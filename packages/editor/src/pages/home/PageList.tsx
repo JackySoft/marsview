@@ -149,7 +149,7 @@ export default function Index() {
                       <Tooltip title="页面访问">
                         <SendOutlined
                           onClick={() => {
-                            window.open(`https://admin.marsview.cc/page/prd/${item.id}`, '_blank');
+                            window.open(`http://admin.marsview.cc/page/prd/${item.id}`, '_blank');
                           }}
                         />
                       </Tooltip>
