@@ -1,0 +1,117 @@
+.welcome {
+  height: 100vh;
+  overflow: auto;
+}
+.bg {
+  position: relative;
+  background-color: #000;
+  height: 76vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .canvas {
+    position: absolute;
+    height: 76vh;
+    width: 100vw;
+    z-index: 0;
+  }
+  .content {
+    width: 50%;
+    margin-left: 13%;
+    z-index: 1;
+    .title {
+      font-size: 54px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .desc {
+      font-size: 30px;
+      color: #fff;
+      margin-top: 15px;
+      margin-bottom: 50px;
+    }
+    .btnGroup {
+      display: flex;
+      gap: 50px;
+    }
+  }
+  .cube {
+    background: url(/imgs/welcome-bg.png) no-repeat center;
+    background-size: contain;
+    width: 55%;
+    height: 625px;
+    margin-right: 10%;
+    animation: img1-anim 10s linear 0ms infinite normal backwards;
+  }
+  @keyframes img1-anim {
+    0% {
+      transform: translate(0);
+      scale: 0.9;
+    }
+
+    50% {
+      transform: translate3d(-20px, 20px, 10px);
+      scale: 1;
+    }
+
+    to {
+      transform: translate(0);
+      scale: 0.9;
+    }
+  }
+}
+.module {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .moduleList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 120px;
+    .moduleItem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        width: 110px;
+        cursor: pointer;
+        transition: all 0.3s linear;
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+      span {
+        font-size: 24px;
+        color: #000;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  background-color: #000;
+  color: #fff;
+  h1 {
+    font-size: 36px;
+    margin-block: 30px;
+  }
+  img {
+    width: 100px;
+  }
+}
+.beian {
+  margin-top: 30px;
+  a {
+    color: #a6a0a0;
+  }
+}

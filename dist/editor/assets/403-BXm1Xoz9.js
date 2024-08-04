@@ -1,0 +1,1 @@
+import{u as s,j as t}from"./index-BdozwHxb.js";const e=window.antd.Button,a=window.antd.Result;function i(){const n=s();return t.jsx(a,{status:403,title:"403",subTitle:"抱歉，您当前没有权限访问此页面",extra:t.jsx(e,{type:"primary",onClick:()=>n("/pages"),children:"返回列表"})})}export{i as default};

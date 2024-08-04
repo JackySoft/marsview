@@ -1,0 +1,87 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  background-color: #fff;
+  height: 64px;
+  padding: 0 20px;
+  font-size: 14px;
+}
+.homeHeader {
+  &:extend(.header);
+  box-shadow: 0 4px 6px #0000000d;
+}
+.layoutHeader {
+  &:extend(.header);
+  border-bottom: 1px solid @border-color;
+}
+.logo {
+  width: 300px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.menu {
+  flex: 1;
+  :global {
+    .ant-menu-horizontal {
+      border-bottom: none;
+    }
+  }
+}
+.iconAction {
+  display: flex;
+  align-items: center;
+  a {
+    height: 63px;
+    padding: 0 20px;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    .iconBlock {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      align-items: center;
+      height: 30px;
+      span {
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+        font-size: 16px;
+        color: #7d33ff;
+        font-weight: 500;
+      }
+      img {
+        transition: all 0.2s linear;
+      }
+      &:hover {
+        img {
+          margin-top: -30px;
+        }
+      }
+    }
+  }
+  img {
+    width: 30px;
+    vertical-align: middle;
+  }
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  .avatar {
+    display: flex;
+    align-items: center;
+  }
+}
+.publishPopover {
+  padding: 10px;
+  button {
+    margin-left: 10px;
+  }
+}

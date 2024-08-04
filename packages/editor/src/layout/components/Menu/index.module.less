@@ -1,0 +1,22 @@
+.menuItem {
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid @border-color;
+  border-radius: 5px;
+  text-align: center;
+  cursor: grab;
+}
+
+.menuItemLib {
+  &:extend(.menuItem);
+  cursor: pointer;
+}
+
+// 修改系统组件：antd的样式
+.leftTool {
+  :global {
+    .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-tab {
+      padding: 8px 5px 8px 17px;
+    }
+  }
+}

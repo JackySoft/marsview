@@ -1,0 +1,44 @@
+.homeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  height: 60px;
+  padding: 0 20px;
+  font-size: 14px;
+  border-bottom: 1px solid @border-color;
+  box-shadow: 0 4px 6px #0000000d;
+  box-sizing: border-box;
+  color: #000;
+}
+.logo {
+  width: 255px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+.project {
+  margin-top: 30px;
+  padding: 0 20px;
+  :global {
+    .ant-card-body {
+      padding-bottom: 12px;
+    }
+    .ant-card-actions {
+      background: none;
+    }
+  }
+  .footer {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 35px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 12px;
+  }
+  .gabLeft {
+    margin-left: 4px;
+  }
+}

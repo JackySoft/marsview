@@ -1,0 +1,103 @@
+.pageList {
+  margin-top: 30px;
+  padding: 0 20px;
+}
+.card {
+  border: 1px solid #f0f0f0;
+  border-radius: 2px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s linear;
+  &:hover {
+    box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
+  }
+}
+.itemContent {
+  position: relative;
+  height: 120px;
+  cursor: pointer;
+}
+.itemHeader {
+  margin-top: 10px;
+  text-align: right;
+  margin-right: -8px;
+}
+.itemTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+.itemRemark {
+  font-size: 14px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  color: rgba(0, 0, 0, 0.88);
+}
+.updateUser {
+  font-size: 13px;
+  color: #9c9a9a;
+}
+.itemFooter {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #f0f0f0;
+  font-size: 20px;
+  padding: 10px;
+  :global {
+    .anticon {
+      color: #454343;
+      &:hover {
+        cursor: pointer;
+        color: #7d33ff;
+      }
+    }
+  }
+}
+.project {
+  margin-top: 30px;
+  padding: 0 20px;
+  :global {
+    .ant-card-body {
+      padding-bottom: 12px;
+    }
+    .ant-card-actions {
+      background: none;
+    }
+  }
+  .footer {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 35px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 12px;
+  }
+  .gabLeft {
+    margin-left: 4px;
+  }
+}
+// 组件库
+.libWrap {
+  padding-inline: 40px;
+  .search {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 10px;
+    border-bottom: 1px solid @border-color;
+    height: 120px;
+    .itemInfo {
+      .remark {
+        color: #505052;
+      }
+      p {
+        line-height: 30px;
+        color: #0006;
+      }
+    }
+  }
+}

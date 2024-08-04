@@ -1,0 +1,90 @@
+import { Button } from 'antd';
+import { CheckOutlined, ClockCircleOutlined, LoadingOutlined } from '@ant-design/icons';
+import { usePageStore } from '@/stores/pageStore';
+import { publishPage } from '@/api';
+import styles from './index.module.less';
+import { message } from '@/utils/AntdGlobal';
+import { useState } from 'react';
+
+export default function Publish() {
+  const [loading1, setLoading1] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [loading3, setLoading3] = useState(false);
+  const {
+    page: {
+      pageId,
+      pageName,
+      remark,
+      is_public,
+      stg_state,
+      pre_state,
+      prd_state,
+      stg_publish_id,
+      pre_publish_id,
+      prd_publish_id,
+      variableData,
+      formData,
+      ...pageData
+    },
+    updatePageState,
+  } = usePageStore((state) => ({
+    page: state.page,
+    updatePageState: state.updatePageState,
+  }));
+  async function publishToEnv(env: 'stg' | 'pre' | 'prd') {
+    if (env === 'stg') {
+      if (stg_state === 3) return message.warning('STG已发布，请勿重复发布');
+      setLoading1(true);
+    }
+    if (env === 'pre') {
+      if (pre_state === 3) return message.warning('PRE已发布，请勿重复发布');
+      setLoading2(true);
+    }
+    if (env === 'prd') {
+      if (prd_state === 3) return message.warning('PRD已发布，请勿重复发布');
+      setLoading3(true);
+    }
+    await publishPage({
+      env,
+      page_id: pageId,
+      page_name: pageName,
+      page_data: JSON.stringify({
+        ...pageData,
+        stg_state: undefined,
+        pre_state: undefined,
+        prd_state: undefined,
+        preview_img: undefined,
+        variableData: {},
+        formData: {},
+        stg_publish_id: undefined,
+        pre_publish_id: undefined,
+        prd_publish_id: undefined,
+        user_id: undefined,
+      }),
+    });
+    updatePageState({
+      env: env === 'stg' ? 'stg_state' : env === 'pre' ? 'pre_state' : 'prd_state',
+      pageState: 3,
+    });
+    message.success('发布成功');
+    if (env === 'stg') setLoading1(false);
+    if (env === 'pre') setLoading2(false);
+    if (env === 'prd') setLoading3(false);
+  }
+  return (
+    <div className={styles.publishPopover}>
+      <Button type={stg_publish_id ? 'link' : 'text'} danger={stg_state === 4} onClick={() => publishToEnv('stg')}>
+        STG
+        {!loading1 ? stg_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
+      </Button>
+      <Button type={pre_publish_id ? 'link' : 'text'} danger={pre_state === 4} onClick={() => publishToEnv('pre')}>
+        PRE
+        {!loading2 ? pre_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
+      </Button>
+      <Button type={prd_publish_id ? 'link' : 'text'} danger={prd_state === 4} onClick={() => publishToEnv('prd')}>
+        PRD
+        {!loading3 ? prd_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
+      </Button>
+    </div>
+  );
+}

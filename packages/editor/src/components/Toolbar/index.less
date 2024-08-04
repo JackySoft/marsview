@@ -1,0 +1,81 @@
+.toolbar-box {
+  position: absolute;
+  z-index: 999; //Modal为1000，防止遮挡属性中的弹框
+  pointer-events: none;
+  box-sizing: border-box;
+  transition: all 0.2s;
+  font-size: 12px;
+  top: 0;
+  left: 0;
+  .tool-bar {
+    display: none;
+  }
+  .node-nav {
+    min-width: 48px;
+    .node-tip {
+      display: block;
+      padding-left: 8px;
+      padding-right: 8px;
+      transition: all 0.2s;
+      height: 24px;
+      line-height: 24px;
+      cursor: pointer;
+      &.parent,
+      &.child {
+        position: absolute;
+        background-color: @primary-color;
+        opacity: 0;
+      }
+
+      &.parent {
+        left: 0;
+        top: 0;
+      }
+      &.child {
+        left: 0;
+        top: 0;
+      }
+    }
+    &:hover {
+      .parent {
+        opacity: 1;
+        transform: translateY(-26px);
+      }
+      .child {
+        opacity: 1;
+        transform: translateY(27px);
+      }
+    }
+  }
+  .actions {
+    position: relative;
+    padding: 0 12px;
+    &::before {
+      position: absolute;
+      left: 0;
+      color: #fff;
+      content: '|';
+      width: 1px;
+    }
+  }
+  &.hover {
+    border: 1px dashed @primary-color;
+  }
+  &.selected {
+    border: 1px solid @primary-color;
+    background-color: rgb(156 105 244 / 10%);
+    .tool-bar {
+      position: absolute;
+      right: -1px;
+      top: -25px;
+      display: inline-flex;
+      background-color: @primary-color;
+      color: #fff;
+      pointer-events: auto;
+      &.first {
+        top: auto;
+        bottom: -25px;
+      }
+    }
+  }
+}

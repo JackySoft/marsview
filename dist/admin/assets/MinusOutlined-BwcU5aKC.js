@@ -1,0 +1,1 @@
+import{_ as i}from"./objectSpread2-C4CkhkJ7.js";import{M as o}from"./MinusOutlined-BZaTcxGD.js";import{A as r}from"./PlusOutlined-CrNRbnjj.js";const n=window.React;var s=function(t,e){return n.createElement(r,i({},t,{ref:e,icon:o}))};const m=n.forwardRef(s);export{m as M};

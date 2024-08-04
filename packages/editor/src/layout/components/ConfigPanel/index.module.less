@@ -1,0 +1,30 @@
+.attrBox {
+  height: calc(100vh - 64px);
+  border-left: 1px solid @border-color;
+  overflow: auto;
+  :global {
+    .ant-form-item {
+      margin-bottom: 15px;
+    }
+  }
+}
+.widget {
+  position: relative;
+  top: -8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin-inline: auto;
+  text-align: center;
+  color: #5b5b5c;
+  line-height: 30px;
+}
+.text {
+  white-space: nowrap; /* 防止文本换行 */
+  overflow: hidden; /* 隐藏超出容器的内容 */
+  text-overflow: ellipsis; /* 用省略号表示被裁剪的文本 */
+}
+.ml5 {
+  margin-left: 5px;
+}

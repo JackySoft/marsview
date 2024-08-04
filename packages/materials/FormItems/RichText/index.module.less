@@ -1,0 +1,8 @@
+.richTextQuill {
+  :global {
+    // 解决 quill 编辑器高度问题（总高度去掉工具条的高度）
+    .ql-container {
+      height: calc(100% - 43px);
+    }
+  }
+}

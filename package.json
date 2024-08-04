@@ -1,0 +1,49 @@
+{
+  "private": true,
+  "scripts": {
+    "start:editor": "pnpm --filter editor start",
+    "build:editor": "pnpm --filter editor build",
+    "start:admin": "pnpm --filter admin start",
+    "build:admin": "pnpm --filter admin build",
+    "build": "pnpm --filter editor build && pnpm --filter admin build",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@ant-design/plots": "^1.2.6",
+    "@types/qs": "^6.9.15",
+    "ahooks": "^3.7.8",
+    "antd": "^5.17.2",
+    "axios": "^0.27.2",
+    "less": "^4.2.0",
+    "lodash-es": "^4.17.21",
+    "qs": "^6.12.1",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-error-boundary": "^4.0.13",
+    "react-quill": "^2.0.0",
+    "react-router-dom": "^6.21.2",
+    "vite": "^5.0.8",
+    "vite-plugin-externals-new": "^1.5.5",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.7",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "lint-staged": "^10.0.7",
+    "typescript": "latest",
+    "yorkie": "^2.0.0"
+  }
+}

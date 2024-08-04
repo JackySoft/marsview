@@ -1,0 +1,19 @@
+/**
+ * 为了实现组件拖拽，该样式只应用在开发模式下。
+ * 设置弹框的定位为绝对定位，可以避免其他部分被遮盖。
+*/
+.mars-editor {
+  .ant-modal-root {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 888;
+    min-height: 100%;
+    .ant-modal-mask,
+    .ant-modal-wrap {
+      position: absolute;
+    }
+  }
+}

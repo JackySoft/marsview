@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  border: 1px solid #e8e9eb;
+  height: 500px;
+  .leftFn {
+    width: 160px;
+    border-right: 1px solid #e8e9eb;
+    overflow: hidden;
+    ul,
+    li {
+      list-style: none;
+    }
+    ul {
+      margin-block: -12px;
+    }
+    li {
+      padding-left: 25px;
+      cursor: pointer;
+      line-height: 28px;
+    }
+  }
+  .box {
+    height: 460px;
+    overflow: auto;
+  }
+  .content {
+    flex: 1;
+  }
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    padding-left: 10px;
+    line-height: 30px;
+    margin-bottom: 10px;
+    background-color: #f3f3f3;
+  }
+  .variable {
+    width: 350px;
+    border-left: 1px solid #e8e9eb;
+    overflow-y: auto;
+  }
+}
