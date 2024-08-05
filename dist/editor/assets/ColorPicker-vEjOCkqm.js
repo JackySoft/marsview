@@ -1,0 +1,1 @@
+import{j as r}from"./index-CSGxKpEX.js";const t=window.antd.ColorPicker,C=e=>{const o=a=>{e.onChange(a.toHexString())},n=()=>{e.onChange("")};return r.jsx(t,{...e,format:"hex",showText:!0,allowClear:!0,value:e.value,onChange:o,onClear:n})};export{C as M};

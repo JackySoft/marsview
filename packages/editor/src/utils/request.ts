@@ -61,7 +61,7 @@ instance.interceptors.response.use(
     if (res.ret === 10018) {
       message.error('登录已过期，请重新登录');
       setTimeout(() => {
-        window.location.replace(`/#/login?callback=${window.location.href}`);
+        window.location.replace(`/login?callback=${window.location.href}`);
         return null;
       }, 1500);
       return Promise.reject(res.message);

@@ -10,8 +10,8 @@ export interface PageParams {
 export interface PageItem {
   id: number;
   name: string;
-  sso_name: string;
-  user_id: string;
+  user_name: string;
+  user_id: number;
   remark: string;
   updated_at: string;
   created_at: string;

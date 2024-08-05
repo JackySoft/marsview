@@ -145,7 +145,7 @@ export default function Index() {
                         description={
                           <>
                             <div style={{ position: 'absolute', top: 15, right: 15 }}>{isAuth ? null : <LockOutlined />}</div>
-                            <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.remark}</p>
+                            <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.remark || '暂无描述'}</p>
                             <p style={{ marginTop: 10 }}>
                               <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
                               {item.user_name}
