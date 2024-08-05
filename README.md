@@ -18,7 +18,7 @@ $ pnpm start:editor
 $ pnpm start:admin
 ```
 
-## 开发注意
+## 解决痛点
 
 ```bash
 
