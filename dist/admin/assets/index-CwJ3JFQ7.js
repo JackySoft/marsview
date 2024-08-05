@@ -1,1 +1,0 @@
-import{j as i}from"./index-DHYities.js";const o=window.antd.Divider,d=window.React.forwardRef,n=window.React.useImperativeHandle,a=window.React.useState,w=({config:e},s)=>{const[r,t]=a(!0);return n(s,()=>({show(){t(!0)},hide(){t(!1)}})),r&&i.jsx(o,{style:e.style,...e.props,children:e.props.text})},p=d(w);export{p as Divider};

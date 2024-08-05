@@ -9,7 +9,7 @@
     "build:editor": "pnpm --filter editor build",
     "start:admin": "pnpm --filter admin start",
     "build:admin": "pnpm --filter admin build",
-    "build": "pnpm --filter editor build && pnpm --filter admin build",
+    "build": "rm -rf dist && pnpm --filter editor build && pnpm --filter admin build",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
   },
   "gitHooks": {
