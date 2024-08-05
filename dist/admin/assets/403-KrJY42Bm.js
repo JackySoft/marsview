@@ -1,0 +1,1 @@
+import{b as a,j as t}from"./index-BMoS0DUA.js";const o=window.antd.Button,r=window.antd.Result;function c(){const[s]=a(),e=n=>{window.open(n)};return t.jsx(r,{status:403,title:"403",subTitle:`抱歉，您当前没有权限访问此${s.get("type")==="project"?"项目":"页面"}`,extra:t.jsx(o,{type:"primary",onClick:()=>e("http://www.marsview.cc/"),children:"返回Mars平台"})})}export{c as default};
