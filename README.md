@@ -13,6 +13,13 @@ $ pnpm start:editor
 ```
 
 ## 启动用户端
+
 ```bash
 $ pnpm start:admin
+```
+
+## 开发注意
+
+```bash
+
 ```
