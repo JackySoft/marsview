@@ -32,7 +32,7 @@ export default () => {
   // 初始化monaco，默认为jsdelivery分发，由于网络原因改为本地cdn
   loader.config({
     paths: {
-      vs: 'https://static.huolala.cn/npm/monaco-editor@0.44.0/min/vs',
+      vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs/loader.js',
     },
   });
 
@@ -66,8 +66,8 @@ export default () => {
   const initWasm = async () => {
     try {
       setLoading(true);
-      await loadScript('https://static.huolala.cn/npm/esbuild-wasm@0.20.2/lib/browser.min.js');
-      await window.esbuild.initialize({ wasmURL: 'https://static.huolala.cn/npm/esbuild-wasm@0.20.2/esbuild.wasm' });
+      // await loadScript('');
+      // await window.esbuild.initialize({ wasmURL: '' });
       setLoading(false);
       setTabs(items);
     } catch (error) {

@@ -65,7 +65,7 @@ export default function VsEditor({ height, language, value, onChange }: any) {
   // 初始化monaco，默认为jsdelivery分发，由于网络原因改为本地cdn
   loader.config({
     paths: {
-      vs: 'https://static.huolala.cn/npm/monaco-editor@0.44.0/min/vs',
+      vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs/loader.js',
     },
   });
   return (
