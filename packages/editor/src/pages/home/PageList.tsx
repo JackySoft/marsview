@@ -127,11 +127,11 @@ export default function Index() {
                         <StateTag item={item} />
                       </div>
                       <div className={styles.itemTitle}>{item.name}</div>
-                      <div className={styles.itemRemark}>{item.remark}</div>
+                      <div className={styles.itemRemark}>{item.remark || '暂无描述'}</div>
                       <div className={styles.updateUser}>
                         <span style={{ marginRight: 10 }}>
                           <UserOutlined style={{ fontSize: 15, marginRight: 5 }} />
-                          {item.sso_name}
+                          {item.user_name}
                         </span>
                         <span>更新时间：{dayjs(item.updated_at).fromNow()}</span>
                       </div>
