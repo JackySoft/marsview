@@ -3,6 +3,7 @@ import { UploadOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons
 import { Form, Button, Upload } from 'antd';
 import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
+import { uploadImg } from '@/api';
 import { message } from '@/utils/AntdGlobal';
 
 /**
@@ -107,13 +108,9 @@ const UploadFC = ({ config, value, disabled, onChange }: any, ref: any) => {
    */
   const uploadRequest = (options: any) => {
     setLoading(true);
-    /*
+
     uploadImg({
       file: options.file as File, // File 对象
-      onProgress(e) {
-        // 上传进度
-        console.log(e.percent);
-      },
     })
       .then((res) => {
         const { name, url = '' } = res;
@@ -137,7 +134,6 @@ const UploadFC = ({ config, value, disabled, onChange }: any, ref: any) => {
         setLoading(false);
         message.error('图片上传失败');
       });
-      */
   };
 
   // 根据listType和上传数量，动态处理上传按钮
