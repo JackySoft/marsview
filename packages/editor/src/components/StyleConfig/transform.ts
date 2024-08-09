@@ -1,7 +1,7 @@
 import cssParser from 'css';
 /**
  * css 转换为 object
- * .mars { font-size: 12px } 生成：{ mars:{ fontSize: '12px' } }
+ * .marsview { font-size: 12px } 生成：{ marsview:{ fontSize: '12px' } }
  * @param rules
  * @param result
  */
@@ -65,7 +65,7 @@ export function transform(inputCssText: string) {
   let bootstrapWithCssClass = false;
   if (inputCssText.indexOf('{') === -1) {
     bootstrapWithCssClass = true;
-    inputCssText = `.mars { ${inputCssText} }`;
+    inputCssText = `.marsview { ${inputCssText} }`;
   }
   const css = cssParser.parse(inputCssText);
   let result: any = {};
@@ -73,7 +73,7 @@ export function transform(inputCssText: string) {
 
   // Don't expose the implementation detail of our wrapped css class.
   if (bootstrapWithCssClass) {
-    result = result.mars;
+    result = result.marsview;
   }
 
   return result;

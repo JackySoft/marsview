@@ -14,7 +14,7 @@ export interface IModalProp {
 const CreateLib = (props: IModalProp) => {
   const [form] = useForm();
   const [visible, setVisible] = useState(false);
-  const { updateList, userInfo } = usePageStore((state) => ({ updateList: state.updateList, userInfo: state.userInfo }));
+  const { updateList } = usePageStore((state) => ({ updateList: state.updateList, userInfo: state.userInfo }));
 
   // 暴露方法
   useImperativeHandle(props.createRef, () => ({
@@ -28,7 +28,7 @@ const CreateLib = (props: IModalProp) => {
     const { tag, name, description } = form.getFieldsValue();
     const valid = await form.validateFields();
     if (valid) {
-      await createLib({ tag: 'C' + tag, name, description });
+      await createLib({ tag, name, description });
       // 通知列表刷新
       updateList();
       handleCancle();
@@ -43,10 +43,17 @@ const CreateLib = (props: IModalProp) => {
   return (
     <Modal title="创建组件库" open={visible} onOk={handleOk} onCancel={handleCancle} width={500} okText="确定" cancelText="取消">
       <Form form={form} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }} initialValues={{ is_public: 1 }}>
-        <Form.Item label="组件标识" name="tag" rules={[{ required: true, message: '请输入页面名称' }]}>
-          <Input placeholder="请输入英文标识：Button" />
+        <Form.Item
+          label="组件标识"
+          name="tag"
+          rules={[
+            { required: true, message: '请输入组件标识' },
+            { pattern: /^[a-zA-Z]+$/g, message: '只支持英文' },
+          ]}
+        >
+          <Input placeholder="请输入英文标识：Button" prefix="MC" />
         </Form.Item>
-        <Form.Item label="组件名称" name="name" rules={[{ required: true, message: '请输入页面名称' }]}>
+        <Form.Item label="组件名称" name="name" rules={[{ required: true, message: '请输入组件名称' }]}>
           <Input placeholder="请输入中文名称：按钮" />
         </Form.Item>
         <Form.Item label="组件描述" name="description">

@@ -363,7 +363,6 @@ export const loadStyle = (id: string, src: string) => {
     link.rel = 'stylesheet';
     link.type = 'text/css';
     link.href = src;
-    link.id = id;
     link.onload = resolve;
     link.onerror = reject;
 

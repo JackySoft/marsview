@@ -20,7 +20,7 @@ const CodingPanel = () => {
   // 初始化monaco，默认为jsdelivery分发，由于网络原因改为本地cdn
   loader.config({
     paths: {
-      vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs/loader.js',
+      vs: 'https://marsview.cdn.bcebos.com/static/monaco-editor/vs',
     },
   });
 

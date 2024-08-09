@@ -39,6 +39,12 @@ instance.interceptors.request.use(
         Authorization: `Bearer ${token}`,
       };
     }
+    if (config.url === '/upload/files') {
+      config.headers = {
+        ...config.headers,
+        'Content-Type': 'multipart/form-data',
+      };
+    }
     return config;
   },
   (error: AxiosError) => {

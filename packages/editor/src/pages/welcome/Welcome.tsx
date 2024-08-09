@@ -18,7 +18,7 @@ export default function Welcome() {
       <section className={style.bg}>
         <canvas id="canvasBox" className={style.canvas}></canvas>
         <div className={style.content}>
-          <h1 className={style.title}>Mars零代码搭建平台</h1>
+          <h1 className={style.title}>Marsview 低代码搭建平台</h1>
           <p className={style.desc}>让搭建更简单，让开发更高效</p>
           <div className={style.btnGroup}>
             <Button type="primary" ghost size="large" onClick={openDoc}>
@@ -81,7 +81,7 @@ export default function Welcome() {
       </section>
       <section className={style.footer}>
         <img src="/imgs/mars-logo-light.png" />
-        <h1>欢迎使用Mars零代码搭建平台</h1>
+        <h1>欢迎使用 Marsview 零代码搭建平台</h1>
         <Link to="/projects">
           <Button type="primary" size="large">
             快速开始

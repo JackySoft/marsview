@@ -251,52 +251,52 @@ export default {
       source: [
         {
           type: 'PV',
-          project: 'OMS',
+          project: '百度',
           value: 5000,
         },
         {
           type: 'UV',
-          project: 'OMS',
+          project: '百度',
           value: 800,
         },
         {
           type: 'PV',
-          project: 'LLP',
+          project: '字节跳动',
           value: 3000,
         },
         {
           type: 'UV',
-          project: 'LLP',
+          project: '字节跳动',
           value: 300,
         },
         {
           type: 'PV',
-          project: '货拉拉小程序',
+          project: '阿里',
           value: 30000,
         },
         {
           type: 'UV',
-          project: '货拉拉小程序',
+          project: '阿里',
           value: 10000,
         },
         {
           type: 'PV',
-          project: '活动',
+          project: '微信',
           value: 7000,
         },
         {
           type: 'UV',
-          project: '活动',
+          project: '微信',
           value: 5000,
         },
         {
           type: 'PV',
-          project: 'Mars',
+          project: 'Marsview',
           value: 50000,
         },
         {
           type: 'UV',
-          project: 'Mars',
+          project: 'Marsview',
           value: 35000,
         },
       ],

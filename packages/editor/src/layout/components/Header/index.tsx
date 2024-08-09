@@ -2,12 +2,12 @@ import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Image } from
 import { memo, useEffect, useRef, useState } from 'react';
 import { ProjectOutlined, OneToOneOutlined, PlusOutlined, CaretDownFilled, DownOutlined, AppstoreOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { toBlob } from 'html-to-image';
+import { toBlob, toPng } from 'html-to-image';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
-import { getUserAvatar, updatePageData } from '@/api';
+import { getUserAvatar, updatePageData, uploadImg } from '@/api';
 import CreatePage from './CreatePage';
-// import CreateLib from './CreateLib';
+import CreateLib from './CreateLib';
 import Publish from './PublishPopover';
 import styles from './index.module.less';
 
@@ -58,11 +58,11 @@ const Header = memo(() => {
       key: 'pages',
       icon: <OneToOneOutlined style={{ fontSize: 16 }} />,
     },
-    // {
-    //   label: '组件库',
-    //   key: 'libs',
-    //   icon: <AppstoreOutlined style={{ fontSize: 16 }} />,
-    // },
+    {
+      label: '组件库',
+      key: 'libs',
+      icon: <AppstoreOutlined style={{ fontSize: 16 }} />,
+    },
   ];
 
   useEffect(() => {
@@ -102,10 +102,10 @@ const Header = memo(() => {
       const blob = await toBlob(document.querySelector('#page') as HTMLElement);
       if (!blob) return;
       const file = new File([blob], `${pageId}-${Date.now()}.png`, { type: 'image/png' });
-      // const res = await uploadImg({
-      //   file: file, // File 对象
-      // });
-      return '';
+      const res = await uploadImg({
+        file: file, // File 对象
+      });
+      return res;
     } catch (error) {
       console.error('封面图上传失败', error);
       return '';
@@ -204,7 +204,7 @@ const Header = memo(() => {
       <Layout.Header className={isNav ? styles.homeHeader : styles.layoutHeader}>
         <div className={styles.logo} onClick={goHome}>
           <img src="/imgs/mars-logo.png" width={40} />
-          <span>Mars</span>
+          <span>Marsview</span>
         </div>
         {/* 首页 - 导航菜单 */}
         {isNav && (
@@ -293,14 +293,13 @@ const Header = memo(() => {
               退出预览
             </Button>
           )}
-          <Button
-            type="link"
+          <img
+            width={20}
+            src="https://marsview.cdn.bcebos.com/wechat.png"
             onClick={() => {
               setShowQrCode(true);
             }}
-          >
-            微信群
-          </Button>
+          />
           {/* 用户头像 */}
           <div className={styles.avatar}>
             {avatar ? <img width={30} src={avatar} style={{ borderRadius: '50%' }} /> : null}
@@ -311,16 +310,16 @@ const Header = memo(() => {
         {/* 新建页面 */}
         {pageFrom === 'pages' && <CreatePage createRef={creatPageRef} />}
         {/* 新建组件 */}
-        {/* {pageFrom === 'libs' && <CreateLib createRef={createLibRef} />} */}
+        {pageFrom === 'libs' && <CreateLib createRef={createLibRef} />}
       </Layout.Header>
       {/* 微信群 */}
       <Image
         width={0}
         height={0}
         style={{ display: 'none' }}
-        src="https://marsview.cdn.bcebos.com/qrcode.png"
         preview={{
           visible: showQrCode,
+          src: 'https://marsview.cdn.bcebos.com/qrcode.png',
           onVisibleChange: (value) => {
             setShowQrCode(value);
           },

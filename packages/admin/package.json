@@ -1,5 +1,5 @@
 {
-  "name": "@mars/admin",
+  "name": "@marsview/admin",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -20,7 +20,7 @@
     ]
   },
   "dependencies": {
-    "@mars/materials": "workspace:^",
+    "@marsview/materials": "workspace:^",
     "dayjs": "^1.11.10",
     "immer": "^10.0.3"
   },

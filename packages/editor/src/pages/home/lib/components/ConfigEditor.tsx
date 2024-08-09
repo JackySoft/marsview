@@ -74,7 +74,7 @@ export default memo(
       }
     };
 
-    const { run } = useDebounceFn(onChange, { wait: 300 });
+    const { run } = useDebounceFn(onChange, { wait: 500 });
 
     // 初始化配置器值
     const handleSetterChange = () => {
