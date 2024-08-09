@@ -18,7 +18,6 @@
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@ant-design/plots": "^1.2.5",
-    "@hll/corshub-base": "^0.0.3",
     "@types/lodash-es": "^4.17.7",
     "ahooks": "^3.7.6",
     "allotment": "^1.19.3",
