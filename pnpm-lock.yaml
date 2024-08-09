@@ -230,9 +230,6 @@ importers:
       '@ant-design/plots':
         specifier: ^1.2.5
         version: 1.2.6(react-dom@18.3.1)(react@18.3.1)
-      '@hll/corshub-base':
-        specifier: ^0.0.3
-        version: 0.0.3(axios@0.27.2)
       '@types/lodash-es':
         specifier: ^4.17.7
         version: 4.17.12
@@ -1321,17 +1318,6 @@ packages:
     resolution: {integrity: sha1-pUF66EJ4c/HdCLcLNXS0U+Z7X38=}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
-
-  /@hll/corshub-base@0.0.3(axios@0.27.2):
-    resolution: {integrity: sha1-4xHmfzKv+kRrbUGg0dBEwGuBnSQ=}
-    peerDependencies:
-      axios: ^0.27.2
-    peerDependenciesMeta:
-      axios:
-        optional: true
-    dependencies:
-      axios: 0.27.2
-    dev: false
 
   /@humanwhocodes/config-array@0.11.14:
     resolution: {integrity: sha1-145IGgOfdWbsyWYLTqf+ax/sRCs=}
