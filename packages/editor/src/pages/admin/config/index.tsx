@@ -95,7 +95,6 @@ const Config: React.FC = memo(() => {
         </Form.Item>
         <Form.Item label="LOGO" name="logo" rules={[{ required: true, message: '请上传项目Logo' }]}>
           {type === 'detail' ? <ImageFC /> : <UploadImages />}
-          <ImageFC />
         </Form.Item>
         <h3>系统配置</h3>
         <Form.Item label="系统布局" name="layout">
