@@ -19,7 +19,6 @@
     "bytemd": "^1.21.0",
     "css": "^3.0.0",
     "dayjs": "^1.11.10",
-    "esbuild-wasm": "^0.19.5",
     "github-markdown-css": "^5.5.1",
     "highlight.js": "^11.9.0",
     "html-to-image": "^1.11.11",

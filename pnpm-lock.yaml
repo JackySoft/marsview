@@ -151,9 +151,6 @@ importers:
       dayjs:
         specifier: ^1.11.10
         version: 1.11.10
-      esbuild-wasm:
-        specifier: ^0.19.5
-        version: 0.19.5
       github-markdown-css:
         specifier: ^5.5.1
         version: 5.5.1
@@ -177,7 +174,7 @@ importers:
         version: 2.8.8
       react-dnd:
         specifier: ^16.0.1
-        version: 16.0.1(@types/node@20.11.27)(@types/react@18.2.66)(react@17.0.2)
+        version: 16.0.1(@types/node@20.11.27)(react@17.0.2)
       react-dnd-html5-backend:
         specifier: ^16.0.1
         version: 16.0.1
@@ -186,7 +183,7 @@ importers:
         version: 0.28.1
       react-json-view:
         specifier: ^1.21.3
-        version: 1.21.3(@types/react@18.2.66)(react-dom@17.0.2)(react@17.0.2)
+        version: 1.21.3(react-dom@17.0.2)(react@17.0.2)
       style-to-object:
         specifier: ^1.0.5
         version: 1.0.5
@@ -1591,7 +1588,6 @@ packages:
     resolution: {integrity: sha512-Iu0Kno1vrD7zHQDxOmvweqLkAzjxEVqNhUIXBsZ8hu8Oak7/5VTPrxOEZXYC1nmrBVJp0ZcL2E7lSuuOVaE3+w==}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -1599,7 +1595,6 @@ packages:
     resolution: {integrity: sha512-C31QrW47llgVyrRjIwiOwsHFcaIwmkKi3PCroQY5aVq4H0A5v/vVVAtFsI1nfBngtoRpeREvZOkIhmRwUKkAdw==}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     optional: true
 
@@ -1607,7 +1602,6 @@ packages:
     resolution: {integrity: sha512-Oq90dtMHvthFOPMl7pt7KmxzX7E71AfyIhh+cPhLY9oko97Zf2C9tt/XJD4RgxhaGeAraAXDtqxvKE1y/j35lA==}
     cpu: [riscv64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -1615,7 +1609,6 @@ packages:
     resolution: {integrity: sha512-yUD/8wMffnTKuiIsl6xU+4IA8UNhQ/f1sAnQebmE/lyQ8abjsVyDkyRkWop0kdMhKMprpNIhPmYlCxgHrPoXoA==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -1623,7 +1616,6 @@ packages:
     resolution: {integrity: sha512-9RyNqoFNdF0vu/qqX63fKotBh43fJQeYC98hCaf89DYQpv+xu0D8QFSOS0biA7cGuqJFOc1bJ+m2rhhsKcw1hw==}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     optional: true
 
@@ -1941,7 +1933,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.23.3(@babel/core@7.24.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.0
-      vite: 5.3.5(@types/node@20.11.27)(less@4.2.0)
+      vite: 5.3.5(@types/node@20.11.27)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2891,12 +2883,6 @@ packages:
       is-symbol: 1.0.4
     dev: false
 
-  /esbuild-wasm@0.19.5:
-    resolution: {integrity: sha1-KPRWPX47y+lGKBPjdrL7YCSTH9k=}
-    engines: {node: '>=12'}
-    hasBin: true
-    dev: false
-
   /esbuild@0.19.12:
     resolution: {integrity: sha1-3ILuXceegvWlw7QyOipkGCfbPgQ=}
     engines: {node: '>=12'}
@@ -2929,7 +2915,7 @@ packages:
     dev: true
 
   /esbuild@0.21.5:
-    resolution: {integrity: sha1-nKMBsSCSKVm3ZjYNisgw2g0CmX0=}
+    resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
     engines: {node: '>=12'}
     hasBin: true
     requiresBuild: true
@@ -4623,7 +4609,7 @@ packages:
     resolution: {integrity: sha1-0J0fNXtEP0kzgqjrPM0YOHKuYAk=}
 
   /nanoid@3.3.7:
-    resolution: {integrity: sha1-0MMBppG8jVTvoKIibM8/4v1la9g=}
+    resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -4893,7 +4879,7 @@ packages:
     dev: true
 
   /postcss@8.4.40:
-    resolution: {integrity: sha1-64HypN12aO2Gmm2yWZngLprZCdg=}
+    resolution: {integrity: sha512-YF2kKIUzAofPMpfH6hOi2cGnv/HrUlfucspc7pDyvv7kGdqXrfj8SCl/t8owkEgKEuu8ZcRjSOxFxVLqwChZ2Q==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.7
@@ -5558,7 +5544,7 @@ packages:
       dnd-core: 16.0.1
     dev: false
 
-  /react-dnd@16.0.1(@types/node@20.11.27)(@types/react@18.2.66)(react@17.0.2):
+  /react-dnd@16.0.1(@types/node@20.11.27)(react@17.0.2):
     resolution: {integrity: sha1-JEKj7GeJLGDUChVZ7vRUmLom+jc=}
     peerDependencies:
       '@types/hoist-non-react-statics': '>= 3.3.1'
@@ -5576,7 +5562,6 @@ packages:
       '@react-dnd/invariant': 4.0.2
       '@react-dnd/shallowequal': 4.0.2
       '@types/node': 20.11.27
-      '@types/react': 18.2.66
       dnd-core: 16.0.1
       fast-deep-equal: 3.1.3
       hoist-non-react-statics: 3.3.2
@@ -5641,7 +5626,7 @@ packages:
     resolution: {integrity: sha1-6DVX3BLq5jqZ4AOkY4ix3LtE234=}
     dev: false
 
-  /react-json-view@1.21.3(@types/react@18.2.66)(react-dom@17.0.2)(react@17.0.2):
+  /react-json-view@1.21.3(react-dom@17.0.2)(react@17.0.2):
     resolution: {integrity: sha1-8YQgnujxvzdPsMQbCBPP9UVJxHU=}
     peerDependencies:
       react: ^17.0.0 || ^16.3.0 || ^15.5.4
@@ -5652,7 +5637,7 @@ packages:
       react-base16-styling: 0.6.0
       react-dom: 17.0.2(react@17.0.2)
       react-lifecycles-compat: 3.0.4
-      react-textarea-autosize: 8.5.3(@types/react@18.2.66)(react@17.0.2)
+      react-textarea-autosize: 8.5.3(react@17.0.2)
     transitivePeerDependencies:
       - '@types/react'
       - encoding
@@ -5703,7 +5688,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-textarea-autosize@8.5.3(@types/react@18.2.66)(react@17.0.2):
+  /react-textarea-autosize@8.5.3(react@17.0.2):
     resolution: {integrity: sha1-0en+dgF4QTiRSEhH0zeHBgUt1Ak=}
     engines: {node: '>=10'}
     peerDependencies:
@@ -5712,7 +5697,7 @@ packages:
       '@babel/runtime': 7.24.0
       react: 17.0.2
       use-composed-ref: 1.3.0(react@17.0.2)
-      use-latest: 1.2.1(@types/react@18.2.66)(react@17.0.2)
+      use-latest: 1.2.1(react@17.0.2)
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -5886,7 +5871,7 @@ packages:
     dev: false
 
   /rollup@4.13.0:
-    resolution: {integrity: sha1-3SrhRLTNwuolQgR39o1JN6chI3o=}
+    resolution: {integrity: sha512-3YegKemjoQnYKmsBlOHfMLVPPA5xLkQ8MHLLSw/fBrFaVkEayL51DilPpNNLq1exr98F2B1TzrV0FUlN3gWRPg==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
     dependencies:
@@ -6113,7 +6098,7 @@ packages:
     dev: true
 
   /source-map-js@1.2.0:
-    resolution: {integrity: sha1-FrgJwWJRe1uMPn3NMVoqXCYSsq8=}
+    resolution: {integrity: sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==}
     engines: {node: '>=0.10.0'}
 
   /source-map-resolve@0.6.0:
@@ -6556,7 +6541,7 @@ packages:
       react: 17.0.2
     dev: false
 
-  /use-isomorphic-layout-effect@1.1.2(@types/react@18.2.66)(react@17.0.2):
+  /use-isomorphic-layout-effect@1.1.2(react@17.0.2):
     resolution: {integrity: sha1-SXzvsT2GPWh7CEd9nloWStjBpvs=}
     peerDependencies:
       '@types/react': '*'
@@ -6565,11 +6550,10 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.66
       react: 17.0.2
     dev: false
 
-  /use-latest@1.2.1(@types/react@18.2.66)(react@17.0.2):
+  /use-latest@1.2.1(react@17.0.2):
     resolution: {integrity: sha1-0T37SwjCjj4zmRVGos7lPhQDjPI=}
     peerDependencies:
       '@types/react': '*'
@@ -6578,9 +6562,8 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.66
       react: 17.0.2
-      use-isomorphic-layout-effect: 1.1.2(@types/react@18.2.66)(react@17.0.2)
+      use-isomorphic-layout-effect: 1.1.2(react@17.0.2)
     dev: false
 
   /use-resize-observer@9.1.0(react-dom@17.0.2)(react@17.0.2):
@@ -6720,6 +6703,42 @@ packages:
       fsevents: 2.3.3
     dev: true
 
+  /vite@5.3.5(@types/node@20.11.27):
+    resolution: {integrity: sha512-MdjglKR6AQXQb9JGiS7Rc2wC6uMjcm7Go/NHNO63EwiJXfuk9PgqiP/n5IDJCziMkfw9n4Ubp7lttNwz+8ZVKA==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || >=20.0.0
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      '@types/node': 20.11.27
+      esbuild: 0.21.5
+      postcss: 8.4.40
+      rollup: 4.13.0
+    optionalDependencies:
+      fsevents: 2.3.3
+    dev: true
+
   /vite@5.3.5(@types/node@20.11.27)(less@4.2.0):
     resolution: {integrity: sha1-uEf4RvsrbLb29O1QqDAYYTjLg9g=}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -6755,6 +6774,7 @@ packages:
       rollup: 4.13.0
     optionalDependencies:
       fsevents: 2.3.3
+    dev: false
 
   /web-namespaces@2.0.1:
     resolution: {integrity: sha1-EBD/fGUOzLJZLOvur5obJT/UBpI=}
