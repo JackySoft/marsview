@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@mars/materials",
+  "name": "@marsview/materials",
   "scripts": {
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
   },

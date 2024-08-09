@@ -2,8 +2,8 @@ import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 're
 import Editor from '@monaco-editor/react';
 import { useDebounceFn } from 'ahooks';
 import { Allotment } from 'allotment';
-import less from 'less';
 import ComPreview from './ComPreview';
+import less from 'less';
 
 /**
  * 组件代码编辑
@@ -64,7 +64,7 @@ export default forwardRef((_: any, ref: React.ForwardedRef<{ getCode: () => void
     setCode(value);
   };
 
-  const { run } = useDebounceFn(onChange, { wait: 200 });
+  const { run } = useDebounceFn(onChange, { wait: 300 });
 
   return (
     <div className="code-editor">

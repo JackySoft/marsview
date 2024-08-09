@@ -1,7 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import { App as AntdApp } from 'antd';
 import router from './router';
-import AntdGlobal from '@mars/materials/utils/AntdGlobal';
+import AntdGlobal from '@marsview/materials/utils/AntdGlobal';
 import './App.less';
 import './index.less';
 

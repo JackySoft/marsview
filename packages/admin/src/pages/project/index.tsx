@@ -1,10 +1,10 @@
 import { getPageDetail } from '@/api/index';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { usePageStore as usePageStore2 } from '@mars/materials/stores/pageStore';
+import { usePageStore as usePageStore2 } from '@marsview/materials/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
 import NotFound from './notFound';
-import { Page } from '@mars/materials/Page';
+import { Page } from '@marsview/materials/Page';
 import { useShallow } from 'zustand/react/shallow';
 
 export default function () {

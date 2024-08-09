@@ -32,11 +32,6 @@ export default forwardRef((_: any, ref: any) => {
     window.React = window.React || React;
     window.dayjs = window.dayjs || dayjs;
     window.antd = window.antd || antd;
-    // TODO: Image组件和系统Image对象冲突，需要处理，编辑器应该支持import语法
-    // TODO: 需要把import { Button } from 'antd' 编译成 const { Button } = window.antd;
-    // for (const key in window.antd) {
-    //   window[key] = window.antd[key];
-    // }
   }
 
   // 初始化代码
@@ -138,7 +133,7 @@ export default forwardRef((_: any, ref: any) => {
     handleCompile();
   }, [code]);
 
-  const { run } = useDebounceFn(onChange, { wait: 200 });
+  const { run } = useDebounceFn(onChange, { wait: 500 });
 
   return (
     <div className="code-editor">

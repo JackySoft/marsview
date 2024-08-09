@@ -78,6 +78,7 @@ function CustomLib(_: any, ref: any) {
         config,
         events,
         methods,
+        elements: [],
       });
     }
   };

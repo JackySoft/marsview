@@ -10,10 +10,8 @@ import MDEditor from './components/MDEditor';
 import md5 from 'md5';
 import { loadScript } from '@/utils/util';
 import { updateLib, getLibDetail, publish, ILib } from '@/api/lib';
-import { generateUUID } from '@/utils/util';
 import { defaultReactCode, defaultLessCode, defaultConfigCode, defaultMdCode } from './components/InitValue';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { usePageStore } from '@/stores/pageStore';
 /**
  * 组件代码编辑
  */
@@ -27,12 +25,11 @@ export default () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  const userInfo = usePageStore((state) => state.userInfo);
 
   // 初始化monaco，默认为jsdelivery分发，由于网络原因改为本地cdn
   loader.config({
     paths: {
-      vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs/loader.js',
+      vs: 'https://marsview.cdn.bcebos.com/static/monaco-editor/vs',
     },
   });
 
@@ -66,8 +63,8 @@ export default () => {
   const initWasm = async () => {
     try {
       setLoading(true);
-      // await loadScript('');
-      // await window.esbuild.initialize({ wasmURL: '' });
+      await loadScript('https://marsview.cdn.bcebos.com/static/esbuild-wasm%400.20.2/browser.min.js');
+      await window.esbuild.initialize({ wasmURL: 'https://marsview.cdn.bcebos.com/static/esbuild-wasm%400.20.2/esbuild.wasm' });
       setLoading(false);
       setTabs(items);
     } catch (error) {
@@ -81,10 +78,10 @@ export default () => {
       getLibDetail(parseInt(id))
         .then((res) => {
           // 如果hash有值，说明已经提交过
-          localStorage.setItem('react-code', res.hash ? res.react_source : defaultReactCode);
-          localStorage.setItem('less-code', res.hash ? res.less_source : defaultLessCode);
-          localStorage.setItem('config-code', res.hash ? res.config_source : defaultConfigCode);
-          localStorage.setItem('md-code', res.hash ? res.md_source : defaultMdCode);
+          localStorage.setItem('react-code', res.hash ? res.react_code : defaultReactCode);
+          localStorage.setItem('less-code', res.hash ? res.less_code : defaultLessCode);
+          localStorage.setItem('config-code', res.hash ? res.config_code : defaultConfigCode);
+          localStorage.setItem('md-code', res.hash ? res.md_code : defaultMdCode);
 
           initWasm();
           setDetail(res);
@@ -116,23 +113,31 @@ export default () => {
 
   // 保存代码
   const handleSave = async () => {
-    const reactCode = reactRef.current?.getCode();
-    const cssCode = cssRef.current?.getCode();
-    const configCode = configRef.current?.getCode();
-    const mdCode = mdRef.current?.getCode();
-    if (!id) return message.success('组件id不存在');
-    if (!reactCode || !configCode) {
-      return message.success('组件代码和组件配置不能为空');
-    }
-    await updateLib({
-      react_source: reactCode,
-      less_source: cssCode,
-      config_source: configCode,
-      md_source: mdCode,
-      id,
-      hash: md5(reactCode + cssCode + configCode),
+    Modal.confirm({
+      title: '确认',
+      content: '请确保编译成功后再保存！',
+      okText: '确认',
+      cancelText: '取消',
+      onOk: async () => {
+        const reactCode = reactRef.current?.getCode();
+        const cssCode = cssRef.current?.getCode();
+        const configCode = configRef.current?.getCode();
+        const mdCode = mdRef.current?.getCode();
+        if (!id) return message.success('组件id不存在');
+        if (!reactCode || !configCode) {
+          return message.success('组件代码和组件配置不能为空');
+        }
+        await updateLib({
+          react_code: reactCode,
+          less_code: cssCode,
+          config_code: configCode,
+          md_code: mdCode,
+          id,
+          hash: md5(reactCode + cssCode + configCode),
+        });
+        message.success('保存成功');
+      },
     });
-    message.success('保存成功');
   };
 
   // 发布
@@ -144,18 +149,10 @@ export default () => {
     if (!reactjs || !configjs) {
       return message.success('组件代码和组件配置不能为空');
     }
-    if (detail?.release_hash === md5(reactjs + css + configjs)) {
+    if (detail?.release_hash === md5(reactjs + css + configjs) && detail.md_code === mdRef.current?.getCode()) {
       return message.success('系统未检测到当前组件代码有变化');
     }
-    const react_url = await uploadFile(reactjs, 'index.js');
-    if (!react_url) return message.error('react文件上传失败，请重新保存');
-    let css_url = '';
-    if (css) {
-      css_url = await uploadFile(css, 'index.css');
-      if (!css_url) return message.error('css文件上传失败，请重新保存');
-    }
-    const config_url = await uploadFile(configjs, 'config.js');
-    if (!config_url) return message.error('配置文件上传失败，请重新保存');
+
     Modal.confirm({
       title: '确认',
       content: '确认发布吗？',
@@ -164,31 +161,14 @@ export default () => {
       onOk: async () => {
         await publish({
           lib_id: parseInt(id),
-          release_id: generateUUID(),
-          react_url,
-          css_url,
-          config_url,
+          react_compile: reactjs,
+          config_code: configjs,
+          css_compile: css,
           release_hash: md5(reactjs + css + configjs),
         });
         message.success('发布成功');
       },
     });
-  };
-
-  // 将当前页面生成图片，并上传到服务器
-  const uploadFile = async (text: string, fileName: string) => {
-    try {
-      if (!text) return '';
-      const blob = new Blob([text], { type: 'application/javascript' });
-      const file = new File([blob], fileName, { type: 'application/javascript' });
-      // const res = await uploadImg({
-      //   file: file,
-      // });
-      return '';
-    } catch (error) {
-      console.error('文件上传失败', error);
-      return '';
-    }
   };
 
   return (

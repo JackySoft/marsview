@@ -6,10 +6,10 @@ export interface ILib {
   tag: string;
   name: string;
   description?: string;
-  react_source: string;
-  less_source: string;
-  config_source: string;
-  md_source: string;
+  react_code: string;
+  less_code: string;
+  config_code: string;
+  md_code: string;
   hash: string;
   release_id: string;
   react_url?: string;
@@ -53,25 +53,11 @@ export const createLib = (params: { tag: string; name: string; description?: str
 };
 
 // 保存组件
-export const updateLib = (params: {
-  react_source: string;
-  less_source: string;
-  config_source: string;
-  md_source: string;
-  id: string;
-  hash: string;
-}) => {
+export const updateLib = (params: { react_code: string; less_code: string; config_code: string; md_code: string; id: string; hash: string }) => {
   return request.post('/lib/update', params);
 };
 
 // 发布组件
-export const publish = (params: {
-  lib_id: number;
-  release_id: string;
-  react_url: string;
-  css_url?: string;
-  config_url: string;
-  release_hash: string;
-}) => {
+export const publish = (params: { lib_id: number; react_compile: string; css_compile?: string; config_code: string; release_hash: string }) => {
   return request.post('/lib/publish', params);
 };

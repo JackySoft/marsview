@@ -225,7 +225,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           parentId: element.parentId,
           type: element.type,
           name: element.name,
-          elements: element.elements.map((item) => ({ id: item.id, parentId: element.id, type: item.type, name: item.name })),
+          elements: element.elements?.map((item) => ({ id: item.id, parentId: element.id, type: item.type, name: item.name })) || [],
         });
         const childElement = cloneDeep({
           ...element,
@@ -240,7 +240,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
         // 添加当前组件对象
         state.page.elementsMap[element.id] = childElement;
         // 添加子组件对象
-        element.elements.map((item) => {
+        element.elements?.map((item) => {
           state.page.elementsMap[item.id] = item;
         });
       }),

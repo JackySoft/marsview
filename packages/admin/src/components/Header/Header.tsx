@@ -37,7 +37,7 @@ const Header = memo(() => {
       {/* 加载面包屑，左右布局时，面包屑在顶部 */}
       {projectInfo.layout === 1 && (
         <Flex align="center">
-          <div onClick={toggleCollapsed}>
+          <div onClick={toggleCollapsed} style={{ cursor: 'pointer' }}>
             {collapsed ? (
               <MenuUnfoldOutlined style={{ color: isLight ? '#000' : '#fff' }} />
             ) : (

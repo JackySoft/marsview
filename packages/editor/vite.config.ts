@@ -48,7 +48,7 @@ export default defineConfig({
         varName: 'antd',
       },
       ahooks: {
-        src: 'http://www.marsview.cc/ahooks.js',
+        src: 'https://marsview.cdn.bcebos.com/static/ahooks.js',
         varName: 'ahooks',
       },
       axios: {

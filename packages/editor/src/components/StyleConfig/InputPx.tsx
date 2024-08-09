@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { InputNumber } from 'antd';
 
 const InputPx = ({ value, onChange, ...props }: any) => {
-  const [num, setNum] = useState<null | number | string>(null);
+  const [num, setNum] = useState<null | number | string>('');
 
   useEffect(() => {
-    const num = value?.replace('px', '');
-    if (num != '') setNum(num);
+    const num = value?.toString().replace('px', '');
+    if (num) setNum(num);
   }, [value]);
 
   const handleChange = (value: null | number | string) => {

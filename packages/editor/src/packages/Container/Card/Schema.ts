@@ -96,7 +96,7 @@ export default {
     props: {
       title: {
         type: 'static',
-        value: 'Mars搭建',
+        value: 'Marsview搭建',
       },
       size: 'default',
       bordered: true,

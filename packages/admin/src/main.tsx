@@ -15,7 +15,7 @@ let root: ReactDOM.Root | null = null;
 // microApp 子应用挂载
 window.mount = () => {
   // 初始化渲染
-  root = ReactDOM.createRoot(document.getElementById('root')!);
+  root = ReactDOM.createRoot(document.getElementById('rootHAHA')!);
   root.render(<App />);
   // 监听路由变化
   window.microApp?.addDataListener((data: any) => {

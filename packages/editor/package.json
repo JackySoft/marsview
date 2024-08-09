@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@mars/editor",
+  "name": "@marsview/editor",
   "scripts": {
     "dev": "vite",
     "start": "vite",
@@ -13,7 +13,7 @@
     "@bytemd/plugin-gfm": "^1.21.0",
     "@bytemd/plugin-highlight": "^1.21.0",
     "@bytemd/react": "^1.21.0",
-    "@mars/materials": "workspace:^",
+    "@marsview/materials": "workspace:^",
     "@monaco-editor/react": "^4.6.0",
     "allotment": "^1.19.5",
     "bytemd": "^1.21.0",

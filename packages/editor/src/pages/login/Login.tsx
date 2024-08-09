@@ -28,21 +28,24 @@ export default function Login() {
           <img src="/imgs/login-bg.png" />
         </div>
         <div className={style.form}>
-          <div className={style.title}>Marsview</div>
+          <div className={style.title}>
+            <img src="/imgs/mars-logo.png" width={45} />
+            <span>Marsview</span>
+          </div>
           <Form
             name="basic"
             layout="vertical"
             className={style.form}
             onFinish={onFinish}
-            initialValues={{ userName: 'admin@marsview.cc', userPwd: '123456' }}
+            initialValues={{ userName: 'demo@marsview.cc', userPwd: 'marsview' }}
             autoComplete="off"
             size="large"
           >
-            <Form.Item<FieldType> name="userName" rules={[{ required: true, message: 'Please input your username!' }]}>
+            <Form.Item<FieldType> name="userName" rules={[{ required: true, message: '请输入邮箱' }]}>
               <Input prefix={<UserOutlined />} />
             </Form.Item>
 
-            <Form.Item<FieldType> style={{ marginTop: 32 }} name="userPwd" rules={[{ required: true, message: 'Please input your password!' }]}>
+            <Form.Item<FieldType> style={{ marginTop: 32 }} name="userPwd" rules={[{ required: true, message: '请输入密码' }]}>
               <Input.Password prefix={<LockOutlined />} />
             </Form.Item>
 

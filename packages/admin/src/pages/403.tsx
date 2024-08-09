@@ -13,7 +13,7 @@ function Forbidden() {
       subTitle={`抱歉，您当前没有权限访问此${searchParams.get('type') === 'project' ? '项目' : '页面'}`}
       extra={
         <Button type="primary" onClick={() => navigate(`http://www.marsview.cc/`)}>
-          返回Mars平台
+          返回Marsview平台
         </Button>
       }
     />
