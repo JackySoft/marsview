@@ -3,6 +3,7 @@ import { Upload } from 'antd';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons';
 import { message } from '@/utils/AntdGlobal';
+import { uploadImg } from '@/api';
 import styles from './index.module.less';
 
 interface UploadImagesProps {
@@ -77,12 +78,8 @@ const UploadImages: React.FC<UploadImagesProps> = memo(
      */
     const uploadRequest = (options: any) => {
       setLoading(true);
-      /*uploadImg({
+      uploadImg({
         file: options.file as File, // File 对象
-        onProgress(e) {
-          // 上传进度
-          console.log(e.percent);
-        },
       })
         .then((res) => {
           const { name, url = '' } = res;
@@ -104,9 +101,9 @@ const UploadImages: React.FC<UploadImagesProps> = memo(
         })
         .catch(() => {
           setLoading(false);
-          onChange('https://static.marsview.cn/image/05892524adf0c112f0e2e39887e7cc3991ec5ae9.png');
+          onChange('https://marsview.cdn.bcebos.com/mars-logo.png');
           message.error('图片上传失败');
-        });*/
+        });
     };
     // 上传按钮
     const uploadButton = (

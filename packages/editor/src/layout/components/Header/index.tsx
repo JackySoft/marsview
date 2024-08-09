@@ -105,7 +105,7 @@ const Header = memo(() => {
       const res = await uploadImg({
         file: file, // File 对象
       });
-      return res;
+      return res.url;
     } catch (error) {
       console.error('封面图上传失败', error);
       return '';
