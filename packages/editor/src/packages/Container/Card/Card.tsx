@@ -62,7 +62,7 @@ const MCard = ({ id, type, config, elements, onClick }: ComponentType, ref: any)
         {...config.props}
         data-id={id}
         data-type={type}
-        cover={<img src={config.props.cover} />}
+        cover={config.props.cover ? <img src={config.props.cover} /> : null}
         extra={
           config.props.extra?.text ? (
             <Button {...config.props.extra} onClick={handleClick}>
