@@ -18,7 +18,7 @@ export interface ILib {
   react_config: string;
   release_hash: string;
   user_id: string;
-  sso_name: string;
+  user_name: string;
   created_at: string;
   updated_at: string;
 }

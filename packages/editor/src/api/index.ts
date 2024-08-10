@@ -138,22 +138,22 @@ export const copyMenu = (params: { id: number }) => {
 
 // 获取用户列表
 export const getUserList = (params: UserListParams) => {
-  return request.get('/user/list', params, { showLoading: false });
+  return request.get('/project/user/list', params, { showLoading: false });
 };
 
 // 新增用户
 export const addUser = (params: UserCreateParams) => {
-  return request.post('/user/create', params, { showLoading: false });
+  return request.post('/project/user/create', params, { showLoading: false });
 };
 
 // 删除用户
 export const delUser = (params: { id: number }) => {
-  return request.post('/user/delete', params, { showLoading: false });
+  return request.post('/project/user/delete', params, { showLoading: false });
 };
 
 // 更新用户
 export const updateUser = (params: { id: number; system_role: number; role_id: number }) => {
-  return request.post('/user/update', params, { showLoading: false });
+  return request.post('/project/user/update', params, { showLoading: false });
 };
 
 // 获取角色列表

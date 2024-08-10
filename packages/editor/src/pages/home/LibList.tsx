@@ -73,7 +73,7 @@ export default () => {
                 <p className={style.remark}>{item.description}</p>
                 <p>
                   <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
-                  {item.sso_name} {item.created_at}
+                  {item.user_name} {item.created_at}
                 </p>
               </div>
               <Space>

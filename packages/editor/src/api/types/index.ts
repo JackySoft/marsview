@@ -25,7 +25,7 @@ export interface PageItem {
     id: number;
     role: 1 | 2;
     user_id: string;
-    sso_name: string;
+    user_name: string;
   }>;
   preview_img: string;
 }
@@ -36,7 +36,7 @@ export interface PageReqParams {
 
 export interface CreatePageParams {
   name: string;
-  sso_name: string;
+  user_name: string;
   user_id: string;
   path: string;
 }

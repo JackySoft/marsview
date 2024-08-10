@@ -173,8 +173,8 @@ export default function MenuList() {
     },
     {
       title: '创建人',
-      dataIndex: 'sso_name',
-      key: 'sso_name',
+      dataIndex: 'user_name',
+      key: 'user_name',
     },
     {
       title: '操作',
