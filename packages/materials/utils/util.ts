@@ -207,7 +207,7 @@ export function renderFormula(formula: string, eventParams?: any) {
     // eslint-disable-next-line no-useless-escape
     const formIds: Array<string> = formula.match(/([A-Za-z]+_\w+)\.[\w\.]*/g) || [];
     const originIds: Array<string> = [...new Set(formIds.map((id) => id.split('.')[0]))];
-    const fnParams: Array<string> = ['variable', 'eventParams', 'FORMAT'];
+    const fnParams: Array<string> = ['context', 'eventParams'];
     const data: Array<any> = [];
     const pageStore = usePageStore.getState().page;
     originIds.forEach((id: string) => {
