@@ -23,7 +23,7 @@ export interface ProjectItem {
   name: string;
   remark: string;
   logo: string;
-  sso_name: string;
+  user_name: string;
   user_id: string;
   updated_at: string;
   created_at: string;
@@ -31,6 +31,6 @@ export interface ProjectItem {
     id: number;
     role: 1 | 2;
     user_id: string;
-    sso_name: string;
+    user_name: string;
   }>;
 }

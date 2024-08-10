@@ -29,7 +29,7 @@ interface HistoryItem {
   page_id: number;
   page_name: string;
   page_data: string;
-  sso_name: string;
+  user_name: string;
   created_at: string;
   updated_at: string;
 }
@@ -65,8 +65,8 @@ export default function PublishHistory() {
     },
     {
       title: '操作人',
-      dataIndex: 'sso_name',
-      key: 'sso_name',
+      dataIndex: 'user_name',
+      key: 'user_name',
     },
     {
       title: '版本ID',

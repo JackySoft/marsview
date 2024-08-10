@@ -90,8 +90,8 @@ export default function MenuList() {
   const columns: ColumnsType<UserItem> = [
     {
       title: '用户名称',
-      dataIndex: 'sso_name',
-      key: 'sso_name',
+      dataIndex: 'user_name',
+      key: 'user_name',
     },
     {
       title: '系统角色',

@@ -11,10 +11,11 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
   const [form] = Form.useForm();
   const [action, setAction] = useState<IAction>('create');
   const [systemRole, setSystemRole] = useState<number>(1);
-  const [users, setUsers] = useState<Array<{ id: string; username: string; account: string }>>([]);
+  const [users, setUsers] = useState<Array<{ id: string; user_name: string }>>([]);
   const [roleList, setRoleList] = useState<Array<{ id: number; name: string }>>([]);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [userLoading, setUserLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const project_id = useParams().id as string;
 
@@ -50,8 +51,15 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
   const { run } = useDebounceFn(
     (val) => {
       if (!val) return;
+      setUserLoading(true);
       searchUser(val).then((res) => {
-        setUsers(res);
+        setUsers(
+          res.map((item: any) => ({
+            label: item.user_name,
+            value: item.id,
+          })),
+        );
+        setUserLoading(false);
       });
     },
     {
@@ -123,13 +131,14 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
             </Form.Item>
             {action === 'create' && (
               <Form.Item label="用户" name="sso_info" rules={[{ required: true, message: '请输入飞书用户名' }]}>
-                <Select labelInValue filterOption={true} showSearch onSearch={run}>
-                  {users.map((item) => (
-                    <Select.Option key={item.account} value={item.account}>
-                      {item.username}
-                    </Select.Option>
-                  ))}
-                </Select>
+                <Select
+                  labelInValue
+                  filterOption={true}
+                  showSearch
+                  onSearch={run}
+                  notFoundContent={userLoading ? <Spin size="small" /> : null}
+                  options={users}
+                />
               </Form.Item>
             )}
 
