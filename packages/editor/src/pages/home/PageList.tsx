@@ -163,9 +163,9 @@ export default function Index() {
 
         <Image
           style={{ display: 'none' }}
-          src={previewUrl}
           preview={{
             visible: showPreview,
+            src: previewUrl,
             onVisibleChange: (value) => {
               setShowPreview(value);
             },

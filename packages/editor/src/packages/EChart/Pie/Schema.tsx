@@ -217,23 +217,23 @@ export default {
       sourceType: 'json',
       source: [
         {
-          name: '基础设施组',
+          name: '前端组',
           count: 10,
         },
         {
-          name: '增长中台组',
+          name: '后端组',
           count: 18,
         },
         {
-          name: '用户平台组',
+          name: '测试组',
           count: 23,
         },
         {
-          name: '司机组',
+          name: '产品组',
           count: 19,
         },
         {
-          name: '多业务中台',
+          name: '设计组',
           count: 15,
         },
       ],
