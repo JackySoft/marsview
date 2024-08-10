@@ -209,9 +209,9 @@ export function renderFormula(formula: string, eventParams?: any) {
     const originIds: Array<string> = [...new Set(formIds.map((id) => id.split('.')[0]))];
     const fnParams: Array<string> = ['variable', 'eventParams', 'FORMAT'];
     const data: Array<any> = [];
+    const pageStore = usePageStore.getState().page;
     originIds.forEach((id: string) => {
       fnParams.push(id);
-      const pageStore = usePageStore.getState().page;
       // 如果绑定的是表单项，则通过Form实例对象获取对应表单值
       const formValues = pageStore.formData?.[id] || {};
       data.push(formValues);
@@ -222,8 +222,14 @@ export function renderFormula(formula: string, eventParams?: any) {
     const FORMAT = (date: any, fmt: string = 'YYYY-MM-DD HH:mm:ss') => {
       return dayjs(date).format(fmt);
     };
-    const result = dynamicFunc(variableData, eventParams || {}, FORMAT, ...data);
-    if (typeof result === 'function') return result(variableData, eventParams || {}, FORMAT, ...data);
+    const context = {
+      variable: variableData,
+      eventParams,
+      FORMAT,
+      ...(pageStore.formData || {}),
+    };
+    const result = dynamicFunc(context, variableData, eventParams || {}, FORMAT, ...data);
+    if (typeof result === 'function') return result(context, variableData, eventParams || {}, FORMAT, ...data);
     return result;
   } catch (error) {
     console.error('表达式解析失败：', error);
@@ -357,7 +363,6 @@ export const loadStyle = (id: string, src: string) => {
     link.rel = 'stylesheet';
     link.type = 'text/css';
     link.href = src;
-    link.id = id;
     link.onload = resolve;
     link.onerror = reject;
 

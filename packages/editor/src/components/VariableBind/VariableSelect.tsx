@@ -139,27 +139,27 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
 
     // 选择页面全局变量
     if (node.type === 'Variable') {
-      form.setFieldValue('expression', `${beforeExpression} variable.${node.id}`.trimStart());
+      form.setFieldValue('expression', `${beforeExpression} context.variable.${node.id}`.trimStart());
       return;
     }
     // 判断取值方式，如果是表单项，就按照表单的方式取值
     if (node.type === 'PageVariable') {
-      form.setFieldValue('expression', `${beforeExpression} variable`);
+      form.setFieldValue('expression', `${beforeExpression} context.variable`);
     } else if (node.type === 'EditTable') {
       const name = elementsMap[node.id]?.config.props.field;
-      if (name) form.setFieldValue('expression', `${beforeExpression} ${node.parentId}.${name}`.trimStart());
+      if (name) form.setFieldValue('expression', `${beforeExpression} context.${node.parentId}.${name}`.trimStart());
     } else if (node.type === 'Form') {
-      form.setFieldValue('expression', `${beforeExpression}  ${node.id}`);
+      form.setFieldValue('expression', `${beforeExpression}  context.${node.id}`);
     } else {
       const formItem = elementsMap[node.id]?.config.props.formItem;
-      form.setFieldValue('expression', `${beforeExpression} ${node.parentId}.${formItem.name}`.trimStart());
+      form.setFieldValue('expression', `${beforeExpression} context.${node.parentId}.${formItem.name}`.trimStart());
     }
   };
 
   // 计算函数点击
   const handleClick = (type: string) => {
     const beforeExpression = form.getFieldValue('expression') ?? '';
-    form.setFieldValue('expression', `${beforeExpression} ${type}()`.trimStart());
+    form.setFieldValue('expression', `${beforeExpression} context.${type}()`.trimStart());
   };
 
   // 确认提交
