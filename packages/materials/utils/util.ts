@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { usePageStore } from '../stores/pageStore';
 import { ComponentType } from '../types';
 import { get } from 'lodash-es';
+import { cloneDeep } from 'lodash-es';
 
 /**
  * 生成ID
@@ -208,13 +209,15 @@ export function renderFormula(formula: string, eventParams?: any) {
     const formIds: Array<string> = formula.match(/([A-Za-z]+_\w+)\.[\w\.]*/g) || [];
     const originIds: Array<string> = [...new Set(formIds.map((id) => id.split('.')[0]))];
     const fnParams: Array<string> = ['context', 'eventParams'];
-    const data: Array<any> = [];
     const pageStore = usePageStore.getState().page;
+    const formData = cloneDeep(pageStore.formData || {});
     originIds.forEach((id: string) => {
       fnParams.push(id);
       // 如果绑定的是表单项，则通过Form实例对象获取对应表单值
       const formValues = pageStore.formData?.[id] || {};
-      data.push(formValues);
+      if (!formData?.id) {
+        formData[id] = formValues;
+      }
     });
     const variableData = getPageVariable();
     const dynamicFunc = createFunction(fnParams, formula);
@@ -226,10 +229,10 @@ export function renderFormula(formula: string, eventParams?: any) {
       variable: variableData,
       eventParams,
       FORMAT,
-      ...(pageStore.formData || {}),
+      ...formData,
     };
-    const result = dynamicFunc(context, variableData, eventParams || {}, FORMAT, ...data);
-    if (typeof result === 'function') return result(context, variableData, eventParams || {}, FORMAT, ...data);
+    const result = dynamicFunc(context, eventParams || {});
+    if (typeof result === 'function') return result(context, eventParams || {});
     return result;
   } catch (error) {
     console.error('表达式解析失败：', error);
