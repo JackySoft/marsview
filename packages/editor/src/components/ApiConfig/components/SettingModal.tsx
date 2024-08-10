@@ -30,7 +30,7 @@ const SettingModal = ({ update }: SettingModalProp, ref: any) => {
     replaceData: 'merge',
     isCors: true,
     result: {
-      code: 'ret',
+      code: 'code',
       data: 'data',
       msg: 'msg',
       codeValue: 0,

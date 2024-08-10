@@ -48,7 +48,7 @@ const MList = ({ config }: ComponentType<IConfig>, ref: any) => {
   // 列表加载
   const getDataList = (data: any) => {
     handleApi(config.api, data).then((res) => {
-      if (res?.ret === 0) {
+      if (res?.code === 0) {
         if (!Array.isArray(res.data)) {
           console.error('[List]', 'data数据格式错误，请检查');
           setData([]);

@@ -50,8 +50,6 @@ export interface UpdatePageParams {
 
 export interface PublishPageParams {
   page_id: number;
-  page_name: string;
-  page_data?: string;
   env: 'stg' | 'pre' | 'prd'; // 1 stg 2 pre 3 prod;
 }
 

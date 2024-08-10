@@ -21,10 +21,10 @@ export const handleApi = async (
   sendParams: any = {},
 ) => {
   if (api.sourceType === 'json') {
-    return { ret: 0, data: api.source };
+    return { code: 0, data: api.source };
   } else if (api.sourceType === 'api' || api.actionType === 'request' || api.actionType === 'download') {
     if (!api.id) {
-      return { ret: 0, data: '' };
+      return { code: 0, data: '' };
     }
     const apis = usePageStore.getState().page.apis;
     const { method, stgApi, preApi, prdApi, contentType, replaceData = 'merge', isCors = true, params, result, tips } = apis[api.id] || {};
@@ -42,7 +42,7 @@ export const handleApi = async (
       if (api.actionType === 'download') {
         response = (await request.download(config.url, config.data, { ...config, filename: api.filename })) || {};
         if (response.data instanceof Blob) {
-          return { ret: 0, data: response.data, msg: '' };
+          return { code: 0, data: response.data, msg: '' };
         }
       } else {
         if (method === 'GET' || method === 'DELETE') {
@@ -60,19 +60,19 @@ export const handleApi = async (
     } catch (error: any) {
       response = {
         status: 200,
-        data: { ret: 500, msg: error },
+        data: { code: 500, msg: error },
       };
     }
     let res = response.data;
     // 判断是否是数组，如果是数组，则拼接标准结构进行返回，严格意义将，此处必须返回完整结构
     if (Array.isArray(res)) {
-      res = { ret: 0, data: res, msg: '' };
+      res = { code: 0, data: res, msg: '' };
     }
     // 字段映射
-    const ret = result.code ? Number(res[result.code]) : 0;
+    const code = result.code ? Number(res[result.code]) : 0;
     const data = result.data ? res[result.data] : res;
     const msg = result.msg ? res[result.msg] : '';
-    if (ret === result.codeValue) {
+    if (code === result.codeValue) {
       if (tips?.success) {
         message.success(tips.success);
       }
@@ -96,14 +96,14 @@ export const handleApi = async (
     } else if (typeof api.sourceField === 'string' && api.sourceField) {
       renderData = get(data, api.sourceField);
     }
-    return { ret, data: renderData, originData: data, msg };
+    return { code, data: renderData, originData: data, msg };
   } else {
     // 解析动态变量
     if (api.name?.value) {
       const value = renderFormula(api.name?.value);
-      return { ret: 0, data: value };
+      return { code: 0, data: value };
     }
-    return { ret: 0, data: '' };
+    return { code: 0, data: '' };
   }
 };
 

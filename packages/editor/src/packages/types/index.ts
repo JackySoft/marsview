@@ -203,7 +203,7 @@ export interface ApiType {
   sourceType?: string; //数据源类型，枚举值
   // 静态数据源映射
   source: any;
-  // 数据源映射，比如：{ ret: { list: [] } }，这里sourceField: 'list'
+  // 数据源映射，比如：{ code: { list: [] } }，这里sourceField: 'list'
   sourceField: string;
   contentType: string;
   baseApi?: string;

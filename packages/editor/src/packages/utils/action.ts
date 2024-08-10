@@ -328,7 +328,7 @@ const handleNotifacation = ({ action, next }: ActionNode<NotifacationAction>, da
  */
 const handleRequest = async ({ action, next }: ActionNode<ApiConfig>, data: any) => {
   const res = await handleApi(action, data);
-  if (res.ret === 0) {
+  if (res.code === 0) {
     execAction(next?.success || next, res.data);
   } else {
     execAction(next?.fail, res.msg);
@@ -463,7 +463,7 @@ const handleSendMessage = async (
   data: any,
 ) => {
   const res = await request.post('https://mars-api.marsview.cc/api/robot/sendMessage', { ...action, variables: data });
-  if (res.data.ret === 0) {
+  if (res.data.code === 0) {
     execAction(next?.success || next, res.data.data);
   } else {
     execAction(next?.fail, res.msg);
@@ -475,7 +475,7 @@ const handleSendMessage = async (
  */
 const handleCreateNode = async ({ action, next }: ActionNode<{ space_id: number; node_token: string; title: string }>, data: any) => {
   const res = await request.post('https://mars-api.marsview.cc/api/robot/createNode', { ...action, variables: data });
-  if (res.data.ret === 0) {
+  if (res.data.code === 0) {
     execAction(next?.success || next, res.data.data);
   } else {
     execAction(next?.fail, res.msg);
