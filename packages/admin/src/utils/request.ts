@@ -5,7 +5,7 @@ import router from '@/router';
 import storage from './storage';
 
 interface IResult {
-  ret: number;
+  code: number;
   data: any;
   message: string;
 }
@@ -49,20 +49,17 @@ instance.interceptors.response.use(
       message.error(ErrorMsg);
       return Promise.reject(ErrorMsg);
     }
-    if (typeof res.ret === 'undefined') {
-      return res;
-    }
-    if (res.ret === 0) {
+    if (res.code === 0) {
       return res.data;
     }
-    if (res.ret === 10018) {
+    if (res.code === 10018) {
       message.error('登录已过期，请重新登录');
       setTimeout(() => {
         window.location.replace(`/#/login?callback=${window.location.href}`);
         return null;
       }, 2000);
       return Promise.reject(res.message);
-    } else if (res.ret != 0) {
+    } else if (res.code != 0) {
       message.error(res.message);
       return Promise.reject(res.message);
     }

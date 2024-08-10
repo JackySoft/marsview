@@ -41,20 +41,24 @@ const CreatePage = (props: IModalProp) => {
     const valid = await form.validateFields();
     if (valid) {
       setLoading(true);
-      if (type === 'create') {
-        await createPageData(params);
-      } else {
-        await updatePageData({
-          ...params,
-          id: recordId,
-        });
+      try {
+        if (type === 'create') {
+          await createPageData(params);
+        } else {
+          await updatePageData({
+            ...params,
+            id: recordId,
+          });
+        }
+        // 页面列表通过全局state通知刷新
+        updateList();
+        // 编辑器界面 - 左侧菜单修改后刷新
+        props.update?.();
+        handleCancle();
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
       }
-      setLoading(false);
-      // 页面列表通过全局state通知刷新
-      updateList();
-      // 编辑器界面 - 左侧菜单修改后刷新
-      props.update?.();
-      handleCancle();
     }
   };
 
@@ -74,7 +78,7 @@ const CreatePage = (props: IModalProp) => {
       okText="确定"
       cancelText="取消"
     >
-      <Form form={form} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }} initialValues={{ is_public: 1 }}>
+      <Form form={form} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }} initialValues={{ is_public: 1, is_edit: 1 }}>
         <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入页面名称' }]}>
           <Input placeholder="请输入页面名称" />
         </Form.Item>
@@ -85,6 +89,12 @@ const CreatePage = (props: IModalProp) => {
           <Radio.Group>
             <Radio value={1}>公开</Radio>
             <Radio value={2}>私有</Radio>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item label="模式" name="is_edit" rules={[{ required: true, message: '请选择编辑模式' }]}>
+          <Radio.Group>
+            <Radio value={1}>编辑</Radio>
+            <Radio value={2}>查看</Radio>
           </Radio.Group>
         </Form.Item>
       </Form>

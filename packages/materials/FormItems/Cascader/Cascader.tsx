@@ -52,7 +52,7 @@ const MCascader = ({ config, onChange }: ComponentType<IConfig>, ref: any) => {
   // 列表加载
   const getDataList = (data: any) => {
     handleApi(config.api, data).then((res) => {
-      if (res?.ret === 0) {
+      if (res?.code === 0) {
         if (Array.isArray(res.data)) {
           setData(res.data);
         } else {

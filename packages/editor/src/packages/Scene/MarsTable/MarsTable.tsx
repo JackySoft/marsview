@@ -80,7 +80,7 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
       .then((res) => {
         setLoading(false);
         updateToolbar();
-        if (res?.ret === 0) {
+        if (res?.code === 0) {
           if (Array.isArray(res.data)) {
             setData(res.data);
           }

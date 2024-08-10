@@ -55,7 +55,7 @@ const MSegmented = ({ id, type, config, onChange }: ComponentType<IConfig>, ref:
   // 列表加载
   const getDataList = (data: any) => {
     handleApi(config.api, data).then((res) => {
-      if (res?.ret === 0) {
+      if (res?.code === 0) {
         if (!Array.isArray(res.data)) {
           console.error('[segmentd]', 'data数据格式错误，请检查');
           setData([]);

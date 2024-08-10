@@ -24,7 +24,7 @@ const BarChart = ({ id, type, config, apis }: ComponentType, ref: any) => {
   const getDataList = (data: any) => {
     setLoading(true);
     handleApi(config.api, data).then((res) => {
-      if (res?.ret === 0) {
+      if (res?.code === 0) {
         if (Array.isArray(res.data)) {
           setData(res.data);
         } else {

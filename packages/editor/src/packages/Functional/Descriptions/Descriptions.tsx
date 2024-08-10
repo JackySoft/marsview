@@ -39,7 +39,7 @@ const MButton = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
   // 列表加载
   const getDataList = (params: any) => {
     handleApi(config.api, params).then((res) => {
-      if (res?.ret === 0) {
+      if (res?.code === 0) {
         if (Array.isArray(res.data)) {
           setData(res.data);
         } else {

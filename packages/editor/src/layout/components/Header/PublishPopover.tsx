@@ -11,21 +11,7 @@ export default function Publish() {
   const [loading2, setLoading2] = useState(false);
   const [loading3, setLoading3] = useState(false);
   const {
-    page: {
-      pageId,
-      pageName,
-      remark,
-      is_public,
-      stg_state,
-      pre_state,
-      prd_state,
-      stg_publish_id,
-      pre_publish_id,
-      prd_publish_id,
-      variableData,
-      formData,
-      ...pageData
-    },
+    page: { pageId, stg_state, pre_state, prd_state, stg_publish_id, pre_publish_id, prd_publish_id },
     updatePageState,
   } = usePageStore((state) => ({
     page: state.page,
@@ -44,29 +30,19 @@ export default function Publish() {
       if (prd_state === 3) return message.warning('PRD已发布，请勿重复发布');
       setLoading3(true);
     }
-    await publishPage({
-      env,
-      page_id: pageId,
-      page_name: pageName,
-      page_data: JSON.stringify({
-        ...pageData,
-        stg_state: undefined,
-        pre_state: undefined,
-        prd_state: undefined,
-        preview_img: undefined,
-        variableData: {},
-        formData: {},
-        stg_publish_id: undefined,
-        pre_publish_id: undefined,
-        prd_publish_id: undefined,
-        user_id: undefined,
-      }),
-    });
-    updatePageState({
-      env: env === 'stg' ? 'stg_state' : env === 'pre' ? 'pre_state' : 'prd_state',
-      pageState: 3,
-    });
-    message.success('发布成功');
+    try {
+      await publishPage({
+        env,
+        page_id: pageId,
+      });
+      updatePageState({
+        env: env === 'stg' ? 'stg_state' : env === 'pre' ? 'pre_state' : 'prd_state',
+        pageState: 3,
+      });
+      message.success('发布成功');
+    } catch (error) {
+      console.log(error);
+    }
     if (env === 'stg') setLoading1(false);
     if (env === 'pre') setLoading2(false);
     if (env === 'prd') setLoading3(false);

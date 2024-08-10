@@ -45,7 +45,7 @@ const CodingPanel = () => {
       message.error('页面数据格式异常，请检查重试');
       return;
     }
-    const { pageName, remark, is_public, ...pageData } = value.page;
+    const { pageName, remark, is_public, is_edit, ...pageData } = value.page;
     /**
      * 页面ID和用户信息不允许修改
      */
@@ -54,6 +54,7 @@ const CodingPanel = () => {
       name: pageName,
       remark,
       is_public,
+      is_edit,
       page_data: JSON.stringify({
         ...pageData,
         pageId: undefined,
@@ -73,28 +74,29 @@ const CodingPanel = () => {
     setLoading(true);
     try {
       await updatePageData(params);
+      setLoading(false);
+      savePageInfo({
+        ...JSON.parse(params.page_data),
+        pageId: page.pageId,
+        pageName,
+        remark,
+        is_public,
+        is_edit,
+        preview_img: page.preview_img,
+        stg_publish_id: page.stg_publish_id,
+        pre_publish_id: page.pre_publish_id,
+        prd_publish_id: page.prd_publish_id,
+        stg_state: page.stg_state,
+        pre_state: page.pre_state,
+        prd_state: page.prd_state,
+        user_id: page.user_id,
+        variableData: page.variableData,
+        formData: page.formData,
+      });
+      message.success('保存成功');
     } catch (error) {
-      console.error(error);
+      setLoading(false);
     }
-    setLoading(false);
-    savePageInfo({
-      ...JSON.parse(params.page_data),
-      pageId: page.pageId,
-      pageName,
-      remark,
-      is_public,
-      preview_img: page.preview_img,
-      stg_publish_id: page.stg_publish_id,
-      pre_publish_id: page.pre_publish_id,
-      prd_publish_id: page.prd_publish_id,
-      stg_state: page.stg_state,
-      pre_state: page.pre_state,
-      prd_state: page.prd_state,
-      user_id: page.user_id,
-      variableData: page.variableData,
-      formData: page.formData,
-    });
-    message.success('保存成功');
   };
 
   return (

@@ -20,7 +20,6 @@ const Header = memo(() => {
   const [loading, setLoading] = useState(false);
   const [navKey, setNavKey] = useState(['projects']);
   const [pageFrom, setPageFrom] = useState('projects');
-  const [showQrCode, setShowQrCode] = useState(false);
   const creatPageRef = useRef<{ open: () => void }>();
   const createLibRef = useRef<{ open: () => void }>();
   const navigate = useNavigate();
@@ -33,7 +32,7 @@ const Header = memo(() => {
   };
   const {
     userInfo,
-    page: { pageId, pageName, remark, is_public, ...pageData },
+    page: { pageId, pageName, remark, is_public, is_edit, ...pageData },
     mode,
     setMode,
     updatePageState,
@@ -136,15 +135,16 @@ const Header = memo(() => {
           name: pageName,
           remark: remark,
           is_public: is_public ?? 1,
+          is_edit: is_edit ?? 1,
           page_data,
           preview_img: preview_img || pageData.preview_img,
         });
+        updatePageState({ env: 'all' });
+        setLoading(false);
+        message.success('保存成功', 1);
       } catch (error) {
-        console.error(error);
+        setLoading(false);
       }
-      updatePageState({ env: 'all' });
-      setLoading(false);
-      message.success('保存成功', 1);
     } else if (name === 'preview') {
       setMode('preview');
     } else {
@@ -293,13 +293,17 @@ const Header = memo(() => {
               退出预览
             </Button>
           )}
-          <img
-            width={20}
-            src="https://marsview.cdn.bcebos.com/wechat.png"
-            onClick={() => {
-              setShowQrCode(true);
-            }}
-          />
+          <Popover
+            content={
+              <>
+                <Image width={150} src="https://marsview.cdn.bcebos.com/qrcode.png" preview={false} />
+                <p style={{ textAlign: 'center', color: '#7d33ff' }}>微信交流群</p>
+              </>
+            }
+          >
+            <img width={20} src="https://marsview.cdn.bcebos.com/wechat.png" />
+          </Popover>
+
           {/* 用户头像 */}
           <div className={styles.avatar}>
             {avatar ? <img width={30} src={avatar} style={{ borderRadius: '50%' }} /> : null}
@@ -312,19 +316,6 @@ const Header = memo(() => {
         {/* 新建组件 */}
         {pageFrom === 'libs' && <CreateLib createRef={createLibRef} />}
       </Layout.Header>
-      {/* 微信群 */}
-      <Image
-        width={0}
-        height={0}
-        style={{ display: 'none' }}
-        preview={{
-          visible: showQrCode,
-          src: 'https://marsview.cdn.bcebos.com/qrcode.png',
-          onVisibleChange: (value) => {
-            setShowQrCode(value);
-          },
-        }}
-      />
     </>
   );
 });
