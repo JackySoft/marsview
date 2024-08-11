@@ -81,10 +81,7 @@ const AdminLayout = () => {
   const Footer = () => (
     <Layout.Footer>
       <div className="footnote">
-        <span>上海云搭科技有限公司</span>
-        <span>
-          <a href="https://beian.miit.gov.cn/#/Integrated/index">京ICP备14041985号-2</a>
-        </span>
+        <span>Marsview 访问端</span>
       </div>
     </Layout.Footer>
   );
