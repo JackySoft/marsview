@@ -9,7 +9,7 @@ export default defineConfig({
     outDir: '../../dist/editor',
   },
   server: {
-    host: 'localhost',
+    host: '127.0.0.1',
     port: 8080,
     headers: {
       'Access-Control-Allow-Origin': '*',
