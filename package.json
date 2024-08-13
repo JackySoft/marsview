@@ -1,5 +1,9 @@
 {
   "private": true,
+  "name": "mars",
+  "description": "低代码平台，包含可视化编辑器、可视化后台管理，支持自定义组件开发",
+  "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "start:editor": "pnpm --filter editor start",
     "build:editor": "pnpm --filter editor build",
