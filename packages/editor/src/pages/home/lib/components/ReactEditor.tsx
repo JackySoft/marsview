@@ -68,7 +68,7 @@ export default forwardRef((_: any, ref: any) => {
   });
 
   // 保存后，格式化代码
-  useKeyPress(['meta.s'], (event) => {
+  useKeyPress(['meta.s', 'ctrl.s'], (event) => {
     try {
       event.stopPropagation();
       event.preventDefault();
