@@ -3,6 +3,7 @@
  */
 
 export interface PageParams {
+  keyword?: string;
   pageNum: number;
   pageSize?: number;
 }
@@ -123,6 +124,7 @@ export namespace Menu {
 }
 
 export interface ProjectListParams {
+  keyword?: string;
   pageNum: number;
   pageSize?: number;
 }
