@@ -62,7 +62,7 @@ export default () => {
   return (
     <div className={style.libWrap}>
       <div className={style.search}>
-        <Input.Search placeholder="输入组件名称或标识" allowClear enterButton="Search" style={{ width: 500 }} size="large" onSearch={onSearch} />
+        <Input.Search placeholder="输入组件名称" allowClear enterButton="Search" style={{ width: 500 }} size="large" onSearch={onSearch} />
       </div>
       <Skeleton loading={loading} active paragraph={{ rows: 3 }}>
         {list.map((item) => {
@@ -70,7 +70,7 @@ export default () => {
             <div className={style.item} key={item.id}>
               <div className={style.itemInfo}>
                 <h2>{item.name}</h2>
-                <p className={style.remark}>{item.description}</p>
+                <p className={style.remark}>{item.description || '暂无描述'}</p>
                 <p>
                   <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
                   {item.user_name} {item.created_at}
