@@ -2,19 +2,18 @@ import { Input, Modal, Form } from 'antd';
 import { useImperativeHandle, useState, MutableRefObject } from 'react';
 import { useForm } from 'antd/es/form/Form';
 import { createLib } from '@/api/lib';
-import { usePageStore } from '@/stores/pageStore';
 /**
  * 创建自定义组件库
  */
 
 export interface IModalProp {
   createRef: MutableRefObject<{ open: () => void } | undefined>;
+  update?: () => void;
 }
 
 const CreateLib = (props: IModalProp) => {
   const [form] = useForm();
   const [visible, setVisible] = useState(false);
-  const { updateList } = usePageStore((state) => ({ updateList: state.updateList, userInfo: state.userInfo }));
 
   // 暴露方法
   useImperativeHandle(props.createRef, () => ({
@@ -29,8 +28,7 @@ const CreateLib = (props: IModalProp) => {
     const valid = await form.validateFields();
     if (valid) {
       await createLib({ tag, name, description });
-      // 通知列表刷新
-      updateList();
+      props.update?.();
       handleCancle();
     }
   };

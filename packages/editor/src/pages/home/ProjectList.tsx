@@ -1,15 +1,13 @@
-import { Card, Col, Dropdown, Layout, Row, Pagination, Spin, Empty, Button, Form, Input, Select } from 'antd';
+import { Card, Col, Dropdown, Layout, Row, Pagination, Spin, Empty, Button, Form } from 'antd';
 import { useEffect, useState } from 'react';
 import type { MenuProps } from 'antd';
 import { UserOutlined, DeleteOutlined, LinkOutlined, LockOutlined, PlusOutlined, RedoOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { getProjectList, delProject } from '@/api';
 import { Project } from '@/api/types';
-import { usePageStore } from '@/stores/pageStore';
 import { Modal, message } from '@/utils/AntdGlobal';
 import styles from './index.module.less';
 import SearchBar from '@/components/Searchbar/SearchBar';
-import { set } from 'lodash-es';
 
 /**
  * 页面列表
@@ -22,13 +20,12 @@ export default function Index() {
   const [projectId, setProjectId] = useState(-1);
   const [total, setTotal] = useState<number>(0);
   const [current, setCurrent] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(20);
-  const userId = usePageStore((state) => state.userInfo.userId);
+  const [pageSize, setPageSize] = useState<number>(12);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getList();
-  }, []);
+    getList(current, pageSize);
+  }, [current, pageSize]);
 
   // 加载页面列表
   const getList = async (pageNum: number = current, size: number = pageSize) => {
@@ -66,6 +63,7 @@ export default function Index() {
     });
   };
 
+  // 访问地址
   const items: MenuProps['items'] = [
     {
       key: 'stg',
@@ -94,17 +92,9 @@ export default function Index() {
   ];
 
   // 切换页码和每页条数回调
-  const handleChange = (page: number, pageSize?: number) => {
-    setCurrent(page);
-    setPageSize(pageSize || 12);
-    getList(page, pageSize);
-  };
-
-  // 切换每页条数回调
-  const handlePageSizeChange = (_current: number, size: number) => {
-    setCurrent(1);
+  const handleChange = (_current: number, size: number) => {
+    setCurrent(_current);
     setPageSize(size);
-    getList(1, size);
   };
 
   // 页面操作
@@ -125,14 +115,7 @@ export default function Index() {
   };
 
   // 提交搜索
-  const handleSearchSubmit = () => {
-    setCurrent(1);
-    getList(1, pageSize);
-  };
-
-  // 重置或者刷新页面
-  const handleSearchReset = () => {
-    form.resetFields();
+  const handleSearch = () => {
     setCurrent(1);
     getList(1, pageSize);
   };
@@ -140,11 +123,11 @@ export default function Index() {
   return (
     <>
       <Layout.Content className={styles.project}>
-        <SearchBar form={form} submit={handleSearchSubmit} reset={handleSearchReset}>
+        <SearchBar form={form} from="项目" submit={handleSearch}>
           <Button type="dashed" style={{ marginRight: '10px' }} icon={<PlusOutlined />} onClick={() => navigate('/project/0/config')}>
             新建项目
           </Button>
-          <Button shape="circle" icon={<RedoOutlined />} onClick={handleSearchReset}></Button>
+          <Button shape="circle" icon={<RedoOutlined />} onClick={() => getList()}></Button>
         </SearchBar>
         <div className={styles.projectList}>
           <Spin spinning={loading} size="large">
@@ -204,10 +187,10 @@ export default function Index() {
               total={total}
               current={current}
               pageSize={pageSize}
+              pageSizeOptions={['12', '16', '20', '50']}
               showTotal={(total) => `总共 ${total} 条`}
               onChange={handleChange}
               showSizeChanger
-              onShowSizeChange={handlePageSizeChange}
             />
           ) : (
             !loading && (

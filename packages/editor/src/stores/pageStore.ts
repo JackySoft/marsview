@@ -15,7 +15,6 @@ export interface PageState {
   mode: 'edit' | 'preview';
   selectedElement: { type: string; id: string } | undefined;
   isUpdateToolbar: boolean; // 更新遮罩
-  isUpdateList: boolean; // 更新列表
   page: {
     pageId: number;
     pageName: string;
@@ -92,7 +91,6 @@ export interface PageAction {
   setFormData: (payload: any) => void;
   setInterceptor: (payload: any) => void;
   updateToolbar: () => void;
-  updateList: () => void;
   clearPageInfo: () => void;
 }
 export const usePageStore = create<PageState & PageAction>((set) => ({
@@ -103,7 +101,6 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   mode: 'edit',
   selectedElement: undefined,
   isUpdateToolbar: false,
-  isUpdateList: false,
   page: {
     pageId: 0,
     pageName: '',
@@ -510,14 +507,6 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     set((state) => {
       return {
         isUpdateToolbar: !state.isUpdateToolbar,
-      };
-    });
-  },
-  // 新建页面和组件后，更新列表
-  updateList: () => {
-    set((state) => {
-      return {
-        isUpdateList: !state.isUpdateList,
       };
     });
   },
