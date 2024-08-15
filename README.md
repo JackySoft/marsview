@@ -18,7 +18,7 @@ pnpm start:admin
 ```
 # add upstream
 
-git remote add upstream https://github.com/H5-Dooring/dooringx
+git remote add upstream https://github.com/JackySoft/marsview
 
 # 抓取源仓库修改 master 分支
 
