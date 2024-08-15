@@ -1,6 +1,22 @@
 .pageList {
   margin-top: 30px;
   padding: 0 20px;
+  height: calc(100vh - 84px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  .pagesContent {
+    flex: 1;
+  }
+  .paginationContainer {
+    align-self: flex-end;
+    padding: 20px 0;
+    bottom: 16px;
+    right: 16px;
+    width: 100%; /* 使分页栏与内容对齐 */
+    text-align: right;
+  }
 }
 .card {
   border: 1px solid #f0f0f0;
@@ -56,6 +72,10 @@
 .project {
   margin-top: 30px;
   padding: 0 20px;
+  height: calc(100vh - 84px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
   :global {
     .ant-card-body {
       padding-bottom: 12px;
@@ -74,13 +94,27 @@
   .gabLeft {
     margin-left: 4px;
   }
+  .projectList {
+    flex: 1;
+  }
+  .paginationContainer {
+    align-self: flex-end;
+    padding: 20px 0;
+    bottom: 16px;
+    right: 16px;
+    width: 100%; /* 使分页栏与内容对齐 */
+    text-align: right;
+  }
 }
 // 组件库
 .libWrap {
-  padding-inline: 40px;
-  padding-block: 20px;
-  height: calc(100vh - 64px);
+  margin-top: 30px;
+  padding: 0 20px;
+  height: calc(100vh - 84px);
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
   .search {
     text-align: center;
     margin-top: 30px;
@@ -102,5 +136,16 @@
         color: #0006;
       }
     }
+  }
+  .libList {
+    flex: 1;
+  }
+  .paginationContainer {
+    align-self: flex-end;
+    padding: 20px 0;
+    bottom: 16px;
+    right: 16px;
+    width: 100%; /* 使分页栏与内容对齐 */
+    text-align: right;
   }
 }

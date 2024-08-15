@@ -33,7 +33,7 @@ export type ILibPublish = {
   release_hash: string;
 };
 // 获取组件列表
-export const getLibList = (params: PageParams & { keyword?: string }) => {
+export const getLibList = (params: PageParams) => {
   return request.get('/lib/list', params, { showLoading: false });
 };
 

@@ -20,8 +20,6 @@ const Header = memo(() => {
   const [loading, setLoading] = useState(false);
   const [navKey, setNavKey] = useState(['projects']);
   const [pageFrom, setPageFrom] = useState('projects');
-  const creatPageRef = useRef<{ open: () => void }>();
-  const createLibRef = useRef<{ open: () => void }>();
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
@@ -83,16 +81,6 @@ const Header = memo(() => {
   // Tab切换点击
   const handleTab: MenuProps['onClick'] = (e) => {
     navigate(`/${e.key}`);
-  };
-  // 新建页面
-  const handleCreate = (type: 'project' | 'page' | 'lib') => {
-    if (type === 'project') {
-      navigate(`/project/0/config`);
-    } else if (type === 'page') {
-      creatPageRef.current?.open();
-    } else {
-      createLibRef.current?.open();
-    }
   };
 
   // 将当前页面生成图片，并上传到服务器
@@ -240,30 +228,6 @@ const Header = memo(() => {
           </div>
         )}
 
-        {/* 新建项目 */}
-        {pageFrom === 'projects' && (
-          <a onClick={() => handleCreate('project')}>
-            <PlusOutlined style={{ marginRight: 5 }} />
-            新建项目
-          </a>
-        )}
-
-        {/* 新建页面 */}
-        {pageFrom === 'pages' && (
-          <a onClick={() => handleCreate('page')}>
-            <PlusOutlined style={{ marginRight: 5 }} />
-            新建页面
-          </a>
-        )}
-
-        {/* 新建组件 */}
-        {pageFrom === 'libs' && (
-          <a onClick={() => handleCreate('lib')}>
-            <PlusOutlined style={{ marginRight: 5 }} />
-            新建组件
-          </a>
-        )}
-
         {/* 用户信息&发布&发布记录 */}
         <div className={styles.user}>
           {isEditPage && mode === 'edit' && (
@@ -310,11 +274,6 @@ const Header = memo(() => {
             <span style={{ marginLeft: 10 }}>{`${userInfo?.userName}` || '开发者'}</span>
           </div>
         </div>
-
-        {/* 新建页面 */}
-        {pageFrom === 'pages' && <CreatePage createRef={creatPageRef} />}
-        {/* 新建组件 */}
-        {pageFrom === 'libs' && <CreateLib createRef={createLibRef} />}
       </Layout.Header>
     </>
   );
