@@ -18,14 +18,14 @@ export default () => {
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState<number>(0);
   const [current, setCurrent] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(20);
-  const { userInfo, isUpdateList } = usePageStore((state) => ({ userInfo: state.userInfo, isUpdateList: state.isUpdateList }));
+  const [pageSize, setPageSize] = useState<number>(10);
+  const { userInfo } = usePageStore((state) => ({ userInfo: state.userInfo }));
   const createLibRef = useRef<{ open: () => void }>();
   const navigate = useNavigate();
 
   useEffect(() => {
-    getList();
-  }, []);
+    getList(current, pageSize);
+  }, [current, pageSize]);
 
   // 加载列表
   const getList = async (pageNum: number = current, size: number = pageSize) => {
@@ -44,17 +44,10 @@ export default () => {
     }
   };
 
-  // 分页事件
-  const handleChange = (page: number, pageSize?: number) => {
-    setCurrent(page);
-    setPageSize(pageSize || 20);
-    getList(page, pageSize || 20);
-  };
-
-  const handlePageSizeChange = (current: number, size: number) => {
-    setCurrent(1);
+  // 切换页码和每页条数回调
+  const handleChange = (_current: number, size: number) => {
+    setCurrent(_current);
     setPageSize(size);
-    getList(1, size);
   };
 
   // 进入开发页面
@@ -67,14 +60,7 @@ export default () => {
     }
   };
 
-  const handleSearchSubmit = () => {
-    setCurrent(1);
-    getList(1, pageSize);
-  };
-
-  // 重置或者刷新页面
-  const handleSearchReset = () => {
-    form.resetFields();
+  const handleSearch = () => {
     setCurrent(1);
     getList(1, pageSize);
   };
@@ -86,15 +72,12 @@ export default () => {
 
   return (
     <div className={style.libWrap}>
-      <SearchBar form={form} submit={handleSearchSubmit} reset={handleSearchReset}>
+      <SearchBar form={form} from="组件" submit={handleSearch}>
         <Button type="dashed" style={{ marginRight: '10px' }} icon={<PlusOutlined />} onClick={handleCreate}>
           新建组件
         </Button>
-        <Button shape="circle" icon={<RedoOutlined />} onClick={handleSearchReset}></Button>
+        <Button shape="circle" icon={<RedoOutlined />} onClick={() => getList()}></Button>
       </SearchBar>
-      {/* <div className={style.search}>
-        <Input.Search placeholder="输入组件名称" allowClear enterButton="Search" style={{ width: 500 }} size="large" onSearch={onSearch} />
-      </div> */}
       <div className={style.libList}>
         <Skeleton loading={loading} active paragraph={{ rows: 3 }}>
           {list.map((item) => {
@@ -132,10 +115,9 @@ export default () => {
           showTotal={(total) => `总共 ${total} 条`}
           onChange={handleChange}
           showSizeChanger
-          onShowSizeChange={handlePageSizeChange}
         />
       </div>
-      <CreateLib createRef={createLibRef} />
+      <CreateLib createRef={createLibRef} update={() => getList(1, pageSize)} />
     </div>
   );
 };

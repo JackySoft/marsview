@@ -16,7 +16,6 @@ import { Button, Col, Empty, Form, Image, Layout, Pagination, Row, Spin, Tag, To
 import dayjs from 'dayjs';
 import { getPageList, copyPageData, delPageData } from '@/api';
 import { PageItem } from '@/api/types';
-import { usePageStore } from '@/stores/pageStore';
 import { message, Modal } from '@/utils/AntdGlobal';
 import CreatePage from '@/layout/components/Header/CreatePage';
 import styles from './index.module.less';
@@ -32,15 +31,14 @@ export default function Index() {
   const [content, setContent] = useState<any>([]);
   const [total, setTotal] = useState<number>(0);
   const [current, setCurrent] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(20);
+  const [pageSize, setPageSize] = useState<number>(12);
   const [showPreview, setShowPreview] = useState(false);
   const [previewUrl, setPreviewUrl] = useState('');
   const creatPageRef = useRef<{ open: () => void }>();
-  const { userInfo, isUpdateList } = usePageStore((state) => ({ userInfo: state.userInfo, isUpdateList: state.isUpdateList }));
   const navigate = useNavigate();
   useEffect(() => {
-    getList();
-  }, []);
+    getList(current, pageSize);
+  }, [current, pageSize]);
 
   // 加载页面列表
   const getList = async (pageNum: number = current, size: number = pageSize) => {
@@ -60,17 +58,9 @@ export default function Index() {
   };
 
   // 切换页码和每页条数回调
-  const handleChange = (page: number, pageSize?: number) => {
-    setCurrent(page);
-    setPageSize(pageSize || 12);
-    getList(page, pageSize);
-  };
-
-  // 切换每页条数回调
-  const handlePageSizeChange = (_current: number, size: number) => {
-    setCurrent(1);
+  const handleChange = (_current: number, size: number) => {
+    setCurrent(_current);
     setPageSize(size);
-    getList(1, size);
   };
 
   // 新建页面
@@ -118,14 +108,7 @@ export default function Index() {
   };
 
   // 提交搜索
-  const handleSearchSubmit = () => {
-    setCurrent(1);
-    getList(1, pageSize);
-  };
-
-  // 重置或者刷新页面
-  const handleSearchReset = () => {
-    form.resetFields();
+  const handleSearch = () => {
     setCurrent(1);
     getList(1, pageSize);
   };
@@ -133,11 +116,11 @@ export default function Index() {
   return (
     <>
       <Layout.Content className={styles.pageList}>
-        <SearchBar form={form} submit={handleSearchSubmit} reset={handleSearchReset}>
+        <SearchBar form={form} from="页面" submit={handleSearch}>
           <Button type="dashed" style={{ marginRight: '10px' }} icon={<PlusOutlined />} onClick={handleCreate}>
             新建页面
           </Button>
-          <Button shape="circle" icon={<RedoOutlined />} onClick={handleSearchReset}></Button>
+          <Button shape="circle" icon={<RedoOutlined />} onClick={() => getList()}></Button>
         </SearchBar>
         <div className={styles.pagesContent}>
           <Spin spinning={loading} size="large">
@@ -214,9 +197,9 @@ export default function Index() {
               current={current}
               showSizeChanger
               pageSize={pageSize}
+              pageSizeOptions={['12', '16', '20', '50']}
               showTotal={(total) => `总共 ${total} 条`}
               onChange={handleChange}
-              onShowSizeChange={handlePageSizeChange}
             />
           ) : (
             !loading && (
@@ -229,7 +212,7 @@ export default function Index() {
           )}
         </div>
         {/* 新建页面 */}
-        <CreatePage createRef={creatPageRef} />
+        <CreatePage createRef={creatPageRef} update={() => getList(1, pageSize)} />
       </Layout.Content>
     </>
   );

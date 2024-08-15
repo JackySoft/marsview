@@ -19,7 +19,6 @@ const CreatePage = (props: IModalProp) => {
   const [recordId, setRecordId] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const updateList = usePageStore((state) => state.updateList);
   // 暴露方法
   useImperativeHandle(props.createRef, () => ({
     open(record?: PageItem) {
@@ -50,8 +49,6 @@ const CreatePage = (props: IModalProp) => {
             id: recordId,
           });
         }
-        // 页面列表通过全局state通知刷新
-        updateList();
         // 编辑器界面 - 左侧菜单修改后刷新
         props.update?.();
         handleCancle();
