@@ -12,7 +12,7 @@ import {
   PlusOutlined,
   RedoOutlined,
 } from '@ant-design/icons';
-import { Button, Col, Empty, Form, Image, Layout, Pagination, Row, Spin, Tag, Tooltip } from 'antd';
+import { Badge, Button, Col, Empty, Form, Image, Layout, Pagination, Radio, Row, Spin, Tag, Tooltip } from 'antd';
 import dayjs from 'dayjs';
 import { getPageList, copyPageData, delPageData } from '@/api';
 import { PageItem } from '@/api/types';
@@ -20,6 +20,8 @@ import { message, Modal } from '@/utils/AntdGlobal';
 import CreatePage from '@/layout/components/Header/CreatePage';
 import styles from './index.module.less';
 import SearchBar from '@/components/Searchbar/SearchBar';
+import { RadioChangeEvent } from 'antd/lib';
+import { usePageStore } from '@/stores/pageStore';
 
 /**
  * 页面列表
@@ -36,9 +38,18 @@ export default function Index() {
   const [previewUrl, setPreviewUrl] = useState('');
   const creatPageRef = useRef<{ open: () => void }>();
   const navigate = useNavigate();
+
+  // 展示可见items 1 个人 2 全部
+  const [visitLocalGlobal, setVisitLocalGlobal] = useState('1');
+  const user_id = usePageStore((state) => state.userInfo.userId);
+  const optionsLocalGlobal = [
+    { label: '个人', value: '1' },
+    { label: '全部', value: '2' },
+  ];
+
   useEffect(() => {
     getList(current, pageSize);
-  }, [current, pageSize]);
+  }, [current, pageSize, visitLocalGlobal]);
 
   // 加载页面列表
   const getList = async (pageNum: number = current, size: number = pageSize) => {
@@ -48,6 +59,7 @@ export default function Index() {
         pageNum,
         pageSize: size,
         keyword: form.getFieldValue('keyword'),
+        type: Number(visitLocalGlobal),
       });
       setTotal(res?.total || 0);
       setContent(res?.list || []);
@@ -113,65 +125,100 @@ export default function Index() {
     getList(1, pageSize);
   };
 
+  // 切换展示个人或全部
+  const handleVisistLocalGlobalChange = ({ target: { value } }: RadioChangeEvent) => {
+    setVisitLocalGlobal(value);
+  };
+
+  // 页面列表项
+  const SectionItem = ({ item }: { item: PageItem }) => {
+    const isAuth = item.id ? true : false;
+    return (
+      <section
+        className={styles.card}
+        key={item.id}
+        style={{
+          borderRadius: 8,
+          opacity: isAuth ? 1 : 0.6,
+          background: isAuth ? 'none' : "url('/imgs/cross-bg.png')",
+          overflow: 'hidden',
+        }}
+      >
+        <div className={styles.itemContent} onClick={() => handleAction('edit', item, isAuth)}>
+          <div className={styles.itemHeader}>
+            <StateTag item={item} />
+          </div>
+          <div className={styles.itemTitle}>{item.name}</div>
+          <div className={styles.itemRemark}>{item.remark || '暂无描述'}</div>
+          <div className={styles.updateUser}>
+            <span style={{ marginRight: 10 }}>
+              <UserOutlined style={{ fontSize: 15, marginRight: 5 }} />
+              {item.user_name}
+            </span>
+            <span>更新时间：{dayjs(item.updated_at).fromNow()}</span>
+          </div>
+        </div>
+        <div className={styles.itemFooter}>
+          <Tooltip title="效果图预览">
+            <EyeOutlined onClick={() => handleAction('preview', item, isAuth)} />
+          </Tooltip>
+          <Tooltip title="页面复制">
+            <CopyOutlined onClick={() => handleAction('copy', item, isAuth)} />
+          </Tooltip>
+          <Tooltip title="页面删除">
+            <DeleteOutlined onClick={() => handleAction('delete', item, isAuth)} />
+          </Tooltip>
+          <Tooltip title="页面访问">
+            <SendOutlined
+              onClick={() => {
+                window.open(`http://admin.marsview.cc/page/prd/${item.id}`, '_blank');
+              }}
+            />
+          </Tooltip>
+        </div>
+      </section>
+    );
+  };
+
   return (
     <>
       <Layout.Content className={styles.pageList}>
-        <SearchBar form={form} from="页面" submit={handleSearch}>
-          <Button type="dashed" style={{ marginRight: '10px' }} icon={<PlusOutlined />} onClick={handleCreate}>
-            新建页面
-          </Button>
-          <Button shape="circle" icon={<RedoOutlined />} onClick={() => getList()}></Button>
-        </SearchBar>
+        <SearchBar
+          form={form}
+          from="页面"
+          submit={handleSearch}
+          leftChildren={
+            <Radio.Group
+              style={{ marginRight: '20px' }}
+              options={optionsLocalGlobal}
+              onChange={handleVisistLocalGlobalChange}
+              value={visitLocalGlobal}
+              optionType="button"
+              buttonStyle="solid"
+            />
+          }
+          rightChildren={
+            <>
+              <Button type="dashed" style={{ marginRight: '10px' }} icon={<PlusOutlined />} onClick={handleCreate}>
+                新建页面
+              </Button>
+              <Button shape="circle" icon={<RedoOutlined />} onClick={() => getList()}></Button>
+            </>
+          }
+        ></SearchBar>
         <div className={styles.pagesContent}>
           <Spin spinning={loading} size="large">
             <Row gutter={[20, 20]}>
               {content.map((item: PageItem) => {
-                const isAuth = item.id ? true : false;
                 return (
                   <Col span={6} key={item.id}>
-                    <section
-                      className={styles.card}
-                      key={item.id}
-                      style={{
-                        borderRadius: 8,
-                        opacity: isAuth ? 1 : 0.6,
-                        background: isAuth ? 'none' : "url('/imgs/cross-bg.png')",
-                        overflow: 'hidden',
-                      }}
-                    >
-                      <div className={styles.itemContent} onClick={() => handleAction('edit', item, isAuth)}>
-                        <div className={styles.itemHeader}>
-                          <StateTag item={item} />
-                        </div>
-                        <div className={styles.itemTitle}>{item.name}</div>
-                        <div className={styles.itemRemark}>{item.remark || '暂无描述'}</div>
-                        <div className={styles.updateUser}>
-                          <span style={{ marginRight: 10 }}>
-                            <UserOutlined style={{ fontSize: 15, marginRight: 5 }} />
-                            {item.user_name}
-                          </span>
-                          <span>更新时间：{dayjs(item.updated_at).fromNow()}</span>
-                        </div>
-                      </div>
-                      <div className={styles.itemFooter}>
-                        <Tooltip title="效果图预览">
-                          <EyeOutlined onClick={() => handleAction('preview', item, isAuth)} />
-                        </Tooltip>
-                        <Tooltip title="页面复制">
-                          <CopyOutlined onClick={() => handleAction('copy', item, isAuth)} />
-                        </Tooltip>
-                        <Tooltip title="页面删除">
-                          <DeleteOutlined onClick={() => handleAction('delete', item, isAuth)} />
-                        </Tooltip>
-                        <Tooltip title="页面访问">
-                          <SendOutlined
-                            onClick={() => {
-                              window.open(`http://admin.marsview.cc/page/prd/${item.id}`, '_blank');
-                            }}
-                          />
-                        </Tooltip>
-                      </div>
-                    </section>
+                    {visitLocalGlobal === '2' && item.user_id === user_id ? (
+                      <Badge.Ribbon text="Me" placement="start">
+                        <SectionItem item={item} />
+                      </Badge.Ribbon>
+                    ) : (
+                      <SectionItem item={item} />
+                    )}
                   </Col>
                 );
               })}
@@ -204,7 +251,7 @@ export default function Index() {
           ) : (
             !loading && (
               <Empty style={{ marginTop: 100 }}>
-                <Button type="primary" onClick={handleCreate}>
+                <Button type="dashed" icon={<PlusOutlined />} onClick={handleCreate}>
                   创建页面
                 </Button>
               </Empty>
