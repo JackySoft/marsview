@@ -6,6 +6,7 @@ export interface PageParams {
   keyword?: string;
   pageNum: number;
   pageSize?: number;
+  type?: number;
 }
 
 export interface PageItem {
@@ -74,7 +75,7 @@ export namespace Project {
     remark: string;
     logo: string;
     user_name: string;
-    user_id: string;
+    user_id: number;
     updated_at: string;
     created_at: string;
     members?: Array<{
@@ -127,6 +128,7 @@ export interface ProjectListParams {
   keyword?: string;
   pageNum: number;
   pageSize?: number;
+  type?: number;
 }
 
 export interface ProjectCreateParams {
