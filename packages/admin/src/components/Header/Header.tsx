@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
-import { Flex } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { Dropdown, Flex, Space } from 'antd';
+import { DownOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import { usePageStore } from '@/stores/pageStore';
 import { useProjectStore } from '@/stores/projectStore';
 import Logo from '../Logo/Logo';
@@ -15,6 +16,7 @@ const Header = memo(() => {
   const [avatar, setAvatar] = useState('');
   const { userName } = usePageStore((state) => state.userInfo);
   const { projectInfo, collapsed, updateCollapsed } = useProjectStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserAvatar().then((res) => {
@@ -53,7 +55,37 @@ const Header = memo(() => {
       <div className={styles.user}>
         {/* 用户头像 */}
         {avatar ? <img width={30} src={avatar} style={{ borderRadius: '50%' }} /> : null}
-        <span style={{ marginLeft: '10px', color: isLight ? '#000' : '#fff' }}>{`${userName}` || '开发者'}</span>
+        <Dropdown
+          menu={{
+            items: [
+              {
+                key: '1',
+                label: `${userName}`,
+              },
+              {
+                key: '2',
+                label: (
+                  <div
+                    onClick={(e) => {
+                      localStorage.clear();
+                      navigate(`/login?callback=${window.location.href}`);
+                    }}
+                  >
+                    退出
+                  </div>
+                ),
+              },
+            ],
+            selectable: true,
+          }}
+        >
+          <a onClick={(e) => e.preventDefault()}>
+            <Space>
+              <span style={{ marginLeft: '10px', color: isLight ? '#000' : '#fff' }}>{`${userName}` || '开发者'}</span>
+              <DownOutlined />
+            </Space>
+          </a>
+        </Dropdown>
       </div>
     </div>
   );

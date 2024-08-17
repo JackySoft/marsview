@@ -2,7 +2,7 @@ import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Image } from
 import { memo, useEffect, useState } from 'react';
 import { ProjectOutlined, OneToOneOutlined, CaretDownFilled, DownOutlined, AppstoreOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { toBlob, toPng } from 'html-to-image';
+import { toBlob } from 'html-to-image';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
 import { getUserAvatar, updatePageData, uploadImg } from '@/api';
@@ -255,6 +255,9 @@ const Header = memo(() => {
               退出预览
             </Button>
           )}
+          <a href="http://docs.marsview.cc" target="_blank">
+            文档
+          </a>
           <Popover
             content={
               <>
