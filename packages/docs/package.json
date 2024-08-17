@@ -4,7 +4,7 @@
   "description": "Marsview低代码平台开发使用文档",
   "scripts": {
     "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build && mv ./.vitepress/dist ../../dist/docs",
+    "build": "vitepress build && mv ./.vitepress/dist ../../dist/docs",
     "docs:preview": "vitepress preview"
   },
   "author": "河畔一角",

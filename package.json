@@ -21,7 +21,7 @@
     "build:editor": "pnpm --filter editor build",
     "start:admin": "pnpm --filter admin start",
     "build:admin": "pnpm --filter admin build",
-    "build": "rm -rf dist && pnpm --filter editor build && pnpm --filter admin build",
+    "build": "rm -rf dist && pnpm --filter editor build && pnpm --filter admin build && pnpm --filter docs build",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "release:major": "standard-version --release-as major",
     "release:minor": "standard-version --release-as minor",
