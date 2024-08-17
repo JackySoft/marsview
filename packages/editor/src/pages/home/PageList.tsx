@@ -10,18 +10,15 @@ import {
   ExclamationCircleOutlined,
   ClockCircleOutlined,
   PlusOutlined,
-  RedoOutlined,
 } from '@ant-design/icons';
-import { Badge, Button, Col, Empty, Form, Image, Layout, Pagination, Radio, Row, Spin, Tag, Tooltip } from 'antd';
+import { Button, Col, Empty, Form, Image, Layout, Pagination, Row, Spin, Tag, Tooltip } from 'antd';
 import dayjs from 'dayjs';
 import { getPageList, copyPageData, delPageData } from '@/api';
 import { PageItem } from '@/api/types';
 import { message, Modal } from '@/utils/AntdGlobal';
 import CreatePage from '@/layout/components/Header/CreatePage';
-import styles from './index.module.less';
 import SearchBar from '@/components/Searchbar/SearchBar';
-import { RadioChangeEvent } from 'antd/lib';
-import { usePageStore } from '@/stores/pageStore';
+import styles from './index.module.less';
 
 /**
  * 页面列表
@@ -39,27 +36,20 @@ export default function Index() {
   const creatPageRef = useRef<{ open: () => void }>();
   const navigate = useNavigate();
 
-  // 展示可见items 1 个人 2 全部
-  const [visitLocalGlobal, setVisitLocalGlobal] = useState('1');
-  const user_id = usePageStore((state) => state.userInfo.userId);
-  const optionsLocalGlobal = [
-    { label: '个人', value: '1' },
-    { label: '全部', value: '2' },
-  ];
-
   useEffect(() => {
     getList(current, pageSize);
-  }, [current, pageSize, visitLocalGlobal]);
+  }, [current, pageSize]);
 
   // 加载页面列表
   const getList = async (pageNum: number = current, size: number = pageSize) => {
     setLoading(true);
     try {
+      const { type, keyword } = form.getFieldsValue();
       const res = await getPageList({
         pageNum,
         pageSize: size,
-        keyword: form.getFieldValue('keyword'),
-        type: Number(visitLocalGlobal),
+        keyword,
+        type,
       });
       setTotal(res?.total || 0);
       setContent(res?.list || []);
@@ -125,18 +115,12 @@ export default function Index() {
     getList(1, pageSize);
   };
 
-  // 切换展示个人或全部
-  const handleVisistLocalGlobalChange = ({ target: { value } }: RadioChangeEvent) => {
-    setVisitLocalGlobal(value);
-  };
-
   // 页面列表项
   const SectionItem = ({ item }: { item: PageItem }) => {
     const isAuth = item.id ? true : false;
     return (
       <section
         className={styles.card}
-        key={item.id}
         style={{
           borderRadius: 8,
           opacity: isAuth ? 1 : 0.6,
@@ -171,7 +155,7 @@ export default function Index() {
           <Tooltip title="页面访问">
             <SendOutlined
               onClick={() => {
-                window.open(`http://admin.marsview.cc/page/prd/${item.id}`, '_blank');
+                window.open(`http://admin.marsview.cc/page/stg/${item.id}`, '_blank');
               }}
             />
           </Tooltip>
@@ -183,42 +167,14 @@ export default function Index() {
   return (
     <>
       <Layout.Content className={styles.pageList}>
-        <SearchBar
-          form={form}
-          from="页面"
-          submit={handleSearch}
-          leftChildren={
-            <Radio.Group
-              style={{ marginRight: '20px' }}
-              options={optionsLocalGlobal}
-              onChange={handleVisistLocalGlobalChange}
-              value={visitLocalGlobal}
-              optionType="button"
-              buttonStyle="solid"
-            />
-          }
-          rightChildren={
-            <>
-              <Button type="dashed" style={{ marginRight: '10px' }} icon={<PlusOutlined />} onClick={handleCreate}>
-                新建页面
-              </Button>
-              <Button shape="circle" icon={<RedoOutlined />} onClick={() => getList()}></Button>
-            </>
-          }
-        ></SearchBar>
+        <SearchBar form={form} from="页面" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
         <div className={styles.pagesContent}>
           <Spin spinning={loading} size="large">
             <Row gutter={[20, 20]}>
-              {content.map((item: PageItem) => {
+              {content.map((item: PageItem, index: number) => {
                 return (
-                  <Col span={6} key={item.id}>
-                    {visitLocalGlobal === '2' && item.user_id === user_id ? (
-                      <Badge.Ribbon text="Me" placement="start">
-                        <SectionItem item={item} />
-                      </Badge.Ribbon>
-                    ) : (
-                      <SectionItem item={item} />
-                    )}
+                  <Col span={6} key={item.id || index}>
+                    <SectionItem item={item} />
                   </Col>
                 );
               })}

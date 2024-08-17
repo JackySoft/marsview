@@ -1,11 +1,11 @@
 import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
-import style from './index.module.less';
+import { useNavigate } from 'react-router-dom';
 import { login } from '@/api';
 import storage from '@/utils/storage';
 import { usePageStore } from '@/stores/pageStore';
-import { useNavigate } from 'react-router-dom';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import style from './index.module.less';
 type FieldType = {
   userName: string;
   userPwd: string;
@@ -18,7 +18,11 @@ export default function Login() {
     if (res.token) {
       storage.set('token', res.token);
       saveUserInfo(res);
-      navigate('/projects');
+      const params = new URLSearchParams(location.search);
+      setTimeout(() => {
+        const url = new URL(params.get('callback') as string);
+        navigate(url.pathname || '/projects');
+      });
     }
   };
   return (

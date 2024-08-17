@@ -1,16 +1,31 @@
 {
-  "private": true,
+  "private": false,
   "name": "marsview",
-  "description": "低代码平台，包含可视化编辑器、可视化后台管理，支持自定义组件开发",
+  "description": "marsview 是一款开源的低代码平台，面向中后台管理系统。支持可视化配置、逻辑编排、事件流交互、数据源配置等。",
   "version": "1.0.0",
   "license": "MIT",
+  "author": {
+    "name": "河畔一角",
+    "email": "sunnyboysoft@163.com",
+    "url": "http://www.marsview.cc"
+  },
+  "keywords": [
+    "lowcode",
+    "react",
+    "antd",
+    "react-dnd",
+    "中后台低代码平台"
+  ],
   "scripts": {
     "start:editor": "pnpm --filter editor start",
     "build:editor": "pnpm --filter editor build",
     "start:admin": "pnpm --filter admin start",
     "build:admin": "pnpm --filter admin build",
     "build": "rm -rf dist && pnpm --filter editor build && pnpm --filter admin build",
-    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "release:major": "standard-version --release-as major",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -22,6 +37,14 @@
     "*.ts?(x)": [
       "prettier --parser=typescript --write"
     ]
+  },
+  "homepage": "http://www.marsview.cc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackySoft/marsview.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JackySoft/marsview/issues"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
@@ -38,6 +61,7 @@
     "react-error-boundary": "^4.0.13",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.21.2",
+    "standard-version": "^9.5.0",
     "vite": "^5.0.8",
     "vite-plugin-externals-new": "^1.5.5",
     "zustand": "^4.4.7"

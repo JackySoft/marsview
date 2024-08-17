@@ -1,16 +1,15 @@
-import { Card, Col, Dropdown, Layout, Row, Pagination, Spin, Empty, Button, Form, Radio, Badge } from 'antd';
+import { Card, Col, Dropdown, Layout, Row, Pagination, Spin, Empty, Button, Form } from 'antd';
 import { useEffect, useState } from 'react';
 import type { MenuProps } from 'antd';
-import { UserOutlined, DeleteOutlined, LinkOutlined, LockOutlined, PlusOutlined, RedoOutlined } from '@ant-design/icons';
+import { UserOutlined, DeleteOutlined, LinkOutlined, LockOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 import { getProjectList, delProject } from '@/api';
 import { Project } from '@/api/types';
 import { Modal, message } from '@/utils/AntdGlobal';
-import styles from './index.module.less';
 import SearchBar from '@/components/Searchbar/SearchBar';
-import { usePageStore } from '@/stores/pageStore';
-import { RadioChangeEvent } from 'antd/lib';
 import { ProjectCardItemProps } from '../types';
+import styles from './index.module.less';
 
 /**
  * 页面列表
@@ -26,27 +25,20 @@ export default function Index() {
   const [pageSize, setPageSize] = useState<number>(12);
   const navigate = useNavigate();
 
-  const user_id = usePageStore((state) => state.userInfo.userId);
-  // 展示可见items 1 个人 2 全部
-  const [visitLocalGlobal, setVisitLocalGlobal] = useState('1');
-  const optionsLocalGlobal = [
-    { label: '个人', value: '1' },
-    { label: '全部', value: '2' },
-  ];
-
   useEffect(() => {
     getList(current, pageSize);
-  }, [current, pageSize, visitLocalGlobal]);
+  }, [current, pageSize]);
 
   // 加载页面列表
   const getList = async (pageNum: number = current, size: number = pageSize) => {
     try {
       setLoading(true);
+      const { type, keyword } = form.getFieldsValue();
       const res = await getProjectList({
         pageNum,
         pageSize: size,
-        keyword: form.getFieldValue('keyword'),
-        type: Number(visitLocalGlobal),
+        keyword,
+        type,
       });
       setLoading(false);
       setProjectList(res?.list || []);
@@ -132,11 +124,6 @@ export default function Index() {
     getList(1, pageSize);
   };
 
-  // 切换展示个人还是全部
-  const handleVisistLocalGlobalChange = ({ target: { value } }: RadioChangeEvent) => {
-    setVisitLocalGlobal(value);
-  };
-
   // 项目卡片
   const CardItem: React.FC<ProjectCardItemProps> = ({ item, isAuth }) => {
     return (
@@ -172,7 +159,7 @@ export default function Index() {
                   <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
                   {item.user_name}
                   &nbsp;&nbsp;
-                  {item.updated_at}
+                  {dayjs(item.updated_at).format('YYYY/MM/DD HH:mm')}
                 </p>
               </>
             }
@@ -185,43 +172,14 @@ export default function Index() {
   return (
     <>
       <Layout.Content className={styles.project}>
-        <SearchBar
-          form={form}
-          from="项目"
-          submit={handleSearch}
-          leftChildren={
-            <Radio.Group
-              style={{ marginRight: '20px' }}
-              options={optionsLocalGlobal}
-              onChange={handleVisistLocalGlobalChange}
-              value={visitLocalGlobal}
-              optionType="button"
-              buttonStyle="solid"
-            />
-          }
-          rightChildren={
-            <>
-              <Button type="dashed" style={{ marginRight: '10px' }} icon={<PlusOutlined />} onClick={() => navigate('/project/0/config')}>
-                新建项目
-              </Button>
-              <Button shape="circle" icon={<RedoOutlined />} onClick={() => getList()}></Button>
-            </>
-          }
-        ></SearchBar>
+        <SearchBar form={form} from="项目" submit={handleSearch} refresh={getList} onCreate={() => navigate('/project/0/config')} />
         <div className={styles.projectList}>
           <Spin spinning={loading} size="large">
             <Row gutter={[20, 20]}>
               {projectList.map((item: Project.ProjectItem, index) => {
-                const isAuth = item.id ? true : false;
                 return (
                   <Col span={6} key={item.id || index}>
-                    {visitLocalGlobal === '2' && item.user_id === user_id ? (
-                      <Badge.Ribbon text="Me" placement="start">
-                        <CardItem item={item} isAuth={isAuth} />
-                      </Badge.Ribbon>
-                    ) : (
-                      <CardItem item={item} isAuth={isAuth} />
-                    )}
+                    <CardItem item={item} isAuth={item.id ? true : false} />
                   </Col>
                 );
               })}
