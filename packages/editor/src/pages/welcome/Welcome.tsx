@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { setNebulaCanvas } from '@/utils/canvas';
 import style from './index.module.less';
-import { message } from '@/utils/AntdGlobal';
 export default function Welcome() {
   useEffect(() => {
     setNebulaCanvas();
   }, []);
 
   const openDoc = () => {
-    message.info('敬请期待');
+    window.open('http://docs.marsview.cc', '_blank');
   };
 
   return (
