@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/JackySoft/marsview/compare/v1.2.0...v1.3.0) (2024-08-17)
+
+
+### Features
+
+* 访问端增加退出功能 ([813412d](https://github.com/JackySoft/marsview/commit/813412de1db2ee7e2f90b4ebe430104218665959))
+
 ## [1.2.0](https://github.com/JackySoft/marsview/compare/v1.1.0...v1.2.0) (2024-08-17)
 
 
