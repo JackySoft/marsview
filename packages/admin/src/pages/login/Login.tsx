@@ -18,11 +18,15 @@ export default function Login() {
     if (res.token) {
       storage.set('token', res.token);
       saveUserInfo(res);
-      const params = new URLSearchParams(location.search);
-      setTimeout(() => {
-        const url = new URL(params.get('callback') as string);
-        navigate(url.pathname || '/welcome');
-      });
+      if (location.search) {
+        const params = new URLSearchParams(location.search);
+        setTimeout(() => {
+          const url = new URL(params.get('callback') as string);
+          navigate(url.pathname || '/welcome');
+        });
+      } else {
+        navigate('/');
+      }
     }
   };
   return (
