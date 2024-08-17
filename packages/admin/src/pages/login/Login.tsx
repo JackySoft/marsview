@@ -1,15 +1,17 @@
 import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
-import style from './index.module.less';
+import { useNavigate } from 'react-router-dom';
 import { login } from '@/api';
 import storage from '@/utils/storage';
 import { usePageStore } from '@/stores/pageStore';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import style from './index.module.less';
 type FieldType = {
   userName: string;
   userPwd: string;
 };
 export default function Login() {
+  const navigate = useNavigate();
   const saveUserInfo = usePageStore((state) => state.saveUserInfo);
   const onFinish: FormProps<FieldType>['onFinish'] = async (values: FieldType) => {
     const res = await login<FieldType>(values);
@@ -18,7 +20,8 @@ export default function Login() {
       saveUserInfo(res);
       const params = new URLSearchParams(location.search);
       setTimeout(() => {
-        location.href = params.get('callback') || '/welcome';
+        const url = new URL(params.get('callback') as string);
+        navigate(url.pathname || '/welcome');
       });
     }
   };
