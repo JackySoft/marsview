@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/JackySoft/marsview/compare/v1.1.0...v1.2.0) (2024-08-17)
+
+
+### Features
+
+* 1. 修复登录问题。 2. 修复后台问题。3. 新增使用文档 ([52ca774](https://github.com/JackySoft/marsview/commit/52ca774a466b9a06f0ba626b43cdd0b926305278))
+
 ## 1.1.0 (2024-08-17)
 
 
