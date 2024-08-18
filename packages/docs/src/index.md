@@ -6,9 +6,6 @@ hero:
   name: 'Marsview 低代码平台'
   text: '快速搭建后台管理系统'
   tagline: 让搭建更简单，让开发更高效
-  image:
-    src: http://www.marsview.cc/imgs/login-bg.png
-    alt: Marsview
   actions:
     - theme: brand
       text: 快速开始
