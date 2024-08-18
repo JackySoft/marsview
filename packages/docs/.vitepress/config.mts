@@ -5,9 +5,13 @@ export default defineConfig({
   title: 'Marsview',
   description: '一款面向中后台低代码平台，支持逻辑编排、事件交互和接口配置。',
   lastUpdated: true,
+  head: [['link', { rel: 'icon', href: '/mars-logo.png' }]],
+  lang: 'zh-CN',
+  srcDir: 'src',
+  outDir: '../../dist/docs',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: './../assets/mars-logo.png',
+    logo: '/mars-logo.png',
     nav: [
       { text: '首页', link: '/' },
       { text: '项目', link: '/project' },
@@ -57,7 +61,7 @@ export default defineConfig({
     socialLinks: [{ icon: 'github', link: 'https://github.com/JackySoft/marsview' }],
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2014-present 河畔一角',
+      copyright: 'Copyright © 2024-present 河畔一角',
     },
     search: {
       provider: 'local',

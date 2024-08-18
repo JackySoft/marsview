@@ -11,14 +11,6 @@ const members = [
     ]
   },
   {
-    avatar: 'https://www.github.com/Alex660.png',
-    name: 'Alex660',
-    title: 'Developer',
-    links: [
-      { icon: 'github', link: 'https://github.com/Alex660' },
-    ]
-  },
-  {
     avatar: 'https://www.github.com/waiterxiaoyy.png',
     name: 'waiterxiaoyy',
     title: 'Developer',

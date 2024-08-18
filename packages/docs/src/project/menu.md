@@ -2,7 +2,7 @@
 
 对于后台管理系统而言，菜单是必不可少的，创建完项目以后，还需要给项目添加菜单。菜单支持创建、复制、编辑、删除等操作。
 
-![项目列表](./../assets/project/menu.png)
+![项目列表](/project/menu.png)
 
 ### 填写菜单信息
 
@@ -10,4 +10,4 @@
 
 每个菜单都必须关联一个页面，用于在后台访问时，进行页面跳转。
 
-![项目列表](./../assets/project/createMenu.png)
+![项目列表](/project/createMenu.png)

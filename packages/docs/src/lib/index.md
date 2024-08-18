@@ -8,13 +8,13 @@
 
 组件标识为英文，类似于`Antd`组件库中的`Button`，组件名称为中文。
 
-![创建组件](./../assets/lib/createLib.png)
+![创建组件](/lib/createLib.png)
 
 ## 组件开发
 
 组件创建完成后，在列表点击开发按钮，即可进入开发界面。
 
-![组件开发](./../assets/lib/dev.png)
+![组件开发](/lib/dev.png)
 
 ## 开发流程
 

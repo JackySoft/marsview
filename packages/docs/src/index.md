@@ -7,11 +7,11 @@ hero:
   text: '快速搭建后台管理系统'
   tagline: 让搭建更简单，让开发更高效
   image:
-    src: http://www.marsview.cc/imgs/welcome-bg.png
+    src: http://www.marsview.cc/imgs/login-bg.png
     alt: Marsview
   actions:
     - theme: brand
-      text: 使用文档
+      text: 快速开始
       link: /login
     - theme: alt
       text: 在线体验

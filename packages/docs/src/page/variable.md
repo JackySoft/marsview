@@ -6,4 +6,4 @@
 
 变量支持基础类型：`string`, `number`, `boolean`, `object`, `array`.
 
-![访问端工作台](./../assets/page/click_variable.png)
+![访问端工作台](/page/click_variable.png)

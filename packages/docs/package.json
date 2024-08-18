@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Marsview低代码平台开发使用文档",
   "scripts": {
-    "docs:dev": "vitepress dev",
-    "build": "vitepress build && mv ./.vitepress/dist ../../dist/docs",
+    "dev": "vitepress dev",
+    "build": "vitepress build",
     "docs:preview": "vitepress preview"
   },
   "author": "河畔一角",

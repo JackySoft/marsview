@@ -2,7 +2,7 @@
 
 画布中的组件都是以 json 的形式渲染出来的，每个组件都对应一个 json 对象，json 对象中包含组件的属性、事件、样式和接口配置等信息，如果你非常熟悉 json，你甚至可以直接修改 json 来实现画布中组件的渲染。
 
-![访问端工作台](./../assets/page/click_json.png)
+![访问端工作台](/page/click_json.png)
 
 ## 组件 json 结构
 

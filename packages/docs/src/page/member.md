@@ -4,4 +4,4 @@
 
 ## 创建成员
 
-![页面成员](./../assets/page/click_member.png)
+![页面成员](/page/click_member.png)

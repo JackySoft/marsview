@@ -2,15 +2,15 @@
 
 ### 打开 Marsview
 
-输入平台地址：`http://marsview.com`
+输入平台地址：`http://marsview.cc`
 
-![进入首页](./assets/login/welcome.png)
+![进入首页](/login/welcome.png)
 
 ### 进入登录页面
 
 点击快速开始按钮，如果没有登录，会跳转到登录页面。
 
-![点击快速开始](./assets/login/login.png)
+![点击快速开始](/login/login.png)
 
 ### 登录账号
 

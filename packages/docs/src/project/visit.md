@@ -6,8 +6,8 @@
 
 输入后台地址：`http://admin.marsview.cc`，进入访问端。左侧菜单就是我们在创建项目时添加的菜单，点击菜单会跳转到我们关联的页面。
 
-![访问端工作台](./../assets/project/console.png)
+![访问端工作台](/project/console.png)
 
-![访问端工作台](./../assets/project/admin1.png)
+![访问端工作台](/project/admin1.png)
 
-![访问端工作台](./../assets/project/admin2.png)
+![访问端工作台](/project/admin2.png)
