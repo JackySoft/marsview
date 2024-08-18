@@ -6,13 +6,13 @@ Marsview 支持从零开始创建项目，同时支持一整套完整项目的�
 
 项目列表包含名称搜索，新建项目，列表刷新，我创建的和市场公开的项目。
 
-![项目列表](./../assets/project/project-list.png)
+![项目列表](/project/project-list.png)
 
 ### 创建项目
 
 点击右侧新建项目，会跳转到项目初始化页面。填写项目名称、项目描述、项目 Logo、主题色等，即可完成项目创建。
 
-![项目列表](./../assets/project/config.png)
+![项目列表](/project/config.png)
 
 ### 项目权限
 
@@ -20,4 +20,4 @@ Marsview 支持从零开始创建项目，同时支持一整套完整项目的�
 
 开发权限需要在项目创建成功以后，再次打开，才能设置开发权限，也就是指定谁能修改项目。
 
-![项目列表](./../assets/project/project_limit.png)
+![项目列表](/project/project_limit.png)

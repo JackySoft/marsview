@@ -6,20 +6,20 @@
 
 **组件大纲**
 
-![组件大纲](./../assets/page/outline.png)
+![组件大纲](/page/outline.png)
 
 **组件源码**
 
-![组件源码](./../assets/page/json.png)
+![组件源码](/page/json.png)
 
 **接口管理**
 
-![接口管理](./../assets/page/api.png)
+![接口管理](/page/api.png)
 
 **变量管理**
 
-![变量管理](./../assets/page/variable.png)
+![变量管理](/page/variable.png)
 
 **页面成员**
 
-![页面成员](./../assets/page/member.png)
+![页面成员](/page/member.png)
