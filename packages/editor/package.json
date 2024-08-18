@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "private": false,
   "name": "@marsview/editor",
   "scripts": {
     "dev": "vite",
