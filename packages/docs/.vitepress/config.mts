@@ -9,6 +9,7 @@ export default defineConfig({
   lang: 'zh-CN',
   srcDir: 'src',
   outDir: '../../dist/docs',
+  appearance: 'dark',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/mars-logo.png',
