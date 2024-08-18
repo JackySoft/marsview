@@ -72,8 +72,6 @@ pnpm i
 pnpm start:editor
 # 启动用户端
 pnpm start:admin
-# 启动文档
-pnpm start:docs
 ```
 
 ### 同步代码
