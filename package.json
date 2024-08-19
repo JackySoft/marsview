@@ -75,5 +75,58 @@
     "lint-staged": "^10.0.7",
     "typescript": "latest",
     "yorkie": "^2.0.0"
+  },
+  "standard-version": {
+    "types": [
+      {
+        "type": "feat",
+        "section": "Features"
+      },
+      {
+        "type": "fix",
+        "section": "Bug Fixes"
+      },
+      {
+        "type": "docs",
+        "section": "Documentation"
+      },
+      {
+        "type": "style",
+        "section": "Styles"
+      },
+      {
+        "type": "chore",
+        "section": "Others"
+      },
+      {
+        "type": "build",
+        "section": "Build System"
+      },
+      {
+        "type": "perf",
+        "section": "Performance Improvements"
+      },
+      {
+        "type": "refactor",
+        "section": "Code Refactoring"
+      },
+      {
+        "type": "improvement",
+        "section": "Feature Improvements"
+      },
+      {
+        "type": "impr",
+        "section": "Feature Improvements"
+      },
+      {
+        "type": "test",
+        "section": "Tests"
+      },
+      {
+        "type": "ci",
+        "section": "CI"
+      }
+    ],
+    "scopes": []
   }
 }
