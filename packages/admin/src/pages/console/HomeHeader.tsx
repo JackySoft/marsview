@@ -1,7 +1,7 @@
 import { Dropdown, Space } from 'antd';
-import style from './index.module.less';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { DownOutlined } from '@ant-design/icons';
+import style from './index.module.less';
 function HomeHeader() {
   const userInfo: any = useLoaderData();
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ function HomeHeader() {
       >
         <a onClick={(e) => e.preventDefault()}>
           <Space>
-            <span>{`${userInfo?.userName}` || '开发者'}</span>
+            {`${userInfo?.userName}` || '开发者'}
             <DownOutlined />
           </Space>
         </a>

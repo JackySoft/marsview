@@ -81,7 +81,7 @@ const Header = memo(() => {
         >
           <a onClick={(e) => e.preventDefault()}>
             <Space>
-              <span style={{ marginLeft: '10px', color: isLight ? '#000' : '#fff' }}>{`${userName}` || '开发者'}</span>
+              <span style={{ marginLeft: '10px', color: isLight ? '' : '#fff' }}>{`${userName}` || '开发者'}</span>
               <DownOutlined />
             </Space>
           </a>
