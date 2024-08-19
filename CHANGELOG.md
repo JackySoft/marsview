@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/JackySoft/marsview/compare/v1.12.0...v1.13.0) (2024-08-19)
+
+
+### Bug Fixes
+
+* 1.修复首页项目点击问题。 2.优化项目和页面样式，保证一屏展示。 ([a2ca5b5](https://github.com/JackySoft/marsview/commit/a2ca5b52d6485a16faab16d626408fc070ce8d85))
+
 ## [1.12.0](https://github.com/JackySoft/marsview/compare/v1.11.0...v1.12.0) (2024-08-19)
 
 
