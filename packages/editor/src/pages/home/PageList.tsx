@@ -137,9 +137,9 @@ export default function Index() {
           <div className={styles.updateUser}>
             <span style={{ marginRight: 10 }}>
               <UserOutlined style={{ fontSize: 15, marginRight: 5 }} />
-              {item.user_name}
+              {item.user_name.split('@')?.[0]}
             </span>
-            <span>更新时间：{dayjs(item.updated_at).fromNow()}</span>
+            <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
           </div>
         </div>
         <div className={styles.itemFooter}>
@@ -195,7 +195,7 @@ export default function Index() {
         <div className={styles.paginationContainer}>
           {total > 0 ? (
             <Pagination
-              style={{ textAlign: 'right', marginTop: 16 }}
+              style={{ textAlign: 'right' }}
               total={total}
               current={current}
               showSizeChanger
