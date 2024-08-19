@@ -115,3 +115,71 @@
     color: #a6a0a0;
   }
 }
+
+@media (max-width: 768px) {
+  :global(.ant-btn) {
+    height: 35px; /* 设置高度 */
+    padding: 0 10px; /* 设置左右内边距 */
+    font-size: 15px; /* 设置字体大小 */
+  }
+  .bg {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    .content {
+      width: 100%;
+      margin-left: 5%;
+      padding: 10px;
+      .title {
+        font-size: 32px;
+        margin-top: 20%;
+      }
+      .desc {
+        font-size: 23px;
+        margin-top: 30px;
+      }
+      .btnGroup {
+        gap: 20px;
+      }
+    }
+    .cube {
+      width: 100%;
+      margin-left: 10%;
+    }
+  }
+  .module {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    h1 {
+      font-size: 23px;
+      margin-bottom: 30px;
+    }
+    .moduleList {
+      gap: 60px;
+      // flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .moduleItem {
+        width: 42%;
+        img {
+          width: 80px;
+        }
+        span {
+          font-size: 18px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  .footer {
+    padding-top: 50px;
+    padding-bottom: 30px;
+    h1 {
+      font-size: 22px;
+      margin-block: 20px;
+    }
+    img {
+      width: 80px;
+    }
+  }
+}
