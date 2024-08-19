@@ -1,5 +1,5 @@
 import { Card, Col, Dropdown, Layout, Row, Pagination, Spin, Empty, Button, Form } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { MenuProps } from 'antd';
 import { UserOutlined, DeleteOutlined, LinkOutlined, LockOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
@@ -68,32 +68,34 @@ export default function Index() {
   };
 
   // 访问地址
-  const items: MenuProps['items'] = [
-    {
-      key: 'stg',
-      label: (
-        <a href={`${import.meta.env.VITE_ADMIN_URL}/project/stg/${projectId}`} target="_blank">
-          STG
-        </a>
-      ),
-    },
-    {
-      key: 'pre',
-      label: (
-        <a href={`${import.meta.env.VITE_ADMIN_URL}/project/pre/${projectId}`} target="_blank">
-          PRE
-        </a>
-      ),
-    },
-    {
-      key: 'prod',
-      label: (
-        <a href={`${import.meta.env.VITE_ADMIN_URL}/project/prd/${projectId}`} target="_blank">
-          PRD
-        </a>
-      ),
-    },
-  ];
+  const getItems: (projectId: number) => MenuProps['items'] = (projectId: number) => {
+    return [
+      {
+        key: 'stg',
+        label: (
+          <a href={`${import.meta.env.VITE_ADMIN_URL}/project/stg/${projectId}`} target="_blank">
+            STG
+          </a>
+        ),
+      },
+      {
+        key: 'pre',
+        label: (
+          <a href={`${import.meta.env.VITE_ADMIN_URL}/project/pre/${projectId}`} target="_blank">
+            PRE
+          </a>
+        ),
+      },
+      {
+        key: 'prod',
+        label: (
+          <a href={`${import.meta.env.VITE_ADMIN_URL}/project/prd/${projectId}`} target="_blank">
+            PRD
+          </a>
+        ),
+      },
+    ];
+  };
 
   // 切换页码和每页条数回调
   const handleChange = (_current: number, size: number) => {
@@ -108,14 +110,6 @@ export default function Index() {
       return false;
     }
     navigate(`/project/${id}/config`);
-  };
-
-  // 访问地址
-  const handleVisit = (projectId: number, isAuth: boolean) => {
-    if (!isAuth) {
-      return message.warning('该项目未授权，无法访问');
-    }
-    setProjectId(projectId);
   };
 
   // 提交搜索
@@ -134,8 +128,8 @@ export default function Index() {
           background: isAuth ? 'none' : "url('/imgs/cross-bg.png')",
         }}
         actions={[
-          <Dropdown key="link" menu={{ items: isAuth ? items : [] }} trigger={['click']}>
-            <div onClick={() => handleVisit(item.id, isAuth)}>
+          <Dropdown key="link" menu={{ items: isAuth ? getItems(item.id) : [] }} trigger={['click']}>
+            <div>
               <LinkOutlined />
               <span className={styles.gabLeft}>访问地址</span>
             </div>
@@ -157,9 +151,9 @@ export default function Index() {
                 <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.remark || '暂无描述'}</p>
                 <p style={{ marginTop: 10 }}>
                   <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
-                  {item.user_name}
+                  {item.user_name.split('@')?.[0]}
                   &nbsp;&nbsp;
-                  {dayjs(item.updated_at).format('YYYY/MM/DD HH:mm')}
+                  {dayjs(item.updated_at).format('YYYY-MM-DD HH:mm')}
                 </p>
               </>
             }

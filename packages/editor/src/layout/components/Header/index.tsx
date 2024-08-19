@@ -256,7 +256,7 @@ const Header = memo(() => {
             </Button>
           )}
           <a href="http://docs.marsview.cc" target="_blank">
-            文档
+            使用文档
           </a>
           <Popover
             content={
