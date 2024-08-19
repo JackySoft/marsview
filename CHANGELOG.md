@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/JackySoft/marsview/compare/v1.11.0...v1.12.0) (2024-08-19)
+
+
+### Others
+
+* 修改package，增加commit 类型 ([1c3c7a1](https://github.com/JackySoft/marsview/commit/1c3c7a1590a137b333f4e99cc613f1976aad4477))
+
 ## [1.11.0](https://github.com/JackySoft/marsview/compare/v1.10.0...v1.11.0) (2024-08-19)
 
 ## [1.10.0](https://github.com/JackySoft/marsview/compare/v1.9.0...v1.10.0) (2024-08-19)
