@@ -2,13 +2,49 @@
   height: 100vh;
   overflow: auto;
 }
+.header {
+  position: fixed;
+  top: 0;
+  height: 64px;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 50px;
+  color: #fff;
+  background-color: #1a1a1a;
+  .shadow {
+    box-shadow: 0 1px 10px 1px #00000059;
+  }
+  .logo {
+    font-size: 20px;
+    img {
+      vertical-align: middle;
+      margin-right: 20px;
+    }
+  }
+  .doc {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    line-height: 17px;
+    a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #eee;
+    }
+  }
+}
 .bg {
   position: relative;
-  background-color: #000;
+  background-color: #1a1a1a;
   height: 76vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 64px;
   .canvas {
     position: absolute;
     height: 76vh;
@@ -22,7 +58,9 @@
     .title {
       font-size: 54px;
       font-weight: 600;
-      color: #fff;
+      background: linear-gradient(45deg, #fff, #8434e9 52%, #520bcd);
+      color: transparent; /* Fallback color in case gradients are not supported */
+      background-clip: text;
     }
     .desc {
       font-size: 30px;
@@ -111,8 +149,10 @@
 }
 .beian {
   margin-top: 30px;
+  color: #a6a0a0;
   a {
     color: #a6a0a0;
+    margin-left: 10px;
   }
 }
 
