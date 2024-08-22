@@ -48,6 +48,10 @@ export const router = [
     path: '/403',
     element: lazyLoad(React.lazy(() => import('@/pages/403'))),
   },
+  {
+    path: '/500',
+    element: lazyLoad(React.lazy(() => import('@/pages/500'))),
+  },
 ];
 
 export default createBrowserRouter(router);

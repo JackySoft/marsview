@@ -1,14 +1,13 @@
 import { Button, Flex, List, Spin, Tag } from 'antd';
 import { PlusOutlined, SyncOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useEffect, useRef, useState } from 'react';
-import api, { PageItem } from '@/api/pageMember';
+import { PageItem } from '@/api/pageMember';
 import { getPageList, delPageData } from '@/api';
 import { useNavigate } from 'react-router-dom';
 import { Modal, message } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
 import CreatePage from '../../Header/CreatePage';
-import { set } from 'lodash-es';
-import { has } from 'lodash-es';
+
 /**
  * 编辑器中，快捷操作页面列表
  * 打开、修改、删除、新增页面
@@ -138,6 +137,7 @@ export default () => {
       </Spin>
       {/* 创建和修改页面 */}
       <CreatePage
+        title="修改页面"
         createRef={createRef}
         update={() => {
           getMyPagesList(1);

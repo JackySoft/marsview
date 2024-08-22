@@ -6,8 +6,8 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { message } from '@/utils/AntdGlobal';
 import { IAction, IModalProp } from '@/pages/types';
 import { Menu } from '@/api/types';
-import { getMenuList, addMenu, updateMenu } from '@/api';
-import api, { PageItem } from '@/api/pageMember';
+import { getMenuList, addMenu, updateMenu, getPageList } from '@/api';
+import { PageItem } from '@/api/pageMember';
 import { arrayToTree } from '@/utils/util';
 import CreatePage from '@/layout/components/Header/CreatePage';
 
@@ -33,7 +33,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
     setLoading(true);
     // 获取菜单列表
     await getMenus();
-    await getPageList();
+    await getMyPageList();
     setLoading(false);
     if (data && project_id) {
       form.setFieldsValue({ ...data, project_id: parseInt(project_id), code: data.code?.split('_')[2] || '' });
@@ -51,8 +51,8 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
   };
 
   // 获取用户页面列表
-  const getPageList = async () => {
-    const res = await api.getPageList();
+  const getMyPageList = async () => {
+    const res = await getPageList({ pageNum: 1, pageSize: 50 });
     setPageList(res.list);
   };
 
@@ -199,7 +199,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
                         {pageList.map((item) => {
                           return (
                             <Select.Option value={item.id} key={item.id}>
-                              {item.name + '( ' + item.remark + ' )'}
+                              {item.name}
                             </Select.Option>
                           );
                         })}
@@ -223,7 +223,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
         </Spin>
       </Modal>
       {/* 创建和修改页面 */}
-      <CreatePage createRef={createRef} update={() => getPageList()} />
+      <CreatePage title="创建页面" createRef={createRef} update={() => getMyPageList()} />
     </>
   );
 }

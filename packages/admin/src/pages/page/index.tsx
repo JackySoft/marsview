@@ -14,30 +14,34 @@ export default function () {
   const navitate = useNavigate();
   useEffect(() => {
     if (id) {
-      getPageDetail(env as string, Number(id)).then((res: any) => {
-        if (!res.id) {
-          return navitate('/404');
-        }
-        let pageData: any = {};
-        try {
-          pageData = JSON.parse(res.page_data || '{}');
-        } catch (error) {
-          console.error(error);
-          console.info('【json数据】', res.page_data);
-          message.error('页面数据格式错误，请检查');
-        }
-        savePageInfo({
-          pageId: res.id,
-          pageName: res.name,
-          remark: res.remark,
-          is_public: res.is_public,
-          stg_publish_id: res.stg_publish_id,
-          pre_publish_id: res.pre_publish_id,
-          prd_publish_id: res.prd_publish_id,
-          ...pageData,
+      getPageDetail(env as string, Number(id))
+        .then((res: any) => {
+          if (!res.id) {
+            return navitate('/404');
+          }
+          let pageData: any = {};
+          try {
+            pageData = JSON.parse(res.page_data || '{}');
+          } catch (error) {
+            console.error(error);
+            console.info('【json数据】', res.page_data);
+            message.error('页面数据格式错误，请检查');
+          }
+          savePageInfo({
+            pageId: res.id,
+            pageName: res.name,
+            remark: res.remark,
+            is_public: res.is_public,
+            stg_publish_id: res.stg_publish_id,
+            pre_publish_id: res.pre_publish_id,
+            prd_publish_id: res.prd_publish_id,
+            ...pageData,
+          });
+          setTheme(pageData.config.props.theme || '#1677ff');
+        })
+        .catch(() => {
+          navitate('/500');
         });
-        setTheme(pageData.config.props.theme || '#1677ff');
-      });
     }
   }, [id]);
   return (
