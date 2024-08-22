@@ -2,11 +2,13 @@ import { Button, Flex, List, Spin, Tag } from 'antd';
 import { PlusOutlined, SyncOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useEffect, useRef, useState } from 'react';
 import api, { PageItem } from '@/api/pageMember';
-import { delPageData } from '@/api';
+import { getPageList, delPageData } from '@/api';
 import { useNavigate } from 'react-router-dom';
 import { Modal, message } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
 import CreatePage from '../../Header/CreatePage';
+import { set } from 'lodash-es';
+import { has } from 'lodash-es';
 /**
  * 编辑器中，快捷操作页面列表
  * 打开、修改、删除、新增页面
@@ -16,17 +18,41 @@ export default () => {
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState<PageItem[]>([]);
   const pageId = usePageStore((state) => state.page.pageId);
+  const [total, setTotal] = useState<number>(0);
+  const [pageNum, setPageNum] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(16);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [moreLoading, setMoreLoading] = useState<boolean>(false);
+
   const navigate = useNavigate();
   useEffect(() => {
-    getPageList();
+    setLoading(true);
+    getMyPagesList(1);
   }, []);
 
   // 获取用户页面列表
-  const getPageList = async () => {
-    setLoading(true);
-    const res = await api.getPageList();
+  const getMyPagesList = async (current: number) => {
+    if (current > 1) {
+      setMoreLoading(true);
+    } else {
+      setLoading(true);
+    }
+    const res = await getPageList({
+      pageNum: current || pageNum,
+      pageSize,
+      type: 1,
+    });
+    setPageNum(current);
     setLoading(false);
-    setList(res.list);
+    setMoreLoading(false);
+    if (res.list.length < pageSize) {
+      setHasMore(false);
+    }
+    if (current === 1) {
+      setList(res.list);
+    } else {
+      setList([...list, ...res.list]);
+    }
   };
 
   // 新增用户
@@ -46,7 +72,7 @@ export default () => {
           id,
         });
         message.success('删除成功');
-        getPageList();
+        getMyPagesList(1);
         if (list.length > 0) navigate(`/editor/${list[0].id}/edit`);
       },
     });
@@ -64,32 +90,59 @@ export default () => {
         <Button type="link" icon={<PlusOutlined />} onClick={() => handleAdd()} style={{ marginLeft: -15 }}>
           新增
         </Button>
-        <Button type="link" icon={<SyncOutlined />} onClick={getPageList}>
+        <Button
+          type="link"
+          icon={<SyncOutlined />}
+          onClick={() => {
+            getMyPagesList(1);
+          }}
+        >
           刷新
         </Button>
       </Flex>
       <Spin spinning={loading}>
-        <List
-          style={{ height: 'calc(100vh - 150px)', overflowY: 'auto' }}
-          itemLayout="horizontal"
-          dataSource={list}
-          renderItem={(item) => {
-            return (
-              <List.Item
-                actions={[
-                  item.id === pageId ? <Tag color="#7D33FF">当前</Tag> : '',
-                  <DeleteOutlined onClick={() => handleDelete(item.id)} />,
-                  <EditOutlined onClick={() => handleAdd(item)} />,
-                ]}
+        <div style={{ height: 'calc(100vh - 150px)', overflowY: 'auto' }}>
+          <List
+            itemLayout="horizontal"
+            dataSource={list}
+            renderItem={(item) => {
+              return (
+                <List.Item
+                  actions={[
+                    item.id === pageId ? <Tag color="#7D33FF">当前</Tag> : '',
+                    <DeleteOutlined onClick={() => handleDelete(item.id)} />,
+                    <EditOutlined onClick={() => handleAdd(item)} />,
+                  ]}
+                >
+                  <List.Item.Meta title={<a onClick={(event) => handleOpen(event, item.id)}>{item.name}</a>} description={item.remark} />
+                </List.Item>
+              );
+            }}
+          />
+          {hasMore ? (
+            <div style={{ textAlign: 'center', padding: 10 }}>
+              <Button
+                block
+                loading={moreLoading}
+                onClick={() => {
+                  getMyPagesList(pageNum + 1);
+                }}
               >
-                <List.Item.Meta title={<a onClick={(event) => handleOpen(event, item.id)}>{item.name}</a>} description={item.remark} />
-              </List.Item>
-            );
-          }}
-        />
+                加载更多
+              </Button>
+            </div>
+          ) : (
+            <div style={{ fontSize: '12px', borderTop: '1px solid #f5f5f5', marginTop: '12px', padding: '5px', textAlign: 'center' }}>没有更多了</div>
+          )}
+        </div>
       </Spin>
       {/* 创建和修改页面 */}
-      <CreatePage createRef={createRef} update={() => getPageList()} />
+      <CreatePage
+        createRef={createRef}
+        update={() => {
+          getMyPagesList(1);
+        }}
+      />
     </>
   );
 };
