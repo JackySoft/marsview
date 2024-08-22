@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/JackySoft/marsview/compare/v1.15.0...v1.16.0) (2024-08-22)
+
+
+### Features
+
+* 1.编辑器页面列表增加加载更多。2.修改创建页面标题问题。3.访问端增加未发布提示。 ([6a3379d](https://github.com/JackySoft/marsview/commit/6a3379d021865d53a97a4904ce413df9344e77cf))
+
 ## [1.15.0](https://github.com/JackySoft/marsview/compare/v1.13.0...v1.15.0) (2024-08-21)
 
 
