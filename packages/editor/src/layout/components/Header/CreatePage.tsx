@@ -8,6 +8,7 @@ import { PageItem } from '@/api/pageMember';
  */
 
 export interface IModalProp {
+  title: string;
   createRef: MutableRefObject<{ open: (record: PageItem) => void } | undefined>;
   update?: () => void;
 }
@@ -66,7 +67,7 @@ const CreatePage = (props: IModalProp) => {
   };
   return (
     <Modal
-      title="创建页面"
+      title={props.title}
       open={visible}
       confirmLoading={loading}
       onOk={handleOk}

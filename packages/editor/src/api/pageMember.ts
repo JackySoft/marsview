@@ -36,8 +36,4 @@ export default {
   deletePageMember(params: DelParams) {
     return request.post('/page/role/delete', params);
   },
-  // 获取当前用户页面列表
-  getPageList() {
-    return request.post('/page/user/pages', {}, { showLoading: false });
-  },
 };

@@ -215,7 +215,7 @@ export default function Index() {
           )}
         </div>
         {/* 新建页面 */}
-        <CreatePage createRef={creatPageRef} update={() => getList(1, pageSize)} />
+        <CreatePage title="创建页面" createRef={creatPageRef} update={() => getList(1, pageSize)} />
       </Layout.Content>
     </>
   );
