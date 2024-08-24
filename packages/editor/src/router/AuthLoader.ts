@@ -1,4 +1,4 @@
-import { getUserInfo } from '@/api';
+import { getUserInfo } from '@/api/user';
 import storage from '@/utils/storage';
 /**
  * 加载用户信息，生成token
