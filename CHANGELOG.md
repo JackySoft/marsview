@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/JackySoft/marsview/compare/v1.16.0...v2.0.0) (2024-08-24)
+
+
+### Features
+
+* 开发邮箱注册功能 ([cdff0d7](https://github.com/JackySoft/marsview/commit/cdff0d74af10cd6e3fe532a552a35488cb824b1b))
+
 ## [1.16.0](https://github.com/JackySoft/marsview/compare/v1.15.0...v1.16.0) (2024-08-22)
 
 
