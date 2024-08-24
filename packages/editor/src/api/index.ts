@@ -13,23 +13,6 @@ import {
   Menu,
   Role,
 } from './types';
-// 用户登录
-export const login = async <T>(params: T) => {
-  return request.post('/user/login', params, { showLoading: false });
-};
-
-// 获取用户信息
-export const getUserInfo = async () => {
-  return request.get('/user/info', {}, { showLoading: false });
-};
-
-// 获取用户头像
-export const getUserAvatar = () => {
-  // TODO 等后续接入微信扫码后生成用户头像
-  return Promise.resolve({
-    avatar: '',
-  });
-};
 
 // 获取页面列表
 export const getPageList = (params: PageParams) => {
@@ -79,11 +62,6 @@ export const publishList = (params: PublishListParams) => {
 // 页面回滚
 export const rollbackPage = (params: { page_id: number; env: string; last_publish_id: number }) => {
   return request.post('/page/rollback', params);
-};
-
-// 搜索用户
-export const searchUser = (keyword: string) => {
-  return request.post(`/user/search`, { keyword }, { showLoading: false });
 };
 
 // 获取项目列表
@@ -136,22 +114,22 @@ export const copyMenu = (params: { id: number }) => {
   return request.post('/menu/copy', params, { showLoading: false });
 };
 
-// 获取用户列表
+// 获取项目配置的用户列表
 export const getUserList = (params: UserListParams) => {
   return request.get('/project/user/list', params, { showLoading: false });
 };
 
-// 新增用户
+// 新增项目用户
 export const addUser = (params: UserCreateParams) => {
   return request.post('/project/user/create', params, { showLoading: false });
 };
 
-// 删除用户
+// 删除项目用户
 export const delUser = (params: { id: number }) => {
   return request.post('/project/user/delete', params, { showLoading: false });
 };
 
-// 更新用户
+// 更新项目用户
 export const updateUser = (params: { id: number; system_role: number; role_id: number }) => {
   return request.post('/project/user/update', params, { showLoading: false });
 };

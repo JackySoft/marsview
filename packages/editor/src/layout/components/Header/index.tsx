@@ -5,7 +5,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { toBlob } from 'html-to-image';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
-import { getUserAvatar, updatePageData, uploadImg } from '@/api';
+import { updatePageData, uploadImg } from '@/api';
 import Publish from './PublishPopover';
 import styles from './index.module.less';
 
@@ -13,7 +13,6 @@ import styles from './index.module.less';
  * 编辑器顶部组件
  */
 const Header = memo(() => {
-  const [avatar, setAvatar] = useState('');
   const [isNav, setNav] = useState(false);
   const [loading, setLoading] = useState(false);
   const [navKey, setNavKey] = useState(['projects']);
@@ -59,12 +58,6 @@ const Header = memo(() => {
       icon: <AppstoreOutlined style={{ fontSize: 16 }} />,
     },
   ];
-
-  useEffect(() => {
-    getUserAvatar().then((res) => {
-      setAvatar(res.avatar);
-    });
-  }, []);
 
   useEffect(() => {
     if (['/projects', '/pages', '/libs'].includes(location.pathname)) {
@@ -271,8 +264,6 @@ const Header = memo(() => {
 
           {/* 用户头像 */}
           <div className={styles.avatar}>
-            {avatar ? <img width={30} src={avatar} style={{ borderRadius: '50%' }} /> : null}
-
             <Dropdown
               menu={{
                 items: [

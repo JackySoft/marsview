@@ -5,8 +5,8 @@ import { useDebounceFn } from 'ahooks';
 import { message } from '@/utils/AntdGlobal';
 import { IAction, IModalProp } from '@/pages/types';
 import { UserItem } from '@/api/types';
-import { searchUser, addUser, updateUser, getRoleListAll } from '@/api';
-
+import { addUser, updateUser, getRoleListAll } from '@/api';
+import { searchUser } from '@/api/user';
 export default function CreateMenu(props: IModalProp<UserItem>) {
   const [form] = Form.useForm();
   const [action, setAction] = useState<IAction>('create');
