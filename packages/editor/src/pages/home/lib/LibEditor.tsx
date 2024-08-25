@@ -179,10 +179,6 @@ export default () => {
         onChange={handleTabChange}
         tabBarExtraContent={
           <Space size={20}>
-            <a href="javascript:;" target="_blank">
-              <QuestionCircleOutlined />
-              <span style={{ marginLeft: 3 }}>开发文档</span>
-            </a>
             <Button type="default" onClick={handleBack}>
               返回
             </Button>
