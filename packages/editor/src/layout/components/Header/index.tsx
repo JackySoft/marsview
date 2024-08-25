@@ -23,7 +23,9 @@ const Header = memo(() => {
 
   const goHome = () => {
     setMode('edit');
-    navigate('/pages');
+    const fromProject = location.pathname.indexOf('/project') > -1;
+    const fromLib = location.pathname.indexOf('/lib') > -1;
+    navigate(fromProject ? '/projects' : fromLib ? '/libs' : '/pages');
   };
   const {
     userInfo,

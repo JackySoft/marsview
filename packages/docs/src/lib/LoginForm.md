@@ -6,7 +6,10 @@
 
 ## 视频演示
 
-【放视频】
+<video width="680" controls>  
+  <source src="/vedio/createLoginLib.mp4" type="video/mp4">  
+  您的浏览器不支持 Video 标签。  
+</video>
 
 ## 创建组件
 
