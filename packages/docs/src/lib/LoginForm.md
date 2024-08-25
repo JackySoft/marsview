@@ -34,7 +34,7 @@ config.js 主要属性值有：
 
 （我们可以先将初始化的代码全部删除，每个文件保留最基本的格式）
 
-1. `index.jsx`
+#### 一、 `index.jsx`
 
 ```jsx
 export default ({ id, type, config }, ref) => {
@@ -42,7 +42,7 @@ export default ({ id, type, config }, ref) => {
 };
 ```
 
-2. `config.js`
+#### 二、 `config.js`
 
 ```js
 export default {
@@ -68,9 +68,7 @@ export default {
 };
 ```
 
-3.
-
-### 组件结构编写
+#### 三、 组件结构编写
 
 在 `index.jsx` 文件中书写组件结构。
 
@@ -182,7 +180,7 @@ export default ({ id, type, config, onClick }, ref) => {
 };
 ```
 
-### `config` 配置
+#### 四、 `config` 配置
 
 `config` 是定义属性值以及属性值的修改方式。
 
