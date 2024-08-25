@@ -2,7 +2,21 @@
 
 页面是整个低代码平台中最重要的部分，也是整个低代码平台的核心。它可以关联到项目中，也可以独立存在。假设我们公司有一个老项目，我们想要通过 Marsview 单独实现其中一个页面，就可以只创建该页面，等页面搭建完成后，通过微服务集成到老项目中。
 
-![访问端工作台](/page/editor.png)
+**页面使用**
+
+<video width="680" controls>
+
+  <source src="/vedio/page-1.mp4" type="video/mp4">  
+  您的浏览器不支持 Video 标签。  
+</video>
+
+**编辑器使用**
+
+<video width="680" controls>
+
+  <source src="/vedio/editor.mp4" type="video/mp4">  
+  您的浏览器不支持 Video 标签。  
+</video>
 
 ## 页面创建
 
