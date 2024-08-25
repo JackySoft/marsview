@@ -2,6 +2,11 @@
 
 Marsview 支持从零开始创建项目，同时支持一整套完整项目的配置，比如：项目菜单、项目角色、项目权限、项目开发成员等，创建完成后，可以直接通过`http://admin.marsview.cc`访问创建的项目。
 
+<video width="680" controls>  
+  <source src="/vedio/project.mp4" type="video/mp4">  
+  您的浏览器不支持 Video 标签。  
+</video>
+
 ### 项目列表
 
 项目列表包含名称搜索，新建项目，列表刷新，我创建的和市场公开的项目。
