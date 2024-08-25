@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/JackySoft/marsview/compare/v2.0.0...v2.1.0) (2024-08-25)
+
+
+### Documentation
+
+* 增加自定义组件案例文档 ([29bdde1](https://github.com/JackySoft/marsview/commit/29bdde136813cf9c133401f5c940b3866d0a4c5f))
+
 ## [2.0.0](https://github.com/JackySoft/marsview/compare/v1.16.0...v2.0.0) (2024-08-24)
 
 
