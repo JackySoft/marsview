@@ -24,13 +24,13 @@ export default {
   config: {
     // 组件默认属性值
     props: {
-      src: 'https://baidu.com',
+      src: 'https://juejin.cn/',
       title: 'IFrame组件',
     },
     style: {
-      border: 'none',
-      width: '300px',
-      height: '500px',
+      border: '5px solid #7d33ff',
+      width: '100%',
+      height: '600px',
     },
     events: [],
     api: {},
