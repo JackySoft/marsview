@@ -9,7 +9,6 @@ export default defineConfig({
   lang: 'zh-CN',
   srcDir: 'src',
   outDir: '../../dist/docs',
-  appearance: 'dark',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/mars-logo.png',
@@ -51,7 +50,10 @@ export default defineConfig({
       },
       {
         text: '组件',
-        items: [{ text: '组件介绍', link: '/lib' }],
+        items: [
+          { text: '组件介绍', link: '/lib' },
+          { text: '自定义组件案例', link: '/lib/LoginForm' },
+        ],
       },
       {
         text: '团队介绍',
