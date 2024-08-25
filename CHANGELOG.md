@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/JackySoft/marsview/compare/v2.2.0...v2.3.0) (2024-08-25)
+
+
+### Documentation
+
+* 录制教学视频 ([9421ed6](https://github.com/JackySoft/marsview/commit/9421ed6952251c7c6223c9486a47e6e1d718c47a))
+
 ## [2.2.0](https://github.com/JackySoft/marsview/compare/v2.1.0...v2.2.0) (2024-08-25)
 
 
