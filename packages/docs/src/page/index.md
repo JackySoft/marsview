@@ -6,7 +6,7 @@
 
 <video width="680" controls>
 
-  <source src="/vedio/page-1.mp4" type="video/mp4">  
+  <source src="https://marsview.cdn.bcebos.com/vedio/page-1.mp4" type="video/mp4">  
   您的浏览器不支持 Video 标签。  
 </video>
 
@@ -14,7 +14,7 @@
 
 <video width="680" controls>
 
-  <source src="/vedio/editor.mp4" type="video/mp4">  
+  <source src="https://marsview.cdn.bcebos.com/vedio/editor.mp4" type="video/mp4">  
   您的浏览器不支持 Video 标签。  
 </video>
 

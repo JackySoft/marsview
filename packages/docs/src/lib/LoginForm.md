@@ -7,7 +7,7 @@
 ## 视频演示
 
 <video width="680" controls>  
-  <source src="/vedio/createLoginLib.mp4" type="video/mp4">  
+  <source src="https://marsview.cdn.bcebos.com/vedio/createLoginLib.mp4" type="video/mp4">  
   您的浏览器不支持 Video 标签。  
 </video>
 
