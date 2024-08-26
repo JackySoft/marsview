@@ -3,9 +3,12 @@ import styles from './index.module.less';
 import { spawn } from 'child_process';
 import { ArrowUpOutlined, BellOutlined, RocketOutlined, SearchOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
+import { set } from 'lodash-es';
 
 interface AIChatModalProps {
   showModal: boolean;
+  onHideModal: () => void;
+  onGenerateLoad: (message: string) => void;
 }
 
 interface Example {
@@ -13,7 +16,7 @@ interface Example {
   name: string;
   message: string;
 }
-export default function AIChatModal({ showModal }: AIChatModalProps) {
+export default function AIChatModal({ showModal, onHideModal, onGenerateLoad }: AIChatModalProps) {
   const [message, setMessage] = useState<string>('');
   const [requestMessage, setRequestMessage] = useState<string>('');
   const [responseMessage, setResponseMessage] = useState<string>('');
@@ -51,8 +54,30 @@ export default function AIChatModal({ showModal }: AIChatModalProps) {
     setMessage(e.target.value);
   };
 
+  const handleRequestMessage = () => {
+    setRequestMessage(message);
+    setTimeout(() => {
+      setResponseMessage('好的，MarsAI为您服务~');
+    }, 1000);
+    onGenerateLoad(message);
+    setTimeout(() => {
+      setShowLoad(true);
+    }, 1000);
+    setMessage('');
+    setLoading(true);
+  };
+
   const handleClickExample = (item: Example) => {
     setMessage(item.message);
+  };
+
+  const handleHideModal = () => {
+    setMessage('');
+    setRequestMessage('');
+    setResponseMessage('');
+    setShowLoad(false);
+    setLoading(false);
+    onHideModal();
   };
 
   return (
@@ -60,44 +85,51 @@ export default function AIChatModal({ showModal }: AIChatModalProps) {
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
           <span>MarsAI Code</span>
+          <button className={styles.closeButton} onClick={handleHideModal}>
+            &times;
+          </button>
         </div>
         <div className={styles.modalBody}>
           <div className={styles.chatContent}>
-            <div className={styles.chatItem}>
-              <div className={styles.chatInfo}>
-                <div className={styles.chatName}>MarsUser</div>
-                <div className={styles.avatar}>
-                  <img src="/imgs/chatUser.png" alt="" />
+            {requestMessage && (
+              <div className={styles.chatItem}>
+                <div className={styles.chatInfo}>
+                  <div className={styles.chatName}>MarsUser</div>
+                  <div className={styles.avatar}>
+                    <img src="/imgs/chatUser.png" alt="" />
+                  </div>
+                </div>
+                <div className={styles.chatText}>
+                  <div className={styles.chatMessage}>{requestMessage}</div>
                 </div>
               </div>
-              <div className={styles.chatText}>
-                <div className={styles.chatMessage}>
-                  帮我实现一个表单，可以输入一个学生的基本信息帮我实现一个表单，可以输入一个学生的基本信息帮我实现一个表单，可以输入一个学生的基本信息帮我实现一个表单，可以输入一个学生的基本信息帮我实现一个表单，可以输入一个学生的基本信息帮我实现一个表单，可以输入一个学生的基本信息
-                </div>
-              </div>
-            </div>
+            )}
 
-            <div className={styles.chatResponce}>
-              <div className={styles.chatInfo}>
-                <div className={styles.avatar}>
-                  <img src="/imgs/mars-logo-light.png" alt="" />
+            {responseMessage && (
+              <div className={styles.chatResponce}>
+                <div className={styles.chatInfo}>
+                  <div className={styles.avatar}>
+                    <img src="/imgs/mars-logo-light.png" alt="" />
+                  </div>
+                  <div className={styles.chatName}>MarsAI</div>
                 </div>
-                <div className={styles.chatName}>MarsAI</div>
+                <div className={styles.chatText}>
+                  <div className={styles.chatMessage}>{responseMessage}</div>
+                </div>
               </div>
-              <div className={styles.chatText}>
-                <div className={styles.chatMessage}>好的，请稍等</div>
-              </div>
-            </div>
+            )}
 
-            <div className={styles.chatLoad}>
-              <div className={styles.chatText}>正在生成，请稍后</div>
-              <div className={styles.load}>
-                <Spin size="small" />
-              </div>
-              {/* <Alert type="success" banner message={'生成已完成'} />
+            {showLoad && (
+              <div className={styles.chatLoad}>
+                <div className={styles.chatText}>正在生成，请稍后</div>
+                <div className={styles.load}>
+                  <Spin size="small" />
+                </div>
+                {/* <Alert type="success" banner message={'生成已完成'} />
               <Alert type="error" banner message={'生成失败'} />
               <Alert banner message={'遇到问题了，请重试'} /> */}
-            </div>
+              </div>
+            )}
           </div>
           <div className={styles.chatExamples}>
             {examples.map((item) => {
@@ -118,7 +150,7 @@ export default function AIChatModal({ showModal }: AIChatModalProps) {
               <input type="text" placeholder="描述组件的结构和内容" value={message} onChange={handleInputChange} />
             </div>
             <div className={styles.sendBtn}>
-              <Button disabled={!sendAllow} shape="circle" type="primary" icon={<ArrowUpOutlined />}></Button>
+              <Button disabled={!sendAllow} shape="circle" type="primary" icon={<ArrowUpOutlined />} onClick={handleRequestMessage}></Button>
             </div>
           </div>
         </div>
