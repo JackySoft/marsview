@@ -78,10 +78,10 @@ const CreatePage = (props: IModalProp) => {
     >
       <Form form={form} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }} initialValues={{ is_public: 1, is_edit: 1 }}>
         <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入页面名称' }]}>
-          <Input placeholder="请输入页面名称" />
+          <Input placeholder="请输入页面名称" maxLength={15} showCount />
         </Form.Item>
         <Form.Item label="描述" name="remark">
-          <Input placeholder="请输入页面描述" />
+          <Input placeholder="请输入页面描述" maxLength={20} showCount />
         </Form.Item>
         <Form.Item label="权限" name="is_public" rules={[{ required: true, message: '请选择访问类型' }]}>
           <Radio.Group>

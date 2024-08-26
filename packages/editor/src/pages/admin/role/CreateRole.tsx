@@ -79,7 +79,7 @@ export default function CreateRole(props: IModalProp<Role.RoleItem>) {
           <Input placeholder="请输入角色名称" />
         </Form.Item>
         <Form.Item name="remark" label="备注">
-          <Input.TextArea placeholder="请输入备注" />
+          <Input.TextArea placeholder="请输入备注" maxLength={20} showCount />
         </Form.Item>
       </Form>
     </Modal>
