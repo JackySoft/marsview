@@ -6,7 +6,7 @@ import { usePageStore } from '@/stores/pageStore';
 import './index.less';
 const Toolbar = memo(({ hoverTarget, copyElement, pastElement, delElement }: any) => {
   // 页面组件
-  const { selectedElement, elements, isFirstNode, nodeNav, isUpdateToolbar, setSelectedElement, moveElements } = usePageStore((state) => {
+  const { selectedElement, elements, nodeNav, isUpdateToolbar, setSelectedElement, moveElements } = usePageStore((state) => {
     const currentId = state.selectedElement?.id;
     const element = currentId ? state.page.elementsMap[currentId] : null;
     const nodeNav: { [key: string]: { id: string; type: string; name: string } } = {};
@@ -27,7 +27,6 @@ const Toolbar = memo(({ hoverTarget, copyElement, pastElement, delElement }: any
     return {
       selectedElement: state.selectedElement,
       elements: state.page.elements,
-      isFirstNode: state.page.elements[0]?.id === currentId,
       nodeNav,
       isUpdateToolbar: state.isUpdateToolbar,
       setSelectedElement: state.setSelectedElement,
@@ -37,6 +36,7 @@ const Toolbar = memo(({ hoverTarget, copyElement, pastElement, delElement }: any
 
   const [selectedStyle, setSelectedStyle] = useState({});
   const [hoverStyle, setHoverStyle] = useState({});
+  const [direction, setDirection] = useState<string>('rightTop');
 
   /**
    * 当元素属性发生变化时，重新渲染工具条
@@ -44,8 +44,16 @@ const Toolbar = memo(({ hoverTarget, copyElement, pastElement, delElement }: any
   useEffect(() => {
     if (!selectedElement) return;
     setTimeout(() => {
-      const target = document.querySelector(`[data-id=${selectedElement?.id}]`);
+      const target: HTMLElement | null = document.querySelector(`[data-id=${selectedElement?.id}]`);
+      if (!target) return;
       const style = getBoundingClientRect(target);
+      if (target.offsetLeft < 144 - style.width) {
+        setDirection('bottomLeft');
+      } else if (target.offsetTop < 24) {
+        setDirection('bottomRight');
+      } else {
+        setDirection('rightTop');
+      }
       setSelectedStyle(style);
     });
   }, [selectedElement, elements, isUpdateToolbar]);
@@ -88,7 +96,7 @@ const Toolbar = memo(({ hoverTarget, copyElement, pastElement, delElement }: any
   return (
     <>
       <div className={selectedElement ? 'toolbar-box selected' : 'toolbar-box'} style={selectedStyle} id="editorToolbar">
-        <div className={isFirstNode ? 'tool-bar first' : 'tool-bar'}>
+        <div className={'tool-bar ' + direction}>
           {/* 节点导航：只渲染父节点、当前节点和子节点 */}
           <div className="node-nav">
             {nodeNav.parent && (
