@@ -12,6 +12,7 @@ import { loadScript } from '@/utils/util';
 import { updateLib, getLibDetail, publish, ILib } from '@/api/lib';
 import { defaultReactCode, defaultLessCode, defaultConfigCode, defaultMdCode } from './components/InitValue';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import AIChatModal from '@/components/AIChatModal';
 /**
  * 组件代码编辑
  */
@@ -25,6 +26,7 @@ export default () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
+  const [showModal, setShowModal] = useState(false);
 
   // 初始化monaco，默认为jsdelivery分发，由于网络原因改为本地cdn
   loader.config({
@@ -171,26 +173,36 @@ export default () => {
     });
   };
 
+  const handleAICodeChat = () => {
+    setShowModal(true);
+  };
+
   return (
-    <Spin spinning={loading} tip="正在编译中...">
-      <Tabs
-        items={tabs}
-        tabBarStyle={{ paddingLeft: 65, paddingRight: 30 }}
-        onChange={handleTabChange}
-        tabBarExtraContent={
-          <Space size={20}>
-            <Button type="default" onClick={handleBack}>
-              返回
-            </Button>
-            <Button type="primary" onClick={handleSave}>
-              保存
-            </Button>
-            <Button type="primary" danger onClick={handlePublish}>
-              发布
-            </Button>
-          </Space>
-        }
-      />
-    </Spin>
+    <>
+      <Spin spinning={loading} tip="正在编译中...">
+        <Tabs
+          items={tabs}
+          tabBarStyle={{ paddingLeft: 65, paddingRight: 30 }}
+          onChange={handleTabChange}
+          tabBarExtraContent={
+            <Space size={20}>
+              <Button type="primary" onClick={handleAICodeChat}>
+                AI智能编码
+              </Button>
+              <Button type="default" onClick={handleBack}>
+                返回
+              </Button>
+              <Button type="primary" onClick={handleSave}>
+                保存
+              </Button>
+              <Button type="primary" danger onClick={handlePublish}>
+                发布
+              </Button>
+            </Space>
+          }
+        />
+      </Spin>
+      <AIChatModal showModal={showModal} />
+    </>
   );
 };
