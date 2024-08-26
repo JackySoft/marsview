@@ -8,10 +8,10 @@ const ReturnTips = function () {
         <span style={{ marginLeft: 5 }}>用来定义成功或者失败时，系统显示提示文案</span>
       </p>
       <Form.Item label="成功提示" name={['tips', 'success']}>
-        <Input placeholder="默认不提示" />
+        <Input placeholder="默认不提示" maxLength={50} showCount />
       </Form.Item>
       <Form.Item label="失败提示" name={['tips', 'fail']}>
-        <Input placeholder="默认不提示" />
+        <Input placeholder="默认不提示" maxLength={50} showCount />
       </Form.Item>
       <Form.Item label="系统报错" name={['tips', 'isError']} valuePropName="checked" extra={'开启系统报错后，会优先使用接口返回错误信息。'}>
         <Switch />

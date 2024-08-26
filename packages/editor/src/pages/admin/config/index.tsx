@@ -88,7 +88,7 @@ const Config: React.FC = memo(() => {
         </Form.Item>
         <h3>基础配置</h3>
         <Form.Item label="项目名称" name="name" rules={[{ required: true, message: '请输入项目名称' }]}>
-          <Input placeholder={'项目名称: Mars'} {...props} />
+          <Input placeholder={'项目名称: Mars'} {...props} maxLength={15} showCount />
         </Form.Item>
         <Form.Item label="项目描述" name="remark" rules={[{ required: true, message: '请输入项目描述' }]}>
           <Input.TextArea autoSize placeholder={'请输入项目描述'} maxLength={20} showCount={type !== 'detail'} {...props} />
