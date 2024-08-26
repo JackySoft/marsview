@@ -11,6 +11,7 @@ import { useKeyPress } from 'ahooks';
 import ComPreview from './ComPreview';
 import 'allotment/dist/style.css';
 import './index.less';
+import { Modal } from '@/utils/AntdGlobal';
 
 /**
  * 组件代码编辑
@@ -62,6 +63,23 @@ export default forwardRef((_: any, ref: any) => {
         return compileCode;
       },
       refresh() {
+        setRefreshTag(refreshTag + 1);
+      },
+      // 打印流写入代码
+      async writeCode(newCode: string) {
+        let index = 0;
+        const codeInterval = setInterval(() => {
+          setCode((prev) => prev + newCode[index++]);
+          if (index > newCode.length - 1) {
+            clearInterval(codeInterval);
+            return;
+          }
+        }, 30);
+        setRefreshTag(refreshTag + 1);
+      },
+      // 清空代码
+      clearCode() {
+        setCode('');
         setRefreshTag(refreshTag + 1);
       },
     };

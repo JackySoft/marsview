@@ -25,11 +25,28 @@
 
 .modalHeader {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   color: #7d33ff;
   padding: 10px;
   border-bottom: 1px solid #e0e0e6;
+  .closeButton {
+    // position: absolute;
+    // top: 20px;
+    // right: 40px;
+    color: #000;
+    background-color: transparent;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 2001;
+    transition: transform 0.5s ease-in-out;
+
+    &:hover {
+      transform: rotate(90deg) scale(1.2);
+    }
+  }
+
   span {
     font-size: 20px;
     font-weight: bold;

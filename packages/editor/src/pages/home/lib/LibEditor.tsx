@@ -173,8 +173,41 @@ export default () => {
     });
   };
 
+  const handleGenerate = (message: string) => {
+    console.log(message);
+    setTimeout(() => {
+      handleWriteCode(message);
+    }, 2000);
+  };
+
+  const handleWriteCode = (code: string) => {
+    if (reactRef.current) {
+      reactRef.current.clearCode();
+
+      if (reactRef.current.getCode()) {
+        Modal.confirm({
+          title: '确认',
+          content: '编辑器中已有代码，确认将覆盖原有代码，不可找回',
+          okText: '确认',
+          cancelText: '取消',
+          onOk: async () => {
+            reactRef.current.clearCode();
+            const code =
+              'export default ({ id, type, config, onClick }, ref) => {\n  const { Form, Button, Input } = window.antd;\n  const onFinish = (values) => {\n    onClick && onClick(values);\n  };\n\n  return (\n    <div data-id={id} data-type={type}>\n      <Form name="studentForm"\n        labelCol={{ span: config.props.labelCol }}\n        wrapperCol={{ span: config.props.wrapperCol }}\n        style={{ maxWidth: config.props.maxWidth }}\n        onFinish={onFinish}\n      >\n        <Form.Item label="姓名" name="name">\n          <Input />\n        </Form.Item>\n        <Form.Item label="年龄" name="age">\n          <Input />\n        </Form.Item>\n        <Form.Item label="性别" name="gender">\n          <Input />\n        </Form.Item>\n        <Form.Item label="班级" name="class">\n          <Input />\n        </Form.Item>\n        <Form.Item wrapperCol={{\n          offset: config.props.offset,\n          span: config.props.wrapperCol\n        }}>\n          <Button htmlType="submit" block={config.props.block} type="primary">\n            {config.props.submitBtn}\n          </Button>\n        </Form.Item>\n      </Form>\n    </div>\n  );\n};';
+            await reactRef.current.writeCode(code);
+            // handleHideAIModal();
+          },
+        });
+      }
+    }
+  };
+
   const handleAICodeChat = () => {
     setShowModal(true);
+  };
+
+  const handleHideAIModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -202,7 +235,7 @@ export default () => {
           }
         />
       </Spin>
-      <AIChatModal showModal={showModal} />
+      <AIChatModal showModal={showModal} onHideModal={handleHideAIModal} onGenerateLoad={handleGenerate} />
     </>
   );
 };
