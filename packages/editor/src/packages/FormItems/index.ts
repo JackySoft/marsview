@@ -1,6 +1,8 @@
 export { Input, InputConfig } from './Input';
-export { TextArea, TextAreaConfig } from './TextArea';
+export { InputPassword, InputPasswordConfig } from './InputPassword';
 export { InputNumber, InputNumberConfig } from './InputNumber';
+export { InputOTP, InputOTPConfig } from './InputOTP';
+export { TextArea, TextAreaConfig } from './TextArea';
 export { DatePicker, DatePickerConfig } from './DatePicker';
 export { DatePickerRange, DatePickerRangeConfig } from './DatePickerRange';
 export { Radio, RadioConfig } from './Radio';

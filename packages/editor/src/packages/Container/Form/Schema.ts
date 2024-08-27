@@ -128,6 +128,9 @@ export default {
       colon: true,
       labelAlign: 'right',
       layout: 'horizontal',
+      labelCol: {
+        span: 2,
+      },
     },
     // 组件样式
     style: {
