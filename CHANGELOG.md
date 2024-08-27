@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/JackySoft/marsview/compare/v2.8.0...v2.9.0) (2024-08-27)
+
+
+### Features
+
+* 自定义组件接入AI助手 ([f1e35c0](https://github.com/JackySoft/marsview/commit/f1e35c064bce5d2af985feec899bfecafce44a7e))
+
 ## [2.8.0](https://github.com/JackySoft/marsview/compare/v2.6.0...v2.8.0) (2024-08-27)
 
 
