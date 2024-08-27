@@ -10,8 +10,9 @@ import MDEditor from './components/MDEditor';
 import md5 from 'md5';
 import { loadScript } from '@/utils/util';
 import { updateLib, getLibDetail, publish, ILib } from '@/api/lib';
+import { generateCode } from '@/api/ai';
+import Icon, { BulbOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { defaultReactCode, defaultLessCode, defaultConfigCode, defaultMdCode } from './components/InitValue';
-import { QuestionCircleOutlined } from '@ant-design/icons';
 import AIChatModal from '@/components/AIChatModal';
 /**
  * 组件代码编辑
@@ -24,9 +25,14 @@ export default () => {
   const [tabs, setTabs] = useState<Array<{ key: string; label: string; children: React.ReactNode; forceRender?: boolean }>>([]);
   const [detail, setDetail] = useState<ILib>();
   const [loading, setLoading] = useState(false);
+  const [activeTabKey, setActiveTabKey] = useState<string>('react');
+
+  const [cacheAICode, setCacheAICode] = useState<{ jsx: string; config: string } | null>(null);
+
   const navigate = useNavigate();
   const { id } = useParams();
-  const [showModal, setShowModal] = useState(false);
+
+  const aiChatmRef = useRef<any>();
 
   // 初始化monaco，默认为jsdelivery分发，由于网络原因改为本地cdn
   loader.config({
@@ -95,6 +101,7 @@ export default () => {
   }, [id]);
 
   const handleTabChange = (key: string) => {
+    setActiveTabKey(key);
     switch (key) {
       case 'react':
         reactRef.current?.refresh();
@@ -173,41 +180,82 @@ export default () => {
     });
   };
 
-  const handleGenerate = (message: string) => {
-    console.log(message);
-    setTimeout(() => {
-      handleWriteCode(message);
-    }, 2000);
+  const handleGenerate = async (message: string): Promise<boolean> => {
+    try {
+      await aiChatmRef.current?.changeLoadInfo('MarsAI正在思考中，时间可能较长，请稍候');
+      const data = await generateCode({ message });
+
+      if (!data) {
+        await aiChatmRef.current?.requestError();
+        return false; // 如果 `data` 为空，返回 `false` 表示失败
+      }
+      await aiChatmRef.current?.changeLoadInfo('正在写入代码中，请稍候');
+      handleAskWrite(data, 'load');
+      setCacheAICode(data);
+      return true; // 返回 `true` 表示成功
+    } catch (error) {
+      await aiChatmRef.current?.requestError();
+      return false; // 如果发生错误，返回 `false` 表示失败
+    }
   };
 
-  const handleWriteCode = (code: string) => {
-    if (reactRef.current) {
-      reactRef.current.clearCode();
-
-      if (reactRef.current.getCode()) {
+  const handleAskWrite = (code: { jsx: string; config: string }, type: string) => {
+    if (reactRef.current && configRef.current) {
+      if (reactRef.current.getCode() || configRef.current.getCode()) {
         Modal.confirm({
           title: '确认',
           content: '编辑器中已有代码，确认将覆盖原有代码，不可找回',
           okText: '确认',
           cancelText: '取消',
           onOk: async () => {
-            reactRef.current.clearCode();
-            const code =
-              'export default ({ id, type, config, onClick }, ref) => {\n  const { Form, Button, Input } = window.antd;\n  const onFinish = (values) => {\n    onClick && onClick(values);\n  };\n\n  return (\n    <div data-id={id} data-type={type}>\n      <Form name="studentForm"\n        labelCol={{ span: config.props.labelCol }}\n        wrapperCol={{ span: config.props.wrapperCol }}\n        style={{ maxWidth: config.props.maxWidth }}\n        onFinish={onFinish}\n      >\n        <Form.Item label="姓名" name="name">\n          <Input />\n        </Form.Item>\n        <Form.Item label="年龄" name="age">\n          <Input />\n        </Form.Item>\n        <Form.Item label="性别" name="gender">\n          <Input />\n        </Form.Item>\n        <Form.Item label="班级" name="class">\n          <Input />\n        </Form.Item>\n        <Form.Item wrapperCol={{\n          offset: config.props.offset,\n          span: config.props.wrapperCol\n        }}>\n          <Button htmlType="submit" block={config.props.block} type="primary">\n            {config.props.submitBtn}\n          </Button>\n        </Form.Item>\n      </Form>\n    </div>\n  );\n};';
-            await reactRef.current.writeCode(code);
-            // handleHideAIModal();
+            handleWriteCode(code, type);
+          },
+          onCancel: async () => {
+            await aiChatmRef.current?.cancelLoad();
           },
         });
       }
+    } else {
+      message.error('编辑器未加载完成，请稍后再试');
+    }
+  };
+
+  const handleWriteCode = async (code: { jsx: string; config: string }, type: string) => {
+    if (type === 'reload') {
+      await aiChatmRef.current?.reloadStatus();
+    }
+    handleTabChange('react');
+    let configStatus = false;
+    let reactStatus = false;
+    await reactRef.current?.clearCode();
+    reactStatus = await reactRef.current?.writeCode(code.jsx);
+
+    if (reactStatus) {
+      handleTabChange('config');
+      await configRef.current?.clearCode();
+      configStatus = await configRef.current?.writeCode(code.config);
+    }
+    if (reactStatus && configStatus) {
+      await aiChatmRef.current?.writeCompleted();
+    } else {
+      await aiChatmRef.current?.writeError();
+    }
+  };
+
+  const handleReLoadWriteCode = () => {
+    if (cacheAICode) {
+      handleAskWrite(cacheAICode, 'reload');
+    } else {
+      message.error('未获取到AI智能编码结果');
     }
   };
 
   const handleAICodeChat = () => {
-    setShowModal(true);
+    aiChatmRef.current?.openModal();
   };
 
   const handleHideAIModal = () => {
-    setShowModal(false);
+    aiChatmRef.current?.handleHideModal();
   };
 
   return (
@@ -215,12 +263,13 @@ export default () => {
       <Spin spinning={loading} tip="正在编译中...">
         <Tabs
           items={tabs}
+          activeKey={activeTabKey}
           tabBarStyle={{ paddingLeft: 65, paddingRight: 30 }}
           onChange={handleTabChange}
           tabBarExtraContent={
             <Space size={20}>
-              <Button type="primary" onClick={handleAICodeChat}>
-                AI智能编码
+              <Button type="primary" onClick={handleAICodeChat} icon={<BulbOutlined />}>
+                AI助手
               </Button>
               <Button type="default" onClick={handleBack}>
                 返回
@@ -235,7 +284,7 @@ export default () => {
           }
         />
       </Spin>
-      <AIChatModal showModal={showModal} onHideModal={handleHideAIModal} onGenerateLoad={handleGenerate} />
+      <AIChatModal mRef={aiChatmRef} onGenerateLoad={handleGenerate} onReloadWrite={handleReLoadWriteCode} />
     </>
   );
 };

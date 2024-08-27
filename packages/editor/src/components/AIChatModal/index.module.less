@@ -34,7 +34,7 @@
     // position: absolute;
     // top: 20px;
     // right: 40px;
-    color: #000;
+    color: #9b9a9a;
     background-color: transparent;
     border: none;
     font-size: 40px;
@@ -46,33 +46,22 @@
       transform: rotate(90deg) scale(1.2);
     }
   }
-
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .marsailogo {
+    width: 35px;
+    height: 35px;
+    margin-top: 4px;
+    margin-right: 4px;
+  }
   span {
     font-size: 20px;
     font-weight: bold;
   }
 }
-
-// .modalContent::before {
-//   content: '';
-//   position: absolute;
-//   bottom: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 4px;
-//   background: linear-gradient(90deg, #ff7e79, #fdd835, #8bc34a, #2196f3, #ff7e79);
-//   background-size: 300% 100%;
-//   animation: scroll 2s linear infinite;
-// }
-
-// @keyframes scroll {
-//   0% {
-//     background-position: 0% 100%;
-//   }
-//   100% {
-//     background-position: 100% 100%;
-//   }
-// }
 
 .modalBody {
   margin-top: 10px;
@@ -89,6 +78,13 @@
   padding: 10px;
   border-radius: 5px;
   scrollbar-width: none;
+
+  .welcomeText {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 120px 0;
+  }
 }
 
 .chatItem {
@@ -188,7 +184,7 @@
   justify-content: flex-start;
   .chatExampleItem {
     border: 1px solid #e0e0e6;
-    padding: 0 10px;
+    padding: 5px 10px;
     border-radius: 8px;
     background-color: transparent;
     cursor: pointer;
@@ -216,6 +212,7 @@
   padding: 0;
   .chatOtherInfo {
     font-size: 20px;
+    color: #9b9a9a;
     margin-right: 5px;
     cursor: pointer;
     &:hover {
@@ -236,4 +233,10 @@
       border: 1.5px solid #7d33ff;
     }
   }
+}
+
+:global(.ant-popover) {
+  max-width: 200px;
+  text-align: justify;
+  word-break: break-all;
 }
