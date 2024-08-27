@@ -31,6 +31,25 @@ export default memo(
         refresh() {
           setRefreshTag(refreshTag + 1);
         },
+        // 打印流写入代码
+        async writeCode(newCode: string): Promise<boolean> {
+          return new Promise((resolve) => {
+            let index = 0;
+            const codeInterval = setInterval(() => {
+              setCode((prev) => prev + newCode[index++]);
+              if (index > newCode.length - 2) {
+                clearInterval(codeInterval);
+                setRefreshTag(refreshTag + 1);
+                resolve(true);
+              }
+            }, 30);
+          });
+        },
+        // 清空代码
+        async clearCode() {
+          setCode('');
+          setRefreshTag(refreshTag + 1);
+        },
       };
     });
 
