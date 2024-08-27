@@ -1,0 +1,242 @@
+.AIChatModal {
+  position: fixed;
+  bottom: 5%;
+  right: 30px;
+  min-height: 300px;
+  width: 450px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  background-color: #fff;
+}
+
+.showModal {
+  display: block;
+}
+
+.hideModal {
+  display: none;
+}
+
+.modalContent {
+  padding: 0 20px 20px 20px;
+  border-bottom: 4px solid transparent;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #7d33ff;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e6;
+  .closeButton {
+    // position: absolute;
+    // top: 20px;
+    // right: 40px;
+    color: #9b9a9a;
+    background-color: transparent;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 2001;
+    transition: transform 0.5s ease-in-out;
+
+    &:hover {
+      transform: rotate(90deg) scale(1.2);
+    }
+  }
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .marsailogo {
+    width: 35px;
+    height: 35px;
+    margin-top: 4px;
+    margin-right: 4px;
+  }
+  span {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.modalBody {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.chatContent {
+  width: 100%;
+  height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  border-radius: 5px;
+  scrollbar-width: none;
+
+  .welcomeText {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 120px 0;
+  }
+}
+
+.chatItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  .chatInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-left: 10px;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+    .chatName {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+  .chatText {
+    width: fix-content;
+    margin: 0 30px;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    line-height: 1.3;
+    text-align: justify;
+  }
+}
+
+.chatResponce {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px 0;
+  .chatInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+    .chatName {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  .chatText {
+    width: fix-content;
+    margin: 0 30px;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    line-height: 1.3;
+    text-align: justify;
+  }
+}
+
+.chatLoad {
+  display: flex;
+  margin-left: 30px;
+  align-items: center;
+
+  .chatText {
+    font-size: 12px;
+  }
+  .load {
+    font-size: 12px;
+    margin-left: 10px;
+  }
+}
+.chatExamples {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+  width: 100%;
+  margin-left: 50px;
+  justify-content: flex-start;
+  .chatExampleItem {
+    border: 1px solid #e0e0e6;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: transparent;
+    cursor: pointer;
+    span {
+      font-size: 12px;
+    }
+
+    // 增加一个收缩动画
+    &:hover {
+      border: 1px solid #7d33ff;
+      transition: all 0.5s;
+      transform: scale(1.1);
+      span {
+      }
+    }
+  }
+}
+
+.chatInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0;
+  .chatOtherInfo {
+    font-size: 20px;
+    color: #9b9a9a;
+    margin-right: 5px;
+    cursor: pointer;
+    &:hover {
+      color: #7d33ff;
+    }
+  }
+  input {
+    width: 330px;
+    height: 30px;
+    border: 1.5px solid #e0e0e6;
+    outline: none;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 14px;
+    margin-right: 10px;
+
+    &:focus {
+      border: 1.5px solid #7d33ff;
+    }
+  }
+}
+
+:global(.ant-popover) {
+  max-width: 200px;
+  text-align: justify;
+  word-break: break-all;
+}

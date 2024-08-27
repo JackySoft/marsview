@@ -2,6 +2,8 @@
  * API参数类型定义
  */
 
+import { message } from 'antd';
+
 export interface PageParams {
   keyword?: string;
   pageNum: number;
@@ -192,6 +194,12 @@ export namespace Role {
     project_id: number;
     checked: string;
     half_checked: string;
+  }
+}
+
+export namespace AIChat {
+  export interface AILibChatProps {
+    message: string;
   }
 }
 

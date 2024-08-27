@@ -2,6 +2,7 @@ import { defineConfig, PluginOption } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { VitePluginExternals } from 'vite-plugin-externals-new';
+import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -57,5 +58,6 @@ export default defineConfig({
           varName: 'axios',
         },
       }),
+    svgr({ svgrOptions: { icon: true } }),
   ],
 });
