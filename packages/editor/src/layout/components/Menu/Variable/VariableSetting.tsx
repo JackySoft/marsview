@@ -91,7 +91,7 @@ const VariableSetting = (_: any, ref: any) => {
             },
           ]}
         >
-          <Input placeholder="请输入变量名称，以字母开头，支持大小写、下划线" />
+          <Input placeholder="请输入变量名称，以字母开头，支持大小写、下划线" maxLength={20} showCount />
         </Form.Item>
         <Form.Item label="变量类型" name="type" rules={[{ required: true, message: '请选择变量类型' }]}>
           <Radio.Group buttonStyle="solid" onChange={(e) => handleChange(e.target.value)}>
@@ -121,7 +121,7 @@ const VariableSetting = (_: any, ref: any) => {
           )}
         </Form.Item>
         <Form.Item label="变量说明" name="remark">
-          <Input placeholder="请输入变量说明" />
+          <Input placeholder="请输入变量说明" maxLength={20} showCount />
         </Form.Item>
       </Form>
     </Modal>

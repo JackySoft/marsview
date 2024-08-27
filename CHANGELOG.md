@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/JackySoft/marsview/compare/v2.5.1...v2.6.0) (2024-08-26)
+
+
+### Features
+
+* 备注增加字数限制 ([c58bba2](https://github.com/JackySoft/marsview/commit/c58bba2cd6344a0210e5cab667cc4cd937687245))
+
+
+### Bug Fixes
+
+* 修复toolbar问题. ([19494a6](https://github.com/JackySoft/marsview/commit/19494a646575c75b53cdc19973219e426a0b66ea))
+
 ### [2.5.1](https://github.com/JackySoft/marsview/compare/v2.5.0...v2.5.1) (2024-08-25)
 
 

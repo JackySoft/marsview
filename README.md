@@ -100,7 +100,6 @@ git merge upstream/main
 
 - 2024-08-17: 项目[在线文档](http://docs.marsview.cc/)发布
 - 2024-08-13: 开源文章登上掘金论坛热榜第一
-  - 掘金[文章热榜](https://juejin.cn/hot/articles/)
 - 2024-08-10: 项目开源
   - 公告项目开源，发布开源文章：[我的低代码平台 Marsview 终于开源了](https://juejin.cn/post/7401009128204894244)
 - 2024-07-16: 项目首次在掘金论坛预告
