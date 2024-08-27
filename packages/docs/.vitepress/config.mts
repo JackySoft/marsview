@@ -17,6 +17,7 @@ export default defineConfig({
       { text: '项目', link: '/project' },
       { text: '页面', link: '/page' },
       { text: '组件', link: '/lib' },
+      { text: '综合案例', link: '/example' },
       { text: '团队', link: '/team' },
     ],
 
@@ -54,6 +55,10 @@ export default defineConfig({
           { text: '组件介绍', link: '/lib' },
           { text: '自定义组件案例', link: '/lib/LoginForm' },
         ],
+      },
+      {
+        text: '综合案例',
+        items: [{ text: '登录事件流', link: '/example/login' }],
       },
       {
         text: '团队介绍',

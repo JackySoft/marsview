@@ -131,7 +131,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
                 const type = form.getFieldValue('type');
                 return type === 1 ? (
                   <Form.Item label="菜单名称" name="name" rules={[{ required: true, message: '请输入菜单名称' }]}>
-                    <Input placeholder="请输入菜单名称" allowClear />
+                    <Input placeholder="请输入菜单名称" allowClear maxLength={15} showCount />
                   </Form.Item>
                 ) : type === 2 ? (
                   <Form.Item label="按钮名称" name="name" rules={[{ required: true, message: '请输入按钮名称' }]}>

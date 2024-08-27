@@ -72,9 +72,15 @@
       background-color: @primary-color;
       color: #fff;
       pointer-events: auto;
-      &.first {
+      min-width: 144px;
+      &.bottomRight {
         top: auto;
         bottom: -25px;
+      }
+      &.bottomLeft {
+        left: -1px;
+        top: auto;
+        bottom: -24px;
       }
     }
   }

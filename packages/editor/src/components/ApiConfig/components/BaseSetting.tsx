@@ -1,6 +1,6 @@
 import VariableBind from '@/components/VariableBind/VariableBind';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Form, Radio, Input, Switch, Space } from 'antd';
+import { Form, Radio, Input, Switch, Space, Popover } from 'antd';
 
 const SettingForm = function () {
   return (
@@ -17,7 +17,7 @@ const SettingForm = function () {
           },
         ]}
       >
-        <Input placeholder="请输入接口中文名称，eg: 用户列表" />
+        <Input placeholder="请输入接口中文名称，eg: 用户列表" maxLength={20} showCount />
       </Form.Item>
       <Form.Item label="请求方式" name="method">
         <Radio.Group buttonStyle="solid">
@@ -103,16 +103,26 @@ const SettingForm = function () {
       {/* <Form.Item name="sendOn" extra={'用表达式来设置该请求的发送条件'} label="发送条件">
         <Input />
       </Form.Item> */}
-      <Form.Item label="参数替换" extra={'默认会把事件流参数和当前参数合并；保留参数为只取当前参数，参数支持模板语法：${id}。'} name="replaceData">
+      <Form.Item
+        label="参数替换"
+        name="replaceData"
+        tooltip={
+          <>
+            <p>1. 默认会把事件流参数和自定义参数合并；</p>
+            <p>2. 覆盖参数是事件流中上下文的参数覆盖自定义参数；</p>
+            <p>3. 保留参数为只取自定义参数，参数支持模板语法：{'${id}'}。</p>
+          </>
+        }
+      >
         <Radio.Group buttonStyle="solid">
           <Radio.Button value="merge">合并参数</Radio.Button>
           <Radio.Button value="cover">覆盖参数</Radio.Button>
           <Radio.Button value="reserve">保留参数</Radio.Button>
         </Radio.Group>
       </Form.Item>
-      <Form.Item label="开启代理" name="isCors" extra="开启接口代理对解决跨域问题很有用">
+      {/* <Form.Item label="开启代理" name="isCors" extra="开启接口代理对解决跨域问题很有用">
         <Switch />
-      </Form.Item>
+      </Form.Item> */}
     </>
   );
 };
