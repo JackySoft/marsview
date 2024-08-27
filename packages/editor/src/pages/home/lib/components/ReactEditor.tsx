@@ -11,6 +11,7 @@ import { useKeyPress } from 'ahooks';
 import ComPreview from './ComPreview';
 import 'allotment/dist/style.css';
 import './index.less';
+import { Modal } from '@/utils/AntdGlobal';
 
 /**
  * 组件代码编辑
@@ -50,7 +51,7 @@ export default forwardRef((_: any, ref: any) => {
     initCode();
   }, []);
 
-  // 对外提供获取源码方法
+  // 对外提供控制方法
   useImperativeHandle(ref, () => {
     return {
       // 源码
@@ -63,6 +64,29 @@ export default forwardRef((_: any, ref: any) => {
       },
       refresh() {
         setRefreshTag(refreshTag + 1);
+      },
+      // 打印流写入代码
+      async writeCode(newCode: string): Promise<boolean> {
+        return new Promise((resolve) => {
+          let index = 0;
+          const codeInterval = setInterval(() => {
+            setCode((prev) => prev + newCode[index++]);
+            if (index > newCode.length - 2) {
+              clearInterval(codeInterval);
+              setRefreshTag(refreshTag + 1);
+              resolve(true);
+            }
+          }, 30);
+        });
+      },
+      // 清空代码
+      async clearCode() {
+        setCode('');
+        setRefreshTag(refreshTag + 1);
+      },
+      // 取消加载
+      async cancelLoading() {
+        setLoading(false);
       },
     };
   });
