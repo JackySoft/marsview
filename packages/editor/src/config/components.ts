@@ -69,6 +69,16 @@ const components = [
       },
       {
         icon: '',
+        name: '密码框',
+        type: 'InputPassword',
+      },
+      {
+        icon: '',
+        name: '一次性密码框',
+        type: 'InputOTP',
+      },
+      {
+        icon: '',
         name: '下拉框',
         type: 'Select',
       },
