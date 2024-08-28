@@ -46,15 +46,15 @@ export default defineConfig({
           varName: 'dayjs',
         },
         antd: {
-          src: 'https://cdn.staticfile.net/antd/5.13.2/antd.min.js',
+          src: 'https://marsview.cdn.bcebos.com/static/antd%405.20.3.min.js',
           varName: 'antd',
         },
         ahooks: {
-          src: 'https://marsview.cdn.bcebos.com/static/ahooks.js',
+          src: 'https://marsview.cdn.bcebos.com/static/ahooks%403.8.1.min.js',
           varName: 'ahooks',
         },
         axios: {
-          src: 'https://cdn.staticfile.net/axios/1.6.5/axios.min.js',
+          src: 'https://marsview.cdn.bcebos.com/static/axios%401.7.5.min.js',
           varName: 'axios',
         },
       }),
