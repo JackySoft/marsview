@@ -64,11 +64,17 @@ export const router = [
       },
       {
         path: '/editor/:id',
-        element: lazyLoad(React.lazy(() => import('@/layout/EditLayout'))),
+        element: lazyLoad(
+          React.lazy(() => import('@/layout/EditLayout')),
+          true,
+        ),
         children: [
           {
             path: '/editor/:id/edit',
-            element: lazyLoad(React.lazy(() => import('@/pages/editor/editor'))),
+            element: lazyLoad(
+              React.lazy(() => import('@/pages/editor/editor')),
+              true,
+            ),
           },
         ],
       },

@@ -15,7 +15,7 @@ import style from './index.module.less';
 export default () => {
   const [form] = Form.useForm();
   const [list, setList] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(0);
   const [current, setCurrent] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -101,7 +101,7 @@ export default () => {
 
   return (
     <div className={style.libWrap}>
-      {total > 0 ? (
+      {total > 0 || loading ? (
         <>
           <SearchBar form={form} from="组件" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
           <div className={style.libList}>
