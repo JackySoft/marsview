@@ -290,6 +290,11 @@ const components = [
         name: '标签页',
         type: 'Tabs',
       },
+      {
+        icon: '',
+        name: '抽屉',
+        type: 'Drawer',
+      },
     ],
   },
   {
