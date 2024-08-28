@@ -166,41 +166,42 @@ export default function Index() {
   return (
     <>
       <Layout.Content className={styles.project}>
-        <SearchBar form={form} from="项目" submit={handleSearch} refresh={getList} onCreate={() => navigate('/project/0/config')} />
-        <div className={styles.projectList}>
-          <Spin spinning={loading} size="large">
-            <Row gutter={[20, 20]}>
-              {projectList.map((item: Project.ProjectItem, index) => {
-                return (
-                  <Col span={6} key={item.id || index}>
-                    <CardItem item={item} isAuth={item.id ? true : false} />
-                  </Col>
-                );
-              })}
-            </Row>
-          </Spin>
-        </div>
-        <div className={styles.paginationContainer}>
-          {total > 0 ? (
+        {total > 0 ? (
+          <>
+            <SearchBar form={form} from="项目" submit={handleSearch} refresh={getList} onCreate={() => navigate('/project/0/config')} />
+            <div className={styles.projectList}>
+              <Spin spinning={loading} size="large">
+                <Row gutter={[20, 20]}>
+                  {projectList.map((item: Project.ProjectItem, index) => {
+                    return (
+                      <Col span={6} key={item.id || index}>
+                        <CardItem item={item} isAuth={item.id ? true : false} />
+                      </Col>
+                    );
+                  })}
+                </Row>
+              </Spin>
+            </div>
             <Pagination
               total={total}
               current={current}
               pageSize={pageSize}
+              showSizeChanger
               pageSizeOptions={['12', '16', '20', '50']}
               showTotal={(total) => `总共 ${total} 条`}
+              align="end"
               onChange={handleChange}
-              showSizeChanger
             />
-          ) : (
-            !loading && (
-              <Empty style={{ marginTop: 100 }}>
-                <Button type="dashed" icon={<PlusOutlined />} onClick={() => navigate('/project/0/config')}>
-                  新建项目
-                </Button>
-              </Empty>
-            )
-          )}
-        </div>
+          </>
+        ) : (
+          !loading && (
+            <Empty style={{ marginTop: 100 }}>
+              <Button type="dashed" icon={<PlusOutlined />} onClick={() => navigate('/project/0/config')}>
+                新建项目
+              </Button>
+            </Empty>
+          )
+        )}
       </Layout.Content>
     </>
   );
