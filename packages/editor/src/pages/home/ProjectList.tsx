@@ -19,7 +19,6 @@ export default function Index() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(true);
   const [projectList, setProjectList] = useState<Project.ProjectItem[]>([]);
-  const [projectId, setProjectId] = useState(-1);
   const [total, setTotal] = useState<number>(0);
   const [current, setCurrent] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(12);
@@ -166,7 +165,7 @@ export default function Index() {
   return (
     <>
       <Layout.Content className={styles.project}>
-        {total > 0 ? (
+        {total > 0 || loading ? (
           <>
             <SearchBar form={form} from="项目" submit={handleSearch} refresh={getList} onCreate={() => navigate('/project/0/config')} />
             <div className={styles.projectList}>
