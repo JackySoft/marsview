@@ -167,53 +167,52 @@ export default function Index() {
   return (
     <>
       <Layout.Content className={styles.pageList}>
-        <SearchBar form={form} from="页面" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
-        <div className={styles.pagesContent}>
-          <Spin spinning={loading} size="large">
-            <Row gutter={[20, 20]}>
-              {content.map((item: PageItem, index: number) => {
-                return (
-                  <Col span={6} key={item.id || index}>
-                    <SectionItem item={item} />
-                  </Col>
-                );
-              })}
-            </Row>
-          </Spin>
-          <Image
-            style={{ display: 'none' }}
-            preview={{
-              visible: showPreview,
-              src: previewUrl,
-              onVisibleChange: (value) => {
-                setShowPreview(value);
-              },
-            }}
-          />
-        </div>
-
-        <div className={styles.paginationContainer}>
-          {total > 0 ? (
+        {total > 0 ? (
+          <>
+            <SearchBar form={form} from="页面" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
+            <div className={styles.pagesContent}>
+              <Spin spinning={loading} size="large">
+                <Row gutter={[20, 20]}>
+                  {content.map((item: PageItem, index: number) => {
+                    return (
+                      <Col span={6} key={item.id || index}>
+                        <SectionItem item={item} />
+                      </Col>
+                    );
+                  })}
+                </Row>
+              </Spin>
+              <Image
+                style={{ display: 'none' }}
+                preview={{
+                  visible: showPreview,
+                  src: previewUrl,
+                  onVisibleChange: (value) => {
+                    setShowPreview(value);
+                  },
+                }}
+              />
+            </div>
             <Pagination
-              style={{ textAlign: 'right' }}
               total={total}
               current={current}
               showSizeChanger
               pageSize={pageSize}
               pageSizeOptions={['12', '16', '20', '50']}
               showTotal={(total) => `总共 ${total} 条`}
+              align="end"
               onChange={handleChange}
             />
-          ) : (
-            !loading && (
-              <Empty style={{ marginTop: 100 }}>
-                <Button type="dashed" icon={<PlusOutlined />} onClick={handleCreate}>
-                  创建页面
-                </Button>
-              </Empty>
-            )
-          )}
-        </div>
+          </>
+        ) : (
+          !loading && (
+            <Empty style={{ marginTop: 100 }}>
+              <Button type="dashed" icon={<PlusOutlined />} onClick={handleCreate}>
+                创建页面
+              </Button>
+            </Empty>
+          )
+        )}
         {/* 新建页面 */}
         <CreatePage title="创建页面" createRef={creatPageRef} update={() => getList(1, pageSize)} />
       </Layout.Content>

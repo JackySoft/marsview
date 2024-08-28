@@ -80,11 +80,12 @@ function Console() {
         </Spin>
         {total > 0 ? (
           <Pagination
-            style={{ textAlign: 'right', marginTop: 16 }}
+            style={{ marginTop: 16 }}
             total={total}
             current={current}
             pageSize={12}
             showTotal={(total) => `总共 ${total} 条`}
+            align="end"
             onChange={handleChange}
           />
         ) : (

@@ -1,4 +1,4 @@
-import { Button, Skeleton, Space, Pagination, Form } from 'antd';
+import { Button, Skeleton, Space, Pagination, Form, Empty } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { UserOutlined, CodeOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
@@ -101,24 +101,34 @@ export default () => {
 
   return (
     <div className={style.libWrap}>
-      <SearchBar form={form} from="组件" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
-      <div className={style.libList}>
-        <Skeleton loading={loading} active paragraph={{ rows: 3 }}>
-          {list.map((item) => (
-            <LibItem item={item} key={item.id} />
-          ))}
-        </Skeleton>
-      </div>
-      <div className={style.paginationContainer}>
-        <Pagination
-          total={total}
-          current={current}
-          pageSize={pageSize}
-          showTotal={(total) => `总共 ${total} 条`}
-          onChange={handleChange}
-          showSizeChanger
-        />
-      </div>
+      {total > 0 ? (
+        <>
+          <SearchBar form={form} from="组件" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
+          <div className={style.libList}>
+            <Skeleton loading={loading} active paragraph={{ rows: 3 }}>
+              {list.map((item) => (
+                <LibItem item={item} key={item.id} />
+              ))}
+            </Skeleton>
+          </div>
+          <Pagination
+            total={total}
+            current={current}
+            pageSize={pageSize}
+            showSizeChanger
+            showTotal={(total) => `总共 ${total} 条`}
+            align="end"
+            style={{ marginTop: 20 }}
+            onChange={handleChange}
+          />
+        </>
+      ) : (
+        <Empty style={{ marginTop: 100 }}>
+          <Button type="dashed" icon={<PlusOutlined />} onClick={handleCreate}>
+            新建组件
+          </Button>
+        </Empty>
+      )}
       <CreateLib createRef={createLibRef} update={() => getList(1, pageSize)} />
     </div>
   );
