@@ -280,9 +280,6 @@ function FlowNode(_: any, ref: any) {
     <>
       <InfiniteViewer
         className="node-viewer"
-        onPinch={(event) => {
-          console.log('pinch', event);
-        }}
         displayHorizontalScroll={false}
         useMouseDrag={true}
         useWheelScroll={true}

@@ -12,11 +12,18 @@ const AntDrawer = forwardRef(({ config, elements, onClose, onAfterOpenChange }: 
 
   useImperativeHandle(ref, () => {
     return {
-      show() {
-        setVisible(true);
+      // 关闭弹框
+      close: () => {
+        setVisible(() => false);
       },
-      hide() {
-        setVisible(false);
+      // 打开弹框
+      open: () => {
+        return new Promise((resolve) => {
+          setVisible(() => {
+            resolve(true);
+            return true;
+          });
+        });
       },
       // 显示确认Loading
       showLoading: () => {
@@ -51,23 +58,20 @@ const AntDrawer = forwardRef(({ config, elements, onClose, onAfterOpenChange }: 
       <Drawer
         {...config.props}
         open={visible}
-        getContainer={false}
         afterOpenChange={(open) => handleOpenChange(open)}
         onClose={handleClose}
         footer={config.props.footer ? undefined : null}
         style={{ ...config.style }}
-        zIndex={998}
         extra={
-          <div>
+          <div style={{ display: 'flex', gap: 10 }}>
             {bulkActionList.map((item: any, index: number) => {
               return (
                 <AuthButton
+                  key={item.eventName}
                   type={item.type}
                   danger={item.danger}
                   icon={item.icon ? React.createElement(iconsList[item.icon]) : null}
                   onClick={() => handleOperate(item.eventName)}
-                  key={item.eventName}
-                  style={{ marginRight: 8 }}
                   authCode={item.authCode}
                   authScript={item.authScript}
                 >
