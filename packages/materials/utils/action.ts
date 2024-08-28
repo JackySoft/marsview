@@ -173,6 +173,10 @@ const execAction = (node: any, params: any = {}) => {
       handleOpenModal(node, data, 'open');
     } else if (node.action.actionType === 'closeModal') {
       handleOpenModal(node, data, 'close');
+    } else if (node.action.actionType === 'openDrawer') {
+      handleOpenDrawer(node, data, 'open');
+    } else if (node.action.actionType === 'closeDrawer') {
+      handleOpenDrawer(node, data, 'close');
     } else if (node.action.actionType === 'jumpLink') {
       handleJumpLink(node, data);
     } else if (node.action.actionType === 'reloadPage') {
@@ -273,6 +277,16 @@ async function handleOpenModal({ action, next }: ActionNode<MethodsAction>, data
   const ref = getComponentRef(action.target);
   if (type === 'close') ref.close({ ...data });
   if (type === 'open') await ref.open({ ...data });
+  execAction(next, data);
+}
+
+/**
+ * 打开/关闭抽屉
+ */
+async function handleOpenDrawer({ action, next }: ActionNode<MethodsAction>, data: any = {}, type: 'open' | 'close') {
+  const ref = getComponentRef(action.target);
+  if (type === 'close') ref.hide({ ...data });
+  if (type === 'open') await ref.show({ ...data });
   execAction(next, data);
 }
 
