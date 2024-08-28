@@ -414,11 +414,11 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
               {bulkActionList?.map((item) => {
                 return (
                   <Button
+                    key={item.eventName}
                     type={item.type}
                     danger={item.danger}
                     icon={item.icon ? React.createElement(iconsList[item.icon]) : null}
                     onClick={() => handleOperate(item.eventName)}
-                    key={item.eventName}
                   >
                     {item.text}
                   </Button>

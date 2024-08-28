@@ -14,7 +14,6 @@ const OpenDrawerAction = () => {
         });
       }
     });
-    console.log(drawers);
     return {
       drawers,
     };

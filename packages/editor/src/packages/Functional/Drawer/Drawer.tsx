@@ -37,11 +37,18 @@ const AntDrawer = forwardRef(({ id, type, config, elements, onClose, onAfterOpen
 
   useImperativeHandle(ref, () => {
     return {
-      show() {
-        setVisible(true);
-      },
-      hide() {
+      // 关闭弹框
+      close: () => {
         setVisible(false);
+      },
+      // 打开弹框
+      open: () => {
+        return new Promise((resolve) => {
+          setVisible(() => {
+            resolve(true);
+            return true;
+          });
+        });
       },
       // 显示确认Loading
       showLoading: () => {
@@ -78,26 +85,25 @@ const AntDrawer = forwardRef(({ id, type, config, elements, onClose, onAfterOpen
       </div>
       <Drawer
         {...config.props}
+        data-id={id}
         data-type={type}
         open={visible}
+        footer={config.props.footer ? undefined : null}
         getContainer={false}
         afterOpenChange={(open) => handleOpenChange(open)}
         onClose={handleClose}
-        data-id={id}
-        footer={config.props.footer ? undefined : null}
         style={{ ...config.style }}
         zIndex={998}
         extra={
-          <div>
+          <div style={{ display: 'flex', gap: 10 }}>
             {bulkActionList.map((item: any, index: number) => {
               return (
                 <Button
+                  key={item.eventName}
                   type={item.type}
                   danger={item.danger}
                   icon={item.icon ? React.createElement(iconsList[item.icon]) : null}
                   onClick={() => handleOperate(item.eventName)}
-                  key={item.eventName}
-                  style={{ marginRight: 8 }}
                 >
                   {item.text}
                 </Button>
