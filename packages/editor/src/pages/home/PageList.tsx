@@ -167,7 +167,7 @@ export default function Index() {
   return (
     <>
       <Layout.Content className={styles.pageList}>
-        {total > 0 ? (
+        {total > 0 || loading ? (
           <>
             <SearchBar form={form} from="页面" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
             <div className={styles.pagesContent}>
