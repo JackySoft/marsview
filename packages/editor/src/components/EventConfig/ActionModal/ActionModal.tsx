@@ -25,6 +25,7 @@ import RunScriptAction from './RunScriptAction';
 import SendParams from './SendParams';
 // 样式
 import styles from './index.module.less';
+import OpenDrawerAction from './OpenDrawerAction';
 
 const ActionModal = (props: any, ref: any) => {
   const [visible, setVisible] = useState(false);
@@ -65,6 +66,16 @@ const ActionModal = (props: any, ref: any) => {
           label: '关闭弹框',
           key: 'closeModal',
           render: () => <OpenModalAction />,
+        },
+        {
+          label: '打开抽屉',
+          key: 'openDrawer',
+          render: () => <OpenDrawerAction />,
+        },
+        {
+          label: '关闭抽屉',
+          key: 'closeDrawer',
+          render: () => <OpenDrawerAction />,
         },
         {
           label: '确认框',
@@ -273,7 +284,7 @@ const ActionModal = (props: any, ref: any) => {
 * 事件参数: eventParams
 */
 function run(){
-    
+
 }
 `,
       });
