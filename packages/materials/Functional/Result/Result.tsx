@@ -49,30 +49,28 @@ const MResult = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
 
   return (
     visible && (
-      <div data-id={id} data-type={type}>
-        <Result
-          style={config.style}
-          {...config.props}
-          icon={config.props.icon ? React.createElement(iconsList[config.props.icon as string]) : undefined}
-          extra={
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10 }}>
-              {bulkActionList.map((item: any, index: number) => {
-                return (
-                  <Button
-                    key={item.eventName}
-                    type={item.type}
-                    danger={item.danger}
-                    icon={item.icon ? React.createElement(iconsList[item.icon]) : null}
-                    onClick={() => handleOperate(item.eventName)}
-                  >
-                    {item.text}
-                  </Button>
-                );
-              })}
-            </div>
-          }
-        ></Result>
-      </div>
+      <Result
+        style={config.style}
+        {...config.props}
+        icon={config.props.icon ? React.createElement(iconsList[config.props.icon as string]) : undefined}
+        extra={
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10 }}>
+            {bulkActionList.map((item: any, index: number) => {
+              return (
+                <Button
+                  key={item.eventName}
+                  type={item.type}
+                  danger={item.danger}
+                  icon={item.icon ? React.createElement(iconsList[item.icon]) : null}
+                  onClick={() => handleOperate(item.eventName)}
+                >
+                  {item.text}
+                </Button>
+              );
+            })}
+          </div>
+        }
+      ></Result>
     )
   );
 };
