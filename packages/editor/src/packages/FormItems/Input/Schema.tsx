@@ -72,6 +72,16 @@ export default {
       },
     },
     {
+      type: 'Switch',
+      label: '允许清除',
+      name: ['formWrap', 'allowClear'],
+    },
+    {
+      type: 'Switch',
+      label: '显示字数',
+      name: ['formWrap', 'showCount'],
+    },
+    {
       type: 'InputNumber',
       label: '最大长度',
       name: ['formWrap', 'maxLength'],
@@ -81,18 +91,40 @@ export default {
     },
     {
       type: 'Switch',
-      label: '显示删除',
-      name: ['formWrap', 'allowClear'],
-    },
-    {
-      type: 'Switch',
-      label: '显示字数',
-      name: ['formWrap', 'showCount'],
-    },
-    {
-      type: 'Switch',
       label: '是否禁用',
       name: ['formWrap', 'disabled'],
+    },
+    {
+      type: 'Input',
+      label: '前置标签',
+      name: ['formWrap', 'addonBefore'],
+      props: {
+        placeholder: 'eg: http://',
+      },
+    },
+    {
+      type: 'Input',
+      label: '后置标签',
+      name: ['formWrap', 'addonAfter'],
+      props: {
+        placeholder: 'eg: .com',
+      },
+    },
+    {
+      type: 'Icons',
+      label: '前缀',
+      name: ['formWrap', 'prefixIcons'],
+      props: {
+        placeholder: '请选择图标',
+      },
+    },
+    {
+      type: 'Icons',
+      label: '后缀',
+      name: ['formWrap', 'suffixIcons'],
+      props: {
+        placeholder: '请选择图标',
+      },
     },
     {
       type: 'Select',
@@ -176,11 +208,15 @@ export default {
   events: [
     {
       value: 'onChange',
-      name: 'onChange事件',
+      name: '输入事件',
     },
     {
       value: 'onBlur',
-      name: 'onBlur事件',
+      name: '失焦事件',
+    },
+    {
+      value: 'onPressEnter',
+      name: '回车事件',
     },
   ],
 };

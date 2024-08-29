@@ -1,11 +1,13 @@
+import React, { memo } from 'react';
+import { Form, Input, InputNumber, Radio, Select, Switch, Slider, FormInstance } from 'antd';
+import * as icons from '@ant-design/icons';
 import { SchemaType } from '@/packages/types';
 import { CaretDownOutlined } from '@ant-design/icons/lib';
-import { Form, Input, InputNumber, Radio, Select, Switch, Slider, FormInstance } from 'antd';
-import { memo } from 'react';
 import MColorPicker from '../ColorPicker';
 import VariableBindInput from '../VariableBind/VariableBind';
-import styles from './index.module.less';
 import InputSelect from '../InputSelect/InputSelect';
+import styles from './index.module.less';
+
 // 如果没有设置label，则独占一行
 const formLayoutFull = {
   labelCol: { span: 0 },
@@ -62,6 +64,27 @@ const SetterRender = memo(({ attrs, form }: IAttrs) => {
           FormControl = <VariableBindInput {...item.props} />;
         } else if (item.type === 'function') {
           return item.render?.(form);
+        } else if (item.type === 'Icons') {
+          // 获取所有的antd图标，动态渲染到下拉框中
+          const iconsList: { [key: string]: any } = icons;
+          FormControl = (
+            <Select placeholder="请选择菜单图表" showSearch allowClear>
+              {Object.keys(icons)
+                .filter((item) => !['default', 'createFromIconfontCN', 'getTwoToneColor', 'setTwoToneColor', 'IconProvider'].includes(item))
+                .map((key) => {
+                  return (
+                    <Select.Option value={key} key={key}>
+                      {React.createElement(iconsList[key], {
+                        style: {
+                          fontSize: '18px',
+                          verticalAlign: 'middle',
+                        },
+                      })}
+                    </Select.Option>
+                  );
+                })}
+            </Select>
+          );
         }
         return (
           <Form.Item key={key} name={item.name} label={item.label} tooltip={item.tooltip} {...(item.label ? null : formLayoutFull)}>

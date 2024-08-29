@@ -1,5 +1,6 @@
+import React, { forwardRef, useContext, useEffect, useImperativeHandle, useState } from 'react';
 import { Form, Input, InputProps, FormItemProps } from 'antd';
-import { forwardRef, useContext, useEffect, useImperativeHandle, useState } from 'react';
+import * as icons from '@ant-design/icons';
 import { ComponentType } from '@/packages/types';
 import { isNull } from '@/packages/utils/util';
 import { FormContext } from '@/packages/utils/context';
@@ -8,7 +9,7 @@ import { FormContext } from '@/packages/utils/context';
 export interface IConfig {
   defaultValue: string;
   formItem: FormItemProps;
-  formWrap: InputProps;
+  formWrap: InputProps & { prefixIcons?: string; suffixIcons?: string };
 }
 /**
  *
@@ -16,7 +17,7 @@ export interface IConfig {
  * @param props 系统属性值：componentid、componentname等
  * @returns 返回组件
  */
-const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, ref: any) => {
+const MInput = ({ id, type, config, onChange, onBlur, onPressEnter }: ComponentType<IConfig>, ref: any) => {
   const form = useContext(FormContext);
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState(false);
@@ -35,13 +36,22 @@ const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, 
     setDisabled(config.props.formWrap.disabled || false);
   }, [config.props.formWrap.disabled]);
 
+  // 输入事件
   const handleChange = (val: string) => {
     onChange?.({
       [config.props.formItem.name]: val,
     });
   };
+
+  // 失去焦点事件
   const handleBlur = (val: string) => {
     onBlur?.({
+      [config.props.formItem.name]: val,
+    });
+  };
+  // 回车事件
+  const handlePressEnter = (val: string) => {
+    onPressEnter?.({
       [config.props.formItem.name]: val,
     });
   };
@@ -61,6 +71,7 @@ const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, 
       },
     };
   });
+  const iconsList: { [key: string]: any } = icons;
   return (
     visible && (
       <Form.Item {...config.props.formItem} data-id={id} data-type={type}>
@@ -69,8 +80,11 @@ const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, 
           disabled={disabled}
           variant={config.props.formWrap.variant || undefined}
           style={config.style}
+          prefix={config.props.formWrap.prefixIcons ? React.createElement(iconsList[config.props.formWrap.prefixIcons]) : null}
+          suffix={config.props.formWrap.suffixIcons ? React.createElement(iconsList[config.props.formWrap.suffixIcons]) : null}
           onChange={(event) => handleChange(event.target.value)}
           onBlur={(event) => handleBlur(event.target.value)}
+          onPressEnter={(event: any) => handlePressEnter(event.target.value)}
         />
       </Form.Item>
     )

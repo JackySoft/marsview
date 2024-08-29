@@ -272,6 +272,7 @@ export enum FormType {
   function = 'function',
   Slider = 'Slider',
   Variable = 'Variable',
+  Icons = 'Icons',
 }
 
 /**
