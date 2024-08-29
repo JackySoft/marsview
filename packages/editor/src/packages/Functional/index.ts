@@ -8,3 +8,4 @@ export { FileUpload, FileUploadConfig } from './FileUpload';
 export { Tabs, TabsConfig } from './Tabs';
 export { Tab, TabConfig } from './Tab';
 export { Drawer, DrawerConfig } from './Drawer';
+export { Result, ResultConfig } from './Result';

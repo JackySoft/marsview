@@ -295,6 +295,11 @@ const components = [
         name: '抽屉',
         type: 'Drawer',
       },
+      {
+        icon: '',
+        name: '结果页',
+        type: 'Result',
+      },
     ],
   },
   {
