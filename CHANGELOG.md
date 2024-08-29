@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.14.0](https://github.com/JackySoft/marsview/compare/v2.13.0...v2.14.0) (2024-08-29)
+
+
+### Features
+
+* 1.Input组件增加属性。2.配置增加图标类型。 ([655f2e6](https://github.com/JackySoft/marsview/commit/655f2e6499380fe4cd4690d6b812ed5bc2b72ec9))
+* 增加 Result 组件 ([1b3082e](https://github.com/JackySoft/marsview/commit/1b3082e7d200bf9f740850ebc4c086e70cd5246b))
+* Result 组件代码优化 ([1fa674e](https://github.com/JackySoft/marsview/commit/1fa674e8b0d999b4a87ff606a12e8f238653d636))
+
 ## [2.13.0](https://github.com/JackySoft/marsview/compare/v2.12.0...v2.13.0) (2024-08-28)
 
 
