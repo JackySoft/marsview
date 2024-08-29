@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { FormProps } from 'antd';
-import { Button, Form, Input, InputNumber, Space } from 'antd';
+import { Button, Flex, Form, Input, InputNumber, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { login, sendEmail, regist } from '@/api/user';
 import storage from '@/utils/storage';
@@ -111,14 +111,14 @@ export default function Login() {
 
             {type === 'regist' && (
               <Form.Item>
-                <Space>
+                <Flex gap={20}>
                   <Form.Item<FieldType> name="code" noStyle rules={[{ required: true, message: '请输入验证码' }]}>
                     <InputNumber prefix={<SafetyOutlined />} style={{ width: '100%' }} placeholder="验证码" />
                   </Form.Item>
                   <Button type="primary" onClick={handleCreateCode} disabled={count > 0} loading={loading1}>
                     {count > 0 ? count + 's' : '获取验证码'}
                   </Button>
-                </Space>
+                </Flex>
               </Form.Item>
             )}
 
