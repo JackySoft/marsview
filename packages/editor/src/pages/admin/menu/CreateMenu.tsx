@@ -192,18 +192,14 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
                       }
                       name="page_id"
                     >
-                      <Select placeholder="请选择关联页面" allowClear>
-                        <Select.Option value={0} key="empty">
-                          空页面
-                        </Select.Option>
-                        {pageList.map((item) => {
-                          return (
-                            <Select.Option value={item.id} key={item.id}>
-                              {item.name}
-                            </Select.Option>
-                          );
-                        })}
-                      </Select>
+                      <Select
+                        placeholder="请选择关联页面"
+                        allowClear
+                        showSearch
+                        filterOption={(input, option) => (option?.name ?? '').toLowerCase().includes(input.toLowerCase())}
+                        options={[...pageList, { name: '空页面', id: 0 }]}
+                        fieldNames={{ label: 'name', value: 'id' }}
+                      ></Select>
                     </Form.Item>
                   </>
                 );
