@@ -13,16 +13,16 @@ export default {
       key: 'basic',
     },
     {
-      type: 'Input',
-      label: 'title 文字',
+      type: 'Variable',
+      label: '标题',
       name: ['title'],
       props: {
         placeholder: '请输入 title 文字',
       },
     },
     {
-      type: 'Input',
-      label: 'subTitle 文字',
+      type: 'Variable',
+      label: '子标题',
       name: ['subTitle'],
       props: {
         placeholder: '请输入 subTitle 文字',
@@ -46,7 +46,7 @@ export default {
     },
     {
       type: 'Icons',
-      label: '自定义 icon',
+      label: '自定义图标',
       name: ['icon'],
       props: {
         placeholder: '请选择图标',
