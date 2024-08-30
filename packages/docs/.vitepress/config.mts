@@ -58,7 +58,10 @@ export default defineConfig({
       },
       {
         text: '综合案例',
-        items: [{ text: '登录事件流', link: '/example/login' }],
+        items: [
+          { text: '案例介绍', link: '/example/' },
+          { text: '登录事件流', link: '/example/login' },
+        ],
       },
       {
         text: '团队介绍',
