@@ -33,15 +33,15 @@ export default defineConfig({
     process.env.NODE_ENV === 'production' &&
       VitePluginExternals({
         react: {
-          src: 'https://cdn.staticfile.net/react/18.2.0/umd/react.production.min.js',
+          src: 'https://marsview.cdn.bcebos.com/static/react%4018.3.1.production.min.js',
           varName: 'React',
         },
         'react-dom': {
-          src: 'https://cdn.staticfile.net/react-dom/18.2.0/umd/react-dom.production.min.js',
+          src: 'https://marsview.cdn.bcebos.com/static/react-dom%4018.3.1.production.min.js',
           varName: 'ReactDOM',
         },
         dayjs: {
-          src: 'https://cdn.staticfile.net/dayjs/1.11.10/dayjs.min.js',
+          src: 'https://marsview.cdn.bcebos.com/static/dayjs%401.11.13.min.js',
           varName: 'dayjs',
         },
         antd: {
