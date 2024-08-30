@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.17.0](https://github.com/JackySoft/marsview/compare/v2.16.0...v2.17.0) (2024-08-30)
+
+
+### Others
+
+* 修改cdn地址 ([db62826](https://github.com/JackySoft/marsview/commit/db628268c5cc4e94eed538070c82426168aac214))
+
 ## [2.16.0](https://github.com/JackySoft/marsview/compare/v2.15.0...v2.16.0) (2024-08-30)
 
 
