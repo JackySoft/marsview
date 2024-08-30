@@ -24,12 +24,12 @@ export default defineConfig({
     sidebar: [
       {
         text: '登录',
-        items: [{ text: '账号登录', link: '/login' }],
+        items: [{ text: '账号登录', link: '/login/' }],
       },
       {
         text: '项目',
         items: [
-          { text: '项目介绍', link: '/project' },
+          { text: '项目介绍', link: '/project/' },
           { text: '菜单介绍', link: '/project/menu' },
           { text: '角色介绍', link: '/project/role' },
           { text: '用户介绍', link: '/project/user' },
@@ -39,7 +39,7 @@ export default defineConfig({
       {
         text: '页面',
         items: [
-          { text: '页面介绍', link: '/page' },
+          { text: '页面介绍', link: '/page/' },
           { text: '左侧菜单', link: '/page/sideNav' },
           { text: '组件拖拽', link: '/page/drag' },
           { text: '组件大纲', link: '/page/outline' },
@@ -52,7 +52,7 @@ export default defineConfig({
       {
         text: '组件',
         items: [
-          { text: '组件介绍', link: '/lib' },
+          { text: '组件介绍', link: '/lib/' },
           { text: '自定义组件案例', link: '/lib/LoginForm' },
         ],
       },
