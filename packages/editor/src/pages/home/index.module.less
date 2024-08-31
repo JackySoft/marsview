@@ -1,5 +1,7 @@
-.pageList {
-  padding: 30px 20px 15px;
+.project,
+.pageList,
+.libWrap {
+  padding: 30px 20px;
   height: calc(100vh - 64px);
   overflow: auto;
   display: flex;
@@ -61,11 +63,6 @@
   }
 }
 .project {
-  padding: 30px 20px 15px;
-  height: calc(100vh - 64px);
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
   :global {
     .ant-card-body {
       padding-inline: 12px;
@@ -88,23 +85,34 @@
   .projectList {
     flex: 1;
   }
-  .paginationContainer {
-    align-self: flex-end;
-    padding: 20px 0;
-    bottom: 16px;
-    right: 16px;
-    width: 100%; /* 使分页栏与内容对齐 */
-    text-align: right;
+  .projectCard {
+    &:hover {
+      .delIcon {
+        visibility: visible;
+        color: red;
+      }
+    }
+  }
+  :global {
+    .unlock {
+      display: none;
+    }
+    .lock {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+  }
+  .delIcon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    visibility: hidden;
+    transition: all 0.3s;
   }
 }
 // 组件库
 .libWrap {
-  padding: 30px 20px 15px;
-  height: calc(100vh - 64px);
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-
   .search {
     text-align: center;
     margin-top: 30px;
@@ -129,13 +137,5 @@
   }
   .libList {
     flex: 1;
-  }
-  .paginationContainer {
-    align-self: flex-end;
-    padding: 20px 0;
-    bottom: 16px;
-    right: 16px;
-    width: 100%; /* 使分页栏与内容对齐 */
-    text-align: right;
   }
 }

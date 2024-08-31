@@ -167,9 +167,9 @@ export default function Index() {
   return (
     <>
       <Layout.Content className={styles.pageList}>
+        <SearchBar form={form} from="页面" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
         {total > 0 || loading ? (
           <>
-            <SearchBar form={form} from="页面" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
             <div className={styles.pagesContent}>
               <Spin spinning={loading} size="large">
                 <Row gutter={[20, 20]}>
