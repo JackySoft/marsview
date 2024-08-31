@@ -120,9 +120,9 @@ const SettingForm = function () {
           <Radio.Button value="reserve">保留参数</Radio.Button>
         </Radio.Group>
       </Form.Item>
-      {/* <Form.Item label="开启代理" name="isCors" extra="开启接口代理对解决跨域问题很有用">
+      <Form.Item label="开启代理" name="isCors" extra="开启接口代理对解决跨域问题很有用">
         <Switch />
-      </Form.Item> */}
+      </Form.Item>
     </>
   );
 };
