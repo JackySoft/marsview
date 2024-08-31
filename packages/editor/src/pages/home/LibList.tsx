@@ -101,9 +101,9 @@ export default () => {
 
   return (
     <div className={style.libWrap}>
+      <SearchBar form={form} from="组件" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
       {total > 0 || loading ? (
         <>
-          <SearchBar form={form} from="组件" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
           <div className={style.libList}>
             <Skeleton loading={loading} active paragraph={{ rows: 3 }}>
               {list.map((item) => (

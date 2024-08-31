@@ -1,7 +1,6 @@
-import { Card, Col, Dropdown, Layout, Row, Pagination, Spin, Empty, Button, Form } from 'antd';
-import { useEffect, useMemo, useState } from 'react';
-import type { MenuProps } from 'antd';
-import { UserOutlined, DeleteOutlined, LinkOutlined, LockOutlined, PlusOutlined } from '@ant-design/icons';
+import { Card, Col, Layout, Row, Pagination, Spin, Empty, Button, Form } from 'antd';
+import { useEffect, useState } from 'react';
+import { UserOutlined, DeleteOutlined, LockOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { getProjectList, delProject } from '@/api';
@@ -48,11 +47,8 @@ export default function Index() {
   };
 
   // 删除项目确认
-  const deleteProjectConfirm = (id: number, isAuth: boolean) => {
-    if (!isAuth) {
-      message.warning('该项目未授权，无法删除');
-      return false;
-    }
+  const deleteProjectConfirm = (event: React.MouseEvent, id: number) => {
+    event.stopPropagation();
     Modal.confirm({
       title: '确认',
       content: '确认删除该项目吗？',
@@ -66,36 +62,6 @@ export default function Index() {
     });
   };
 
-  // 访问地址
-  const getItems: (projectId: number) => MenuProps['items'] = (projectId: number) => {
-    return [
-      {
-        key: 'stg',
-        label: (
-          <a href={`${import.meta.env.VITE_ADMIN_URL}/project/stg/${projectId}`} target="_blank">
-            STG
-          </a>
-        ),
-      },
-      {
-        key: 'pre',
-        label: (
-          <a href={`${import.meta.env.VITE_ADMIN_URL}/project/pre/${projectId}`} target="_blank">
-            PRE
-          </a>
-        ),
-      },
-      {
-        key: 'prod',
-        label: (
-          <a href={`${import.meta.env.VITE_ADMIN_URL}/project/prd/${projectId}`} target="_blank">
-            PRD
-          </a>
-        ),
-      },
-    ];
-  };
-
   // 切换页码和每页条数回调
   const handleChange = (_current: number, size: number) => {
     setCurrent(_current);
@@ -103,9 +69,13 @@ export default function Index() {
   };
 
   // 页面操作
-  const handleAction = async (id: number, isAuth: boolean) => {
-    if (!isAuth) {
-      message.warning('该项目未授权，无法访问');
+  const handleAction = async (id: number, isEdit: boolean) => {
+    if (!id) {
+      message.warning('该项目为私有项目');
+      return false;
+    }
+    if (!isEdit) {
+      message.warning('您不是该项目开发者，无权限操作');
       return false;
     }
     navigate(`/project/${id}/config`);
@@ -127,32 +97,48 @@ export default function Index() {
           background: isAuth ? 'none' : "url('/imgs/cross-bg.png')",
         }}
         actions={[
-          <Dropdown key="link" menu={{ items: isAuth ? getItems(item.id) : [] }} trigger={['click']}>
-            <div>
-              <LinkOutlined />
-              <span className={styles.gabLeft}>访问地址</span>
-            </div>
-          </Dropdown>,
-          <div onClick={() => deleteProjectConfirm(item.id, isAuth)}>
-            <DeleteOutlined />
-            <span className={styles.gabLeft}>删除项目</span>
-          </div>,
+          item.id ? (
+            <a href={`${import.meta.env.VITE_ADMIN_URL}/project/stg/${item.id}`} target="_blank">
+              STG
+            </a>
+          ) : (
+            <span style={{ cursor: 'not-allowed' }}>STG</span>
+          ),
+          item.id ? (
+            <a href={`${import.meta.env.VITE_ADMIN_URL}/project/pre/${item.id}`} target="_blank">
+              PRE
+            </a>
+          ) : (
+            <span style={{ cursor: 'not-allowed' }}>PRE</span>
+          ),
+          item.id ? (
+            <a href={`${import.meta.env.VITE_ADMIN_URL}/project/prd/${item.id}`} target="_blank">
+              PRD
+            </a>
+          ) : (
+            <span style={{ cursor: 'not-allowed' }}>PRD</span>
+          ),
         ]}
       >
-        <div onClick={() => handleAction(item.id, isAuth)}>
+        <div className={styles.projectCard} onClick={() => handleAction(item.id, item.is_edit)}>
           <Card.Meta
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: isAuth ? 'pointer' : 'not-allowed' }}
             avatar={<img src={item.logo} style={{ width: 32 }} />}
             title={item.name}
             description={
               <>
-                <div style={{ position: 'absolute', top: 15, right: 15 }}>{isAuth ? null : <LockOutlined />}</div>
+                <div className={isAuth ? 'unlock' : 'lock'}>
+                  <LockOutlined />
+                </div>
+                {item.id && item.is_edit ? (
+                  <DeleteOutlined className={styles.delIcon} onClick={(event) => deleteProjectConfirm(event, item.id)} />
+                ) : null}
                 <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.remark || '暂无描述'}</p>
                 <p style={{ marginTop: 10 }}>
                   <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
                   {item.user_name.split('@')?.[0]}
                   &nbsp;&nbsp;
-                  {dayjs(item.updated_at).format('YYYY-MM-DD HH:mm')}
+                  <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
                 </p>
               </>
             }
@@ -165,9 +151,9 @@ export default function Index() {
   return (
     <>
       <Layout.Content className={styles.project}>
+        <SearchBar form={form} from="项目" submit={handleSearch} refresh={getList} onCreate={() => navigate('/project/0/config')} />
         {total > 0 || loading ? (
           <>
-            <SearchBar form={form} from="项目" submit={handleSearch} refresh={getList} onCreate={() => navigate('/project/0/config')} />
             <div className={styles.projectList}>
               <Spin spinning={loading} size="large">
                 <Row gutter={[20, 20]}>

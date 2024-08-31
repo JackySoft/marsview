@@ -78,6 +78,7 @@ export namespace Project {
     logo: string;
     user_name: string;
     user_id: number;
+    is_edit: boolean;
     updated_at: string;
     created_at: string;
     members?: Array<{
