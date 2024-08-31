@@ -31,7 +31,12 @@ instance.interceptors.request.use((config) => {
     ...config.headers,
     ...handleArrayVariable(headers),
     Accept: 'application/json, text/plain, */*',
+    proxyApi: config.isCors ? config.url : '',
   };
+  // 接口跨域转发
+  if (config.isCors) {
+    config.url = `${import.meta.env.VITE_BASE_API}/ai/proxy`;
+  }
   if (requestIntercetpor) {
     const requestConfig = new Function('config', `return (${requestIntercetpor})(config);`);
     return requestConfig(config);
