@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.18.0](https://github.com/JackySoft/marsview/compare/v2.17.0...v2.18.0) (2024-08-31)
+
+
+### Features
+
+* 1.优化项目权限 2.优化样式 3.修复问题 ([1410f57](https://github.com/JackySoft/marsview/commit/1410f5785b2fe910d735818689fd11a4c043bc32))
+* 增加第三方接口代理 ([b4003ff](https://github.com/JackySoft/marsview/commit/b4003ff61ad194d0135a72ccdde8ce5f57673583))
+
 ## [2.17.0](https://github.com/JackySoft/marsview/compare/v2.16.0...v2.17.0) (2024-08-30)
 
 
