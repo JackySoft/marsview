@@ -23,7 +23,7 @@ const BackgroundImage = (props: any) => {
     }
   };
 
-  return <Input value={value} onChange={(e) => handleChange(e.target.value)} />;
+  return <Input value={value} onChange={(e) => handleChange(e.target.value)} placeholder="http://xxx.png" />;
 };
 
 export default BackgroundImage;

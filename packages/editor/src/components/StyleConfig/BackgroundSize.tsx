@@ -32,7 +32,7 @@ const BackgroundSize = (props: any) => {
     props.onChange(val);
   };
   return (
-    <Flex gap={5}>
+    <Flex gap={3}>
       <Select
         placeholder="请选择"
         value={type}

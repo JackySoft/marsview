@@ -84,6 +84,7 @@ const Header = memo(() => {
       const file = new File([blob], `${pageId}-${Date.now()}.png`, { type: 'image/png' });
       const res = await uploadImg({
         file: file, // File 对象
+        id: userInfo.userId + '_' + pageId, // 页面ID
       });
       return res.url;
     } catch (error) {

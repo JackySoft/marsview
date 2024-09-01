@@ -80,6 +80,10 @@ const StyleConfig = () => {
     labelCol: { span: 7 },
     wrapperCol: { span: 16 },
   };
+  const basicLayout = {
+    labelCol: { span: 5 },
+    wrapperCol: { span: 18 },
+  };
   return (
     <Form className={styles.ui} {...formLayout} form={form} layout="horizontal" labelAlign="right" onValuesChange={run}>
       <TitleStyle>自定义样式</TitleStyle>
@@ -87,15 +91,15 @@ const StyleConfig = () => {
         <VsEditor language="css" />
       </Form.Item>
       <TitleStyle>基础</TitleStyle>
-      <Form.Item name={['scopeStyle', 'width']} label={'宽度'}>
+      <Form.Item name={['scopeStyle', 'width']} label={'宽度'} {...basicLayout}>
         <InputPx />
       </Form.Item>
-      <Form.Item name={['scopeStyle', 'height']} label={'高度'}>
+      <Form.Item name={['scopeStyle', 'height']} label={'高度'} {...basicLayout}>
         <InputPx />
       </Form.Item>
       <MarginInput form={form} />
       <PaddingInput form={form} />
-      <Form.Item key={'opacity'} name={['scopeStyle', 'opacity']} label={'透明度'}>
+      <Form.Item key={'opacity'} name={['scopeStyle', 'opacity']} label={'透明'} {...basicLayout}>
         <Slider min={0} max={1} step={0.1} />
       </Form.Item>
       <TitleStyle>布局</TitleStyle>
@@ -236,7 +240,7 @@ const StyleConfig = () => {
         ></Select>
       </Form.Item>
       <TitleStyle>定位</TitleStyle>
-      <Form.Item key={'position'} name={['scopeStyle', 'position']} label={'定位'}>
+      <Form.Item key={'position'} name={['scopeStyle', 'position']} label={'定位'} {...basicLayout}>
         <Select
           placeholder={'请选择'}
           options={[
@@ -264,12 +268,12 @@ const StyleConfig = () => {
           suffixIcon={<CaretDownOutlined />}
         />
       </Form.Item>
-      <Form.Item key={'zIndex'} name={['scopeStyle', 'zIndex']} label={'zIndex'}>
-        <InputNumber />
+      <Form.Item key={'zIndex'} name={['scopeStyle', 'zIndex']} label={'zIndex'} {...basicLayout}>
+        <InputNumber placeholder="层级" />
       </Form.Item>
       {!['', undefined, 'static'].includes(form.getFieldValue(['scopeStyle', 'position'])) && (
-        <Form.Item label="位置">
-          <Flex gap={10}>
+        <Form.Item label="位置" {...basicLayout}>
+          <Flex gap={3}>
             <Form.Item name="top" noStyle>
               <InputPx placeholder="T: 10" />
             </Form.Item>
@@ -277,7 +281,7 @@ const StyleConfig = () => {
               <InputPx placeholder="R: 10" />
             </Form.Item>
           </Flex>
-          <Flex gap={10} style={{ marginTop: 10 }}>
+          <Flex gap={3} style={{ marginTop: 10 }}>
             <Form.Item name="bottom" noStyle>
               <InputPx placeholder="B: 10" />
             </Form.Item>
