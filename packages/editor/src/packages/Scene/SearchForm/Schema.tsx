@@ -41,7 +41,7 @@ export default {
     },
     // 组件样式
     style: {
-      background: '#fff',
+      backgroundColor: '#ffffff',
       padding: '20px 10px',
       border: '1px solid #e6e6e6',
       borderRadius: '3px',
