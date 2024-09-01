@@ -6,8 +6,12 @@ const InputPx = ({ value, onChange, ...props }: any) => {
   const [unit, setUnit] = useState<string>('px');
 
   useEffect(() => {
-    const num = value?.toString().replace(/(px|%|vw|vh|rem|em)/, '');
+    const val = value?.toString();
+    const num = val?.replace(/(px|%|vw|vh|em)/, '');
     if (num) setNum(num);
+    const reg = new RegExp('(px|%|vw|vh|em)');
+    const unit = val?.match(reg);
+    if (unit) setUnit(unit[0]);
   }, [value]);
 
   // 输入框改变
@@ -28,13 +32,12 @@ const InputPx = ({ value, onChange, ...props }: any) => {
   };
 
   const selectAfter = (
-    <Select defaultValue="px" onChange={handleSelect} size="small">
+    <Select defaultValue="px" value={unit} onChange={handleSelect} size="small">
       <Option value="px">px</Option>
       <Option value="%">%</Option>
       <Option value="vw">vw</Option>
       <Option value="vh">vh</Option>
       <Option value="em">em</Option>
-      <Option value="rem">rem</Option>
     </Select>
   );
 
