@@ -16,9 +16,13 @@ const MarginInput = ({ form }: { form: FormInstance }) => {
   const handleChange = (value: string) => {
     setType(value);
   };
+  const basicLayout = {
+    labelCol: { span: 5 },
+    wrapperCol: { span: 18 },
+  };
   return (
     <>
-      <Form.Item label="边距">
+      <Form.Item label="边距" layout="horizontal" {...basicLayout}>
         <Radio.Group optionType="button" value={type} buttonStyle="solid" onChange={(e) => handleChange(e.target.value)}>
           <Radio.Button value="all">
             <BorderOuterOutlined />
@@ -34,7 +38,7 @@ const MarginInput = ({ form }: { form: FormInstance }) => {
         )}
         {type === 'single' && (
           <>
-            <Flex gap={10} style={{ marginTop: 10 }}>
+            <Flex gap={3} style={{ marginTop: 10 }}>
               <Form.Item name={['scopeStyle', 'margin']} hidden>
                 <InputPx />
               </Form.Item>
@@ -45,7 +49,7 @@ const MarginInput = ({ form }: { form: FormInstance }) => {
                 <InputPx placeholder="R: 10" />
               </Form.Item>
             </Flex>
-            <Flex gap={10} style={{ marginTop: 10 }}>
+            <Flex gap={3} style={{ marginTop: 10 }}>
               <Form.Item name={['scopeStyle', 'marginBottom']} noStyle>
                 <InputPx placeholder="B: 10" />
               </Form.Item>

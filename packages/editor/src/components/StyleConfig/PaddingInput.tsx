@@ -17,9 +17,14 @@ const PaddingInput = ({ form }: { form: FormInstance }) => {
     setType(value);
   };
 
+  const basicLayout = {
+    labelCol: { span: 5 },
+    wrapperCol: { span: 18 },
+  };
+
   return (
     <>
-      <Form.Item label="填充">
+      <Form.Item label="填充" {...basicLayout}>
         <Radio.Group optionType="button" value={type} buttonStyle="solid" onChange={(e) => handleChange(e.target.value)}>
           <Radio.Button value="all">
             <BorderOuterOutlined />
@@ -35,7 +40,7 @@ const PaddingInput = ({ form }: { form: FormInstance }) => {
         )}
         {type === 'single' && (
           <>
-            <Flex gap={10} style={{ marginTop: 10 }}>
+            <Flex gap={3} style={{ marginTop: 10 }}>
               <Form.Item name={['scopeStyle', 'padding']} hidden>
                 <InputPx placeholder="M" />
               </Form.Item>
@@ -46,7 +51,7 @@ const PaddingInput = ({ form }: { form: FormInstance }) => {
                 <InputPx placeholder="R: 10" />
               </Form.Item>
             </Flex>
-            <Flex gap={10} style={{ marginTop: 10 }}>
+            <Flex gap={3} style={{ marginTop: 10 }}>
               <Form.Item name={['scopeStyle', 'paddingBottom']} noStyle>
                 <InputPx placeholder="B: 10" />
               </Form.Item>
