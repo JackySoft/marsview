@@ -197,7 +197,7 @@ export default {
     },
     {
       type: 'Input',
-      label: 'value',
+      label: 'children',
       name: ['formWrap', 'fieldNames', 'children'],
     },
     {
