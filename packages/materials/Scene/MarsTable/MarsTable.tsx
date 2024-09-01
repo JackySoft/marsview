@@ -9,6 +9,7 @@ import * as util from '../../utils/util';
 import { usePageStore } from '../../stores/pageStore';
 import { ComponentType } from '../../types';
 import AuthButton from '../../Functional/Button/AuthButton';
+import { get } from 'lodash-es';
 import styles from './index.module.less';
 
 export interface IConfig {
@@ -79,7 +80,7 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
             setData(res.data);
           }
           if (config.props.field.total) {
-            setTotal(res.originData[config.props.field.total] || 0);
+            setTotal(get(res.originData, config.props.field.total) || 0);
           }
         }
       })

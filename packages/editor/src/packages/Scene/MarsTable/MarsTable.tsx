@@ -10,6 +10,7 @@ import { handleActionFlow } from '@/packages/utils/action';
 import * as util from '@/packages/utils/util';
 import { usePageStore } from '@/stores/pageStore';
 import { ComponentType, IDragTargetItem } from '@/packages/types';
+import { get } from 'lodash-es';
 import styles from './index.module.less';
 
 export interface IConfig {
@@ -86,7 +87,7 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
           }
           // 解析总条数
           if (config.props.field.total) {
-            setTotal(res.originData[config.props.field.total] || 0);
+            setTotal(get(res.originData, config.props.field.total) || 0);
           }
         }
       })
