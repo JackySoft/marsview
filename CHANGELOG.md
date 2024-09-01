@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.20.0](https://github.com/JackySoft/marsview/compare/v2.19.0...v2.20.0) (2024-09-01)
+
+
+### Bug Fixes
+
+* 修复问题 ([4c8f395](https://github.com/JackySoft/marsview/commit/4c8f395b2407dfb3c90b04c3a4dc76605338095e))
+* 修复样式中单位回显问题 ([0bd9a86](https://github.com/JackySoft/marsview/commit/0bd9a866d80cae8b6726d3d2d72bea602199e006))
+
 ## [2.19.0](https://github.com/JackySoft/marsview/compare/v2.18.0...v2.19.0) (2024-09-01)
 
 
