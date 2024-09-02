@@ -147,6 +147,14 @@ function FlowNode(_: any, ref: any) {
         if (type === 'normal') {
           nodeList.splice(node.index + 1, 0, taskNode);
         } else {
+          if(node.selfNode.type === 'start'){
+            message.error('开始节点后第一个不能添加分支节点');
+            return;
+          }
+          if(node.selfNode.type === 'condition'){
+            message.error('分支节点后第一个不能添加分支节点');
+            return;
+          }
           nodeList.splice(node.index + 1, 0, {
             ...taskNode,
             children: [
@@ -169,7 +177,7 @@ function FlowNode(_: any, ref: any) {
         }
       } else if (node?.parentNode?.type === 'condition') {
         if (type === 'condition') {
-          message.error('分支节点第一个不能添加分支节点');
+          message.error('分支节点后第一个不能添加分支节点');
           return;
         }
         node.parentNode.children[node.index].children.unshift(taskNode);
