@@ -341,7 +341,7 @@ export const handleArrayVariable = (list: any = [], data: any = {}) => {
           }
         } else {
           // 变量不支持模板字符串语法
-          const result = renderFormula(next.value.value);
+          const result = renderFormula(next.value.value, data);
           prev[next.key] = isNotEmpty(result) ? result : undefined;
         }
       }

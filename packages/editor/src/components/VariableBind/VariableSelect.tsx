@@ -125,8 +125,8 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
     } else if (type === 'function') {
       form.setFieldValue(
         'expression',
-        `function run(eventParams) {
-    return '';
+        `function run() {
+    return context.eventParams;
 }`,
       );
     }
