@@ -115,7 +115,7 @@ git merge upstream/main
 
 在使用和开发过程中遇到任何问题，欢迎微信扫码添加项目交流群：
 
-<img src="https://marsview.cdn.bcebos.com/qrcode.jpg?a=1" alt="交流群" width="300">
+<img src="/.github/imgs/qrcode.jpg" alt="交流群" width="300">
 
 ## 🤝 参与贡献
 
