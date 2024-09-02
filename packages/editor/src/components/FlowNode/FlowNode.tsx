@@ -279,12 +279,13 @@ function FlowNode(_: any, ref: any) {
   return (
     <>
       <InfiniteViewer
-        className="node-viewer"
+        className="node-viewer dot"
         displayHorizontalScroll={false}
         useMouseDrag={true}
         useWheelScroll={true}
         useAutoZoom={true}
         zoomRange={[0.5, 10]}
+        zoom={1.5}
         useResizeObserver={true}
       >
         <div className="node-container">{renderNodeList(list)}</div>
