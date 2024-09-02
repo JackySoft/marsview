@@ -2,7 +2,16 @@
   width: 100vw;
   height: calc(100vh - 65px);
   margin: -24px;
-  background-color: #f2f3f5;
+  background-color: #f0f2f3;
+  &.dot {
+    /* 设置背景图像为重复的径向渐变，每个渐变代表一个点 */
+    background-image: radial-gradient(circle, rgba(185, 185, 185, 0.5) 1px, transparent 1px),
+      radial-gradient(circle, rgba(0, 0, 0, 0.5) 1px, transparent 1px);
+    /* 设置背景大小，确保点之间有足够的间距 */
+    background-size: 20px 20px; /* 根据需要调整间距 */
+    /* 让背景图像在水平和垂直方向上重复 */
+    background-repeat: repeat;
+  }
   .infinite-viewer-scroll-bar .infinite-viewer-scroll-thumb {
     background: #b1b1b5;
   }
