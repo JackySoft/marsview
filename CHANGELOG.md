@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.23.0](https://github.com/JackySoft/marsview/compare/v2.22.0...v2.23.0) (2024-09-02)
+
+
+### Styles
+
+* node节点添加背景色 ([1a1f657](https://github.com/JackySoft/marsview/commit/1a1f6570e271420dba05432c3abbfcf3e8bacea9))
+
 ## [2.22.0](https://github.com/JackySoft/marsview/compare/v2.21.0...v2.22.0) (2024-09-02)
 
 
