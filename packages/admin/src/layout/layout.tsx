@@ -93,6 +93,7 @@ const AdminLayout = () => {
         token: {
           colorPrimary: projectInfo.system_theme_color || '#1677ff',
         },
+        hashed: false,
       }}
     >
       <Layout>

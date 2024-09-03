@@ -41,6 +41,10 @@ export const router = [
     element: lazyLoad(React.lazy(() => import('@/pages/login/Login'))),
   },
   {
+    path: '/demo',
+    element: lazyLoad(React.lazy(() => import('@/pages/login/Demo'))),
+  },
+  {
     path: '/',
     loader: AuthLoader,
     element: <Root />,

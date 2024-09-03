@@ -21,15 +21,6 @@ export default function Login() {
   const [form] = Form.useForm();
   const saveUserInfo = usePageStore((state) => state.saveUserInfo);
 
-  // 类型切换
-  const onChange = () => {
-    setType(type == 'login' ? 'regist' : 'login');
-    form.setFieldsValue({
-      userName: '',
-      userPwd: '',
-    });
-  };
-
   // 生成验证码
   const handleCreateCode = () => {
     form.validateFields(['userName']).then(async ({ userName }) => {
@@ -44,22 +35,11 @@ export default function Login() {
     });
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (count > 0) {
-        setCount(count - 1);
-      }
-    }, 1000);
-
-    // 清理函数
-    return () => clearTimeout(timer);
-  }, [count]);
-
   // 登录或注册
   const onFinish: FormProps<FieldType>['onFinish'] = async (values: FieldType) => {
     setLoading2(true);
     try {
-      const res = type === 'login' ? await login<FieldType>(values) : await regist(values);
+      const res = await login<FieldType>(values);
       setLoading2(false);
       if (res.token) {
         storage.set('token', res.token);
@@ -85,15 +65,21 @@ export default function Login() {
           <img src="/imgs/login-bg.png" />
         </div>
         <div className={style.form}>
-          {type === 'login' ? (
-            <div className={style.title}>
-              <img src="/imgs/mars-logo.png" width={45} />
-              <span>Marsview</span>
-            </div>
-          ) : (
-            <div className={style.title}>邮箱注册</div>
-          )}
-          <Form name="basic" layout="vertical" className={style.form} onFinish={onFinish} size="large" form={form}>
+          <div className={style.title}>
+            <span>Demo体验</span>
+          </div>
+          <Form
+            name="basic"
+            layout="vertical"
+            className={style.form}
+            initialValues={{
+              userName: 'demo@marsview.cc',
+              userPwd: 'marsview',
+            }}
+            onFinish={onFinish}
+            size="large"
+            form={form}
+          >
             <Form.Item<FieldType>
               name="userName"
               rules={[
@@ -104,37 +90,23 @@ export default function Login() {
               <Input prefix={<UserOutlined />} placeholder="请输入个人邮箱" autoComplete="off" allowClear />
             </Form.Item>
 
-            {type === 'regist' && (
-              <Form.Item>
-                <Flex gap={20}>
-                  <Form.Item<FieldType> name="code" noStyle rules={[{ required: true, message: '请输入验证码' }]}>
-                    <InputNumber prefix={<SafetyOutlined />} style={{ width: '100%' }} placeholder="验证码" />
-                  </Form.Item>
-                  <Button type="primary" onClick={handleCreateCode} disabled={count > 0} loading={loading1}>
-                    {count > 0 ? count + 's' : '获取验证码'}
-                  </Button>
-                </Flex>
-              </Form.Item>
-            )}
-
             <Form.Item<FieldType> style={{ marginTop: 32 }} name="userPwd" rules={[{ required: true, message: '请输入密码' }]}>
               <Input.Password prefix={<LockOutlined />} autoComplete="off" allowClear />
             </Form.Item>
 
             <Form.Item style={{ marginTop: 40 }}>
               <Button type="primary" block htmlType="submit" loading={loading2}>
-                登录
+                体验号登录
               </Button>
             </Form.Item>
             <Form.Item style={{ marginTop: 40 }}>
               <Flex justify="center" gap={20}>
-                <a onClick={onChange}>{type === 'login' ? '没有账号？去注册' : '已有账号？去登录'}</a>
                 <a
                   onClick={() => {
-                    navigate('/demo');
+                    navigate('/login');
                   }}
                 >
-                  体验 Demo
+                  返回注册
                 </a>
               </Flex>
             </Form.Item>
