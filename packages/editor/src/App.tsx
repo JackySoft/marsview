@@ -20,6 +20,7 @@ function App() {
           colorLink: '#7D33FF',
           colorInfo: '#7D33FF',
         },
+        hashed: false,
       }}
     >
       <AntdApp>

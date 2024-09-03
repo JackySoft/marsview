@@ -53,6 +53,7 @@ export default function () {
           colorLink: theme,
           colorInfo: theme,
         },
+        hashed: false,
       }}
     >
       <Page />
