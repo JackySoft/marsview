@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.25.0](https://github.com/JackySoft/marsview/compare/v2.24.0...v2.25.0) (2024-09-03)
+
+
+### Features
+
+* 1. 增加Demo登录 2. 降级Demo账号 3.屏蔽antd主题hash生成 ([632c5cc](https://github.com/JackySoft/marsview/commit/632c5ccbe1c46aadf79d4a92a35212161665d636))
+* 调整部分样式 ([d4efabb](https://github.com/JackySoft/marsview/commit/d4efabbf626bddc6b5b47603608217cc2a643f86))
+* 事件流分支节点后支持增加节点 ([6413269](https://github.com/JackySoft/marsview/commit/6413269c0e4ed89128701aaa3a8a2af913bdee60))
+* 修改新增节点的判断逻辑 ([410af57](https://github.com/JackySoft/marsview/commit/410af571c72e36ed363af6ed33ca641bd53bfb9f))
+
 ## [2.24.0](https://github.com/JackySoft/marsview/compare/v2.23.0...v2.24.0) (2024-09-03)
 
 
