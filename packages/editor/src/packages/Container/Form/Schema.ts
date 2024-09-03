@@ -170,7 +170,7 @@ export default {
     },
     {
       name: 'init',
-      title: '表单初始化',
+      title: '表单赋值',
     },
     {
       name: 'getFormData',

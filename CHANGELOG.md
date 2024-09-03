@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.23.0](https://github.com/JackySoft/marsview/compare/v2.22.0...v2.23.0) (2024-09-02)
+
+
+### Styles
+
+* node节点添加背景色 ([1a1f657](https://github.com/JackySoft/marsview/commit/1a1f6570e271420dba05432c3abbfcf3e8bacea9))
+
+## [2.22.0](https://github.com/JackySoft/marsview/compare/v2.21.0...v2.22.0) (2024-09-02)
+
+
+### Features
+
+* 事件流页面增加网格背景 ([3e0b545](https://github.com/JackySoft/marsview/commit/3e0b545ffdd47fc7327b322587f2e34ec299c1d5))
+
+
+### Bug Fixes
+
+* 修复事件流传参问题 ([46688cc](https://github.com/JackySoft/marsview/commit/46688cc9dbe5981499be092b16263a0edb7b1ae3))
+
+
+### Documentation
+
+* 更新二维码 ([ae2beb4](https://github.com/JackySoft/marsview/commit/ae2beb42d0d1c02980e958ddef3a046e917661e6))
+* 更新文档群二维码 ([9b6716f](https://github.com/JackySoft/marsview/commit/9b6716f2b7024fb5bef0fe596bee62385fa45571))
+
+
+### Others
+
+* 修改表单事件名称 ([3925376](https://github.com/JackySoft/marsview/commit/3925376da04074359fccb7de14cbe8dabfae5b45))
+
 ## [2.21.0](https://github.com/JackySoft/marsview/compare/v2.20.0...v2.21.0) (2024-09-01)
 
 
