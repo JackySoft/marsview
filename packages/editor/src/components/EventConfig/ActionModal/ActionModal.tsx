@@ -280,11 +280,12 @@ const ActionModal = (props: any, ref: any) => {
       form.setFieldsValue({
         scripts: `/**
 * 触发动作后，会执行该函数
+* 上下文: context        
 * 变量: variable
-* 事件参数: eventParams
+* 事件流参数: eventParams
 */
 function run(){
-
+    return context.eventParams;
 }
 `,
       });
