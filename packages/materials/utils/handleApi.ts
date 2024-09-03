@@ -69,9 +69,9 @@ export const handleApi = async (
       res = { code: 0, data: res, msg: '' };
     }
     // 字段映射
-    const code = result.code ? Number(res[result.code]) : 0;
-    const data = result.data ? res[result.data] : res;
-    const msg = result.msg ? res[result.msg] : '';
+    const code = result.code ? Number(res[result.code] || 0) : 0;
+    const data = result.data ? res[result.data] || res : res;
+    const msg = result.msg ? res[result.msg] || '' : '';
     if (code === result.codeValue) {
       if (tips?.success) {
         message.success(tips.success);
