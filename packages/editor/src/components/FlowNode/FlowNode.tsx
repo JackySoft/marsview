@@ -77,12 +77,13 @@ function FlowNode(_: any, ref: any) {
     );
   };
   //   条件节点
-  const ConditionNode = ({ children }: any) => {
+  const ConditionNode = ({ children, id }: any) => {
     return (
       <div className="condition-node">
         <div className="title">分支</div>
         <div className="node-list">{children}</div>
         <span className="arrow-line"></span>
+        <AddNode id={id} />
       </div>
     );
   };
@@ -146,6 +147,14 @@ function FlowNode(_: any, ref: any) {
         if (type === 'normal') {
           nodeList.splice(node.index + 1, 0, taskNode);
         } else {
+          if(node.selfNode.type === 'start'){
+            message.error('开始节点后第一个不能添加分支节点');
+            return;
+          }
+          if(node.selfNode.type === 'condition'){
+            message.error('分支节点后第一个不能添加分支节点');
+            return;
+          }
           nodeList.splice(node.index + 1, 0, {
             ...taskNode,
             children: [
@@ -168,7 +177,7 @@ function FlowNode(_: any, ref: any) {
         }
       } else if (node?.parentNode?.type === 'condition') {
         if (type === 'condition') {
-          message.error('分支节点第一个不能添加分支节点');
+          message.error('分支节点后第一个不能添加分支节点');
           return;
         }
         node.parentNode.children[node.index].children.unshift(taskNode);
@@ -261,7 +270,7 @@ function FlowNode(_: any, ref: any) {
           return <NormalNode key={node.id} node={node} />;
         case 'condition':
           return (
-            <ConditionNode key={node.id} title={node.title}>
+            <ConditionNode key={node.id} title={node.title} id={node.id}>
               {node.children.map((item: any, index: number) => {
                 return (
                   <ConditionItem key={item.id} type={index === 0 ? 'start' : index == node.children.length - 1 ? 'end' : 'center'}>
