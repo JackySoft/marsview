@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.24.0](https://github.com/JackySoft/marsview/compare/v2.23.0...v2.24.0) (2024-09-03)
+
+
+### Bug Fixes
+
+* 修复接口返回无结构问题 ([5a9337b](https://github.com/JackySoft/marsview/commit/5a9337b463a9c3ae1550bb7351383a339fb63b51))
+
 ## [2.23.0](https://github.com/JackySoft/marsview/compare/v2.22.0...v2.23.0) (2024-09-02)
 
 
