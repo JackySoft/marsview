@@ -3,6 +3,7 @@ import { Form, Dropdown, Button } from 'antd';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useEffect } from 'react';
 import { usePageStore } from '@/stores/pageStore';
+import { message } from '@/utils/AntdGlobal';
 import NodeModal from '../FlowNode/NodeModal';
 import { NodeType } from '../FlowNode/FlowNode';
 import styles from './index.module.less';
@@ -69,6 +70,12 @@ const EventConfig = memo(() => {
     wrapperCol: { span: 15 },
   };
 
+  // 判断事件是否存在
+  const hasExistEvent = (key: string):boolean => {
+    const events = form.getFieldValue(['events']);
+    return events.some((item: any) => item.eventName === key);
+  };
+
   return (
     <>
       <Form form={form} {...formLayout} onValuesChange={handleValueChange}>
@@ -82,6 +89,10 @@ const EventConfig = memo(() => {
                       items,
                       onClick: ({ key }) => {
                         const nickName = items?.find((item) => item?.key === key)?.label;
+                        if (hasExistEvent(key)) {
+                          message.warning('事件已存在');
+                          return;
+                        }
                         add({ nickName, eventName: key, actions: [] });
                       },
                     }}
