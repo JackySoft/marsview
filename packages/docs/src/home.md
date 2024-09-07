@@ -86,7 +86,7 @@ new Vue({
     name: 'MicroMars',
     data() {
       return {
-        url: 'https://mars-admin-v.huolala.cn/',
+        url: 'https://mars-admin-v.marsview.cc/',
       };
     },
     methods: {
@@ -104,7 +104,8 @@ new Vue({
 </script>
 ```
 
-其实这些配置完全是`microApp`的配置，大家如果对`microApp`不了解，可以看一下官方文档，这里`handleDataChange`也并不是必须的，如果搭建的页面不需要跳转就不需要配置，加入搭建的页面需要跳转到你的 Vue 菜单中，那需要`handleDataChange`来实现跳转。
+其实这些配置完全是`microApp`的配置，大家如果对`microApp`不了解，可以看一下官方文档，这里`handleDataChange`也并不是必须的，如果搭建的页面不需要跳转就不需要配置，假如搭建的页面需要跳转到你的 Vue 菜单中，那需要`handleDataChange`来实现跳转。
+
 **4. 配置路由**
 
 常规开发中，我们会在`router.js`中配置路由，我们此时同样需要分配一个路由用来加载`marsview`。
