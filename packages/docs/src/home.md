@@ -86,7 +86,7 @@ new Vue({
     name: 'MicroMars',
     data() {
       return {
-        url: 'https://mars-admin-v.marsview.cc/',
+        url: 'http://admin.marsview.cc/',
       };
     },
     methods: {
