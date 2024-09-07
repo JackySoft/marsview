@@ -171,21 +171,32 @@ export const loadScript = (src: string) => {
   });
 };
 
+function findParentTypesById(id: string, elementsMap: { [id: string]: ComponentType }) {
+  const types = [elementsMap[id].type];
+  let parentItem = elementsMap[id];
+  while (parentItem.parentId) {
+    const parentType = elementsMap[parentItem.parentId].type;
+    parentType && types.push(parentType);
+    parentItem = elementsMap[parentItem.parentId];
+  }
+  return types;
+}
+
 /**
  * 判断组件是否允许添加
  * 主要判断表单组件只能添加到Form或者SearhForm中
  */
-export const checkComponentType = (type: string, parentType?: string) => {
+export const checkComponentType = (type: string, parentId: string = '', parentType: string = '', elementsMap: { [id: string]: ComponentType }) => {
+  const childFormList = components.find((item) => item.type === 'Form')?.data.map((item) => item.type);
   if (!parentType) {
-    const childFormList = components.find((item) => item.type === 'form')?.data.map((item) => item.type);
-    if (childFormList?.includes(type) || type === 'EditTable') {
+    if (childFormList?.includes(type)) {
       return false;
     }
     return true;
   } else {
-    const childFormList = components.find((item) => item.type === 'form')?.data.map((item) => item.type);
     if (childFormList?.includes(type)) {
-      if (parentType === 'Form' || parentType === 'SearchForm') return true;
+      const types = findParentTypesById(parentId, elementsMap);
+      if (types.includes('Form') || types.includes('SearchForm')) return true;
       return false;
     }
   }

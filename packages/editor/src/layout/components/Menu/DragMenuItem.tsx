@@ -14,11 +14,12 @@ import { message } from '@/utils/AntdGlobal';
 const DragMenuItem = (props: IDragTarget) => {
   // 生成组件ID
   const [id, setId] = useState(createId(props.type));
-  const { selectedElement, addElement, addChildElements } = usePageStore((state) => {
+  const { selectedElement, elementsMap, addElement, addChildElements } = usePageStore((state) => {
     return {
       addElement: state.addElement,
       addChildElements: state.addChildElements,
       selectedElement: state.selectedElement,
+      elementsMap: state.page.elementsMap,
     };
   });
   const [{ isDragging }, drag] = useDrag(
@@ -45,8 +46,8 @@ const DragMenuItem = (props: IDragTarget) => {
     // 生成默认配置
     const { config, events, methods = [], elements = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
     const newId = createId(item.type);
-    if (!checkComponentType(item.type, selectedElement?.type)) {
-      message.warning(`${item.name}组件不支持添加到${selectedElement?.type || '页面'}中`);
+    if (!checkComponentType(item.type, selectedElement?.id, selectedElement?.type, elementsMap)) {
+      message.info('请把表单项放在Form容器内');
       return;
     }
     const childElement =
