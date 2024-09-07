@@ -14,6 +14,7 @@ export default defineConfig({
     logo: '/mars-logo.png',
     nav: [
       { text: '首页', link: '/' },
+      { text: '平台', link: '/home' },
       { text: '项目', link: '/project' },
       { text: '页面', link: '/page' },
       { text: '组件', link: '/lib' },
@@ -22,6 +23,10 @@ export default defineConfig({
     ],
 
     sidebar: [
+      {
+        text: 'Marsview',
+        items: [{ text: '介绍', link: '/home' }],
+      },
       {
         text: '登录',
         items: [{ text: '账号登录', link: '/login/' }],
