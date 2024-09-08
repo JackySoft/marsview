@@ -1,7 +1,6 @@
 /**
  * 组件配置和属性值
  */
-import IConSetting from '@/packages/components/IConSetting';
 export default {
   // 组件属性配置JSON
   attrs: [
@@ -58,10 +57,9 @@ export default {
       name: ['button', 'danger'],
     },
     {
-      type: 'function',
-      render() {
-        return <IConSetting key="icon-setting" name={['button', 'icon']} />;
-      },
+      type: 'Icons',
+      label: '按钮图标',
+      name: ['button', 'icon'],
     },
     {
       type: 'Title',

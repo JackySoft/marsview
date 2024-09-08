@@ -326,6 +326,11 @@ const components = [
         name: '超链接',
         type: 'Link',
       },
+      {
+        icon: '',
+        name: '图标',
+        type: 'Icon',
+      },
     ],
   },
   {

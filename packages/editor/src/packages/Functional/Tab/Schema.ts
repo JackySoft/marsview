@@ -1,4 +1,3 @@
-import IConSetting from '@/packages/components/IConSetting';
 /**
  * 组件配置和属性值
  */
@@ -21,10 +20,9 @@ export default {
       name: ['label'],
     },
     {
-      type: 'function',
-      render() {
-        return <IConSetting key="icon-setting" />;
-      },
+      type: 'Icons',
+      label: '按钮图标',
+      name: ['icon'],
     },
     {
       type: 'Switch',
