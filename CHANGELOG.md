@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.28.0](https://github.com/JackySoft/marsview/compare/v2.27.0...v2.28.0) (2024-09-08)
+
+
+### Features
+
+* 1. 新增Icon组件。 2.增加FormAction。3. 优化代码。 ([8abd896](https://github.com/JackySoft/marsview/commit/8abd8963d0fe2370aa618bcc53c6a1d538c5a42f))
+
+
+### Bug Fixes
+
+* 修复表单项和Form容器匹配问题 ([e580da4](https://github.com/JackySoft/marsview/commit/e580da483218eb38582979b2ee09180bf3a3c355))
+
+
+### Others
+
+* 替换群二维码 ([dc6acd5](https://github.com/JackySoft/marsview/commit/dc6acd53eb3d2a66a7ddda7822466c1a580c4bdc))
+
+
+### Documentation
+
+* 添加微服务集成文档 ([479e767](https://github.com/JackySoft/marsview/commit/479e767502534f11c702bf1fa99f7953ee0c36ea))
+* 修改地址 ([08e7afb](https://github.com/JackySoft/marsview/commit/08e7afba86683f62bb0c77fb879a63a4093a45b2))
+* 修改文档文案 ([5572b79](https://github.com/JackySoft/marsview/commit/5572b79624de891489967aaca03fee2c1463894d))
+
 ## [2.27.0](https://github.com/JackySoft/marsview/compare/v2.26.0...v2.27.0) (2024-09-03)
 
 
