@@ -169,6 +169,21 @@ const execAction = (node: any, params: any = {}) => {
       handleNotifacation(node, data);
     } else if (node.action.actionType === 'request' || node.action.actionType === 'download') {
       handleRequest(node, data);
+    } else if (node.action.actionType === 'formReset') {
+      node.action.method = 'reset';
+      handleMethods(node, data);
+    } else if (node.action.actionType === 'formSubmit') {
+      node.action.method = 'submit';
+      handleMethods(node, data);
+    } else if (node.action.actionType === 'formValidate') {
+      node.action.method = 'validate';
+      handleMethods(node, data);
+    } else if (node.action.actionType === 'formAssignment') {
+      node.action.method = 'init';
+      handleMethods(node, data);
+    } else if (node.action.actionType === 'formGetValue') {
+      node.action.method = 'getFormData';
+      handleMethods(node, data);
     } else if (['openModal', 'openDrawer'].includes(node.action.actionType)) {
       handleOpenModal(node, data, 'open');
     } else if (['closeModal', 'closeDrawer'].includes(node.action.actionType)) {
