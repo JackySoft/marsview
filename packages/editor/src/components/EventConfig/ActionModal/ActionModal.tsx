@@ -3,6 +3,8 @@ import { forwardRef, useImperativeHandle, useState } from 'react';
 // 页面
 import JumpLinkAction from './JumpLinkAction';
 import ReloadPageAction from './ReloadPageAction';
+// 表单
+import FormAction from './FormAction';
 // 弹框
 import OpenModalAction from './OpenModalAction';
 import MessageAction from './MessageAction';
@@ -50,6 +52,37 @@ const ActionModal = (props: any, ref: any) => {
           render: () => {
             return <ReloadPageAction />;
           },
+        },
+      ],
+    },
+    {
+      label: '表单',
+      key: 'form-nav',
+      children: [
+        {
+          label: '表单重置',
+          key: 'formReset',
+          render: () => <FormAction />,
+        },
+        {
+          label: '表单提交',
+          key: 'formSubmit',
+          render: () => <FormAction />,
+        },
+        {
+          label: '表单验证',
+          key: 'formValidate',
+          render: () => <FormAction />,
+        },
+        {
+          label: '表单赋值',
+          key: 'formAssignment',
+          render: () => <FormAction />,
+        },
+        {
+          label: '获取表单值',
+          key: 'formGetValue',
+          render: () => <FormAction />,
         },
       ],
     },

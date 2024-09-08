@@ -14,7 +14,7 @@ const RequestAction = ({ type }: { type: 'request' | 'download' }) => {
     <>
       <div className={styles.desc}>
         <h3 className={styles.descTitle}>说明</h3>
-        <p className={styles.descInfo}>点击一个按钮，可以通过此行为来发送一个请求。</p>
+        <p className={styles.descInfo}>文件下载时，后端接口必须返回Blob对象才可以。</p>
         <Divider />
       </div>
       <Form.Item label="配置请求" name="id" rules={[{ required: true, message: '请选择请求接口' }]}>

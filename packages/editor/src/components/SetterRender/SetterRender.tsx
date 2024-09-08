@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
-import { Form, Input, InputNumber, Radio, Select, Switch, Slider, FormInstance } from 'antd';
+import { Form, Input, InputNumber, Radio, Select, Switch, Slider, FormInstance, Tooltip } from 'antd';
 import * as icons from '@ant-design/icons';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 import { SchemaType } from '@/packages/types';
 import { CaretDownOutlined } from '@ant-design/icons/lib';
 import MColorPicker from '../ColorPicker';
@@ -33,7 +34,12 @@ const SetterRender = memo(({ attrs, form }: IAttrs) => {
         if (item.type == 'Title') {
           return (
             <h2 className={styles.title} key={key}>
-              {item.label}
+              <span style={{ marginRight: 10 }}>{item.label}</span>
+              {item.tooltip ? (
+                <Tooltip title={item.tooltip}>
+                  <QuestionCircleOutlined />
+                </Tooltip>
+              ) : null}
             </h2>
           );
         } else if (item.type == 'Input') {
