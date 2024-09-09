@@ -9,3 +9,4 @@ export { Tabs, TabsConfig } from './Tabs';
 export { Tab, TabConfig } from './Tab';
 export { Drawer, DrawerConfig } from './Drawer';
 export { Result, ResultConfig } from './Result';
+export { Avatar, AvatarConfig } from './Avatar';
