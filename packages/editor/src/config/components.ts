@@ -300,6 +300,11 @@ const components = [
         name: '结果页',
         type: 'Result',
       },
+      {
+        icon: '',
+        name: '头像',
+        type: 'Avatar',
+      },
     ],
   },
   {
