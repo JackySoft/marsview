@@ -22,7 +22,7 @@ export default {
     },
     {
       type: 'Variable',
-      label: '图片地址',
+      label: '地址',
       name: ['src'],
       props: {
         placeholder: '图片地址',
@@ -30,9 +30,9 @@ export default {
     },
     {
       type: 'InputSelect',
-      label: '头像大小',
+      label: '大小',
       name: ['size'],
-      tooltip: '可以选择图像系统默认大小或者手动输入像素值',
+      tooltip: '支持自定义大小，如: 10, "20px"',
       props: {
         options: [
           { value: 'large', label: 'large' },
@@ -42,8 +42,8 @@ export default {
       },
     },
     {
-      type: 'Variable',
-      label: '替代文本',
+      type: 'Input',
+      label: 'alt属性',
       name: ['alt'],
       tooltip: '图像无法显示时的替代文本',
       props: {
@@ -52,49 +52,21 @@ export default {
     },
     {
       type: 'InputNumber',
-      label: '边界距离',
+      label: '文字边距',
       name: ['gap'],
-      tooltip: '字符类型距离左右两侧边界单位像素',
+      tooltip: '文字头像距离左右两侧距离',
       props: {
         placeholder: '请输入',
       },
     },
     {
       type: 'Select',
-      label: '头像形状',
+      label: '形状',
       name: ['shape'],
-      tooltip: '指定头像的形状',
       props: {
         options: [
-          { value: 'circle', label: 'circle' },
-          { value: 'square', label: 'square' },
-        ],
-      },
-    },
-    {
-      type: 'Select',
-      label: 'draggable',
-      name: ['draggable'],
-      tooltip: '图片是否允许拖动',
-      props: {
-        placeholder: '图片是否允许拖动',
-        options: [
-          { value: 'true', label: 'true' },
-          { value: 'false', label: 'false' },
-        ],
-      },
-    },
-    {
-      type: 'Select',
-      label: 'CORS设置',
-      name: ['crossOrigin'],
-      tooltip: 'CORS属性设置',
-      props: {
-        placeholder: 'CORS属性设置',
-        allowClear: true,
-        options: [
-          { value: 'anonymous', label: 'anonymous' },
-          { value: 'use-credentials', label: 'use-credentials' },
+          { value: 'circle', label: '圆形' },
+          { value: 'square', label: '方形' },
         ],
       },
     },
@@ -105,7 +77,8 @@ export default {
       textavatar: 'wang',
       size: 'large',
       shape: 'circle',
-      draggable: 'true',
+      crossOrigin: 'anonymous',
+      gap: 4,
     },
     // 组件样式
     style: {},

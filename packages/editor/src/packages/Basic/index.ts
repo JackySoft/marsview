@@ -3,3 +3,4 @@ export { Text, TextConfig } from './Text';
 export { Title, TitleConfig } from './Title';
 export { Link, LinkConfig } from './Link';
 export { Icon, IconConfig } from './Icon';
+export { Avatar, AvatarConfig } from './Avatar';

@@ -1,6 +1,6 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 import { Avatar } from 'antd';
-import { ComponentType } from '../../types';
+import { ComponentType } from '@/packages/types';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number;
 
@@ -28,7 +28,7 @@ export interface IConfig {
  * @param style 组件样式
  * @returns
  */
-const MAvatar = ({ config }: ComponentType<IConfig>, ref: any) => {
+const MAvatar = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
   const [visible, setVisible] = useState(true);
   // 对外暴露方法
   useImperativeHandle(ref, () => {
@@ -42,10 +42,21 @@ const MAvatar = ({ config }: ComponentType<IConfig>, ref: any) => {
     };
   });
 
+  const { textavatar, size, ...props } = config.props;
+
+  // 大小转换
+  const avatarSize = useMemo(() => {
+    if (!size) return 'default';
+    if (['large', 'small', 'default'].includes(size?.toString())) return size;
+
+    const str = Number(size.toString().replace('px', ''));
+    return isNaN(Number(str)) ? 'default' : Number(str);
+  }, [size]);
+
   return (
     visible && (
-      <Avatar style={config.style} {...config.props} size={!isNaN(Number(config.props?.size)) ? Number(config.props?.size) : config.props?.size}>
-        {config.props.textavatar}
+      <Avatar data-id={id} data-type={type} style={config.style} {...props} src={props.src || undefined} size={avatarSize as AvatarSize}>
+        {textavatar}
       </Avatar>
     )
   );
