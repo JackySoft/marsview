@@ -257,11 +257,6 @@ const components = [
       },
       {
         icon: '',
-        name: '弹框',
-        type: 'Modal',
-      },
-      {
-        icon: '',
         name: '文件上传',
         type: 'FileUpload',
       },
@@ -275,11 +270,7 @@ const components = [
         name: '描述列表',
         type: 'Descriptions',
       },
-      {
-        icon: '',
-        name: '空状态',
-        type: 'Empty',
-      },
+
       {
         icon: '',
         name: '步骤条',
@@ -289,6 +280,17 @@ const components = [
         icon: '',
         name: '标签页',
         type: 'Tabs',
+      },
+    ],
+  },
+  {
+    type: 'FeedBack',
+    title: '反馈组件',
+    data: [
+      {
+        icon: '',
+        name: '弹框',
+        type: 'Modal',
       },
       {
         icon: '',
@@ -302,8 +304,8 @@ const components = [
       },
       {
         icon: '',
-        name: '头像',
-        type: 'Avatar',
+        name: '空状态',
+        type: 'Empty',
       },
     ],
   },
@@ -335,6 +337,11 @@ const components = [
         icon: '',
         name: '图标',
         type: 'Icon',
+      },
+      {
+        icon: '',
+        name: '头像',
+        type: 'Avatar',
       },
     ],
   },

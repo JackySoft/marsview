@@ -18,6 +18,7 @@ export default defineConfig({
       { text: '项目', link: '/project' },
       { text: '页面', link: '/page' },
       { text: '组件', link: '/lib' },
+      { text: '微服务', link: '/micro' },
       { text: '综合案例', link: '/example' },
       { text: '团队', link: '/team' },
     ],
@@ -29,7 +30,7 @@ export default defineConfig({
       },
       {
         text: '登录',
-        items: [{ text: '账号登录', link: '/login/' }],
+        items: [{ text: '账号登录', link: '/login' }],
       },
       {
         text: '项目',
@@ -60,6 +61,10 @@ export default defineConfig({
           { text: '组件介绍', link: '/lib/' },
           { text: '自定义组件案例', link: '/lib/LoginForm' },
         ],
+      },
+      {
+        text: '微服务',
+        items: [{ text: '接入指南', link: '/micro' }],
       },
       {
         text: '综合案例',
