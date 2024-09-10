@@ -6,5 +6,6 @@ export * from './Layout';
 export * from './EChart';
 export * from './Functional';
 export * from './Basic';
+export * from './FeedBack';
 export { IFrame, IFrameConfig } from './IFrame';
 import './index.less';
