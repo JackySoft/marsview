@@ -96,7 +96,7 @@ export const handleApi = async (
     } else if (typeof api.sourceField === 'string' && api.sourceField) {
       renderData = get(data, api.sourceField);
     }
-    return { code, data: renderData, originData: data, msg };
+    return { code: 0, data: renderData, originData: data, msg };
   } else {
     // 解析动态变量
     if (api.name?.value) {
