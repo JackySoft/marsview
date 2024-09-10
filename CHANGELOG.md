@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.30.0](https://github.com/JackySoft/marsview/compare/v2.29.0...v2.30.0) (2024-09-10)
+
+
+### Bug Fixes
+
+* 导出反馈组件 ([7d37db8](https://github.com/JackySoft/marsview/commit/7d37db8917648d0e61c899e370652c83777557f5))
+* 修复弹框拖拽问题 ([5a0b25c](https://github.com/JackySoft/marsview/commit/5a0b25c4f8e475f55d50f7c49f5b2112c4055086))
+* 修复code问题 ([76517b1](https://github.com/JackySoft/marsview/commit/76517b1285d372522fc5167884f65174729d6f69))
+
+
+### Others
+
+* 替换群二维码 ([ee24b27](https://github.com/JackySoft/marsview/commit/ee24b27005958cbad03c8a713a32987a6c85727c))
+
 ## [2.29.0](https://github.com/JackySoft/marsview/compare/v2.28.0...v2.29.0) (2024-09-09)
 
 
