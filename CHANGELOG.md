@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/JackySoft/marsview/compare/v2.30.0...v3.0.0) (2024-09-12)
+
+
+### Features
+
+* 1.开发数值统计组件。 2.开发倒计时组件。3.优化首页。 ([71eee20](https://github.com/JackySoft/marsview/commit/71eee201afb97872327a82e7f7abe412c83ed14e))
+
+
+### Bug Fixes
+
+* 修复单词拼写错误问题 ([62d88a2](https://github.com/JackySoft/marsview/commit/62d88a2eb89312fff2ccc1dbf9580621014cabdf))
+* 修复若干错误单词，删除执行表达式中的无用语句 ([5bad7b6](https://github.com/JackySoft/marsview/commit/5bad7b6ab47c950f43ac9d8ee64537ef779b4519))
+
+
+### Others
+
+* 修改事件文案 ([f9be889](https://github.com/JackySoft/marsview/commit/f9be889ba3400b9141c7ab9adc74530ec48d2d35))
+
 ## [2.30.0](https://github.com/JackySoft/marsview/compare/v2.29.0...v2.30.0) (2024-09-10)
 
 
