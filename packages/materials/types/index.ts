@@ -53,10 +53,10 @@ export interface ComponentType<T = any> {
   parentId?: string;
   config: ConfigType<T>;
   // 属性中用于展示的事件，跟配置中的事件不同
-  events?: Array<{ name: string; value: string; }>;
+  events?: Array<{ name: string; value: string }>;
   // 属性中用于展示的方法，跟配置中的方法不同
   methods: ComponentMethodType[];
-  apis: { [key: string]: ApiType; };
+  apis: { [key: string]: ApiType };
   elements: ComponentType<T>[];
   [key: string]: any; // 自定义属性，比如事件函数挂载
 }
@@ -83,11 +83,11 @@ export interface ApiConfig {
   id: string;
   source: any;
   sourceField:
-  | string
-  | {
-    type: 'variable' | 'static';
-    value: string;
-  };
+    | string
+    | {
+        type: 'variable' | 'static';
+        value: string;
+      };
   name?: {
     type: 'variable' | 'static';
     value: string;
@@ -108,7 +108,7 @@ export interface EventType<T = any> {
  */
 export interface ActionNode<T> {
   action: T;
-  next: (ActionNode<T> & { success: ActionNode<T>; fail: ActionNode<T>; }) | null;
+  next: (ActionNode<T> & { success: ActionNode<T>; fail: ActionNode<T> }) | null;
 }
 
 /**
@@ -118,7 +118,7 @@ export interface MethodsAction {
   name: string;
   target: string;
   method: string;
-  data: Array<{ key: string; value: string; }>;
+  data: Array<{ key: string; value: string }>;
 }
 
 /**
@@ -175,7 +175,7 @@ export interface JumpLinkAction {
  */
 
 export interface VariableAction {
-  assignmentType: 'assigment' | 'reset';
+  assignmentType: 'assignment' | 'reset';
   assignmentWay: 'static' | 'dynamic';
   name: string;
   value: any;

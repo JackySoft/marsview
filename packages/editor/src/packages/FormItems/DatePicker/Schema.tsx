@@ -29,7 +29,7 @@ export default {
         allowClear: true,
         options: [
           { value: 'today', label: '今天' },
-          { value: 'yestoday', label: '昨天' },
+          { value: 'yesterday', label: '昨天' },
           { value: 'last7', label: '一周前' },
           { value: 'last30', label: '一个月前' },
           { value: 'last90', label: '三个月前' },

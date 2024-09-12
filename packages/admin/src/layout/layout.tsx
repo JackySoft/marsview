@@ -5,7 +5,7 @@ import Header from '../components/Header/Header';
 import Menu from '../components/Menu/Menu';
 import { useProjectStore } from '@/stores/projectStore';
 import { UserInfoStore, usePageStore } from '@/stores/pageStore';
-import { getPorjectDetail, getProjectMenu } from '@/api/index';
+import { getProjectDetail, getProjectMenu } from '@/api/index';
 import Tab from '../components/Tab';
 import Logo from '@/components/Logo/Logo';
 import BreadList from '@/components/BreadList/BreadList';
@@ -25,7 +25,7 @@ const AdminLayout = () => {
   });
   const saveUserInfo = usePageStore((state) => state.saveUserInfo);
   const loaderData = useLoaderData();
-  const navitate = useNavigate();
+  const navigate = useNavigate();
   const { projectId, env } = useParams();
   const { pathname } = useLocation();
 
@@ -38,22 +38,22 @@ const AdminLayout = () => {
   // 获取项目信息
   useEffect(() => {
     // 判断项目ID是否合法
-    if ((projectId && isNaN(+projectId)) || !isEnv(env)) return navitate('/404?type=project');
+    if ((projectId && isNaN(+projectId)) || !isEnv(env)) return navigate('/404?type=project');
 
     const fetchProjectDetail = async () => {
       if (projectId) {
-        const detail = await getPorjectDetail(projectId);
+        const detail = await getProjectDetail(projectId);
         // 如果项目不存在，跳转到404
         if (!detail.id) {
-          return navitate('/404?type=project');
+          return navigate('/404?type=project');
         }
         const menus = await getProjectMenu(projectId).catch(() => {
-          return navitate('/403?type=project');
+          return navigate('/403?type=project');
         });
         if (!menus) return;
 
         // 如果没有页面路径，跳转到欢迎页
-        if (!/project\/(stg|pre|prd)\/\d+\/\d+/.test(pathname)) navitate(`/project/${env}/${projectId}/welcome`);
+        if (!/project\/(stg|pre|prd)\/\d+\/\d+/.test(pathname)) navigate(`/project/${env}/${projectId}/welcome`);
         const { menuTree, buttons, pageMap, menuMap } = arrayToTree(menus.list);
         storage.set('buttons', buttons);
         storage.set('pageMap', pageMap);

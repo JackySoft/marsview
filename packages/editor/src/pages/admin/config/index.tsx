@@ -1,6 +1,6 @@
 import { useEffect, useState, memo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Form, Input, Button, Space, Image, Select, Radio, Switch, Alert, Tag } from 'antd';
+import { Form, Input, Button, Space, Image, Radio, Switch, Tag } from 'antd';
 import { message } from '@/utils/AntdGlobal';
 import { RollbackOutlined, EditOutlined, SaveOutlined } from '@ant-design/icons';
 import UploadImages from '@/components/UploadImages/UploadImages';
@@ -16,7 +16,7 @@ import styles from './index.module.less';
 const Config: React.FC = memo(() => {
   const { id } = useParams();
   const [form] = Form.useForm();
-  const [loading, setLoding] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [type, setType] = useState<'detail' | 'edit' | 'create'>('detail');
 
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const Config: React.FC = memo(() => {
     try {
       await form.validateFields();
       const values = form.getFieldsValue();
-      setLoding(true);
+      setLoading(true);
       if (type === 'create') {
         await addProject(values);
         message.success('创建成功');
@@ -46,10 +46,10 @@ const Config: React.FC = memo(() => {
         await updateProject(values);
         message.success('更新成功');
       }
-      setLoding(false);
+      setLoading(false);
       setType('detail');
     } catch (error) {
-      setLoding(false);
+      setLoading(false);
     }
   };
 

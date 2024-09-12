@@ -138,11 +138,11 @@ const ColumnSetting = memo((props: IModalProp) => {
   };
 
   // 关闭
-  const handleCancle = () => {
+  const handleCancel = () => {
     setVisible(false);
   };
   return (
-    <Modal title="列设置" open={visible} onOk={handleOk} onCancel={handleCancle} width={900}>
+    <Modal title="列设置" open={visible} onOk={handleOk} onCancel={handleCancel} width={900}>
       <Form form={form} labelCol={{ span: 6 }}>
         <Tabs items={items} />
       </Form>

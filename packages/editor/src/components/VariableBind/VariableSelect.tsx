@@ -166,11 +166,11 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
   const handleSubmit = () => {
     const expression = form.getFieldValue('expression');
     onSelect({ value: expression });
-    handleCancle();
+    handleCancel();
   };
 
   // 关闭
-  const handleCancle = () => {
+  const handleCancel = () => {
     setVisible(false);
   };
   const fnList: CollapseProps['items'] = [
@@ -200,7 +200,7 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
     },
   ];
   return (
-    <Modal open={visible} onCancel={handleCancle} title="逻辑编辑器" width={1100} onOk={handleSubmit} okText="确认" cancelText="取消">
+    <Modal open={visible} onCancel={handleCancel} title="逻辑编辑器" width={1100} onOk={handleSubmit} okText="确认" cancelText="取消">
       <div style={{ marginBlock: 10 }}>
         <NotificationOutlined style={{ color: '#7D33FF' }} />
         <span style={{ marginLeft: 5 }}>下表为页面定义的全局变量，选择时，直接鼠标点击对应的行即可。</span>

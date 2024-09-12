@@ -1,9 +1,7 @@
-import { Form, Select, Divider, Radio, Button, TreeSelect } from 'antd';
+import { Form, Divider, Radio, TreeSelect } from 'antd';
 import { usePageStore } from '@/stores/pageStore';
-import styles from './index.module.less';
-import { useRef, useState } from 'react';
-import VariableSelect from '@/components/VariableBind/VariableSelect';
 import VariableBind from '@/components/VariableBind/VariableBind';
+import styles from './index.module.less';
 /**
  * 显示确认弹框
  * @returns

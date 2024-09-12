@@ -11,13 +11,13 @@ export default function () {
   const [theme, setTheme] = useState('');
   const { id, env } = useParams();
   const { savePageInfo } = usePageStore2();
-  const navitate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     if (id) {
       getPageDetail(env as string, Number(id))
         .then((res: any) => {
           if (!res.id) {
-            return navitate('/404');
+            return navigate('/404');
           }
           let pageData: any = {};
           try {
@@ -40,7 +40,7 @@ export default function () {
           setTheme(pageData.config.props.theme || '#1677ff');
         })
         .catch(() => {
-          navitate('/500');
+          navigate('/500');
         });
     }
   }, [id]);

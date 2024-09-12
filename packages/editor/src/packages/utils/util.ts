@@ -50,7 +50,7 @@ export const getDateByType = (type: string) => {
   const date = new Date();
   if (!type) return undefined;
   if (type == 'today') return dayjs(date.toLocaleString());
-  if (type == 'yestoday') {
+  if (type == 'yesterday') {
     date.setDate(date.getDate() - 1);
   }
   if (type == 'last7') {
@@ -68,7 +68,7 @@ export const getDateByType = (type: string) => {
  * 获取日期范围
  * now: 当前时间戳
  * today: 今天0-24点
- * yestoday: 昨天0-24点
+ * yesterday: 昨天0-24点
  * last7: 最近7天
  * last30: 最近30天
  * last60: 最近60天
@@ -104,8 +104,8 @@ export const getDateRangeByType = (type: string) => {
     return [dayjs(startDate.toLocaleString()), dayjs(endDate.toLocaleString())];
   }
   // 昨天、上周、上月
-  if (['yestoday', 'lastWeek', 'lastMonth', 'last3Month', 'lastYear'].includes(type)) {
-    if (type == 'yestoday') {
+  if (['yesterday', 'lastWeek', 'lastMonth', 'last3Month', 'lastYear'].includes(type)) {
+    if (type == 'yesterday') {
       startDate.setDate(startDate.getDate() - 1);
     } else if (type == 'lastWeek') {
       startDate.setDate(startDate.getDate() - 7);

@@ -67,18 +67,18 @@ const VariableSetting = (_: any, ref: any) => {
       } else {
         editVariable(values);
       }
-      handleCancle();
+      handleCancel();
     });
   };
 
   // 关闭
-  const handleCancle = () => {
+  const handleCancel = () => {
     form.resetFields();
     setVisible(false);
     setDataType('string');
   };
   return (
-    <Modal title="添加变量" open={visible} width={650} onOk={handleOk} onCancel={handleCancle} okText="提交" cancelText="取消">
+    <Modal title="添加变量" open={visible} width={650} onOk={handleOk} onCancel={handleCancel} okText="提交" cancelText="取消">
       <Form form={form} labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} initialValues={{ type: 'string' }}>
         <Form.Item
           label="变量名称"

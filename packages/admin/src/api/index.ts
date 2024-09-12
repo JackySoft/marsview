@@ -34,6 +34,6 @@ export const getProjectMenu = (projectId: string | number) => {
 };
 
 // 获取项目配置
-export const getPorjectDetail = (projectId: string | number) => {
+export const getProjectDetail = (projectId: string | number) => {
   return request.get('/admin/getProjectConfig?project_id=' + projectId);
 };

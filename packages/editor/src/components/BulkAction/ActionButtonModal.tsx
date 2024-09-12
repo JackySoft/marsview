@@ -53,14 +53,14 @@ const ActionButtonModal = memo((props: IModalProp) => {
   };
 
   // 关闭
-  const handleCancle = () => {
+  const handleCancel = () => {
     setVisible(false);
   };
 
   // 获取所有的antd图标，动态渲染到下拉框中
   const iconsList: { [key: string]: any } = icons;
   return (
-    <Modal title="操作按钮设置" open={visible} onOk={handleOk} onCancel={handleCancle} width={600} destroyOnClose>
+    <Modal title="操作按钮设置" open={visible} onOk={handleOk} onCancel={handleCancel} width={600} destroyOnClose>
       <Form form={form} labelCol={{ span: 5 }} wrapperCol={{ span: 18 }}>
         <Form.Item label="按钮名称" name="text" rules={[{ required: true, message: '请输入按钮名称' }]}>
           <Input />

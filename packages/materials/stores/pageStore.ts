@@ -36,16 +36,16 @@ export interface PageState {
         source: any;
       };
     };
-    events: Array<{ name: string; value: string; }>;
+    events: Array<{ name: string; value: string }>;
     // 页面全局接口
-    apis: { [key: string]: ApiType; };
+    apis: { [key: string]: ApiType };
     elements: ComItemType[];
-    elementsMap: { [key: string]: ComponentType; };
+    elementsMap: { [key: string]: ComponentType };
     // 页面变量
     variables: PageVariable[];
-    variableData: { [key: string]: any; };
+    variableData: { [key: string]: any };
     // 表单数据
-    formData: { [key: string]: any; };
+    formData: { [key: string]: any };
     // 全局拦截器
     interceptor: {
       headers?: {

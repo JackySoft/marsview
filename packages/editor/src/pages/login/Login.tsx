@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { FormProps } from 'antd';
-import { Button, Flex, Form, Input, InputNumber, Space } from 'antd';
+import { Button, Flex, Form, Input, InputNumber } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { login, sendEmail, regist } from '@/api/user';
 import storage from '@/utils/storage';
@@ -118,7 +118,7 @@ export default function Login() {
             )}
 
             <Form.Item<FieldType> style={{ marginTop: 32 }} name="userPwd" rules={[{ required: true, message: '请输入密码' }]}>
-              <Input.Password prefix={<LockOutlined />} autoComplete="off" allowClear />
+              <Input.Password prefix={<LockOutlined />} autoComplete="off" allowClear placeholder="请输入密码" />
             </Form.Item>
 
             <Form.Item style={{ marginTop: 40 }}>
