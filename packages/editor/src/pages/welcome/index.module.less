@@ -53,20 +53,34 @@
   }
   .content {
     width: 50%;
-    margin-left: 13%;
+    margin-left: 10%;
+    margin-top: -100px;
     z-index: 1;
     .title {
       font-size: 54px;
       font-weight: 600;
       background: linear-gradient(45deg, #fff, #8434e9 52%, #520bcd);
-      color: transparent; /* Fallback color in case gradients are not supported */
+      color: transparent;
       background-clip: text;
     }
     .desc {
       font-size: 30px;
-      color: #fff;
-      margin-top: 15px;
+      color: #e3e3e3;
+    }
+    .count {
+      font-size: 38px;
+      margin-top: 30px;
       margin-bottom: 50px;
+      background: linear-gradient(60deg, #fff, rgb(144, 0, 255), rgb(0, 72, 255), rgb(0, 255, 136), rgb(255, 136, 0));
+      background-clip: text;
+      color: transparent;
+      span {
+        display: inline-block;
+        width: 150px;
+        font-size: 54px;
+        font-weight: bold;
+        text-align: center;
+      }
     }
     .btnGroup {
       display: flex;
@@ -76,26 +90,8 @@
   .cube {
     background: url(/imgs/welcome-bg.png) no-repeat center;
     background-size: contain;
-    width: 55%;
+    width: 50%;
     height: 625px;
-    margin-right: 10%;
-    animation: img1-anim 10s linear 0ms infinite normal backwards;
-  }
-  @keyframes img1-anim {
-    0% {
-      transform: translate(0);
-      scale: 0.9;
-    }
-
-    50% {
-      transform: translate3d(-20px, 20px, 10px);
-      scale: 1;
-    }
-
-    to {
-      transform: translate(0);
-      scale: 0.9;
-    }
   }
 }
 .module {

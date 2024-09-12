@@ -26,6 +26,7 @@
     "lodash-es": "^4.17.21",
     "md5": "^2.3.0",
     "prettier": "^2.2.0",
+    "react-countup": "^6.5.3",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-infinite-viewer": "^0.28.1",

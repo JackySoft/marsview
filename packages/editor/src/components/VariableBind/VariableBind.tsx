@@ -30,7 +30,7 @@ const VariableBind: React.FC<Props> = ({ value, onChange, ...props }: any) => {
     });
   }
 
-  const val = typeof value === 'string' ? { type: 'static', value } : value;
+  const val = typeof value === 'string' || typeof value === 'number' ? { type: 'static', value } : value;
 
   return (
     <>
