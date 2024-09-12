@@ -169,7 +169,7 @@ export function renderTemplate(template: string, data: any) {
  */
 export function getPageVariable(name?: string) {
   const pageStore = usePageStore.getState().page;
-  const data: { [key: string]: any } = {};
+  const data: { [key: string]: any; } = {};
   pageStore.variables.forEach((item) => {
     data[item.name] = pageStore.variableData[item.name] ?? item.defaultValue;
   });
@@ -212,7 +212,6 @@ export function renderFormula(formula: string, eventParams?: any) {
     const pageStore = usePageStore.getState().page;
     const formData = cloneDeep(pageStore.formData || {});
     originIds.forEach((id: string) => {
-      fnParams.push(id);
       // 如果绑定的是表单项，则通过Form实例对象获取对应表单值
       const formValues = pageStore.formData?.[id] || {};
       if (!formData?.id) {
@@ -276,7 +275,7 @@ export const dateFormat = (list: Array<ComponentType>, values: any) => {
       } else if (item.type === 'EditTable') {
         columns
           .filter((item: any) => item.type === 'date')
-          .map(({ dataIndex }: { dataIndex: string }) => {
+          .map(({ dataIndex }: { dataIndex: string; }) => {
             values[name].map((item: any) => {
               if (item[dataIndex]) item[dataIndex] = dayjs(item[dataIndex]);
             });
