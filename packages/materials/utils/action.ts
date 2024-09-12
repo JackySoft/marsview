@@ -6,7 +6,7 @@ import {
   JumpLinkAction,
   MessageAction,
   MethodsAction,
-  NotifacationAction,
+  NotificationAction,
   VariableAction,
 } from '../types';
 import { getComponentRef } from './useComponentRefs';
@@ -327,7 +327,7 @@ const handleMessage = ({ action, next }: ActionNode<MessageAction>, data: any) =
 /**
  * 消息通知
  */
-const handleNotifacation = ({ action, next }: ActionNode<NotifacationAction>, data: any) => {
+const handleNotifacation = ({ action, next }: ActionNode<NotificationAction>, data: any) => {
   notification.open({
     type: action.type,
     message: action.message,
@@ -377,16 +377,16 @@ const handleJumpLink = async ({ action, next }: ActionNode<JumpLinkAction>, data
  * 变量赋值
  */
 const handleVariable = ({ action, next }: ActionNode<VariableAction>, data: any) => {
-  let value = action.assigmentType === 'reset' ? undefined : data[action.name];
+  let value = action.assignmentType === 'reset' ? undefined : data[action.name];
   /**
    * 1. 变量重置，清空variableData中的数据
    * 2. 变量静态赋值，直接使用定义的value
    * 3. 变量动态赋值，使用上一个行为中返回的数据作为结果赋值
    */
-  if (action.assigmentType === 'reset') {
+  if (action.assignmentType === 'reset') {
     value = undefined;
-  } else if (action.assigmentType === 'assigment') {
-    if (action.assigmentWay === 'static') {
+  } else if (action.assignmentType === 'assigment') {
+    if (action.assignmentWay === 'static') {
       value = action.value;
     } else {
       value = data;
@@ -415,7 +415,7 @@ const handleCopy = async ({ action, next }: ActionNode<CopyAction>, data: any) =
 /**
  * 定时器
  */
-const handleSetTimeout = async ({ action, next }: ActionNode<{ duration: number }>, data: any) => {
+const handleSetTimeout = async ({ action, next }: ActionNode<{ duration: number; }>, data: any) => {
   setTimeout(() => {
     execAction(next, data);
   }, action.duration * 1000);
@@ -424,7 +424,7 @@ const handleSetTimeout = async ({ action, next }: ActionNode<{ duration: number 
 /**
  * 组件显示和隐藏
  */
-const handleVisible = async ({ action, next }: ActionNode<{ target: string; showType: string; showResult: string; expression: any }>, data: any) => {
+const handleVisible = async ({ action, next }: ActionNode<{ target: string; showType: string; showResult: string; expression: any; }>, data: any) => {
   const ref = getComponentRef(action.target);
   if (action.showType === 'static') {
     if (action.showResult === 'show') {
@@ -447,7 +447,7 @@ const handleVisible = async ({ action, next }: ActionNode<{ target: string; show
  * 组件禁用
  */
 const handleDisable = async (
-  { action, next }: ActionNode<{ target: string; disableType: string; disableResult: string; expression: any }>,
+  { action, next }: ActionNode<{ target: string; disableType: string; disableResult: string; expression: any; }>,
   data: any,
 ) => {
   const ref = getComponentRef(action.target);
@@ -474,7 +474,7 @@ const handleDisable = async (
  * 发送飞书消息
  */
 const handleSendMessage = async (
-  { action, next }: ActionNode<{ msg_type: string; content: string; template_id: string; receive_id: number }>,
+  { action, next }: ActionNode<{ msg_type: string; content: string; template_id: string; receive_id: number; }>,
   data: any,
 ) => {
   const res = await request.post('http://mars-api.marsview.cc/api/robot/sendMessage', { ...action, variables: data });
@@ -488,7 +488,7 @@ const handleSendMessage = async (
 /**
  * 创建知识库副本
  */
-const handleCreateNode = async ({ action, next }: ActionNode<{ space_id: number; node_token: string; title: string }>, data: any) => {
+const handleCreateNode = async ({ action, next }: ActionNode<{ space_id: number; node_token: string; title: string; }>, data: any) => {
   const res = await request.post('http://mars-api.marsview.cc/api/robot/createNode', { ...action, variables: data });
   if (res.data.code === 0) {
     execAction(next?.success || next, res.data.data);
@@ -500,7 +500,7 @@ const handleCreateNode = async ({ action, next }: ActionNode<{ space_id: number;
 /**
  * 运行脚本
  */
-const handleRunScripts = async ({ action, next }: ActionNode<{ scripts: string }>, data: any) => {
+const handleRunScripts = async ({ action, next }: ActionNode<{ scripts: string; }>, data: any) => {
   const result = renderFormula(action.scripts, data);
   if (typeof result === 'boolean') {
     if (result) {
