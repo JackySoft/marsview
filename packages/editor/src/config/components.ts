@@ -335,6 +335,16 @@ const components = [
       },
       {
         icon: '',
+        name: '统计数值',
+        type: 'Statistic',
+      },
+      {
+        icon: '',
+        name: '倒计时',
+        type: 'CountDown',
+      },
+      {
+        icon: '',
         name: '图标',
         type: 'Icon',
       },
