@@ -8,14 +8,14 @@ import FormAction from './FormAction';
 // 弹框
 import OpenModalAction from './OpenModalAction';
 import MessageAction from './MessageAction';
-import NotifacationAction from './NotifacationAction';
+import NotificationAction from './NotificationAction';
 import ShowConfirmAction from './ShowConfirmAction';
 import RequestAction from './RequestAction';
 // 组件
 import VisibleAction from './VisibleAction';
 import DisableAction from './DisableAction';
 import ComponentMethods from './ComponentMethods';
-import VariableAssigment from './VariableAssigment';
+import VariableAssignment from './VariableAssignment';
 // 飞书
 import SendMessageAction from './SendMessageAction';
 import CreateNodeAction from './CreateNodeAction';
@@ -128,7 +128,7 @@ const ActionModal = (props: any, ref: any) => {
           label: '消息通知',
           key: 'notifacation',
           render: () => {
-            return <NotifacationAction />;
+            return <NotificationAction />;
           },
         },
       ],
@@ -176,7 +176,7 @@ const ActionModal = (props: any, ref: any) => {
           label: '变量赋值',
           key: 'variable',
           render: () => {
-            return <VariableAssigment form={form} />;
+            return <VariableAssignment form={form} />;
           },
         },
       ],
@@ -313,7 +313,7 @@ const ActionModal = (props: any, ref: any) => {
       form.setFieldsValue({
         scripts: `/**
 * 触发动作后，会执行该函数
-* 上下文: context        
+* 上下文: context
 * 变量: variable
 * 事件流参数: eventParams
 */

@@ -4,7 +4,7 @@ import styles from './index.module.less';
 import { useEffect, useState } from 'react';
 import VsEditor from '@/components/VsEditor';
 import VariableBind from '@/components/VariableBind/VariableBind';
-const VariableAssigment = ({ form }: { form: FormInstance }) => {
+const VariableAssignment = ({ form }: { form: FormInstance; }) => {
   const variables = usePageStore((state) => state.page.variables);
   const [dataType, setDataType] = useState('string');
 
@@ -26,9 +26,9 @@ const VariableAssigment = ({ form }: { form: FormInstance }) => {
         <p className={styles.descInfo}>给页面全局变量动态赋值。页面中支持绑定动态变量的地方都可以使用此功能来添加动态值。</p>
         <Divider />
       </div>
-      <Form.Item label="赋值类型" name="assigmentType">
+      <Form.Item label="赋值类型" name="assignmentType">
         <Radio.Group buttonStyle="solid">
-          <Radio.Button value="assigment">变量赋值</Radio.Button>
+          <Radio.Button value="assignment">变量赋值</Radio.Button>
           <Radio.Button value="reset">变量重置</Radio.Button>
         </Radio.Group>
       </Form.Item>
@@ -46,12 +46,12 @@ const VariableAssigment = ({ form }: { form: FormInstance }) => {
       </Form.Item>
       <Form.Item noStyle shouldUpdate>
         {(form: FormInstance) => {
-          const assigmentType = form.getFieldValue('assigmentType');
-          if (assigmentType === 'assigment')
+          const assignmentType = form.getFieldValue('assignmentType');
+          if (assignmentType === 'assignment')
             return (
               <Form.Item
                 label="赋值方式"
-                name="assigmentWay"
+                name="assignmentWay"
                 wrapperCol={{ span: 16 }}
                 tooltip="动态赋值会默认接收上一个行为的数据作为变量值，比如上一个行为是接口请求"
                 rules={[{ required: true, message: '请选择赋值方式' }]}
@@ -66,8 +66,8 @@ const VariableAssigment = ({ form }: { form: FormInstance }) => {
       </Form.Item>
       <Form.Item noStyle shouldUpdate>
         {(form: FormInstance) => {
-          const { assigmentType, assigmentWay } = form.getFieldsValue();
-          if (assigmentType === 'assigment' && assigmentWay === 'static')
+          const { assignmentType, assignmentWay } = form.getFieldsValue();
+          if (assignmentType === 'assignment' && assignmentWay === 'static')
             return (
               <Form.Item label="变量值" name="value" wrapperCol={{ span: 16 }} rules={[{ required: true, message: '请输入变量值' }]}>
                 {/* {dataType === 'string' && <Input placeholder="请输入变量值" />} */}
@@ -82,4 +82,4 @@ const VariableAssigment = ({ form }: { form: FormInstance }) => {
     </>
   );
 };
-export default VariableAssigment;
+export default VariableAssignment;
