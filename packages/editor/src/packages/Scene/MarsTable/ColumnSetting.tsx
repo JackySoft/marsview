@@ -107,7 +107,7 @@ const ColumnSetting = memo((props: IModalProp) => {
       values.list?.map((item: any, index: number) => {
         let name = '';
         if (typeof item.text === 'string' || item.text?.type === 'static') {
-          name = '操作列' + (item.text?.value || item.text) + '事件';
+          name = '点击' + (item.text?.value || item.text) + '事件';
         } else {
           name = `操作列动态按钮${index + 1}事件`;
         }
