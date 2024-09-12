@@ -23,7 +23,7 @@ instance.interceptors.request.use((config) => {
     headers = [],
     timeout = 8,
     timeoutErrorMessage = '请求超时，请稍后重试',
-    requestIntercetpor,
+    requestInterceptor,
   } = usePageStore.getState().page.interceptor || {};
   config.timeout = timeout * 1000;
   config.timeoutErrorMessage = timeoutErrorMessage;
@@ -37,8 +37,8 @@ instance.interceptors.request.use((config) => {
   if (config.isCors) {
     config.url = `${import.meta.env.VITE_BASE_API}/ai/proxy`;
   }
-  if (requestIntercetpor) {
-    const requestConfig = new Function('config', `return (${requestIntercetpor})(config);`);
+  if (requestInterceptor) {
+    const requestConfig = new Function('config', `return (${requestInterceptor})(config);`);
     return requestConfig(config);
   }
 
@@ -48,11 +48,11 @@ instance.interceptors.request.use((config) => {
 // 响应拦截器
 instance.interceptors.response.use(
   (response) => {
-    const { responseIntercetpor } = usePageStore.getState().page.interceptor;
+    const { responseInterceptor } = usePageStore.getState().page.interceptor;
     // 返回拦截
     let res = response;
-    if (responseIntercetpor) {
-      const responseFn = new Function('response', `return (${responseIntercetpor})(response);`);
+    if (responseInterceptor) {
+      const responseFn = new Function('response', `return (${responseInterceptor})(response);`);
       res = responseFn(response);
     }
     return res;

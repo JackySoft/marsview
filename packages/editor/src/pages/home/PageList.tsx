@@ -33,7 +33,7 @@ export default function Index() {
   const [pageSize, setPageSize] = useState<number>(12);
   const [showPreview, setShowPreview] = useState(false);
   const [previewUrl, setPreviewUrl] = useState('');
-  const creatPageRef = useRef<{ open: () => void }>();
+  const createPageRef = useRef<{ open: () => void }>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function Index() {
 
   // 新建页面
   const handleCreate = () => {
-    creatPageRef.current?.open();
+    createPageRef.current?.open();
   };
 
   // 页面操作
@@ -214,7 +214,7 @@ export default function Index() {
           )
         )}
         {/* 新建页面 */}
-        <CreatePage title="创建页面" createRef={creatPageRef} update={() => getList(1, pageSize)} />
+        <CreatePage title="创建页面" createRef={createPageRef} update={() => getList(1, pageSize)} />
       </Layout.Content>
     </>
   );

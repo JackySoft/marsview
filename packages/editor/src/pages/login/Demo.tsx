@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { FormProps } from 'antd';
-import { Button, Flex, Form, Input, InputNumber, Space } from 'antd';
+import { Button, Flex, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { login, sendEmail, regist } from '@/api/user';
+import { login, sendEmail } from '@/api/user';
 import storage from '@/utils/storage';
 import { usePageStore } from '@/stores/pageStore';
-import { LockOutlined, SafetyOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import style from './index.module.less';
 type FieldType = {
   userName: string;

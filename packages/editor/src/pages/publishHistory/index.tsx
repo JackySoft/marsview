@@ -1,5 +1,4 @@
 import { Tabs, Layout, Form, Input, DatePicker, Button, Table, Badge, Modal } from 'antd';
-import style from './index.module.less';
 import type { ColumnsType } from 'antd/es/table';
 import { useState, useEffect } from 'react';
 import { getPageDetail, publishList, rollbackPage } from '@/api';
@@ -7,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import SearchForm from '../admin/components/SearchForm';
 import { message } from '@/utils/AntdGlobal';
 import ReactJson from 'react-json-view';
+import style from './index.module.less';
 type EnvType = 'stg' | 'pre' | 'prd';
 const items: Array<{ key: EnvType; label: string }> = [
   {

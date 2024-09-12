@@ -126,7 +126,7 @@ const ActionModal = (props: any, ref: any) => {
         },
         {
           label: '消息通知',
-          key: 'notifacation',
+          key: 'notification',
           render: () => {
             return <NotificationAction />;
           },
@@ -241,7 +241,7 @@ const ActionModal = (props: any, ref: any) => {
       await form.validateFields();
       const values = form.getFieldsValue();
       // 变量赋值需要进行数据转换
-      if (values.assigmentType === 'assigment' && values.assigmentWay === 'static') {
+      if (values.assignmentType === 'assignment' && values.assignmentWay === 'static') {
         if (values.variableType === 'array' || values.variableType === 'object') {
           try {
             values.value = typeof values.value === 'string' ? JSON.parse(values.value || '') : values.value || '';
@@ -265,7 +265,7 @@ const ActionModal = (props: any, ref: any) => {
   const handleClick = (item: any) => {
     form.resetFields();
     if (item.key === 'variable') {
-      form.setFieldsValue({ assigmentType: 'assigment', assigmentWay: 'static' });
+      form.setFieldsValue({ assignmentType: 'assignment', assignmentWay: 'static' });
     } else if (item.key === 'showConfirm') {
       form.setFieldsValue({
         type: 'confirm',
@@ -280,7 +280,7 @@ const ActionModal = (props: any, ref: any) => {
         content: '操作成功',
         duration: 3,
       });
-    } else if (item.key === 'notifacation') {
+    } else if (item.key === 'notification') {
       form.setFieldsValue({
         type: 'info',
         message: '通知',

@@ -37,7 +37,7 @@ const MemberSetting = (props: any, ref: any) => {
       setConfirmLoading(true);
       await api.addPageMember({ type, page_id: type == 1 ? parseInt(projectId) : pageId, role, user_name });
       setConfirmLoading(false);
-      handleCancle();
+      handleCancel();
       props?.update();
     } catch (error) {
       setConfirmLoading(false);
@@ -45,7 +45,7 @@ const MemberSetting = (props: any, ref: any) => {
   };
 
   // 关闭
-  const handleCancle = () => {
+  const handleCancel = () => {
     form.resetFields();
     setVisible(false);
   };
@@ -55,7 +55,7 @@ const MemberSetting = (props: any, ref: any) => {
       open={visible}
       confirmLoading={confirmLoading}
       onOk={handleOk}
-      onCancel={handleCancle}
+      onCancel={handleCancel}
       okText="提交"
       cancelText="取消"
     >

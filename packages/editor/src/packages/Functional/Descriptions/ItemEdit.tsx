@@ -89,11 +89,11 @@ const ColumnSetting = memo((props: IModalProp) => {
   };
 
   // 关闭
-  const handleCancle = () => {
+  const handleCancel = () => {
     setVisible(false);
   };
   return (
-    <Modal title="描述项设置" open={visible} onOk={handleOk} onCancel={handleCancle} width={800}>
+    <Modal title="描述项设置" open={visible} onOk={handleOk} onCancel={handleCancel} width={800}>
       <Form form={form} labelCol={{ span: 8 }} wrapperCol={{ span: 14 }}>
         <Row>
           <Col span={12}>

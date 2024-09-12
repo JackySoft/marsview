@@ -26,14 +26,14 @@ export function generateUUID(): string {
   if (crypto?.randomUUID) {
     return crypto.randomUUID();
   }
-  const randomMathod = () => {
+  const randomMethod = () => {
     if (crypto?.getRandomValues) {
       return crypto.getRandomValues(new Uint8Array(1))[0];
     } else {
       return Math.floor(Math.random()) * 256;
     }
   };
-  return (String(1e7) + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) => (Number(c) ^ (randomMathod() & (15 >> (Number(c) / 4)))).toString(16));
+  return (String(1e7) + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) => (Number(c) ^ (randomMethod() & (15 >> (Number(c) / 4)))).toString(16));
 }
 
 /**
@@ -184,7 +184,7 @@ function findParentTypesById(id: string, elementsMap: { [id: string]: ComponentT
 
 /**
  * 判断组件是否允许添加
- * 主要判断表单组件只能添加到Form或者SearhForm中
+ * 主要判断表单组件只能添加到Form或者SearchForm中
  */
 export const checkComponentType = (type: string, parentId: string = '', parentType: string = '', elementsMap: { [id: string]: ComponentType }) => {
   const childFormList = components.find((item) => item.type === 'Form')?.data.map((item) => item.type);

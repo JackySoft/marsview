@@ -22,7 +22,7 @@ const InterceptorModal = ({ update }: SettingModalProp, ref: any) => {
     headers: [{ key: '', value: '' }],
     timeout: 8,
     timeoutErrorMessage: '请求超时，请稍后重试',
-    requestIntercetpor: `/**
+    requestInterceptor: `/**
  * config: 请求完整配置，请严格按照以下格式使用和返回
  * config.url: 请求地址,eg: config.url = 'https://xxx.marsview.cc/api/xxx'
  * config.params: Get请求对应参数,eg: config.params = {name:'xxx'}
@@ -33,7 +33,7 @@ const InterceptorModal = ({ update }: SettingModalProp, ref: any) => {
 function request(config){
     return config;
 }`,
-    responseIntercetpor: `/**
+    responseInterceptor: `/**
 * response: 返回值完整结构
 * response.config: 请求完整配置。
 * response.data: 请求返回数据

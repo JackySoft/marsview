@@ -33,7 +33,7 @@ export default {
           { value: 'curMonth', label: '本月' },
           { value: 'curQuarter', label: '本季度' },
           { value: 'curYear', label: '本年' },
-          { value: 'yestoday', label: '昨天' },
+          { value: 'yesterday', label: '昨天' },
           { value: 'lastWeek', label: '最近一周' },
           { value: 'lastMonth', label: '最近一月' },
           { value: 'last3Month', label: '最近三月' },

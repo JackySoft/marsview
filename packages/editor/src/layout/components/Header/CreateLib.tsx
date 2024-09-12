@@ -29,17 +29,17 @@ const CreateLib = (props: IModalProp) => {
     if (valid) {
       await createLib({ tag, name, description });
       props.update?.();
-      handleCancle();
+      handleCancel();
     }
   };
 
   // 关闭
-  const handleCancle = () => {
+  const handleCancel = () => {
     form.resetFields();
     setVisible(false);
   };
   return (
-    <Modal title="创建组件库" open={visible} onOk={handleOk} onCancel={handleCancle} width={500} okText="确定" cancelText="取消">
+    <Modal title="创建组件库" open={visible} onOk={handleOk} onCancel={handleCancel} width={500} okText="确定" cancelText="取消">
       <Form form={form} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }}>
         <Form.Item
           label="组件标识"

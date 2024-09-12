@@ -1,7 +1,6 @@
 import { Input, Modal, Form, Radio } from 'antd';
 import { useImperativeHandle, useState, MutableRefObject } from 'react';
 import { createPageData, updatePageData } from '@/api';
-import { usePageStore } from '@/stores/pageStore';
 import { PageItem } from '@/api/pageMember';
 /**
  * 创建页面
@@ -52,7 +51,7 @@ const CreatePage = (props: IModalProp) => {
         }
         // 编辑器界面 - 左侧菜单修改后刷新
         props.update?.();
-        handleCancle();
+        handleCancel();
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -61,7 +60,7 @@ const CreatePage = (props: IModalProp) => {
   };
 
   // 关闭
-  const handleCancle = () => {
+  const handleCancel = () => {
     form.resetFields();
     setVisible(false);
   };
@@ -71,7 +70,7 @@ const CreatePage = (props: IModalProp) => {
       open={visible}
       confirmLoading={loading}
       onOk={handleOk}
-      onCancel={handleCancle}
+      onCancel={handleCancel}
       width={500}
       okText="确定"
       cancelText="取消"

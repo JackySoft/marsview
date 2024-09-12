@@ -38,10 +38,10 @@ const SettingForm = function () {
       <Form.Item label="超时提示" name="timeoutErrorMessage">
         <Input placeholder="请输入超时提示" />
       </Form.Item>
-      <Form.Item label="请求适配" name="requestIntercetpor">
+      <Form.Item label="请求适配" name="requestInterceptor">
         <VsEditor />
       </Form.Item>
-      <Form.Item label="返回适配" name="responseIntercetpor">
+      <Form.Item label="返回适配" name="responseInterceptor">
         <VsEditor />
       </Form.Item>
     </>

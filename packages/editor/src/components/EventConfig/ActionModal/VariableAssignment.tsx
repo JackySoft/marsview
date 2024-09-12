@@ -1,10 +1,10 @@
-import { Form, Select, Divider, Input, Radio, InputNumber, Switch, FormInstance } from 'antd';
+import { Form, Select, Divider, Input, Radio, FormInstance } from 'antd';
 import { usePageStore } from '@/stores/pageStore';
-import styles from './index.module.less';
 import { useEffect, useState } from 'react';
 import VsEditor from '@/components/VsEditor';
 import VariableBind from '@/components/VariableBind/VariableBind';
-const VariableAssignment = ({ form }: { form: FormInstance; }) => {
+import styles from './index.module.less';
+const VariableAssignment = ({ form }: { form: FormInstance }) => {
   const variables = usePageStore((state) => state.page.variables);
   const [dataType, setDataType] = useState('string');
 
