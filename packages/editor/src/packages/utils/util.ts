@@ -7,6 +7,7 @@ import { usePageStore } from '@/stores/pageStore';
 import { ComponentType } from '../types';
 import { get } from 'lodash-es';
 import { cloneDeep } from 'lodash-es';
+import copy from 'copy-to-clipboard';
 
 /**
  * 生成ID
@@ -141,8 +142,8 @@ export const isNotEmpty = (value: any) => {
  * @param text 复制内容
  * @param callback 兼容历史代码，作为成功识别的回调,1:成功 2:失败
  */
-export function copyText(text: string): Promise<any> {
-  return navigator.clipboard.writeText(text);
+export function copyText(text: string) {
+  return copy(text);
 }
 
 /**

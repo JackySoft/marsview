@@ -11,6 +11,7 @@ import { usePageStore } from '@/stores/pageStore';
 import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
 import { message } from '@/utils/AntdGlobal';
 import { defaultsDeep } from 'lodash-es';
+import copy from 'copy-to-clipboard';
 import styles from './index.module.less';
 
 /**
@@ -94,6 +95,7 @@ const ConfigPanel = memo(() => {
   // 复制组件ID
   const handleCopy = () => {
     navigator.clipboard.writeText(selectedElement?.id || pageName);
+    copy(selectedElement?.id || pageName);
     message.info('复制成功');
     setCopy(true);
     setTimeout(() => {
