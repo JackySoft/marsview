@@ -259,6 +259,8 @@ const Editor = () => {
   return (
     <ConfigProvider
       theme={{
+        cssVar: true,
+        hashed: false,
         token: {
           colorPrimary: theme || '#1677ff',
           colorLink: theme || '#1677ff',

@@ -25,7 +25,7 @@ export default ({ id, type, config }, ref) => {
 
 // 默认组件样式
 export const defaultLessCode = `.bgColor{
-  background-color: coral;
+  background-color: #4096ff;
   height: 150px;
   padding: 50px;
   text-align: center;

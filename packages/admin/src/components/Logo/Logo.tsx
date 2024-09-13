@@ -11,9 +11,9 @@ function Logo() {
   useEffect(() => {
     // 左右布局模式下，Logo背景需要跟着主题色变化
     if (projectInfo.menu_theme_color === 'dark') {
-      setStyle({ backgroundColor: '#001529', color: '#fff', height: 60, padding: '0 24px' });
+      setStyle({ backgroundColor: '#001529', color: '#fff', height: 60, padding: '10px 24px' });
     } else {
-      setStyle({ backgroundColor: '#fff', color: '#000', height: 60, padding: '0 24px' });
+      setStyle({ backgroundColor: '#fff', color: '#000', height: 60, padding: '10px 24px' });
     }
     /**
      * 1. 名称是中文，7个字，正常显示。
@@ -34,7 +34,7 @@ function Logo() {
       }}
       style={style}
     >
-      <img src={projectInfo.logo || 'https://marsview.cdn.bcebos.com/mars-logo.png'} width={38} />
+      <img src={projectInfo.logo || 'https://marsview.cdn.bcebos.com/mars-logo.png'} />
       {!collapsed && (
         <span className={styles.logoName} style={nameStyle}>
           {projectInfo.name}

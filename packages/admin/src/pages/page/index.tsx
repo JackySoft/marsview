@@ -48,12 +48,13 @@ export default function () {
     <ConfigProvider
       locale={locale}
       theme={{
+        cssVar: true,
+        hashed: false,
         token: {
           colorPrimary: theme,
           colorLink: theme,
           colorInfo: theme,
         },
-        hashed: false,
       }}
     >
       <Page />
