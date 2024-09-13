@@ -87,8 +87,7 @@ export default function Login() {
         <div className={style.form}>
           {type === 'login' ? (
             <div className={style.title}>
-              <img src="/imgs/mars-logo.png" width={45} />
-              <span>Marsview</span>
+              <img src="/imgs/logo.png" width={150} />
             </div>
           ) : (
             <div className={style.title}>邮箱注册</div>

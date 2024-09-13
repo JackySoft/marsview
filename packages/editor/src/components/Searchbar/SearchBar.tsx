@@ -1,22 +1,15 @@
 import { memo } from 'react';
-import { Button, Form, Input, Radio, Space } from 'antd';
+import { Button, Form, Input, Space } from 'antd';
 import { PlusOutlined, RedoOutlined } from '@ant-design/icons';
 import styles from './index.module.less';
 
 const SearchBar = memo((props: any) => {
   const { form, from, submit, refresh, onCreate } = props;
-  const options = [
-    { label: '我的', value: 1 },
-    { label: '市场', value: 2 },
-  ];
   return (
     <>
       <div className={styles.searchBar}>
         <div className={styles.searchBarForm}>
           <Form form={form} layout="inline" initialValues={{ type: 1 }}>
-            <Form.Item name="type">
-              <Radio.Group options={options} onChange={submit} optionType="button" buttonStyle="solid" />
-            </Form.Item>
             <Form.Item name="keyword" style={{ width: 200 }}>
               <Input placeholder={`请输入${from}名称`} onPressEnter={submit} />
             </Form.Item>

@@ -1,5 +1,5 @@
 import { RouterProvider } from 'react-router-dom';
-import { ConfigProvider, App as AntdApp } from 'antd';
+import { ConfigProvider, App as AntdApp, theme } from 'antd';
 import router from './router';
 import AntdGlobal from '@/utils/AntdGlobal';
 import locale from 'antd/locale/zh_CN';
@@ -15,6 +15,8 @@ function App() {
     <ConfigProvider
       locale={locale}
       theme={{
+        cssVar: true,
+        hashed: false,
         token: {
           colorPrimary: '#7D33FF',
           colorLink: '#7D33FF',

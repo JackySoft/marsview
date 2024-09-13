@@ -123,7 +123,7 @@ export default function Index() {
         <div className={styles.projectCard} onClick={() => handleAction(item.id, item.is_edit)}>
           <Card.Meta
             style={{ cursor: isAuth ? 'pointer' : 'not-allowed' }}
-            avatar={<img src={item.logo} style={{ width: 32 }} />}
+            avatar={<img src={item.logo} style={{ width: 50 }} />}
             title={item.name}
             description={
               <>

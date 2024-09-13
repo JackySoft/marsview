@@ -14,7 +14,7 @@ import styles from './index.module.less';
  */
 const Header = memo(() => {
   const [avatar, setAvatar] = useState('');
-  const { userName } = usePageStore((state) => state.userInfo);
+  const { userName = '-' } = usePageStore((state) => state.userInfo);
   const { projectInfo, collapsed, updateCollapsed } = useProjectStore();
   const navigate = useNavigate();
 
