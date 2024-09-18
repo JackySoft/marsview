@@ -8,7 +8,8 @@ function HomeHeader() {
   return (
     <div className={style.homeHeader}>
       <div className={style.logo}>
-        <img width={130} src="/imgs/logo.png" alt="logo" />
+        <img width={40} src="https://marsview.cdn.bcebos.com/mars-logo.png" alt="logo" />
+        <span>工作台</span>
       </div>
       <Dropdown
         menu={{

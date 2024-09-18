@@ -1,4 +1,4 @@
-import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Image } from 'antd';
+import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Image, Flex } from 'antd';
 import { memo, useEffect, useState } from 'react';
 import { ProjectOutlined, OneToOneOutlined, CaretDownFilled, DownOutlined, AppstoreOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -185,7 +185,8 @@ const Header = memo(() => {
     <>
       <Layout.Header className={isNav ? styles.homeHeader : styles.layoutHeader}>
         <div className={styles.logo} onClick={goHome}>
-          <img src="/imgs/logo.png" width={130} />
+          <img src="https://marsview.cdn.bcebos.com/mars-logo.png" width={42} />
+          <span>Marsview</span>
         </div>
         {/* 首页 - 导航菜单 */}
         {isNav && (
