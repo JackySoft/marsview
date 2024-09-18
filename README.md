@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="http://marsview.cc/"><img src="/.github/imgs/logo.png" width="150" alt="marsview logo"></a>
+<a href="http://marsview.cc/"><img src="https://marsview.cdn.bcebos.com/mars-logo.png" width="150" alt="marsview logo"></a>
 
 # Marsview 低代码平台
 

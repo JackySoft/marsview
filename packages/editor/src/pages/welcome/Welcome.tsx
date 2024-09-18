@@ -34,7 +34,8 @@ export default function Welcome() {
         }}
       >
         <div className={style.logo}>
-          <img src="/imgs/logo.png" width="150" />
+          <img src="https://marsview.cdn.bcebos.com/mars-logo-light.png" width="40" />
+          <span>Marsview</span>
         </div>
         <div className={style.doc}>
           <a href="http://docs.marsview.cc" target="_blank">
@@ -122,7 +123,7 @@ export default function Welcome() {
         </div>
       </section>
       <section className={style.footer}>
-        <img src="/imgs/logo.png" />
+        <img src="https://marsview.cdn.bcebos.com/mars-logo-light.png" />
         <h1>欢迎使用 Marsview 零代码搭建平台</h1>
         <Link to="/projects">
           <Button type="primary" size="large">
