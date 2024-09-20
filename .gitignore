@@ -8,6 +8,7 @@ packages/**/*/node_modules
 /package-lock.json
 # production
 /dist
+/shell
 # misc
 .DS_Store
 cache
