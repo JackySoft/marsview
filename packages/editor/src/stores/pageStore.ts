@@ -374,7 +374,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           if (!item.config.props.items) item.config.props.items = [];
           item.config.props.items[payload.index] = payload.props;
         } else {
-          if (!item.config.props.actionList) item.config.props.actionList = [];
+          if (!item.config.props.bulkActionList) item.config.props.bulkActionList = [];
           item.config.props.bulkActionList[payload.index] = payload.props;
         }
         state.isUpdateToolbar = !state.isUpdateToolbar;

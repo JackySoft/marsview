@@ -148,7 +148,7 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
     } else if (node.type === 'EditTable') {
       const name = elementsMap[node.id]?.config.props.field;
       if (name) form.setFieldValue('expression', `${beforeExpression} context.${node.parentId}.${name}`.trimStart());
-    } else if (node.type === 'Form') {
+    } else if (node.type === 'Form' || node.type === 'SearchForm') {
       form.setFieldValue('expression', `${beforeExpression}  context.${node.id}`);
     } else {
       const formItem = elementsMap[node.id]?.config.props.formItem;

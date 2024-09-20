@@ -274,31 +274,31 @@ const StyleConfig = () => {
       {!['', undefined, 'static'].includes(form.getFieldValue(['scopeStyle', 'position'])) && (
         <Form.Item label="位置" {...basicLayout}>
           <Flex gap={3}>
-            <Form.Item name="top" noStyle>
+            <Form.Item name={['scopeStyle', 'top']} noStyle>
               <InputPx placeholder="T: 10" />
             </Form.Item>
-            <Form.Item name="right" noStyle>
+            <Form.Item name={['scopeStyle', 'right']} noStyle>
               <InputPx placeholder="R: 10" />
             </Form.Item>
           </Flex>
           <Flex gap={3} style={{ marginTop: 10 }}>
-            <Form.Item name="bottom" noStyle>
+            <Form.Item name={['scopeStyle', 'bottom']} noStyle>
               <InputPx placeholder="B: 10" />
             </Form.Item>
-            <Form.Item name="left" noStyle>
+            <Form.Item name={['scopeStyle', 'left']} noStyle>
               <InputPx placeholder="L: 10" />
             </Form.Item>
           </Flex>
         </Form.Item>
       )}
       <TitleStyle>边框</TitleStyle>
-      <Form.Item name={['scopeStyle', 'borderRadius']} label={'圆角'}>
+      <Form.Item name={['scopeStyle', 'borderRadius']} label={'圆角'} {...basicLayout}>
         <InputPx placeholder="eg：5" />
       </Form.Item>
-      <Form.Item name={['scopeStyle', 'border']} label={'边框'}>
+      <Form.Item name={['scopeStyle', 'border']} label={'边框'} {...basicLayout}>
         <Input placeholder="eg：1px solid #fff" />
       </Form.Item>
-      <Form.Item label="阴影" name={['scopeStyle', 'boxShadow']}>
+      <Form.Item label="阴影" name={['scopeStyle', 'boxShadow']} {...basicLayout}>
         <Shadow />
       </Form.Item>
     </Form>

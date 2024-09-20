@@ -101,6 +101,9 @@ export default {
       formItem: {
         label: '分段控制器',
         name: 'segmented',
+        labelCol: {
+          offset: -1,
+        },
       },
       defaultValue: '每周',
       formWrap: {},

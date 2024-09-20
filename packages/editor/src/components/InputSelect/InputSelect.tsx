@@ -18,6 +18,7 @@ const InputSelect: React.FC = ({ value, onChange, ...props }: any) => {
   const addItem = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     e.preventDefault();
     if (name.trim() === '') return;
+    if (items.find((item) => item.value === name)) return;
     setItems([...items, { label: name, value: name }]);
     setName('');
     setTimeout(() => {

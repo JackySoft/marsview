@@ -4,6 +4,7 @@ import * as icons from '@ant-design/icons';
 import { ComponentType } from '@/packages/types';
 import { isNull } from '@/packages/utils/util';
 import { FormContext } from '@/packages/utils/context';
+import omit from 'lodash-es/omit';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {
@@ -76,7 +77,7 @@ const MInput = ({ id, type, config, onChange, onBlur, onPressEnter }: ComponentT
     visible && (
       <Form.Item {...config.props.formItem} data-id={id} data-type={type}>
         <Input
-          {...config.props.formWrap}
+          {...omit(config.props.formWrap, ['prefixIcons', 'suffixIcons'])}
           disabled={disabled}
           variant={config.props.formWrap.variant || undefined}
           style={config.style}

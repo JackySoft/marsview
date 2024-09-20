@@ -1,4 +1,4 @@
-import { Input, Modal, Form, Col, Row, Select, Switch } from 'antd';
+import { Input, Modal, Form, Col, Row, Select, Switch, InputNumber } from 'antd';
 import { useImperativeHandle, useState, MutableRefObject, memo } from 'react';
 import { useForm } from 'antd/es/form/Form';
 import { ComponentType } from '../../types';
@@ -8,7 +8,7 @@ import { createId } from '@/utils/util';
 
 export interface IModalProp {
   columnRef: MutableRefObject<{ open: (index: number) => void } | undefined>;
-  update: (title: string, index: number) => void;
+  update: (values: any, index: number) => void;
 }
 /**
  * 列设置
@@ -83,7 +83,7 @@ const ColumnSetting = memo((props: IModalProp) => {
         id: element.id,
         events,
       });
-      props.update(values.label, index);
+      props.update(values, index);
       setVisible(false);
     });
   };
@@ -110,7 +110,7 @@ const ColumnSetting = memo((props: IModalProp) => {
         <Row>
           <Col span={12}>
             <Form.Item label="跨列数" name="span">
-              <Input />
+              <InputNumber />
             </Form.Item>
           </Col>
           <Col span={12}>
