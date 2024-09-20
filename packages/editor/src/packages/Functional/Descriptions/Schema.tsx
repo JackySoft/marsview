@@ -91,10 +91,10 @@ export default {
       size: 'default',
       empty: '-',
       items: [
-        { label: '名称', name: 'name', type: 'text' },
-        { label: '类型', name: 'type', type: 'text' },
-        { label: '寿命', name: 'time', type: 'text' },
-        { label: '地区分布', name: 'area', type: 'text' },
+        { label: '名称', name: 'name', type: 'text', span: 1 },
+        { label: '类型', name: 'type', type: 'text', span: 1 },
+        { label: '寿命', name: 'time', type: 'text', span: 1 },
+        { label: '地区分布', name: 'area', type: 'text', span: 1 },
       ],
     },
     // 组件样式
