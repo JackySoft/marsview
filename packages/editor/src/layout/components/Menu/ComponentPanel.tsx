@@ -50,7 +50,7 @@ const ComponentPanel = () => {
           searchInArray(item.data, { ...item, data: [] });
         } else if (item.name.includes(keyword)) {
           parent.data.push(item);
-          if (results.filter((r) => r.type === parent.type).length > 0) return;
+          if (results.filter((r) => r.type === parent.type).length > 0) continue;
           results.push({ ...parent });
         }
       }
