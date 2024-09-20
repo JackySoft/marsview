@@ -1,22 +1,24 @@
-import { Flex, Form, Input, Radio, Select } from 'antd';
+import { Flex, Form, InputNumber, Radio } from 'antd';
 import { useEffect, useState } from 'react';
 import MColorPicker from '../ColorPicker';
 
 const Shadow = (props: any) => {
   const [type, setType] = useState('none');
   const [color, setColor] = useState('#000');
-  const [x, setX] = useState('0');
-  const [y, setY] = useState('0');
-  const [blur, setBlur] = useState('0');
-  const [spread, setSpread] = useState('0');
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+  const [blur, setBlur] = useState(0);
+  const [spread, setSpread] = useState(0);
   useEffect(() => {
-    const list = props.value?.split(' ');
+    if (props.value === 'none') return;
+    // 将 #000 10px 10px 10px 10px inset 转换为 ['#000', 10, 10, 10, 10, 'inset]
+    const list = props.value?.replace(/px/g, '').split(' ');
     if (list && list.length > 0) {
       setColor(list[0] || '#000');
-      setX(list[1] || '0px');
-      setY(list[2] || '0px');
-      setBlur(list[3] || '0px');
-      setSpread(list[4] || '0px');
+      setX(list[1] || 0);
+      setY(list[2] || 0);
+      setBlur(list[3] || 0);
+      setSpread(list[4] || 0);
       setType(list[5] || '');
     }
   }, []);
@@ -25,31 +27,34 @@ const Shadow = (props: any) => {
     if (value === 'none') {
       props.onChange('none');
     } else {
-      props.onChange(`${color} ${x} ${y} ${blur} ${spread} ${value}`);
+      props.onChange(`${color} ${x}px ${y}px ${blur}px ${spread}px ${value}`);
     }
   };
 
+  // 单独设置颜色
+  const handleChangeColor = (val: string) => {
+    setColor(val);
+    props.onChange(`${val} ${x}px ${y}px ${blur}px ${spread}px ${type}`);
+  };
+
   // 设置阴影值
-  const handleChange = (condition: string, val: string) => {
-    if (condition === 'color') {
-      setColor(val);
-      props.onChange(`${val} ${x} ${y} ${blur} ${spread} ${type}`);
-    } else if (condition === 'x') {
-      if (val === '') val = '0px';
+  const handleChange = (condition: string, val: number | null) => {
+    if (condition === 'x') {
+      if (!val) val = 0;
       setX(val);
-      props.onChange(`${color} ${val} ${y} ${blur} ${spread} ${type}`);
+      props.onChange(`${color} ${val}px ${y}px ${blur}px ${spread}px ${type}`);
     } else if (condition === 'y') {
-      if (val === '') val = '0px';
+      if (!val) val = 0;
       setY(val);
-      props.onChange(`${color} ${x} ${val} ${blur} ${spread} ${type}`);
+      props.onChange(`${color} ${x}px ${val}px ${blur}px ${spread}px ${type}`);
     } else if (condition === 'blur') {
-      if (val === '') val = '0px';
+      if (!val) val = 0;
       setBlur(val);
-      props.onChange(`${color} ${x} ${y} ${val} ${spread} ${type}`);
+      props.onChange(`${color} ${x}px ${y}px ${val}px ${spread}px ${type}`);
     } else if (condition === 'spread') {
-      if (val === '') val = '0px';
+      if (!val) val = 0;
       setSpread(val);
-      props.onChange(`${color} ${x} ${y} ${blur} ${val} ${type}`);
+      props.onChange(`${color} ${x}px ${y}px ${blur}px ${val}px ${type}`);
     }
   };
 
@@ -64,22 +69,22 @@ const Shadow = (props: any) => {
       </Form.Item>
 
       <Form.Item label="颜色" style={{ marginBlock: 14 }}>
-        <MColorPicker showText allowClear value={color} onChange={(val: string) => handleChange('color', val)} />
+        <MColorPicker showText allowClear value={color} onChange={(val: string) => handleChangeColor(val)} />
       </Form.Item>
       <Flex gap={10}>
         <Form.Item label="X轴">
-          <Input value={x} onChange={(e) => handleChange('x', e.target.value)} />
+          <InputNumber value={x} onChange={(num) => handleChange('x', num)} style={{ width: '100%' }} />
         </Form.Item>
         <Form.Item label="Y轴">
-          <Input value={y} onChange={(e) => handleChange('y', e.target.value)} />
+          <InputNumber value={y} onChange={(num) => handleChange('y', num)} style={{ width: '100%' }} />
         </Form.Item>
       </Flex>
       <Flex gap={10} style={{ marginTop: -10, marginBottom: -24 }}>
         <Form.Item label="模糊">
-          <Input value={blur} onChange={(e) => handleChange('blur', e.target.value)} />
+          <InputNumber value={blur} onChange={(num) => handleChange('blur', num)} style={{ width: '100%' }} />
         </Form.Item>
         <Form.Item label="扩展">
-          <Input value={spread} onChange={(e) => handleChange('spread', e.target.value)} />
+          <InputNumber value={spread} onChange={(num) => handleChange('spread', num)} style={{ width: '100%' }} />
         </Form.Item>
       </Flex>
     </>
