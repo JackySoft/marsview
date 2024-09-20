@@ -433,7 +433,9 @@ const handleVisible = async ({ action, next }: ActionNode<{ target: string; show
       ref.hide({ ...data });
     }
   } else {
-    const result = action.expression;
+    const expression = action.expression ?? {};
+    const formula = expression.value;
+    const result = renderFormula(formula);
     if (result) {
       ref.show({ ...data });
     } else {

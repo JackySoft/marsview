@@ -69,7 +69,7 @@ export default {
       name: ['formWrap', 'multiple'],
     },
     {
-      type: 'Switch',
+      type: 'Input',
       label: '默认提示',
       name: ['formWrap', 'placeholder'],
     },

@@ -32,8 +32,9 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
     setVisible(true);
     setLoading(true);
     // 获取菜单列表
-    await getMenus();
-    await getMyPageList();
+    const p1 = getMenus();
+    const p2 = getMyPageList();
+    await Promise.all([p1, p2]);
     setLoading(false);
     if (data && project_id) {
       form.setFieldsValue({ ...data, project_id: parseInt(project_id), code: data.code?.split('_')[2] || '' });

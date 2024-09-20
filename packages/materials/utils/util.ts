@@ -330,7 +330,7 @@ export const handleArrayVariable = (list: any = [], data: any = {}) => {
         }
       } else {
         if (next.value.type === 'static') {
-          if (isNotEmpty(next.value)) {
+          if (isNotEmpty(next.value.value)) {
             // 解析模板语法
             const val: any = renderTemplate(next.value.value, data);
             // 数字转换
@@ -367,7 +367,7 @@ export const loadStyle = (id: string, src: string) => {
     link.href = src;
     link.onload = resolve;
     link.onerror = reject;
-
+    link.setAttribute('id', id);
     // 将link元素添加到DOM的head部分
     document.getElementsByTagName('HEAD')[0].appendChild(link);
   });
