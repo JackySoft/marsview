@@ -69,7 +69,7 @@ const FlexStyle = ({ form }: { form: FormInstance }) => {
                 },
                 {
                   label: '终点对齐',
-                  value: 'flex-right',
+                  value: 'flex-end',
                 },
                 {
                   label: '居中对齐',
@@ -82,6 +82,10 @@ const FlexStyle = ({ form }: { form: FormInstance }) => {
                 {
                   label: '环绕对齐',
                   value: 'space-around',
+                },
+                {
+                  label: '均匀对齐',
+                  value: 'space-evenly',
                 },
               ]}
               suffixIcon={<CaretDownOutlined />}
@@ -114,7 +118,7 @@ const FlexStyle = ({ form }: { form: FormInstance }) => {
               suffixIcon={<CaretDownOutlined />}
             />
           </Form.Item>
-          <Form.Item name={['scopeStyle', 'flexWrap']} label={'换行方式'}>
+          <Form.Item name={['scopeStyle', 'flexWrap']} label={'换行方式'} wrapperCol={{ span: 18 }}>
             <Radio.Group buttonStyle="solid" optionType="button">
               <Radio value="nowrap">不换</Radio>
               <Radio value="wrap">换行</Radio>

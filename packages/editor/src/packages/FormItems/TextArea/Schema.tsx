@@ -134,6 +134,9 @@ export default {
       formItem: {
         label: '多行输入框',
         name: 'textarea',
+        labelCol: {
+          offset: -1,
+        },
       },
       // 组件默认属性值
       formWrap: {
