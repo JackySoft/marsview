@@ -85,17 +85,19 @@ function CustomLib(_: any, ref: any) {
 
   return (
     <Spin spinning={loading}>
-      <Flex wrap="wrap" gap={5} justify="space-between" style={{ marginTop: 10 }}>
-        {list.map((item) => {
-          return (
-            <div style={{ width: '45%' }} key={item.id}>
-              <div className={styles.menuItemLib} onClick={() => handleClick(item)}>
-                {item.name}
+      <div style={{ overflow: 'auto', height: 'calc(100vh - 200px)' }}>
+        <Flex wrap="wrap" gap={5} justify="space-between" style={{ marginTop: 10 }}>
+          {list.map((item) => {
+            return (
+              <div style={{ width: '45%' }} key={item.id}>
+                <div className={styles.menuItemLib} onClick={() => handleClick(item)}>
+                  {item.name}
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </Flex>
+            );
+          })}
+        </Flex>
+      </div>
     </Spin>
   );
 }
