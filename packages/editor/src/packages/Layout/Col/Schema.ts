@@ -39,7 +39,7 @@ export default {
       label: '右推格数',
       name: 'push',
       props: {
-        placeholder: '左侧偏移格数',
+        placeholder: '右侧偏移格数',
       },
     },
   ],
