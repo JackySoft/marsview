@@ -13,6 +13,10 @@ export default function BreadList() {
   useEffect(() => {
     if (!pageId) return;
     const menuItem = pageMap[Number(pageId)];
+    if (pathname.endsWith('/welcome')) {
+      setMenuPath([{ title: '欢迎页' }]);
+      return;
+    }
     if (!menuItem) return;
     const breadList = [] as any[];
     let cur = menuItem;
