@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/JackySoft/marsview/compare/v3.1.2...v3.2.0) (2024-09-20)
+
+
+### Features
+
+* 还原Logo设计 ([cc6799d](https://github.com/JackySoft/marsview/commit/cc6799d8c752f6ce53575a685299a260de7c6dcf))
+
+
+### Bug Fixes
+
+* 显示欢迎页时的面包屑 ([4351931](https://github.com/JackySoft/marsview/commit/4351931b60eb28c8774034a74e0b885fe994a316))
+* 修复代码逻辑问题，优化部分组件显示 ([0040ae4](https://github.com/JackySoft/marsview/commit/0040ae4fe8a13370e55053f4c00da38127744cd2))
+* 修复拼写错误 ([c82376e](https://github.com/JackySoft/marsview/commit/c82376e52af8b4a4b618cf3ddf4cffd55148a140))
+* 修复一些细小的代码逻辑问题 ([5e2886f](https://github.com/JackySoft/marsview/commit/5e2886f84d0759d0fda2b55955eb29da8d1c35c1))
+* 修复ComponentPanel中搜索系统组件时，每个展开的面板下最多只显示两个的问题 ([acbea3c](https://github.com/JackySoft/marsview/commit/acbea3c29556bfc8177a8efefc5b4b3ff5266c4a))
+* 修复CustomLib中显示自定义组件的列表时无法滚动的问题 ([e8d359d](https://github.com/JackySoft/marsview/commit/e8d359dcad76b250409d1a9b2cde21a5ae774552))
+* 修复Descriptions修改item设置时不生效的问题 ([c911ea3](https://github.com/JackySoft/marsview/commit/c911ea34f0d9eac8011cd9b578d907edf2964723))
+* 修复StyleConfig组件中设置top、right、bottom、left偏移不生效的问题，调整组件显示 ([5ee41e0](https://github.com/JackySoft/marsview/commit/5ee41e0655d2b568b83e7da3a2afcf62c1758827))
+
+
+### Others
+
+*  替换二维码 ([559f1f1](https://github.com/JackySoft/marsview/commit/559f1f1012b8dfb965d358d5b9223521fe95e794))
+
 ### [3.1.2](https://github.com/JackySoft/marsview/compare/v3.1.1...v3.1.2) (2024-09-13)
 
 
