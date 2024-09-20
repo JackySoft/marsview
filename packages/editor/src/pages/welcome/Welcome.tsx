@@ -16,7 +16,7 @@ export default function Welcome() {
         setShadow(false);
       }
     };
-    () => {
+    return () => {
       el.onscroll = null;
     };
   }, []);
