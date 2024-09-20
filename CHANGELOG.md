@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0](https://github.com/JackySoft/marsview/compare/v3.2.0...v3.3.0) (2024-09-20)
+
+
+### Bug Fixes
+
+* 修复StyleConfig中阴影问题 ([b238ead](https://github.com/JackySoft/marsview/commit/b238ead8cd095ca322ae92ca1e2477d55edbea8a))
+
+
+### Others
+
+* 替换群二维码 ([b2bee91](https://github.com/JackySoft/marsview/commit/b2bee9197795398504c4d8422c4b384d44345ff2))
+
 ## [3.2.0](https://github.com/JackySoft/marsview/compare/v3.1.2...v3.2.0) (2024-09-20)
 
 
