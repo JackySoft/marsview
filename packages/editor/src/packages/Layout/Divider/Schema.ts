@@ -48,6 +48,11 @@ export default {
         ],
       },
     },
+    {
+      type: 'ColorPicker',
+      label: '分割线颜色',
+      name: ['style', 'borderColor'],
+    },
   ],
   config: {
     // 组件默认属性值

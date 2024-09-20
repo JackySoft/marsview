@@ -84,6 +84,10 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
     form.resetFields();
     const values = form.getFieldsValue();
     onReset && onReset(dateFormat(elements, values));
+    setFormData({
+      name: id,
+      value: values,
+    });
   };
 
   // 监听表单值变化
@@ -156,7 +160,7 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
             {elements.length ? <MarsRender elements={elements} /> : <div className="slots">拖拽表单组件到这里</div>}
             <div ref={emptyRef}></div>
           </div>
-          <Space style={{ alignItems: 'baseline' }}>
+          <Space style={{ alignItems: 'baseline', marginLeft: 10 }}>
             {submitText ? (
               <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
                 {submitText}

@@ -236,7 +236,7 @@ const Header = memo(() => {
           )}
           {/* 编辑和发布 */}
           {(isEditPage || isPublishPage) && mode === 'edit' && (
-            <Dropdown menu={{ items: pathItems, selectable: true, defaultSelectedKeys: [pageFrom] }}>
+            <Dropdown menu={{ items: pathItems, selectable: true, defaultSelectedKeys: [...pageFrom.split('/').slice(-1)] }}>
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
                   {isEditPage ? '编辑' : '发布记录'}
