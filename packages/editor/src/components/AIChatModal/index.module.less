@@ -30,6 +30,7 @@
   color: #7d33ff;
   padding: 10px;
   border-bottom: 1px solid #e0e0e6;
+
   .closeButton {
     // position: absolute;
     // top: 20px;
@@ -46,17 +47,20 @@
       transform: rotate(90deg) scale(1.2);
     }
   }
+
   .title {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   .marsailogo {
     width: 35px;
     height: 35px;
     margin-top: 4px;
     margin-right: 4px;
   }
+
   span {
     font-size: 20px;
     font-weight: bold;
@@ -92,28 +96,33 @@
   flex-direction: column;
   align-items: flex-end;
   margin-bottom: 20px;
+
   .chatInfo {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+
     .avatar {
       width: 30px;
       height: 30px;
       border-radius: 50%;
       margin-left: 10px;
+
       img {
         width: 100%;
         height: 100%;
         border-radius: 50%;
       }
     }
+
     .chatName {
       font-size: 14px;
       font-weight: bold;
     }
   }
+
   .chatText {
-    width: fix-content;
+    width: fit-content;
     margin: 0 30px;
     font-size: 14px;
     padding: 10px;
@@ -129,21 +138,25 @@
   flex-direction: column;
   align-items: flex-start;
   margin: 10px 0;
+
   .chatInfo {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+
     .avatar {
       width: 30px;
       height: 30px;
       border-radius: 50%;
       margin-right: 10px;
+
       img {
         width: 100%;
         height: 100%;
         border-radius: 50%;
       }
     }
+
     .chatName {
       font-size: 14px;
       font-weight: bold;
@@ -151,7 +164,7 @@
   }
 
   .chatText {
-    width: fix-content;
+    width: fit-content;
     margin: 0 30px;
     font-size: 14px;
     padding: 10px;
@@ -170,11 +183,13 @@
   .chatText {
     font-size: 12px;
   }
+
   .load {
     font-size: 12px;
     margin-left: 10px;
   }
 }
+
 .chatExamples {
   display: flex;
   margin-top: 10px;
@@ -182,12 +197,14 @@
   width: 100%;
   margin-left: 50px;
   justify-content: flex-start;
+
   .chatExampleItem {
     border: 1px solid #e0e0e6;
     padding: 5px 10px;
     border-radius: 8px;
     background-color: transparent;
     cursor: pointer;
+
     span {
       font-size: 12px;
     }
@@ -197,8 +214,8 @@
       border: 1px solid #7d33ff;
       transition: all 0.5s;
       transform: scale(1.1);
-      span {
-      }
+
+      span {}
     }
   }
 }
@@ -210,15 +227,18 @@
   justify-content: space-between;
   margin-top: 10px;
   padding: 0;
+
   .chatOtherInfo {
     font-size: 20px;
     color: #9b9a9a;
     margin-right: 5px;
     cursor: pointer;
+
     &:hover {
       color: #7d33ff;
     }
   }
+
   input {
     width: 330px;
     height: 30px;

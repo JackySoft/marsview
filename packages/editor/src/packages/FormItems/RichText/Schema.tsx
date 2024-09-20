@@ -60,7 +60,7 @@ export default {
     },
     {
       type: 'Switch',
-      label: '只度',
+      label: '只读',
       name: ['formWrap', 'readOnly'],
     },
     {
