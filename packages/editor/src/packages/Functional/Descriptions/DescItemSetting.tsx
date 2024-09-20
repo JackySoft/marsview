@@ -12,8 +12,8 @@ const DescItemSetting = memo(({ form }: { form: FormInstance }) => {
     columnRef.current?.open(index);
   };
   // 更新
-  const handleUpdate = (text: string, index: number) => {
-    form.setFieldValue(['items', index, 'label'], text);
+  const handleUpdate = (values: any, index: number) => {
+    form.setFieldValue(['items', index], values);
   };
   return (
     <>
@@ -29,7 +29,7 @@ const DescItemSetting = memo(({ form }: { form: FormInstance }) => {
                   <Input placeholder="项字段" style={{ width: '100%' }} />
                 </Form.Item>
                 <EditOutlined onClick={() => handleOpen(name)} />
-                <PlusOutlined onClick={() => add({ label: '-', name: `name${name + 1}` }, name + 1)} />
+                <PlusOutlined onClick={() => add({ label: '-', name: `name${name + 1}`, span: 1 }, name + 1)} />
                 <MinusOutlined onClick={() => remove(name)} />
               </Space>
             ))}

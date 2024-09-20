@@ -18,6 +18,7 @@ export interface IConfig {
     clickable: boolean;
     eventName: string;
     render: string;
+    span?: number | object;
   }>;
   empty: string;
 }
@@ -141,6 +142,7 @@ const MButton = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
         key: item.key,
         label: item.label,
         children,
+        span: item.span,
       };
     });
   }, [config.props.items, data]);
