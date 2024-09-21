@@ -7,5 +7,6 @@ export * from './EChart';
 export * from './Functional';
 export * from './Basic';
 export * from './FeedBack';
+export { BMap, BMapConfig } from './Map/BMap';
 export { IFrame, IFrameConfig } from './IFrame';
 import './index.less';

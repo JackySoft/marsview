@@ -213,7 +213,6 @@ export function renderFormula(formula: string, eventParams: any = {}) {
     const pageStore = usePageStore.getState().page;
     const formData = cloneDeep(pageStore.formData || {});
     originIds.forEach((id: string) => {
-      fnParams.push(id);
       // 如果绑定的是表单项，则通过Form实例对象获取对应表单值
       const formValues = pageStore.formData?.[id] || {};
       if (!formData?.id) {
@@ -372,6 +371,23 @@ export const loadStyle = (id: string, src: string) => {
     link.setAttribute('id', id);
     // 将link元素添加到DOM的head部分
     document.getElementsByTagName('HEAD')[0].appendChild(link);
+  });
+};
+
+/**
+ * 动态加载JS，主要用于解决不常用的JS包，防止影响整体性能，比如抖音和快手
+ * @param src
+ * @returns Promise
+ */
+export const loadScript = (src: string) => {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    // script.defer = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    script.src = src;
+    document.head.append(script);
   });
 };
 

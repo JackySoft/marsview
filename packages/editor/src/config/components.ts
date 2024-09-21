@@ -356,6 +356,17 @@ const components = [
     ],
   },
   {
+    type: 'Map',
+    title: '地图',
+    data: [
+      {
+        icon: '',
+        name: 'BMap',
+        type: 'BMap',
+      },
+    ],
+  },
+  {
     type: 'MicroApp',
     title: '微服务',
     data: [
