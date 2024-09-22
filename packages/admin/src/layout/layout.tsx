@@ -10,10 +10,10 @@ import Tab from '../components/Tab';
 import Logo from '@/components/Logo/Logo';
 import BreadList from '@/components/BreadList/BreadList';
 import { arrayToTree, isEnv } from '@/utils/util';
+import storage from '@/utils/storage';
 import locale from 'antd/locale/zh_CN';
 import 'dayjs/locale/zh-cn';
 import './layout.less';
-import storage from '@/utils/storage';
 
 const AdminLayout = () => {
   const { collapsed, setProjectInfo, projectInfo } = useProjectStore((state) => {
@@ -70,7 +70,7 @@ const AdminLayout = () => {
   }, [projectId]);
 
   // 计算渲染区容器实际高度
-  let height = 61;
+  let height = 64;
   let calcHeight = 'calc(100vh - 60px)';
   if (projectInfo.tag) {
     height += 50;

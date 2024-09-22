@@ -5,8 +5,12 @@ import AntdGlobal from '@/utils/AntdGlobal';
 import locale from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
+import weekday from 'dayjs/plugin/weekday';
+import localeData from 'dayjs/plugin/localeData';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
+dayjs.extend(weekday);
+dayjs.extend(localeData);
 dayjs.locale('zh-cn');
 import './App.less';
 

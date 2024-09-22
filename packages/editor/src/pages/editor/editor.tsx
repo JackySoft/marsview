@@ -207,7 +207,10 @@ const Editor = () => {
     if (!id) {
       return message.info('暂无复制内容');
     }
-    const parentId = elementsMap[id]?.parentId;
+    let parentId = elementsMap[id]?.parentId;
+    if (selectedElement?.id !== id) {
+      parentId = selectedElement?.id;
+    }
     // 如果没有父组件，在页面最外层先复制一个元素
     if (!parentId) {
       const current = getElement(elements, id);

@@ -288,7 +288,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           }
           return list;
         }
-        state.page.elements = deepFind(state.page.elements);
+        deepFind(state.page.elements);
         state.isUpdateToolbar = !state.isUpdateToolbar;
       }),
     );
