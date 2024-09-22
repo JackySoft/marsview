@@ -94,7 +94,6 @@ const ConfigPanel = memo(() => {
 
   // 复制组件ID
   const handleCopy = () => {
-    navigator.clipboard.writeText(selectedElement?.id || pageName);
     copy(selectedElement?.id || pageName);
     message.info('复制成功');
     setCopy(true);
