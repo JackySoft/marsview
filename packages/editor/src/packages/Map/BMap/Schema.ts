@@ -9,6 +9,10 @@ export default {
       type: 'Title',
       label: '基础配置',
       name: 'basic',
+      link: {
+        url: 'https://api.map.baidu.com/lbsapi/getpoint/index.html',
+        label: '坐标拾取',
+      },
     },
     {
       type: 'Input',
@@ -106,15 +110,6 @@ export default {
       type: 'Switch',
       label: '显示覆盖物',
       name: 'showOverlay',
-    },
-    {
-      type: 'Title',
-      label: '覆盖物',
-      name: 'overlay',
-      link: {
-        url: 'https://api.map.baidu.com/lbsapi/getpoint/index.html',
-        label: '坐标拾取',
-      },
     },
   ],
   config: {

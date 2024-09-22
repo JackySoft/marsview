@@ -1,17 +1,21 @@
-import { usePageStore } from '@/stores/pageStore';
-import { DownOutlined } from '@ant-design/icons';
+import { memo, useEffect, useState } from 'react';
 import { Tree, Row } from 'antd';
-import { useState } from 'react';
-
+import { DownOutlined } from '@ant-design/icons';
+import { usePageStore } from '@/stores/pageStore';
+import { useShallow } from 'zustand/react/shallow';
+import style from './index.module.less';
 /**
  * 大纲
  */
-const OutlinePanel = () => {
-  const { pageName, elements, setSelectedElement } = usePageStore((state) => ({
-    pageName: state.page.pageName,
-    elements: state.page.elements,
-    setSelectedElement: state.setSelectedElement,
-  }));
+const OutlinePanel = memo(() => {
+  const { pageName, elements, selectedEl, setSelectedElement } = usePageStore(
+    useShallow((state) => ({
+      pageName: state.page.pageName,
+      elements: state.page.elements,
+      selectedEl: state.selectedElement,
+      setSelectedElement: state.setSelectedElement,
+    })),
+  );
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
   const treeData: any = [
@@ -21,6 +25,14 @@ const OutlinePanel = () => {
       elements,
     },
   ];
+
+  useEffect(() => {
+    if (selectedEl) {
+      setSelectedKeys([selectedEl.id]);
+    } else {
+      setSelectedKeys([]);
+    }
+  }, [selectedEl]);
   const handleSelect = (selectedKeys: any, { node }: any) => {
     setSelectedKeys(selectedKeys);
     if (selectedKeys.length > 0) {
@@ -34,7 +46,7 @@ const OutlinePanel = () => {
   };
 
   return (
-    <Row style={{ paddingRight: '24px', height: 'calc(100vh - 110px)', overflowY: 'auto' }}>
+    <Row className={style.outlinePanel}>
       <Tree
         showLine
         defaultExpandAll
@@ -46,6 +58,6 @@ const OutlinePanel = () => {
       />
     </Row>
   );
-};
+});
 
 export default OutlinePanel;
