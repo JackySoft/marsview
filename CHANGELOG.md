@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://github.com/JackySoft/marsview/compare/v3.6.0...v3.7.0) (2024-09-22)
+
+
+### Bug Fixes
+
+* 1.修复日期选择问题。2.修复组件复制粘贴问题。3.修复admin页面高度问题。 ([22dcdf6](https://github.com/JackySoft/marsview/commit/22dcdf689b1df1d92651c084683512c3de301ea5))
+
 ## [3.6.0](https://github.com/JackySoft/marsview/compare/v3.5.0...v3.6.0) (2024-09-22)
 
 
