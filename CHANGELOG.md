@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.5.0](https://github.com/JackySoft/marsview/compare/v3.4.0...v3.5.0) (2024-09-22)
+
+
+### Feature Improvements
+
+* 优化地图组件功能 ([39072c0](https://github.com/JackySoft/marsview/commit/39072c0e4b3fd8310fb2a6c9eb2201cf6b23f043))
+
 ## [3.4.0](https://github.com/JackySoft/marsview/compare/v3.3.0...v3.4.0) (2024-09-21)
 
 
