@@ -291,6 +291,11 @@ export interface SchemaType {
   name?: (string | number)[];
   // tooltips
   tooltip?: string;
+  // link
+  link?: {
+    url: string;
+    label: string;
+  };
   // Switch节点值
   valuePropName?: string;
   // 表单验证规则

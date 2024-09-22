@@ -13,19 +13,19 @@ export default {
     {
       type: 'Input',
       label: '中心坐标',
-      name: 'cityName',
+      name: 'center',
       props: {
         placeholder: '城市或者经纬度,eg: 116.403795,39.914286',
       },
-      tooltip: '输入经纬度时，逗号分割，纬度在前，经度在后',
+      tooltip: '输入经纬度时，逗号分割',
     },
     {
       type: 'Slider',
       label: '缩放等级',
       name: 'zoom',
       props: {
-        min: 1,
-        max: 18,
+        min: 3,
+        max: 19,
         step: 1,
       },
     },
@@ -38,11 +38,17 @@ export default {
       type: 'InputNumber',
       label: '旋转角度',
       name: 'rotateAngle',
+      props: {
+        placeholder: '旋转角度，范围0-360',
+      },
     },
     {
       type: 'InputNumber',
       label: '倾斜角度',
       name: 'tiltAngle',
+      props: {
+        placeholder: '倾斜角度，范围0-90',
+      },
     },
     {
       type: 'Select',
@@ -81,39 +87,175 @@ export default {
       label: '定位控件',
       name: 'LocationControl',
     },
+    {
+      type: 'Title',
+      label: 'POI配置',
+      name: 'poi',
+    },
+    {
+      type: 'Switch',
+      label: '显示名称',
+      name: 'showText',
+    },
+    {
+      type: 'Switch',
+      label: '显示图标',
+      name: 'showIcon',
+    },
+    {
+      type: 'Switch',
+      label: '显示覆盖物',
+      name: 'showOverlay',
+    },
+    {
+      type: 'Title',
+      label: '覆盖物',
+      name: 'overlay',
+      link: {
+        url: 'https://api.map.baidu.com/lbsapi/getpoint/index.html',
+        label: '坐标拾取',
+      },
+    },
   ],
   config: {
     // 组件默认属性值
     props: {
-      cityName: '北京市',
+      center: '北京市',
       zoom: 15,
       wheelZoom: true,
       mapType: 'BMAP_NORMAL_MAP',
-      ScaleControl: true,
+      ScaleControl: false,
       ZoomControl: true,
-      CityListControl: true,
-      LocationControl: true,
+      CityListControl: false,
+      LocationControl: false,
+      showText: true,
+      showIcon: true,
+      showOverlay: true,
     },
     style: {
-      border: '3px solid #7d33ff',
       width: '100%',
       height: '600px',
     },
     events: [],
-    api: {},
+    api: {
+      sourceType: 'json',
+      source: [
+        {
+          type: 'marker3D',
+          lng: 116.424319,
+          lat: 39.923319,
+          height: 0, // 距离地面高度
+          style: {
+            size: 10,
+            shape: 'BMAP_SHAPE_CIRCLE',
+            fillColor: 'red',
+            fillOpacity: 1,
+          },
+        },
+        {
+          type: 'label',
+          lng: 116.424319,
+          lat: 39.923319,
+          offset: {
+            x: -50,
+            y: 10,
+          },
+          text: '我是文本，灯市口',
+          style: {
+            color: '#fff',
+            backgroundColor: '#9d5cff',
+            borderColor: '#fff',
+            borderRadius: '5px',
+            padding: '5px',
+          },
+        },
+        {
+          type: 'infoWindow',
+          lng: 116.424319,
+          lat: 39.923319,
+          options: {
+            width: 100,
+            height: 50,
+            title: '信息窗口',
+            message: '信息窗口内容',
+          },
+          text: '显示文本内容',
+        },
+        {
+          type: 'marker3D',
+          lng: 116.409659,
+          lat: 39.948768,
+          height: 0, // 距离地面高度
+          style: {
+            size: 10,
+            shape: 'BMAP_SHAPE_CIRCLE',
+            fillColor: '#78ff67',
+            fillOpacity: 1,
+          },
+        },
+        {
+          type: 'label',
+          lng: 116.409659,
+          lat: 39.948768,
+          offset: {
+            x: -10,
+            y: 10,
+          },
+          text: '60',
+          style: {
+            color: 'red',
+            backgroundColor: '#fff',
+            borderColor: '#fff',
+            borderRadius: '5px',
+          },
+        },
+        {
+          type: 'marker3D',
+          lng: 116.326871,
+          lat: 39.927524,
+          height: 0, // 距离地面高度
+          style: {
+            size: 10,
+            shape: 'BMAP_SHAPE_CIRCLE',
+            fillColor: '#78ff67',
+            fillOpacity: 1,
+          },
+        },
+        {
+          type: 'label',
+          lng: 116.326871,
+          lat: 39.927524,
+          offset: {
+            x: -10,
+            y: 10,
+          },
+          text: '100',
+          style: {
+            color: 'red',
+            backgroundColor: '#fff',
+            borderColor: '#fff',
+            borderRadius: '5px',
+          },
+        },
+      ],
+    },
     source: '',
   },
   // 组件事件
   events: [
     {
-      value: 'onLoaded',
-      name: '加载完成事件',
-    },
-    {
       value: 'onClick',
-      name: '地图单机事件',
+      name: '地图单击事件',
     },
   ],
-  // 组件接口
-  api: {},
+  methods: [
+    {
+      name: 'setZoom',
+      title: '设置缩放等级',
+    },
+    {
+      name: 'setZoom',
+      title: '获取中心点坐标',
+    },
+  ],
 };

@@ -35,10 +35,17 @@ const SetterRender = memo(({ attrs, form }: IAttrs) => {
           return (
             <h2 className={styles.title} key={key}>
               <span style={{ marginRight: 10 }}>{item.label}</span>
+              {/* 标题增加提示信息 */}
               {item.tooltip ? (
                 <Tooltip title={item.tooltip}>
                   <QuestionCircleOutlined />
                 </Tooltip>
+              ) : null}
+              {/* 标题增加跳转链接 */}
+              {item.link ? (
+                <a href={item.link.url} target="_blank" style={{ fontSize: 12 }}>
+                  {item.link.label}
+                </a>
               ) : null}
             </h2>
           );

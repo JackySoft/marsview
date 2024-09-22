@@ -383,11 +383,11 @@ export const loadScript = (src: string) => {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    // script.defer = true;
+    script.defer = true;
     script.onload = resolve;
     script.onerror = reject;
     script.src = src;
-    document.head.append(script);
+    document.body.append(script);
   });
 };
 
