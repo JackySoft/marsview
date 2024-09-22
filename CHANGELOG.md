@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.8.0](https://github.com/JackySoft/marsview/compare/v3.7.0...v3.8.0) (2024-09-22)
+
+
+### Bug Fixes
+
+* admin系统名称字号适配 ([cefcf3c](https://github.com/JackySoft/marsview/commit/cefcf3c19b83f2cd3be6a7e740e10d0398ee31db))
+
 ## [3.7.0](https://github.com/JackySoft/marsview/compare/v3.6.0...v3.7.0) (2024-09-22)
 
 
