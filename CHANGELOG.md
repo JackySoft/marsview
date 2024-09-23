@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.10.0](https://github.com/JackySoft/marsview/compare/v3.9.0...v3.10.0) (2024-09-23)
+
+
+### Features
+
+* 所有组件添加公共属性显示和隐藏，用于处理显隐逻辑 ([81c3c2e](https://github.com/JackySoft/marsview/commit/81c3c2e79a61a0cdb99393c37dbf4f345e37d39e))
+* 文档添加百度统计功能 ([32b0dc5](https://github.com/JackySoft/marsview/commit/32b0dc57c20747771e68b7efe341069872af1fc7))
+
 ## [3.9.0](https://github.com/JackySoft/marsview/compare/v3.8.0...v3.9.0) (2024-09-22)
 
 
