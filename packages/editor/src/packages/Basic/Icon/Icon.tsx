@@ -12,6 +12,7 @@ const MImage = (
     id,
     type,
     config,
+    onClick,
   }: ComponentType<{
     icon: string;
     style?: React.CSSProperties;
@@ -30,10 +31,21 @@ const MImage = (
       },
     };
   });
+
+  const handleClick = () => {
+    onClick?.();
+  };
   const iconComp = Icons[config.props.icon as keyof typeof Icons];
   return (
     visible && (
-      <Icon component={iconComp as React.ForwardRefExoticComponent<any>} style={config.style} {...config.props} data-id={id} data-type={type} />
+      <Icon
+        component={iconComp as React.ForwardRefExoticComponent<any>}
+        style={config.style}
+        {...config.props}
+        data-id={id}
+        data-type={type}
+        onClick={handleClick}
+      />
     )
   );
 };

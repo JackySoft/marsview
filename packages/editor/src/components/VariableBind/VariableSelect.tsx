@@ -220,6 +220,7 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
                 <div>
                   <p>1. 默认支持普通变量定义，最终会返回该解析后的变量值：variable.current </p>
                   <p>2. 支持三元表达式：userName === 'jack' ? 1 : 2 </p>
+                  <p>2. 支持布尔值：true ，最终会被解析会true变量进行返回。</p>
                   <p>3. 支持逻辑判断：if( a {'>'} 1 ) return 1; return 2 </p>
                   <p>4. 支持函数function定义：function getName(){'{ return "jack" } '}</p>
                   <p>5. 定义函数的时候，不支持自定义参数，参数只能是从右侧选择的变量或者表单对象，系统会自动解析。</p>

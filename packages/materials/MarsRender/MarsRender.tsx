@@ -9,6 +9,7 @@ import { produce } from 'immer';
 import dayjs from 'dayjs';
 import * as antd from 'antd';
 import { isNull, loadStyle, renderFormula } from '../utils/util';
+import { omit } from 'lodash-es';
 import './index.less';
 
 let cachedComponents: any = {};
@@ -163,13 +164,13 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
     return eventFunction;
   };
 
-  if (Component) {
+  if (Component && config?.props.showOrHide !== false) {
     if (cached) {
       return (
         <Component
           className={['mars-component']} // 暂时还没用，日后可能会用
           id={item.id}
-          config={config}
+          config={{ ...config, props: { ...omit(config?.props, ['showOrHide']) } }}
           elements={item.elements || []}
           // 把事件函数传递给子组件，子组件触发对应事件时，会执行回调函数
           {...createEvents()}
@@ -184,7 +185,7 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
           <Component
             className={['mars-component']} // 暂时还没用，日后可能会用
             id={item.id}
-            config={config}
+            config={{ ...config, props: { ...omit(config?.props, ['showOrHide']) } }}
             elements={item.elements || []}
             // 把事件函数传递给子组件，子组件触发对应事件时，会执行回调函数
             {...createEvents()}

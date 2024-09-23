@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { ComponentType } from '../../types';
 import { formatNumber } from '../../utils/util';
 import { message } from '../../utils/AntdGlobal';
-
+import { omit } from 'lodash-es';
 /**
  *
  * @param props 组件本身属性
@@ -59,7 +59,7 @@ const MText = ({ config }: ComponentType, ref: any) => {
 
   return (
     visible && (
-      <Typography.Text style={config.style} {...config.props}>
+      <Typography.Text style={config.style} {...omit(config.props, ['script'])}>
         {text}
       </Typography.Text>
     )

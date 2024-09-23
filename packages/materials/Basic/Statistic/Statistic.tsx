@@ -3,7 +3,7 @@ import { Statistic } from 'antd';
 import { ComponentType } from '../../types';
 import * as icons from '@ant-design/icons';
 import { message } from '../../utils/AntdGlobal';
-
+import { omit } from 'lodash-es';
 /**
  *
  * @param props 组件本身属性
@@ -48,7 +48,7 @@ const MStatistic = ({ config }: ComponentType, ref: any) => {
     visible && (
       <Statistic
         style={config.style}
-        {...config.props}
+        {...omit(config.props, ['script', 'prefix', 'suffix'])}
         value={text}
         prefix={config.props.prefix ? React.createElement(iconsList[config.props.prefix]) : null}
         suffix={config.props.suffix ? React.createElement(iconsList[config.props.suffix]) : null}

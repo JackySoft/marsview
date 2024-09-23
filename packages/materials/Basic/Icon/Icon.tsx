@@ -9,9 +9,8 @@ import { ComponentType } from '../../types';
  */
 const MIcon = (
   {
-    id,
-    type,
     config,
+    onClick,
   }: ComponentType<{
     icon: string;
     style?: React.CSSProperties;
@@ -30,7 +29,14 @@ const MIcon = (
       },
     };
   });
+
+  const handleClick = () => {
+    onClick?.();
+  };
+
   const iconComp = Icons[config.props.icon as keyof typeof Icons];
-  return visible && <Icon component={iconComp as React.ForwardRefExoticComponent<any>} style={config.style} {...config.props} />;
+  return (
+    visible && <Icon component={iconComp as React.ForwardRefExoticComponent<any>} style={config.style} {...config.props} onClick={handleClick} />
+  );
 };
 export default forwardRef(MIcon);

@@ -3,6 +3,7 @@ import { Statistic } from 'antd';
 import { ComponentType } from '@/packages/types';
 import * as icons from '@ant-design/icons';
 import { message } from '@/utils/AntdGlobal';
+import { omit } from 'lodash-es';
 
 /**
  *
@@ -48,7 +49,7 @@ const MStatistic = ({ id, type, config }: ComponentType, ref: any) => {
     visible && (
       <Statistic
         style={config.style}
-        {...config.props}
+        {...omit(config.props, ['script', 'prefix', 'suffix'])}
         value={text}
         prefix={config.props.prefix ? React.createElement(iconsList[config.props.prefix]) : null}
         suffix={config.props.suffix ? React.createElement(iconsList[config.props.suffix]) : null}

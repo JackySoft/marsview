@@ -105,6 +105,13 @@ const SetterRender = memo(({ attrs, form }: IAttrs) => {
           </Form.Item>
         );
       })}
+      {/* 公共属性 */}
+      <h2 className={styles.title} key="visibleTitle">
+        <span style={{ marginRight: 10 }}>组件显隐</span>
+      </h2>
+      <Form.Item key="showOrHide" name="showOrHide" label="显示条件">
+        <VariableBindInput />
+      </Form.Item>
     </>
   );
 });

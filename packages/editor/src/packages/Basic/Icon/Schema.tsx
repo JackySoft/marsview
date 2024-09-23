@@ -35,7 +35,9 @@ export default {
       spin: false,
     },
     // 组件样式
-    style: {},
+    style: {
+      fontSize: 24,
+    },
   },
   // 组件事件
   events: [

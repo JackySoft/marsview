@@ -3,6 +3,7 @@ import { Statistic } from 'antd';
 import { ComponentType } from '@/packages/types';
 import * as icons from '@ant-design/icons';
 import { message } from '@/utils/AntdGlobal';
+import { omit } from 'lodash-es';
 
 /**
  *
@@ -53,7 +54,7 @@ const CountDown = ({ id, type, config, onChange, onFinish }: ComponentType, ref:
     visible && (
       <Statistic.Countdown
         style={config.style}
-        {...config.props}
+        {...omit(config.props, ['script', 'format', 'prefix', 'suffix'])}
         value={text}
         format={config.props?.format || undefined}
         prefix={config.props.prefix ? React.createElement(iconsList[config.props.prefix]) : null}

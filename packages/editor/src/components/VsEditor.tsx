@@ -23,16 +23,6 @@ export default function VsEditor({ height, language, value, onChange }: any) {
         };
       },
     });
-    // setTimeout(() => {
-    //   // 创建一个范围，表示要插入文本的位置（这里范围实际上是一个点）
-    //   const range = new editorRef.current.monaco.Range(5, 4, 5, 8);
-
-    //   // 准备编辑操作
-    //   const edit = { range, text: '99999', forceMoveMarkers: true };
-
-    //   // 应用编辑操作
-    //   editorRef.current.editor.executeEdits('my-source', [edit]);
-    // }, 10000);
   }, [monaco]);
   function createDependencyProposals(range: any) {
     if (!monaco) return [];
