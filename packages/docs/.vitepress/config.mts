@@ -5,7 +5,23 @@ export default defineConfig({
   title: 'Marsview',
   description: '一款面向中后台低代码平台，支持逻辑编排、事件交互和接口配置。',
   lastUpdated: true,
-  head: [['link', { rel: 'icon', href: '/mars-logo.png' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/mars-logo.png' }],
+    // 添加百度统计
+    [
+      'script',
+      {},
+      `
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e0b36c5433838f284c65581c1de9b9bd";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+`,
+    ],
+  ],
   lang: 'zh-CN',
   srcDir: 'src',
   outDir: '../../dist/docs',
