@@ -1,6 +1,14 @@
 import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Image, Flex } from 'antd';
 import { memo, useEffect, useState } from 'react';
-import { ProjectOutlined, OneToOneOutlined, CaretDownFilled, DownOutlined, AppstoreOutlined, LoadingOutlined } from '@ant-design/icons';
+import {
+  ProjectOutlined,
+  OneToOneOutlined,
+  CaretDownFilled,
+  DownOutlined,
+  AppstoreOutlined,
+  LoadingOutlined,
+  PieChartOutlined,
+} from '@ant-design/icons';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { toBlob } from 'html-to-image';
 import { usePageStore } from '@/stores/pageStore';
@@ -23,9 +31,15 @@ const Header = memo(() => {
 
   const goHome = () => {
     setMode('edit');
-    const fromProject = location.pathname.indexOf('/project') > -1;
-    const fromLib = location.pathname.indexOf('/lib') > -1;
-    navigate(fromProject ? '/projects' : fromLib ? '/libs' : '/pages');
+    // 点击Logo返回最近操作的列表，对用户友好
+    const isProject = /project\/\d+\/\w+/.test(location.pathname);
+    const isPage = /editor\/\d+\/(edit|publishHistory)/.test(location.pathname);
+    const isLib = /lib\/\d+/.test(location.pathname);
+    const isTmpl = /editor\/\d+\/template/.test(location.pathname);
+    if (isProject) navigate('/projects');
+    if (isPage) navigate('/pages');
+    if (isLib) navigate('/libs');
+    if (isTmpl) navigate('/templates');
   };
   const {
     userInfo,
@@ -59,10 +73,14 @@ const Header = memo(() => {
       key: 'libs',
       icon: <AppstoreOutlined style={{ fontSize: 16 }} />,
     },
+    {
+      label: '精选模板',
+      key: 'templates',
+      icon: <PieChartOutlined style={{ fontSize: 16 }} />,
+    },
   ];
-
   useEffect(() => {
-    if (['/projects', '/pages', '/libs'].includes(location.pathname)) {
+    if (['/projects', '/pages', '/libs', '/templates'].includes(location.pathname)) {
       setNav(true);
       setNavKey([location.pathname.slice(1)]);
     } else {
@@ -179,7 +197,7 @@ const Header = memo(() => {
     },
   ];
 
-  const isEditPage = pageFrom === `editor/${id}/edit`;
+  const isEditPage = pageFrom === `editor/${id}/edit` || pageFrom === `editor/${id}/template`;
   const isPublishPage = pageFrom === `editor/${id}/publishHistory`;
   return (
     <>

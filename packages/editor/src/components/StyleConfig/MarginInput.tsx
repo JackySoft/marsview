@@ -16,13 +16,9 @@ const MarginInput = ({ form }: { form: FormInstance }) => {
   const handleChange = (value: string) => {
     setType(value);
   };
-  const basicLayout = {
-    labelCol: { span: 5 },
-    wrapperCol: { span: 18 },
-  };
   return (
     <>
-      <Form.Item label="边距" layout="horizontal" {...basicLayout}>
+      <Form.Item label="边距" layout="horizontal">
         <Radio.Group optionType="button" value={type} buttonStyle="solid" onChange={(e) => handleChange(e.target.value)}>
           <Radio.Button value="all">
             <BorderOuterOutlined />

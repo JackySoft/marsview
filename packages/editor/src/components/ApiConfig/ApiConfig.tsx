@@ -88,7 +88,7 @@ const ApiConfigComponent = () => {
     <Form form={form} labelCol={{ span: 8 }} wrapperCol={{ span: 15 }} labelAlign="right" onValuesChange={run} autoComplete="off">
       <h2 className={styles.title}>
         <span>数据源配置</span>
-        <Tooltip title="接口配置">
+        <Tooltip title="支持mock数据、接口请求和变量绑定">
           <QuestionCircleOutlined style={{ marginLeft: 5 }} />
         </Tooltip>
       </h2>
@@ -115,8 +115,12 @@ const ApiConfigComponent = () => {
                 <Form.Item label="请求地址" name="id">
                   <ApiInput showModal={showModal} />
                 </Form.Item>
-                <Form.Item label="数据处理" name="sourceField">
-                  <VariableBind placeholder="数据源所对应的接口字段" />
+                <Form.Item
+                  label="数据处理"
+                  name="sourceField"
+                  tooltip="示例：{ code:0 ,data:{ list: [], total: 10 } } ，字段对应是list，因为表格的数据源只能是数组格式。"
+                >
+                  <VariableBind placeholder="返回值字段映射,eg: data.list" />
                 </Form.Item>
                 <Form.Item name="source" hidden>
                   <VsEditor height="350px" language="json" />

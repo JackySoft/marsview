@@ -113,6 +113,9 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
 
   // 添加表格渲染模板快捷键
   const onAddRenderTmpl = (type: string) => {
+    if (type === 'boolean') {
+      form.setFieldValue('expression', `true`);
+    }
     if (type === 'table') {
       form.setFieldValue(
         'expression',
@@ -230,6 +233,9 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
             >
               <QuestionCircleOutlined style={{ marginLeft: 10, cursor: 'pointer' }} />
             </Popover>
+            <Button type="link" onClick={() => onAddRenderTmpl('boolean')}>
+              布尔值
+            </Button>
             <Button type="link" onClick={() => onAddRenderTmpl('expression')}>
               三元表达式模板
             </Button>

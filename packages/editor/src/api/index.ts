@@ -19,6 +19,10 @@ export const getPageList = (params: PageParams) => {
   return request.get('/page/list', params, { showLoading: false });
 };
 
+// 获取页面模板列表
+export const getPageTemplateList = (params: Omit<PageParams, 'type'>) => {
+  return request.get('/page/getPageTemplateList', params, { showLoading: false });
+};
 // 获取页面详情
 export const getPageDetail = (id: number) => {
   return request.get(`/page/detail/${id}`);

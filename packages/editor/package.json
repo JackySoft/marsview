@@ -15,6 +15,7 @@
     "@bytemd/react": "^1.21.0",
     "@marsview/materials": "workspace:^",
     "@monaco-editor/react": "^4.6.0",
+    "@xyflow/react": "^12.3.0",
     "allotment": "^1.19.5",
     "bytemd": "^1.21.0",
     "css": "^3.0.0",

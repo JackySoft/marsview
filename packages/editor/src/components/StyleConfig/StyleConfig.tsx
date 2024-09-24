@@ -77,12 +77,8 @@ const StyleConfig = () => {
     }
   };
   const formLayout = {
-    labelCol: { span: 7 },
-    wrapperCol: { span: 16 },
-  };
-  const basicLayout = {
-    labelCol: { span: 5 },
-    wrapperCol: { span: 18 },
+    labelCol: { span: 6 },
+    wrapperCol: { span: 17 },
   };
   return (
     <Form className={styles.ui} {...formLayout} form={form} layout="horizontal" labelAlign="right" onValuesChange={run}>
@@ -91,15 +87,15 @@ const StyleConfig = () => {
         <VsEditor language="css" />
       </Form.Item>
       <TitleStyle>基础</TitleStyle>
-      <Form.Item name={['scopeStyle', 'width']} label={'宽度'} {...basicLayout}>
+      <Form.Item name={['scopeStyle', 'width']} label={'宽度'}>
         <InputPx />
       </Form.Item>
-      <Form.Item name={['scopeStyle', 'height']} label={'高度'} {...basicLayout}>
+      <Form.Item name={['scopeStyle', 'height']} label={'高度'}>
         <InputPx />
       </Form.Item>
       <MarginInput form={form} />
       <PaddingInput form={form} />
-      <Form.Item key={'opacity'} name={['scopeStyle', 'opacity']} label={'透明'} {...basicLayout}>
+      <Form.Item key={'opacity'} name={['scopeStyle', 'opacity']} label={'透明'}>
         <Slider min={0} max={1} step={0.1} />
       </Form.Item>
       <TitleStyle>布局</TitleStyle>
@@ -240,7 +236,7 @@ const StyleConfig = () => {
         ></Select>
       </Form.Item>
       <TitleStyle>定位</TitleStyle>
-      <Form.Item key={'position'} name={['scopeStyle', 'position']} label={'定位'} {...basicLayout}>
+      <Form.Item key={'position'} name={['scopeStyle', 'position']} label={'定位'}>
         <Select
           placeholder={'请选择'}
           options={[
@@ -268,11 +264,11 @@ const StyleConfig = () => {
           suffixIcon={<CaretDownOutlined />}
         />
       </Form.Item>
-      <Form.Item key={'zIndex'} name={['scopeStyle', 'zIndex']} label={'zIndex'} {...basicLayout}>
+      <Form.Item key={'zIndex'} name={['scopeStyle', 'zIndex']} label={'zIndex'}>
         <InputNumber placeholder="层级" />
       </Form.Item>
       {!['', undefined, 'static'].includes(form.getFieldValue(['scopeStyle', 'position'])) && (
-        <Form.Item label="位置" {...basicLayout}>
+        <Form.Item label="位置">
           <Flex gap={3}>
             <Form.Item name={['scopeStyle', 'top']} noStyle>
               <InputPx placeholder="T: 10" />
@@ -292,13 +288,13 @@ const StyleConfig = () => {
         </Form.Item>
       )}
       <TitleStyle>边框</TitleStyle>
-      <Form.Item name={['scopeStyle', 'borderRadius']} label={'圆角'} {...basicLayout}>
+      <Form.Item name={['scopeStyle', 'borderRadius']} label={'圆角'}>
         <InputPx placeholder="eg：5" />
       </Form.Item>
-      <Form.Item name={['scopeStyle', 'border']} label={'边框'} {...basicLayout}>
+      <Form.Item name={['scopeStyle', 'border']} label={'边框'}>
         <Input placeholder="eg：1px solid #fff" />
       </Form.Item>
-      <Form.Item label="阴影" name={['scopeStyle', 'boxShadow']} {...basicLayout}>
+      <Form.Item label="阴影" name={['scopeStyle', 'boxShadow']}>
         <Shadow />
       </Form.Item>
     </Form>

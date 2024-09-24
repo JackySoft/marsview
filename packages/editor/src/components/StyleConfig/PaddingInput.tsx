@@ -17,14 +17,9 @@ const PaddingInput = ({ form }: { form: FormInstance }) => {
     setType(value);
   };
 
-  const basicLayout = {
-    labelCol: { span: 5 },
-    wrapperCol: { span: 18 },
-  };
-
   return (
     <>
-      <Form.Item label="填充" {...basicLayout}>
+      <Form.Item label="填充">
         <Radio.Group optionType="button" value={type} buttonStyle="solid" onChange={(e) => handleChange(e.target.value)}>
           <Radio.Button value="all">
             <BorderOuterOutlined />

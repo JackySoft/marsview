@@ -63,6 +63,10 @@ export const router = [
         element: lazyLoad(React.lazy(() => import('@/pages/home/LibList'))),
       },
       {
+        path: '/templates',
+        element: lazyLoad(React.lazy(() => import('@/pages/home/Template'))),
+      },
+      {
         path: '/lib/:id',
         element: lazyLoad(React.lazy(() => import('@/pages/home/lib/LibEditor'))),
       },
@@ -75,6 +79,13 @@ export const router = [
         children: [
           {
             path: '/editor/:id/edit',
+            element: lazyLoad(
+              React.lazy(() => import('@/pages/editor/editor')),
+              true,
+            ),
+          },
+          {
+            path: '/editor/:id/template',
             element: lazyLoad(
               React.lazy(() => import('@/pages/editor/editor')),
               true,

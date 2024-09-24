@@ -86,6 +86,7 @@ const CreatePage = (props: IModalProp) => {
           <Radio.Group>
             <Radio value={1}>公开</Radio>
             <Radio value={2}>私有</Radio>
+            <Radio value={3}>公开模板</Radio>
           </Radio.Group>
         </Form.Item>
         <Form.Item label="模式" name="is_edit" rules={[{ required: true, message: '请选择编辑模式' }]}>
