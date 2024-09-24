@@ -9,7 +9,6 @@ export default {
     // 组件默认属性值
     props: {},
     style: {
-      padding: '20px',
     },
     events: [],
     api: {},

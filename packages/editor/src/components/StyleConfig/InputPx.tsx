@@ -32,7 +32,7 @@ const InputPx = ({ value, onChange, ...props }: any) => {
   };
 
   const selectAfter = (
-    <Select defaultValue="px" value={unit} onChange={handleSelect} size="small">
+    <Select defaultValue="px" value={unit} onChange={handleSelect} size="small" style={{ width: 52 }}>
       <Option value="px">px</Option>
       <Option value="%">%</Option>
       <Option value="vw">vw</Option>
@@ -41,7 +41,9 @@ const InputPx = ({ value, onChange, ...props }: any) => {
     </Select>
   );
 
-  return <InputNumber placeholder="输入尺寸: 10" {...props} addonAfter={selectAfter} value={num} onChange={(val) => handleChange(val)} />;
+  return (
+    <InputNumber placeholder="输入尺寸: 10" {...props} addonAfter={selectAfter} value={num} controls={false} onChange={(val) => handleChange(val)} />
+  );
 };
 
 export default InputPx;

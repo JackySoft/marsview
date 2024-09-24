@@ -57,7 +57,7 @@ export default {
       },
     },
     {
-      type: 'Input',
+      type: 'InputPx',
       label: '元素间隙',
       name: 'gap',
       props: {
@@ -72,11 +72,9 @@ export default {
       wrap: 'nowrap',
       justify: 'center',
       align: 'center',
-      gap: 20,
+      gap: '10px',
     },
-    style: {
-      padding: '20px',
-    },
+    style: {},
     events: [],
     api: {},
     source: '',

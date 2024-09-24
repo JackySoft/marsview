@@ -256,6 +256,7 @@ export enum FormType {
   Collapse = 'Collapse',
   Panel = 'Panel',
   Input = 'Input',
+  InputPx = 'InputPx',
   TextArea = 'TextArea',
   InputSelect = 'InputSelect',
   Switch = 'Switch',

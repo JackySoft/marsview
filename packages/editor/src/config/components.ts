@@ -54,6 +54,32 @@ const components = [
     ],
   },
   {
+    type: 'LayoutComp',
+    title: '布局组件',
+    data: [
+      {
+        icon: '',
+        name: '间距',
+        type: 'Space',
+      },
+      {
+        icon: '',
+        name: '分割线',
+        type: 'Divider',
+      },
+      {
+        icon: '',
+        name: '行组件',
+        type: 'Row',
+      },
+      {
+        icon: '',
+        name: '列组件',
+        type: 'Col',
+      },
+    ],
+  },
+  {
     type: 'Form',
     title: '表单组件',
     data: [
@@ -171,32 +197,6 @@ const components = [
         icon: '',
         name: '表单项',
         type: 'FormItem',
-      },
-    ],
-  },
-  {
-    type: 'LayoutComp',
-    title: '布局组件',
-    data: [
-      {
-        icon: '',
-        name: '间距',
-        type: 'Space',
-      },
-      {
-        icon: '',
-        name: '分割线',
-        type: 'Divider',
-      },
-      {
-        icon: '',
-        name: '行组件',
-        type: 'Row',
-      },
-      {
-        icon: '',
-        name: '列组件',
-        type: 'Col',
       },
     ],
   },

@@ -7,6 +7,7 @@ import { CaretDownOutlined } from '@ant-design/icons/lib';
 import MColorPicker from '../ColorPicker';
 import VariableBindInput from '../VariableBind/VariableBind';
 import InputSelect from '../InputSelect/InputSelect';
+import InputPx from '../StyleConfig/InputPx';
 import styles from './index.module.less';
 
 // 如果没有设置label，则独占一行
@@ -51,6 +52,8 @@ const SetterRender = memo(({ attrs, form }: IAttrs) => {
           );
         } else if (item.type == 'Input') {
           FormControl = <Input {...item.props} />;
+        } else if (item.type === 'InputPx') {
+          FormControl = <InputPx {...item.props} />;
         } else if (item.type == 'TextArea') {
           FormControl = <Input.TextArea rows={3} cols={8} {...item.props} />;
         } else if (item.type == 'InputSelect') {
