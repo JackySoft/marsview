@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.11.0](https://github.com/JackySoft/marsview/compare/v3.10.0...v3.11.0) (2024-09-24)
+
+
+### Features
+
+* 1.优化样式，缩小属性配置字体大小。2.新增精选模板菜单。 ([65efd6a](https://github.com/JackySoft/marsview/commit/65efd6ab089f6a4aa9c59ca762eaeab56224c3fc))
+
 ## [3.10.0](https://github.com/JackySoft/marsview/compare/v3.9.0...v3.10.0) (2024-09-23)
 
 
