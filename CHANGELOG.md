@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.14.0](https://github.com/JackySoft/marsview/compare/v3.13.0...v3.14.0) (2024-09-25)
+
+
+### Bug Fixes
+
+* 修复icon版本问题 ([1fdcce3](https://github.com/JackySoft/marsview/commit/1fdcce34710834c462720444e6995542cc48f4cc))
+
 ## [3.13.0](https://github.com/JackySoft/marsview/compare/v3.12.0...v3.13.0) (2024-09-25)
 
 
