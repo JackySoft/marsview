@@ -42,7 +42,7 @@ export default {
   // 组件事件
   events: [
     {
-      value: 'handleClick',
+      value: 'onClick',
       name: '点击事件',
     },
   ],

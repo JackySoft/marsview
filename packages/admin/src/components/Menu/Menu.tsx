@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Menu } from 'antd';
 import type { MenuProps, MenuTheme } from 'antd';
@@ -29,15 +29,13 @@ const MenuComponent: React.FC = () => {
   const getTreeMenu = (menuList: IMenuItem[], treeList: MenuItem[] = []) => {
     menuList.forEach((item) => {
       if (item.type === 1 && item.status === 1) {
-        const iconComp = Icons[item.icon as keyof typeof Icons];
+        const iconsList: { [key: string]: any } = Icons;
         if (item.buttons?.length || !item.children) {
           const path = `/project/${env}/${projectId}/${item.page_id || 0}`;
-          return treeList.push(getMenuItem(item.name, path, <Icon component={iconComp as React.ForwardRefExoticComponent<any>} />));
+          return treeList.push(getMenuItem(item.name, path, React.createElement(iconsList[item.icon])));
         }
         const path = `/project/${env}/${projectId}/${item.id}`;
-        treeList.push(
-          getMenuItem(item.name, path, <Icon component={iconComp as React.ForwardRefExoticComponent<any>} />, getTreeMenu(item.children || [])),
-        );
+        treeList.push(getMenuItem(item.name, path, React.createElement(iconsList[item.icon]), getTreeMenu(item.children || [])));
       }
     });
     return treeList;
