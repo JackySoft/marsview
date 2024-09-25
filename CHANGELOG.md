@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.13.0](https://github.com/JackySoft/marsview/compare/v3.12.0...v3.13.0) (2024-09-25)
+
+
+### Features
+
+* 1.替换分割组件。2.增加cdn。3.画布增加缩放和拖拽。4.功能优化。 ([aa3a6b6](https://github.com/JackySoft/marsview/commit/aa3a6b606eb4fc1fe36be660f070414df2272220))
+
 ## [3.12.0](https://github.com/JackySoft/marsview/compare/v3.11.0...v3.12.0) (2024-09-24)
 
 
