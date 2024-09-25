@@ -45,7 +45,7 @@ export default defineConfig({
           varName: 'dayjs',
         },
         antd: {
-          src: 'https://marsview.cdn.bcebos.com/static/antd%405.20.3.min.js',
+          src: 'https://marsview.cdn.bcebos.com/static/antd%405.21.1/antd.min.js',
           varName: 'antd',
         },
         ahooks: {
@@ -55,6 +55,14 @@ export default defineConfig({
         axios: {
           src: 'https://marsview.cdn.bcebos.com/static/axios%401.7.5.min.js',
           varName: 'axios',
+        },
+        '@ant-design/icons': {
+          src: 'https://marsview.cdn.bcebos.com/static/%40ant-design-icons%405.5.1/index.umd.min.js',
+          varName: 'icons',
+        },
+        '@ant-design/plots': {
+          src: 'https://marsview.cdn.bcebos.com/static/plots%401.2.6.min.js',
+          varName: 'Plots',
         },
       }),
   ],

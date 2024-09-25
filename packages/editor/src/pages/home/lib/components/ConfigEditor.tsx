@@ -1,12 +1,9 @@
 import Editor from '@monaco-editor/react';
 import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useDebounceFn } from 'ahooks';
-import { Form } from 'antd';
-import { Spin } from 'antd';
+import { Form, Spin, Splitter } from 'antd';
 import SetterRender from '@/components/SetterRender/SetterRender';
-import { Allotment } from 'allotment';
 import ComPreview from './ComPreview';
-import 'allotment/dist/style.css';
 import './index.less';
 
 /**
@@ -122,8 +119,8 @@ export default memo(
 
     return (
       <div className="code-editor">
-        <Allotment>
-          <Allotment.Pane minSize={300}>
+        <Splitter>
+          <Splitter.Panel min={300}>
             <Editor
               language="javascript"
               value={code}
@@ -139,14 +136,14 @@ export default memo(
               }}
               onMount={(editor) => (editorRef.current = editor)}
             />
-          </Allotment.Pane>
-          <Allotment.Pane minSize={700}>
+          </Splitter.Panel>
+          <Splitter.Panel min={700}>
             <Spin spinning={loading} tip="正在编译中...">
               <ComPreview config={config?.config} refreshTag={refreshTag} />
               {error && <p style={{ color: 'red', lineHeight: '30px', padding: 30 }}>{error}</p>}
             </Spin>
-          </Allotment.Pane>
-          <Allotment.Pane minSize={300}>
+          </Splitter.Panel>
+          <Splitter.Panel min={300}>
             <Form
               form={form}
               style={{ paddingBottom: 20 }}
@@ -157,8 +154,8 @@ export default memo(
             >
               <SetterRender attrs={config?.attrs || []} form={form} />
             </Form>
-          </Allotment.Pane>
-        </Allotment>
+          </Splitter.Panel>
+        </Splitter>
       </div>
     );
   }),

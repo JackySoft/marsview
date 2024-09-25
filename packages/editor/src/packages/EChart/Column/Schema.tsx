@@ -205,7 +205,7 @@ export default {
         text: '多色饼图',
       },
       theme: 'default', // 主题
-      color: ['#f16622', '#FFAB3E', '#FADB1E', '#9ADB19', '#28C084', '#3CA2FF', '#1861EB', '#A24CF5', '#F32AA3', '#F11818'],
+      color: ['#9d5cff', '#FFAB3E', '#FADB1E', '#9ADB19', '#28C084', '#3CA2FF', '#1861EB', '#A24CF5', '#F32AA3', '#F11818'],
       seriesField: 'type', // 分类字段
       isStack: false, // 是否堆叠
       isRange: false, // 是否区间柱状图

@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import { useDebounceFn } from 'ahooks';
-import { Allotment } from 'allotment';
+import { Splitter } from 'antd';
 import ComPreview from './ComPreview';
 import less from 'less';
 
@@ -68,8 +68,8 @@ export default forwardRef((_: any, ref: React.ForwardedRef<{ getCode: () => void
 
   return (
     <div className="code-editor">
-      <Allotment>
-        <Allotment.Pane preferredSize={'50%'}>
+      <Splitter>
+        <Splitter.Panel defaultSize="50%">
           <Editor
             language={'less'}
             value={code}
@@ -82,11 +82,11 @@ export default forwardRef((_: any, ref: React.ForwardedRef<{ getCode: () => void
             }}
             onMount={(editor) => (editorRef.current = editor)}
           />
-        </Allotment.Pane>
-        <Allotment.Pane preferredSize={'50%'}>
+        </Splitter.Panel>
+        <Splitter.Panel defaultSize="50%">
           <ComPreview refreshTag={refreshTag} />
-        </Allotment.Pane>
-      </Allotment>
+        </Splitter.Panel>
+      </Splitter>
     </div>
   );
 });

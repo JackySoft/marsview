@@ -1,31 +1,22 @@
 // 页面编辑器样式
 .mars-editor {
   position: relative;
-  background-color: #f5f5f5;
-  height: calc(100vh - 94px);
-  overflow-y: auto;
-  padding: 0px 20px 20px;
+  height: 1000px;
   // 当前页面样式
   .pageWrapper {
-    overflow: auto;
     background-color: #fff;
     min-height: 100%;
     position: relative;
   }
 }
 .canvas-size {
-  text-align: center;
-  background-color: #f5f5f5;
-
-  // 设置顶部【画布宽度】对应的颜色
-  .ant-input-number-group-addon,
-  .ant-input-number-input {
-    color: #a1a1a1 !important;
-  }
-  &:hover {
-    .ant-input-number-group-addon,
-    .ant-input-number-input {
-      color: #000 !important;
-    }
-  }
+  position: absolute;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
+  background-color: #fff;
+  padding-inline: 20px;
+  border-radius: 20px;
+  z-index: 100;
+  display: flex;
 }

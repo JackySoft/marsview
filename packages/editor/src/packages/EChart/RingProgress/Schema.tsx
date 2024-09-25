@@ -75,7 +75,7 @@ export default {
       appendPadding: 0, // 图表内边距
       innerRadius: 0.85,
       radius: 1,
-      color: ['#f16622', '#E8EDF3'],
+      color: ['#9d5cff', '#E8EDF3'],
     },
     // 组件样式
     style: {

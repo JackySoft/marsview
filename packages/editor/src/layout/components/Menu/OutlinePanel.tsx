@@ -36,10 +36,14 @@ const OutlinePanel = memo(() => {
   const handleSelect = (selectedKeys: any, { node }: any) => {
     setSelectedKeys(selectedKeys);
     if (selectedKeys.length > 0) {
-      setSelectedElement({
-        id: node.id,
-        type: node.type,
-      });
+      if(selectedKeys[0] === 'page'){
+        setSelectedElement(undefined);
+      }else{
+        setSelectedElement({
+          id: node.id,
+          type: node.type,
+        });
+      }
     } else {
       setSelectedElement(undefined);
     }

@@ -63,7 +63,7 @@ export default {
       autoFit: false, // 图表自适应
       appendPadding: 0, // 图表内边距
       barWidthRatio: 0.2,
-      color: ['#f16622', '#E8EDF3'],
+      color: ['#9d5cff', '#E8EDF3'],
     },
     // 组件样式
     style: {

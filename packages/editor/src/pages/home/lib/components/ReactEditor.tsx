@@ -1,17 +1,14 @@
-import Editor from '@monaco-editor/react';
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import Editor from '@monaco-editor/react';
 import * as prettier from 'prettier';
 import parserJavaScript from 'prettier/parser-babel';
 import { useDebounceFn } from 'ahooks';
 import * as antd from 'antd';
-import { Spin } from 'antd';
-import { Allotment } from 'allotment';
+import { Spin, Splitter } from 'antd';
 import dayjs from 'dayjs';
 import { useKeyPress } from 'ahooks';
 import ComPreview from './ComPreview';
-import 'allotment/dist/style.css';
 import './index.less';
-import { Modal } from '@/utils/AntdGlobal';
 
 /**
  * 组件代码编辑
@@ -161,8 +158,8 @@ export default forwardRef((_: any, ref: any) => {
 
   return (
     <div className="code-editor">
-      <Allotment>
-        <Allotment.Pane preferredSize={'50%'}>
+      <Splitter>
+        <Splitter.Panel defaultSize="50%">
           <Editor
             language={'javascript'}
             value={code}
@@ -178,14 +175,14 @@ export default forwardRef((_: any, ref: any) => {
             }}
             onMount={(editor) => (editorRef.current = editor)}
           />
-        </Allotment.Pane>
-        <Allotment.Pane preferredSize={'50%'}>
+        </Splitter.Panel>
+        <Splitter.Panel defaultSize="50%">
           <Spin spinning={loading} tip="正在编译中...">
             <ComPreview refreshTag={refreshTag} />
             {error && <p style={{ color: 'red', lineHeight: '30px', padding: 30 }}>{error}</p>}
           </Spin>
-        </Allotment.Pane>
-      </Allotment>
+        </Splitter.Panel>
+      </Splitter>
     </div>
   );
 });

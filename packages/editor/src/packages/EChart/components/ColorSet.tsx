@@ -13,7 +13,7 @@ export default memo(() => {
                 <Form.Item noStyle {...restField} name={[name]}>
                   <MColorPicker style={{ width: '120px' }} />
                 </Form.Item>
-                <PlusOutlined onClick={() => add('#f16622', name + 1)} />
+                <PlusOutlined onClick={() => add('#9d5cff', name + 1)} />
                 {name > 0 && <MinusOutlined onClick={() => remove(name)} />}
               </Space>
             ))}

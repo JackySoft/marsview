@@ -2,7 +2,6 @@ import { Col, Row, Tabs, Tooltip } from 'antd';
 import {
   AppstoreOutlined,
   PartitionOutlined,
-  MenuFoldOutlined,
   CodeOutlined,
   ApiOutlined,
   FunctionOutlined,
@@ -84,7 +83,7 @@ const panels = [
  * 生成左侧组件列表
  */
 
-const Menu = (props: any) => {
+const Menu = () => {
   return (
     <>
       <Tabs
@@ -94,7 +93,6 @@ const Menu = (props: any) => {
         tabBarStyle={{ width: '50px', height: 'calc(100vh - 64px)' }}
         className={styles.leftTool}
         centered={true}
-        onTabClick={() => props.toggleOpen(true)}
         items={panels.map((item) => {
           return {
             key: item.key,
@@ -103,15 +101,12 @@ const Menu = (props: any) => {
                 {item.icon}
               </Tooltip>
             ),
-            children: props.isOpen && (
+            children: (
               <div style={{ marginLeft: -10, marginRight: 10 }}>
-                <Row style={{ height: 46, paddingRight: 14 }} align={'middle'} justify={'space-between'}>
+                <Row style={{ height: 46 }} align={'middle'} justify={'space-between'}>
                   <Col>
                     <span style={{ fontWeight: 'bold' }}>{item.title}</span>
                   </Col>
-                  <Tooltip placement="right" title="关闭菜单">
-                    <MenuFoldOutlined onClick={() => props.toggleOpen()} />
-                  </Tooltip>
                 </Row>
                 {item.component?.()}
               </div>

@@ -16,6 +16,16 @@ export default {
       name: 'src',
     },
     {
+      type: 'InputPx',
+      label: '图片宽度',
+      name: 'width',
+    },
+    {
+      type: 'InputPx',
+      label: '图片高度',
+      name: 'height',
+    },
+    {
       type: 'Switch',
       label: '是否预览',
       name: 'preview',
@@ -26,13 +36,12 @@ export default {
     props: {
       src: 'https://marsview.cdn.bcebos.com/s1.png',
       preview: false,
+      width: '200px',
+      height: '200px',
       alt: '',
     },
     // 组件样式
-    style: {
-      width: '200px',
-      height: '200px',
-    },
+    style: {},
   },
   // 组件事件
   events: [

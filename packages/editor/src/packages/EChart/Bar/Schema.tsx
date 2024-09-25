@@ -184,7 +184,7 @@ export default {
       barWidthRatio: 0.6, // 柱子宽度占比
       isGroup: true,
       theme: 'default', // 主题
-      color: ['#f16622', '#FFAB3E', '#FADB1E', '#9ADB19', '#28C084', '#3CA2FF', '#1861EB', '#A24CF5', '#F32AA3', '#F11818'],
+      color: ['#9d5cff', '#FFAB3E', '#FADB1E', '#9ADB19', '#28C084', '#3CA2FF', '#1861EB', '#A24CF5', '#F32AA3', '#F11818'],
       seriesField: 'type', // 分类字段
       autoFit: true, // 图表自适应
       appendPadding: 20, // 图表内边距
