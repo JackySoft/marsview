@@ -32,10 +32,12 @@ const MenuComponent: React.FC = () => {
         const iconsList: { [key: string]: any } = Icons;
         if (item.buttons?.length || !item.children) {
           const path = `/project/${env}/${projectId}/${item.page_id || 0}`;
-          return treeList.push(getMenuItem(item.name, path, React.createElement(iconsList[item.icon])));
+          return treeList.push(getMenuItem(item.name, path, iconsList[item.icon] && React.createElement(iconsList[item.icon])));
         }
         const path = `/project/${env}/${projectId}/${item.id}`;
-        treeList.push(getMenuItem(item.name, path, React.createElement(iconsList[item.icon]), getTreeMenu(item.children || [])));
+        treeList.push(
+          getMenuItem(item.name, path, iconsList[item.icon] && React.createElement(iconsList[item.icon]), getTreeMenu(item.children || [])),
+        );
       }
     });
     return treeList;

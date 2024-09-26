@@ -126,7 +126,7 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
   const iconsList: { [key: string]: any } = icons;
   return (
     visible && (
-      <FormContext.Provider value={form}>
+      <FormContext.Provider value={{ form, formId: id, setFormData }}>
         <Form form={form} layout="inline" style={config.style} onValuesChange={handleValuesChange}>
           <div className={styles.formWrap} style={!isExpand ? { height: 32, overflow: 'hidden' } : {}}>
             <MarsRender elements={elements} />
