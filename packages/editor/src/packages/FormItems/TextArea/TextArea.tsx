@@ -1,8 +1,8 @@
 import { Form, Input, FormItemProps } from 'antd';
-import { useEffect, useContext, useState, useImperativeHandle, forwardRef } from 'react';
+import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import { ComponentType } from '@/packages/types';
 import { isNull } from '@/packages/utils/util';
-import { FormContext } from '@/packages/utils/context';
+import { useFormContext } from '@/packages/utils/context';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {
@@ -17,7 +17,7 @@ export interface IConfig {
  * @returns 返回组件
  */
 const MTextArea = ({ id, type, config, onChange }: ComponentType<IConfig>, ref: any) => {
-  const form = useContext(FormContext);
+  const { form, formId, setFormData } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState(false);
   // 初始化默认值
@@ -27,6 +27,7 @@ const MTextArea = ({ id, type, config, onChange }: ComponentType<IConfig>, ref: 
     // 日期组件初始化值
     if (name && !isNull(value)) {
       form?.setFieldValue(name, value);
+      setFormData({ name: formId, value: { [name]: value } });
     }
   }, [config.props.defaultValue]);
 

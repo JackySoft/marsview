@@ -1,7 +1,7 @@
-import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useState, memo } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useState, memo } from 'react';
 import { Table, Form, Input, InputNumber, Select, DatePicker, Switch, Space, Button } from 'antd';
 import { ComponentType } from '@/packages/types';
-import { FormContext } from '@/packages/utils/context';
+import { useFormContext } from '@/packages/utils/context';
 import * as util from '@/packages/utils/util';
 import dayjs from 'dayjs';
 import { usePageStore } from '@/stores/pageStore';
@@ -12,7 +12,7 @@ import { message } from '@/utils/AntdGlobal';
  */
 function EditTable({ id, type, config }: ComponentType, ref: any) {
   const [visible, setVisible] = useState(true);
-  const form = useContext(FormContext);
+  const { form } = useFormContext();
 
   useImperativeHandle(ref, () => ({
     show() {

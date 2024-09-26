@@ -1,7 +1,7 @@
-import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { Table, Form, Input, InputNumber, Select, DatePicker, Switch, Space, Button } from 'antd';
 import { ComponentType } from '../../types';
-import { FormContext } from '../../utils/context';
+import { useFormContext } from '../../utils/context';
 import * as util from '../../utils/util';
 import dayjs from 'dayjs';
 import { PlusOutlined } from '@ant-design/icons';
@@ -11,7 +11,7 @@ import { message } from '../../utils/AntdGlobal';
  */
 function EditTable({ id, type, config }: ComponentType, ref: any) {
   const [visible, setVisible] = useState(true);
-  const form = useContext(FormContext);
+  const { form } = useFormContext();
 
   useImperativeHandle(ref, () => ({
     show() {

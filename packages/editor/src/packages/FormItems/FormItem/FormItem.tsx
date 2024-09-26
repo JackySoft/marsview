@@ -1,10 +1,10 @@
 import { Form, InputProps, FormItemProps } from 'antd';
 import { useDrop } from 'react-dnd';
 import * as Components from '@/packages/index';
-import { forwardRef, useContext, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { ComponentType, IDragTargetItem } from '@/packages/types';
 import { isNull } from '@/packages/utils/util';
-import { FormContext } from '@/packages/utils/context';
+import { useFormContext } from '@/packages/utils/context';
 
 import { usePageStore } from '@/stores/pageStore';
 import MarsRender from '@/packages/MarsRender/MarsRender';
@@ -23,7 +23,7 @@ export interface IConfig {
  */
 const MFormItem = ({ id, type, config, elements }: ComponentType<IConfig>, ref: any) => {
   const addChildElements = usePageStore((state) => state.addChildElements);
-  const form = useContext(FormContext);
+  const { form, formId, setFormData } = useFormContext();
   const [visible, setVisible] = useState(true);
   // 初始化默认值
   useEffect(() => {
@@ -32,6 +32,7 @@ const MFormItem = ({ id, type, config, elements }: ComponentType<IConfig>, ref: 
     // 日期组件初始化值
     if (name && !isNull(value)) {
       form?.setFieldValue(name, value);
+      setFormData({ name: formId, value: { [name]: value } });
     }
   }, [config.props.defaultValue]);
 

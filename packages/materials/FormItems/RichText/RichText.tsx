@@ -1,10 +1,10 @@
 import { Form, FormItemProps } from 'antd';
-import { forwardRef, useContext, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import ReactQuill, { Range, UnprivilegedEditor } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { ComponentType } from '../../types';
 import { isNull } from '../../utils/util';
-import { FormContext } from '../../utils/context';
+import { useFormContext } from '../../utils/context';
 import styles from './index.module.less';
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {
@@ -22,7 +22,7 @@ export interface IConfig {
  * @returns 返回组件
  */
 const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, ref: any) => {
-  const form = useContext(FormContext);
+  const { form, formId, setFormData } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState(false);
   // 初始化默认值
@@ -32,6 +32,7 @@ const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, 
     // 日期组件初始化值
     if (name && !isNull(value)) {
       form?.setFieldValue(name, value);
+      setFormData({ name: formId, value: { [name]: value } });
     }
   }, []);
 

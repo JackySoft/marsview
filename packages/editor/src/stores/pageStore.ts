@@ -491,7 +491,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   setFormData({ name, value }: any) {
     set(
       produce((state) => {
-        state.page.formData[name] = value;
+        state.page.formData[name] = { ...state.page.formData[name], ...value };
       }),
     );
   },

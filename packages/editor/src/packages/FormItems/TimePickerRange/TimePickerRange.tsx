@@ -1,8 +1,8 @@
 import { ComponentType } from '@/packages/types';
 import { isNull } from '@/packages/utils/util';
 import { Form, FormItemProps, FormInstance, TimePicker } from 'antd';
-import { useEffect, useContext, useState, useImperativeHandle, forwardRef } from 'react';
-import { FormContext } from '@/packages/utils/context';
+import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
+import { useFormContext } from '@/packages/utils/context';
 
 import dayjs from 'dayjs';
 
@@ -20,7 +20,7 @@ export interface IConfig {
  * @returns 返回组件
  */
 const MTimePickerRange = ({ id, type, config, onChange }: ComponentType<IConfig> & { form: FormInstance }, ref: any) => {
-  const form = useContext(FormContext);
+  const { form, formId, setFormData } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState(config.props.formWrap.disabled);
   // 初始化默认值
@@ -32,6 +32,7 @@ const MTimePickerRange = ({ id, type, config, onChange }: ComponentType<IConfig>
       const fmt = config.props.formWrap.format || 'HH:mm:ss';
       const rangeTime = value.split(',').map((item) => dayjs(item, fmt));
       form?.setFieldValue(name, rangeTime);
+      setFormData({ name: formId, value: { [name]: rangeTime } });
     }
   }, [config.props.defaultValue]);
 

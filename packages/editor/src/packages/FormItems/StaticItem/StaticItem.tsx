@@ -1,9 +1,9 @@
 import { Form, InputProps, FormItemProps, Image } from 'antd';
-import { forwardRef, useContext, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { ComponentType } from '@/packages/types';
 import dayjs from 'dayjs';
 import { formatNumber, isNull } from '@/packages/utils/util';
-import { FormContext } from '@/packages/utils/context';
+import { useFormContext } from '@/packages/utils/context';
 
 import { message } from '@/utils/AntdGlobal';
 
@@ -14,7 +14,7 @@ export interface IConfig {
 }
 
 const StaticItem = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
-  const form = useContext(FormContext);
+  const { form, formId, setFormData } = useFormContext();
   const [visible, setVisible] = useState(true);
   // 初始化默认值
   useEffect(() => {
@@ -23,6 +23,7 @@ const StaticItem = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
     // 日期组件初始化值
     if (name && !isNull(value)) {
       form?.setFieldValue(name, value);
+      setFormData({ name: formId, value: { [name]: value } });
     }
   }, [config.props.defaultValue]);
 

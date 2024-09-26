@@ -1,8 +1,8 @@
-import { forwardRef, useContext, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { Form, InputProps, Space, Button } from 'antd';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Material } from '@/packages/MarsRender/MarsRender';
-import { FormContext } from '@/packages/utils/context';
+import { useFormContext } from '@/packages/utils/context';
 import { ComponentType } from '@/packages/types';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
@@ -22,7 +22,7 @@ export interface IConfig {
  */
 const MFormList = ({ id, type, config, elements }: ComponentType<IConfig>, ref: any) => {
   const [visible, setVisible] = useState(true);
-  const form = useContext(FormContext);
+  const { form } = useFormContext();
   // 初始化默认值
   useEffect(() => {
     form?.setFieldValue(config.props.formItem.name, [{}]);
@@ -44,7 +44,7 @@ const MFormList = ({ id, type, config, elements }: ComponentType<IConfig>, ref: 
         <Form.List {...config.props.formItem}>
           {(fields, { add, remove }) => (
             <>
-              {fields.map(({ key, name, ...restField }) => (
+              {fields.map(({ key, name }) => (
                 <Space key={key} style={{ display: 'flex', width: '100%', marginBottom: 8, padding: '0 10px' }} align="baseline">
                   <Space key={key} align="baseline" direction={config.props.formItem.direction}>
                     {elements?.length ? (

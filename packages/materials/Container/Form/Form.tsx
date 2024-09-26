@@ -81,7 +81,7 @@ const MForm = ({ id, config, elements, onFinish, onChange }: ComponentType, ref:
 
   return (
     visible && (
-      <FormContext.Provider value={form}>
+      <FormContext.Provider value={{ form, formId: id, setFormData }}>
         <Form form={form} style={config.style} {...config.props} onFinish={handleFinish} onValuesChange={handleChange}>
           <MarsRender elements={elements} />
         </Form>

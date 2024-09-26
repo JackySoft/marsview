@@ -16,7 +16,7 @@ const InputPx = ({ value, onChange, ...props }: any) => {
 
   // 输入框改变
   const handleChange = (value: null | number | string) => {
-    if (value) {
+    if (value || value === 0) {
       setNum(value);
       onChange(value + unit);
     } else {

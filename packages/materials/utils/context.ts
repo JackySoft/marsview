@@ -5,6 +5,10 @@
  */
 
 import { FormInstance } from 'antd';
-import { createContext } from 'react';
+import React, { createContext } from 'react';
 
-export const FormContext = createContext<FormInstance<any> | null>(null);
+export const FormContext = createContext<{ form: FormInstance<any>; formId: string; setFormData: (payload: any) => void } | null>(null);
+
+export const useFormContext = () => {
+  return React.useContext(FormContext) || { form: null, setFormData: () => {}, formId: '' };
+};

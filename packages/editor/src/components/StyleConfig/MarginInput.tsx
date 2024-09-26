@@ -29,7 +29,7 @@ const MarginInput = ({ form }: { form: FormInstance }) => {
         </Radio.Group>
         {type === 'all' && (
           <Form.Item name={['scopeStyle', 'margin']} noStyle>
-            <Input style={{ marginTop: 10 }} placeholder="边距: 10px" />
+            <InputPx style={{ marginTop: 10 }} placeholder="边距: 10px" />
           </Form.Item>
         )}
         {type === 'single' && (

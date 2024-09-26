@@ -1,8 +1,8 @@
 import { ComponentType } from '@/packages/types';
 import { getDateRangeByType, isNull } from '@/packages/utils/util';
 import { Form, DatePicker, FormItemProps } from 'antd';
-import { useEffect, useContext, useState, useImperativeHandle, forwardRef } from 'react';
-import { FormContext } from '@/packages/utils/context';
+import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
+import { useFormContext } from '@/packages/utils/context';
 
 export interface IConfig {
   defaultValue: string;
@@ -19,7 +19,7 @@ export interface IConfig {
  */
 const MDatePickerRange = ({ id, type, config, onChange }: ComponentType<IConfig>, ref: any) => {
   const { RangePicker } = DatePicker;
-  const form = useContext(FormContext);
+  const { form, formId, setFormData } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState(false);
   // 初始化默认值
@@ -30,6 +30,7 @@ const MDatePickerRange = ({ id, type, config, onChange }: ComponentType<IConfig>
     if (name && !isNull(value)) {
       const date = getDateRangeByType(value);
       form?.setFieldValue(name, date);
+      setFormData({ name: formId, value: { [name]: date } });
     }
   }, [config.props.defaultValue]);
 

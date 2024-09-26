@@ -1,9 +1,9 @@
 import { ComponentType } from '../../types';
 import { Form, FormItemProps, Cascader } from 'antd';
-import { forwardRef, useContext, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { handleApi } from '../../utils/handleApi';
 import { isNull } from '../../utils/util';
-import { FormContext } from '../../utils/context';
+import { useFormContext } from '../../utils/context';
 import { usePageStore } from '../../stores/pageStore';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
@@ -25,7 +25,7 @@ interface Option {
  * @returns 返回组件
  */
 const MCascader = ({ config, onChange }: ComponentType<IConfig>, ref: any) => {
-  const form = useContext(FormContext);
+  const { form, formId, setFormData } = useFormContext();
   const [data, setData] = useState<Option[]>([]);
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState(false);
@@ -37,6 +37,7 @@ const MCascader = ({ config, onChange }: ComponentType<IConfig>, ref: any) => {
     // 日期组件初始化值
     if (name && !isNull(value)) {
       form?.setFieldValue(name, value);
+      setFormData({ name: formId, value: { [name]: value } });
     }
   }, [config.props.defaultValue]);
 

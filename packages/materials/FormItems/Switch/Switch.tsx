@@ -1,8 +1,8 @@
 import { ComponentType } from '../../types';
 import { isNull } from '../../utils/util';
 import { Form, Switch } from 'antd';
-import { useEffect, useContext, useState, useImperativeHandle, forwardRef } from 'react';
-import { FormContext } from '../../utils/context';
+import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
+import { useFormContext } from '../../utils/context';
 
 /**
  *
@@ -11,7 +11,7 @@ import { FormContext } from '../../utils/context';
  * @returns 返回组件
  */
 const MSwitch = ({ config, onChange }: ComponentType, ref: any) => {
-  const form = useContext(FormContext);
+  const { form, formId, setFormData } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState(false);
   // 初始化默认值
@@ -21,6 +21,7 @@ const MSwitch = ({ config, onChange }: ComponentType, ref: any) => {
     // 日期组件初始化值
     if (name && !isNull(value)) {
       form?.setFieldValue(name, value);
+      setFormData({ name: formId, value: { [name]: value } });
     }
   }, [config.props.defaultValue]);
 

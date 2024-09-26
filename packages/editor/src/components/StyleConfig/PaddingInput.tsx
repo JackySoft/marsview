@@ -30,7 +30,7 @@ const PaddingInput = ({ form }: { form: FormInstance }) => {
         </Radio.Group>
         {type === 'all' && (
           <Form.Item name={['scopeStyle', 'padding']} noStyle>
-            <Input style={{ marginTop: 10 }} placeholder="填充: 10px" />
+            <InputPx style={{ marginTop: 10 }} placeholder="填充: 10px" />
           </Form.Item>
         )}
         {type === 'single' && (
