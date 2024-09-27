@@ -57,7 +57,7 @@ export default function Welcome() {
       <section className={style.bg}>
         <canvas id="canvasBox" className={style.canvas}></canvas>
         <div className={style.content}>
-          <h1 className={style.title}>Marsview 低代码搭建平台</h1>
+          <h1 className={style.title}>Marsview 低代码搭建</h1>
           <p className={style.desc}>让搭建更简单，让开发更高效</p>
           <div className={style.count}>
             服务 <CountUp end={1000} duration={3} />+ 项目，

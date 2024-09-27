@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'Marsview',
+  title: 'Marsview可视化搭建',
   description: '一款面向中后台低代码平台，支持逻辑编排、事件交互和接口配置。',
   lastUpdated: true,
   head: [
