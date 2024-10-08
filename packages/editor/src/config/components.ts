@@ -353,6 +353,11 @@ const components = [
         name: '头像',
         type: 'Avatar',
       },
+      {
+        icon: '',
+        name: '二维码',
+        type: 'QRCode',
+      },
     ],
   },
   {
