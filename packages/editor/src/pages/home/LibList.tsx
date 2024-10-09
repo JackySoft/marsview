@@ -7,6 +7,7 @@ import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
 import SearchBar from '@/components/Searchbar/SearchBar';
 import CreateLib from '@/layout/components/Header/CreateLib';
+import dayjs from 'dayjs';
 import style from './index.module.less';
 
 /**
@@ -80,8 +81,11 @@ export default () => {
           <h2>{item.name}</h2>
           <p className={style.remark}>{item.description || '暂无描述'}</p>
           <p>
-            <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
-            {item.user_name} {item.created_at}
+            <span style={{ marginRight: 10 }}>
+              <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
+              {item.user_name.split('@')?.[0]}
+            </span>
+            <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
           </p>
         </div>
         <Space>

@@ -74,7 +74,7 @@ const MenuComponent: React.FC = () => {
         onClick={onClick}
         theme={projectInfo.menu_theme_color as MenuTheme}
         selectedKeys={selectedKeys}
-        style={{ height: 'calc(100vh - 60px)', border: 'none', overflowY: 'auto' }}
+        style={{ height: 'calc(100vh - 64px)', border: 'none', overflowY: 'auto' }}
         mode={projectInfo.menu_mode}
         inlineCollapsed={collapsed}
         items={menuList}

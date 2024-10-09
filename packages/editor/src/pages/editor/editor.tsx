@@ -301,7 +301,7 @@ const Editor = () => {
           useMouseDrag={true}
           useWheelScroll={true}
           useAutoZoom={true}
-          zoomRange={[0.1, 10]}
+          zoomRange={[0.5, 3]}
           margin={100}
         >
           {/* 编辑器 */}

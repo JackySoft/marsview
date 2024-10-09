@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Space, Tooltip } from 'antd';
 import { CheckOutlined, ClockCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import { usePageStore } from '@/stores/pageStore';
 import { publishPage } from '@/api';
@@ -49,18 +49,20 @@ export default function Publish() {
   }
   return (
     <div className={styles.publishPopover}>
-      <Button type={stg_publish_id ? 'link' : 'text'} danger={stg_state === 4} onClick={() => publishToEnv('stg')}>
-        STG
-        {!loading1 ? stg_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
-      </Button>
-      <Button type={pre_publish_id ? 'link' : 'text'} danger={pre_state === 4} onClick={() => publishToEnv('pre')}>
-        PRE
-        {!loading2 ? pre_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
-      </Button>
-      <Button type={prd_publish_id ? 'link' : 'text'} danger={prd_state === 4} onClick={() => publishToEnv('prd')}>
-        PRD
-        {!loading3 ? prd_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
-      </Button>
+      <Space size={10}>
+        <Button type={stg_publish_id || stg_state >= 3 ? 'link' : 'text'} danger={stg_state === 4} onClick={() => publishToEnv('stg')}>
+          <Tooltip title="测试环境"> STG</Tooltip>
+          {!loading1 ? stg_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
+        </Button>
+        <Button type={pre_publish_id || pre_state >= 3 ? 'link' : 'text'} danger={pre_state === 4} onClick={() => publishToEnv('pre')}>
+          <Tooltip title="预发布环境">PRE</Tooltip>
+          {!loading2 ? pre_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
+        </Button>
+        <Button type={prd_publish_id || prd_state >= 3 ? 'link' : 'text'} danger={prd_state === 4} onClick={() => publishToEnv('prd')}>
+          <Tooltip title="生产环境">PRD</Tooltip>
+          {!loading3 ? prd_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
+        </Button>
+      </Space>
     </div>
   );
 }

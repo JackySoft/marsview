@@ -244,7 +244,7 @@ const Header = memo(() => {
         <div className={styles.user}>
           {isEditPage && mode === 'edit' && (
             <>
-              <Popover placement="bottom" content={<Publish />}>
+              <Popover placement="bottom" content={<Publish />} trigger="click">
                 <Button type="primary">
                   发布
                   <CaretDownFilled />

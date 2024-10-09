@@ -1,7 +1,7 @@
-import { Card, Col, Layout, Row, Pagination, Spin, Empty, Button, Form } from 'antd';
 import { useEffect, useState } from 'react';
-import { UserOutlined, DeleteOutlined, LockOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { Card, Col, Layout, Row, Pagination, Spin, Empty, Button, Form } from 'antd';
+import { UserOutlined, DeleteOutlined, LockOutlined, PlusOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { getProjectList, delProject } from '@/api';
 import { Project } from '@/api/types';
@@ -89,6 +89,13 @@ export default function Index() {
 
   // 项目卡片
   const CardItem: React.FC<ProjectCardItemProps> = ({ item, isAuth }) => {
+    const getEnvTag = (env: 'stg' | 'pre' | 'prd', name: string) => {
+      return (
+        <a href={`${import.meta.env.VITE_ADMIN_URL}/project/stg/${item.id}`} target="_blank">
+          {name}
+        </a>
+      );
+    };
     return (
       <Card
         hoverable
@@ -97,27 +104,9 @@ export default function Index() {
           background: isAuth ? 'none' : "url('/imgs/cross-bg.png')",
         }}
         actions={[
-          item.id ? (
-            <a href={`${import.meta.env.VITE_ADMIN_URL}/project/stg/${item.id}`} target="_blank">
-              STG
-            </a>
-          ) : (
-            <span style={{ cursor: 'not-allowed' }}>STG</span>
-          ),
-          item.id ? (
-            <a href={`${import.meta.env.VITE_ADMIN_URL}/project/pre/${item.id}`} target="_blank">
-              PRE
-            </a>
-          ) : (
-            <span style={{ cursor: 'not-allowed' }}>PRE</span>
-          ),
-          item.id ? (
-            <a href={`${import.meta.env.VITE_ADMIN_URL}/project/prd/${item.id}`} target="_blank">
-              PRD
-            </a>
-          ) : (
-            <span style={{ cursor: 'not-allowed' }}>PRD</span>
-          ),
+          item.id ? getEnvTag('stg', 'STG') : <span style={{ cursor: 'not-allowed' }}>STG</span>,
+          item.id ? getEnvTag('pre', 'PRE') : <span style={{ cursor: 'not-allowed' }}>PRE</span>,
+          item.id ? getEnvTag('prd', 'PRD') : <span style={{ cursor: 'not-allowed' }}>PRD</span>,
         ]}
       >
         <div className={styles.projectCard} onClick={() => handleAction(item.id, item.is_edit)}>
@@ -155,7 +144,7 @@ export default function Index() {
         {total > 0 || loading ? (
           <>
             <div className={styles.projectList}>
-              <Spin spinning={loading} size="large">
+              <Spin spinning={loading} size="large" tip="加载中...">
                 <Row gutter={[20, 20]}>
                   {projectList.map((item: Project.ProjectItem, index) => {
                     return (

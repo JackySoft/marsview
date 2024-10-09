@@ -71,7 +71,7 @@ const AdminLayout = () => {
 
   // 计算渲染区容器实际高度
   let height = 64;
-  let calcHeight = 'calc(100vh - 60px)';
+  let calcHeight = '';
   if (projectInfo.tag) {
     height += 50;
   }

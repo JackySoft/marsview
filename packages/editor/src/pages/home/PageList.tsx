@@ -95,8 +95,9 @@ export default function Index() {
     if (type === 'delete') {
       Modal.confirm({
         title: '确认',
-        content: '确认删除吗？',
+        content: '删除后，该页面无法恢复，请谨慎操作。',
         okText: '确认',
+        okButtonProps: { danger: true },
         cancelText: '取消',
         onOk: async () => {
           await delPageData({
@@ -143,16 +144,16 @@ export default function Index() {
           </div>
         </div>
         <div className={styles.itemFooter}>
-          <Tooltip title="效果图预览">
+          <Tooltip title="预览">
             <EyeOutlined onClick={() => handleAction('preview', item, isAuth)} />
           </Tooltip>
-          <Tooltip title="页面复制">
+          <Tooltip title="复制">
             <CopyOutlined onClick={() => handleAction('copy', item, isAuth)} />
           </Tooltip>
-          <Tooltip title="页面删除">
+          <Tooltip title="删除">
             <DeleteOutlined onClick={() => handleAction('delete', item, isAuth)} />
           </Tooltip>
-          <Tooltip title="页面访问">
+          <Tooltip title="访问">
             <SendOutlined
               onClick={() => {
                 window.open(`http://admin.marsview.cc/page/stg/${item.id}`, '_blank');
@@ -171,7 +172,7 @@ export default function Index() {
         {total > 0 || loading ? (
           <>
             <div className={styles.pagesContent}>
-              <Spin spinning={loading} size="large">
+              <Spin spinning={loading} size="large" tip="加载中...">
                 <Row gutter={[20, 20]}>
                   {content.map((item: PageItem, index: number) => {
                     return (
