@@ -1,8 +1,9 @@
 import { Form, TreeSelect, Divider, Select, Input, FormInstance } from 'antd';
 import { useEffect, useState } from 'react';
-import { ComponentMethodType } from '@/packages/types';
+import { ComponentMethodParams, ComponentMethodType } from '@/packages/types';
 import { usePageStore } from '@/stores/pageStore';
 import styles from './index.module.less';
+import VariableBind from '@/components/VariableBind/VariableBind';
 
 /**
  * 调用各个组件暴露的方法
@@ -13,6 +14,7 @@ const ComponentMethods = ({ form }: { form: FormInstance }) => {
   const state = usePageStore();
 
   const [methods, setMethods] = useState<ComponentMethodType[]>([]);
+  const [methodParams, setMethodParams] = useState<ComponentMethodParams[]>([]);
 
   useEffect(() => {
     const target = form.getFieldValue('target');
@@ -30,6 +32,13 @@ const ComponentMethods = ({ form }: { form: FormInstance }) => {
 
   const update = (methodName?: string) => {
     form.setFieldValue('methodName', methodName);
+  };
+
+  const handleChangeMethod = (value: string) => {
+    const targetMethod = methods.find((item) => item.name === value);
+    if (!targetMethod) return;
+    update(targetMethod?.title);
+    setMethodParams(targetMethod?.params || []);
   };
 
   return (
@@ -50,7 +59,7 @@ const ComponentMethods = ({ form }: { form: FormInstance }) => {
         />
       </Form.Item>
       <Form.Item label="组件方法" name={'method'} rules={[{ required: true, message: '请选择调用的方法' }]}>
-        <Select onChange={(val) => update(methods.find((item) => item.name === val)?.title)} placeholder="请选择要调用的组件方法">
+        <Select onChange={(val) => handleChangeMethod(val)} placeholder="请选择要调用的组件方法">
           {methods.map((item) => (
             <Select.Option key={item.name} value={item.name}>
               {item.title}
@@ -58,6 +67,28 @@ const ComponentMethods = ({ form }: { form: FormInstance }) => {
           ))}
         </Select>
       </Form.Item>
+
+      {methodParams.map((item, index) => (
+        <Form.Item
+          label={item.title}
+          name={'params' + index}
+          rules={item.required ? [{ required: true, message: '请选择调用的方法' }] : []}
+          key={'params' + index}
+        >
+          {item.type === 'select' ? (
+            <Select placeholder="请选择">
+              {item.options?.map((i) => (
+                <Select.Option key={i.value} value={i.value}>
+                  {i.label}
+                </Select.Option>
+              ))}
+            </Select>
+          ) : (
+            <VariableBind placeholder="参数值" />
+          )}
+        </Form.Item>
+      ))}
+
       <Form.Item label="方法名称" name={'methodName'} hidden>
         <Input />
       </Form.Item>
