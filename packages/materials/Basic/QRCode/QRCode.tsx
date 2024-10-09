@@ -36,7 +36,7 @@ const MQRCode = ({ config }: ComponentType<IConfig>, ref: any) => {
       hide() {
         setVisible(false);
       },
-      changeQRCodeStatus(status: QRStatus) {
+      changeQRCodeStatus({ status }: { status: QRStatus }) {
         setStatusEffect(status);
       },
     };

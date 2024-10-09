@@ -118,7 +118,7 @@ export interface MethodsAction {
   name: string;
   target: string;
   method: string;
-  data: Array<{ key: string; value: string }>;
+  params?: { [key: string]: string | number };
 }
 
 /**

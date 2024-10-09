@@ -258,7 +258,7 @@ async function handleMethods({ action, next }: ActionNode<MethodsAction>, data: 
     return;
   }
   try {
-    const result = await ref?.[action.method]?.({ ...data });
+    const result = await ref?.[action.method]?.({ ...action?.params, ...data });
     if (typeof result === 'boolean') {
       if (result) {
         execAction(next?.success || next, data);

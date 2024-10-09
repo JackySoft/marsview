@@ -71,21 +71,11 @@ const ComponentMethods = ({ form }: { form: FormInstance }) => {
       {methodParams.map((item, index) => (
         <Form.Item
           label={item.title}
-          name={'params' + index}
-          rules={item.required ? [{ required: true, message: '请选择调用的方法' }] : []}
+          name={['params', item.name]}
+          rules={[{ required: item.required || false, message: '请选择调用的方法' }]}
           key={'params' + index}
         >
-          {item.type === 'select' ? (
-            <Select placeholder="请选择">
-              {item.options?.map((i) => (
-                <Select.Option key={i.value} value={i.value}>
-                  {i.label}
-                </Select.Option>
-              ))}
-            </Select>
-          ) : (
-            <VariableBind placeholder="参数值" />
-          )}
+          {item.type === 'select' ? <Select placeholder="请选择" options={item.options} /> : <VariableBind placeholder="参数值" />}
         </Form.Item>
       ))}
 
