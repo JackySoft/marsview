@@ -26,7 +26,6 @@ export interface IConfig {
  */
 const MResult = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
   const [visible, setVisible] = useState(true);
-  console.log(id, type, config, 'ppp');
   // 对外暴露方法
   useImperativeHandle(ref, () => {
     return {

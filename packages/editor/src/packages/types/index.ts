@@ -153,12 +153,21 @@ export interface NotificationAction {
   duration: number;
 }
 
+export interface ComponentMethodParams {
+  name: string;
+  title: string;
+  required: boolean;
+  type: 'select' | 'input';
+  options?: Array<{ label: string; value: string }>;
+}
+
 /**
  * 组件方法类型
  */
 export interface ComponentMethodType {
   name: string;
   title: string;
+  params: ComponentMethodParams[];
 }
 
 /**
