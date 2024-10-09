@@ -11,7 +11,7 @@ export default {
     },
     {
       type: 'Variable',
-      label: '扫描后的结果',
+      label: '扫描结果',
       name: 'value',
       props: {
         placeholder: '请输入',
@@ -28,55 +28,7 @@ export default {
         ],
       },
     },
-    {
-      type: 'Variable',
-      label: '图片地址',
-      name: 'icon',
-      tooltip: '二维码中图片的地址（目前只支持图片地址）',
-      props: {
-        placeholder: '请输入图片地址',
-      },
-    },
-    {
-      type: 'InputNumber',
-      label: '二维码大小',
-      name: 'size',
-      props: {
-        placeholder: '二维码大小',
-      },
-    },
-    {
-      type: 'InputNumber',
-      label: '图片宽度',
-      name: ['iconSize', 'width'],
-      props: {
-        placeholder: '二维码中图片的宽度',
-      },
-    },
-    {
-      type: 'InputNumber',
-      label: '图片高度',
-      name: ['iconSize', 'height'],
-      props: {
-        placeholder: '二维码中图片的高度',
-      },
-    },
-    {
-      type: 'Variable',
-      label: '二维码颜色',
-      name: 'color',
-      props: {
-        placeholder: '请输入',
-      },
-    },
-    {
-      type: 'Variable',
-      label: '二维码背景颜色',
-      name: 'bgColor',
-      props: {
-        placeholder: '请输入',
-      },
-    },
+
     {
       type: 'Switch',
       label: '是否有边框',
@@ -108,6 +60,66 @@ export default {
         ],
       },
     },
+    {
+      type: 'Title',
+      label: '二维码设置',
+      key: 'qrcode-settings',
+    },
+    {
+      type: 'InputNumber',
+      label: '大小',
+      name: 'size',
+      props: {
+        placeholder: '二维码大小',
+      },
+    },
+    {
+      type: 'ColorPicker',
+      label: '颜色',
+      name: 'color',
+      props: {
+        placeholder: '请输入',
+      },
+    },
+    {
+      type: 'ColorPicker',
+      label: '背景色',
+      name: 'bgColor',
+      props: {
+        placeholder: '请输入',
+      },
+    },
+    {
+      type: 'Title',
+      label: '中间图片设置',
+      key: 'img-settings',
+    },
+    {
+      type: 'Variable',
+      label: '图片地址',
+      name: 'icon',
+      tooltip: '二维码中图片的地址（目前只支持图片地址）',
+      props: {
+        placeholder: '请输入图片地址',
+      },
+    },
+
+    {
+      type: 'InputNumber',
+      label: '图片宽度',
+      name: ['iconSize', 'width'],
+      props: {
+        placeholder: '二维码中图片的宽度',
+      },
+    },
+    {
+      type: 'InputNumber',
+      label: '图片高度',
+      name: ['iconSize', 'height'],
+      props: {
+        placeholder: '二维码中图片的高度',
+      },
+    },
   ],
   config: {
     // 组件默认属性值
@@ -118,7 +130,7 @@ export default {
       icon: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
       iconSize: { width: 40, height: 40 },
       color: '#000',
-      bgColor: 'transparent',
+      bgColor: '#fff',
       bordered: true,
       errorLevel: 'M',
       status: 'active',
@@ -146,11 +158,6 @@ export default {
             { value: 'loading', label: 'loading' },
             { value: 'scanned', label: 'scanned' },
           ],
-        },
-        {
-          name: 'text',
-          title: '测试参数',
-          type: 'input',
         },
       ],
     },
