@@ -8,6 +8,7 @@ import {
   AppstoreOutlined,
   LoadingOutlined,
   PieChartOutlined,
+  CloudOutlined,
 } from '@ant-design/icons';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { toBlob } from 'html-to-image';
@@ -78,9 +79,14 @@ const Header = memo(() => {
       key: 'templates',
       icon: <PieChartOutlined style={{ fontSize: 16 }} />,
     },
+    {
+      label: '图片云',
+      key: 'cloud',
+      icon: <CloudOutlined style={{ fontSize: 16 }} />,
+    },
   ];
   useEffect(() => {
-    if (['/projects', '/pages', '/libs', '/templates'].includes(location.pathname)) {
+    if (['/projects', '/pages', '/libs', '/templates', '/cloud'].includes(location.pathname)) {
       setNav(true);
       setNavKey([location.pathname.slice(1)]);
     } else {

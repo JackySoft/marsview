@@ -2,8 +2,6 @@
  * API参数类型定义
  */
 
-import { message } from 'antd';
-
 export interface PageParams {
   keyword?: string;
   pageNum: number;

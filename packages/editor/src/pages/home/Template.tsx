@@ -90,7 +90,6 @@ export default function Index() {
 
   // 页面列表项
   const SectionItem = ({ item }: { item: PageItem }) => {
-    const isAuth = item.id ? true : false;
     return (
       <section className={styles.card}>
         <div className={styles.itemContent} onClick={() => handleAction('edit', item)}>

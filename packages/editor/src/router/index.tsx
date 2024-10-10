@@ -120,6 +120,10 @@ export const router = [
         ],
       },
       {
+        path: '/cloud',
+        element: lazyLoad(React.lazy(() => import('@/pages/cloud/ImgCloud'))),
+      },
+      {
         path: '*',
         element: <Navigate to="/404" />,
       },
