@@ -48,7 +48,7 @@ export default function ImgCloud() {
     const token = storage.get('token');
     return {
       name: 'file',
-      action: 'http://localhost:5000/api/cloud/upload/files',
+      action: 'http://mars-api.marsview.cc/api/cloud/upload/files',
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -67,6 +67,7 @@ export default function ImgCloud() {
             message.error(response.message);
           }
         } else if (status === 'error') {
+          setLoading(false);
           message.error(`上传失败，请稍后重试`);
         }
       },
