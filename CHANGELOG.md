@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.19.0](https://github.com/JackySoft/marsview/compare/v3.18.0...v3.19.0) (2024-10-10)
+
+
+### Bug Fixes
+
+* 替换二维码 ([554497e](https://github.com/JackySoft/marsview/commit/554497e47f689028d76d2dc9258cc80ee8696ab7))
+
+
+### Feature Improvements
+
+* 编辑页面画布优化 ([65f1a8b](https://github.com/JackySoft/marsview/commit/65f1a8b223aadf264dd14c1c589f1f43fcbc3a6c))
+
 ## [3.18.0](https://github.com/JackySoft/marsview/compare/v3.17.0...v3.18.0) (2024-10-09)
 
 
