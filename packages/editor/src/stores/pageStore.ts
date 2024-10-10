@@ -27,7 +27,6 @@ export interface PageState {
     stg_publish_id: number;
     pre_publish_id: number;
     prd_publish_id: number;
-    canvasWidth: number;
     preview_img: string;
     user_id: string;
     // 页面配置数据
@@ -70,7 +69,6 @@ export interface PageState {
 export interface PageAction {
   saveUserInfo: (userInfo: UserInfoStore) => void;
   savePageInfo: (pageInfo: any) => void;
-  setCanvasWidth: (width: number) => void;
   updatePageState: (payload: any) => void;
   addApi: (api: ApiType) => void;
   updateApi: (api: ApiType) => void;
@@ -113,7 +111,6 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     stg_publish_id: 0,
     pre_publish_id: 0,
     prd_publish_id: 0,
-    canvasWidth: 0,
     preview_img: '',
     user_id: '',
     config: {
@@ -171,12 +168,6 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
         } else {
           state.page = Object.assign(state.page, payload);
         }
-      }),
-    ),
-  setCanvasWidth: (width: any) =>
-    set(
-      produce((state) => {
-        state.page.canvasWidth = width;
       }),
     ),
   updatePageState: ({ env, pageState }) => {

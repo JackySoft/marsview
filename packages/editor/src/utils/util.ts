@@ -109,7 +109,7 @@ export function getBoundingClientRect(element: any) {
 // 获取当前画布缩放比例，用来计算选中元素的实际尺寸。
 function getScale() {
   // 获取元素的最终计算样式
-  const style = window.getComputedStyle(document.querySelector('.mars-editor') as HTMLElement);
+  const style = window.getComputedStyle(document.querySelector('#editor') as HTMLElement);
   // 获取transform属性的值
   const transform = style.transform;
 

@@ -21,21 +21,19 @@ const EditLayout = () => {
           theme={{
             components: {
               Splitter: {
-                splitBarSize: 3,
                 controlItemBgActiveHover: '#7d33ff',
-                controlItemBgHover: '#e8e9eb',
               },
             },
           }}
         >
           <Splitter>
-            <Splitter.Panel size={mode === 'preview' ? 0 : 300} defaultSize={300}>
+            <Splitter.Panel collapsible size={mode === 'preview' ? 0 : undefined} defaultSize={300} min={300} max={800}>
               <Menu />
             </Splitter.Panel>
-            <Splitter.Panel size={mode === 'preview' ? '100%' : ''}>
+            <Splitter.Panel size={mode === 'preview' ? '100%' : ''} defaultSize={'100%'}>
               <Outlet></Outlet>
             </Splitter.Panel>
-            <Splitter.Panel size={mode === 'preview' ? 0 : 300} defaultSize={300}>
+            <Splitter.Panel collapsible size={mode === 'preview' ? 0 : undefined} defaultSize={300} min={300} max={800}>
               <ConfigPanel />
             </Splitter.Panel>
           </Splitter>

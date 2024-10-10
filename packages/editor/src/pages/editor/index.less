@@ -7,16 +7,22 @@
     background-color: #fff;
     min-height: 100%;
     position: relative;
+    box-shadow: 0 0 8px 3px #cccccc;
   }
 }
-.canvas-size {
-  position: absolute;
-  left: 50%;
-  width: 200px;
-  margin-left: -100px;
-  background-color: #fff;
-  padding-inline: 20px;
-  border-radius: 20px;
-  z-index: 100;
-  display: flex;
+.canvas-viewer {
+  width: auto;
+  height: calc(100vh - 64px);
+  background-color: #f0f2f3;
+  cursor: grab;
+  box-shadow: inset 1px 1px 6px 0px #cccccc;
+  &.dot {
+    /* 设置背景图像为重复的径向渐变，每个渐变代表一个点 */
+    background-image: radial-gradient(circle, rgba(185, 185, 185, 0.5) 1px, transparent 1px),
+      radial-gradient(circle, rgba(0, 0, 0, 0.5) 1px, transparent 1px);
+    /* 设置背景大小，确保点之间有足够的间距 */
+    background-size: 20px 20px; /* 根据需要调整间距 */
+    /* 让背景图像在水平和垂直方向上重复 */
+    background-repeat: repeat;
+  }
 }

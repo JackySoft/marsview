@@ -1,6 +1,6 @@
-import React, { MouseEvent, useState, useEffect } from 'react';
+import React, { MouseEvent, useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { ConfigProvider, InputNumber, Tooltip } from 'antd';
+import { ConfigProvider } from 'antd';
 import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
 import * as Components from '@/packages/index';
@@ -15,7 +15,6 @@ import { usePageStore } from '@/stores/pageStore';
 import { PageConfig } from '@/packages/Page';
 import InfiniteViewer from 'react-infinite-viewer';
 import './index.less';
-import { QuestionCircleOutlined } from '@ant-design/icons';
 
 /**
  * 画布
@@ -26,8 +25,6 @@ const Editor = () => {
   // 页面组件
   const {
     mode,
-    canvasWidth,
-    setCanvasWidth,
     selectedElement,
     theme,
     elements,
@@ -41,8 +38,6 @@ const Editor = () => {
   } = usePageStore((state) => {
     return {
       mode: state.mode,
-      canvasWidth: state.page.canvasWidth,
-      setCanvasWidth: state.setCanvasWidth,
       selectedElement: state.selectedElement,
       theme: state.page.config.props.theme,
       pageStyle: state.page.config.style,
@@ -60,6 +55,7 @@ const Editor = () => {
   const [hoverTarget, setHoverTarget] = useState<HTMLElement | null>(null);
   const [loaded, setLoaded] = useState(false);
   const { id } = useParams();
+  const viewerRef = useRef<InfiniteViewer>(null);
   useEffect(() => {
     if (!id) return;
     setLoaded(false);
@@ -91,8 +87,14 @@ const Editor = () => {
         user_id: res.user_id,
       });
       setLoaded(true);
-      // 初始化画布宽度
-      setCanvasWidth(Math.max(1440, pageData.canvasWidth || 0));
+      // 设置初始化缩放比例，由于屏幕尺寸是动态的，我们需要动态计算一个最佳的初始化缩放比例值
+      const container = document.querySelector('.mars-editor') as HTMLDivElement;
+      const scale = (container.clientWidth - 50) / 1440;
+      viewerRef.current?.setZoom(scale);
+      // 滚动到画布中心
+      requestAnimationFrame(() => {
+        viewerRef.current?.scrollCenter();
+      });
     });
     return () => {
       clearPageInfo();
@@ -261,6 +263,7 @@ const Editor = () => {
       removeElements(selectedElement.id);
     }
   };
+
   return (
     <ConfigProvider
       theme={{
@@ -273,58 +276,38 @@ const Editor = () => {
         },
       }}
     >
-      {/* 设置画布宽度 */}
-      {mode === 'edit' && (
-        <div
-          className="canvas-size"
-          onClick={() => {
-            setSelectedElement(undefined);
-          }}
-        >
-          <Tooltip title="画布支持缩放和拖拽；当页面内容较多时，可以尝试修改画布尺寸；">
-            <QuestionCircleOutlined />
-          </Tooltip>
-          <InputNumber
-            addonBefore="画布宽度:"
-            variant="borderless"
-            value={canvasWidth}
-            onChange={(val) => val && setCanvasWidth(val)}
-            controls={false}
-          />
-        </div>
-      )}
-      {mode === 'edit' ? (
-        <InfiniteViewer
-          className="node-viewer dot"
-          displayHorizontalScroll={false}
-          displayVerticalScroll={false}
-          useMouseDrag={true}
-          useWheelScroll={true}
-          useAutoZoom={true}
-          zoomRange={[0.5, 3]}
-          margin={100}
-        >
-          {/* 编辑器 */}
-          <div ref={drop} className={mode === 'edit' ? 'mars-editor' : 'mars-preview'}>
+      {/* 编辑器 */}
+      <div ref={drop} className={mode === 'edit' ? 'mars-editor' : 'mars-preview'}>
+        {mode === 'edit' ? (
+          <InfiniteViewer
+            className="canvas-viewer dot"
+            displayHorizontalScroll={false}
+            displayVerticalScroll={false}
+            useMouseDrag={true}
+            useWheelScroll={false}
+            useAutoZoom={true}
+            zoomRange={[0.5, 2]}
+            onDragStart={(e) => {
+              const target = e.inputEvent.target;
+              if (target.nodeName === 'A') {
+                e.stop();
+              }
+            }}
+            ref={viewerRef}
+          >
             {/* 页面渲染 */}
-            <div
-              id="editor"
-              className="pageWrapper"
-              style={{ minWidth: 1440, width: canvasWidth || 'auto', height: '100%' }}
-              onClick={handleClick}
-              onMouseOver={run}
-            >
+            <div id="editor" className="pageWrapper" style={{ width: 1440 }} onClick={handleClick} onMouseOver={run}>
               {/* 根据选中目标的相对位置，设置工具条 */}
               {mode === 'edit' && <Toolbar copyElement={copyElement} pastElement={pastElement} delElement={delElement} hoverTarget={hoverTarget} />}
               <React.Suspense fallback={<div>Loading...</div>}>{loaded && <Page />}</React.Suspense>
             </div>
+          </InfiniteViewer>
+        ) : (
+          <div id="editor" className="pageWrapper" style={{ height: 'calc(100vh - 64px)', overflow: 'auto' }}>
+            <React.Suspense fallback={<div>Loading...</div>}>{loaded && <Page />}</React.Suspense>
           </div>
-        </InfiniteViewer>
-      ) : (
-        <div id="editor" className="pageWrapper" style={{ height: 'calc(100vh - 64px)', overflow: 'auto' }}>
-          <React.Suspense fallback={<div>Loading...</div>}>{loaded && <Page />}</React.Suspense>
-        </div>
-      )}
+        )}
+      </div>
     </ConfigProvider>
   );
 };
