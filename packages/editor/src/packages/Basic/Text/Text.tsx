@@ -61,7 +61,7 @@ const MText = ({ id, type, config }: ComponentType, ref: any) => {
 
   return (
     visible && (
-      <Typography.Text style={config.style} {...omit(config.props, ['script'])} text={undefined} data-id={id} data-type={type}>
+      <Typography.Text style={config.style} {...omit(config.props, ['script', 'text'])} data-id={id} data-type={type}>
         {text}
       </Typography.Text>
     )

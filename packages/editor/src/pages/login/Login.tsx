@@ -123,7 +123,7 @@ export default function Login() {
 
             <Form.Item style={{ marginTop: 40 }}>
               <Button type="primary" block htmlType="submit" loading={loading2}>
-                登录
+                {type === 'login' ? '登录' : '注册'}
               </Button>
             </Form.Item>
             <Form.Item style={{ marginTop: 40 }}>

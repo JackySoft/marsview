@@ -14,7 +14,7 @@ export function isEnv(env?: string) {
  * menuMap: 菜单ID映射
  * @returns
  */
-export function arrayToTree(array: IMenuItem[]) {
+export function arrayToTree(array: IMenuItem[] = []) {
   const buttons: IMenuItem[] = [];
   const pageMap: { [key: number]: IMenuItem } = {};
   const menuMap: { [key: number]: IMenuItem } = {};
@@ -23,8 +23,13 @@ export function arrayToTree(array: IMenuItem[]) {
   array.forEach((item) => {
     map[item.id] = { ...item };
     if (item.type === 2) buttons.push(item);
-    if ((item.type === 1 || item.type === 3) && item.page_id) pageMap[item.page_id] = { ...item };
-    if (item.type === 1 || item.type === 3) menuMap[item.id] = { ...item };
+    if (item.type === 1 || item.type === 3) {
+      if (item.page_id) {
+        pageMap[item.page_id] = { ...item };
+      } else {
+        menuMap[item.id] = { ...item };
+      }
+    }
   });
 
   // 找到每个节点的父节点
@@ -43,7 +48,7 @@ export function arrayToTree(array: IMenuItem[]) {
     }
   });
   const menuTree = Object.values(map)
-    .filter((item) => item.parent_id === null)
+    .filter((item) => !item.parent_id)
     .sort((a, b) => a.sort_num - b.sort_num);
   return {
     menuTree,

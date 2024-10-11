@@ -144,6 +144,7 @@ export const formatDate = (date?: Date | string, rule?: string) => {
 
 // 递归生成菜单
 export function arrayToTree(array: Menu.MenuItem[], parentId = null) {
+  if (!Array.isArray(array)) return [];
   // 创建一个映射，将id映射到节点对象
   const map: { [key: number]: Menu.MenuItem & { children?: Menu.MenuItem[] } } = {};
   array.forEach((item) => {
@@ -161,7 +162,7 @@ export function arrayToTree(array: Menu.MenuItem[], parentId = null) {
     }
   });
   return Object.values(map)
-    .filter((item) => item.parent_id === parentId)
+    .filter((item) => (parentId ? item.parent_id === parentId : !item.parent_id))
     .sort((a, b) => a.sort_num - b.sort_num);
 }
 

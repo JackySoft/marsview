@@ -63,7 +63,7 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
       });
     },
     {
-      wait: 500,
+      wait: 800,
     },
   );
 
@@ -130,14 +130,15 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
               </Radio.Group>
             </Form.Item>
             {action === 'create' && (
-              <Form.Item label="用户" name="sso_info" rules={[{ required: true, message: '请输入飞书用户名' }]}>
+              <Form.Item label="用户" name="sso_info" rules={[{ required: true, message: '请输入用户邮箱' }]}>
                 <Select
                   labelInValue
-                  filterOption={true}
+                  filterOption={false}
                   showSearch
                   onSearch={run}
                   notFoundContent={userLoading ? <Spin size="small" /> : null}
                   options={users}
+                  placeholder="请输入用户完整邮箱"
                 />
               </Form.Item>
             )}
