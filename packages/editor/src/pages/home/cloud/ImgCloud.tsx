@@ -12,7 +12,7 @@ export default function ImgCloud() {
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState<number>(100);
   const [current, setCurrent] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(12);
+  const [pageSize, setPageSize] = useState<number>(24);
   const [state, setState] = useState(false);
   const [list, setList] = useState<
     Array<{ id: number; type: string; origin_name: string; file_name: string; size: number; user_name: string; created_at: string; url: string }>
@@ -30,8 +30,8 @@ export default function ImgCloud() {
         pageNum,
         pageSize: size,
       });
-      setTotal(res?.total || 0);
-      setList(res?.list || []);
+      setTotal(res.total || 0);
+      setList(res.list || []);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -56,9 +56,6 @@ export default function ImgCloud() {
       onChange(info) {
         const { status, response } = info.file;
         setLoading(true);
-        if (status !== 'uploading') {
-          console.log('上传中...');
-        }
         if (status === 'done') {
           setLoading(false);
           if (response.code == 0) {
@@ -78,7 +75,7 @@ export default function ImgCloud() {
     <div className={styles.imgCloud}>
       <div className={styles.content}>
         <Alert type="info" showIcon message="Marsview提供在线CDN服务，方便对远程图片和文件的管理；普通用户最多可上传5个文件，每个文件最大支持5M；" />
-        <Space>
+        <Space size={20}>
           <Upload {...props}>
             <Button type="primary" icon={<UploadOutlined />}>
               上传
@@ -145,7 +142,7 @@ export default function ImgCloud() {
         </div>
       </Spin>
       <div className={styles.imgPagination}>
-        <Pagination total={total} current={current} pageSize={pageSize} align="center" showSizeChanger={false} onChange={handleChange} />
+        <Pagination total={total} current={current} pageSize={pageSize} align="end" showSizeChanger={false} onChange={handleChange} />
       </div>
     </div>
   );

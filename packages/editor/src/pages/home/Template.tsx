@@ -101,7 +101,7 @@ export default function Index() {
           <div className={styles.updateUser}>
             <span style={{ marginRight: 10 }}>
               <UserOutlined style={{ fontSize: 15, marginRight: 5 }} />
-              {item.user_name.split('@')?.[0]}
+              {item.user_name}
             </span>
             <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
           </div>

@@ -83,7 +83,7 @@ export default () => {
           <p>
             <span style={{ marginRight: 10 }}>
               <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
-              {item.user_name.split('@')?.[0]}
+              {item.user_name}
             </span>
             <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
           </p>

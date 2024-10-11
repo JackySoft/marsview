@@ -98,7 +98,7 @@ export default function Welcome() {
         </div>
       </section>
       <section className={style.module} style={{ backgroundColor: '#fafafa' }}>
-        <h1>平台特色</h1>
+        <h1>项目特色</h1>
         <div className={style.moduleList}>
           <div className={style.moduleItem}>
             <img src="/imgs/p1.png" style={{ width: 90 }} />
@@ -124,7 +124,7 @@ export default function Welcome() {
       </section>
       <section className={style.footer}>
         <img src="https://marsview.cdn.bcebos.com/mars-logo-light.png" />
-        <h1>欢迎使用 Marsview 零代码搭建平台</h1>
+        <h1>欢迎使用 Marsview 零代码搭建工具</h1>
         <Link to="/projects">
           <Button type="primary" size="large">
             快速开始

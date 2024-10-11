@@ -121,7 +121,7 @@ export const router = [
       },
       {
         path: '/cloud',
-        element: lazyLoad(React.lazy(() => import('@/pages/cloud/ImgCloud'))),
+        element: lazyLoad(React.lazy(() => import('@/pages/home/cloud/ImgCloud'))),
       },
       {
         path: '*',

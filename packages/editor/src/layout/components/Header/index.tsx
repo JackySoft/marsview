@@ -1,5 +1,6 @@
-import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Image, Flex } from 'antd';
 import { memo, useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Image, Flex } from 'antd';
 import {
   ProjectOutlined,
   OneToOneOutlined,
@@ -10,7 +11,6 @@ import {
   PieChartOutlined,
   CloudOutlined,
 } from '@ant-design/icons';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { toBlob } from 'html-to-image';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
@@ -26,6 +26,7 @@ const Header = memo(() => {
   const [loading, setLoading] = useState(false);
   const [navKey, setNavKey] = useState(['projects']);
   const [pageFrom, setPageFrom] = useState('projects');
+  const [avatar, setAvatar] = useState<string>();
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
@@ -85,6 +86,7 @@ const Header = memo(() => {
       icon: <CloudOutlined style={{ fontSize: 16 }} />,
     },
   ];
+
   useEffect(() => {
     if (['/projects', '/pages', '/libs', '/templates', '/cloud'].includes(location.pathname)) {
       setNav(true);
@@ -94,6 +96,16 @@ const Header = memo(() => {
     }
     setPageFrom(location.pathname.slice(1));
   }, [location]);
+
+  // 获取用户头像
+  useEffect(() => {
+    const [email, suffix] = userInfo.userName.split('@');
+    if (suffix === 'qq.com') {
+      setAvatar(`https://q2.qlogo.cn/headimg_dl?dst_uin=${email}&spec=640`);
+    } else {
+      setAvatar('');
+    }
+  }, [userInfo]);
 
   // Tab切换点击
   const handleTab: MenuProps['onClick'] = (e) => {
@@ -205,6 +217,7 @@ const Header = memo(() => {
 
   const isEditPage = pageFrom === `editor/${id}/edit` || pageFrom === `editor/${id}/template`;
   const isPublishPage = pageFrom === `editor/${id}/publishHistory`;
+
   return (
     <>
       <Layout.Header className={isNav ? styles.homeHeader : styles.layoutHeader}>
@@ -297,32 +310,30 @@ const Header = memo(() => {
               menu={{
                 items: [
                   {
-                    key: '1',
+                    key: 'profile',
                     label: `${userInfo?.userName}`,
                   },
                   {
-                    key: '2',
-                    label: (
-                      <div
-                        onClick={(e) => {
-                          localStorage.clear();
-                          navigate(`/login?callback=${window.location.href}`);
-                        }}
-                      >
-                        退出
-                      </div>
-                    ),
+                    key: 'logout',
+                    label: '退出',
                   },
                 ],
+                onClick: (e) => {
+                  if (e.key === 'logout') {
+                    localStorage.clear();
+                    navigate(`/login?callback=${window.location.href}`);
+                  }
+                },
                 selectable: true,
               }}
             >
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  <span style={{ marginLeft: 10 }}>{`${userInfo?.userName}` || '开发者'}</span>
-                  <DownOutlined />
-                </Space>
-              </a>
+              <Flex align="center" style={{ height: 64 }}>
+                {avatar && <img width={25} vertical-align="sub" style={{ borderRadius: '50%' }} src={avatar} />}
+                <a type="link" onClick={(e) => e.preventDefault()} style={{ marginInline: 5 }}>
+                  {`${userInfo?.userName.split('@')[0]}` || '开发者'}
+                </a>
+                <DownOutlined style={{ color: '#7d33ff' }} />
+              </Flex>
             </Dropdown>
           </div>
           {/* github开源地址 */}

@@ -125,7 +125,7 @@ export default function Index() {
                 <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.remark || '暂无描述'}</p>
                 <p style={{ marginTop: 10 }}>
                   <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
-                  {item.user_name.split('@')?.[0]}
+                  {item.user_name}
                   &nbsp;&nbsp;
                   <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
                 </p>

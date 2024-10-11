@@ -129,7 +129,7 @@ const ComponentPanel = () => {
             <>
               {tabKey === 'system' && (
                 <>
-                  <Input placeholder="输入关键字查询组件" suffix={<SearchOutlined />} onChange={run} />
+                  <Input placeholder="输入组件名称查询" suffix={<SearchOutlined />} onChange={run} />
                   <Divider style={{ margin: '12px 0 0 0' }} />
                 </>
               )}
