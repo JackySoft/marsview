@@ -36,6 +36,7 @@ var _hmt = _hmt || [];
       { text: '组件', link: '/lib' },
       { text: '微服务', link: '/micro' },
       { text: '综合案例', link: '/example' },
+      { text: '赞助', link: '/sponsor' },
       { text: '团队', link: '/team' },
     ],
 
