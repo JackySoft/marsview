@@ -1,0 +1,40 @@
+#服务名
+spring:
+  application:
+    name: lowcode-core
+  #邮箱配置
+  mail:
+    host:
+    username: zfvip_it@163.com
+    password: RMh4qC24pNqbscab
+    properties: { "mail.smtp.ssl.enable",true }
+    test-connection: true
+    protocol: smtps
+    port: 465
+  #redis配置
+  data:
+    redis:
+      host:
+      port:
+      password:
+      database:
+
+
+#服务端口
+server:
+  port: 9001
+
+#mybatis配置
+mybatis:
+  jdbc:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url:
+    username:
+    password:
+  # mybatis对应的实体类
+  mapper-locations: classpath:com/**/mapper/**/*.xml
+  type-aliases-package: com.**.domain
+
+#打印sql日志
+logging:
+  config: classpath:logback.xml

@@ -26,7 +26,7 @@
 
 ## 介绍 🚀
 
-Marsview 是一款中后台方向的低代码可视化搭建平台，开发者可以在平台上创建项目、页面和组件，支持事件交互、接口调用、数据联动和逻辑编排等，开发者还可通过微服务快速集成到自己的业务系统中。
+Marsview 是一款中后台方向的低代码可视化搭建平台，开发者可以在平台上创建项目、页面和组件，支持事件交互、接口调用、数据联动和逻辑编排等，开发者还可通过微前端框架 microApp 快速集成到自己的业务系统中。
 
 ## 在线使用 🛸
 
@@ -52,6 +52,7 @@ Marsview 是一款中后台方向的低代码可视化搭建平台，开发者�
 - **环境：** 平台支持三套环境，STG、PRE 和 PRD，页面只有发布到对应环境后，才可以在用户端访问到该页面。
 - **回滚：** 平台发布后的页面支持一键回滚。
 - **微服务：** 如果你是传统的 Vue 项目，想使用此平台，可以先在平台搭建一个页面发布到 PRD 环境，最后通过微服务集成进来。
+- 后端提供 JAVA 和 Koa 两个版本，数据库为 Mysql。
 
 ## 本地开发 👨‍💻
 
@@ -60,20 +61,47 @@ Marsview 是一款中后台方向的低代码可视化搭建平台，开发者�
 git clone https://github.com/JackySoft/marsview.git
 ```
 
+项目说明
+
+|                    |                |
+| ------------------ | -------------- |
+| packges            | 前端项目       |
+| packges/admin      | 项目访问端     |
+| packges/editor     | 编辑器入口     |
+| packages/materials | 组件物料       |
+| packages/docs      | 低代码使用文档 |
+| backend            | 后端服务       |
+| backend/java       | JAVA 版本      |
+| backend/koa        | KOA 版本       |
+
 ### 快速开始
 
 运行需要 node 环境，建议`node:18`以上版本。使用`pnpm`作为依赖管理工具，如未安装，请先执行安装命令`npm install -g pnpm`。
 
+1. 安装 MySQL 数据库，执行`backend/db.sql`脚本
+
+2. 启动 Node 后端
+
 ```bash
-# 进入根目录
-cd marsview
+cd backend/koa
+
+pnpm i
+
+pnpm run dev
+```
+
+> 注意：运行前需要修改 koa/config.js 配置文件。
+
+3. 启动前端
+
+```bash
 
 # 安装依赖（安装依赖时间如过长，请先配置镜像源）
 pnpm i
+# 修改 .env.development 文件
+VITE_BASE_API = 'http://localhost:5000/api'
 # 启动编辑器
 pnpm start:editor
-# 启动用户端（用户端是当你页面搭建完成后，给用户提供独立访问的系统）
-pnpm start:admin
 ```
 
 ### 同步代码
@@ -100,6 +128,8 @@ git merge upstream/main
 
 ## 活动记录 🆕
 
+- 2024-10-30: Marsview 开源后端服务。
+- 2024-09-27: 上线邮箱注册服务。
 - 2024-08-30: MarsView 发布在[阮一峰周刊](https://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html)
 - 2024-08-27: MarsAI v1.0 上线，在自定义编写中实现辅助生成代码
 - 2024-08-17: 项目[在线文档](http://docs.marsview.cc/)发布
@@ -115,9 +145,13 @@ git merge upstream/main
 
 ## 项目交流 🏘️
 
-在使用和开发过程中遇到任何问题，欢迎微信扫码添加项目交流群：
+在使用过程中，遇到任何技术问题或商用授权问题，都可微信联系我：
 
-<img src="/.github/imgs/qrcode.jpg" alt="交流群" width="300">
+<img src=".github/imgs/qrcode.jpg"  width="200">
+
+## 参与捐赠 ✨
+
+[请我喝杯咖啡 ☕️](https://afdian.com/a/marsview)
 
 ## 🤝 参与贡献
 

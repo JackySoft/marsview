@@ -10,11 +10,15 @@
     "url": "http://www.marsview.cc"
   },
   "keywords": [
+    "marsview",
+    "mars",
     "lowcode",
     "react",
     "antd",
     "react-dnd",
-    "中后台低代码平台"
+    "中后台低代码平台",
+    "低代码平台",
+    "可视化搭建"
   ],
   "scripts": {
     "start:editor": "pnpm --filter editor start",

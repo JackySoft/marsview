@@ -1,0 +1,36 @@
+{
+  "name": "marsview-server",
+  "version": "1.0.0",
+  "repository": "",
+  "author": "河畔一角",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "nodemon main.js",
+    "serve:prd": "nodemon main.js"
+  },
+  "dependencies": {
+    "@baiducloud/sdk": "^1.0.1",
+    "@koa/router": "^12.0.0",
+    "@langchain/community": "^0.2.31",
+    "@larksuiteoapi/node-sdk": "^1.30.0",
+    "axios": "^1.6.3",
+    "cookie": "^0.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "keyv": "^5.0.1",
+    "koa": "^2.14.2",
+    "koa-body": "^6.0.1",
+    "koa-bodyparser": "^4.4.1",
+    "koa-jwt": "^4.0.4",
+    "koa2-cors": "^2.0.6",
+    "langchain": "^0.2.17",
+    "log4js": "^6.9.1",
+    "mysql2": "^3.6.0",
+    "nodemailer": "^6.9.14",
+    "nodemon": "^3.0.1",
+    "uuid": "^10.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  }
+}

@@ -12,3 +12,6 @@ packages/**/*/node_modules
 # misc
 .DS_Store
 cache
+/backend/koa/node_modules
+/backend/java/logs
+/backend/java/build
