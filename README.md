@@ -34,7 +34,7 @@ Marsview 是一款中后台方向的低代码可视化搭建平台，开发者�
 
 |                                    |                                    |
 | ---------------------------------- | ---------------------------------- |
-| ![Demo](/.github/imgs/intro1.png)  | ![Demo](./.github/imgs/intro2.png) |
+| ![Demo](./.github/imgs/intro1.png) | ![Demo](./.github/imgs/intro2.png) |
 | ![Demo](./.github/imgs/intro3.png) | ![Demo](./.github/imgs/intro4.png) |
 | ![Demo](./.github/imgs/intro5.png) | ![Demo](./.github/imgs/intro6.png) |
 | ![Demo](./.github/imgs/intro7.png) | ![Demo](./.github/imgs/intro8.png) |
@@ -122,6 +122,17 @@ git merge upstream/main
 ## 参与捐赠 ✨
 
 [请我喝杯咖啡 ☕️](https://afdian.com/a/marsview)
+
+感谢以下兄弟的捐赠：
+
+| 微信名称        | 微信头像                                        |
+| --------------- | ----------------------------------------------- |
+| 物联网方案-肖工 | <img src="./.github/sponsor/3.png"  width="50"> |
+| 🥕 二月贝弋 🥕  | <img src="./.github/sponsor/2.png"  width="50"> |
+| ᗥ               | <img src="./.github/sponsor/1.png"  width="50"> |
+| 元次达          | <img src="./.github/sponsor/4.png"  width="50"> |
+| fsliit          | <img src="./.github/sponsor/5.png"  width="50"> |
+| w10752842       | <img src="./.github/sponsor/6.png"  width="50"> |
 
 ## 🤝 参与贡献
 
