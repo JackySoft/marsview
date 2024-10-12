@@ -34,7 +34,7 @@ Marsview 是一款中后台方向的低代码可视化搭建平台，开发者�
 
 |                                    |                                    |
 | ---------------------------------- | ---------------------------------- |
-| ![Demo](./.github/imgs/intro1.png) | ![Demo](./.github/imgs/intro2.png) |
+| ![Demo](/.github/imgs/intro1.png)  | ![Demo](./.github/imgs/intro2.png) |
 | ![Demo](./.github/imgs/intro3.png) | ![Demo](./.github/imgs/intro4.png) |
 | ![Demo](./.github/imgs/intro5.png) | ![Demo](./.github/imgs/intro6.png) |
 | ![Demo](./.github/imgs/intro7.png) | ![Demo](./.github/imgs/intro8.png) |
@@ -149,7 +149,7 @@ git merge upstream/main
 
 在使用过程中，遇到任何技术问题或商用授权问题，都可微信联系我：
 
-<img src=".github/imgs/qrcode.jpg"  width="200">
+<img src="/.github/imgs/mywechat.jpg"  width="200">
 
 ## 参与捐赠 ✨
 
