@@ -45,7 +45,7 @@ export const createPageData = (params: CreatePageParams) => {
 
 // 图片上传
 export const uploadImg = (params: any) => {
-  return request.post('/upload/files', params, { showLoading: false });
+  return request.post('/upload/files', params, { showLoading: false, showError: false });
 };
 
 // 保存页面数据
