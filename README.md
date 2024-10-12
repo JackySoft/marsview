@@ -163,7 +163,7 @@ git merge upstream/main
 | 🥕 二月贝弋 🥕  | <img src="./.github/sponsor/2.png"  width="50"> |
 | ᗥ               | <img src="./.github/sponsor/1.png"  width="50"> |
 | 元次达          | <img src="./.github/sponsor/4.png"  width="50"> |
-| fsliit          | <img src="./.github/sponsor/5.png"  width="50"> |
+| IoT-Fast        | <img src="./.github/sponsor/5.png"  width="50"> |
 | w10752842       | <img src="./.github/sponsor/6.png"  width="50"> |
 
 ## 🤝 参与贡献
