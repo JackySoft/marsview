@@ -157,11 +157,11 @@ git merge upstream/main
 
 感谢以下兄弟的捐赠：
 
-| 微信名称        | 微信头像                                        |
+| 名称            | 头像                                            |
 | --------------- | ----------------------------------------------- |
 | 物联网方案-肖工 | <img src="./.github/sponsor/3.png"  width="50"> |
 | 🥕 二月贝弋 🥕  | <img src="./.github/sponsor/2.png"  width="50"> |
-| ᗥ               | <img src="./.github/sponsor/1.png"  width="50"> |
+| 猩猩点灯        | <img src="./.github/sponsor/1.png"  width="50"> |
 | 元次达          | <img src="./.github/sponsor/4.png"  width="50"> |
 | IoT-Fast        | <img src="./.github/sponsor/5.png"  width="50"> |
 | w10752842       | <img src="./.github/sponsor/6.png"  width="50"> |
