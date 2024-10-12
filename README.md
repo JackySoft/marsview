@@ -63,16 +63,18 @@ git clone https://github.com/JackySoft/marsview.git
 
 项目说明
 
-|                    |                |
-| ------------------ | -------------- |
-| packges            | 前端项目       |
-| packges/admin      | 项目访问端     |
-| packges/editor     | 编辑器入口     |
-| packages/materials | 组件物料       |
-| packages/docs      | 低代码使用文档 |
-| backend            | 后端服务       |
-| backend/java       | JAVA 版本      |
-| backend/koa        | KOA 版本       |
+| 目录               | 说明                       |
+| ------------------ | -------------------------- |
+| packges            | 前端项目，包括 4 个子服务  |
+| packges/admin      | 项目访问端                 |
+| packges/editor     | 编辑器端                   |
+| packages/materials | 组件物料 ，仅供 admin 使用 |
+| packages/docs      | 低代码使用文档             |
+| backend            | 后端服务，包括 2 个版本    |
+| backend/java       | JAVA 版本                  |
+| backend/koa        | KOA 版本                   |
+| backend/koa/config | 项目配置文件               |
+| backend/sql        | 数据库脚本                 |
 
 ### 快速开始
 

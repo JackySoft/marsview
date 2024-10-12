@@ -72,7 +72,7 @@ instance.interceptors.response.use(
       }, 1500);
       return Promise.reject(res.message);
     } else if (res.code != 0) {
-      message.error(res.message);
+      response.config.showError === false ? null : message.error(res.message);
       return Promise.reject(res.message);
     }
     return res;
