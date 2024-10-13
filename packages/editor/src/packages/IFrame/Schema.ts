@@ -20,14 +20,29 @@ export default {
       label: '显示标题',
       name: 'title',
     },
+    {
+      type: 'Title',
+      label: '内容裁剪',
+      key: 'clip',
+    },
+    {
+      type: 'InputPx',
+      label: '顶部裁剪',
+      name: ['clip', 'top'],
+    },
   ],
   config: {
     // 组件默认属性值
     props: {
       src: 'https://juejin.cn/',
       title: 'IFrame组件',
+      clip: {
+        top: '0px',
+      },
     },
     style: {
+      position: 'relative',
+      overflow: 'hidden',
       border: '5px solid #7d33ff',
       width: '100%',
       height: '600px',
@@ -37,12 +52,7 @@ export default {
     source: '',
   },
   // 组件事件
-  events: [
-    {
-      value: 'handleClick',
-      name: '点击事件',
-    },
-  ],
+  events: [],
   // 组件接口
   api: {},
 };

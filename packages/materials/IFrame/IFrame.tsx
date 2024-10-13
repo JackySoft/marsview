@@ -1,5 +1,5 @@
 import { ComponentType } from '../types';
-import { useState, useImperativeHandle, forwardRef } from 'react';
+import { useState, useImperativeHandle, forwardRef, useMemo } from 'react';
 
 /**
  *
@@ -20,6 +20,26 @@ const IFrame = ({ config }: ComponentType, ref: any) => {
       },
     };
   });
-  return visible && <iframe style={config.style} {...config.props}></iframe>;
+  // 裁剪后，重新计算高度
+  const height = useMemo(() => {
+    const { top } = config.props.clip;
+    let height = '100%';
+    const px = (num: string) => Number(num.replace('px', ''));
+    const topPx = px(top);
+    if (topPx != 0) {
+      height = `calc(100% + ${-topPx}px)`;
+    }
+    return height;
+  }, [config.props.clip]);
+  return (
+    visible && (
+      <div style={config.style}>
+        <iframe
+          style={{ position: 'absolute', top: config.props.clip.top, left: 0, width: '100%', height, border: 'none' }}
+          {...config.props}
+        ></iframe>
+      </div>
+    )
+  );
 };
 export default forwardRef(IFrame);
