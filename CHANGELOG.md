@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/JackySoft/marsview/compare/v4.0.1...v4.1.0) (2024-10-13)
+
+
+### Features
+
+* 添加赞助 ([a53b5ac](https://github.com/JackySoft/marsview/commit/a53b5ac3376bf798994d87a9440af9eadbb2cece))
+* 添加中英文readme ([4ac0c61](https://github.com/JackySoft/marsview/commit/4ac0c61c9ef14508f9f7a5dde97d49c08d672d8a))
+* 增加赞助者 ([d78fef4](https://github.com/JackySoft/marsview/commit/d78fef45372aa8371e8aff97ae6807ae534547c8))
+* iframe组件增加内容裁剪 ([321c516](https://github.com/JackySoft/marsview/commit/321c5167ab976cfed8bd98f74b84ddfb6962e759))
+
+
+### Bug Fixes
+
+* 修复admin loader报错问题 ([1806a94](https://github.com/JackySoft/marsview/commit/1806a94cb57569a31a0f5282d458e0fc6157ef17))
+* 修改赞助 ([253a718](https://github.com/JackySoft/marsview/commit/253a718d6d153d5c25b764c77098ab7e0799fdbc))
+
+
+### Others
+
+* 替换图片 ([d904171](https://github.com/JackySoft/marsview/commit/d9041716f8cfa29b758233f457f7eeb16b2ba4de))
+* 修改 ([2d5c58d](https://github.com/JackySoft/marsview/commit/2d5c58d0ed2f1875c789c31cb0f869af1280c1ca))
+* 修改捐赠者 ([f9bf657](https://github.com/JackySoft/marsview/commit/f9bf657c6b076e0b90548217e84918e252d0921d))
+* 修改头像 ([88ae99b](https://github.com/JackySoft/marsview/commit/88ae99bb7c14efd8d751ca846e10929c9876c7ea))
+* 修改文档 ([c5d98c5](https://github.com/JackySoft/marsview/commit/c5d98c53fb50d8585cb07b298360dfbc12c734f4))
+
 ### [4.0.1](https://github.com/JackySoft/marsview/compare/v4.0.0...v4.0.1) (2024-10-12)
 
 
