@@ -287,6 +287,30 @@ const StyleConfig = () => {
           </Flex>
         </Form.Item>
       )}
+      <Form.Item key={'overflow'} name={['scopeStyle', 'overflow']} label={'overflow'}>
+        <Select
+          placeholder={'请选择'}
+          options={[
+            {
+              label: '默认',
+              value: 'auto',
+            },
+            {
+              label: '可见',
+              value: 'visible',
+            },
+            {
+              label: '超出隐藏',
+              value: 'hidden',
+            },
+            {
+              label: '超出滚动',
+              value: 'scroll',
+            },
+          ]}
+          suffixIcon={<CaretDownOutlined />}
+        />
+      </Form.Item>
       <TitleStyle>边框</TitleStyle>
       <Form.Item name={['scopeStyle', 'borderRadius']} label={'圆角'}>
         <InputPx placeholder="eg：5" />
