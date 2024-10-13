@@ -8,7 +8,7 @@ Make building simpler and development more efficient
 
 [Project documentation](http://docs.marsview.cc/) |
 [Open source repository](https://github.com/JackySoft/marsview) |
-[Communication group](https://marsview.cdn.bcebos.com/qrcode.jpg)
+[Communication group](./.github/imgs/mywechat.jpg)
 
 </div>
 

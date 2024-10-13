@@ -8,7 +8,7 @@
 
 [项目文档](http://docs.marsview.cc/) |
 [开源仓库](https://github.com/JackySoft/marsview) |
-[交流群](https://marsview.cdn.bcebos.com/qrcode.jpg)
+[交流群](./.github/imgs/mywechat.jpg)
 
 </div>
 
