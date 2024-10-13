@@ -7,7 +7,7 @@ export default async function AuthLoader() {
   try {
     if (!storage.get('token')) {
       window.location.replace(`/login?callback=${window.location.href}`);
-      return;
+      return '';
     }
     const res: { userName: string } = await getUserInfo();
     const userInfo = {
