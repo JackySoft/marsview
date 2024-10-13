@@ -18,4 +18,4 @@ Marsview 是一个开源的可视化搭建平台，采用 MIT 许可的开源项
 | 元次达          | <img src="http://docs.marsview.cc/sponsor/4.png"  width="50"> |
 | IoT-Fast        | <img src="http://docs.marsview.cc/sponsor/5.png"  width="50"> |
 | w10752842       | <img src="http://docs.marsview.cc/sponsor/6.png"  width="50"> |
-| 朱红宾          | <img src="http://docs.marsview.cc/sponsor/6.png"  width="50"> |
+| 朱红宾          | <img src="http://docs.marsview.cc/sponsor/7.png"  width="50"> |
