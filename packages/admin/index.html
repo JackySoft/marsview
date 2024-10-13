@@ -20,6 +20,7 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+        overflow: hidden;
       }
       .loading {
         animation: rotate linear 1.5s infinite;
@@ -31,6 +32,10 @@
         to {
           transform: rotate(360deg);
         }
+      }
+      #root {
+        height: 100vh;
+        overflow: auto;
       }
     </style>
     <script>
