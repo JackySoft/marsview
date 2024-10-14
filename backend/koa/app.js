@@ -5,7 +5,7 @@ const koajwt = require('koa-jwt');
 const path = require('path');
 const { routerInstaller } = require('./utils/installer');
 const errorHandler = require('./error');
-
+const config = require('./config');
 const app = new Koa();
 app.use(
   cors({
@@ -66,7 +66,7 @@ app.use(
 
 // token 鉴权
 app.use(
-  koajwt({ secret: 'mars-api-lowcode@marsview' }).unless({
+  koajwt({ secret: config.JWT_SECRET }).unless({
     path: [
       /^\/api\/user\/login/,
       /^\/api\/user\/sendEmail/,
