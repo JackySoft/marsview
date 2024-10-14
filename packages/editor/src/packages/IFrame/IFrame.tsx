@@ -22,7 +22,8 @@ const IFrame = ({ id, type, config }: ComponentType, ref: any) => {
   });
   // 裁剪后，重新计算高度
   const height = useMemo(() => {
-    const { top } = config.props.clip;
+    // TODO: 临时兼容老版本，后续需要删除
+    const { top } = config.props.clip || { top: '0px' };
     let height = '100%';
     const px = (num: string) => Number(num.replace('px', ''));
     const topPx = px(top);
@@ -33,9 +34,9 @@ const IFrame = ({ id, type, config }: ComponentType, ref: any) => {
   }, [config.props.clip]);
   return (
     visible && (
-      <div className="" style={config.style} data-id={id} data-type={type}>
+      <div style={config.style} data-id={id} data-type={type}>
         <iframe
-          style={{ position: 'absolute', top: config.props.clip.top, left: 0, width: '100%', height, border: 'none' }}
+          style={{ position: 'absolute', top: config.props.clip?.top || 0, left: 0, width: '100%', height, border: 'none' }}
           {...config.props}
         ></iframe>
       </div>
