@@ -5,9 +5,9 @@ spring:
   #邮箱配置
   mail:
     host:
-    username: zfvip_it@163.com
-    password: RMh4qC24pNqbscab
-    properties: { "mail.smtp.ssl.enable",true }
+    username:
+    password:
+    properties: { 'mail.smtp.ssl.enable', true }
     test-connection: true
     protocol: smtps
     port: 465
@@ -18,7 +18,6 @@ spring:
       port:
       password:
       database:
-
 
 #服务端口
 server:
