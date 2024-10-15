@@ -11,7 +11,7 @@ export default {
       key: 'basic',
     },
     {
-      type: 'TextArea',
+      type: 'Variable',
       label: '远程地址',
       name: 'src',
     },
