@@ -57,7 +57,8 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
   const [selectedRows, setSelectedRows] = useState<any[]>([]);
   const [visible, setVisible] = useState(true);
 
-  const { addChildElements, variableData, updateToolbar } = usePageStore((state) => ({
+  const { mode, addChildElements, variableData, updateToolbar } = usePageStore((state) => ({
+    mode: state.mode,
     addChildElements: state.addChildElements,
     variableData: state.page.variableData,
     updateToolbar: state.updateToolbar,
@@ -411,7 +412,11 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
           <div className={styles.toolbar}>
             {config.props.leftTitle && <div className={styles.title}>{config.props.leftTitle}</div>}
             <div className={styles.action} ref={drop}>
-              {elements?.length ? <MarsRender elements={elements} /> : <div className="slots">拖拽子元素到这里，一般用来放表单</div>}
+              {elements?.length ? (
+                <MarsRender elements={elements} />
+              ) : mode === 'edit' ? (
+                <div className="slots">拖拽子元素到这里，一般用来放表单</div>
+              ) : null}
               {bulkActionList?.map((item) => {
                 return (
                   <Button
