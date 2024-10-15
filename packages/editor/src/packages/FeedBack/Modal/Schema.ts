@@ -16,7 +16,7 @@ export default {
       name: 'title',
     },
     {
-      type: 'InputNumber',
+      type: 'InputPx',
       label: '弹框宽度',
       name: 'width',
     },

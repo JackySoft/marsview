@@ -219,7 +219,7 @@ const Editor = () => {
     // 如果没有父组件，在页面最外层先复制一个元素
     if (!parentId) {
       const current = getElement(elements, id);
-      const newId = createId(id.split('-')[0]);
+      const newId = createId(id.split('_')[0]);
       addElement({
         ...elementsMap[id],
         elements: [],
@@ -230,7 +230,7 @@ const Editor = () => {
       deepCopy(current?.elements || [], newId);
     } else {
       const current = getElement(elements, id);
-      const newId = createId(id.split('-')[0]);
+      const newId = createId(id.split('_')[0]);
       addChildElements({
         ...elementsMap[id],
         elements: [],
@@ -245,7 +245,7 @@ const Editor = () => {
   // 深度递归复制
   function deepCopy(list: any[], parentId: string) {
     for (let i = 0; i < list.length; i++) {
-      const pId = createId(list[i].id.split('-')[0]);
+      const pId = createId(list[i].id.split('_')[0]);
       addChildElements({
         ...elementsMap[list[i].id],
         parentId,

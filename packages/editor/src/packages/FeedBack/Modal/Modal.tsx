@@ -17,7 +17,7 @@ const AntdModal = forwardRef(({ id, type, config, elements, onLoad, onOk, onCanc
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(config.props.confirmLoading || false);
   const [loading, setLoading] = useState(false);
-  const addChildElements = usePageStore((state) => state.addChildElements);
+  const { mode, addChildElements } = usePageStore((state) => ({ mode: state.mode, addChildElements: state.addChildElements }));
   // 拖拽接收
   const [, drop] = useDrop({
     accept: 'MENU_ITEM',
@@ -111,9 +111,11 @@ const AntdModal = forwardRef(({ id, type, config, elements, onLoad, onOk, onCanc
   return (
     <>
       {/* 虚拟一个按钮，来模拟弹框，生产模式下，需要删除 */}
-      <div>
-        <Button onClick={() => setVisible(true)}>{config.props.title}</Button>
-      </div>
+      {mode === 'edit' ? (
+        <div>
+          <Button onClick={() => setVisible(true)}>{config.props.title}</Button>
+        </div>
+      ) : null}
       <Modal
         {...config.props}
         data-id={id}
