@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/JackySoft/marsview/compare/v4.2.1...v4.3.0) (2024-10-16)
+
+
+### Features
+
+* 1. 组件大纲支持拖拽排序。2.页面返回增加二次弹框确认。3.优化代码。 ([2cbd0ef](https://github.com/JackySoft/marsview/commit/2cbd0efcc883de53c9dbbaa67873c264a6ff7835))
+
 ### [4.2.1](https://github.com/JackySoft/marsview/compare/v4.2.0...v4.2.1) (2024-10-15)
 
 
