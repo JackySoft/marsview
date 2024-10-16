@@ -44,6 +44,12 @@ const EMAIL_PORT = 465;
 const EMAIL_USER = '';
 const EMAIL_PASSWORD = '';
 
+/**
+ * 大模型配置
+ */
+
+const ZHIPU_AI_KEY = '';
+
 module.exports = {
   SERVER_HOST,
   SERVER_PORT,
@@ -67,4 +73,5 @@ module.exports = {
   EMAIL_PORT,
   EMAIL_USER,
   EMAIL_PASSWORD,
+  ZHIPU_AI_KEY,
 };

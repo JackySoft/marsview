@@ -82,6 +82,7 @@ export interface PageAction {
   moveElements: (payload: any) => void;
   setSelectedElement: (payload: any) => void;
   removeElements: (payload: any) => void;
+  dragSortElements: (payload: any) => void;
   addVariable: (payload: PageVariable) => void;
   editVariable: (payload: PageVariable) => void;
   removeVariable: (name: string) => void;
@@ -294,7 +295,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           item.config.props = payload.props;
           // Tabs标签对象需要同步属性值到Tab组件中
           if (item.type === 'Tabs') {
-            const parentItem = getElement(state.page.elements, payload.id);
+            const { element: parentItem } = getElement(state.page.elements, payload.id);
             if (parentItem?.elements.length === payload.props.items.length) {
               parentItem?.elements.map((item, index) => {
                 Object.assign(state.page.elementsMap[item.id].config.props, payload.props.items[index]);
@@ -402,6 +403,14 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           }
         }
         deepFind(state.page.elements);
+      }),
+    );
+  },
+  // 组件大纲拖拽排序
+  dragSortElements(payload: any) {
+    set(
+      produce((state) => {
+        state.page.elements = payload;
       }),
     );
   },

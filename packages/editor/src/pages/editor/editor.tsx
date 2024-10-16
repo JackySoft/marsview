@@ -1,6 +1,6 @@
 import React, { MouseEvent, useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { ConfigProvider, FloatButton, Image, Popover } from 'antd';
+import { useParams, useBlocker } from 'react-router-dom';
+import { ConfigProvider, FloatButton, Image, Modal, Popover } from 'antd';
 import { CommentOutlined, InfoCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
@@ -103,6 +103,26 @@ const Editor = () => {
       setSelectedElement(undefined);
     };
   }, [id]);
+
+  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    return currentLocation.pathname !== nextLocation.pathname;
+  });
+
+  // 页面返回时，提示用户是否离开
+  useEffect(() => {
+    if (blocker.state === 'blocked') {
+      Modal.confirm({
+        title: '确认离开',
+        content: '是否确认离开当前页面？',
+        onOk: () => {
+          blocker.proceed();
+        },
+        onCancel: () => {
+          blocker.reset();
+        },
+      });
+    }
+  }, [blocker]);
 
   // 拖拽接收
   const [, drop] = useDrop({
@@ -218,7 +238,7 @@ const Editor = () => {
     }
     // 如果没有父组件，在页面最外层先复制一个元素
     if (!parentId) {
-      const current = getElement(elements, id);
+      const { element: current } = getElement(elements, id);
       const newId = createId(id.split('_')[0]);
       addElement({
         ...elementsMap[id],
@@ -229,7 +249,7 @@ const Editor = () => {
       // 如果该元素存在子元素，需要递归复制
       deepCopy(current?.elements || [], newId);
     } else {
-      const current = getElement(elements, id);
+      const { element: current } = getElement(elements, id);
       const newId = createId(id.split('_')[0]);
       addChildElements({
         ...elementsMap[id],

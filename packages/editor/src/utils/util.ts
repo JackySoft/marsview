@@ -1,6 +1,6 @@
 import { Menu } from '@/api/types';
 import components from '@/config/components';
-import { ComponentType } from '@/packages/types';
+import { ComponentType, ComItemType } from '@/packages/types';
 import dayjs from 'dayjs';
 import parse from 'style-to-object';
 /**
@@ -38,19 +38,22 @@ export function generateUUID(): string {
 
 /**
  * 递归查找组件
+ * element：返回当前元素
+ * index：返回当前元素在父级中的索引
+ * elements：返回父级列表
  */
-export const getElement = (elements: ComponentType[], id?: string): ComponentType | null => {
-  if (!id) return null;
+export const getElement = (elements: ComItemType[], id?: string): { element: ComItemType | null; index: number; elements: ComItemType[] } => {
+  if (!id) return { element: null, index: -1, elements: [] };
   for (let i = 0; i < elements.length; i++) {
     const item = elements[i];
     if (item.id == id) {
-      return item;
+      return { element: item, index: i, elements };
     } else if (item.elements?.length) {
       const result = getElement(item.elements, id);
-      if (result) return result;
+      if (result.element) return result;
     }
   }
-  return null;
+  return { element: null, index: -1, elements: [] };
 };
 
 /**

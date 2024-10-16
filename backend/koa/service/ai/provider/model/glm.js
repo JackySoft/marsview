@@ -1,10 +1,10 @@
-const { BaseModelProvider } = require("../base/BaseModelProvider");
-const { ChatZhipuAI } = require("@langchain/community/chat_models/zhipuai");
-
+const { BaseModelProvider } = require('../base/BaseModelProvider');
+const { ChatZhipuAI } = require('@langchain/community/chat_models/zhipuai');
+const { ZHIPU_AI_KEY } = require('../../../../config');
 class GlmModelProvider extends BaseModelProvider {
   async createModel() {
-    const aiKey = "e971601d428426fc11f7df8fe8f408da.DlQVn8wwPaDw7XPy";
-    const model_name = "glm-4";
+    const aiKey = ZHIPU_AI_KEY;
+    const model_name = 'glm-4';
 
     const model = new ChatZhipuAI({
       apiKey: aiKey,

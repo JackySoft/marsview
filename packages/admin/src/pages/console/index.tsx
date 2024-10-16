@@ -90,9 +90,9 @@ function Console() {
           />
         ) : (
           !loading && (
-            <Empty style={{ marginTop: 100 }}>
-              <Button type="primary" onClick={() => navigate('/project/0/config')}>
-                创建项目
+            <Empty style={{ marginTop: 100 }} description="当前暂无可访问的项目">
+              <Button type="primary" onClick={() => window.open('http://www.marsview.cc/projects', 'blank')}>
+                去创建
               </Button>
             </Empty>
           )

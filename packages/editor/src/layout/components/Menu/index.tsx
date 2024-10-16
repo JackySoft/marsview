@@ -1,4 +1,4 @@
-import { Col, Row, Tabs, Tooltip } from 'antd';
+import { Col, Row, Space, Tabs, Tooltip } from 'antd';
 import {
   AppstoreOutlined,
   PartitionOutlined,
@@ -7,6 +7,7 @@ import {
   FunctionOutlined,
   UsergroupAddOutlined,
   ProjectOutlined,
+  QuestionCircleOutlined,
 } from '@ant-design/icons';
 import PageList from './Pages/PageList';
 import ComponentPanel from './ComponentPanel';
@@ -24,7 +25,14 @@ const panels = [
   {
     key: 'ComponentPanel',
     icon: <AppstoreOutlined />,
-    title: '组件物料',
+    title: (
+      <Space>
+        <span>组件物料</span>
+        <Tooltip title="无需拖拽，直接点击就能添加到画布中。">
+          <QuestionCircleOutlined />
+        </Tooltip>
+      </Space>
+    ),
     component: () => {
       return <ComponentPanel />;
     },
@@ -40,7 +48,14 @@ const panels = [
   {
     key: 'OutlinePanel',
     icon: <PartitionOutlined />,
-    title: '页面大纲',
+    title: (
+      <Space>
+        <span>页面大纲</span>
+        <Tooltip title="组件支持拖拽排序">
+          <QuestionCircleOutlined />
+        </Tooltip>
+      </Space>
+    ),
     component: () => {
       return <OutlinePanel />;
     },
