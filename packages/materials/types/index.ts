@@ -24,16 +24,8 @@ export interface IDragTargetItem {
 /**
  * 组件最小颗粒度类型定义
  */
-export interface ComItemType {
-  id: string;
-  type: string;
-  name: string | number;
-  parentId?: string;
-  elements: ComItemType[];
-  remoteUrl?: string;
-  remoteConfigUrl?: string;
-  remoteCssUrl?: string;
-}
+export type ComItemType = Pick<ComponentType, 'id' | 'type' | 'name' | 'parentId' | 'elements' | 'remoteUrl' | 'remoteConfigUrl' | 'remoteCssUrl'>;
+
 /**
  * stor中状态对应的组件类型，这是原始的组件类型
  * @param {string} id 组件ID(算法生成)

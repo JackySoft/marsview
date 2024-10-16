@@ -28,8 +28,9 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
     const list: Array<{ id: string; name: string; elements: any[] }> = [];
     Object.keys(elementsMap).map((id) => {
       if (id.startsWith('SearchForm_') || id.startsWith('Form_') || id.startsWith('MarsTable_')) {
-        const data: any = getElement(cloneDeep(elements), id);
-        data.elements?.map((item: any) => {
+        const { element }: any = getElement(cloneDeep(elements), id);
+        if (!element) return;
+        element.elements?.map((item: any) => {
           const formItem = elementsMap[item.id].config.props.formItem;
           if (formItem) {
             item.name = `${formItem.label}(${formItem.name})`;
@@ -38,10 +39,10 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
           }
         });
         // 排除不是表单的元素
-        if (data.elements) {
-          data.elements = data.elements.filter((item: any) => item.name);
+        if (element.elements) {
+          element.elements = element.elements.filter((item: any) => item.name);
         }
-        if (data) list.push(data);
+        list.push(element);
       }
     });
     return list;
