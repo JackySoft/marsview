@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.3.1](https://github.com/JackySoft/marsview/compare/v4.3.0...v4.3.1) (2024-10-17)
+
+
+### Features
+
+* 1.删除Demo登录。2.优化选中组件样式。 ([1c67342](https://github.com/JackySoft/marsview/commit/1c6734233c5a7a8cb7ac0998752701c418e59d32))
+
 ## [4.3.0](https://github.com/JackySoft/marsview/compare/v4.2.1...v4.3.0) (2024-10-16)
 
 
