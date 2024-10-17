@@ -42,7 +42,11 @@ const Toolbar = memo(({ hoverTarget, copyElement, pastElement, delElement }: any
    * 当元素属性发生变化时，重新渲染工具条
    */
   useEffect(() => {
-    if (!selectedElement) return;
+    if (!selectedElement) {
+      setSelectedStyle({});
+      setDirection('');
+      return;
+    }
     setTimeout(() => {
       const target: HTMLElement | null = document.querySelector(`[data-id=${selectedElement?.id}]`);
       if (!target) return;
