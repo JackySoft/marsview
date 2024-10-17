@@ -1,5 +1,5 @@
 import type { FormProps } from 'antd';
-import { Button, Flex, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { login } from '@/api';
 import storage from '@/utils/storage';
@@ -53,17 +53,6 @@ export default function Login() {
               <Button type="primary" block htmlType="submit">
                 登录
               </Button>
-            </Form.Item>
-            <Form.Item>
-              <Flex justify="center" gap={20}>
-                <a
-                  onClick={() => {
-                    form.setFieldsValue({ userName: 'demo@marsview.cc', userPwd: 'marsview' });
-                  }}
-                >
-                  没有账号？使用体验号
-                </a>
-              </Flex>
             </Form.Item>
           </Form>
         </div>
