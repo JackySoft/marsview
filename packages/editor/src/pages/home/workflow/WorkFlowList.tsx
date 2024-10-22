@@ -112,7 +112,7 @@ export default function WorkFlow() {
   return (
     <>
       <Layout.Content className={styles.workflow}>
-        <SearchBar form={form} from="工作流模板" submit={handleSearch} refresh={getList} onCreate={handleCreate} />
+        <SearchBar form={form} from="工作流模板" showGroup={false} submit={handleSearch} refresh={getList} onCreate={handleCreate} />
         {total > 0 || loading ? (
           <>
             <div className={styles.pagesContent}>

@@ -15,9 +15,12 @@ const SearchBar = memo((props: any) => {
       <div className={styles.searchBar}>
         <div className={styles.searchBarForm}>
           <Form form={form} layout="inline" initialValues={{ type: 1 }}>
-            <Form.Item name="type">
-              <Radio.Group options={options} onChange={submit} optionType="button" buttonStyle="solid" />
-            </Form.Item>
+            {props.showGroup === false ? null : (
+              <Form.Item name="type">
+                <Radio.Group options={options} onChange={submit} optionType="button" buttonStyle="solid" />
+              </Form.Item>
+            )}
+
             <Form.Item name="keyword" style={{ width: 200 }}>
               <Input placeholder={`请输入${from}名称`} onPressEnter={submit} />
             </Form.Item>
