@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.2](https://github.com/JackySoft/marsview/compare/v4.4.1...v4.4.2) (2024-10-22)
+
+
+### Bug Fixes
+
+* 修复审批流打开问题 ([891c6df](https://github.com/JackySoft/marsview/commit/891c6dfd773009b6c530877c3a76a05ef678a6f7))
+
 ### [4.4.1](https://github.com/JackySoft/marsview/compare/v4.4.0...v4.4.1) (2024-10-22)
 
 
