@@ -16,7 +16,7 @@ import dayjs from 'dayjs';
 import { getPageList, copyPageData, delPageData } from '@/api';
 import { PageItem } from '@/api/types';
 import { message, Modal } from '@/utils/AntdGlobal';
-import CreatePage from '@/layout/components/Header/CreatePage';
+import CreatePage from '@/components/CreatePage';
 import SearchBar from '@/components/Searchbar/SearchBar';
 import styles from './index.module.less';
 

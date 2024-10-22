@@ -6,7 +6,7 @@ import { getLibList } from '@/api/lib';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
 import SearchBar from '@/components/Searchbar/SearchBar';
-import CreateLib from '@/layout/components/Header/CreateLib';
+import CreateLib from './lib/CreateLib';
 import dayjs from 'dayjs';
 import style from './index.module.less';
 

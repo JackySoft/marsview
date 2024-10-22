@@ -1,0 +1,201 @@
+.node-container {
+  --line-color: #cacaca;
+  display: flex;
+  flex-direction: column;
+  padding-block: 40px;
+  .start-node,
+  .normal-node,
+  .end-node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .node-wrapper {
+    position: relative;
+    width: 220px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px 0px;
+    cursor: pointer;
+    overflow: hidden;
+    &:hover {
+      outline: rgb(22, 119, 255) solid 1px;
+    }
+    .node-title {
+      background-color: #7d33ff;
+      font-size: 12px;
+      line-height: 30px;
+      padding-left: 16px;
+      color: #fff;
+    }
+    .node-info {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px;
+      font-size: 14px;
+      background: #fff;
+    }
+    .icon-del {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s;
+      color: #fff;
+    }
+    &:hover {
+      .icon-del {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+  // 箭头样式
+  .arrow-line {
+    position: relative;
+    width: 2px;
+    height: 80px;
+    user-select: none;
+    &::before {
+      position: absolute;
+      content: '';
+      width: 2px;
+      height: 100%;
+      background-color: var(--line-color);
+    }
+  }
+  .add-node-btn {
+    position: absolute;
+    bottom: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    // 添加按钮图标
+    .add-icon {
+      display: flex;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: #7d33ff;
+    }
+  }
+  // 条件节点样式
+  .condition-node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .condition-branch {
+      display: flex;
+      .branch-name {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 15px;
+        text-align: center;
+        background: #7d33ff;
+        cursor: pointer;
+        color: #fff;
+        font-size: 12px;
+        z-index: 2;
+      }
+      .node-item {
+        padding-inline: 60px;
+        padding-top: 30px;
+        position: relative;
+        .left-line,
+        .right-line {
+          position: absolute;
+          height: 2px;
+          width: 50%;
+          left: 0;
+          background-color: var(--line-color);
+        }
+        .left-line {
+          &.start {
+            top: 0;
+            left: 50%;
+          }
+          &.center {
+            width: 100%;
+            top: 0;
+          }
+          &.end {
+            top: 0;
+            right: 50%;
+          }
+        }
+        .right-line {
+          &.start {
+            bottom: 0;
+            left: 50%;
+          }
+          &.center {
+            bottom: 0;
+            width: 100%;
+          }
+          &.end {
+            bottom: 0;
+            right: 50%;
+          }
+        }
+        .connect-line {
+          position: absolute;
+          width: 2px;
+          height: 100%;
+          left: 50%;
+          top: 0;
+          background-color: var(--line-color);
+        }
+        .arrow-line {
+          opacity: 0;
+        }
+      }
+    }
+  }
+  .circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #cacaca;
+  }
+  .text {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.65);
+  }
+}
+.popover-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 360px;
+  .popover-item {
+    width: 50%;
+    padding: 4px 8px;
+    padding: 0px 8px;
+    height: 64px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .icon {
+      display: flex;
+      height: 40px;
+      width: 40px;
+      border: solid 1px #d9d9d9;
+      margin-right: 16px;
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+    }
+  }
+}

@@ -9,7 +9,7 @@ import { Menu } from '@/api/types';
 import { getMenuList, addMenu, updateMenu, getPageList } from '@/api';
 import { PageItem } from '@/api/pageMember';
 import { arrayToTree } from '@/utils/util';
-import CreatePage from '@/layout/components/Header/CreatePage';
+import CreatePage from '@/components/CreatePage';
 
 export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
   const [form] = Form.useForm();

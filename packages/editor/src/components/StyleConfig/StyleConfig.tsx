@@ -287,7 +287,7 @@ const StyleConfig = () => {
           </Flex>
         </Form.Item>
       )}
-      <Form.Item key={'overflow'} name={['scopeStyle', 'overflow']} label={'overflow'}>
+      <Form.Item key={'overflow'} name={['scopeStyle', 'overflow']} label="溢出">
         <Select
           placeholder={'请选择'}
           options={[

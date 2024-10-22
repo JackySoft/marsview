@@ -91,7 +91,7 @@ export default function Index() {
   const CardItem: React.FC<ProjectCardItemProps> = ({ item, isAuth }) => {
     const getEnvTag = (env: 'stg' | 'pre' | 'prd', name: string) => {
       return (
-        <a href={`${import.meta.env.VITE_ADMIN_URL}/project/stg/${item.id}`} target="_blank">
+        <a href={`${import.meta.env.VITE_ADMIN_URL}/project/${env}/${item.id}`} target="_blank">
           {name}
         </a>
       );

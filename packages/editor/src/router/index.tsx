@@ -63,6 +63,14 @@ export const router = [
         element: lazyLoad(React.lazy(() => import('@/pages/home/Template'))),
       },
       {
+        path: '/workflows',
+        element: lazyLoad(React.lazy(() => import('@/pages/home/workflow/WorkFlowList'))),
+      },
+      {
+        path: '/workflow/:id',
+        element: lazyLoad(React.lazy(() => import('@/pages/home/workflow/Design'))),
+      },
+      {
         path: '/lib/:id',
         element: lazyLoad(React.lazy(() => import('@/pages/home/lib/LibEditor'))),
       },
