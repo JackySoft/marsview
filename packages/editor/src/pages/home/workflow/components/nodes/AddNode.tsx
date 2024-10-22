@@ -19,7 +19,7 @@ const AddNode = ({ id }: { id: string }) => {
         trigger="click"
         placement="rightTop"
         open={open}
-        onOpenChange={() => setOpen(true)}
+        onOpenChange={(newOpen: boolean) => setOpen(newOpen)}
         content={
           <div className={style['popover-wrapper']}>
             <div
