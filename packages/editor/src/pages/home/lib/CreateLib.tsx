@@ -39,8 +39,8 @@ const CreateLib = (props: IModalProp) => {
     setVisible(false);
   };
   return (
-    <Modal title="创建组件库" open={visible} onOk={handleOk} onCancel={handleCancel} width={500} okText="确定" cancelText="取消">
-      <Form form={form} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }}>
+    <Modal title="创建组件库" open={visible} onOk={handleOk} onCancel={handleCancel} width={600} okText="确定" cancelText="取消">
+      <Form form={form} labelCol={{ span: 5 }} wrapperCol={{ span: 17 }}>
         <Form.Item
           label="组件标识"
           name="tag"

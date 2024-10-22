@@ -10,6 +10,7 @@ import {
   LoadingOutlined,
   PieChartOutlined,
   CloudOutlined,
+  ApartmentOutlined,
 } from '@ant-design/icons';
 import { toBlob } from 'html-to-image';
 import { usePageStore } from '@/stores/pageStore';
@@ -81,6 +82,11 @@ const Header = memo(() => {
       icon: <PieChartOutlined style={{ fontSize: 16 }} />,
     },
     {
+      label: '工作流',
+      key: 'workflows',
+      icon: <ApartmentOutlined style={{ fontSize: 16 }} />,
+    },
+    {
       label: '图片云',
       key: 'cloud',
       icon: <CloudOutlined style={{ fontSize: 16 }} />,
@@ -88,7 +94,7 @@ const Header = memo(() => {
   ];
 
   useEffect(() => {
-    if (['/projects', '/pages', '/libs', '/templates', '/cloud'].includes(location.pathname)) {
+    if (['/projects', '/pages', '/libs', '/templates', '/workflows', '/cloud'].includes(location.pathname)) {
       setNav(true);
       setNavKey([location.pathname.slice(1)]);
     } else {
@@ -228,7 +234,7 @@ const Header = memo(() => {
         {/* 首页 - 导航菜单 */}
         {isNav && (
           <div className={styles.menu}>
-            <Menu onClick={handleTab} selectedKeys={navKey} mode="horizontal" items={items} />
+            <Menu onClick={handleTab} selectedKeys={navKey} mode="horizontal" items={items} style={{ width: items.length * 110 }} />
           </div>
         )}
 

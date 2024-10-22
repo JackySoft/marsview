@@ -2,6 +2,7 @@ import { Input, Modal, Form, Radio } from 'antd';
 import { useImperativeHandle, useState, MutableRefObject } from 'react';
 import { createPageData, updatePageData } from '@/api';
 import { PageItem } from '@/api/pageMember';
+import { usePageStore } from '@/stores/pageStore';
 /**
  * 创建页面
  */
@@ -18,6 +19,7 @@ const CreatePage = (props: IModalProp) => {
   const [type, setType] = useState<'create' | 'edit'>('create');
   const [recordId, setRecordId] = useState(0);
   const [loading, setLoading] = useState(false);
+  const userId = usePageStore((store) => store.userInfo.userId);
 
   // 暴露方法
   useImperativeHandle(props.createRef, () => ({
@@ -71,25 +73,31 @@ const CreatePage = (props: IModalProp) => {
       confirmLoading={loading}
       onOk={handleOk}
       onCancel={handleCancel}
-      width={500}
+      width={600}
       okText="确定"
       cancelText="取消"
     >
-      <Form form={form} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }} initialValues={{ is_public: 1, is_edit: 1 }}>
+      <Form form={form} labelCol={{ span: 5 }} wrapperCol={{ span: 16 }} initialValues={{ is_public: 1, is_edit: 1 }}>
         <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入页面名称' }]}>
           <Input placeholder="请输入页面名称" maxLength={15} showCount />
         </Form.Item>
         <Form.Item label="描述" name="remark">
           <Input placeholder="请输入页面描述" maxLength={20} showCount />
         </Form.Item>
-        <Form.Item label="权限" name="is_public" rules={[{ required: true, message: '请选择访问类型' }]}>
+        <Form.Item
+          label="权限"
+          name="is_public"
+          rules={[{ required: true, message: '请选择访问类型' }]}
+          extra="公开页面支持所有人访问。私有页面仅自己可访问。"
+        >
           <Radio.Group>
             <Radio value={1}>公开</Radio>
             <Radio value={2}>私有</Radio>
-            <Radio value={3}>公开模板</Radio>
+            {/* 普通用户暂不开放模板设置 */}
+            {userId == 50 ? <Radio value={3}>公开模板</Radio> : null}
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="模式" name="is_edit" rules={[{ required: true, message: '请选择编辑模式' }]}>
+        <Form.Item label="模式" name="is_edit" rules={[{ required: true, message: '请选择编辑模式' }]} extra="公开后设置他人可查看或编辑；">
           <Radio.Group>
             <Radio value={1}>编辑</Radio>
             <Radio value={2}>查看</Radio>

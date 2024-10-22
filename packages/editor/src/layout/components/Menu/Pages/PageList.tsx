@@ -6,8 +6,7 @@ import { getPageList, delPageData } from '@/api';
 import { useNavigate } from 'react-router-dom';
 import { Modal, message } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
-import CreatePage from '../../Header/CreatePage';
-
+import CreatePage from '@/components/CreatePage';
 /**
  * 编辑器中，快捷操作页面列表
  * 打开、修改、删除、新增页面
