@@ -18,6 +18,22 @@ const members = [
       { icon: 'github', link: 'https://github.com/waiterxiaoyy' },
     ]
   },
+   {
+    avatar: 'https://www.github.com/jingjing20.png',
+    name: 'jingjing20',
+    title: 'Developer',
+    links: [
+      { icon: 'github', link: 'https://github.com/jingjing20' },
+    ]
+  },
+  {
+    avatar: 'https://www.github.com/LingYe-007.png',
+    name: 'LingYe-007',
+    title: 'Developer',
+    links: [
+      { icon: 'github', link: 'https://github.com/LingYe-007' },
+    ]
+  },
   
 ]
 </script>
