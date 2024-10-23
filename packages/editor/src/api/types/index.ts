@@ -53,6 +53,7 @@ export interface UpdatePageParams {
 export interface PublishPageParams {
   page_id: number;
   env: 'stg' | 'pre' | 'prd'; // 1 stg 2 pre 3 prod;
+  preview_img: string;
 }
 
 export interface PublishListParams {
