@@ -94,9 +94,16 @@ class PagesService {
   }
 
   //state=> 1: 未保存 2: 已保存 3: 已发布 4: 已回滚
-  async updatePageState(last_publish_id, id, env) {
-    const statement = `UPDATE pages SET ${env}_state=3, ${env}_publish_id = ? WHERE id = ?;`;
-    const [result] = await connection.execute(statement, [last_publish_id, id]);
+  async updatePageState(last_publish_id, id, env, preview_img) {
+    let statement = `UPDATE pages SET ${env}_state=3, ${env}_publish_id = ?`;
+    let sql_params = [last_publish_id];
+    if (preview_img) {
+      statement += `, preview_img = ?`;
+      sql_params.push(preview_img);
+    }
+    statement += ` WHERE id = ?;`;
+    sql_params.push(id);
+    const [result] = await connection.execute(statement, sql_params);
     return result;
   }
 

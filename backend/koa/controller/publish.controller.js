@@ -15,7 +15,7 @@ module.exports = {
   },
 
   async create(ctx) {
-    const { page_id, env } = ctx.request.body;
+    const { page_id, env, preview_img } = ctx.request.body;
 
     if (!util.isNotEmpty(page_id)) {
       return ctx.throw(400, '页面ID不能为空');
@@ -37,7 +37,7 @@ module.exports = {
     }
     const result = await publishService.createPublish(page_id, pageInfo.name, pageInfo.page_data, userName, userId, env);
 
-    await pagesService.updatePageState(result.insertId, page_id, env);
+    await pagesService.updatePageState(result.insertId, page_id, env, preview_img);
 
     util.success(ctx);
   },

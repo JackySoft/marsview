@@ -12,7 +12,7 @@ router.post('/files', async (ctx) => {
   try {
     const file = ctx.request.files.file;
     const id = ctx.request.body.id || '';
-    const config = {
+    const ossConfig = {
       endpoint: config.OSS_ENDPOINT, //传入Bucket所在区域域名
       credentials: {
         ak: config.OSS_ACCESSKEY, //您的AccessKey
@@ -21,7 +21,7 @@ router.post('/files', async (ctx) => {
     };
     let bucket = config.OSS_BUCKET1;
     let key = `imgs/${id}_${file.newFilename}`;
-    let client = new sdk.BosClient(config);
+    let client = new sdk.BosClient(ossConfig);
 
     const buffer = fs.readFileSync(file.filepath);
     await client.putObject(bucket, key, buffer, {
