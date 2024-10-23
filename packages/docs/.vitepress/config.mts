@@ -43,7 +43,10 @@ var _hmt = _hmt || [];
     sidebar: [
       {
         text: 'Marsview',
-        items: [{ text: '介绍', link: '/home' }],
+        items: [
+          { text: '介绍', link: '/home' },
+          { text: '部署', link: '/deploy' },
+        ],
       },
       {
         text: '登录',
