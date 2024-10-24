@@ -15,3 +15,4 @@ cache
 /backend/koa/node_modules
 /backend/java/logs
 /backend/java/build
+/deploy.js
