@@ -46,9 +46,10 @@ export default function ImgCloud() {
 
   const props: UploadProps = useMemo(() => {
     const token = storage.get('token');
+    const baseApi = import.meta.env.VITE_BASE_API;
     return {
       name: 'file',
-      action: 'http://mars-api.marsview.cc/api/cloud/upload/files',
+      action: `${baseApi}/cloud/upload/files`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
