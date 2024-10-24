@@ -49,7 +49,7 @@ router.post('/upload/files', async (ctx) => {
       }
     });
 
-    const url = `${config.OSS_CDNDOMAIN1}/${key}`;
+    const url = `${config.OSS_CDNDOMAIN2}/${key}`;
     await imgcloud.create(userId, userName, file.originalFilename, key, file.mimetype, file.size, url);
     util.success(ctx);
   } catch (error) {
