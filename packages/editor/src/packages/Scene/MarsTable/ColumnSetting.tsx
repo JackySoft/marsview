@@ -292,25 +292,25 @@ const DisplaySetting = () => {
                           </Button>
                         }
                       >
-                        <Row gutter={15} style={{ marginBottom: -24 }}>
-                          <Col span={6}>
+                        <Row gutter={5} style={{ marginBottom: -24 }}>
+                          <Col span={7}>
                             <Form.Item {...restField} name={[name, 'text']} label="名称">
                               <VariableBind />
                             </Form.Item>
                           </Col>
-                          <Col span={4}>
+                          <Col span={3}>
                             <Form.Item label="danger" name={[name, 'danger']} labelCol={{ span: 14 }} valuePropName="checked">
                               <Switch />
                             </Form.Item>
                           </Col>
                           <Col span={7}>
-                            <Form.Item label="权限标识" tooltip="项目配置后台对应的按钮code或者uac中对应的按钮filedName" name={[name, 'authCode']}>
+                            <Form.Item label="权限标识" tooltip="项目配置后台对应的按钮code" name={[name, 'authCode']} labelCol={{ span: 8 }}>
                               <Input placeholder="按钮Code" />
                             </Form.Item>
                           </Col>
                           <Col span={7}>
-                            <Form.Item label="三方脚本" tooltip="如果是微服务集成，需要通过脚本来控制按钮权限" name={[name, 'authScript']}>
-                              <VariableBind placeholder="跨服务时，执行脚本" />
+                            <Form.Item label="三方脚本" tooltip="通过脚本实现第三方系统按钮权限" name={[name, 'authScript']} labelCol={{ span: 8 }}>
+                              <VariableBind placeholder="自定义权限，执行脚本" />
                             </Form.Item>
                             <Form.Item name={[name, 'eventName']} hidden>
                               <Input />
