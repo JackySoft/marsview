@@ -119,7 +119,7 @@ module.exports = {
       endpoint: config.OSS_ENDPOINT,
     };
 
-    let bucket = config.OSS_BUCKET;
+    let bucket = config.OSS_BUCKET1;
     let object = `libs/${fileName}`;
     let client = new sdk.BosClient(ossConfig);
 
