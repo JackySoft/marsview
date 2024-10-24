@@ -15,7 +15,7 @@ router.post('/upload/files', async (ctx) => {
     const file = ctx.request.files.file;
     const { userId, userName } = util.decodeToken(ctx);
     const { total } = await imgcloud.getTotalByUserId(userId);
-    const message = total > 0 && userId == 49 ? 'Demo用户只能上传1个文件' : total > 5 && userId != 50 ? '普通用户最多可以上传5个文件' : '';
+    const message = total > 0 && userId == 49 ? 'Demo用户只能上传1个文件' : total > 10 && userId != 50 ? '普通用户最多可以上传10个文件' : '';
     if (message) {
       fs.unlink(file.filepath, (err) => {
         if (err) {

@@ -75,7 +75,11 @@ export default function ImgCloud() {
   return (
     <div className={styles.imgCloud}>
       <div className={styles.content}>
-        <Alert type="info" showIcon message="Marsview提供在线CDN服务，方便对远程图片和文件的管理；普通用户最多可上传5个文件，每个文件最大支持5M；" />
+        <Alert
+          type="info"
+          showIcon
+          message="Marsview提供在线图片云服务，在开发静态页面过程中，涉及到元素背景图片可直接通过云服务完成；普通用户最多可上传10个文件，每个文件最大支持5M；"
+        />
         <Space size={20}>
           <Upload {...props}>
             <Button type="primary" icon={<UploadOutlined />}>
