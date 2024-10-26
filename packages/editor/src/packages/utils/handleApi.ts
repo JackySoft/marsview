@@ -30,7 +30,7 @@ export const handleApi = async (
     const { method, stgApi, preApi, prdApi, contentType, replaceData = 'merge', isCors = true, params, result, tips } = apis[api.id] || {};
     // 处理参数
     const config: any = mergeParams(method, replaceData, params, sendParams);
-    // 解析模板字符串：http://api.marsview.cn/user/${id}
+    // 解析模板字符串：http://api.marsview.cc/user/${id}
     const stgUrl = renderTemplate(stgApi, sendParams);
     const preUrl = renderTemplate(preApi, sendParams);
     const prdUrl = renderTemplate(prdApi, sendParams);
