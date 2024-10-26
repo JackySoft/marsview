@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, Table, Form, Input, Space } from 'antd';
+import { Button, Table, Form, Input, Space, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { message, Modal } from '@/utils/AntdGlobal';
 import SearchForm from '../components/SearchForm';
@@ -9,6 +9,7 @@ import SetPermission from './SetPermission';
 import { getRoleList, delRoleById } from '@/api';
 import { IAction } from '@/pages/types';
 import { Role } from '@/api/types';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 export default function RoleList() {
   const [list, setList] = useState<Role.RoleItem[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -141,7 +142,12 @@ export default function RoleList() {
       </SearchForm>
       <div className="base-table">
         <div className="header-wrapper">
-          <div className="title">角色列表</div>
+          <Space>
+            <span>角色列表</span>
+            <Tooltip title="角色主要用来配置权限，一个用户对应一个角色，一个角色对应一批权限，从而实现菜单和按钮的显示控制。">
+              <QuestionCircleOutlined />
+            </Tooltip>
+          </Space>
           <div className="action">
             <Button type="primary" onClick={handleCreate}>
               新增

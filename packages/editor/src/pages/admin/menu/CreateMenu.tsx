@@ -1,7 +1,6 @@
-import React, { useImperativeHandle, useRef, useState } from 'react';
+import { useImperativeHandle, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Modal, Form, TreeSelect, Input, Select, InputNumber, Radio, Spin } from 'antd';
-import * as icons from '@ant-design/icons';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { message } from '@/utils/AntdGlobal';
 import { IAction, IModalProp } from '@/pages/types';
@@ -10,6 +9,7 @@ import { getMenuList, addMenu, updateMenu, getPageList } from '@/api';
 import { PageItem } from '@/api/pageMember';
 import { arrayToTree } from '@/utils/util';
 import CreatePage from '@/components/CreatePage';
+import CustomIconOptions from '@/components/CustomIconList';
 
 export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
   const [form] = Form.useForm();
@@ -32,9 +32,8 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
     setVisible(true);
     setLoading(true);
     // 获取菜单列表
-    const p1 = getMenus();
-    const p2 = getMyPageList();
-    await Promise.all([p1, p2]);
+    getMenus();
+    type === 'edit' && getMyPageList();
     setLoading(false);
     if (data && project_id) {
       form.setFieldsValue({ ...data, project_id: parseInt(project_id), code: data.code?.split('_')[2] || '' });
@@ -89,8 +88,6 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
     setVisible(false);
     form.resetFields();
   };
-  // 获取所有的antd图标，动态渲染到下拉框中
-  const iconsList: { [key: string]: any } = icons;
   return (
     <>
       <Modal
@@ -104,14 +101,14 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
         onCancel={handleCancel}
       >
         <Spin spinning={loading}>
-          <Form form={form} labelAlign="right" labelCol={{ span: 4 }} initialValues={{ type: 1, status: 1 }}>
+          <Form form={form} labelAlign="right" labelCol={{ span: 4 }} wrapperCol={{ span: 18 }} initialValues={{ type: 1, status: 1, is_create: 2 }}>
             <Form.Item hidden name="id">
               <Input />
             </Form.Item>
             <Form.Item hidden name="project_id">
               <InputNumber />
             </Form.Item>
-            <Form.Item label="上级菜单" name="parent_id">
+            <Form.Item label="父级菜单" name="parent_id">
               <TreeSelect
                 placeholder="请选择父级菜单"
                 allowClear
@@ -149,68 +146,59 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
               {() => {
                 const type = form.getFieldValue('type');
                 return type === 2 ? (
-                  <Form.Item label="权限标识" name="code" extra="同一个菜单下不要重名即可">
+                  <Form.Item label="权限标识" name="code" extra="同一个菜单下按钮标识不要重复，请根据语义定义。">
                     <Input placeholder="权限标识，例如: create、edit、export" />
                   </Form.Item>
                 ) : (
                   <>
                     {type === 1 ? (
                       <Form.Item label="菜单图标" name="icon">
-                        <Select placeholder="请选择菜单图表" showSearch allowClear>
-                          {Object.keys(icons)
-                            .filter(
-                              (item) => !['default', 'createFromIconfontCN', 'getTwoToneColor', 'setTwoToneColor', 'IconProvider'].includes(item),
-                            )
-                            .map((key) => {
-                              return (
-                                <Select.Option value={key} key={key}>
-                                  {React.createElement(iconsList[key], {
-                                    style: {
-                                      fontSize: '24px',
-                                      verticalAlign: 'middle',
-                                    },
-                                  })}
-                                </Select.Option>
-                              );
-                            })}
-                        </Select>
+                        <CustomIconOptions />
                       </Form.Item>
                     ) : null}
-                    <Form.Item
-                      label="关联页面"
-                      tooltip="选择你创建的页面"
-                      extra={
-                        <span>
-                          暂无页面？
-                          <a
-                            onClick={() => {
-                              createRef.current?.open();
-                            }}
-                          >
-                            去创建
-                          </a>
-                        </span>
-                      }
-                      name="page_id"
-                    >
-                      <Select
-                        placeholder="请选择关联页面"
-                        allowClear
-                        showSearch
-                        filterOption={(input, option) => (option?.name ?? '').toLowerCase().includes(input.toLowerCase())}
-                        options={[...pageList, { name: '空页面', id: 0 }]}
-                        fieldNames={{ label: 'name', value: 'id' }}
-                      ></Select>
-                    </Form.Item>
+                    {action === 'edit' ? (
+                      <Form.Item
+                        label="绑定页面"
+                        extra={
+                          <span>
+                            该菜单可以解绑、修改、新增绑定页面。暂无页面？
+                            <a
+                              onClick={() => {
+                                createRef.current?.open();
+                              }}
+                            >
+                              去创建
+                            </a>
+                          </span>
+                        }
+                        name="page_id"
+                      >
+                        <Select
+                          placeholder="请选择关联页面"
+                          allowClear
+                          showSearch
+                          filterOption={(input, option) => (option?.name ?? '').toLowerCase().includes(input.toLowerCase())}
+                          options={[...pageList, { name: '空页面', id: 0 }]}
+                          fieldNames={{ label: 'name', value: 'id' }}
+                        ></Select>
+                      </Form.Item>
+                    ) : (
+                      <Form.Item label="生成页面" name="is_create" extra="如果你创建的是末级菜单，请给它生成一个页面，父菜单不需要生成。">
+                        <Radio.Group>
+                          <Radio value={1}>是</Radio>
+                          <Radio value={2}>否</Radio>
+                        </Radio.Group>
+                      </Form.Item>
+                    )}
                   </>
                 );
               }}
             </Form.Item>
 
-            <Form.Item label="排序" name="sort_num" tooltip={{ title: '排序值越大越靠后', icon: <InfoCircleOutlined /> }}>
+            <Form.Item label="排序" name="sort_num" extra="排序值越大越靠后。">
               <InputNumber placeholder="请输入排序值" />
             </Form.Item>
-            <Form.Item label="菜单状态" name="status">
+            <Form.Item label="菜单状态" name="status" extra="停用后，菜单不会在admin系统中展示。">
               <Radio.Group>
                 <Radio value={1}>启用</Radio>
                 <Radio value={2}>停用</Radio>
