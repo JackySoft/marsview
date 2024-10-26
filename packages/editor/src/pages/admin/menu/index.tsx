@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Form, Input, Button, Table, Space, Select } from 'antd';
+import { Link, useParams } from 'react-router-dom';
+import { Form, Input, Button, Table, Select, Badge } from 'antd';
 import { Menu } from '@/api/types';
 import { IAction } from '@/pages/types';
 import { ColumnsType } from 'antd/es/table';
@@ -84,7 +84,7 @@ export default function MenuList() {
     if (record.type == 3) text = '页面';
     Modal.confirm({
       title: '确认',
-      content: `确认删除该${text}吗？`,
+      content: `${text}删除后不可恢复，确认删除吗？`,
       onOk() {
         handleDelSubmit(record.id);
       },
@@ -105,11 +105,13 @@ export default function MenuList() {
       dataIndex: 'name',
       key: 'name',
       width: 200,
+      align: 'center',
     },
     {
       title: '菜单图标',
       dataIndex: 'icon',
       key: 'icon',
+      align: 'center',
       render(icon: string) {
         if (!icon) return '-';
         const iconsList: { [key: string]: any } = icons;
@@ -124,6 +126,7 @@ export default function MenuList() {
       title: '菜单类型',
       dataIndex: 'type',
       key: 'type',
+      align: 'center',
       render(type: number) {
         return {
           1: '菜单',
@@ -136,17 +139,18 @@ export default function MenuList() {
       title: '权限标识',
       dataIndex: 'code',
       key: 'code',
+      align: 'center',
       render(code: string) {
         if (!code) return '-';
         return code;
       },
     },
     {
-      title: '关联页面',
+      title: '绑定页面',
       dataIndex: 'page_id',
       key: 'page_id',
+      align: 'center',
       render(page_id: string) {
-        if (!page_id) return '-';
         return page_id;
       },
     },
@@ -154,48 +158,52 @@ export default function MenuList() {
       title: '排序值',
       dataIndex: 'sort_num',
       key: 'sort_num',
+      align: 'center',
     },
     {
       title: '状态',
       dataIndex: 'status',
       key: 'status',
+      align: 'center',
       render(status: number) {
-        return {
-          1: '正常',
-          2: '停用',
-        }[status];
+        if (status === 1) return <Badge status="success" text="正常" />;
+        if (status === 2) return <Badge status="error" text="停用" />;
       },
     },
     {
       title: '创建时间',
       dataIndex: 'created_at',
       key: 'created_at',
+      align: 'center',
     },
     {
       title: '创建人',
       dataIndex: 'user_name',
       key: 'user_name',
+      align: 'center',
     },
     {
       title: '操作',
       key: 'action',
-      width: 200,
+      width: 320,
+      align: 'center',
       render(_, record) {
         return (
-          <Space>
-            <Button type="text" onClick={() => handleCopy(record)}>
+          <>
+            <Button type="link" onClick={() => handleCopy(record)}>
               复制
             </Button>
-            <Button type="text" onClick={() => handleSubCreate(record)}>
+            <Button type="link" onClick={() => handleSubCreate(record)}>
               新增
             </Button>
-            <Button type="text" onClick={() => handleEdit(record)}>
+            <Button type="link" onClick={() => handleEdit(record)}>
               编辑
             </Button>
-            <Button type="text" danger onClick={() => handleDelete(record)}>
+            <Button type="link" danger onClick={() => handleDelete(record)}>
               删除
             </Button>
-          </Space>
+            {record.page_id > 0 && <Link to={`/editor/${record.page_id}/edit`}>去设计</Link>}
+          </>
         );
       },
     },
@@ -225,6 +233,7 @@ export default function MenuList() {
         </div>
         <Table bordered rowKey="id" loading={loading} columns={columns} dataSource={data} pagination={false} />
       </div>
+      {/* 新增菜单 */}
       <CreateMenu mRef={menuRef} update={getMenus} />
     </div>
   );

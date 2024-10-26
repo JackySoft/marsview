@@ -1,6 +1,6 @@
 import React, { MouseEvent, useState, useEffect, useRef } from 'react';
 import { useParams, useBlocker } from 'react-router-dom';
-import { ConfigProvider, FloatButton, Image, Modal, Popover } from 'antd';
+import { ConfigProvider, FloatButton, Image, Popover } from 'antd';
 import { CommentOutlined, InfoCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
@@ -11,7 +11,7 @@ import { createId, getElement } from '@/utils/util';
 import storage from '@/utils/storage';
 import { getPageDetail } from '@/api';
 import Toolbar from '@/components/Toolbar/Toolbar';
-import { message } from '@/utils/AntdGlobal';
+import { message, Modal } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
 import { PageConfig } from '@/packages/Page';
 import InfiniteViewer from 'react-infinite-viewer';

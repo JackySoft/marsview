@@ -40,14 +40,12 @@ export interface CreatePageParams {
   name: string;
   user_name: string;
   user_id: string;
-  path: string;
 }
 
 export interface UpdatePageParams {
   id: number;
   user_id: string;
   name: string;
-  path: string;
 }
 
 export interface PublishPageParams {

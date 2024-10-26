@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Form, Input, Button, Table, Space } from 'antd';
+import { Form, Input, Button, Table, Space, Tooltip } from 'antd';
 import { UserItem } from '@/api/types';
 import { IAction } from '@/pages/types';
 import { ColumnsType } from 'antd/es/table';
@@ -8,6 +8,7 @@ import { Modal, message } from '@/utils/AntdGlobal';
 import CreateUser from './CreateUser';
 import SearchForm from '../components/SearchForm';
 import { getUserList, getRoleListAll, delUser } from '@/api';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 /**
  * 用户配置
@@ -151,7 +152,12 @@ export default function MenuList() {
       </SearchForm>
       <div className="base-table">
         <div className="header-wrapper">
-          <div className="title">用户列表</div>
+          <Space>
+            <span>用户列表</span>
+            <Tooltip title="添加项目对应的用户，管理员默认具备该项目所有权限，普通用户可分配角色来精细化控制菜单和按钮。">
+              <QuestionCircleOutlined />
+            </Tooltip>
+          </Space>
           <div className="action">
             <Button type="primary" onClick={handleCreate}>
               新增
