@@ -15,7 +15,7 @@ CREATE TABLE `firefly` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间戳',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '时间戳',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='数据测试表'
+) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='数据测试表'
 ;
 
 /******************************************/
@@ -32,8 +32,9 @@ CREATE TABLE `imgcloud` (
   `size` int NOT NULL COMMENT '文件大小，单位byte',
   `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图片cdn地址',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COMMENT='图片云服务'
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb3 COMMENT='图片云服务'
 ;
 
 /******************************************/
@@ -55,11 +56,9 @@ CREATE TABLE `lib` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  KEY `ix_name` (`name`),
-  KEY `ix_sso_name` (`user_name`),
-  KEY `ix_updated_at` (`updated_at`),
-  KEY `ix_created_at` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=299 DEFAULT CHARSET=utf8mb3 COMMENT='自定义组件库表，用来满足自定义业务'
+  KEY `ix_user_id` (`user_id`),
+  KEY `ix_name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=437 DEFAULT CHARSET=utf8mb3 COMMENT='自定义组件库表，用来满足自定义业务'
 ;
 
 /******************************************/
@@ -84,7 +83,7 @@ CREATE TABLE `lib_publish` (
   KEY `ix_lib_id` (`lib_id`),
   KEY `ix_updated_at` (`updated_at`),
   KEY `ix_created_at` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb3 COMMENT='组件库发布表'
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb3 COMMENT='组件库发布表'
 ;
 
 /******************************************/
@@ -108,9 +107,9 @@ CREATE TABLE `menu` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`),
-  KEY `ix_updated_at` (`updated_at`),
-  KEY `ix_created_at` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=2098 DEFAULT CHARSET=utf8mb3 COMMENT='菜单列表'
+  KEY `idx_project_id` (`project_id`),
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2873 DEFAULT CHARSET=utf8mb3 COMMENT='菜单列表'
 ;
 
 /******************************************/
@@ -133,12 +132,12 @@ CREATE TABLE `pages` (
   `stg_state` tinyint(1) NOT NULL DEFAULT '1' COMMENT '发布状态：1未保存 2已保存 3已发布',
   `pre_state` tinyint(1) NOT NULL DEFAULT '1' COMMENT '发布状态：1未保存 2已保存 3已发布',
   `prd_state` tinyint(1) NOT NULL DEFAULT '1' COMMENT '发布状态：1未保存 2已保存 3已发布',
+  `project_id` int DEFAULT '0' COMMENT '所属项目ID',
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`),
-  KEY `ix_updated_at` (`updated_at`),
-  KEY `ix_created_at` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=2019 DEFAULT CHARSET=utf8mb3 COMMENT='项目列表'
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2886 DEFAULT CHARSET=utf8mb3 COMMENT='项目列表'
 ;
 
 /******************************************/
@@ -159,7 +158,7 @@ CREATE TABLE `pages_publish` (
   PRIMARY KEY (`id`),
   KEY `ix_updated_at` (`updated_at`),
   KEY `ix_created_at` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=2306 DEFAULT CHARSET=utf8mb3 COMMENT='页面发布列表'
+) ENGINE=InnoDB AUTO_INCREMENT=3075 DEFAULT CHARSET=utf8mb3 COMMENT='页面发布列表'
 ;
 
 /******************************************/
@@ -179,7 +178,7 @@ CREATE TABLE `pages_role` (
   KEY `ix_updated_at` (`updated_at`),
   KEY `ix_created_at` (`created_at`),
   KEY `ix_page_id` (`page_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb3 COMMENT='页面权限列表'
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb3 COMMENT='页面权限列表'
 ;
 
 /******************************************/
@@ -196,9 +195,9 @@ CREATE TABLE `project_user` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`),
-  KEY `ix_updated_at` (`updated_at`),
-  KEY `ix_created_at` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb3 AVG_ROW_LENGTH=4096 COMMENT='用户列表'
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_project_id` (`project_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb3 AVG_ROW_LENGTH=4096 COMMENT='用户列表'
 ;
 
 /******************************************/
@@ -225,9 +224,8 @@ CREATE TABLE `projects` (
   `footer` int NOT NULL DEFAULT '0' COMMENT '页脚 1-显示 0-不显示',
   `system_theme_color` varchar(10) NOT NULL DEFAULT '#F16622' COMMENT '系统主题色',
   PRIMARY KEY (`id`),
-  KEY `ix_updated_at` (`updated_at`),
-  KEY `ix_created_at` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=1515 DEFAULT CHARSET=utf8mb3 AVG_ROW_LENGTH=2048 COMMENT='项目列表'
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2164 DEFAULT CHARSET=utf8mb3 AVG_ROW_LENGTH=2048 COMMENT='项目列表'
 ;
 
 /******************************************/
@@ -248,7 +246,7 @@ CREATE TABLE `roles` (
   PRIMARY KEY (`id`),
   KEY `ix_updated_at` (`updated_at`) USING BTREE,
   KEY `ix_created_at` (`created_at`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=430 DEFAULT CHARSET=utf8mb3 AVG_ROW_LENGTH=4096 COMMENT='页面权限列表'
+) ENGINE=InnoDB AUTO_INCREMENT=593 DEFAULT CHARSET=utf8mb3 AVG_ROW_LENGTH=4096 COMMENT='页面权限列表'
 ;
 
 /******************************************/
@@ -263,7 +261,25 @@ CREATE TABLE `users` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`),
-  KEY `ix_updated_at` (`updated_at`) USING BTREE,
-  KEY `ix_created_at` (`created_at`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=546 DEFAULT CHARSET=utf8mb3 AVG_ROW_LENGTH=4096 ROW_FORMAT=DYNAMIC COMMENT='用户列表'
+  KEY `idx_user_name` (`user_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=1253 DEFAULT CHARSET=utf8mb3 AVG_ROW_LENGTH=4096 ROW_FORMAT=DYNAMIC COMMENT='用户列表'
+;
+
+/******************************************/
+/*   DatabaseName = mars   */
+/*   TableName = workflows   */
+/******************************************/
+CREATE TABLE `workflows` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `form_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '表单名称',
+  `form_desc` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '表单描述',
+  `page_id` int DEFAULT '0' COMMENT '配置页面ID',
+  `template_data` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '工作流配置数据',
+  `user_id` int NOT NULL COMMENT '用户ID',
+  `user_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb3 COMMENT='工作流模板配置'
 ;

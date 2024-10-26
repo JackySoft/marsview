@@ -61,9 +61,10 @@ class PagesService {
     return result;
   }
 
-  async createPage(name, user_id, user_name, remark = '', page_data, is_public, is_edit) {
-    const statement = 'INSERT INTO pages (name, user_id, user_name, remark, page_data, is_public, is_edit) VALUES (?, ?, ?, ?, ?, ?, ?);';
-    const [result] = await connection.execute(statement, [name, user_id, user_name, remark, page_data, is_public, is_edit]);
+  async createPage(name, user_id, user_name, remark = '', page_data, is_public, is_edit, project_id = 0) {
+    const statement =
+      'INSERT INTO pages (name, user_id, user_name, remark, page_data, is_public, is_edit,project_id) VALUES (?, ?, ?, ?, ?, ?, ?,?);';
+    const [result] = await connection.execute(statement, [name, user_id, user_name, remark, page_data, is_public, is_edit, project_id]);
     return result;
   }
 

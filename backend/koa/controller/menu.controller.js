@@ -1,4 +1,5 @@
 const menuService = require('../service/menu.service');
+const pageService = require('../service/pages.service');
 const util = require('../utils/util');
 module.exports = {
   async list(ctx) {
@@ -11,7 +12,7 @@ module.exports = {
   },
   async create(ctx) {
     const { userId, userName } = util.decodeToken(ctx);
-    const { project_id, name } = ctx.request.body;
+    const { project_id, name, type, is_create } = ctx.request.body;
 
     if (project_id === 0) {
       return ctx.throw(400, '请先创建项目');
@@ -24,8 +25,19 @@ module.exports = {
       return ctx.throw(400, '菜单名称不能为空');
     }
 
-    await menuService.create({ ...ctx.request.body, userId, userName });
-    util.success(ctx);
+    try {
+      let pageId = 0;
+      // 只有菜单和页面类型支持自动创建页面
+      if (type !== 2 && is_create === 1) {
+        const res = await pageService.createPage(name, userId, userName, '', '', 1, 2, project_id);
+        pageId = res.insertId || 0;
+      }
+
+      await menuService.create({ ...ctx.request.body, page_id: pageId, userId, userName });
+      util.success(ctx);
+    } catch (error) {
+      util.fail(ctx, error.message);
+    }
   },
 
   async delete(ctx) {
