@@ -1,20 +1,19 @@
-import { debounce } from 'lodash-es';
-
 /**
  * @description: 星云特效
  */
-export const setNebulaCanvas = () => {
+export const initStarCanvas = () => {
   const num = 300;
   const selectorId = 'canvasBox';
-  const canvas = document.querySelector(`#${selectorId}`);
-  let w = window.innerWidth;
-  let h = window.innerHeight;
+  const canvas = document.querySelector(`#${selectorId}`) as HTMLCanvasElement;
+  if (!canvas) return;
+  const w = window.innerWidth;
+  const h = window.innerHeight;
   canvas.width = w;
   canvas.height = h;
   const xBase = 0;
   const yBase = 0;
   const zBase = 600;
-  const dtr = function (d) {
+  const dtr = function (d: number) {
     return (d * Math.PI) / 180;
   };
 
@@ -63,9 +62,15 @@ export const setNebulaCanvas = () => {
     },
   };
 
+  interface point {
+    x: number;
+    y: number;
+    z: number;
+    p?: number;
+  }
   const trans = {
     parts: {
-      sz(p, sz) {
+      sz(p: point, sz: point) {
         return {
           x: p.x * sz.x,
           y: p.y * sz.y,
@@ -73,21 +78,21 @@ export const setNebulaCanvas = () => {
         };
       },
       rot: {
-        x(p, rot) {
+        x(p: point, rot: point) {
           return {
             x: p.x,
             y: p.y * Math.cos(dtr(rot.x)) - p.z * Math.sin(dtr(rot.x)),
             z: p.y * Math.sin(dtr(rot.x)) + p.z * Math.cos(dtr(rot.x)),
           };
         },
-        y(p, rot) {
+        y(p: point, rot: point) {
           return {
             x: p.x * Math.cos(dtr(rot.y)) + p.z * Math.sin(dtr(rot.y)),
             y: p.y,
             z: -p.x * Math.sin(dtr(rot.y)) + p.z * Math.cos(dtr(rot.y)),
           };
         },
-        z(p, rot) {
+        z(p: point, rot: point) {
           return {
             x: p.x * Math.cos(dtr(rot.z)) - p.y * Math.sin(dtr(rot.z)),
             y: p.x * Math.sin(dtr(rot.z)) + p.y * Math.cos(dtr(rot.z)),
@@ -95,7 +100,7 @@ export const setNebulaCanvas = () => {
           };
         },
       },
-      pos(p, pos) {
+      pos(p: point, pos: point) {
         return {
           x: p.x + pos.x,
           y: p.y + pos.y,
@@ -104,21 +109,21 @@ export const setNebulaCanvas = () => {
       },
     },
     pov: {
-      plane(p) {
+      plane(p: point) {
         return {
           x: p.x * cam.ang.cplane + p.z * cam.ang.splane,
           y: p.y,
           z: p.x * -cam.ang.splane + p.z * cam.ang.cplane,
         };
       },
-      theta(p) {
+      theta(p: point) {
         return {
           x: p.x,
           y: p.y * cam.ang.ctheta - p.z * cam.ang.stheta,
           z: p.y * cam.ang.stheta + p.z * cam.ang.ctheta,
         };
       },
-      set(p) {
+      set(p: point) {
         return {
           x: p.x - cam.obj.x,
           y: p.y - cam.obj.y,
@@ -126,7 +131,7 @@ export const setNebulaCanvas = () => {
         };
       },
     },
-    persp(p) {
+    persp(p: point) {
       return {
         x: ((p.x * cam.dist.z) / p.z) * cam.zoom,
         y: ((p.y * cam.dist.z) / p.z) * cam.zoom,
@@ -134,7 +139,7 @@ export const setNebulaCanvas = () => {
         p: cam.dist.z / p.z,
       };
     },
-    disp(p, disp) {
+    disp(p: point, disp: point) {
       return {
         x: p.x + disp.x,
         y: -p.y + disp.y,
@@ -142,7 +147,7 @@ export const setNebulaCanvas = () => {
         p: p.p,
       };
     },
-    steps(_obj_, sz, rot, pos, disp) {
+    steps(_obj_: point, sz: point, rot: point, pos: point, disp: point) {
       let _args = trans.parts.sz(_obj_, sz);
       _args = trans.parts.rot.x(_args, rot);
       _args = trans.parts.rot.y(_args, rot);
@@ -157,35 +162,49 @@ export const setNebulaCanvas = () => {
     },
   };
 
-  (function () {
-    'use strict';
-    const ThreeD = function (param) {
+  class ThreeD {
+    transIn: any;
+    transOut: any;
+
+    constructor(param: any) {
       this.transIn = {};
       this.transOut = {};
       this.transIn.vtx = param.vtx;
       this.transIn.sz = param.sz;
       this.transIn.rot = param.rot;
       this.transIn.pos = param.pos;
-    };
-
-    ThreeD.prototype.vupd = function () {
+    }
+    vupd() {
       this.transOut = trans.steps(this.transIn.vtx, this.transIn.sz, this.transIn.rot, this.transIn.pos, cam.disp);
-    };
+    }
+  }
 
-    const Build = function () {
-      this.vel = 0.04;
-      this.lim = 360;
-      this.diff = 300;
-      this.initPos = 100;
+  class Build {
+    vel = 0.04;
+    lim = 360;
+    diff = 300;
+    initPos = 100;
+    toX = xBase;
+    toY = yBase;
+    canvas: HTMLCanvasElement;
+    $: any;
+    varr: any[];
+    dist: any[];
+    calc: any[];
+    rotObj: any;
+    objSz: any;
+    constructor() {
       this.toX = xBase;
       this.toY = yBase;
-      this.go();
-    };
-
-    Build.prototype.go = function () {
-      this.canvas = document.getElementById(selectorId);
+      this.canvas = document.getElementById(selectorId) as HTMLCanvasElement;
       this.canvas.width = window.innerWidth;
       this.canvas.height = window.innerHeight;
+      this.varr = [];
+      this.dist = [];
+      this.calc = [];
+      this.go();
+    }
+    go() {
       this.$ = this.canvas.getContext('2d');
       this.$.globalCompositeOperation = 'source-over';
       this.varr = [];
@@ -206,9 +225,8 @@ export const setNebulaCanvas = () => {
         y: h / 5,
         z: w / 5,
       };
-    };
-
-    Build.prototype.add = function () {
+    }
+    add() {
       this.varr.push(
         new ThreeD({
           vtx: {
@@ -238,14 +256,12 @@ export const setNebulaCanvas = () => {
         y: 360 * Math.random(),
         z: 360 * Math.random(),
       });
-    };
-
-    Build.prototype.upd = function () {
+    }
+    upd() {
       cam.obj.x += (this.toX - cam.obj.x) * 0.025;
       cam.obj.y += (this.toY - cam.obj.y) * 0.025;
-    };
-
-    Build.prototype.draw = function () {
+    }
+    draw() {
       this.$.clearRect(0, 0, this.canvas.width, this.canvas.height);
       cam.upd();
       this.rotObj.x += 0.05;
@@ -287,128 +303,20 @@ export const setNebulaCanvas = () => {
         this.$.fill();
         this.$.closePath();
       }
-    };
-
-    Build.prototype.anim = function () {
-      window.requestAnimationFrame = (function () {
-        return (
-          window.requestAnimationFrame ||
-          function (callback, element) {
-            window.setTimeout(callback, 1000 / 30);
-          }
-        );
-      })();
-      const anim = function () {
+    }
+    anim() {
+      const anim = () => {
         this.upd();
         this.draw();
         window.requestAnimationFrame(anim);
-      }.bind(this);
-      window.requestAnimationFrame(anim);
-    };
-
-    Build.prototype.run = function () {
-      this.anim();
-      //   window.addEventListener(
-      //     'mousedown',
-      //     function (e) {
-      //       for (let i = 0; i < 100; i += 1) {
-      //         this.add();
-      //       }
-      //     }.bind(this),
-      //   );
-    };
-    const app = new Build();
-    app.run();
-  })();
-};
-
-/**
- * @description: 星空特效
- */
-export const setStarryCanvas = () => {
-  const selectorId = 'canvasBox';
-  const canvas = document.querySelector(`#${selectorId}`);
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const c = canvas.getContext('2d');
-
-  const numStars = 1200;
-  const focalLength = canvas.width * 2;
-  let centerX, centerY;
-
-  let stars = [];
-  let star;
-  let i;
-
-  const animate = true;
-
-  initializeStars();
-
-  function executeFrame() {
-    if (animate) window.requestAnimationFrame(executeFrame);
-    moveStars();
-    drawStars();
-  }
-
-  function initializeStars() {
-    centerX = canvas.width / 2;
-    centerY = canvas.height / 2;
-
-    stars = [];
-    for (i = 0; i < numStars; i += 1) {
-      star = {
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        z: Math.random() * canvas.width,
-        o: `0.${Math.floor(Math.random() * 99)}1`,
       };
-      stars.push(star);
+      window.requestAnimationFrame(anim);
+    }
+    run() {
+      this.anim();
     }
   }
 
-  function moveStars() {
-    for (i = 0; i < numStars; i += 1) {
-      star = stars[i];
-      star.z -= 1;
-
-      if (star.z <= 0) {
-        star.z = canvas.width;
-      }
-    }
-  }
-
-  function drawStars() {
-    let pixelX, pixelY, pixelRadius;
-    c.clearRect(0, 0, canvas.width, canvas.height); // 清除
-    for (i = 0; i < numStars; i += 1) {
-      star = stars[i];
-
-      pixelX = (star.x - centerX) * (focalLength / star.z);
-      pixelX += centerX;
-      pixelY = (star.y - centerY) * (focalLength / star.z);
-      pixelY += centerY;
-      pixelRadius = 1 * (focalLength / star.z);
-
-      c.beginPath();
-      c.arc(pixelX, pixelY, pixelRadius > 20 ? 20 : pixelRadius, 0, 2 * Math.PI);
-      c.fillStyle = `rgba(209, 255, 255, ${star.o} )`;
-      c.fill();
-      c.closePath(); // 结束绘制
-    }
-  }
-
-  window.addEventListener(
-    'resize',
-    debounce(function () {
-      // Resize to the screen
-      if (canvas.width !== window.innerWidth || canvas.width !== window.innerWidth) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        initializeStars();
-      }
-    }, 100),
-    false,
-  );
-
-  executeFrame();
+  const app = new Build();
+  app.run();
 };

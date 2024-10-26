@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Button } from 'antd';
-import { setNebulaCanvas } from '@/utils/canvas';
+import { initStarCanvas } from '@/utils/canvas';
 import CountUp from 'react-countup';
 import style from './index.module.less';
 export default function Welcome() {
   const [isShadow, setShadow] = useState(false);
+
   useEffect(() => {
-    setNebulaCanvas();
-    const el = document.getElementById('welcome') as HTMLDivElement;
+    initStarCanvas();
+    const el: HTMLElement | null = document.getElementById('welcome');
+    if (!el) return;
     el.onscroll = () => {
       if (el.scrollTop > 0) {
         setShadow(true);

@@ -7,8 +7,9 @@ export default function Root() {
   const saveUserInfo = usePageStore((state) => state.saveUserInfo);
 
   useEffect(() => {
-    if (!loaderData) return;
-    saveUserInfo(loaderData as UserInfoStore);
+    if (loaderData) {
+      saveUserInfo(loaderData as UserInfoStore);
+    }
   }, []);
 
   return (
