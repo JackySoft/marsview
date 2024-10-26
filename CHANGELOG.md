@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/JackySoft/marsview/compare/v4.4.11...v4.5.0) (2024-10-26)
+
+
+### Features
+
+* 后端增加字段 ([fe798a4](https://github.com/JackySoft/marsview/commit/fe798a4ef5f75a9c1d6fcf7dd92771a7336faecd))
+* 优化项目创建和菜单页面关联 ([d97fb2a](https://github.com/JackySoft/marsview/commit/d97fb2a87df7cb9e0a61d117a4fe34b0cd649c8a))
+
+
+### Feature Improvements
+
+* 优化canvas代码 ([7259b66](https://github.com/JackySoft/marsview/commit/7259b665c8b21b43043f50eb2877c000a61b7e55))
+
 ### [4.4.11](https://github.com/JackySoft/marsview/compare/v4.4.10...v4.4.11) (2024-10-26)
 
 
