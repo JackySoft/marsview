@@ -10,10 +10,6 @@ declare module 'css';
 declare module 'lodash-es';
 declare module 'prettier';
 declare module 'prettier/parser-babel';
-declare module '@/utils/canvas' {
-  export function setNebulaCanvas();
-  export function setStarryCanvas();
-}
 interface Window {
   [key: string]: any;
 }
