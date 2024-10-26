@@ -1,6 +1,6 @@
 # 开发者本地启动
 
-`Marsview` 包含前端和后端，数据库使用的是 `MySQL`，部署需要先安装 `Node` 和 `NPM`，安装 `MySQL` 数据库。
+`Marsview` 包含前端和后端，数据库使用的是 `MySQL`，如果后端采用`koa`需要提前安装 `Node` 和 `NPM`以及`PNPM`，如果后端采用`java`需要安装`jdk` `maven` 。
 
 ## 数据库安装
 
@@ -12,7 +12,51 @@
 
 ## 后端启动
 
-后端提供 `JAVA` 和 `Koa` 两个版本，`JAVA` 启动请自行百度，`Koa` 版本启动：
+后端提供 `JAVA` 和 `Koa` 两个版本。
+
+### `java` 版本启动：
+
+环境准备：`jdk` `mysql` `maven` `redis`
+
+1. 安装 `jdk`，建议使用 `17` 及以上版本
+
+2. 安装 `maven`，安装方式自行百度
+
+3. 安装 `redis`，安装方式自行百度
+
+4. 安装 `mysql`，安装方式自行百度
+
+5. 修改 `application.yml` 配置文件的 `eamil`、`redis`、`mybatis` 连接信息
+
+```java
+spring：
+  #邮箱配置
+  mail：
+    host：smtp地址，例如：smtp.qq.com
+    username：demo@qq.com（换成自己的邮箱）
+    password：yitmkgakdggbbceg（qq邮箱开启服务生成的密文，注意不是qq密码）
+  # redis配置
+  data：
+    redis：
+      host: XXXX
+      port: XXXX
+      password: XXXX
+      database: XXXX
+
+#mybatis配置
+mybatis：
+  jdbc：
+    url：XXXX
+    username: XXXX
+    password: XXXX
+
+```
+
+6. 运行 com.xintr.LowcodeApplication 启动服务
+
+> 注意，邮箱必须是自己的 163 邮箱，并且开启 POP3 服务，否则无法发送验证码
+
+### koa 版本启动：
 
 1. 请务必安装 `node.js 18.0.0` 以上版本
 
@@ -69,7 +113,8 @@ const ZHIPU_AI_KEY = '';
 
 ```
 
-> 上面的配置，对于必填的，都有备注。
+> 1. 上面的配置，对于必填的，都有备注。
+> 2. 邮箱必须是自己的 163 邮箱，并且开启 POP3 服务，否则无法发送验证码
 
 3. 安装依赖
 
@@ -101,7 +146,8 @@ cd marsview
 pnpm i
 ```
 
-> pnpm i 会全局安装前端项目所有依赖，前提是必须在`marsview`目录下执行
+> 1. 没有安装`pnpm`，通过`npm i -g pnpm`安装。
+> 2. pnpm i 会全局安装前端项目所有依赖，前提是必须在`marsview`目录下执行。
 
 2. 修改编辑器配置
 
@@ -144,3 +190,13 @@ http://127.0.0.1:8090
 ## 总结
 
 以上是本地部署和启动的过程，服务器部署类似。如果你用的是阿里云服务器，可能关于`cdn`部分需要修改一下上传接口代码，比如：`upload.router.js`，因为我代码基于百度云的存储`SDK`实现的。
+
+### 域名介绍：
+
+1. `www.marsview.cn` 是给开发者使用的。
+2. `admin.marsview.cn` 是给用户访问的。
+
+### 项目介绍
+
+1. `editor`项目是给开发者使用的，提供可视化搭建功能。
+2. `admin` 项目是给用户访问的，搭建好以后，通过`admin`域名可以访问搭建的成果。

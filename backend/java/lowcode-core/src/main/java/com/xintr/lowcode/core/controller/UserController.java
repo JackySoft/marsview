@@ -52,6 +52,7 @@ public class UserController extends BasicController {
         if (StringUtils.equals(dto.getUserName(), (String) redisTemplate.opsForValue().get("lowcode.register.code" + dto.getEmail()))) {
             Users users = Builder.of(Users::new)
                     .with(Users::setCreated_at, new Date())
+                    .with(Users::setTeam_id, dto.getTeam_id() == null ? 1 : dto.getTeam_id())
                     .with(Users::setUser_name, dto.getUserName())
                     .with(Users::setUser_pwd, dto.getUserPwd()).build();
             int result = usersMapper.insertUseGeneratedKeys(users);
