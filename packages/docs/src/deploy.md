@@ -18,13 +18,13 @@
 
 环境准备：`jdk` `mysql` `maven` `redis`
 
-1. 安装 `jdk`，建议使用 `17` 及以上版本
+1. 安装 `jdk` 建议使用 `17` 及以上版本
 
-2. 安装 `maven`，安装方式自行百度
+2. 安装 `maven` 安装方式自行百度
 
-3. 安装 `redis`，安装方式自行百度
+3. 安装 `redis` 安装方式自行百度
 
-4. 安装 `mysql`，安装方式自行百度
+4. 安装 `mysql` 安装方式自行百度
 
 5. 修改 `application.yml` 配置文件的 `eamil`、`redis`、`mybatis` 连接信息
 
@@ -193,8 +193,8 @@ http://127.0.0.1:8090
 
 ### 域名介绍：
 
-1. `www.marsview.cn` 是给开发者使用的。
-2. `admin.marsview.cn` 是给用户访问的。
+1. `www.marsview.cc` 是给开发者使用的。
+2. `admin.marsview.cc` 是给用户访问的。
 
 ### 项目介绍
 

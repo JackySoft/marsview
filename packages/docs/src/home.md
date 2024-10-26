@@ -12,8 +12,8 @@ Marsview 是一款中后台方向的低代码可视化搭建平台，开发者�
 
 ## editor 和 admin 关系
 
-1. `editor`项目是给开发者使用的，提供可视化搭建功能，对应`www.marsview.cn`。
-2. `admin` 项目是给用户访问的，通过`admin.marsview.cn`访问页面效果。
+1. `editor`项目是给开发者使用的，提供可视化搭建功能，对应`www.marsview.cc`。
+2. `admin` 项目是给用户访问的，通过`admin.marsview.cc`访问页面效果。
 
 ## 环境解释
 
