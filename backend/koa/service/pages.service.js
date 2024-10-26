@@ -13,7 +13,22 @@ class PagesService {
     const statement =
       `
       SELECT 
-        p.*,
+        p.id,
+        p.name,
+        p.user_id,
+        p.user_name,
+        p.remark,
+        p.is_public,
+        p.is_edit,
+        p.preview_img,
+        p.stg_publish_id,
+        p.pre_publish_id,
+        p.prd_publish_id,
+        p.stg_state,
+        p.pre_state,
+        p.prd_state,
+        p.project_id,
+        p.updated_at,
         SUBSTRING_INDEX(p.user_name, '@', 1) as user_name,
         (  
         SELECT JSON_ARRAYAGG(  
@@ -44,7 +59,31 @@ class PagesService {
   // 查询页面模板
   async listPageTemplate(pageNum, pageSize, keyword) {
     const offset = (+pageNum - 1) * pageSize + '';
-    const statement = `SELECT *,SUBSTRING_INDEX(user_name, '@', 1) as user_name FROM pages WHERE (name like COALESCE(CONCAT('%',?,'%'), name) OR ? IS NULL) AND is_public = 3 ORDER BY updated_at DESC LIMIT ?,?;`;
+    const statement = `SELECT id,
+      name,
+      user_id,
+      user_name,
+      remark,
+      is_public,
+      is_edit,
+      preview_img,
+      stg_publish_id,
+      pre_publish_id,
+      prd_publish_id,
+      stg_state,
+      pre_state,
+      prd_state,
+      project_id,
+      updated_at,
+      SUBSTRING_INDEX(user_name, '@', 1) as user_name 
+    FROM 
+      pages 
+    WHERE 
+      (name like COALESCE(CONCAT('%',?,'%'), name) OR ? IS NULL) 
+    AND 
+      is_public = 3 
+    ORDER BY 
+      updated_at DESC LIMIT ?,?;`;
     const [result] = await connection.execute(statement, [keyword || null, keyword || null, offset, pageSize]);
     return result;
   }
