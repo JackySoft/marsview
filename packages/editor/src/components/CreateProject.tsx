@@ -1,7 +1,6 @@
 import { Input, Modal, Form, Radio } from 'antd';
-import { useImperativeHandle, useState, forwardRef, useMemo } from 'react';
+import { useImperativeHandle, useState, forwardRef, useMemo, memo } from 'react';
 import { addProject } from '@/api';
-import { usePageStore } from '@/stores/pageStore';
 import UploadImages from './UploadImages/UploadImages';
 import { message } from '@/utils/AntdGlobal';
 
@@ -12,11 +11,11 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
   const [form] = Form.useForm();
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const userId = usePageStore((store) => store.userInfo.userId);
 
   // 暴露方法
   useImperativeHandle(ref, () => ({
     open() {
+      form.resetFields();
       setVisible(true);
     },
   }));
@@ -54,7 +53,6 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
       footer: false,
       logo: 'https://marsview.cdn.bcebos.com/mars-logo.png',
       is_public: 1,
-      is_edit: 2,
     };
   }, []);
   return (
@@ -72,29 +70,16 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
         <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入页面名称' }]}>
           <Input placeholder="请输入项目名称" maxLength={15} showCount />
         </Form.Item>
-        <Form.Item label="描述" name="remark">
+        <Form.Item label="描述" name="remark" rules={[{ required: true, message: '请输入项目描述' }]}>
           <Input placeholder="请输入项目描述" maxLength={20} showCount />
         </Form.Item>
         <Form.Item label="LOGO" name="logo" rules={[{ required: true, message: '请上传项目Logo' }]}>
           <UploadImages />
         </Form.Item>
-        <Form.Item
-          label="权限"
-          name="is_public"
-          rules={[{ required: true, message: '请选择访问类型' }]}
-          extra="公开页面支持所有人访问。私有页面仅自己可访问。"
-        >
+        <Form.Item label="权限" name="is_public" rules={[{ required: true, message: '请选择访问类型' }]} extra="公开项目支持所有人访问，但不可修改。">
           <Radio.Group>
             <Radio value={1}>公开</Radio>
             <Radio value={2}>私有</Radio>
-            {/* 普通用户暂不开放模板设置 */}
-            {userId == 50 ? <Radio value={3}>公开模板</Radio> : null}
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label="模式" name="is_edit" rules={[{ required: true, message: '请选择编辑模式' }]} extra="公开后设置他人可查看或编辑；">
-          <Radio.Group>
-            <Radio value={1}>编辑</Radio>
-            <Radio value={2}>查看</Radio>
           </Radio.Group>
         </Form.Item>
       </Form>
@@ -102,4 +87,4 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
   );
 };
 
-export default forwardRef(CreateProject);
+export default memo(forwardRef(CreateProject));
