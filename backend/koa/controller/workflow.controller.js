@@ -58,14 +58,14 @@ module.exports = {
   },
 
   async update(ctx) {
-    const { form_name, form_desc, page_id, template_data } = ctx.request.body;
-    if (!util.isNumber(form_name)) {
+    const { id, form_name, form_desc, page_id, template_data } = ctx.request.body;
+    if (!util.isNumber(id)) {
       return ctx.throw(400, '组件id不正确');
     }
 
     const { userId } = util.decodeToken(ctx);
 
-    await workflow.updateTemplate(form_name, form_desc, page_id, template_data, userId);
+    await workflow.updateTemplate(id, form_name, form_desc, page_id, template_data, userId);
     util.success(ctx);
   },
 };
