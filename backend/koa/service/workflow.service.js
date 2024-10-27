@@ -11,7 +11,12 @@ class PagesService {
     const limit = pageSize;
     const statement = `
       SELECT 
-        *
+        id,
+        form_name,
+        form_desc,
+        page_id,
+        user_name,
+        updated_at
       FROM 
         workflows 
       WHERE
@@ -42,7 +47,7 @@ class PagesService {
     return result;
   }
 
-  async updateTemplate(form_name, form_desc, page_id, template_data, user_id) {
+  async updateTemplate(id, form_name, form_desc, page_id, template_data, user_id) {
     let statement = `UPDATE workflows SET updated_at = ?`;
     let sql_params = [new Date()];
     if (form_name) {
@@ -66,6 +71,7 @@ class PagesService {
     }
 
     statement += ` WHERE id = ? and user_id = ?;`;
+    sql_params.push(id);
     sql_params.push(user_id);
     const [result] = await connection.execute(statement, sql_params);
     return result;

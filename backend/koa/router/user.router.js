@@ -95,7 +95,7 @@ router.post('/sendEmail', async (ctx) => {
     await keyv.set(email, random, 3 * 60 * 1000);
     util.success(ctx, '发送成功');
   } catch (error) {
-    util.fail(ctx, '发送失败，请重试');
+    util.fail(ctx, error.message);
   }
 });
 
