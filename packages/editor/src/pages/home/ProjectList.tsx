@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Col, Layout, Row, Pagination, Spin, Empty, Button, Form, Tooltip } from 'antd';
+import { Card, Col, Layout, Row, Pagination, Spin, Empty, Button, Form, Tooltip, Image } from 'antd';
 import { UserOutlined, DeleteOutlined, LockOutlined, PlusOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { getProjectList, delProject } from '@/api';
@@ -23,14 +23,13 @@ export default function Index() {
   const [current, setCurrent] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(12);
   const createRef = useRef<{ open: () => void }>();
-  const navigate = useNavigate();
 
   useEffect(() => {
     getList(current, pageSize);
   }, [current, pageSize]);
 
   // 加载页面列表
-  const getList = async (pageNum: number = current, size: number = pageSize) => {
+  const getList = useCallback(async (pageNum: number = current, size: number = pageSize) => {
     try {
       setLoading(true);
       const { type, keyword } = form.getFieldsValue();
@@ -46,23 +45,7 @@ export default function Index() {
     } catch (error) {
       setLoading(false);
     }
-  };
-
-  // 删除项目确认
-  const deleteProjectConfirm = (event: React.MouseEvent, id: number) => {
-    event.stopPropagation();
-    Modal.confirm({
-      title: '确认',
-      content: '确认删除该项目吗？',
-      okText: '确认',
-      cancelText: '取消',
-      onOk: async () => {
-        await delProject({ id });
-        message.success('删除成功');
-        getList();
-      },
-    });
-  };
+  }, []);
 
   // 切换页码和每页条数回调
   const handleChange = (_current: number, size: number) => {
@@ -75,80 +58,10 @@ export default function Index() {
     createRef.current?.open();
   };
 
-  // 页面操作
-  const handleAction = async (id: number, isEdit: boolean) => {
-    if (!id) {
-      message.warning('该项目为私有项目');
-      return false;
-    }
-    if (!isEdit) {
-      message.warning('您不是该项目开发者，当前只有访问权限。');
-      return false;
-    }
-    navigate(`/project/${id}/config`);
-  };
-
   // 提交搜索
   const handleSearch = () => {
     setCurrent(1);
     getList(1, pageSize);
-  };
-
-  // 项目卡片
-  const CardItem: React.FC<ProjectCardItemProps> = ({ item, isAuth }) => {
-    const getEnvTag = (env: 'stg' | 'pre' | 'prd', name: string) => {
-      const title = {
-        stg: '访问测试环境',
-        pre: '访问预发布环境',
-        prd: '访问生产环境',
-      }[env];
-      return (
-        <Tooltip title={title}>
-          <a href={`${import.meta.env.VITE_ADMIN_URL}/project/${env}/${item.id}`} target="_blank">
-            {name}
-          </a>
-        </Tooltip>
-      );
-    };
-    return (
-      <Card
-        hoverable
-        style={{
-          opacity: isAuth ? 1 : 0.6,
-          background: isAuth ? 'none' : "url('/imgs/cross-bg.png')",
-        }}
-        actions={[
-          item.id ? getEnvTag('stg', 'STG') : <span style={{ cursor: 'not-allowed' }}>STG</span>,
-          item.id ? getEnvTag('pre', 'PRE') : <span style={{ cursor: 'not-allowed' }}>PRE</span>,
-          item.id ? getEnvTag('prd', 'PRD') : <span style={{ cursor: 'not-allowed' }}>PRD</span>,
-        ]}
-      >
-        <div className={styles.projectCard} onClick={() => handleAction(item.id, item.is_edit)}>
-          <Card.Meta
-            style={{ cursor: isAuth ? 'pointer' : 'not-allowed' }}
-            avatar={<img src={item.logo} style={{ width: 50 }} />}
-            title={item.name}
-            description={
-              <>
-                <div className={isAuth ? 'unlock' : 'lock'}>
-                  <LockOutlined />
-                </div>
-                {item.id && item.is_edit ? (
-                  <DeleteOutlined className={styles.delIcon} onClick={(event) => deleteProjectConfirm(event, item.id)} />
-                ) : null}
-                <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.remark || '暂无描述'}</p>
-                <p style={{ marginTop: 10 }}>
-                  <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
-                  {item.user_name}
-                  &nbsp;&nbsp;
-                  <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
-                </p>
-              </>
-            }
-          />
-        </div>
-      </Card>
-    );
   };
 
   return (
@@ -163,7 +76,7 @@ export default function Index() {
                   {projectList.map((item: Project.ProjectItem, index) => {
                     return (
                       <Col span={6} key={item.id || index}>
-                        <CardItem item={item} isAuth={item.id ? true : false} />
+                        <CardItem item={item} isAuth={item.id ? true : false} getList={getList} />
                       </Col>
                     );
                   })}
@@ -195,3 +108,89 @@ export default function Index() {
     </>
   );
 }
+// 项目卡片
+const CardItem: React.FC<ProjectCardItemProps> = memo(({ item, isAuth, getList }) => {
+  const navigate = useNavigate();
+  const getEnvTag = (env: 'stg' | 'pre' | 'prd', name: string) => {
+    const title = {
+      stg: '访问测试环境',
+      pre: '访问预发布环境',
+      prd: '访问生产环境',
+    }[env];
+    return (
+      <Tooltip title={title}>
+        <a href={`${import.meta.env.VITE_ADMIN_URL}/project/${env}/${item.id}`} target="_blank">
+          {name}
+        </a>
+      </Tooltip>
+    );
+  };
+
+  // 页面操作
+  const handleAction = async (id: number, isEdit: boolean) => {
+    if (!id) {
+      message.warning('该项目为私有项目');
+      return false;
+    }
+    if (!isEdit) {
+      message.warning('您不是该项目开发者，当前只有访问权限。');
+      return false;
+    }
+    navigate(`/project/${id}/config`);
+  };
+
+  // 删除项目确认
+  const deleteProjectConfirm = (event: React.MouseEvent, id: number) => {
+    event.stopPropagation();
+    Modal.confirm({
+      title: '确认',
+      content: '确认删除该项目吗？',
+      okText: '确认',
+      cancelText: '取消',
+      onOk: async () => {
+        await delProject({ id });
+        message.success('删除成功');
+        getList();
+      },
+    });
+  };
+  return (
+    <Card
+      hoverable
+      style={{
+        opacity: isAuth ? 1 : 0.6,
+        background: isAuth ? 'none' : "url('/imgs/cross-bg.png')",
+      }}
+      actions={[
+        item.id ? getEnvTag('stg', 'STG') : <span style={{ cursor: 'not-allowed' }}>STG</span>,
+        item.id ? getEnvTag('pre', 'PRE') : <span style={{ cursor: 'not-allowed' }}>PRE</span>,
+        item.id ? getEnvTag('prd', 'PRD') : <span style={{ cursor: 'not-allowed' }}>PRD</span>,
+      ]}
+    >
+      <div className={styles.projectCard} onClick={() => handleAction(item.id, item.is_edit)}>
+        <Card.Meta
+          style={{ cursor: isAuth ? 'pointer' : 'not-allowed' }}
+          avatar={<Image src={item.logo} width={50} />}
+          title={item.name}
+          description={
+            <>
+              <div className={isAuth ? 'unlock' : 'lock'}>
+                <LockOutlined />
+              </div>
+              {item.id && item.is_edit ? (
+                <DeleteOutlined className={styles.delIcon} onClick={(event) => deleteProjectConfirm(event, item.id)} />
+              ) : null}
+              <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.remark || '暂无描述'}</p>
+              <p style={{ marginTop: 10 }}>
+                <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
+                {item.user_name}
+                &nbsp;&nbsp;
+                <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
+              </p>
+            </>
+          }
+        />
+      </div>
+    </Card>
+  );
+});

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { UserOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Button, Card, Col, Empty, Form, Layout, Pagination, Row, Spin } from 'antd';
 import dayjs from 'dayjs';
 import api from '@/api/workflow';
@@ -63,10 +63,11 @@ export default function WorkFlow() {
   };
 
   // 删除模板
-  const handleDelete = (id: number) => {
+  const handleDelete = (event: React.MouseEvent, id: number) => {
+    event.stopPropagation();
     Modal.confirm({
       title: '确认',
-      content: '删除后，该页面无法恢复，请谨慎操作。',
+      content: '删除后，该业务流无法恢复，请谨慎操作。',
       okText: '确认',
       okButtonProps: { danger: true },
       cancelText: '取消',
@@ -94,6 +95,7 @@ export default function WorkFlow() {
             title={item.form_name}
             description={
               <>
+                <DeleteOutlined className={styles.delIcon} onClick={(event) => handleDelete(event, item.id)} />
                 <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.form_desc || '暂无描述'}</p>
                 <p style={{ marginTop: 10 }}>
                   <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />

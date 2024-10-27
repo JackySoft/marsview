@@ -232,3 +232,37 @@ export const checkComponentType = (type: string, parentId: string = '', parentTy
   }
   return true;
 };
+
+/**
+ * 文件导出
+ */
+export async function saveFile(name: string, content: string) {
+  try {
+    const handle = await window.showSaveFilePicker({
+      suggestedName: name + '.json',
+      types: [
+        {
+          accept: {
+            'text/json': ['.json'],
+          },
+        },
+      ],
+    });
+
+    // create a FileSystemWritableFileStream to write to
+    const writableStream = await handle.createWritable();
+
+    // write our file
+    await writableStream.write(content);
+
+    // close the file and write the contents to disk.
+    await writableStream.close();
+
+    //setHandle(newHandle);
+
+    return handle.name;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}

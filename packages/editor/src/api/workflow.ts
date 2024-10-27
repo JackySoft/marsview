@@ -26,7 +26,7 @@ export default {
     return request.post('/workflow/create', params);
   },
   // 更新模板
-  updateTemplate: (params: Omit<IWorkFlow, 'id'>) => {
+  updateTemplate: (params: Pick<IWorkFlow, 'id' | 'template_data'>) => {
     return request.post('/workflow/update', params);
   },
   // 删除模板
