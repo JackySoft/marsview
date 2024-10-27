@@ -1,31 +1,51 @@
-import { LeftOutlined, SaveOutlined } from '@ant-design/icons';
+import { useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Avatar, Button, Drawer, Form, Segmented, Select, Space } from 'antd';
+import { DownloadOutlined, LeftOutlined, SaveOutlined } from '@ant-design/icons';
 import ApprovalFlow from './components/ApprovalFlow';
-import { NodeItem, NodeType } from './components/types';
+import { message } from '@/utils/AntdGlobal';
+import { NodeItem } from './components/types';
+import api from '@/api/workflow';
 import style from './index.module.less';
-import { useState } from 'react';
+import { saveFile } from '@/utils/util';
 /**
  * 工作流设计器
  */
 const Designer = () => {
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [nodeList, setNodeList] = useState<NodeItem[]>([]);
   const [node, setNode] = useState<NodeItem | null>(null);
-  const nodeList: NodeItem[] = [
-    {
-      id: 'start',
-      type: 'start',
-      title: '开始',
-    },
-    {
-      id: 'end',
-      type: 'end',
-      title: '结束',
-    },
-  ];
+  const nodeRef = useRef<{ getNodeList: () => void }>();
+  const { id } = useParams();
+  useEffect(() => {
+    api.getTemplateDetail(Number(id)).then((res) => {
+      setName(res.form_name);
+      if (res?.template_data) {
+        const list = JSON.parse(res?.template_data);
+        setNodeList(list);
+      }
+    });
+  }, []);
   // 节点点击事件
   const onNodeClick = (node: NodeItem) => {
     setOpen(true);
     setNode(node);
+  };
+
+  // 保存事件
+  const handleSave = async () => {
+    const list = nodeRef.current?.getNodeList();
+    await api.updateTemplate({
+      template_data: JSON.stringify(list),
+      id: Number(id),
+    });
+    message.success('保存成功');
+  };
+
+  // 文件导出
+  const handleExport = () => {
+    saveFile(name, JSON.stringify(nodeList, null, 2));
   };
 
   // 抽屉确认事件
@@ -49,19 +69,19 @@ const Designer = () => {
         </div>
         <div className="center">
           <Button type="link">
-            <Avatar size={20} style={{ border: '1px solid rgba(0,0,0,0.1)', backgroundColor: '#fff', fontSize: 12, color: '#000' }}>
+            <Avatar size={20} className={style.circle} style={{ fontSize: 12 }}>
               1
             </Avatar>
             基础配置
           </Button>
           <Button type="link">
-            <Avatar size={20} style={{ border: '1px solid rgba(0,0,0,0.1)', backgroundColor: '#fff', fontSize: 12, color: '#000' }}>
+            <Avatar size={20} className={style.circle} style={{ fontSize: 12 }}>
               2
             </Avatar>
             表单设计
           </Button>
           <Button type="link">
-            <Avatar size={20} style={{ border: '1px solid rgba(0,0,0,0.1)', backgroundColor: '#fff', fontSize: 12, color: '#000' }}>
+            <Avatar size={20} className={style.circle} style={{ fontSize: 12 }}>
               3
             </Avatar>
             流程设计
@@ -69,15 +89,18 @@ const Designer = () => {
         </div>
         <div className="right">
           <Space>
-            <Button type="default" icon={<SaveOutlined />}>
+            <Button type="default" icon={<SaveOutlined />} onClick={handleSave}>
               保存
             </Button>
-            <Button type="primary">发布</Button>
+            <Button type="primary" icon={<DownloadOutlined />} onClick={handleExport}>
+              导出
+            </Button>
+            {/* <Button type="primary">发布</Button> */}
           </Space>
         </div>
       </div>
       <div className={style.designerContent}>
-        <ApprovalFlow nodeList={nodeList} onNodeClick={onNodeClick} />
+        <ApprovalFlow nodeList={nodeList} onNodeClick={onNodeClick} ref={nodeRef} />
       </div>
       {/* 点击节点，打开抽屉 */}
       <Drawer

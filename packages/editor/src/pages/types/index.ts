@@ -15,4 +15,5 @@ export interface IModalPropData<T = any> {
 export interface ProjectCardItemProps {
   item: Project.ProjectItem;
   isAuth: boolean;
+  getList: () => void;
 }

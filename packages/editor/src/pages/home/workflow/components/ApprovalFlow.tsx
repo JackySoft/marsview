@@ -1,4 +1,5 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { produce } from 'immer';
 import StartNode from './nodes/StartNode';
 import EndNode from './nodes/EndNode';
 import NormalNode from './nodes/NormalNode';
@@ -16,8 +17,26 @@ import style from './index.module.less';
  */
 function ApprovalFlow({ nodeList, onNodeClick }: { nodeList: NodeItem[]; onNodeClick: (node: NodeItem) => void }, ref: any) {
   const nodeRef = useRef<{ open: (title: string, callback: (title: string) => void) => void }>();
-  const actionRef = useRef<{ open: (action: any, callback: (values: any) => void) => void }>();
-  const [list, setList] = useState<Array<NodeItem>>(nodeList || []);
+  const [list, setList] = useState<Array<NodeItem>>([]);
+
+  useEffect(() => {
+    if (nodeList.length > 0) {
+      setList(nodeList);
+    } else {
+      setList([
+        {
+          id: 'start',
+          type: 'start',
+          title: '开始',
+        },
+        {
+          id: 'end',
+          type: 'end',
+          title: '结束',
+        },
+      ]);
+    }
+  }, [nodeList]);
 
   // 对外提供接口
   useImperativeHandle(ref, () => ({
@@ -26,9 +45,9 @@ function ApprovalFlow({ nodeList, onNodeClick }: { nodeList: NodeItem[]; onNodeC
     },
   }));
 
-  // 生成ID
+  // 随机生成节点ID
   const generateId = () => {
-    return Math.random().toString().slice(2, 10);
+    return Math.random().toString().slice(2, 12);
   };
 
   // 创建节点
@@ -46,16 +65,14 @@ function ApprovalFlow({ nodeList, onNodeClick }: { nodeList: NodeItem[]; onNodeC
     createNode(text);
 
     function createNode(title: string) {
-      const nodeList = JSON.parse(JSON.stringify(list));
-      const node = findNodeIndexAndParent(nodeList, id);
-      let taskNode = null;
+      let taskNode: NodeItem | null = null;
       if (type === 'condition') {
         taskNode = {
           id: generateId(),
           type,
           title,
           content: '行为配置',
-          config: {},
+          data: {},
           children: [
             {
               id: generateId(),
@@ -79,55 +96,74 @@ function ApprovalFlow({ nodeList, onNodeClick }: { nodeList: NodeItem[]; onNodeC
           type,
           title,
           content: '行为配置',
-          config: {},
+          data: {},
           children: [],
         };
       }
-      if (!node.parentNode) {
-        if (['approver', 'notifier', 'dealer'].includes(type)) {
-          nodeList.splice(node.index + 1, 0, taskNode);
-        } else {
-          if (node.selfNode.children && node.selfNode.children.length > 0) {
-            node.selfNode.children.push({ ...taskNode, type: 'condition-item' });
+      const newDraftState = produce(list, (draft) => {
+        const node = findNodeIndexAndParent(draft, id);
+        if (!node.parentNode) {
+          if (['approver', 'notifier', 'dealer'].includes(type)) {
+            draft.splice(node.index + 1, 0, taskNode);
           } else {
-            nodeList.splice(node.index + 1, 0, taskNode);
+            if (node.selfNode.children?.length > 0 && type === 'condition-item') {
+              node.selfNode.children.push(taskNode);
+            } else {
+              draft.splice(node.index + 1, 0, taskNode);
+            }
+          }
+        } else if (node?.parentNode?.type === 'condition') {
+          node.parentNode.children[node.index].children.unshift(taskNode);
+        } else if (node?.parentNode?.type === 'condition-item') {
+          if (type === 'condition-item') {
+            node.selfNode.children.push(taskNode);
+          } else {
+            node.parentNode.children.push(taskNode);
           }
         }
-      } else if (node?.parentNode?.type === 'condition') {
-        node.parentNode.children[node.index].children.unshift(taskNode);
-      } else if (node?.parentNode?.type === 'condition-item') {
-        node.parentNode.children.push(taskNode);
-      }
-      setList(() => [...nodeList]);
+      });
+      setList(newDraftState);
     }
   };
 
   //   删除节点
   const handleDelNode = (event: React.MouseEvent, id: string) => {
     event.stopPropagation();
-    const nodeList = JSON.parse(JSON.stringify(list));
-    const node = findNodeIndexAndParent(nodeList, id);
-    if (!node.parentNode) {
-      nodeList.splice(node.index, 1);
-    } else if (['condition', 'condition-item', 'approver', 'dealer', 'notifier'].includes(node?.parentNode?.type)) {
-      if (node.parentNode.type === 'condition-item') {
-        node.parentNode.children.splice(node.index, 1);
-      } else {
-        if (node.parentNode.children.length > 2) {
+    const newDraftState = produce(list, (draft) => {
+      const node = findNodeIndexAndParent(draft, id);
+      if (!node.parentNode) {
+        draft.splice(node.index, 1);
+      } else if (['condition', 'condition-item', 'approver', 'dealer', 'notifier'].includes(node?.parentNode?.type)) {
+        if (node.parentNode.type === 'condition-item') {
           node.parentNode.children.splice(node.index, 1);
+        } else if (node.parentNode.type === 'condition') {
+          if (node.parentNode.children.length > 2) {
+            node.parentNode.children.splice(node.index, 1);
+          } else {
+            const superNode = findNodeIndexAndParent(draft, node.parentNode?.id);
+            if (superNode.parentNode) {
+              superNode.parentNode.children.splice(superNode.index, 1);
+            } else {
+              draft.splice(superNode.index, 1);
+            }
+          }
         } else {
-          nodeList.splice(node.parentNode.index, 1);
+          if (node.parentNode.children.length > 2) {
+            node.parentNode.children.splice(node.index, 1);
+          } else {
+            draft.splice(node.parentNode.index, 1);
+          }
+        }
+      } else if (node?.parentNode?.type === 'condition') {
+        const parentNode = findNodeIndexAndParent(draft, node?.parentNode?.id);
+        if (parentNode.parentNode) {
+          parentNode.parentNode.children.splice(parentNode.index, 1);
+        } else {
+          draft.splice(parentNode.index, 1);
         }
       }
-    } else if (node?.parentNode?.type === 'condition') {
-      const parentNode = findNodeIndexAndParent(nodeList, node?.parentNode?.id);
-      if (parentNode.parentNode) {
-        parentNode.parentNode.children.splice(parentNode.index, 1);
-      } else {
-        nodeList.splice(parentNode.index, 1);
-      }
-    }
-    setList(() => [...nodeList]);
+    });
+    setList(newDraftState);
   };
 
   // 修改节点标题
@@ -135,10 +171,11 @@ function ApprovalFlow({ nodeList, onNodeClick }: { nodeList: NodeItem[]; onNodeC
     event.stopPropagation();
     // TODO 打开弹窗修改节点标题，待开发
     nodeRef.current?.open(node.title, (title) => {
-      const nodeList = JSON.parse(JSON.stringify(list)) as NodeItem[];
-      const editNode = findNodeIndexAndParent(nodeList, node.id);
-      editNode.selfNode.title = title;
-      setList(() => [...nodeList]);
+      const newDraftState = produce(list, (draft) => {
+        const editNode = findNodeIndexAndParent(draft, node.id);
+        editNode.selfNode.title = title;
+      });
+      setList(newDraftState);
     });
   };
 
@@ -195,4 +232,4 @@ export function findNodeIndexAndParent(children: any, nodeId: string, parentNode
   return null;
 }
 
-export default forwardRef(ApprovalFlow);
+export default memo(forwardRef(ApprovalFlow));
