@@ -32,109 +32,112 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("api/user")
 public class UserController extends BasicController {
 
-    @Resource
-    private UsersMapper usersMapper;
+  @Resource
+  private UsersMapper usersMapper;
 
-    @Resource
-    private JavaMailSender mailSender;
+  @Resource
+  private JavaMailSender mailSender;
 
-    @Resource
-    private RedisTemplate redisTemplate;
+  @Resource
+  private RedisTemplate redisTemplate;
 
-    /**
-     * 用户注册
-     *
-     * @param response
-     * @param dto
-     */
-    @PostMapping("regist")
-    public void regist(HttpServletRequest request, HttpServletResponse response, @RequestBody UsersDto dto) {
-        if (StringUtils.equals(dto.getUserName(), (String) redisTemplate.opsForValue().get("lowcode.register.code" + dto.getEmail()))) {
-            Users users = Builder.of(Users::new)
-                    .with(Users::setCreated_at, new Date())
-                    .with(Users::setTeam_id, dto.getTeam_id() == null ? 1 : dto.getTeam_id())
-                    .with(Users::setUser_name, dto.getUserName())
-                    .with(Users::setUser_pwd, dto.getUserPwd()).build();
-            int result = usersMapper.insertUseGeneratedKeys(users);
-            if (result > 0) {
-                SessionUtils.setUser(request, users);
-                HtmlUtil.writerJson(response, getResponse(Map.of("userId", users.getId(), "userName", users.getUser_name(),
-                        "token", Md5Utils.getMd5(users.getId() + users.getUser_name() + users.getUser_pwd()))));
-            } else {
-                HtmlUtil.writerJson(response, getErrorResponse("注册失败"));
-            }
-        } else {
-            redisTemplate.delete("lowcode.register.code" + dto.getEmail());
-            HtmlUtil.writerJson(response, getErrorResponse("验证码错误"));
-        }
-    }
-
-    /**
-     * 发送邮件
-     *
-     * @param response
-     * @param dto
-     */
-    @PostMapping("sendEmail")
-    public void sendEmail(HttpServletResponse response, @RequestBody UsersDto dto) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        int code = RandomUtil.getRandomServerPort();
-        //放入缓存，保存3分钟
-        redisTemplate.opsForValue().set("lowcode.register.code" + dto.getEmail(), code, 60 * 3, TimeUnit.SECONDS);
-        message.setFrom("zfvip_it@163.com");
-        message.setTo(dto.getEmail());
-        message.setSubject("lowcode账号注册");
-        message.setText("您当前的验证码为：" + code + "，3分钟内有效。感谢您成为lowcode一员。");
-        mailSender.send(message);
-        HtmlUtil.writerJson(response, getResponse());
-    }
-
-    /**
-     * 登录
-     *
-     * @param response
-     * @param dto
-     */
-    @PostMapping("login")
-    public void login(HttpServletRequest request, HttpServletResponse response, @RequestBody UsersDto dto) {
-        Users users = usersMapper.selectOne(Builder.of(Users::new)
-                .with(Users::setUser_name, dto.getUserName())
-                .with(Users::setUser_pwd, dto.getUserPwd()).build());
-        if (users != null) {
-            SessionUtils.setUser(request, users);
-            HtmlUtil.writerJson(response, getResponse(Map.of("userId", users.getId(), "userName", users.getUser_name(),
-                    "token", Md5Utils.getMd5(users.getId() + users.getUser_name() + users.getUser_pwd()))));
-        } else {
-            HtmlUtil.writerJson(response, getErrorResponse("用户名或密码错误"));
-        }
-    }
-
-    /**
-     * 登录
-     *
-     * @param response
-     */
-    @GetMapping("info")
-    public void info(HttpServletRequest request, HttpServletResponse response) {
-        Users users = SessionUtils.getUser(request);
+  /**
+   * 用户注册
+   *
+   * @param response
+   * @param dto
+   */
+  @PostMapping("regist")
+  public void regist(HttpServletRequest request, HttpServletResponse response, @RequestBody UsersDto dto) {
+    //从redis获取验证码
+    String code = redisTemplate.opsForValue().get("lowcode.register.code" + dto.getUserName()) + "";
+    //判断验证码是否正确
+    if (StringUtils.equals(dto.getCode(), code)) {
+      Users users = Builder.of(Users::new)
+        .with(Users::setCreated_at, new Date())
+        .with(Users::setUser_name, dto.getUserName())
+        .with(Users::setUser_pwd, dto.getUserPwd())
+        .build();
+      int result = usersMapper.insertUseGeneratedKeys(users);
+      if (result > 0) {
+        SessionUtils.setUser(request, users);
         HtmlUtil.writerJson(response, getResponse(Map.of("userId", users.getId(), "userName", users.getUser_name(),
-                "token", Md5Utils.getMd5(users.getId() + users.getUser_name() + users.getUser_pwd()))));
+          "token", Md5Utils.getMd5(users.getId() + users.getUser_name() + users.getUser_pwd()))));
+      } else {
+        HtmlUtil.writerJson(response, getErrorResponse("注册失败"));
+      }
+    } else {
+      redisTemplate.delete("lowcode.register.code" + dto.getEmail());
+      HtmlUtil.writerJson(response, getErrorResponse("验证码错误"));
     }
+  }
 
-    /**
-     * 登录
-     *
-     * @param response
-     */
-    @PostMapping("search")
-    public void search(HttpServletResponse response, @RequestBody Users users) {
-        users.setVagueMatch(new String[]{"user_name"});
-        HtmlUtil.writerJson(response, getResponse(usersMapper.dataList(users)));
-    }
+  /**
+   * 发送邮件
+   *
+   * @param response
+   * @param dto
+   */
+  @PostMapping("sendEmail")
+  public void sendEmail(HttpServletResponse response, @RequestBody UsersDto dto) {
+    SimpleMailMessage message = new SimpleMailMessage();
+    int code = RandomUtil.getRandomServerPort();
+    //放入缓存，保存3分钟
+    redisTemplate.opsForValue().set("lowcode.register.code" + dto.getEmail(), code, 60 * 3, TimeUnit.SECONDS);
+    message.setFrom("yangshare2024@qq.com");
+    message.setTo(dto.getEmail());
+    message.setSubject("lowcode账号注册");
+    message.setText("您当前的验证码为：" + code + "，3分钟内有效。感谢您成为lowcode一员。");
+    mailSender.send(message);
+    HtmlUtil.writerJson(response, getResponse());
+  }
 
-    public static void main(String[] args) {
-        System.out.println(RandomUtil.getRandomServerPort());
-        System.out.println(RandomUtil.getRandomServerPort());
-        System.out.println(RandomUtil.getRandomServerPort());
+  /**
+   * 登录
+   *
+   * @param response
+   * @param dto
+   */
+  @PostMapping("login")
+  public void login(HttpServletRequest request, HttpServletResponse response, @RequestBody UsersDto dto) {
+    Users users = usersMapper.selectOne(Builder.of(Users::new)
+      .with(Users::setUser_name, dto.getUserName())
+      .with(Users::setUser_pwd, dto.getUserPwd()).build());
+    if (users != null) {
+      SessionUtils.setUser(request, users);
+      HtmlUtil.writerJson(response, getResponse(Map.of("userId", users.getId(), "userName", users.getUser_name(),
+        "token", Md5Utils.getMd5(users.getId() + users.getUser_name() + users.getUser_pwd()))));
+    } else {
+      HtmlUtil.writerJson(response, getErrorResponse("用户名或密码错误"));
     }
+  }
+
+  /**
+   * 登录
+   *
+   * @param response
+   */
+  @GetMapping("info")
+  public void info(HttpServletRequest request, HttpServletResponse response) {
+    Users users = SessionUtils.getUser(request);
+    HtmlUtil.writerJson(response, getResponse(Map.of("userId", users.getId(), "userName", users.getUser_name(),
+      "token", Md5Utils.getMd5(users.getId() + users.getUser_name() + users.getUser_pwd()))));
+  }
+
+  /**
+   * 登录
+   *
+   * @param response
+   */
+  @PostMapping("search")
+  public void search(HttpServletResponse response, @RequestBody Users users) {
+    users.setVagueMatch(new String[]{"user_name"});
+    HtmlUtil.writerJson(response, getResponse(usersMapper.dataList(users)));
+  }
+
+  public static void main(String[] args) {
+    System.out.println(RandomUtil.getRandomServerPort());
+    System.out.println(RandomUtil.getRandomServerPort());
+    System.out.println(RandomUtil.getRandomServerPort());
+  }
 }
