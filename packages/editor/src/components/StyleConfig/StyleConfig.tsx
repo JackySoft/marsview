@@ -93,8 +93,14 @@ const StyleConfig = () => {
       <Form.Item name={['scopeStyle', 'height']} label={'高度'}>
         <InputPx />
       </Form.Item>
-      <MarginInput form={form} />
-      <PaddingInput form={form} />
+      <Form.Item name={['scopeStyle', 'margin']} label={'边距'}>
+        <Input placeholder="边距: 10px" />
+      </Form.Item>
+      <Form.Item name={['scopeStyle', 'padding']} label={'填充'}>
+        <Input placeholder="填充: 10px" />
+      </Form.Item>
+      {/* <MarginInput form={form} /> */}
+      {/* <PaddingInput form={form} /> */}
       <Form.Item key={'opacity'} name={['scopeStyle', 'opacity']} label={'透明'}>
         <Slider min={0} max={1} step={0.1} />
       </Form.Item>
