@@ -60,33 +60,36 @@ const Shadow = (props: any) => {
 
   return (
     <>
-      <Form.Item noStyle>
-        <Radio.Group buttonStyle="solid" optionType="button" value={type} onChange={(e) => handleChangeType(e.target.value)}>
-          <Radio value="none">无</Radio>
-          <Radio value="">外阴影</Radio>
-          <Radio value="Inset">内阴影</Radio>
-        </Radio.Group>
-      </Form.Item>
+      <Radio.Group buttonStyle="solid" optionType="button" value={type} onChange={(e) => handleChangeType(e.target.value)}>
+        <Radio value="none">无</Radio>
+        <Radio value="">外阴影</Radio>
+        <Radio value="Inset">内阴影</Radio>
+      </Radio.Group>
 
-      <Form.Item label="颜色" style={{ marginBlock: 14 }}>
-        <MColorPicker showText allowClear value={color} onChange={(val: string) => handleChangeColor(val)} />
-      </Form.Item>
-      <Flex gap={10}>
-        <Form.Item label="X轴">
-          <InputNumber value={x} onChange={(num) => handleChange('x', num)} style={{ width: '100%' }} />
-        </Form.Item>
-        <Form.Item label="Y轴">
-          <InputNumber value={y} onChange={(num) => handleChange('y', num)} style={{ width: '100%' }} />
-        </Form.Item>
-      </Flex>
-      <Flex gap={10} style={{ marginTop: -10, marginBottom: -24 }}>
-        <Form.Item label="模糊">
-          <InputNumber value={blur} onChange={(num) => handleChange('blur', num)} style={{ width: '100%' }} />
-        </Form.Item>
-        <Form.Item label="扩展">
-          <InputNumber value={spread} onChange={(num) => handleChange('spread', num)} style={{ width: '100%' }} />
-        </Form.Item>
-      </Flex>
+      {/* 当选择无的时候，不显示阴影颜色配置 */}
+      {type === 'none' ? null : (
+        <>
+          <Form.Item label="颜色" style={{ marginBlock: 10 }}>
+            <MColorPicker showText allowClear value={color} onChange={(val: string) => handleChangeColor(val)} />
+          </Form.Item>
+          <Flex gap={10}>
+            <Form.Item label="X轴">
+              <InputNumber value={x} onChange={(num) => handleChange('x', num)} style={{ width: '100%' }} controls={false} />
+            </Form.Item>
+            <Form.Item label="Y轴">
+              <InputNumber value={y} onChange={(num) => handleChange('y', num)} style={{ width: '100%' }} controls={false} />
+            </Form.Item>
+          </Flex>
+          <Flex gap={10}>
+            <Form.Item label="模糊">
+              <InputNumber value={blur} onChange={(num) => handleChange('blur', num)} style={{ width: '100%' }} controls={false} />
+            </Form.Item>
+            <Form.Item label="扩展">
+              <InputNumber value={spread} onChange={(num) => handleChange('spread', num)} style={{ width: '100%' }} controls={false} />
+            </Form.Item>
+          </Flex>
+        </>
+      )}
     </>
   );
 };

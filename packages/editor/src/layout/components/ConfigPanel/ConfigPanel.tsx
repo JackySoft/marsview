@@ -104,7 +104,7 @@ const ConfigPanel = memo(() => {
 
   const formLayout = {
     labelCol: { span: 8 },
-    wrapperCol: { span: 14 },
+    wrapperCol: { span: 15 },
   };
 
   const items: TabsProps['items'] = [
@@ -147,6 +147,17 @@ const ConfigPanel = memo(() => {
       theme={{
         token: {
           fontSize: 12,
+        },
+        components: {
+          Tabs: {
+            titleFontSize: 14,
+          },
+          Form: {
+            itemMarginBottom: 15,
+          },
+          InputNumber: {
+            paddingInline: 8,
+          },
         },
       }}
     >
