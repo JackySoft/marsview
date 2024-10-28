@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.7.2](https://github.com/JackySoft/marsview/compare/v4.7.1...v4.7.2) (2024-10-28)
+
+
+### Features
+
+* 优化代码 ([40da857](https://github.com/JackySoft/marsview/commit/40da8577b3eef7298ec5358adb40c1d3523809a5))
+
 ### [4.7.1](https://github.com/JackySoft/marsview/compare/v4.7.0...v4.7.1) (2024-10-27)
 
 
