@@ -33,7 +33,7 @@ const EditLayout = () => {
             <Splitter.Panel size={mode === 'preview' ? '100%' : ''} defaultSize={'100%'}>
               <Outlet></Outlet>
             </Splitter.Panel>
-            <Splitter.Panel collapsible size={mode === 'preview' ? 0 : undefined} defaultSize={300} min={300} max={800}>
+            <Splitter.Panel collapsible size={mode === 'preview' ? 0 : undefined} defaultSize={320} min={320} max={800}>
               <ConfigPanel />
             </Splitter.Panel>
           </Splitter>

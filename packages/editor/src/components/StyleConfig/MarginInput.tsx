@@ -19,7 +19,7 @@ const MarginInput = ({ form }: { form: FormInstance }) => {
   return (
     <>
       <Form.Item label="边距" layout="horizontal">
-        <Radio.Group optionType="button" value={type} buttonStyle="solid" onChange={(e) => handleChange(e.target.value)}>
+        <Radio.Group optionType="button" value={type} buttonStyle="solid" onChange={(e) => handleChange(e.target.value)} style={{ marginBottom: 10 }}>
           <Radio.Button value="all">
             <BorderOuterOutlined />
           </Radio.Button>
@@ -29,12 +29,12 @@ const MarginInput = ({ form }: { form: FormInstance }) => {
         </Radio.Group>
         {type === 'all' && (
           <Form.Item name={['scopeStyle', 'margin']} noStyle>
-            <InputPx style={{ marginTop: 10 }} placeholder="边距: 10px" />
+            <InputPx placeholder="边距: 10px" />
           </Form.Item>
         )}
         {type === 'single' && (
           <>
-            <Flex gap={3} style={{ marginTop: 10 }}>
+            <Flex gap={3}>
               <Form.Item name={['scopeStyle', 'margin']} hidden>
                 <InputPx />
               </Form.Item>

@@ -20,7 +20,7 @@ const PaddingInput = ({ form }: { form: FormInstance }) => {
   return (
     <>
       <Form.Item label="填充">
-        <Radio.Group optionType="button" value={type} buttonStyle="solid" onChange={(e) => handleChange(e.target.value)}>
+        <Radio.Group optionType="button" value={type} buttonStyle="solid" onChange={(e) => handleChange(e.target.value)} style={{ marginBottom: 10 }}>
           <Radio.Button value="all">
             <BorderOuterOutlined />
           </Radio.Button>
@@ -35,7 +35,7 @@ const PaddingInput = ({ form }: { form: FormInstance }) => {
         )}
         {type === 'single' && (
           <>
-            <Flex gap={3} style={{ marginTop: 10 }}>
+            <Flex gap={3}>
               <Form.Item name={['scopeStyle', 'padding']} hidden>
                 <InputPx placeholder="M" />
               </Form.Item>
