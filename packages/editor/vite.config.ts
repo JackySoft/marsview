@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import { VitePluginExternals } from 'vite-plugin-externals-new';
 import svgr from 'vite-plugin-svgr';
-
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
@@ -14,6 +13,12 @@ export default defineConfig({
     port: 8080,
     headers: {
       'Access-Control-Allow-Origin': '*',
+    },
+    proxy: {
+      '/api': {
+        target: 'http://mars-api.marsview.cc',
+        changeOrigin: true,
+      },
     },
   },
   resolve: {

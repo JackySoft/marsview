@@ -49,7 +49,7 @@ public class UserController extends BasicController {
      */
     @PostMapping("regist")
     public void regist(HttpServletRequest request, HttpServletResponse response, @RequestBody UsersDto dto) {
-        if (StringUtils.equals(dto.getUserName(), (String) redisTemplate.opsForValue().get("lowcode.register.code" + dto.getEmail()))) {
+        if (StringUtils.equals(dto.getCode(), (String) redisTemplate.opsForValue().get("lowcode.register.code" + dto.getEmail()))) {
             Users users = Builder.of(Users::new)
                     .with(Users::setCreated_at, new Date())
                     .with(Users::setTeam_id, dto.getTeam_id() == null ? 1 : dto.getTeam_id())

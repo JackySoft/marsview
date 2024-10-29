@@ -14,6 +14,13 @@ export default defineConfig({
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
+    proxy: {
+      '/api': {
+        // 如果本地启动后端，请替换为后端地址
+        target: 'http://mars-api.marsview.cc',
+        changeOrigin: true,
+      },
+    },
   },
   resolve: {
     alias: {
