@@ -4,9 +4,9 @@ spring:
     name: lowcode-core
   #邮箱配置
   mail:
-    host:
-    username:
-    password:
+    host: smtp.qq.com
+    username: yangshare2023@qq.com
+    password: nqmblqofepasgjhd
     properties: { 'mail.smtp.ssl.enable', true }
     test-connection: true
     protocol: smtps
@@ -14,10 +14,10 @@ spring:
   #redis配置
   data:
     redis:
-      host:
-      port:
+      host: 192.168.6.3
+      port: 6379
       password:
-      database:
+      database: 7
 
 #服务端口
 server:
@@ -27,9 +27,9 @@ server:
 mybatis:
   jdbc:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url:
-    username:
-    password:
+    url: jdbc:mysql://192.168.6.3:3308/mars?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: yang
   # mybatis对应的实体类
   mapper-locations: classpath:com/**/mapper/**/*.xml
   type-aliases-package: com.**.domain
