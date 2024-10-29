@@ -55,6 +55,23 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
       id: 'page',
       elements: [
         {
+          name: '系统变量',
+          id: 'SystemVariable',
+          type: 'SystemVariable',
+          elements: [
+            {
+              type: 'Store',
+              id: 'userId',
+              name: 'userId',
+            },
+            {
+              type: 'Store',
+              id: 'userName',
+              name: 'userName',
+            },
+          ],
+        },
+        {
           name: '全局变量',
           id: 'PageVariable',
           type: 'PageVariable',
@@ -141,6 +158,11 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
     if (!node.type) return;
     const beforeExpression = form.getFieldValue('expression') ?? '';
 
+    // 选择系统存储变量
+    if (node.type === 'Store') {
+      form.setFieldValue('expression', `${beforeExpression} context.store.${node.id}`.trimStart());
+      return;
+    }
     // 选择页面全局变量
     if (node.type === 'Variable') {
       form.setFieldValue('expression', `${beforeExpression} context.variable.${node.id}`.trimStart());
