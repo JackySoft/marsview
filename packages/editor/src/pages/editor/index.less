@@ -2,14 +2,7 @@
 .mars-editor {
   position: relative;
   height: 1000px;
-  /* 现代浏览器支持 */
-  scrollbar-width: none; /* Firefox */
 
-  /* 通用方法，使用伪元素覆盖滚动条 */
-  overflow-y: scroll; /* 确保垂直滚动 */
-  &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
   // 当前页面样式
   .pageWrapper {
     background-color: #f5f5f5;
