@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.8.0](https://github.com/JackySoft/marsview/compare/v4.7.2...v4.8.0) (2024-10-29)
+
+
+### Bug Fixes
+
+* 修复问题 ([0b10539](https://github.com/JackySoft/marsview/commit/0b1053915de8e178d2bf40929db0a31cb4aa95a8))
+* 修复margin和padding ([41c428a](https://github.com/JackySoft/marsview/commit/41c428a88613e0d6e44ad7396780cbdd86cd4e3f))
+
 ### [4.7.2](https://github.com/JackySoft/marsview/compare/v4.7.1...v4.7.2) (2024-10-28)
 
 
