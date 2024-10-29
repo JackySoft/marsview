@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.8.1](https://github.com/JackySoft/marsview/compare/v4.8.0...v4.8.1) (2024-10-29)
+
+
+### Bug Fixes
+
+* 修复本地启动跨域问题和注册验证码判断逻辑问题 ([8583920](https://github.com/JackySoft/marsview/commit/858392060e9fd853b79259ce8993b242bdfe81a2))
+
 ## [4.8.0](https://github.com/JackySoft/marsview/compare/v4.7.2...v4.8.0) (2024-10-29)
 
 
