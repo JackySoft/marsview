@@ -255,14 +255,15 @@ CREATE TABLE `roles` (
 /******************************************/
 CREATE TABLE `users` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `user_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '通行证id',
-  `user_pwd` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '姓名',
-  `team_id` int NOT NULL DEFAULT '1' COMMENT '团队ID',
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `user_name` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '通行证id',
+  `user_pwd` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '姓名',
+  `team_id` int DEFAULT '1' COMMENT '团队ID',
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`),
-  KEY `idx_user_name` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=1253 DEFAULT CHARSET=utf8mb3 AVG_ROW_LENGTH=4096 ROW_FORMAT=DYNAMIC COMMENT='用户列表'
+  KEY `ix_updated_at` (`updated_at`) USING BTREE,
+  KEY `ix_created_at` (`created_at`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=547 DEFAULT CHARSET=utf8mb3 AVG_ROW_LENGTH=4096 ROW_FORMAT=DYNAMIC COMMENT='用户列表'
 ;
 
 /******************************************/

@@ -47,17 +47,20 @@ const Toolbar = memo(({ hoverTarget, copyElement, pastElement, delElement }: any
       setDirection('');
       return;
     }
-    const target: HTMLElement | null = document.querySelector(`[data-id=${selectedElement?.id}]`);
-    if (!target) return;
-    const style = getBoundingClientRect(target);
-    if (target.offsetLeft < 144 - style.width) {
-      setDirection('bottomLeft');
-    } else if (target.offsetTop < 24) {
-      setDirection('bottomRight');
-    } else {
-      setDirection('rightTop');
-    }
-    setSelectedStyle(style);
+    // 加延迟的目的是，组件先渲染，再重新计算位置
+    setTimeout(() => {
+      const target: HTMLElement | null = document.querySelector(`[data-id=${selectedElement?.id}]`);
+      if (!target) return;
+      const style = getBoundingClientRect(target);
+      if (target.offsetLeft < 144 - style.width) {
+        setDirection('bottomLeft');
+      } else if (target.offsetTop < 24) {
+        setDirection('bottomRight');
+      } else {
+        setDirection('rightTop');
+      }
+      setSelectedStyle(style);
+    }, 10);
   }, [selectedElement, elements, isUpdateToolbar]);
 
   /**
