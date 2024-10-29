@@ -153,11 +153,19 @@ pnpm i
 
 2. 修改编辑器配置
 
-打开`marsview/packages/editor/.env.development`，修改`VITE_BASE_API`为本地后端接口地址
+打开`marsview/packages/editor/vite.config.ts`，修改`proxy`中的`target`为本地后端接口地址
 
 ```
-VITE_BASE_API=http://localhost:5000/api
+proxy: {
+  '/api': {
+    // 如果本地启动后端，请替换为后端地址
+    target: 'http://localhost:5000/api',
+    changeOrigin: true,
+  },
+},
 ```
+
+> 注意：为了解决本地开发环境下报跨域问题，前端`editor`和`admin`项目在开发模式下通过`vite.config.ts`做接口代理。
 
 3. 启动编辑器
 
