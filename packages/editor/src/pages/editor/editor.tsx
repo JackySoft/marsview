@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState, useEffect, useRef } from 'react';
+import React, { MouseEvent, useState, useEffect, memo } from 'react';
 import { useParams, useBlocker } from 'react-router-dom';
 import { ConfigProvider, FloatButton, Image, Popover } from 'antd';
 import { CommentOutlined, InfoCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
@@ -14,7 +14,6 @@ import Toolbar from '@/components/Toolbar/Toolbar';
 import { message, Modal } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
 import { PageConfig } from '@/packages/Page';
-import InfiniteViewer from 'react-infinite-viewer';
 import './index.less';
 
 /**
@@ -56,7 +55,6 @@ const Editor = () => {
   const [hoverTarget, setHoverTarget] = useState<HTMLElement | null>(null);
   const [loaded, setLoaded] = useState(false);
   const { id } = useParams();
-  const viewerRef = useRef<InfiniteViewer>(null);
   useEffect(() => {
     if (!id) return;
     setLoaded(false);
@@ -88,14 +86,6 @@ const Editor = () => {
         user_id: res.user_id,
       });
       setLoaded(true);
-      // 设置初始化缩放比例，由于屏幕尺寸是动态的，我们需要动态计算一个最佳的初始化缩放比例值
-      const container = document.querySelector('.mars-editor') as HTMLDivElement;
-      const scale = (container.clientWidth - 50) / 1440;
-      viewerRef.current?.setZoom(scale);
-      // 滚动到画布中心
-      requestAnimationFrame(() => {
-        viewerRef.current?.scrollCenter();
-      });
     });
     return () => {
       clearPageInfo();
@@ -321,38 +311,21 @@ const Editor = () => {
       </FloatButton.Group>
       {/* 编辑器 */}
       <div ref={drop} className={mode === 'edit' ? 'mars-editor' : 'mars-preview'}>
-        {mode === 'edit' ? (
-          <InfiniteViewer
-            className="canvas-viewer dot"
-            displayHorizontalScroll={false}
-            displayVerticalScroll={false}
-            useMouseDrag={true}
-            useWheelScroll={false}
-            useAutoZoom={true}
-            zoomRange={[0.5, 2]}
-            onDragStart={(e) => {
-              const target = e.inputEvent.target;
-              if (target.nodeName === 'A') {
-                e.stop();
-              }
-            }}
-            ref={viewerRef}
-          >
-            {/* 页面渲染 */}
-            <div id="editor" className="pageWrapper" style={{ width: 1440 }} onClick={handleClick} onMouseOver={run}>
-              {/* 根据选中目标的相对位置，设置工具条 */}
-              {mode === 'edit' && <Toolbar copyElement={copyElement} pastElement={pastElement} delElement={delElement} hoverTarget={hoverTarget} />}
-              <React.Suspense fallback={<div>Loading...</div>}>{loaded && <Page />}</React.Suspense>
-            </div>
-          </InfiniteViewer>
-        ) : (
-          <div id="editor" className="pageWrapper" style={{ height: 'calc(100vh - 64px)', overflow: 'auto' }}>
-            <React.Suspense fallback={<div>Loading...</div>}>{loaded && <Page />}</React.Suspense>
-          </div>
-        )}
+        {/* 页面渲染 */}
+        <div
+          id="editor"
+          className="pageWrapper"
+          style={mode === 'preview' ? { height: 'calc(100vh - 64px)', overflow: 'auto', padding: 0 } : { minWidth: 1440, height: '100%' }}
+          onClick={handleClick}
+          onMouseOver={run}
+        >
+          {/* 根据选中目标的相对位置，设置工具条 */}
+          {mode === 'edit' && <Toolbar copyElement={copyElement} pastElement={pastElement} delElement={delElement} hoverTarget={hoverTarget} />}
+          <React.Suspense fallback={<div>Loading...</div>}>{loaded && <Page />}</React.Suspense>
+        </div>
       </div>
     </ConfigProvider>
   );
 };
 
-export default Editor;
+export default memo(Editor);

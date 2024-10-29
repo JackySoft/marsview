@@ -47,19 +47,17 @@ const Toolbar = memo(({ hoverTarget, copyElement, pastElement, delElement }: any
       setDirection('');
       return;
     }
-    setTimeout(() => {
-      const target: HTMLElement | null = document.querySelector(`[data-id=${selectedElement?.id}]`);
-      if (!target) return;
-      const style = getBoundingClientRect(target);
-      if (target.offsetLeft < 144 - style.width) {
-        setDirection('bottomLeft');
-      } else if (target.offsetTop < 24) {
-        setDirection('bottomRight');
-      } else {
-        setDirection('rightTop');
-      }
-      setSelectedStyle(style);
-    });
+    const target: HTMLElement | null = document.querySelector(`[data-id=${selectedElement?.id}]`);
+    if (!target) return;
+    const style = getBoundingClientRect(target);
+    if (target.offsetLeft < 144 - style.width) {
+      setDirection('bottomLeft');
+    } else if (target.offsetTop < 24) {
+      setDirection('bottomRight');
+    } else {
+      setDirection('rightTop');
+    }
+    setSelectedStyle(style);
   }, [selectedElement, elements, isUpdateToolbar]);
 
   /**

@@ -88,7 +88,6 @@ export const parseStyle = (inputCss: string) => {
 export function getBoundingClientRect(element: any) {
   let offsetTop = 0;
   let offsetLeft = 0;
-  const scale = getScale();
   const { width, height } = element.getBoundingClientRect();
   while (element) {
     // 如果是顶级元素，则直接跳出循环
@@ -102,37 +101,11 @@ export function getBoundingClientRect(element: any) {
   }
 
   return {
-    width: width / scale,
-    height: height / scale,
+    width: width,
+    height: height,
     top: offsetTop,
     left: offsetLeft,
   };
-}
-
-// 获取当前画布缩放比例，用来计算选中元素的实际尺寸。
-function getScale() {
-  // 获取元素的最终计算样式
-  const style = window.getComputedStyle(document.querySelector('#editor') as HTMLElement);
-  // 获取transform属性的值
-  const transform = style.transform;
-
-  // 检查transform属性是否为空
-  if (!transform) {
-    return 1; // 如果没有变换，则假设缩放比例为1
-  }
-
-  // 尝试解析transform属性的值来找到缩放比例
-  // 注意：这个解析方法假设transform属性只包含scale变换，并且没有使用矩阵变换
-  const matrixValues = transform.match(/^matrix\(([^)]+)\)$/);
-  if (matrixValues) {
-    // 矩阵变换的值为：matrix(scaleX, skewY, skewX, scaleY, translateX, translateY)
-    // 但对于只包含scale的变换，它可能是matrix(scaleX, 0, 0, scaleY, 0, 0)
-    // 或者对于2D变换，它可能是matrix(scaleX, 0, 0, scaleY, 0, 0)的简化形式，如scale(scaleX, scaleY)
-    // 这里我们直接解析scaleX和scaleY
-    const matrixParts = matrixValues[1].split(', ').map(Number);
-    return matrixParts[0];
-  }
-  return 1;
 }
 
 /**
