@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.9.1](https://github.com/JackySoft/marsview/compare/v4.9.0...v4.9.1) (2024-10-29)
+
+
+### Styles
+
+* 显示画布滚动条 ([5957248](https://github.com/JackySoft/marsview/commit/5957248de1c29e2c4a9e18acd0082da7b3a83c71))
+
 ## [4.9.0](https://github.com/JackySoft/marsview/compare/v4.8.3...v4.9.0) (2024-10-29)
 
 ### [4.8.3](https://github.com/JackySoft/marsview/compare/v4.8.2...v4.8.3) (2024-10-29)
