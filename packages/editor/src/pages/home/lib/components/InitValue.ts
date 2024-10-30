@@ -6,15 +6,20 @@
 export const defaultReactCode = `/**
 * 支持React、Antd、dayjs 等插件使用，需要从window对象中导入：
 * eg: const { Button } = window.antd;
+* const { useEffect,useState } = window.React;
 */
-export default ({ id, type, config }, ref) => {
+export default ({ id, type, config, onClick }, ref) => {
   const { Button } = window.antd;
   const format = () => {
     return dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
   };
+  // 点击会触发父组件的onClick事件，可以在平台中配置事件流。
+  const handleClick = () => {
+    onClick && onClick({ id, type });
+  };
   return (
     <div className="bgColor" data-id={id} data-type={type}>
-      <Button style={config.style} {...config.props}>
+      <Button style={config.style} {...config.props} onClick={handleClick}>
         {config.props.text}
       </Button>
       <p>{format()}</p>
@@ -145,13 +150,16 @@ export const defaultMdCode = `# 自定义组件
 /**
 * 支持React、Antd、dayjs 等插件使用，不用导入，直接用即可。
 */
-export default ({ id, type, config },ref) => {
+export default ({ id, type, config, onClick },ref) => {
   const format = () => {
     return dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
   };
+  const handleClick = () => {
+    onClick && onClick({ id, type });
+  };
   return (
     <div className="bgColor" data-id={id} data-type={type}>
-      <Button style={config.style} {...config.props}>
+      <Button style={config.style} {...config.props} onClick={handleClick}>
         {config.props.text}
       </Button>
       <p>{format()}</p>

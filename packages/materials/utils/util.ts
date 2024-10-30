@@ -210,7 +210,7 @@ export function renderFormula(formula: string, eventParams?: any) {
     const formIds: Array<string> = formula.match(/([A-Za-z]+_\w+)\.[\w\.]*/g) || [];
     const originIds: Array<string> = [...new Set(formIds.map((id) => id.split('.')[0]))];
     const fnParams: Array<string> = ['context', 'eventParams'];
-    const pageStore = usePageStore.getState().page;
+    const { page: pageStore, userInfo } = usePageStore.getState();
     const formData = cloneDeep(pageStore.formData || {});
     originIds.forEach((id: string) => {
       // 如果绑定的是表单项，则通过Form实例对象获取对应表单值
@@ -226,6 +226,7 @@ export function renderFormula(formula: string, eventParams?: any) {
       return dayjs(date).format(fmt);
     };
     const context = {
+      store: userInfo,
       variable: variableData,
       eventParams,
       FORMAT,
