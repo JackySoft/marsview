@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.9.2](https://github.com/JackySoft/marsview/compare/v4.9.1...v4.9.2) (2024-10-30)
+
+
+### Others
+
+* 提取全局环境变量 ([c22f9bb](https://github.com/JackySoft/marsview/commit/c22f9bb531aad75f9fc3b3ebe92a0a15c372572c))
+
 ### [4.9.1](https://github.com/JackySoft/marsview/compare/v4.9.0...v4.9.1) (2024-10-29)
 
 
