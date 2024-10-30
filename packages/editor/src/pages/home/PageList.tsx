@@ -156,7 +156,7 @@ export default function Index() {
           <Tooltip title="访问">
             <SendOutlined
               onClick={() => {
-                window.open(`http://admin.marsview.cc/page/stg/${item.id}`, '_blank');
+                window.open(`${import.meta.env.VITE_ADMIN_URL}/page/stg/${item.id}`, '_blank');
               }}
             />
           </Tooltip>
