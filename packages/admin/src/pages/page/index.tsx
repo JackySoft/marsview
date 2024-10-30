@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
+import { useShallow } from 'zustand/react/shallow';
 import { Page } from '@marsview/materials/Page';
-import { usePageStore as usePageStore2 } from '@marsview/materials/stores/pageStore';
+import { usePageStore } from '@marsview/materials/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
 import { getPageDetail } from '@/api/index';
 import locale from 'antd/locale/zh_CN';
@@ -10,7 +11,11 @@ import 'dayjs/locale/zh-cn';
 export default function () {
   const [theme, setTheme] = useState('');
   const { id, env } = useParams();
-  const { savePageInfo } = usePageStore2();
+  const savePageInfo = usePageStore(
+    useShallow((state) => {
+      return state.savePageInfo;
+    }),
+  );
   const navigate = useNavigate();
   useEffect(() => {
     if (id) {

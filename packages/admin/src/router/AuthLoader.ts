@@ -9,8 +9,9 @@ export default async function AuthLoader() {
       window.location.replace(`/login?callback=${window.location.href}`);
       return '';
     }
-    const res: { userName: string } = await getUserInfo();
+    const res: any = await getUserInfo();
     const userInfo = {
+      userId: res.userId,
       userName: res.userName,
     };
     return userInfo;
