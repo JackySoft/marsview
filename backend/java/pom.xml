@@ -95,21 +95,12 @@
       </exclusions>
     </dependency>
     <!--分页插件 end-->
-    
+
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>3.17.0</version>
     </dependency>
   </dependencies>
-
-  <repositories>
-    <!-- 内部maven -->
-    <repository>
-      <id>rdc-releases</id>
-      <url>https://packages.aliyun.com/maven/repository/2065533-release-WFri6E/</url>
-    </repository>
-    <!-- 内部maven -->
-  </repositories>
 
 </project>
