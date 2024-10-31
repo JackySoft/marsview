@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Col, Row, Space, Tabs, Tooltip } from 'antd';
 import {
   AppstoreOutlined,
@@ -9,15 +10,22 @@ import {
   ProjectOutlined,
   QuestionCircleOutlined,
 } from '@ant-design/icons';
-import PageList from './Pages/PageList';
 import ComponentPanel from './ComponentPanel';
-import OutlinePanel from './OutlinePanel';
-import CodingPanel from './CodingPanel';
-import ApiList from './ApiList/ApiList';
-import MemberList from './Member/MemberList';
-import VariableList from './Variable/VariableList';
+import SpinLoading from '@/components/SpinLoading';
 import styles from './index.module.less';
 
+// 页面列表
+const PageList = lazy(() => import('./Pages/PageList'));
+// 组件大纲
+const OutlinePanel = lazy(() => import('./OutlinePanel'));
+// 页面源码
+const CodingPanel = lazy(() => import('./CodingPanel'));
+// 接口列表
+const ApiList = lazy(() => import('./ApiList/ApiList'));
+// 成员列表
+const MemberList = lazy(() => import('./Member/MemberList'));
+// 页面变量
+const VariableList = lazy(() => import('./Variable/VariableList'));
 /**
  * 左侧面板类型
  */
@@ -123,7 +131,7 @@ const Menu = () => {
                     <span style={{ fontWeight: 'bold' }}>{item.title}</span>
                   </Col>
                 </Row>
-                {item.component?.()}
+                <Suspense fallback={<SpinLoading />}>{item.component?.()}</Suspense>
               </div>
             ),
           };
