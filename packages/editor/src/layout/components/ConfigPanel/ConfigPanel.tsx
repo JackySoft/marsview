@@ -1,23 +1,27 @@
-import SetterRender from '@/components/SetterRender/SetterRender';
-import { StyleConfig } from '@/components/StyleConfig/StyleConfig';
-import * as Components from '@/packages/index';
-import type { TabsProps } from 'antd';
+import { Suspense, lazy, memo, useEffect, useState } from 'react';
 import { ConfigProvider, Form, Tabs } from 'antd';
-import ApiConfig from '@/components/ApiConfig/ApiConfig';
-import { memo, useEffect, useState } from 'react';
-import EventConfig from '@/components/EventConfig/EventConfig';
+import type { TabsProps } from 'antd';
 import { useDebounceFn } from 'ahooks';
+import * as Components from '@/packages/index';
 import { usePageStore } from '@/stores/pageStore';
 import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
 import { message } from '@/utils/AntdGlobal';
 import { defaultsDeep } from 'lodash-es';
 import copy from 'copy-to-clipboard';
+import SpinLoading from '@/components/SpinLoading';
 import styles from './index.module.less';
 
+// 属性设置器
+const SetterRender = lazy(() => import('@/components/SetterRender/SetterRender'));
+// 样式配置
+const StyleConfig = lazy(() => import('@/components/StyleConfig/StyleConfig'));
+// 事件配置
+const EventConfig = lazy(() => import('@/components/EventConfig/EventConfig'));
+// 接口配置
+const ApiConfig = lazy(() => import('@/components/ApiConfig/ApiConfig'));
 /**
  * 生成左侧组件列表
  */
-
 const ConfigPanel = memo(() => {
   const { pageName, pageProps, selectedElement, savePageInfo, elementsMap, editElement } = usePageStore((state) => {
     return {
@@ -121,24 +125,38 @@ const ConfigPanel = memo(() => {
             )}
             {isCopy ? <CheckOutlined className={styles.ml5} /> : <CopyOutlined onClick={handleCopy} className={styles.ml5} />}
           </div>
-          <SetterRender attrs={ComponentConfig?.attrs || []} form={form} />
+          <Suspense fallback={<SpinLoading />}>
+            <SetterRender attrs={ComponentConfig?.attrs || []} form={form} />
+          </Suspense>
         </Form>
       ),
     },
     {
       key: 'style',
       label: `样式`,
-      children: <StyleConfig />,
+      children: (
+        <Suspense fallback={<SpinLoading />}>
+          <StyleConfig />
+        </Suspense>
+      ),
     },
     {
       key: 'event',
       label: `事件`,
-      children: <EventConfig />,
+      children: (
+        <Suspense fallback={<SpinLoading />}>
+          <EventConfig />
+        </Suspense>
+      ),
     },
     {
       key: 'api',
       label: `数据`,
-      children: <ApiConfig />,
+      children: (
+        <Suspense fallback={<SpinLoading />}>
+          <ApiConfig />
+        </Suspense>
+      ),
     },
   ];
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Select, Form, Input, Slider, Radio, Tooltip, Flex, InputNumber } from 'antd';
 import { useDebounceFn } from 'ahooks';
 import { CaretDownOutlined, AlignLeftOutlined, AlignCenterOutlined, AlignRightOutlined } from '@ant-design/icons';
@@ -331,4 +331,4 @@ const StyleConfig = () => {
   );
 };
 
-export { StyleConfig };
+export default memo(StyleConfig);
