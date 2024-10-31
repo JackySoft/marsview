@@ -445,13 +445,5 @@ public class DateUtil {
     System.out.println(DateUtil.stringToTime("2019-03-15 01:01:12", DateUtil.YYYY_MM_DD_HH_MM_SS));
     System.out.println(DateUtil.stringToDate("2019-03-15", DateUtil.YYYY_MM_DD));
     System.out.println(JSON.toJSONString(getMonthStartAndEndDate(stringToDate("20200501", YYYYMMDD))));
-
-    System.out.println(DateUtil.dateToString(DateUtil.addSeconds(DateUtil.stringToTime("2020-08-22 22:25:16", DateUtil.YYYY_MM_DD_HH_MM_SS), 1), DateUtil.YYYY_MM_DD_HH_MM_SS));
-
-    System.out.println(JSON.toJSONString(getMonthFullDay(2022, 5)));
-    System.out.println(JSON.toJSONString(getMonthFullDay(2022, 5, YYYYMMDD)));
-
-    System.out.println(JSON.toJSONString(getSevenDate()));
   }
-
 }
