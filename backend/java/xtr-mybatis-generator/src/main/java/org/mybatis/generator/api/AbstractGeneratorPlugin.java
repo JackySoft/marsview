@@ -1,6 +1,7 @@
 package org.mybatis.generator.api;
 
-import org.apache.commons.lang.StringUtils;
+
+import io.micrometer.common.util.StringUtils;
 
 import java.util.List;
 
@@ -15,44 +16,44 @@ import static org.mybatis.generator.internal.util.messages.Messages.getString;
  */
 public abstract class AbstractGeneratorPlugin extends PluginAdapter {
 
-    protected IntrospectedTable introspectedTable;
+  protected IntrospectedTable introspectedTable;
 
 
-    @Override
-    public boolean validate(List<String> warnings) {
-        boolean valid = true;
+  @Override
+  public boolean validate(List<String> warnings) {
+    boolean valid = true;
 
-        if (!stringHasValue(properties
-                .getProperty("targetProject"))) {
-            warnings.add(getString("ValidationError.18",
-                    "MapperConfigPlugin",
-                    "targetProject"));
-            valid = false;
-        }
-
-        if (!stringHasValue(properties
-                .getProperty("targetPackage"))) {
-            warnings.add(getString("ValidationError.18",
-                    "MapperConfigPlugin",
-                    "targetPackage"));
-            valid = false;
-        }
-
-        return valid;
+    if (!stringHasValue(properties
+      .getProperty("targetProject"))) {
+      warnings.add(getString("ValidationError.18",
+        "MapperConfigPlugin",
+        "targetProject"));
+      valid = false;
     }
 
-    /**
-     * 获取文件名
-     *
-     * @return
-     */
-    protected String getFailName() {
-        String keyword = properties.getProperty("keyword");
-        if (StringUtils.isNotEmpty(keyword) && keyword.length() > 1) {
-            keyword = keyword.substring(0, 1).toUpperCase() + keyword.substring(1);
-        } else {
-            keyword = "";
-        }
-        return introspectedTable.getFullyQualifiedTable().getDomainObjectName() + keyword + "Mapper";
+    if (!stringHasValue(properties
+      .getProperty("targetPackage"))) {
+      warnings.add(getString("ValidationError.18",
+        "MapperConfigPlugin",
+        "targetPackage"));
+      valid = false;
     }
+
+    return valid;
+  }
+
+  /**
+   * 获取文件名
+   *
+   * @return
+   */
+  protected String getFailName() {
+    String keyword = properties.getProperty("keyword");
+    if (StringUtils.isNotEmpty(keyword) && keyword.length() > 1) {
+      keyword = keyword.substring(0, 1).toUpperCase() + keyword.substring(1);
+    } else {
+      keyword = "";
+    }
+    return introspectedTable.getFullyQualifiedTable().getDomainObjectName() + keyword + "Mapper";
+  }
 }

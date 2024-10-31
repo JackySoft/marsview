@@ -18,22 +18,22 @@ import java.util.List;
  */
 public class MybatisGenerator {
 
-    public static void main(String[] args) {
-        try {
-            List<String> warnings = new ArrayList<>();
-            boolean overwrite = true;
-            //这个路径要注意
-            String path = "D:\\IdeaProjects\\xtr-mybatis-generator\\src\\main\\resources\\mybatis-generator.xml";
-            System.out.println(path);
-            File configFile = new File(path);
-            ConfigurationParser cp = new ConfigurationParser(warnings);
-            Configuration config = cp.parseConfiguration(configFile);
-            DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-            MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
-            myBatisGenerator.generate(new VerboseProgressCallback());
-            warnings.forEach(System.out::println);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+  public static void main(String[] args) {
+    try {
+      List<String> warnings = new ArrayList<>();
+      boolean overwrite = true;
+      //这个路径要注意
+      String path = "D:\\IdeaProjects\\xtr-mybatis-generator\\src\\main\\resources\\mybatis-generator.xml";
+      System.out.println(path);
+      File configFile = new File(path);
+      ConfigurationParser cp = new ConfigurationParser(warnings);
+      Configuration config = cp.parseConfiguration(configFile);
+      DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+      MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+      myBatisGenerator.generate(new VerboseProgressCallback());
+      warnings.forEach(System.out::println);
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }
