@@ -96,14 +96,15 @@ const Editor = () => {
 
   // 当页面和用户有交互时，增加刷新和返回提示。
   useEffect(() => {
-    window.addEventListener('beforeunload', (event) => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       // Cancel the event as stated by the standard.
       event.preventDefault();
       // Chrome requires returnValue to be set.
       event.returnValue = '';
-    });
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
     return () => {
-      window.removeEventListener('beforeunload', () => {});
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, []);
 
