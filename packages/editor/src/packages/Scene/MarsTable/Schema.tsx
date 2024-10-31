@@ -155,6 +155,19 @@ export default {
       type: 'Title',
       label: '字段映射',
       key: 'fieldmap',
+      popover: {
+        title: '结构说明',
+        placement: 'left',
+        content: (
+          <>
+            <p>默认结构：{"{ code: 0, data: { list: [], pageNum:1, pageSize: 10, total: 10 }, msg: '' }"}</p>
+            <p>1. 如果接口返回不是code/data/msg，可以在接口配置中修改映射。</p>
+            <p>2. 如果接口返回分页结构不是pageNum/pageSize/total，可以在此处修改映射。</p>
+            <p>3. 如果接口分页结构嵌套的有对象，支持链式写法，如：page.pageNum</p>
+            <p>4. 如果接口分页对象在data外面，需要再拦截器里面或者脚本里面处理，把分页和list放在data里面。</p>
+          </>
+        ),
+      },
     },
     {
       type: 'Input',

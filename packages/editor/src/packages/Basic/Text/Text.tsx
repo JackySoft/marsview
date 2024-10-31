@@ -12,7 +12,7 @@ import { omit } from 'lodash-es';
  * @param style 组件样式
  * @returns
  */
-const MText = ({ id, type, config }: ComponentType, ref: any) => {
+const MText = ({ id, type, config, onClick }: ComponentType, ref: any) => {
   const [text, setText] = useState('');
   const [visible, setVisible] = useState(true);
 
@@ -58,10 +58,12 @@ const MText = ({ id, type, config }: ComponentType, ref: any) => {
       },
     };
   });
-
+  const handleClick = () => {
+    onClick?.();
+  };
   return (
     visible && (
-      <Typography.Text style={config.style} {...omit(config.props, ['script', 'text'])} data-id={id} data-type={type}>
+      <Typography.Text style={config.style} {...omit(config.props, ['script', 'text'])} onClick={handleClick} data-id={id} data-type={type}>
         {text}
       </Typography.Text>
     )

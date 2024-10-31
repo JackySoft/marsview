@@ -8,7 +8,7 @@ import { useState, useImperativeHandle, forwardRef } from 'react';
  * @param style 组件样式
  * @returns
  */
-const MImage = ({ id, type, config }: ComponentType, ref: any) => {
+const MImage = ({ id, type, config, onClick }: ComponentType, ref: any) => {
   const [visible, setVisible] = useState(true);
   // 对外暴露方法
   useImperativeHandle(ref, () => {
@@ -21,6 +21,9 @@ const MImage = ({ id, type, config }: ComponentType, ref: any) => {
       },
     };
   });
-  return visible && <Image style={config.style} {...config.props} data-id={id} data-type={type} />;
+  const handleClick = () => {
+    onClick?.();
+  };
+  return visible && <Image style={config.style} {...config.props} data-id={id} data-type={type} onClick={handleClick} />;
 };
 export default forwardRef(MImage);
