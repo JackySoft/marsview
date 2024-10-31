@@ -3,7 +3,7 @@ import { Button, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { login } from '@/api';
 import storage from '@/utils/storage';
-import { usePageStore } from '@/stores/pageStore';
+import { usePageStore } from '@marsview/materials/stores/pageStore';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import style from './index.module.less';
 type FieldType = {

@@ -2,12 +2,9 @@ import { create } from 'zustand';
 import { produce } from 'immer';
 import { ComponentType, ApiType, PageVariable, EventType, ComItemType } from '../types';
 
-/**
- * 页面信息存储
- */
 export interface UserInfoStore {
-  user_id: number;
-  user_name: string;
+  userId: number;
+  userName: string;
   identifier: string;
 }
 export interface PageState {
@@ -60,6 +57,7 @@ export interface PageState {
   };
 }
 export interface PageAction {
+  saveUserInfo: (userInfo: UserInfoStore) => void;
   savePageInfo: (pageInfo: any) => void;
   setVariableData: (payload: any) => void;
   setFormData: (payload: any) => void;
@@ -67,8 +65,8 @@ export interface PageAction {
 }
 export const usePageStore = create<PageState & PageAction>((set) => ({
   userInfo: {
-    user_id: 0,
-    user_name: '',
+    userId: 0,
+    userName: '',
     identifier: '',
   },
   selectedElement: undefined,
@@ -113,6 +111,12 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
       timeoutErrorMessage: '请求超时，请稍后再试',
     },
   },
+  saveUserInfo: (userInfo: UserInfoStore) =>
+    set(
+      produce((state) => {
+        state.userInfo = userInfo;
+      }),
+    ),
   // 保存页面信息
   savePageInfo: (payload: any) =>
     set(

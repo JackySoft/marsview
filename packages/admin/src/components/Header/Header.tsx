@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { Dropdown, Flex, Space } from 'antd';
 import { DownOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { usePageStore } from '@/stores/pageStore';
+import { usePageStore } from '@marsview/materials/stores/pageStore';
 import { useProjectStore } from '@/stores/projectStore';
 import Logo from '../Logo/Logo';
 import BreadList from '../BreadList/BreadList';

@@ -1,7 +1,7 @@
 import { getPageDetail } from '@/api/index';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { usePageStore as usePageStore2 } from '@marsview/materials/stores/pageStore';
+import { usePageStore } from '@marsview/materials/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
 import NotFound from './notFound';
 import { Page } from '@marsview/materials/Page';
@@ -10,7 +10,7 @@ import { useShallow } from 'zustand/react/shallow';
 export default function () {
   const { projectId, env, pageId } = useParams();
   const [notFound, setNotFound] = useState(false);
-  const { savePageInfo, clearPageInfo } = usePageStore2(
+  const { savePageInfo, clearPageInfo } = usePageStore(
     useShallow((state) => {
       return {
         savePageInfo: state.savePageInfo,

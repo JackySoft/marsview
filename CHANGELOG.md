@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.9.5](https://github.com/JackySoft/marsview/compare/v4.9.4...v4.9.5) (2024-10-31)
+
+
+### Bug Fixes
+
+* 修复问题 ([4434ec1](https://github.com/JackySoft/marsview/commit/4434ec171d4d57d2fa145695ec59f8bbd75a959a))
+
+### [4.9.4](https://github.com/JackySoft/marsview/compare/v4.9.3...v4.9.4) (2024-10-30)
+
+
+### Bug Fixes
+
+* 修复死循环问题 ([261a431](https://github.com/JackySoft/marsview/commit/261a431a3a83d6c947395a4de1aec564780bd19c))
+
+### [4.9.3](https://github.com/JackySoft/marsview/compare/v4.9.2...v4.9.3) (2024-10-30)
+
+
+### Bug Fixes
+
+* 修复Store不显示问题 ([a974353](https://github.com/JackySoft/marsview/commit/a97435398e74feebe6f14b7a5a6118b1d080eb07))
+
+### [4.9.2](https://github.com/JackySoft/marsview/compare/v4.9.1...v4.9.2) (2024-10-30)
+
+
+### Others
+
+* 提取全局环境变量 ([c22f9bb](https://github.com/JackySoft/marsview/commit/c22f9bb531aad75f9fc3b3ebe92a0a15c372572c))
+
+### [4.9.1](https://github.com/JackySoft/marsview/compare/v4.9.0...v4.9.1) (2024-10-29)
+
+
+### Styles
+
+* 显示画布滚动条 ([5957248](https://github.com/JackySoft/marsview/commit/5957248de1c29e2c4a9e18acd0082da7b3a83c71))
+
 ## [4.9.0](https://github.com/JackySoft/marsview/compare/v4.8.3...v4.9.0) (2024-10-29)
 
 ### [4.8.3](https://github.com/JackySoft/marsview/compare/v4.8.2...v4.8.3) (2024-10-29)

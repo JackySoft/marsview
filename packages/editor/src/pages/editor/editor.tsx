@@ -1,5 +1,5 @@
 import React, { MouseEvent, useState, useEffect, memo } from 'react';
-import { useParams, useBlocker } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ConfigProvider, FloatButton, Image, Popover } from 'antd';
 import { CommentOutlined, InfoCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { useDrop } from 'react-dnd';
@@ -11,7 +11,7 @@ import { createId, getElement } from '@/utils/util';
 import storage from '@/utils/storage';
 import { getPageDetail } from '@/api';
 import Toolbar from '@/components/Toolbar/Toolbar';
-import { message, Modal } from '@/utils/AntdGlobal';
+import { message } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
 import { PageConfig } from '@/packages/Page';
 import './index.less';
@@ -94,25 +94,18 @@ const Editor = () => {
     };
   }, [id]);
 
-  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    return currentLocation.pathname !== nextLocation.pathname;
-  });
-
-  // 页面返回时，提示用户是否离开
+  // 当页面和用户有交互时，增加刷新和返回提示。
   useEffect(() => {
-    if (blocker.state === 'blocked') {
-      Modal.confirm({
-        title: '确认离开',
-        content: '是否确认离开当前页面？',
-        onOk: () => {
-          blocker.proceed();
-        },
-        onCancel: () => {
-          blocker.reset();
-        },
-      });
-    }
-  }, [blocker]);
+    window.addEventListener('beforeunload', (event) => {
+      // Cancel the event as stated by the standard.
+      event.preventDefault();
+      // Chrome requires returnValue to be set.
+      event.returnValue = '';
+    });
+    return () => {
+      window.removeEventListener('beforeunload', () => {});
+    };
+  }, []);
 
   // 拖拽接收
   const [, drop] = useDrop({

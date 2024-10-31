@@ -29,7 +29,11 @@ const MCheckBox = ({ id, type, config, onChange }: ComponentType<IConfig>, ref: 
   const [disabled, setDisabled] = useState(false);
   const { form, formId, setFormData } = useFormContext();
   const variableData = usePageStore((state) => state.page.variableData);
-  // 初始化默认值
+
+  /**
+   * 初始化默认值
+   * 此处需要注意：默认值可能是一个数组，必须比对字符串，否则会出现死循环
+   */
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue || [];
@@ -37,7 +41,7 @@ const MCheckBox = ({ id, type, config, onChange }: ComponentType<IConfig>, ref: 
       form?.setFieldValue(name, value);
       setFormData({ name: formId, value: { [name]: value } });
     }
-  }, [config.props.defaultValue]);
+  }, [JSON.stringify(config.props.defaultValue)]);
 
   // 启用和禁用
   useEffect(() => {
