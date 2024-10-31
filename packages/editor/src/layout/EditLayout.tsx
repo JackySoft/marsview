@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import React, { lazy, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { ConfigProvider, Splitter } from 'antd';
 import { useShallow } from 'zustand/react/shallow';
-import ConfigPanel from './components/ConfigPanel/ConfigPanel';
-import Menu from './components/Menu';
 import { usePageStore } from '@/stores/pageStore';
+import SpinLoading from '@/components/SpinLoading';
 import './layout.less';
 
+const Menu = lazy(() => import('./components/Menu'));
+const ConfigPanel = lazy(() => import('./components/ConfigPanel/ConfigPanel'));
 /**
  * 编辑器布局组件
  */
@@ -41,13 +42,17 @@ const EditLayout = () => {
         >
           <Splitter onResize={setSizes}>
             <Splitter.Panel collapsible size={sizes[0]} min={320}>
-              <Menu />
+              <React.Suspense fallback={<SpinLoading />}>
+                <Menu />
+              </React.Suspense>
             </Splitter.Panel>
             <Splitter.Panel size={sizes[1]}>
               <Outlet></Outlet>
             </Splitter.Panel>
             <Splitter.Panel collapsible size={sizes[2]} min={320}>
-              <ConfigPanel />
+              <React.Suspense fallback={<SpinLoading />}>
+                <ConfigPanel />
+              </React.Suspense>
             </Splitter.Panel>
           </Splitter>
         </ConfigProvider>

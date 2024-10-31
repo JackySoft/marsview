@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import { Form, Input, Space } from 'antd';
 import { EditOutlined, HolderOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { useDrag, useDrop } from 'react-dnd';
@@ -6,7 +6,7 @@ import { createId } from '@/packages/utils/util';
 /**
  * 表格配置
  */
-const DragColumn = ({ index, move, handleOpen, add, remove }: any) => {
+const DragColumn = memo(({ index, move, handleOpen, add, remove }: any) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drop] = useDrop<{ index: number }>({
@@ -73,5 +73,5 @@ const DragColumn = ({ index, move, handleOpen, add, remove }: any) => {
       </Space>
     </>
   );
-};
+});
 export default DragColumn;
