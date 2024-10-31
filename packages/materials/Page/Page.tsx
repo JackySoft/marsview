@@ -26,7 +26,7 @@ const Page: React.FC = () => {
         handleActionFlow(event.actions, {});
       }
     });
-  }, []);
+  }, [config.events]);
   return <div style={config.style}>{<MarsRender elements={elements || []} />}</div>;
 };
 export default Page;

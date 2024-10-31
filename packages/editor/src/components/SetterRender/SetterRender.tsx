@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Form, Input, InputNumber, Radio, Select, Switch, Slider, FormInstance, Tooltip } from 'antd';
+import { Form, Input, InputNumber, Radio, Select, Switch, Slider, FormInstance, Tooltip, Popover } from 'antd';
 import * as icons from '@ant-design/icons';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { SchemaType } from '@/packages/types';
@@ -33,6 +33,16 @@ const SetterRender = memo(({ attrs, form }: IAttrs) => {
         const key = item.key || item.name?.toString() || item.label?.toString() + index.toString();
         let FormControl = <></>;
         if (item.type == 'Title') {
+          if (item.popover) {
+            return (
+              <Popover title={item.popover?.title} content={item.popover.content} placement={item.popover.placement || 'left'}>
+                <h2 className={styles.title} key={key}>
+                  <span style={{ marginRight: 10 }}>{item.label}</span>
+                  <QuestionCircleOutlined />
+                </h2>
+              </Popover>
+            );
+          }
           return (
             <h2 className={styles.title} key={key}>
               <span style={{ marginRight: 10 }}>{item.label}</span>
@@ -42,6 +52,7 @@ const SetterRender = memo(({ attrs, form }: IAttrs) => {
                   <QuestionCircleOutlined />
                 </Tooltip>
               ) : null}
+
               {/* 标题增加跳转链接 */}
               {item.link ? (
                 <a href={item.link.url} target="_blank" style={{ fontSize: 12 }}>

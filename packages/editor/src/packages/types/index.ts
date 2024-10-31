@@ -301,6 +301,11 @@ export interface SchemaType {
   name?: (string | number)[];
   // tooltips
   tooltip?: string;
+  popover?: {
+    title: string;
+    content: string | React.ReactNode;
+    placement: 'top' | 'left' | 'right' | 'bottom';
+  };
   // link
   link?: {
     url: string;
