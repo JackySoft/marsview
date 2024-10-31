@@ -382,6 +382,7 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
       getDataList({
         [config.props.field.pageNum]: pageNum,
         [config.props.field.pageSize]: pageSize,
+        ...searchParams,
       });
     },
   };

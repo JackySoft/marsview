@@ -45,7 +45,7 @@ const DragColumn = ({ index, move, handleOpen, add, remove }: any) => {
       item.index = hoverIndex;
     },
   });
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag, preview] = useDrag({
     type: 'card',
     item: () => {
       return { index };
@@ -59,8 +59,8 @@ const DragColumn = ({ index, move, handleOpen, add, remove }: any) => {
   const key = createId('C', 5);
   return (
     <>
-      <Space style={{ display: 'flex', marginBottom: 15, padding: '0 10px', opacity }} align="baseline" ref={ref}>
-        <HolderOutlined style={{ cursor: 'grab' }} />
+      <Space style={{ display: 'flex', marginBottom: 15, padding: '0 10px', opacity }} align="baseline" ref={preview}>
+        <HolderOutlined style={{ cursor: 'grab' }} ref={ref} />
         <Form.Item wrapperCol={{ span: 22 }} name={[index, 'title']} noStyle>
           <Input placeholder="列名称" />
         </Form.Item>
