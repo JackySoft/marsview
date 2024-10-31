@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <properties url="file:D:\IdeaProjects\xtr-mybatis-generator\src\main\resources\mybatis-config.properties"/>
+
+    <!-- 指定数据连接驱动jar地址 -->
+    <classPathEntry location="${classPath}"/>
+
+    <!-- 一个数据库一个context -->
+    <context id="context" targetRuntime="MyBatis3">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--自定义插件-->
+        <!-- 生成reader-mapxml对应客户端 -->
+        <plugin type="org.mybatis.generator.api.JavaMappperGeneratorPlugin">
+            <property name="targetProject" value="${project_mapper}"></property>
+            <property name="targetPackage" value="com.xintr.lowcode.mapper.sys"></property>
+            <property name="keyword" value=""></property>
+        </plugin>
+
+        <!-- 生成reader-mapxml文件 -->
+        <plugin type="org.mybatis.generator.api.XmlMappperGeneratorPlugin">
+            <property name="targetProject" value="${project_xml}"></property>
+            <property name="targetPackage" value="com.xintr.lowcode.mapper.sys"></property>
+            <property name="keyword" value=""></property>
+        </plugin>
+
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="false"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true"/><!-- 是否生成注释代时间戳-->
+            <property name="addRemarkComments" value="true"/><!-- 是否生成类注释-->
+            <property name="author" value="张峰 zfvip_it@163.com"/><!-- 文件作者-->
+            <property name="addAnnotationId" value="true"/><!-- 是否添加主键注解-->
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${jdbc_driver}"
+                        connectionURL="${jdbc_url}" userId="${jdbc_user}"
+                        password="${jdbc_password}"/>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.xintr.lowcode.api.domain" targetProject="${project_bean}">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 配置表信息 -->
+
+        <table schema="${jdbc_schema}" tableName="pages"
+               domainObjectName="Pages"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
+                是否生成 example类   -->
+            <!-- 忽略列，不生成bean 字段 -->
+            <ignoreColumn column="FRED"/>
+            <!-- 指定列的java数据类型 -->
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR"/>
+        </table>
+    </context>
+</generatorConfiguration>
