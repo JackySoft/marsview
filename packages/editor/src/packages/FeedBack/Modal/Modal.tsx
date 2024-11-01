@@ -2,7 +2,7 @@ import { ComponentType, IDragTargetItem } from '@/packages/types';
 import { Button, Modal, Spin } from 'antd';
 import { forwardRef, memo, useEffect, useImperativeHandle, useState } from 'react';
 import { useDrop } from 'react-dnd';
-import * as Components from '@/packages/index';
+import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { usePageStore } from '@/stores/pageStore';
 import './index.less';
@@ -24,7 +24,7 @@ const AntdModal = forwardRef(({ id, type, config, elements, onLoad, onOk, onCanc
     drop(item: IDragTargetItem, monitor) {
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+      const { config, events, methods = [] }: any = getComponent(item.type + 'Config') || {};
       addChildElements({
         type: item.type,
         name: item.name,

@@ -16,25 +16,27 @@ const ComponentPanel = () => {
   const [list, setList] = useState<Array<{ key: string; label: string; children: JSX.Element }>>([]);
   useEffect(() => {
     // 系统自带组件
-    const items: Array<{ key: string; label: string; children: React.JSX.Element }> = (keyword ? searchByName(components, keyword) : components).map(
-      (item: SysComItem) => {
+    const items: Array<{ key: string; label: string; children: React.JSX.Element }> = (keyword ? searchByName(components, keyword) : components)
+      .filter((item: SysComItem) => !item.hidden)
+      .map((item: SysComItem) => {
         return {
           key: item.type,
           label: item.title,
           children: (
             <Row gutter={[10, 10]}>
-              {item.data.map((subItem) => {
-                return (
-                  <Col span={12} key={subItem.type}>
-                    <DragMenuItem {...subItem} />
-                  </Col>
-                );
-              })}
+              {item.data
+                .filter((sub) => !sub.hidden)
+                .map((subItem) => {
+                  return (
+                    <Col span={12} key={subItem.type}>
+                      <DragMenuItem {...subItem} />
+                    </Col>
+                  );
+                })}
             </Row>
           ),
         };
-      },
-    );
+      });
     setActiveKeys(items.map((item) => item.key));
     setList(items);
   }, [keyword]);

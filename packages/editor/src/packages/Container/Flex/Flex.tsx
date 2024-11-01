@@ -1,7 +1,7 @@
 import { ComponentType, IDragTargetItem } from '@/packages/types';
 import { Flex } from 'antd';
 import { useDrop } from 'react-dnd';
-import * as Components from '@/packages/index';
+import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { usePageStore } from '@/stores/pageStore';
 import { forwardRef, useImperativeHandle, useState } from 'react';
@@ -25,7 +25,7 @@ const MFlex = ({ id, type, config, elements }: ComponentType, ref: any) => {
     drop(item: IDragTargetItem, monitor) {
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+      const { config, events, methods = [] }: any = getComponent(item.type + 'Config') || {};
       addChildElements({
         type: item.type,
         name: item.name,

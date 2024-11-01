@@ -3,7 +3,7 @@ import { Button, Table, Image, Tag, TablePaginationConfig, Tooltip, Typography, 
 import { useDrop } from 'react-dnd';
 import { pickBy } from 'lodash-es';
 import * as icons from '@ant-design/icons';
-import * as Components from '@/packages/index';
+import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { handleApi } from '@/packages/utils/handleApi';
 import { handleActionFlow } from '@/packages/utils/action';
@@ -103,7 +103,7 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
     drop(item: IDragTargetItem, monitor) {
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+      const { config, events, methods = [] }: any = getComponent(item.type + 'Config') || {};
       addChildElements({
         type: item.type,
         name: item.name,
