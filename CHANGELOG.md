@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.12.1](https://github.com/JackySoft/marsview/compare/v4.12.0...v4.12.1) (2024-11-01)
+
+
+### Features
+
+* marsTable组件 actions按钮隐藏时去掉占位元素 ([669d303](https://github.com/JackySoft/marsview/commit/669d303c600ef56fe067b76b1fac41099a7b0fc9))
+
+
+### Bug Fixes
+
+* 修复问题 ([2334268](https://github.com/JackySoft/marsview/commit/2334268b4d15b6ffb68ce26432907c55381e151b))
+
 ## [4.12.0](https://github.com/JackySoft/marsview/compare/v4.11.0...v4.12.0) (2024-11-01)
 
 
