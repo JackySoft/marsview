@@ -317,6 +317,7 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
                       btnTxt = '解析异常';
                     }
                   }
+                  if (btnTxt === '') return;
                   return (
                     <AuthButton
                       key={btn.eventName}

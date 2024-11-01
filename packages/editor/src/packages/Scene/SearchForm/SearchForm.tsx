@@ -87,6 +87,7 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
     setFormData({
       name: id,
       value: values,
+      type: 'override',
     });
   };
 
@@ -113,6 +114,7 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
       setFormData({
         name: id,
         value: form.getFieldsValue(),
+        type: 'override',
       });
     },
     submit() {
@@ -124,6 +126,7 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
       setFormData({
         name: id,
         value: initData,
+        type: 'override',
       });
     },
     getFormData(key: string) {

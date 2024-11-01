@@ -78,6 +78,7 @@ const MForm = ({ id, type, config, elements, onFinish, onChange }: ComponentType
         setFormData({
           name: id,
           value: form.getFieldsValue(),
+          type: 'override',
         });
       },
       submit() {
@@ -98,6 +99,7 @@ const MForm = ({ id, type, config, elements, onFinish, onChange }: ComponentType
         setFormData({
           name: id,
           value: initData,
+          type: 'override',
         });
       },
       getFormData(key: string) {
