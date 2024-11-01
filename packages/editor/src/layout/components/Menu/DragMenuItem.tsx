@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
 import { IDragTarget } from '@/packages/types/index';
 import { checkComponentType, createId } from '@/utils/util';
-import * as Components from '@/packages/index';
+import { getComponent } from '@/packages/index';
 import { usePageStore } from '@/stores/pageStore';
 import styles from './index.module.less';
 import { message } from '@/utils/AntdGlobal';
@@ -44,7 +44,7 @@ const DragMenuItem = (props: IDragTarget) => {
 
   const handleClick = (item: IDragTarget) => {
     // 生成默认配置
-    const { config, events, methods = [], elements = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+    const { config, events, methods = [], elements = [] }: any = getComponent(item.type + 'Config') || {};
     const newId = createId(item.type);
     if (!checkComponentType(item.type, selectedElement?.id, selectedElement?.type, elementsMap)) {
       message.info('请把表单项放在Form容器内');
@@ -52,7 +52,7 @@ const DragMenuItem = (props: IDragTarget) => {
     }
     const childElement =
       elements.map((child: IDragTarget & { id: string }) => {
-        const { config, events, methods = [] }: any = Components[(child.type + 'Config') as keyof typeof Components] || {};
+        const { config, events, methods = [] }: any = getComponent(child.type + 'Config') || {};
         return {
           id: child.id || createId(child.type),
           name: child.name,

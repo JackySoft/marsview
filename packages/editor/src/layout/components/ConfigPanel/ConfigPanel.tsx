@@ -2,13 +2,13 @@ import { Suspense, lazy, memo, useEffect, useState } from 'react';
 import { ConfigProvider, Form, Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import { useDebounceFn } from 'ahooks';
-import * as Components from '@/packages/index';
 import { usePageStore } from '@/stores/pageStore';
 import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
 import { message } from '@/utils/AntdGlobal';
 import { defaultsDeep } from 'lodash-es';
 import copy from 'copy-to-clipboard';
 import SpinLoading from '@/components/SpinLoading';
+import { getComponent } from '@/packages/index';
 import styles from './index.module.less';
 
 // 属性设置器
@@ -54,7 +54,7 @@ const ConfigPanel = memo(() => {
         });
       } else {
         // 生成组件
-        const item: any = Components[(selectedElement.type + 'Config') as keyof typeof Components];
+        const item: any = getComponent(selectedElement.type + 'Config');
         setComponentConfig(item);
         // defaults是为了继承页面中新增的配置项
         form.setFieldsValue(elementsMap[selectedElement.id]?.config.props);
@@ -62,7 +62,7 @@ const ConfigPanel = memo(() => {
       form.setFieldValue('id', selectedElement.id);
     } else {
       // 获取页面配置
-      const item: any = Components['PageConfig' as keyof typeof Components];
+      const item: any = getComponent('PageConfig');
       setComponentConfig(item);
       // defaults是为了继承页面中新增的配置项
       form.setFieldsValue({ pageName, ...defaultsDeep({ ...pageProps }, item.config.props) });

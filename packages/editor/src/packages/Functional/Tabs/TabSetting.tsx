@@ -3,7 +3,7 @@ import { Form, Input, Space, Button, FormInstance } from 'antd';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { usePageStore } from '@/stores/pageStore';
 import { createId } from '@/utils/util';
-import { TabConfig } from './../Tab';
+import TabConfig from './../Tab/Schema';
 /**
  * 操作栏配置
  */

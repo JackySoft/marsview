@@ -4,7 +4,7 @@ import { ConfigProvider, FloatButton, Image, Popover } from 'antd';
 import { CommentOutlined, InfoCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
-import * as Components from '@/packages/index';
+import { getComponent } from '@/packages/index';
 import { Page } from '@/packages/Page';
 import { IDragTargetItem } from '@/packages/types/index';
 import { createId, getElement } from '@/utils/util';
@@ -115,10 +115,10 @@ const Editor = () => {
       // 此处必须检测该组件是否已经被放入完成，如果已经放置到其它容器中，直接返回。
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [], elements = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+      const { config, events, methods = [], elements = [] }: any = getComponent(item.type + 'Config') || {};
       const childElement =
         elements.map((child: IDragTargetItem) => {
-          const { config, events, methods = [] }: any = Components[(child.type + 'Config') as keyof typeof Components] || {};
+          const { config, events, methods = [] }: any = getComponent(child.type + 'Config') || {};
           return {
             id: createId(child.type),
             name: child.name,

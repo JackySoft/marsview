@@ -1,6 +1,6 @@
 import { Form, InputProps, FormItemProps } from 'antd';
 import { useDrop } from 'react-dnd';
-import * as Components from '@/packages/index';
+import { getComponent } from '@/packages/index';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { ComponentType, IDragTargetItem } from '@/packages/types';
 import { isNull } from '@/packages/utils/util';
@@ -42,7 +42,7 @@ const MFormItem = ({ id, type, config, elements }: ComponentType<IConfig>, ref: 
     drop(item: IDragTargetItem, monitor) {
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+      const { config, events, methods = [] }: any = getComponent(item.type + 'Config') || {};
       addChildElements({
         type: item.type,
         name: item.name,

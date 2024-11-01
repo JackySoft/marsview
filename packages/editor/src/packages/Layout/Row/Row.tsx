@@ -1,10 +1,10 @@
 import { ComponentType, IDragTargetItem } from '@/packages/types';
 import { useDrop } from 'react-dnd';
-import * as Components from '@/packages/index';
-import MarsRender, { Material } from '@/packages/MarsRender/MarsRender';
+import { getComponent } from '@/packages/index';
+import MarsRender from '@/packages/MarsRender/MarsRender';
 import { usePageStore } from '@/stores/pageStore';
 import { forwardRef, useImperativeHandle, useState } from 'react';
-import { Row, Space } from 'antd';
+import { Row } from 'antd';
 
 /*泛型只需要定义组件本身用到的属性*/
 export interface IConfig {
@@ -25,7 +25,7 @@ const MRow = ({ id, type, config, elements }: ComponentType, ref: any) => {
     drop(item: IDragTargetItem, monitor) {
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+      const { config, events, methods = [] }: any = getComponent(item.type + 'Config') || {};
       addChildElements({
         type: item.type,
         name: item.name,
