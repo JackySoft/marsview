@@ -111,14 +111,14 @@ const Editor = () => {
   // 拖拽接收
   const [, drop] = useDrop({
     accept: 'MENU_ITEM',
-    drop(item: IDragTargetItem, monitor: any) {
+    async drop(item: IDragTargetItem, monitor: any) {
       // 此处必须检测该组件是否已经被放入完成，如果已经放置到其它容器中，直接返回。
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [], elements = [] }: any = getComponent(item.type + 'Config') || {};
+      const { config, events, methods = [], elements = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
       const childElement =
-        elements.map((child: IDragTargetItem) => {
-          const { config, events, methods = [] }: any = getComponent(child.type + 'Config') || {};
+        elements.map(async (child: IDragTargetItem) => {
+          const { config, events, methods = [] }: any = (await getComponent(child.type + 'Config'))?.default || {};
           return {
             id: createId(child.type),
             name: child.name,
@@ -129,14 +129,16 @@ const Editor = () => {
             methods,
           };
         }) || [];
-      addElement({
-        type: item.type,
-        name: item.name,
-        id: item.id,
-        config,
-        events,
-        methods,
-        elements: childElement,
+      Promise.all(childElement).then((res) => {
+        addElement({
+          type: item.type,
+          name: item.name,
+          id: item.id,
+          config,
+          events,
+          methods,
+          elements: res,
+        });
       });
     },
     collect: (monitor) => ({

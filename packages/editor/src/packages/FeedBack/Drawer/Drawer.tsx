@@ -4,7 +4,7 @@ import { usePageStore } from '@/stores/pageStore';
 import { useDrop } from 'react-dnd';
 import { Button, Drawer, Spin } from 'antd';
 import MarsRender from '@/packages/MarsRender/MarsRender';
-import * as Components from '@/packages/index';
+import { getComponent } from '@/packages/index';
 import * as icons from '@ant-design/icons';
 import { handleActionFlow } from '@/packages/utils/action';
 
@@ -16,9 +16,9 @@ const AntDrawer = forwardRef(({ id, type, config, elements, onClose, onAfterOpen
 
   const [, drop] = useDrop({
     accept: 'MENU_ITEM',
-    drop(item: IDragTargetItem, monitor) {
+    async drop(item: IDragTargetItem, monitor) {
       if (monitor.didDrop()) return;
-      const { config, events, methods = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+      const { config, events, methods = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
       addChildElements({
         type: item.type,
         name: item.name,

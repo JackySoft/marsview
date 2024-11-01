@@ -20,10 +20,10 @@ const MTabs = ({ id, type, config, elements }: ComponentType, ref: any) => {
   // 拖拽接收
   const [, drop] = useDrop({
     accept: 'MENU_ITEM',
-    drop(item: IDragTargetItem, monitor) {
+    async drop(item: IDragTargetItem, monitor) {
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [] }: any = getComponent(item.type + 'Config') || {};
+      const { config, events, methods = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
       addChildElements({
         type: item.type,
         name: item.name,
