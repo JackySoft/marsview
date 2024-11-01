@@ -1,14 +1,18 @@
 package com.marsview.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.marsview.domain.PagesRole;
-import com.marsview.mapper.basic.BasicMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * <p>pages_role</p>
- *
- * @author 张峰 zfvip_it@163.com
- * @create: 2024-09-27 10:18:58
- */
+* @author yangshare
+* @description 针对表【pages_role(页面权限列表)】的数据库操作Mapper
+* @createDate 2024-11-01 10:35:15
+* @Entity com.marsview.domain.PagesRole
+*/
 public interface PagesRoleMapper extends BaseMapper<PagesRole> {
+
 }
+
+
+
+

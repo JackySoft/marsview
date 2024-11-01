@@ -37,55 +37,55 @@ public class MenuController extends BasicController {
      * @param response
      * @param menu
      */
-    @PostMapping("create")
-    public void create(HttpServletRequest request, HttpServletResponse response, @RequestBody Menu menu) {
-        Users user = SessionUtils.getUser(request);
-        menu.setUser_id(user.getId());
-        menu.setUser_name(user.getUser_name());
-        menu.setCreated_at(new Date());
-        HtmlUtil.writerJson(response, getUpdateResponse(menuMapper.insertSelective(menu), "新增失败"));
-    }
-
-    /**
-     * 更新菜单
-     *
-     * @param response
-     * @param menu
-     */
-    @PostMapping("update")
-    public void update(HttpServletResponse response, @RequestBody Menu menu) {
-        menu.setUpdated_at(new Date());
-        HtmlUtil.writerJson(response, getUpdateResponse(menuMapper.updateByPrimaryKeySelective(menu), "保存失败"));
-    }
-
-    /**
-     * 获取菜单列表
-     *
-     * @param response
-     * @param menu
-     */
-    @PostMapping("list")
-    public void list(HttpServletResponse response, @RequestBody Menu menu) {
-        menu.setStatus(menu.getStatus() == null || menu.getStatus() == -1 ? 1 : menu.getStatus());
-        HtmlUtil.writerJson(response, getResponse(Map.of("list", menuMapper.select(menu))));
-    }
-
-    /**
-     * 复制
-     *
-     * @param response
-     * @param menu
-     */
-    @PostMapping("copy")
-    public void copy(HttpServletRequest request, HttpServletResponse response, @RequestBody Menu menu) {
-        Users user = SessionUtils.getUser(request);
-        menu = menuMapper.selectByPrimaryKey(menu.getId());
-        menu.setId(null);
-        menu.setPage_id(null);
-        menu.setName(menu.getName() + "-副本");
-        menu.setCreated_at(new Date());
-        menu.setUser_id(user.getId());
-        menu.setUser_name(user.getUser_name());
-        HtmlUtil.writerJson(response, getUpdateResponse(menuMapper.insertSelective(menu), "复制失败"));
-    }
+//    @PostMapping("create")
+//    public void create(HttpServletRequest request, HttpServletResponse response, @RequestBody Menu menu) {
+//        Users user = SessionUtils.getUser(request);
+//        menu.setUser_id(user.getId());
+//        menu.setUser_name(user.getUser_name());
+//        menu.setCreated_at(new Date());
+//        HtmlUtil.writerJson(response, getUpdateResponse(menuMapper.insertSelective(menu), "新增失败"));
+//    }
+//
+//    /**
+//     * 更新菜单
+//     *
+//     * @param response
+//     * @param menu
+//     */
+//    @PostMapping("update")
+//    public void update(HttpServletResponse response, @RequestBody Menu menu) {
+//        menu.setUpdated_at(new Date());
+//        HtmlUtil.writerJson(response, getUpdateResponse(menuMapper.updateByPrimaryKeySelective(menu), "保存失败"));
+//    }
+//
+//    /**
+//     * 获取菜单列表
+//     *
+//     * @param response
+//     * @param menu
+//     */
+//    @PostMapping("list")
+//    public void list(HttpServletResponse response, @RequestBody Menu menu) {
+//        menu.setStatus(menu.getStatus() == null || menu.getStatus() == -1 ? 1 : menu.getStatus());
+//        HtmlUtil.writerJson(response, getResponse(Map.of("list", menuMapper.select(menu))));
+//    }
+//
+//    /**
+//     * 复制
+//     *
+//     * @param response
+//     * @param menu
+//     */
+//    @PostMapping("copy")
+//    public void copy(HttpServletRequest request, HttpServletResponse response, @RequestBody Menu menu) {
+//        Users user = SessionUtils.getUser(request);
+//        menu = menuMapper.selectByPrimaryKey(menu.getId());
+//        menu.setId(null);
+//        menu.setPage_id(null);
+//        menu.setName(menu.getName() + "-副本");
+//        menu.setCreated_at(new Date());
+//        menu.setUser_id(user.getId());
+//        menu.setUser_name(user.getUser_name());
+//        HtmlUtil.writerJson(response, getUpdateResponse(menuMapper.insertSelective(menu), "复制失败"));
+//    }
 }

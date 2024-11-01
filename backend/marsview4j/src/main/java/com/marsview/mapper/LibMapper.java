@@ -1,25 +1,18 @@
 package com.marsview.mapper;
 
-
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.marsview.domain.Lib;
-import com.marsview.dto.LibDto;
-
-import java.util.List;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * <p>lib</p>
- *
- * @author 张峰 zfvip_it@163.com
- * @create: 2024-09-27 10:02:11
- */
+* @author yangshare
+* @description 针对表【lib(自定义组件库表，用来满足自定义业务)】的数据库操作Mapper
+* @createDate 2024-11-01 10:35:15
+* @Entity com.marsview.domain.Lib
+*/
 public interface LibMapper extends BaseMapper<Lib> {
 
-    /**
-     * 分页查询组件库
-     *
-     * @param dto
-     * @return
-     */
-    List<Lib> dataList(LibDto dto);
 }
+
+
+
+

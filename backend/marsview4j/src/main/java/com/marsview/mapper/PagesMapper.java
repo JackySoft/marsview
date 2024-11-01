@@ -1,32 +1,18 @@
 package com.marsview.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.marsview.mapper.basic.BasicMapper;
 import com.marsview.domain.Pages;
-import com.marsview.dto.PagesDto;
-
-import java.util.List;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * <p>pages</p>
- *
- * @author 张峰 zfvip_it@163.com
- * @create: 2024-09-27 17:24:28
- */
+* @author yangshare
+* @description 针对表【pages(项目列表)】的数据库操作Mapper
+* @createDate 2024-11-01 10:35:15
+* @Entity com.marsview.domain.Pages
+*/
 public interface PagesMapper extends BaseMapper<Pages> {
-    /**
-     * 获取页面列表
-     *
-     * @param dto
-     * @return
-     */
-    List<PagesDto> dataList(PagesDto dto);
 
-    /**
-     * 获取页面详情
-     *
-     * @param dto
-     * @return
-     */
-    PagesDto getPageDetail(PagesDto dto);
 }
+
+
+
+

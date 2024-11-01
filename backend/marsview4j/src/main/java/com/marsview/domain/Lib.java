@@ -1,23 +1,24 @@
 package com.marsview.domain;
 
-
-import com.marsview.mapper.basic.BaseObject;
-
-import javax.persistence.Id;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+import lombok.Data;
 
 /**
- * <p>lib</p>
- *
- * @author 张峰 zfvip_it@163.com
- * @create: 2024-09-27 10:02:11
+ * 自定义组件库表，用来满足自定义业务
+ * @TableName lib
  */
-public class Lib extends BaseObject implements Serializable {
+@TableName(value ="lib")
+@Data
+public class Lib implements Serializable {
     /**
      * 组件ID
      */
-    @Id
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -38,22 +39,22 @@ public class Lib extends BaseObject implements Serializable {
     /**
      * 组件源码
      */
-    private String react_code;
+    private String reactCode;
 
     /**
      * 组件样式
      */
-    private String less_code;
+    private String lessCode;
 
     /**
      * 组件配置
      */
-    private String config_code;
+    private String configCode;
 
     /**
      * markdown内容
      */
-    private String md_code;
+    private String mdCode;
 
     /**
      * 组件hash
@@ -63,187 +64,94 @@ public class Lib extends BaseObject implements Serializable {
     /**
      * 通行证ID
      */
-    private Long user_id;
+    private Integer userId;
 
     /**
      * 通行证名称
      */
-    private String user_name;
-
-    /**
-     * 是否开放 1-公开 2-私有
-     */
-    private String is_public;
+    private String userName;
 
     /**
      * 创建时间
      */
-    private Date updated_at;
+    private Date updatedAt;
 
     /**
      * 更新时间
      */
-    private Date created_at;
+    private Date createdAt;
 
-    /**
-     * 组件ID
-     *
-     * @return lib.id, 组件ID
-     */
-    public Long getId() {
-        return id;
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Lib other = (Lib) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getTag() == null ? other.getTag() == null : this.getTag().equals(other.getTag()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+            && (this.getReactCode() == null ? other.getReactCode() == null : this.getReactCode().equals(other.getReactCode()))
+            && (this.getLessCode() == null ? other.getLessCode() == null : this.getLessCode().equals(other.getLessCode()))
+            && (this.getConfigCode() == null ? other.getConfigCode() == null : this.getConfigCode().equals(other.getConfigCode()))
+            && (this.getMdCode() == null ? other.getMdCode() == null : this.getMdCode().equals(other.getMdCode()))
+            && (this.getHash() == null ? other.getHash() == null : this.getHash().equals(other.getHash()))
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
+            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()))
+            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
 
-    /**
-     * 组件ID
-     *
-     * @param id lib.id, 组件ID
-     */
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getTag() == null) ? 0 : getTag().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
+        result = prime * result + ((getReactCode() == null) ? 0 : getReactCode().hashCode());
+        result = prime * result + ((getLessCode() == null) ? 0 : getLessCode().hashCode());
+        result = prime * result + ((getConfigCode() == null) ? 0 : getConfigCode().hashCode());
+        result = prime * result + ((getMdCode() == null) ? 0 : getMdCode().hashCode());
+        result = prime * result + ((getHash() == null) ? 0 : getHash().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
+        result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
+        result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
+        return result;
     }
 
-    /**
-     * 组件标识
-     *
-     * @return lib.tag, 组件标识
-     */
-    public String getTag() {
-        return tag;
-    }
-
-    /**
-     * 组件标识
-     *
-     * @param tag lib.tag, 组件标识
-     */
-    public void setTag(String tag) {
-        this.tag = tag == null ? null : tag.trim();
-    }
-
-    /**
-     * 组件中文名称
-     *
-     * @return lib.name, 组件中文名称
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * 组件中文名称
-     *
-     * @param name lib.name, 组件中文名称
-     */
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    /**
-     * 组件描述
-     *
-     * @return lib.description, 组件描述
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * 组件描述
-     *
-     * @param description lib.description, 组件描述
-     */
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
-
-    /**
-     * 组件hash
-     *
-     * @return lib.hash, 组件hash
-     */
-    public String getHash() {
-        return hash;
-    }
-
-    /**
-     * 组件hash
-     *
-     * @param hash lib.hash, 组件hash
-     */
-    public void setHash(String hash) {
-        this.hash = hash == null ? null : hash.trim();
-    }
-
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getUser_name() {
-        return user_name;
-    }
-
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
-
-    public Date getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public Date getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
-    }
-
-    public String getIs_public() {
-        return is_public;
-    }
-
-    public void setIs_public(String is_public) {
-        this.is_public = is_public;
-    }
-
-    public String getReact_code() {
-        return react_code;
-    }
-
-    public void setReact_code(String react_code) {
-        this.react_code = react_code;
-    }
-
-    public String getLess_code() {
-        return less_code;
-    }
-
-    public void setLess_code(String less_code) {
-        this.less_code = less_code;
-    }
-
-    public String getConfig_code() {
-        return config_code;
-    }
-
-    public void setConfig_code(String config_code) {
-        this.config_code = config_code;
-    }
-
-    public String getMd_code() {
-        return md_code;
-    }
-
-    public void setMd_code(String md_code) {
-        this.md_code = md_code;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", tag=").append(tag);
+        sb.append(", name=").append(name);
+        sb.append(", description=").append(description);
+        sb.append(", reactCode=").append(reactCode);
+        sb.append(", lessCode=").append(lessCode);
+        sb.append(", configCode=").append(configCode);
+        sb.append(", mdCode=").append(mdCode);
+        sb.append(", hash=").append(hash);
+        sb.append(", userId=").append(userId);
+        sb.append(", userName=").append(userName);
+        sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }
