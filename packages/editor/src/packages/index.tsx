@@ -1,21 +1,21 @@
 import { lazy } from 'react';
-import components from '../config/components';
 import './index.less';
 
 const componentMap: { [key: string]: any } = {};
 
-// 动态导入并注册组件
-const registerComponent = async (dir: string, path: string) => {
-  componentMap[path] = lazy(() => import(`./${dir}/${path}/${path}`));
-  componentMap[path + 'Config'] = () => import(`./${dir}/${path}/Schema`);
-};
-for (const { type, data = [] } of components) {
-  if (data?.length > 0) {
-    for (const { type: path } of data) {
-      registerComponent(type, path);
-    }
-  } else {
-    registerComponent('.', type);
+/**
+ * 动态加载组件和Schema配置
+ */
+const modules: { [key: string]: () => Promise<any> } = import.meta.glob('./[a-zA-Z]+/**');
+
+for (const path in modules) {
+  const [type, name] = path.split('/').slice(-2);
+  if (type === 'MarsRender') continue;
+  if (name.indexOf('Schema') > -1) {
+    componentMap[type + 'Config'] = modules[path];
+  }
+  if (type === name.split('.')?.[0]) {
+    componentMap[type] = lazy(modules[path]);
   }
 }
 
