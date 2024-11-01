@@ -349,6 +349,7 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
                       btnTxt = '解析异常';
                     }
                   }
+                  if (btnTxt === '') return;
                   return (
                     <Button key={btn.eventName} type="link" size="small" danger={btn.danger} onClick={() => handleActionClick(btn.eventName, record)}>
                       {btnTxt}
