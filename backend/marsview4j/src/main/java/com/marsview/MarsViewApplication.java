@@ -1,6 +1,7 @@
 package com.marsview;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -17,6 +18,7 @@ import java.net.UnknownHostException;
  * @createTime: 2024/9/26 16:49
  */
 @SpringBootApplication
+@MapperScan("com.marsview.mapper")
 @Slf4j
 public class MarsViewApplication {
 

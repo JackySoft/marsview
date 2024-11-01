@@ -1,14 +1,9 @@
 package com.marsview.controller.basic;
 
-import com.github.pagehelper.PageInfo;
-import com.marsview.config.MapperProxy;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>类说明</p>
@@ -54,24 +49,5 @@ public class BasicController {
                 message).build();
     }
 
-    public <T> T getPageMapper(T t) {
-        return MapperProxy.getPageMapperProxy(t);
-    }
 
-    /**
-     * 分页查询
-     *
-     * @param list
-     * @return
-     */
-    public ResultResponse selectPageList(List list) {
-        PageInfo pageInfo = PageInfo.of(list);
-        pageInfo.getTotal();
-        return Builder.of(ResultResponse::new).with(ResultResponse::setData,
-                Map.of("list", pageInfo.getList(),
-                        "pageNum", pageInfo.getPageNum(),
-                        "pageSize", pageInfo.getPageSize(),
-                        "total", pageInfo.getTotal())
-        ).build();
-    }
 }

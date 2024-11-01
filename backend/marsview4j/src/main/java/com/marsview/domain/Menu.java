@@ -1,27 +1,30 @@
 package com.marsview.domain;
 
-import com.marsview.mapper.basic.BaseObject;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Id;
+import lombok.Data;
 
 /**
- * <p>menu</p>
- *
- * @author 张峰 zfvip_it@163.com
- * @create: 2024-09-27 10:17:54
+ * 菜单列表
+ * @TableName menu
  */
-public class Menu extends BaseObject implements Serializable {
+@TableName(value ="menu")
+@Data
+public class Menu implements Serializable {
     /**
      * 菜单ID
      */
-    @Id
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
      * 项目ID
      */
-    private Long project_id;
+    private Long projectId;
 
     /**
      * 菜单名称
@@ -31,7 +34,7 @@ public class Menu extends BaseObject implements Serializable {
     /**
      * 父级菜单ID
      */
-    private Long parent_id;
+    private Long parentId;
 
     /**
      * 方法 1-菜单 2-按钮 3-页面
@@ -51,12 +54,12 @@ public class Menu extends BaseObject implements Serializable {
     /**
      * 页面ID
      */
-    private Long page_id;
+    private Long pageId;
 
     /**
      * 排序
      */
-    private Integer sort_num;
+    private Integer sortNum;
 
     /**
      * 状态 1-启用 0-禁用
@@ -71,140 +74,100 @@ public class Menu extends BaseObject implements Serializable {
     /**
      * 通行证id
      */
-    private Long user_id;
+    private Integer userId;
 
     /**
      * 姓名
      */
-    private String user_name;
+    private String userName;
 
     /**
      * 更新时间
      */
-    private Date updated_at;
+    private Date updatedAt;
 
     /**
      * 创建时间
      */
-    private Date created_at;
+    private Date createdAt;
 
-    public Long getId() {
-        return id;
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Menu other = (Menu) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getProjectId() == null ? other.getProjectId() == null : this.getProjectId().equals(other.getProjectId()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+            && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
+            && (this.getPath() == null ? other.getPath() == null : this.getPath().equals(other.getPath()))
+            && (this.getPageId() == null ? other.getPageId() == null : this.getPageId().equals(other.getPageId()))
+            && (this.getSortNum() == null ? other.getSortNum() == null : this.getSortNum().equals(other.getSortNum()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getCode() == null ? other.getCode() == null : this.getCode().equals(other.getCode()))
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
+            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()))
+            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getProjectId() == null) ? 0 : getProjectId().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getIcon() == null) ? 0 : getIcon().hashCode());
+        result = prime * result + ((getPath() == null) ? 0 : getPath().hashCode());
+        result = prime * result + ((getPageId() == null) ? 0 : getPageId().hashCode());
+        result = prime * result + ((getSortNum() == null) ? 0 : getSortNum().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        result = prime * result + ((getCode() == null) ? 0 : getCode().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
+        result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
+        result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
+        return result;
     }
 
-    public Long getProject_id() {
-        return project_id;
-    }
-
-    public void setProject_id(Long project_id) {
-        this.project_id = project_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getParent_id() {
-        return parent_id;
-    }
-
-    public void setParent_id(Long parent_id) {
-        this.parent_id = parent_id;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public Long getPage_id() {
-        return page_id;
-    }
-
-    public void setPage_id(Long page_id) {
-        this.page_id = page_id;
-    }
-
-    public Integer getSort_num() {
-        return sort_num;
-    }
-
-    public void setSort_num(Integer sort_num) {
-        this.sort_num = sort_num;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getUser_name() {
-        return user_name;
-    }
-
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
-
-    public Date getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public Date getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", projectId=").append(projectId);
+        sb.append(", name=").append(name);
+        sb.append(", parentId=").append(parentId);
+        sb.append(", type=").append(type);
+        sb.append(", icon=").append(icon);
+        sb.append(", path=").append(path);
+        sb.append(", pageId=").append(pageId);
+        sb.append(", sortNum=").append(sortNum);
+        sb.append(", status=").append(status);
+        sb.append(", code=").append(code);
+        sb.append(", userId=").append(userId);
+        sb.append(", userName=").append(userName);
+        sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

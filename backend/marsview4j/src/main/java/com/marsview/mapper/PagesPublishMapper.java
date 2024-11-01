@@ -1,24 +1,18 @@
 package com.marsview.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.marsview.mapper.basic.BasicMapper;
 import com.marsview.domain.PagesPublish;
-
-import java.util.List;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * <p>pages_publish</p>
- *
- * @author 张峰 zfvip_it@163.com
- * @create: 2024-09-27 10:18:29
- */
+* @author yangshare
+* @description 针对表【pages_publish(页面发布列表)】的数据库操作Mapper
+* @createDate 2024-11-01 10:35:15
+* @Entity com.marsview.domain.PagesPublish
+*/
 public interface PagesPublishMapper extends BaseMapper<PagesPublish> {
 
-    /**
-     * 分页查询
-     *
-     * @param publish
-     * @return
-     */
-    List<PagesPublish> dataList(PagesPublish publish);
 }
+
+
+
+

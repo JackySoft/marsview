@@ -1,21 +1,22 @@
 package com.marsview.controller;
 
-import com.marsview.domain.Menu;
-import com.marsview.domain.Users;
-import com.marsview.dto.PagesDto;
-import com.marsview.dto.ProjectsDto;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.marsview.controller.basic.BasicController;
 import com.marsview.controller.basic.Builder;
-import com.marsview.util.HtmlUtil;
+import com.marsview.controller.basic.ResultResponse;
+import com.marsview.domain.*;
+import com.marsview.service.MenuService;
+import com.marsview.service.PagesPublishService;
+import com.marsview.service.PagesService;
+import com.marsview.service.ProjectsService;
 import com.marsview.util.SessionUtils;
-import com.marsview.mapper.MenuMapper;
-import com.marsview.mapper.PagesMapper;
-import com.marsview.mapper.ProjectsMapper;
-import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,71 +34,106 @@ import java.util.Map;
 @RequestMapping("api/admin")
 public class AdminController extends BasicController {
 
-    private static final Logger LOGGER = LogManager.getLogger(AdminController.class);
+  private static final Logger LOGGER = LogManager.getLogger(AdminController.class);
 
-    @Resource
-    private ProjectsMapper projectsMapper;
+  @Autowired
+  private ProjectsService projectsService;
 
-    @Resource
-    private MenuMapper menuMapper;
+  @Autowired
+  private MenuService menuService;
 
-    @Resource
-    private PagesMapper pagesMapper;
+  @Autowired
+  private PagesService pagesService;
 
-    /**
-     * 获取项目配置
-     *
-     * @param response
-     * @param project_id
-     */
-    @GetMapping("getProjectConfig")
-    public void getProjectConfig(HttpServletResponse response, Long project_id) {
-        HtmlUtil.writerJson(response, getResponse(projectsMapper.selectByPrimaryKey(project_id)));
+  @Autowired
+  private PagesPublishService pagesPublishService;
+
+
+  /**
+   * 获取项目配置
+   *
+   * @param response
+   * @param project_id
+   */
+  @GetMapping("getProjectConfig")
+  public ResultResponse getProjectConfig(HttpServletResponse response, Long project_id) {
+    return getResponse(projectsService.getById(project_id));
+  }
+
+  /**
+   * 获取项目对应的菜单
+   *
+   * @param response
+   * @param project_id
+   */
+  @GetMapping("menu/list/{project_id}")
+  public ResultResponse menuList(HttpServletResponse response, @PathVariable Long project_id) {
+
+    QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+    queryWrapper.eq("project_id", project_id);
+    return getResponse(Map.of("list", menuService.list(queryWrapper)));
+  }
+
+  /**
+   * 获取页面详情
+   *
+   * @param response
+   * @param env
+   * @param page_id
+   */
+  @GetMapping("page/detail/{env}/{page_id}")
+  public ResultResponse pageDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable(name = "env") String env, @PathVariable(name = "page_id") Long page_id) {
+    LOGGER.info("请求参数env[{}],page_id[{}]", env, page_id);
+    Users users = SessionUtils.getUser(request);
+
+    Pages pages = pagesService.getById(page_id);
+    if (pages == null) {
+      return getErrorResponse("页面不存在");
+    }
+    Long last_publish_id = null;
+    switch (env) {
+      case "pre":
+        last_publish_id = pages.getPrePublishId();
+        break;
+      case "stg":
+        last_publish_id = pages.getStgPublishId();
+        break;
+      case "prd":
+        last_publish_id = pages.getPrdPublishId();
+        break;
+      default:
+        return getErrorResponse("环境参数错误");
+
     }
 
-    /**
-     * 获取项目对应的菜单
-     *
-     * @param response
-     * @param project_id
-     */
-    @GetMapping("menu/list/{project_id}")
-    public void menuList(HttpServletResponse response, @PathVariable Long project_id) {
-        HtmlUtil.writerJson(response, getResponse(Map.of("list", menuMapper.select(Builder.of(Menu::new)
-                .with(Menu::setProject_id, project_id).build()))));
-    }
+    QueryWrapper<PagesPublish> queryWrapper = new QueryWrapper<>();
+    queryWrapper.eq("env", env);
+    queryWrapper.eq("user_id", users.getId());
+    queryWrapper.eq("id", last_publish_id);
+    queryWrapper.eq("page_id", page_id);
+    return getResponse(pagesPublishService.getOne(queryWrapper));
+  }
 
-    /**
-     * 获取页面详情
-     *
-     * @param response
-     * @param env
-     * @param page_id
-     */
-    @GetMapping("page/detail/{env}/{page_id}")
-    public void pageDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable(name = "env") String env, @PathVariable(name = "page_id") Long page_id) {
-        LOGGER.info("请求参数env[{}],page_id[{}]", env, page_id);
-        Users users = SessionUtils.getUser(request);
-        HtmlUtil.writerJson(response, getResponse(pagesMapper.selectOne(Builder.of(PagesDto::new)
-                .with(PagesDto::setEnv, env)
-                .with(PagesDto::setUser_id, users.getId())
-                .with(PagesDto::setId, page_id).build())));
-    }
+  /**
+   * 获取项目列表
+   *
+   * @param response
+   * @param pageNum
+   * @param pageSize
+   */
+  @GetMapping("project/list")
+  public ResultResponse projectList(HttpServletRequest request, HttpServletResponse response, int pageNum, int pageSize) {
+    Users users = SessionUtils.getUser(request);
+    QueryWrapper<Projects> queryWrapper = new QueryWrapper<>();
+    queryWrapper.eq("user_id", users.getId());
 
-    /**
-     * 获取项目列表
-     *
-     * @param response
-     * @param pageNum
-     * @param pageSize
-     */
-    @GetMapping("project/list")
-    public void projectList(HttpServletRequest request, HttpServletResponse response, int pageNum, int pageSize) {
-        Users users = SessionUtils.getUser(request);
-        HtmlUtil.writerJson(response, selectPageList(getPageMapper(projectsMapper)
-                .projectList(Builder.of(ProjectsDto::new)
-                        .with(ProjectsDto::setUser_id, users.getId())
-                        .with(ProjectsDto::setPageIndex, pageNum)
-                        .with(ProjectsDto::setPageSize, pageSize).build())));
-    }
+    Page<Projects> page = new Page<>(pageNum, pageSize);
+    IPage<Projects> pageInfo = projectsService.page(page, queryWrapper);
+    return Builder.of(ResultResponse::new).with(ResultResponse::setData,
+      Map.of("list", pageInfo.getRecords(),
+        "pageNum", pageInfo.getCurrent(),
+        "pageSize", pageInfo.getSize(), // 注意这里应该是 getSize() 而不是 getPages()
+        "total", pageInfo.getTotal())
+    ).build();
+  }
 }

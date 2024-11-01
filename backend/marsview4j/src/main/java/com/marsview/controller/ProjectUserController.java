@@ -30,31 +30,31 @@ public class ProjectUserController extends BasicController {
      * @param response
      * @param projectUser
      */
-    @PostMapping("create")
-    public void create(HttpServletResponse response, @RequestBody ProjectUser projectUser) {
-        if (projectUserMapper.selectCount(Builder.of(ProjectUser::new)
-                .with(ProjectUser::setProject_id, projectUser.getProject_id())
-                .with(ProjectUser::setUser_id, projectUser.getUser_id()).build()) > 0) {
-            HtmlUtil.writerJson(response, getErrorResponse("该用户已存在"));
-        } else {
-            projectUser.setCreated_at(new Date());
-            HtmlUtil.writerJson(response, getUpdateResponse(projectUserMapper.insertSelective(projectUser), "新增失败"));
-        }
-    }
-
-    /**
-     * 获取用户列表
-     *
-     * @param response
-     * @param project_id
-     * @param pageNum
-     * @param pageSize
-     */
-    @GetMapping("list")
-    public void detail(HttpServletResponse response, Long project_id, int pageNum, int pageSize) {
-        HtmlUtil.writerJson(response, selectPageList(projectUserMapper.select(Builder.of(ProjectUser::new)
-                .with(ProjectUser::setProject_id, project_id)
-                .with(ProjectUser::setPageIndex, pageNum)
-                .with(ProjectUser::setPageSize, pageSize).build())));
-    }
+//    @PostMapping("create")
+//    public void create(HttpServletResponse response, @RequestBody ProjectUser projectUser) {
+//        if (projectUserMapper.selectCount(Builder.of(ProjectUser::new)
+//                .with(ProjectUser::setProject_id, projectUser.getProject_id())
+//                .with(ProjectUser::setUser_id, projectUser.getUser_id()).build()) > 0) {
+//            HtmlUtil.writerJson(response, getErrorResponse("该用户已存在"));
+//        } else {
+//            projectUser.setCreated_at(new Date());
+//            HtmlUtil.writerJson(response, getUpdateResponse(projectUserMapper.insertSelective(projectUser), "新增失败"));
+//        }
+//    }
+//
+//    /**
+//     * 获取用户列表
+//     *
+//     * @param response
+//     * @param project_id
+//     * @param pageNum
+//     * @param pageSize
+//     */
+//    @GetMapping("list")
+//    public void detail(HttpServletResponse response, Long project_id, int pageNum, int pageSize) {
+//        HtmlUtil.writerJson(response, selectPageList(projectUserMapper.select(Builder.of(ProjectUser::new)
+//                .with(ProjectUser::setProject_id, project_id)
+//                .with(ProjectUser::setPageIndex, pageNum)
+//                .with(ProjectUser::setPageSize, pageSize).build())));
+//    }
 }

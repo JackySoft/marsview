@@ -1,24 +1,20 @@
 package com.marsview.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.marsview.mapper.basic.BasicMapper;
 import com.marsview.domain.Users;
 
 import java.util.List;
 
 /**
- * <p>users</p>
- *
- * @author 张峰 zfvip_it@163.com
- * @create: 2024-09-27 10:19:47
- */
+* @author yangshare
+* @description 针对表【users(用户列表)】的数据库操作Mapper
+* @createDate 2024-11-01 10:35:15
+* @Entity com.marsview.domain.Users
+*/
 public interface UsersMapper extends BaseMapper<Users> {
-
-    /**
-     * 查询用户列表
-     *
-     * @param users
-     * @return
-     */
-    List<Users> dataList(Users users);
+  List<Users> selectList();
 }
+
+
+
+
