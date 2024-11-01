@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Image, Flex } from 'antd';
+import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Flex, Tooltip } from 'antd';
 import {
   ProjectOutlined,
   OneToOneOutlined,
@@ -10,7 +10,7 @@ import {
   LoadingOutlined,
   PieChartOutlined,
   CloudOutlined,
-  ApartmentOutlined,
+  QuestionCircleOutlined,
 } from '@ant-design/icons';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
@@ -80,11 +80,11 @@ const Header = memo(() => {
       key: 'templates',
       icon: <PieChartOutlined style={{ fontSize: 16 }} />,
     },
-    {
-      label: '工作流',
-      key: 'workflows',
-      icon: <ApartmentOutlined style={{ fontSize: 16 }} />,
-    },
+    // {
+    //   label: '工作流',
+    //   key: 'workflows',
+    //   icon: <ApartmentOutlined style={{ fontSize: 16 }} />,
+    // },
     {
       label: '图片云',
       key: 'cloud',
@@ -275,22 +275,9 @@ const Header = memo(() => {
               退出预览
             </Button>
           )}
-          <a href="http://docs.marsview.cc" target="_blank">
-            开发文档
-          </a>
-          {!isEditPage && (
-            <Popover
-              content={
-                <>
-                  <Image width={200} src="https://marsview.cdn.bcebos.com/qrcode.jpg" preview={false} />
-                  <p style={{ textAlign: 'center', color: '#7d33ff' }}>微信交流群</p>
-                </>
-              }
-            >
-              <img width={20} src="https://marsview.cdn.bcebos.com/wechat.png" />
-            </Popover>
-          )}
-
+          <Tooltip title="使用文档">
+            <QuestionCircleOutlined onClick={() => window.open('http://docs.marsview.cc', '_blank')} />
+          </Tooltip>
           {/* 用户头像 */}
           <div className={styles.avatar}>
             <Dropdown
