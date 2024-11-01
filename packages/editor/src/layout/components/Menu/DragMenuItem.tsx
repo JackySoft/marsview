@@ -42,17 +42,17 @@ const DragMenuItem = (props: IDragTarget) => {
     [id],
   );
 
-  const handleClick = (item: IDragTarget) => {
+  const handleClick = async (item: IDragTarget) => {
     // 生成默认配置
-    const { config, events, methods = [], elements = [] }: any = getComponent(item.type + 'Config') || {};
+    const { config, events, methods = [], elements = [] } = (await getComponent(item.type + 'Config'))?.default || {};
     const newId = createId(item.type);
     if (!checkComponentType(item.type, selectedElement?.id, selectedElement?.type, elementsMap)) {
       message.info('请把表单项放在Form容器内');
       return;
     }
     const childElement =
-      elements.map((child: IDragTarget & { id: string }) => {
-        const { config, events, methods = [] }: any = getComponent(child.type + 'Config') || {};
+      elements.map(async (child: IDragTarget & { id: string }) => {
+        const { config, events, methods = [] }: any = (await getComponent(child.type + 'Config'))?.default || {};
         return {
           id: child.id || createId(child.type),
           name: child.name,
@@ -63,28 +63,30 @@ const DragMenuItem = (props: IDragTarget) => {
           methods,
         };
       }) || [];
-    if (selectedElement) {
-      addChildElements({
-        type: item.type,
-        name: item.name,
-        elements: childElement,
-        parentId: selectedElement.id,
-        id: newId,
-        config,
-        events,
-        methods,
-      });
-    } else {
-      addElement({
-        type: item.type,
-        name: item.name,
-        id: newId,
-        elements: childElement,
-        config,
-        events,
-        methods,
-      });
-    }
+    Promise.all(childElement).then((res) => {
+      if (selectedElement) {
+        addChildElements({
+          type: item.type,
+          name: item.name,
+          elements: res,
+          parentId: selectedElement.id,
+          id: newId,
+          config,
+          events,
+          methods,
+        });
+      } else {
+        addElement({
+          type: item.type,
+          name: item.name,
+          id: newId,
+          elements: res,
+          config,
+          events,
+          methods,
+        });
+      }
+    });
   };
 
   // 拖拽样式

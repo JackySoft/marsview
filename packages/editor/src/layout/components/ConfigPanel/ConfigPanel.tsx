@@ -54,18 +54,22 @@ const ConfigPanel = memo(() => {
         });
       } else {
         // 生成组件
-        const item: any = getComponent(selectedElement.type + 'Config');
-        setComponentConfig(item);
-        // defaults是为了继承页面中新增的配置项
-        form.setFieldsValue(elementsMap[selectedElement.id]?.config.props);
+        getComponent(selectedElement.type + 'Config').then((res: any) => {
+          const item = res.default;
+          setComponentConfig(item);
+          // defaults是为了继承页面中新增的配置项
+          form.setFieldsValue(elementsMap[selectedElement.id]?.config.props);
+        });
       }
       form.setFieldValue('id', selectedElement.id);
     } else {
       // 获取页面配置
-      const item: any = getComponent('PageConfig');
-      setComponentConfig(item);
-      // defaults是为了继承页面中新增的配置项
-      form.setFieldsValue({ pageName, ...defaultsDeep({ ...pageProps }, item.config.props) });
+      getComponent('PageConfig').then((res: any) => {
+        const item = res.default;
+        setComponentConfig(item);
+        // defaults是为了继承页面中新增的配置项
+        form.setFieldsValue({ pageName, ...defaultsDeep({ ...pageProps }, item.config.props) });
+      });
     }
     return () => {
       setComponentConfig(null);
