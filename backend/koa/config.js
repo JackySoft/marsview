@@ -7,11 +7,11 @@
  */
 const SERVER_HOST = 'http://localhost';
 const SERVER_PORT = 5000;
-const DATABASE_HOST = '';
+const DATABASE_HOST = '127.0.0.1';
 const DATABASE_PORT = 3306;
 const DATABASE_USER = '';
 const DATABASE_PASSWORD = '';
-const DATABASE_NAME = '';
+const DATABASE_NAME = 'marsview';
 
 /**
  * 飞书应用配置，用来发送飞书消息
@@ -22,7 +22,7 @@ const FEISHU_APP_SECRET = '';
 /**
  * JWT签名密钥和过期时间
  */
-const JWT_SECRET = '';
+const JWT_SECRET = 'marsview';
 const JWT_EXPIRES_IN = '7d';
 
 /**

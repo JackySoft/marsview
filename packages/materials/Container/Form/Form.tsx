@@ -49,6 +49,10 @@ const MForm = ({ id, config, elements, onFinish, onChange }: ComponentType, ref:
       },
       reset() {
         form.resetFields();
+        setFormData({
+          name: id,
+          value: form.getFieldsValue(),
+        });
       },
       submit() {
         form.submit();

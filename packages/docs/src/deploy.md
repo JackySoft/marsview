@@ -83,7 +83,7 @@ const FEISHU_APP_SECRET = '';
 /**
  * JWT签名密钥和过期时间
  */
-const JWT_SECRET = '';// jwt密钥随便填写，用来做token鉴权用
+const JWT_SECRET = 'marsview';// jwt密钥随便填写，用来做token鉴权用
 const JWT_EXPIRES_IN = '7d';// jwt过期时间
 
 /**
@@ -166,6 +166,7 @@ proxy: {
 ```
 
 > 注意：为了解决本地开发环境下报跨域问题，前端`editor`和`admin`项目在开发模式下通过`vite.config.ts`做接口代理。
+> 生产环境需要修改 `.env.production` 文件，将`VITE_API_URL`改为后端地址。
 
 3. 启动编辑器
 

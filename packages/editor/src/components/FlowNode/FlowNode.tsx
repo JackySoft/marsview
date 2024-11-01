@@ -147,11 +147,11 @@ function FlowNode(_: any, ref: any) {
         if (type === 'normal') {
           nodeList.splice(node.index + 1, 0, taskNode);
         } else {
-          if(node.selfNode.type === 'start'){
+          if (node.selfNode.type === 'start') {
             message.error('开始节点后第一个不能添加分支节点');
             return;
           }
-          if(node.selfNode.type === 'condition'){
+          if (node.selfNode.type === 'condition') {
             message.error('分支节点后第一个不能添加分支节点');
             return;
           }
@@ -163,13 +163,13 @@ function FlowNode(_: any, ref: any) {
                 type: 'success',
                 children: [],
                 title: '成功',
-                content: '成功后执行此流程',
+                content: '成功时执行此流程',
               },
               {
                 id: generateId(),
                 type: 'fail',
                 title: '失败',
-                content: '失败后执行此流程',
+                content: '失败时执行此流程',
                 children: [],
               },
             ],
@@ -193,7 +193,7 @@ function FlowNode(_: any, ref: any) {
                 id: generateId(),
                 type: 'success',
                 title: '成功',
-                content: '成功后执行此流程',
+                content: '成功时执行此流程',
                 children: [],
               },
               {
@@ -201,7 +201,7 @@ function FlowNode(_: any, ref: any) {
                 id: generateId(),
                 type: 'fail',
                 title: '失败',
-                content: '失败后执行此流程',
+                content: '失败时执行此流程',
                 children: [],
               },
             ],
@@ -248,6 +248,10 @@ function FlowNode(_: any, ref: any) {
 
   // 修改节点行为
   const onEditAction = (node: NodeType) => {
+    if (node.title === '成功' || node.title === '失败') {
+      message.info('请在此节点后新增执行节点');
+      return;
+    }
     actionRef.current?.open(node.config, (values: any) => {
       const nodeList = JSON.parse(JSON.stringify(list)) as NodeType[];
       const editNode = findNodeIndexAndParent(nodeList, node.id);
