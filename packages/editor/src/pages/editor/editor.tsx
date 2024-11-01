@@ -5,7 +5,6 @@ import { CommentOutlined, InfoCircleOutlined, QuestionCircleOutlined } from '@an
 import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
 import { getComponent } from '@/packages/index';
-import { Page } from '@/packages/Page';
 import { IDragTargetItem } from '@/packages/types/index';
 import { createId, getElement } from '@/utils/util';
 import storage from '@/utils/storage';
@@ -13,7 +12,8 @@ import { getPageDetail } from '@/api';
 import Toolbar from '@/components/Toolbar/Toolbar';
 import { message } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
-import { PageConfig } from '@/packages/Page';
+import Page from '@/packages/Page/Page';
+import PageConfig from '@/packages/Page/Schema';
 import './index.less';
 
 /**

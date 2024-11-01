@@ -68,7 +68,7 @@ mybatis：
  */
 const SERVER_HOST = 'http://localhost';
 const SERVER_PORT = 5000;
-const DATABASE_HOST = '';// 自己数据库地址，本地可以写localhost
+const DATABASE_HOST = 'localhost';// 自己数据库地址，本地可以写localhost
 const DATABASE_PORT = 3306;// 自己数据库端口
 const DATABASE_USER = '';// 自己数据库用户名
 const DATABASE_PASSWORD = '';// 自己数据库密码
