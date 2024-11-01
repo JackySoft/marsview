@@ -1,7 +1,7 @@
 import React, { MouseEvent, useState, useEffect, memo } from 'react';
 import { useParams } from 'react-router-dom';
-import { ConfigProvider, FloatButton, Image, Popover } from 'antd';
-import { CommentOutlined, InfoCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { ConfigProvider, FloatButton, Image, Popover, Tooltip } from 'antd';
+import { CommentOutlined, LinkOutlined, QuestionCircleOutlined, SoundOutlined } from '@ant-design/icons';
 import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
 import { getComponent } from '@/packages/index';
@@ -283,7 +283,10 @@ const Editor = () => {
         },
       }}
     >
-      <FloatButton.Group trigger="click" type="primary" style={{ insetInlineEnd: 24 }} icon={<InfoCircleOutlined />}>
+      <FloatButton.Group trigger="click" type="primary" style={{ insetInlineEnd: 24 }} icon={<SoundOutlined />}>
+        <Tooltip title="使用文档" placement="left">
+          <FloatButton icon={<LinkOutlined />} onClick={() => window.open('http://docs.marsview.cc', '_blank')} />
+        </Tooltip>
         <Popover
           content={
             <>
