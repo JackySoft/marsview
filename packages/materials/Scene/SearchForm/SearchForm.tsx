@@ -83,6 +83,10 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
     },
     reset() {
       form.resetFields();
+      setFormData({
+        name: id,
+        value: form.getFieldsValue(),
+      });
     },
     submit() {
       form.submit();
