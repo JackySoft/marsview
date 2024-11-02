@@ -72,15 +72,11 @@ export default function Index() {
           <>
             <div className={styles.projectList}>
               <Spin spinning={loading} size="large" tip="加载中...">
-                <Row gutter={[20, 20]}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: 20 }}>
                   {projectList.map((item: Project.ProjectItem, index) => {
-                    return (
-                      <Col span={6} key={item.id || index}>
-                        <CardItem item={item} isAuth={item.id ? true : false} getList={getList} />
-                      </Col>
-                    );
+                    return <CardItem item={item} isAuth={item.id ? true : false} getList={getList} key={item.id || item.user_name + index} />;
                   })}
-                </Row>
+                </div>
               </Spin>
             </div>
             <Pagination
