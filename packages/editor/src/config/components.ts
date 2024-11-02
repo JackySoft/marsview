@@ -25,12 +25,17 @@ const components = [
     data: [
       {
         icon: '',
-        name: '搜索表单',
+        name: '行内查询表单',
         type: 'SearchForm',
       },
       {
         icon: '',
-        name: '普通表格',
+        name: '网格查询表单',
+        type: 'GridForm',
+      },
+      {
+        icon: '',
+        name: '基础表格',
         type: 'MarsTable',
       },
     ],

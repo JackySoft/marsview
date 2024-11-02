@@ -14,7 +14,7 @@ import { message } from '@/utils/AntdGlobal';
  */
 const MUpload = ({ id, type, config }: ComponentType, ref: any) => {
   const [visible, setVisible] = useState(true);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState<boolean | undefined>();
   // 对外暴露方法
   useImperativeHandle(ref, () => {
     return {
