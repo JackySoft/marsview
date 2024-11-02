@@ -19,16 +19,16 @@ export default function ImgCloud() {
   >([]);
 
   useEffect(() => {
-    getList();
-  }, []);
+    getList(current);
+  }, [current]);
 
   // 加载页面列表
-  const getList = async (pageNum: number = current, size: number = pageSize) => {
+  const getList = async (pageNum: number = current) => {
     setLoading(true);
     try {
       const res = await getImgList({
         pageNum,
-        pageSize: size,
+        pageSize,
       });
       setTotal(res.total || 0);
       setList(res.list || []);
@@ -87,9 +87,9 @@ export default function ImgCloud() {
       </div>
       <Spin spinning={loading} size="large">
         <div className={styles.imgList}>
-          {list.map((item, index) => {
+          {list.map((item) => {
             return (
-              <div className={styles.imgCard} key={index}>
+              <div className={styles.imgCard} key={item.id}>
                 <div className={styles.imgRound}>
                   <div className={styles.icons}>
                     <Space>
@@ -134,7 +134,7 @@ export default function ImgCloud() {
                       </Tooltip>
                     </Space>
                   </div>
-                  <Image src={item.type.startsWith('image') ? item.url : 'https://marsview.cdn.bcebos.com/js.png'} width={100} />
+                  <Image src={item.type.startsWith('image') ? item.url : 'https://marsview.cdn.bcebos.com/js.png'} height={'100%'} />
                 </div>
                 <div className={styles.desc}>{(item.size / 1024).toFixed(2)} KB</div>
               </div>
