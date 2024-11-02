@@ -11,8 +11,8 @@
   gap: 20px;
 }
 .imgList {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 30px;
   .imgCard {
     position: relative;
@@ -22,15 +22,14 @@
       color: #999;
     }
     .imgRound {
-      width: 142px;
-      height: 142px;
+      height: 150px;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid #eee;
-      padding: 20px;
+      padding: 15px;
       margin-bottom: 5px;
       cursor: pointer;
       &:hover {
