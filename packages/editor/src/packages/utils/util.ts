@@ -242,48 +242,62 @@ export function renderFormula(formula: string, eventParams: any = {}) {
 }
 
 /**
- * 日期组件处理
+ * 递归查找日期组件
+ */
+export const getDateItem = (elements: ComponentType[], list: string[]): string[] => {
+  for (let i = 0; i < elements.length; i++) {
+    const item = elements[i];
+    if (['DatePicker', 'TimePicker', 'DatePickerRange', 'TimePickerRange', 'EditTable'].includes(item.type)) {
+      list.push(item.id);
+    } else if (item.elements?.length) {
+      getDateItem(item.elements, list);
+    }
+  }
+  return list;
+};
+
+/**
+ * 针对日期组件值做特殊处理，因为日期赋值必须转换为dayjs对象
  * @param list 组件列表
- * @param values 表单数据
- * @param type 处理类型，string: 字符串处理，date: 日期转换
+ * @param values 表单数据值
  */
 export const dateFormat = (list: Array<ComponentType>, values: any) => {
   const elementsMap = usePageStore.getState().page.elementsMap;
-  list
-    .filter((item) => ['DatePicker', 'TimePicker', 'DatePickerRange', 'TimePickerRange', 'EditTable'].includes(item.type))
-    .map((item: any) => {
-      const {
-        startField,
-        endField,
-        formItem: { name },
-        formWrap: { format, columns },
-      } = elementsMap[item.id].config.props;
-      if (['DatePicker', 'TimePicker'].includes(item.type)) {
-        if (!values[name]) return;
-        values[name] = values[name]?.format?.(format) || dayjs(values[name]);
-      } else if (['DatePickerRange', 'TimePickerRange'].includes(item.type)) {
-        if (values[name]?.length == 2) {
-          const [start, end] = values[name]?.map((date: any) => date?.format?.(format) || dayjs(values[date])) || [undefined, undefined];
-          if (startField && endField) {
-            values[startField] = start;
-            values[endField] = end;
-            delete values[name];
-          }
-        } else {
-          if (values[startField] && values[endField]) {
-            values[name] = [dayjs(values[startField]), dayjs(values[endField])];
-          }
+  const dates = getDateItem(list, []);
+  dates.map((id: string) => {
+    const { type, config } = elementsMap[id];
+    const {
+      startField,
+      endField,
+      formItem: { name },
+      formWrap: { format, columns },
+    } = config.props;
+    if (['DatePicker', 'TimePicker'].includes(type)) {
+      if (!values[name]) return;
+      values[name] = values[name]?.format?.(format) || dayjs(values[name]);
+    } else if (['DatePickerRange', 'TimePickerRange'].includes(type)) {
+      if (values[name]?.length == 2) {
+        const [start, end] = values[name]?.map((date: any) => date?.format?.(format) || dayjs(values[date])) || [undefined, undefined];
+        if (startField && endField) {
+          values[startField] = start;
+          values[endField] = end;
+          delete values[name];
         }
-      } else if (item.type === 'EditTable') {
-        columns
-          .filter((item: any) => item.type === 'date')
-          .map(({ dataIndex }: { dataIndex: string }) => {
-            values[name].map((item: any) => {
-              if (item[dataIndex]) item[dataIndex] = dayjs(item[dataIndex]);
-            });
-          });
+      } else {
+        if (values[startField] && values[endField]) {
+          values[name] = [dayjs(values[startField]), dayjs(values[endField])];
+        }
       }
-    });
+    } else if (type === 'EditTable') {
+      columns
+        .filter((item: any) => item.type === 'date')
+        .map(({ dataIndex }: { dataIndex: string }) => {
+          values[name].map((item: any) => {
+            if (item[dataIndex]) item[dataIndex] = dayjs(item[dataIndex]);
+          });
+        });
+    }
+  });
   return values;
 };
 
