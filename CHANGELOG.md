@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.14.0](https://github.com/JackySoft/marsview/compare/v4.13.2...v4.14.0) (2024-11-02)
+
+
+### Features
+
+* 开发grid表单组件 ([792320e](https://github.com/JackySoft/marsview/commit/792320e531dda65cf3a701990a948cad5ac6875c))
+
 ### [4.13.2](https://github.com/JackySoft/marsview/compare/v4.13.1...v4.13.2) (2024-11-02)
 
 
