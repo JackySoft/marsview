@@ -28,7 +28,7 @@ const MCascader = ({ config, onChange }: ComponentType<IConfig>, ref: any) => {
   const { form, formId, setFormData } = useFormContext();
   const [data, setData] = useState<Option[]>([]);
   const [visible, setVisible] = useState(true);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState<boolean | undefined>();
   const variableData = usePageStore((state) => state.page.variableData);
   // 初始化默认值
   useEffect(() => {
@@ -43,7 +43,7 @@ const MCascader = ({ config, onChange }: ComponentType<IConfig>, ref: any) => {
 
   // 启用和禁用
   useEffect(() => {
-    setDisabled(config.props.formWrap.disabled || false);
+    if (typeof config.props.formWrap.disabled === 'boolean') setDisabled(config.props.formWrap.disabled);
   }, [config.props.formWrap.disabled]);
 
   useEffect(() => {

@@ -138,7 +138,7 @@ onClick 是事件名称，需要与 `config.js` 中 `events` 数组中定义名�
 
 ```jsx
 const onFinish = (values) => {
-  onClick && onClick(values);
+  onClick?.(values);
 };
 ```
 
@@ -150,7 +150,7 @@ const onFinish = (values) => {
 export default ({ id, type, config, onClick }, ref) => {
   const { Form, Button, Input } = window.antd;
   const onFinish = (values) => {
-    onClick && onClick(values);
+    onClick?.(values);
   };
   return (
     <div data-id={id} data-type={type}>

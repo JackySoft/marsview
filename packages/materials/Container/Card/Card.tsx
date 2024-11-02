@@ -1,7 +1,8 @@
 import { ComponentType } from '../../types';
 import { Button, Card } from 'antd';
 import MarsRender from '../../MarsRender/MarsRender';
-import { forwardRef, useImperativeHandle, useState } from 'react';
+import { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
+import { omit } from 'lodash-es';
 /**
  *
  * @param props 组件本身属性
@@ -23,13 +24,14 @@ const MCard = ({ config, elements, onClick }: ComponentType, ref: any) => {
   });
   // 点击更多事件
   const handleClick = () => {
-    onClick && onClick();
+    onClick?.();
   };
+  const meta = useMemo(() => config.props.meta, [config.props.meta]);
   return (
     visible && (
       <Card
         style={config.style}
-        {...config.props}
+        {...omit(config.props, ['cover', 'meta'])}
         cover={config.props.cover ? <img src={config.props.cover} /> : null}
         extra={
           config.props.extra?.text ? (
@@ -39,7 +41,7 @@ const MCard = ({ config, elements, onClick }: ComponentType, ref: any) => {
           ) : null
         }
       >
-        <Card.Meta {...config.props.meta} />
+        {meta.title || meta.description ? <Card.Meta {...meta} /> : null}
         <MarsRender elements={elements || []} />
       </Card>
     )

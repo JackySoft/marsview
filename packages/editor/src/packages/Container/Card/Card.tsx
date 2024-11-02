@@ -4,7 +4,8 @@ import { useDrop } from 'react-dnd';
 import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { usePageStore } from '@/stores/pageStore';
-import { forwardRef, useImperativeHandle, useState } from 'react';
+import { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
+import { omit } from 'lodash-es';
 /**
  *
  * @param props 组件本身属性
@@ -52,14 +53,14 @@ const MCard = ({ id, type, config, elements, onClick }: ComponentType, ref: any)
 
   // 点击更多事件
   const handleClick = () => {
-    onClick && onClick();
+    onClick?.();
   };
-
+  const meta = useMemo(() => config.props.meta, [config.props.meta]);
   return (
     visible && (
       <Card
         style={config.style}
-        {...config.props}
+        {...omit(config.props, ['cover', 'meta'])}
         data-id={id}
         data-type={type}
         cover={config.props.cover ? <img src={config.props.cover} /> : null}
@@ -72,7 +73,7 @@ const MCard = ({ id, type, config, elements, onClick }: ComponentType, ref: any)
         }
         ref={drop}
       >
-        <Card.Meta {...config.props.meta} />
+        {meta.title || meta.description ? <Card.Meta {...meta} /> : null}
         {elements?.length ? (
           <MarsRender elements={elements || []} />
         ) : (

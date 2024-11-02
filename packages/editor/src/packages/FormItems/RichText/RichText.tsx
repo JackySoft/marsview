@@ -24,7 +24,7 @@ export interface IConfig {
 const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, ref: any) => {
   const { form, formId, setFormData } = useFormContext();
   const [visible, setVisible] = useState(true);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState<boolean | undefined>();
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
