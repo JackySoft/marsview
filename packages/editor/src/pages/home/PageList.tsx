@@ -173,15 +173,11 @@ export default function Index() {
           <>
             <div className={styles.pagesContent}>
               <Spin spinning={loading} size="large" tip="加载中...">
-                <Row gutter={[20, 20]}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: 20 }}>
                   {content.map((item: PageItem, index: number) => {
-                    return (
-                      <Col span={6} key={item.id || index}>
-                        <SectionItem item={item} />
-                      </Col>
-                    );
+                    return <SectionItem item={item} key={item.id || item.user_name + index} />;
                   })}
-                </Row>
+                </div>
               </Spin>
               <Image
                 style={{ display: 'none' }}
