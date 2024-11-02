@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.14.1](https://github.com/JackySoft/marsview/compare/v4.14.0...v4.14.1) (2024-11-02)
+
+
+### Features
+
+* 页面和项目列表增加响应式布局 ([5cae8df](https://github.com/JackySoft/marsview/commit/5cae8df99d00595024e13dbe9a36032c809d017f))
+
+
+### Styles
+
+* 优化图片列表样式 ([41f15bc](https://github.com/JackySoft/marsview/commit/41f15bc774c86df682d979fb128d2e5feae8aa67))
+
 ## [4.14.0](https://github.com/JackySoft/marsview/compare/v4.13.2...v4.14.0) (2024-11-02)
 
 
