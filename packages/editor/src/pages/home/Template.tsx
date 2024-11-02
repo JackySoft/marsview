@@ -135,15 +135,11 @@ export default function Index() {
           <>
             <div className={styles.pagesContent}>
               <Spin spinning={loading} size="large">
-                <Row gutter={[20, 20]}>
-                  {content.map((item: PageItem, index: number) => {
-                    return (
-                      <Col span={6} key={item.id || index}>
-                        <SectionItem item={item} />
-                      </Col>
-                    );
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: 20 }}>
+                  {content.map((item: PageItem) => {
+                    return <SectionItem item={item} key={item.id} />;
                   })}
-                </Row>
+                </div>
               </Spin>
               <Image
                 style={{ display: 'none' }}
