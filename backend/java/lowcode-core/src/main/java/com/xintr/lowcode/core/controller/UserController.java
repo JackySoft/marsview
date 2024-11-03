@@ -87,14 +87,8 @@ public class UserController extends BasicController {
     message.setFrom("");
     message.setTo(dto.getEmail());
     message.setSubject("lowcode账号注册");
-    String codeStr = "您当前的验证码为：" + code + "，3分钟内有效。感谢您成为lowcode一员。";
-    System.out.println(codeStr);
-    message.setText(codeStr);
-    try {
-      mailSender.send(message);
-    }catch (Exception e){
-      e.printStackTrace();
-    }
+    message.setText("您当前的验证码为：" + code + "，3分钟内有效。感谢您成为lowcode一员。");
+    mailSender.send(message);
     HtmlUtil.writerJson(response, getResponse());
   }
 
