@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marsview.mapper.PagesMapper">
+
+    <resultMap id="BaseResultMap" type="com.marsview.domain.Pages">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+            <result property="pageData" column="page_data" jdbcType="VARCHAR"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="isPublic" column="is_public" jdbcType="TINYINT"/>
+            <result property="isEdit" column="is_edit" jdbcType="TINYINT"/>
+            <result property="previewImg" column="preview_img" jdbcType="VARCHAR"/>
+            <result property="stgPublishId" column="stg_publish_id" jdbcType="BIGINT"/>
+            <result property="prePublishId" column="pre_publish_id" jdbcType="BIGINT"/>
+            <result property="prdPublishId" column="prd_publish_id" jdbcType="BIGINT"/>
+            <result property="stgState" column="stg_state" jdbcType="TINYINT"/>
+            <result property="preState" column="pre_state" jdbcType="TINYINT"/>
+            <result property="prdState" column="prd_state" jdbcType="TINYINT"/>
+            <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+            <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,user_id,
+        user_name,page_data,remark,
+        is_public,is_edit,preview_img,
+        stg_publish_id,pre_publish_id,prd_publish_id,
+        stg_state,pre_state,prd_state,
+        updated_at,created_at
+    </sql>
+</mapper>

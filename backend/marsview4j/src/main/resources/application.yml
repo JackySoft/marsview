@@ -1,0 +1,44 @@
+#服务名
+spring:
+  application:
+    name: marsview4j
+  #邮箱配置
+  mail:
+    host: smtp.qq.com
+    username: yangshare2024@qq.com
+    password:
+    properties: { 'mail.smtp.ssl.enable', true }
+    test-connection: true
+    protocol: smtps
+    port: 465
+  #redis配置
+  data:
+    redis:
+      host: 192.168.6.3
+      port: 6379
+      password:
+      database: 7
+  datasource:
+    url: jdbc:mysql://192.168.6.3:3308/mars?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: yang
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#服务端口
+server:
+  port: 9001
+
+#mybatis配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+  type-aliases-package: com.marsview.domain
+  pagination:
+    enable: true
+
+#打印sql日志
+logging:
+  config: classpath:logback.xml
