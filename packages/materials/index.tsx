@@ -1,16 +1,16 @@
-const modules1 = import.meta.glob('./[A-Z][a-zA-Z]+/index.ts(x)?');
-const modules2 = import.meta.glob('./[A-Z][a-zA-Z]+/*/index.ts(x)?');
-const exportModule: any = {};
-const modules = {
-  ...modules1,
-  ...modules2,
-};
+const componentMap: { [key: string]: any } = {};
 
-let regex = /\/([a-z]+)\/index/i;
+/**
+ * 按需加载组件
+ */
+const modules: { [key: string]: () => Promise<any> } = import.meta.glob('./[a-zA-Z]+/**');
+
 for (const path in modules) {
-  const componentName = path.match(regex);
-  if (componentName?.[1]) {
-    exportModule[componentName[1]] = modules[path];
+  const [type, name] = path.split('/').slice(-2);
+  if (type === 'MarsRender') continue;
+  if (type === name.split('.')?.[0]) {
+    componentMap[type] = modules[path];
   }
 }
-export const module = exportModule;
+
+export const module = componentMap;

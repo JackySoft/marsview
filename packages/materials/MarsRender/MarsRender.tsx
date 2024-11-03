@@ -64,22 +64,7 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
         return Comp;
       });
     } else if (Components[item.type as keyof typeof Components]) {
-      const Comp = lazy(() => {
-        let res = Components[item.type as keyof typeof Components]().then((mod: any) => {
-          if (mod[item.type]) {
-            cachedComponents[item.type] = mod[item.type];
-            return Promise.resolve({
-              default: mod[item.type],
-              get [Symbol.toStringTag]() {
-                return 'Module';
-              },
-            });
-          } else {
-            return Promise.reject();
-          }
-        });
-        return res;
-      });
+      const Comp = lazy(Components[item.type as keyof typeof Components]);
       setComponent(Comp);
     }
     setConfig(elementsMap[item.id].config);
@@ -181,7 +166,7 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
       );
     } else {
       return (
-        <Suspense fallback={<div>加载中</div>}>
+        <Suspense fallback={<antd.Spin size="default"></antd.Spin>}>
           <Component
             className={['mars-component']} // 暂时还没用，日后可能会用
             id={item.id}

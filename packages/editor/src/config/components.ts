@@ -94,7 +94,7 @@ const components = [
   },
   {
     type: 'FormItems',
-    title: '表单组件',
+    title: '表单录入',
     data: [
       {
         icon: '',
@@ -330,7 +330,7 @@ const components = [
   },
   {
     type: 'Basic',
-    title: '基础组件',
+    title: '数据展示',
     data: [
       {
         icon: '',
@@ -381,7 +381,7 @@ const components = [
   },
   {
     type: 'Other',
-    title: '地图',
+    title: '其它',
     data: [
       {
         icon: '',
