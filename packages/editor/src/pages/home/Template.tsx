@@ -9,8 +9,9 @@ import {
   ExclamationCircleOutlined,
   ClockCircleOutlined,
 } from '@ant-design/icons';
-import { Input, Col, Form, Image, Layout, Pagination, Row, Spin, Tag, Tooltip } from 'antd';
+import { Input, Image, Layout, Pagination, Spin, Tag, Tooltip } from 'antd';
 import dayjs from 'dayjs';
+import { useMediaQuery } from 'react-responsive';
 import { getPageTemplateList, copyPageData } from '@/api';
 import { PageItem } from '@/api/types';
 import { message } from '@/utils/AntdGlobal';
@@ -30,6 +31,9 @@ export default function Index() {
   const [previewUrl, setPreviewUrl] = useState('');
   const [keyword, setKeyword] = useState<string>('');
   const navigate = useNavigate();
+
+  // 判断是否是超大屏
+  const isXLarge = useMediaQuery({ query: '(min-width: 1920px)' });
 
   useEffect(() => {
     getList(current, pageSize);
@@ -135,7 +139,13 @@ export default function Index() {
           <>
             <div className={styles.pagesContent}>
               <Spin spinning={loading} size="large">
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: 20 }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(auto-fill, minmax(${isXLarge ? 400 : 300}px, 1fr))`,
+                    gap: isXLarge ? 30 : 20,
+                  }}
+                >
                   {content.map((item: PageItem) => {
                     return <SectionItem item={item} key={item.id} />;
                   })}

@@ -207,7 +207,7 @@ const Header = memo(() => {
 
   return (
     <>
-      <Layout.Header className={isNav ? styles.homeHeader : styles.layoutHeader}>
+      <Layout.Header className={styles.layoutHeader}>
         <div className={styles.logo} onClick={goHome}>
           <img src="https://marsview.cdn.bcebos.com/mars-logo.png" width={42} />
           <span>Marsview</span>
@@ -215,7 +215,7 @@ const Header = memo(() => {
         {/* 首页 - 导航菜单 */}
         {isNav && (
           <div className={styles.menu}>
-            <Menu onClick={handleTab} selectedKeys={navKey} mode="horizontal" items={items} style={{ width: items.length * 110 }} />
+            <Menu onClick={handleTab} selectedKeys={navKey} mode="horizontal" items={items} />
           </div>
         )}
 
@@ -276,7 +276,7 @@ const Header = memo(() => {
             </Button>
           )}
           <Tooltip title="使用文档">
-            <QuestionCircleOutlined onClick={() => window.open('http://docs.marsview.cc', '_blank')} />
+            <QuestionCircleOutlined onClick={() => window.open('http://docs.marsview.cc', '_blank')} style={{ fontSize: 20 }} />
           </Tooltip>
           {/* 用户头像 */}
           <div className={styles.avatar}>
