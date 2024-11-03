@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { usePageStore } from '@marsview/materials/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
 import NotFound from './notFound';
-import { Page } from '@marsview/materials/Page';
+import Page from '@marsview/materials/Page/Page';
 import { useShallow } from 'zustand/react/shallow';
 
 export default function () {
