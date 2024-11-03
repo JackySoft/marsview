@@ -4,11 +4,15 @@ spring:
     name: lowcode-core
   #邮箱配置
   mail:
-    host:
+    #示例：smtp.qq.com
+    host: 
+    #示例：marsview@qq.com
     username:
+    #示例：nqmblqofepasgjhd，qq邮箱获取https://service.mail.qq.com/detail/0/75
     password:
     properties: { 'mail.smtp.ssl.enable', true }
-    test-connection: true
+    #如果启动就检查邮箱配置是否连接正常配置为true
+    test-connection: false
     protocol: smtps
     port: 465
   #redis配置
