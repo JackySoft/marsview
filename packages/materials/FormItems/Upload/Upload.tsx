@@ -3,7 +3,7 @@ import { UploadOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons
 import { Form, Button, Upload } from 'antd';
 import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
-import { uploadImg } from './@materials/api';
+import { uploadImg } from '@materials/api';
 import { message } from '@materials/utils/AntdGlobal';
 
 /**
