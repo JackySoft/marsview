@@ -1,11 +1,11 @@
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { Table, Form, Input, InputNumber, Select, DatePicker, Switch, Space, Button } from 'antd';
-import { ComponentType } from '../../types';
-import { useFormContext } from '../../utils/context';
-import * as util from '../../utils/util';
+import { ComponentType } from '@materials/types';
+import { useFormContext } from '@materials/utils/context';
+import * as util from '@materials/utils/util';
 import dayjs from 'dayjs';
 import { PlusOutlined } from '@ant-design/icons';
-import { message } from '../../utils/AntdGlobal';
+import { message } from '@materials/utils/AntdGlobal';
 /**
  * 编辑表格
  */

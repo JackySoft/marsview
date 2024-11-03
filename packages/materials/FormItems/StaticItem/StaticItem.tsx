@@ -1,10 +1,10 @@
 import { Form, InputProps, FormItemProps, Image } from 'antd';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import dayjs from 'dayjs';
-import { formatNumber, isNull } from '../../utils/util';
-import { useFormContext } from '../../utils/context';
-import { message } from '../../utils/AntdGlobal';
+import { formatNumber, isNull } from '@materials/utils/util';
+import { useFormContext } from '@materials/utils/context';
+import { message } from '@materials/utils/AntdGlobal';
 
 export interface IConfig {
   defaultValue: string;

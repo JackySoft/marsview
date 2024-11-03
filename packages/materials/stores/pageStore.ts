@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { produce } from 'immer';
-import { ComponentType, ApiType, PageVariable, EventType, ComItemType } from '../types';
+import { ComponentType, ApiType, PageVariable, EventType, ComItemType } from '@materials/types';
 
 export interface UserInfoStore {
   userId: number;

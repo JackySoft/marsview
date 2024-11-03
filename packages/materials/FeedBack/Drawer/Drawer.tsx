@@ -1,10 +1,10 @@
 import React, { forwardRef, memo, useImperativeHandle, useState } from 'react';
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import { Drawer, Spin } from 'antd';
-import MarsRender from '../../MarsRender/MarsRender';
+import MarsRender from '@materials/MarsRender/MarsRender';
 import * as icons from '@ant-design/icons';
-import { handleActionFlow } from '../../utils/action';
-import AuthButton from '../../Functional/Button/AuthButton';
+import { handleActionFlow } from '@materials/utils/action';
+import AuthButton from '@materials/Functional/Button/AuthButton';
 
 const AntDrawer = forwardRef(({ config, elements, onClose, onAfterOpenChange }: ComponentType, ref: any) => {
   const [visible, setVisible] = useState(false);

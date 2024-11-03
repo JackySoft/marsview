@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 import { Avatar } from 'antd';
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number;
 

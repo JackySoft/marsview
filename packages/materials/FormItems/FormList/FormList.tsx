@@ -1,9 +1,9 @@
 import { forwardRef, useEffect, useImperativeHandle, useState, useContext } from 'react';
 import { Form, InputProps, Space, Button } from 'antd';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { Material } from '../../MarsRender/MarsRender';
-import { useFormContext } from '../../utils/context';
-import { ComponentType } from '../../types';
+import { Material } from '@materials/MarsRender/MarsRender';
+import { useFormContext } from '@materials/utils/context';
+import { ComponentType } from '@materials/types';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {

@@ -1,9 +1,9 @@
 import { Form, Input, FormItemProps } from 'antd';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import type { GetProps } from 'antd';
-import { ComponentType } from '../../types';
-import { isNull } from '../../utils/util';
-import { useFormContext } from '../../utils/context';
+import { ComponentType } from '@materials/types';
+import { isNull } from '@materials/utils/util';
+import { useFormContext } from '@materials/utils/context';
 
 type OTPProps = GetProps<typeof Input.OTP>;
 

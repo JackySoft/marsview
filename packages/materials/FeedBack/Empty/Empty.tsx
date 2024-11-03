@@ -1,4 +1,4 @@
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import { Empty } from 'antd';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 

@@ -2,11 +2,11 @@ import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import { Button, Upload } from 'antd';
 import type { GetProp, UploadProps } from 'antd';
 import * as icons from '@ant-design/icons';
-import { ComponentType } from '../../types';
-import { message } from '../../utils/AntdGlobal';
-import request from '../../utils/request';
-import { usePageStore } from '../../stores/pageStore';
-import { mergeParams } from '../../utils/handleApi';
+import { ComponentType } from '@materials/types';
+import { message } from '@materials/utils/AntdGlobal';
+import request from '@materials/utils/request';
+import { usePageStore } from '@materials/stores/pageStore';
+import { mergeParams } from '@materials/utils/handleApi';
 
 /**
  * 独立封装上传组件

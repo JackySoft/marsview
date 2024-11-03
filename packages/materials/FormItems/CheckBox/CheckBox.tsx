@@ -1,10 +1,10 @@
 import { Form, FormItemProps, RadioProps, Checkbox } from 'antd';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { ComponentType } from '../../types';
-import { handleApi } from '../../utils/handleApi';
-import { isNotEmpty, isNull } from '../../utils/util';
-import { useFormContext } from '../../utils/context';
-import { usePageStore } from '../../stores/pageStore';
+import { ComponentType } from '@materials/types';
+import { handleApi } from '@materials/utils/handleApi';
+import { isNotEmpty, isNull } from '@materials/utils/util';
+import { useFormContext } from '@materials/utils/context';
+import { usePageStore } from '@materials/stores/pageStore';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {

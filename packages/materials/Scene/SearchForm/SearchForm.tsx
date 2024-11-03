@@ -1,13 +1,13 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Button, ButtonProps, Form, Space } from 'antd';
-import { ComponentType } from '../../types';
-import MarsRender from '../../MarsRender/MarsRender';
+import { ComponentType } from '@materials/types';
+import MarsRender from '@materials/MarsRender/MarsRender';
 import { DownOutlined, UpOutlined, SearchOutlined, RedoOutlined } from '@ant-design/icons';
 import * as icons from '@ant-design/icons';
-import { usePageStore } from '../../stores/pageStore';
-import { FormContext } from '../../utils/context';
-import { dateFormat } from '../../utils/util';
-import { handleActionFlow } from '../../utils/action';
+import { usePageStore } from '@materials/stores/pageStore';
+import { FormContext } from '@materials/utils/context';
+import { dateFormat } from '@materials/utils/util';
+import { handleActionFlow } from '@materials/utils/action';
 import styles from './index.module.less';
 export interface IConfig {
   form: {

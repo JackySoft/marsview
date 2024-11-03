@@ -1,8 +1,8 @@
-import { ComponentType } from '../../types';
-import { isNull } from '../../utils/util';
+import { ComponentType } from '@materials/types';
+import { isNull } from '@materials/utils/util';
 import { Form, Switch } from 'antd';
 import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
-import { useFormContext } from '../../utils/context';
+import { useFormContext } from '@materials/utils/context';
 
 /**
  *

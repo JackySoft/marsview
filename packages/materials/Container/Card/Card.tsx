@@ -1,6 +1,6 @@
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import { Button, Card } from 'antd';
-import MarsRender from '../../MarsRender/MarsRender';
+import MarsRender from '@materials/MarsRender/MarsRender';
 import { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 import { omit } from 'lodash-es';
 /**
