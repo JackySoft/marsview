@@ -137,28 +137,30 @@ yarn dev
 
 > 启动成功后，控制台会打印接口地址：`http://localhost:5000`
 
-## java代码生成使用说明
+## java 代码生成使用说明
 
-1. 修改resources目录下的mybatis-config.properties文件
+1. 修改 resources 目录下的 mybatis-config.properties 文件
 
-> 1. 配置生成java bean实体类工程所在位置，示例：project_bean=D:/IdeaProjects/lowcode/lowcode-api/src/main/java
-> 2. 配置生成java mapper接口工程所在位置，示例：project_mapper=D:/IdeaProjects/lowcode/lowcode-mapper/src/main/java
-> 3. 配置生成xml mapper文件工程所在位置，示例：project_xml=D:/IdeaProjects/lowcode/lowcode-mapper/src/main/resources
-> 4. 配置mysql驱动包路径，示例：D:/tools/apache-maven-3.8.1/repository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar
-> 5. 配置mysql连接地址：jdbc_url=jdbc:mysql://XXXXXXX:3306/lowcode?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior\
+> 1. 配置生成 java bean 实体类工程所在位置，示例：project_bean=D:/IdeaProjects/lowcode/lowcode-api/src/main/java
+> 2. 配置生成 java mapper 接口工程所在位置，示例：project_mapper=D:/IdeaProjects/lowcode/lowcode-mapper/src/main/java
+> 3. 配置生成 xml mapper 文件工程所在位置，示例：project_xml=D:/IdeaProjects/lowcode/lowcode-mapper/src/main/resources
+> 4. 配置 mysql 驱动包路径，示例：D:/tools/apache-maven-3.8.1/repository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar
+> 5. 配置 mysql 连接地址：jdbc_url=jdbc:mysql://XXXXXXX:3306/lowcode?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior\
+
      =convertToNull&allowMultiQueries=true
-> 6. 配置mysql数据库访问用户名：username
-> 7. 配置mysql数据库访问密码：password
-> 8. 配置mysql需要连接的库名：db_name
 
-2. 修改resources目录下的mybatis-generator.xml文件
+> 6. 配置 mysql 数据库访问用户名：username
+> 7. 配置 mysql 数据库访问密码：password
+> 8. 配置 mysql 需要连接的库名：db_name
+
+2. 修改 resources 目录下的 mybatis-generator.xml 文件
 
 > 1. 引入配置文件：<properties url="file:D:\IdeaProjects\xtr-mybatis-generator\src\main\resources\mybatis-config.properties"/>
-> 2. 分别修改生成bean实体类、mapper接口、xml mapper文件所在包名：<property name="targetPackage" value="com.xintr.lowcode.mapper.sys"></property>
+> 2. 分别修改生成 bean 实体类、mapper 接口、xml mapper 文件所在包名：<property name="targetPackage" value="com.xintr.lowcode.mapper.sys"></property>
 > 3. 指定需要生成表名：tableName="表名"
-> 4. 指定生成生成java实体类名称：domainObjectName="实体类名称"
+> 4. 指定生成生成 java 实体类名称：domainObjectName="实体类名称"
 
-3. 修改com.xintr.MybatisGenerator类main方法中的path变量，指定mybatis-generator.xml绝对路径
+3. 修改 com.xintr.MybatisGenerator 类 main 方法中的 path 变量，指定 mybatis-generator.xml 绝对路径
 
 4. 运行 com.xintr.MybatisGenerator，生成代码
 
@@ -184,7 +186,7 @@ pnpm i
 proxy: {
   '/api': {
     // 如果本地启动后端，请替换为后端地址
-    target: 'http://localhost:5000/api',
+    target: 'http://localhost:5000',
     changeOrigin: true,
   },
 },
@@ -207,11 +209,20 @@ http://127.0.0.1:8080
 
 1. 修改接口配置
 
-打开`marsview/packages/admin/.env.development`，修改`VITE_BASE_API`为本地后端接口地址
+打开 marsview/packages/editor/vite.config.ts，修改 proxy 中的 target 为本地后端接口地址
 
 ```
-VITE_BASE_API=http://localhost:5000/api
+proxy: {
+  '/api': {
+    // 如果本地启动后端，请替换为后端地址
+    target: 'http://localhost:5000',
+    changeOrigin: true,
+  },
+},
 ```
+
+> 注意：为了解决本地开发环境下报跨域问题，前端`editor`和`admin`项目在开发模式下通过`vite.config.ts`做接口代理。
+> 生产环境需要修改 `.env.production` 文件，将`VITE_API_URL`改为后端地址。
 
 2. 启动用户端
 
@@ -229,8 +240,8 @@ http://127.0.0.1:8090
 
 ### 域名介绍：
 
-1. `www.marsview.cc` 是给开发者使用的。
-2. `admin.marsview.cc` 是给用户访问的。
+1. `www.marsview.cc` 是给开发者搭建页面使用的。
+2. `admin.marsview.cc` 是给用户访最终访问的。
 
 ### 项目介绍
 
