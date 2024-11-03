@@ -1,10 +1,11 @@
 import { ComponentType, IDragTargetItem } from '@/packages/types';
 import { Button, Card } from 'antd';
 import { useDrop } from 'react-dnd';
-import * as Components from '@/packages/index';
+import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { usePageStore } from '@/stores/pageStore';
-import { forwardRef, useImperativeHandle, useState } from 'react';
+import { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
+import { omit } from 'lodash-es';
 /**
  *
  * @param props 组件本身属性
@@ -17,10 +18,10 @@ const MCard = ({ id, type, config, elements, onClick }: ComponentType, ref: any)
   // 拖拽接收
   const [, drop] = useDrop({
     accept: 'MENU_ITEM',
-    drop(item: IDragTargetItem, monitor) {
+    async drop(item: IDragTargetItem, monitor) {
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+      const { config, events, methods = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
       addChildElements({
         type: item.type,
         name: item.name,
@@ -52,14 +53,14 @@ const MCard = ({ id, type, config, elements, onClick }: ComponentType, ref: any)
 
   // 点击更多事件
   const handleClick = () => {
-    onClick && onClick();
+    onClick?.();
   };
-
+  const meta = useMemo(() => config.props.meta, [config.props.meta]);
   return (
     visible && (
       <Card
         style={config.style}
-        {...config.props}
+        {...omit(config.props, ['cover', 'meta'])}
         data-id={id}
         data-type={type}
         cover={config.props.cover ? <img src={config.props.cover} /> : null}
@@ -72,7 +73,7 @@ const MCard = ({ id, type, config, elements, onClick }: ComponentType, ref: any)
         }
         ref={drop}
       >
-        <Card.Meta {...config.props.meta} />
+        {meta.title || meta.description ? <Card.Meta {...meta} /> : null}
         {elements?.length ? (
           <MarsRender elements={elements || []} />
         ) : (

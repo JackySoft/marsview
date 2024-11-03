@@ -17,7 +17,7 @@ export interface IConfig {
  */
 const MButton = ({ id, type, config, onClick }: ComponentType<IConfig>, ref: any) => {
   const [visible, setVisible] = useState(true);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState<boolean | undefined>();
   const [loading, setLoading] = useState(false);
   // 对外暴露方法
   useImperativeHandle(ref, () => {
@@ -43,7 +43,7 @@ const MButton = ({ id, type, config, onClick }: ComponentType<IConfig>, ref: any
     };
   });
   const handleClick = () => {
-    onClick && onClick();
+    onClick?.();
   };
   const iconsList: { [key: string]: any } = icons;
   const { authCode, authScript, ...props } = config.props;

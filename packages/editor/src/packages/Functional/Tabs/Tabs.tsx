@@ -11,7 +11,7 @@ import MarsRender from '@/packages/MarsRender/MarsRender';
  * @param style 组件样式
  * @returns
  */
-const MTabs = ({ id, type, config, onClick, elements, onTabClick, onChange }: ComponentType<TabsProps>, ref: any) => {
+const MTabs = ({ id, type, config, elements, onTabClick, onChange }: ComponentType<TabsProps>, ref: any) => {
   const [visible, setVisible] = useState(true);
 
   const { updateToolbar, elementsMap } = usePageStore((state) => {
@@ -32,10 +32,6 @@ const MTabs = ({ id, type, config, onClick, elements, onTabClick, onChange }: Co
       },
     };
   });
-
-  const handleClick = () => {
-    onClick && onClick();
-  };
 
   // 执行Tab切换事件
   const handleChange = (key: string) => {

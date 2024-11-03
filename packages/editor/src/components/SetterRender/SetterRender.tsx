@@ -35,8 +35,8 @@ const SetterRender = memo(({ attrs, form }: IAttrs) => {
         if (item.type == 'Title') {
           if (item.popover) {
             return (
-              <Popover title={item.popover?.title} content={item.popover.content} placement={item.popover.placement || 'left'}>
-                <h2 className={styles.title} key={key}>
+              <Popover title={item.popover?.title} content={item.popover.content} placement={item.popover.placement || 'left'} key={key}>
+                <h2 className={styles.title}>
                   <span style={{ marginRight: 10 }}>{item.label}</span>
                   <QuestionCircleOutlined />
                 </h2>

@@ -49,6 +49,11 @@ const MForm = ({ id, config, elements, onFinish, onChange }: ComponentType, ref:
       },
       reset() {
         form.resetFields();
+        setFormData({
+          name: id,
+          value: form.getFieldsValue(),
+          type: 'override',
+        });
       },
       submit() {
         form.submit();
@@ -68,6 +73,7 @@ const MForm = ({ id, config, elements, onFinish, onChange }: ComponentType, ref:
         setFormData({
           name: id,
           value: initData,
+          type: 'override',
         });
       },
       getFormData(key: string) {

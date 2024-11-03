@@ -15,7 +15,7 @@ export default ({ id, type, config, onClick }, ref) => {
   };
   // 点击会触发父组件的onClick事件，可以在平台中配置事件流。
   const handleClick = () => {
-    onClick && onClick({ id, type });
+    onClick?.({ id, type });
   };
   return (
     <div className="bgColor" data-id={id} data-type={type}>
@@ -155,7 +155,7 @@ export default ({ id, type, config, onClick },ref) => {
     return dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
   };
   const handleClick = () => {
-    onClick && onClick({ id, type });
+    onClick?.({ id, type });
   };
   return (
     <div className="bgColor" data-id={id} data-type={type}>

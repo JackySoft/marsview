@@ -1,6 +1,5 @@
 import React, { Suspense, forwardRef, memo, useEffect, useState } from 'react';
 import { ComItemType, ConfigType } from '@/packages/types/index';
-import * as Components from '@/packages/index';
 import { handleActionFlow } from '@/packages/utils/action';
 import { setComponentRef } from '@/packages/utils/useComponentRefs';
 import { usePageStore } from '@/stores/pageStore';
@@ -10,6 +9,7 @@ import dayjs from 'dayjs';
 import * as antd from 'antd';
 import { isNull, loadStyle, renderFormula } from '@/packages/utils/util';
 import { omit } from 'lodash-es';
+import { getComponent } from '@/packages/index';
 import './index.less';
 
 /**
@@ -60,7 +60,7 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
         });
       });
     } else {
-      setComponent(Components[item.type as keyof typeof Components]);
+      setComponent(getComponent(item.type));
     }
     setConfig(elementsMap[item.id].config);
   }, []);
@@ -146,7 +146,7 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
 
   if (Component && config?.props.showOrHide !== false) {
     return (
-      <Suspense fallback={<antd.Spin spinning={true} tip="加载中..."></antd.Spin>}>
+      <Suspense fallback={<antd.Spin size="default"></antd.Spin>}>
         <Component
           className={['mars-component']} // 暂时还没用，日后可能会用
           id={item.id}

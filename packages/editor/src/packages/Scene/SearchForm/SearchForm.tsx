@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } f
 import { Button, ButtonProps, Form, Space } from 'antd';
 import { useDrop } from 'react-dnd';
 import { ComponentType, IDragTargetItem } from '@/packages/types';
-import * as Components from '@/packages/index';
+import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { DownOutlined, UpOutlined, SearchOutlined, RedoOutlined } from '@ant-design/icons';
 import * as icons from '@ant-design/icons';
@@ -53,10 +53,10 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
   // 拖拽接收
   const [, drop] = useDrop({
     accept: 'MENU_ITEM',
-    drop(item: IDragTargetItem, monitor) {
+    async drop(item: IDragTargetItem, monitor) {
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+      const { config, events, methods = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
       addChildElements({
         type: item.type,
         name: item.name,
@@ -87,6 +87,7 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
     setFormData({
       name: id,
       value: values,
+      type: 'override',
     });
   };
 
@@ -110,6 +111,11 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
     },
     reset() {
       form.resetFields();
+      setFormData({
+        name: id,
+        value: form.getFieldsValue(),
+        type: 'override',
+      });
     },
     submit() {
       form.submit();
@@ -120,6 +126,7 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
       setFormData({
         name: id,
         value: initData,
+        type: 'override',
       });
     },
     getFormData(key: string) {

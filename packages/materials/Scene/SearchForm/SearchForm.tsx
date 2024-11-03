@@ -55,12 +55,12 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
   // 重置表单
   const handleReset = () => {
     form.resetFields();
-    onReset && onReset();
     const values = form.getFieldsValue();
     onReset && onReset(dateFormat(elements, values));
     setFormData({
       name: id,
       value: values,
+      type: 'override',
     });
   };
 
@@ -83,6 +83,11 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
     },
     reset() {
       form.resetFields();
+      setFormData({
+        name: id,
+        value: form.getFieldsValue(),
+        type: 'override',
+      });
     },
     submit() {
       form.submit();

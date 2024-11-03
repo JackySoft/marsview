@@ -1,7 +1,6 @@
 /**
  * 组件配置和属性值
  */
-
 export default {
   // 组件属性配置JSON
   attrs: [
@@ -50,6 +49,11 @@ export default {
           { label: '大号', value: 'large' },
         ],
       },
+    },
+    {
+      type: 'InputNumber',
+      label: '最小宽度',
+      name: ['minWidth'],
     },
     {
       type: 'Title',
@@ -105,11 +109,7 @@ export default {
       label: '其他配置',
       key: 'OtherConfig',
     },
-    {
-      type: 'Switch',
-      label: '报错聚焦',
-      name: 'scrollToFirstError',
-    },
+
     {
       type: 'Select',
       label: '表单形态',
@@ -128,6 +128,7 @@ export default {
       colon: true,
       labelAlign: 'right',
       layout: 'horizontal',
+      minWidth: 300,
       labelCol: {
         span: 8,
       },
@@ -137,7 +138,6 @@ export default {
     },
     // 组件样式
     style: {
-      padding: '20px 10px',
       backgroundColor: '#fff',
     },
     events: [],
@@ -146,16 +146,16 @@ export default {
   // 组件事件
   events: [
     {
+      value: 'onSearch',
+      name: '查询事件',
+    },
+    {
       value: 'onReset',
       name: '重置事件',
     },
     {
       value: 'onChange',
-      name: '表单变化事件',
-    },
-    {
-      value: 'onFinish',
-      name: '表单提交事件',
+      name: '值变化事件',
     },
   ],
   methods: [
@@ -166,10 +166,6 @@ export default {
     {
       name: 'submit',
       title: '表单提交',
-    },
-    {
-      name: 'validate',
-      title: '表单校验',
     },
     {
       name: 'init',

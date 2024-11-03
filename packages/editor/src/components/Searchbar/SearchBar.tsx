@@ -7,7 +7,7 @@ const SearchBar = memo((props: any) => {
   const { form, from, submit, refresh, onCreate } = props;
   const options = [
     { label: '我的', value: 1 },
-    { label: '他的', value: 2 },
+    { label: '市场', value: 2 },
   ];
 
   return (

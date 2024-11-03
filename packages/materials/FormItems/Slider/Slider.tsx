@@ -19,7 +19,7 @@ export interface IConfig {
 const MInput = ({ config, onChange }: ComponentType<IConfig>, ref: any) => {
   const { form, formId, setFormData } = useFormContext();
   const [visible, setVisible] = useState(true);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState<boolean | undefined>();
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
@@ -33,7 +33,7 @@ const MInput = ({ config, onChange }: ComponentType<IConfig>, ref: any) => {
 
   // 启用和禁用
   useEffect(() => {
-    setDisabled(config.props.formWrap.disabled || false);
+    if (typeof config.props.formWrap.disabled === 'boolean') setDisabled(config.props.formWrap.disabled);
   }, [config.props.formWrap.disabled]);
 
   const handleChange = (val: string | number) => {

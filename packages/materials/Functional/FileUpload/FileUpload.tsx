@@ -18,7 +18,7 @@ import { mergeParams } from '../../utils/handleApi';
  */
 const UploadButton = ({ id, type, config, onSuccess, onFail }: ComponentType, ref: any) => {
   const [visible, setVisible] = useState(true);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState<boolean | undefined>();
   const [loading, setLoading] = useState(false);
 
   const apis = usePageStore((state) => state.page.apis);

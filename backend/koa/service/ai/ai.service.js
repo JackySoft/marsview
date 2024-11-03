@@ -1,12 +1,12 @@
-const { ChatZhipuAI } = require("@langchain/community/chat_models/zhipuai");
-const { HumanMessage } = require("@langchain/core/messages");
-const { GlmModelProvider } = require("./provider/model/glm");
-const { RunnableConfig } = require("@langchain/core/runnables");
-const { extractCodeBlocks } = require("./provider/utils");
+const { ChatZhipuAI } = require('@langchain/community/chat_models/zhipuai');
+const { HumanMessage } = require('@langchain/core/messages');
+const { GlmModelProvider } = require('./provider/model/glm');
+const { RunnableConfig } = require('@langchain/core/runnables');
+const { extractCodeBlocks } = require('./provider/utils');
 
 class AiService {
-	async buildGeneratePrompt({ message }) {
-		const codePrompt = `
+  async buildGeneratePrompt({ message }) {
+    const codePrompt = `
         You are a low-code component development expert.
         Your task is to help me generate two files for a low-code development module: index.jsx and config.js.
         The index.jsx file should define the structure of the component using React and Ant Design, and the config.js file should specify the component's property configurations.
@@ -39,7 +39,7 @@ class AiService {
               onDateChange && onDateChange(date, dateString, dateFormat);
             };
             const onFinish = (values) => {
-              onClick && onClick(values);
+              onClick?.(values);
             };
             return (
               <div data-id={id} data-type={type}>
@@ -240,71 +240,71 @@ class AiService {
             Please write the components that meet the requirements according to the AntDesign library and the template above. Please don't try to omit the content, and be sure to return the code completely.
         `;
 
-		const prompt = codePrompt.replace("#{message}", message);
-		return prompt;
-	}
+    const prompt = codePrompt.replace('#{message}', message);
+    return prompt;
+  }
 
-	async codeGenerate(message) {
-		const modelProvider = new GlmModelProvider();
+  async codeGenerate(message) {
+    const modelProvider = new GlmModelProvider();
 
-		const aiRunnableAbortController = new AbortController();
-		const aiRunnable = await modelProvider.createRunnable({
-			signal: aiRunnableAbortController.signal,
-		});
+    const aiRunnableAbortController = new AbortController();
+    const aiRunnable = await modelProvider.createRunnable({
+      signal: aiRunnableAbortController.signal,
+    });
 
-		const sessionId = `code_session_${Date.now()}`;
+    const sessionId = `code_session_${Date.now()}`;
 
-		const aiRunnableConfig = {
-			configurable: {
-				sessionId,
-			},
-		};
+    const aiRunnableConfig = {
+      configurable: {
+        sessionId,
+      },
+    };
 
-		const sessionIdHistoriesMap = await GlmModelProvider.sessionIdHistoriesMap;
+    const sessionIdHistoriesMap = await GlmModelProvider.sessionIdHistoriesMap;
 
-		const isSessionHistoryExists = !!sessionIdHistoriesMap[sessionId];
+    const isSessionHistoryExists = !!sessionIdHistoriesMap[sessionId];
 
-		const prompt = await this.buildGeneratePrompt({ message });
+    const prompt = await this.buildGeneratePrompt({ message });
 
-		const buildStream = async () => {
-			let aiStream = null;
-			if (!isSessionHistoryExists) {
-				delete sessionIdHistoriesMap[sessionId];
-				aiStream = aiRunnable.stream(
-					{
-						input: prompt,
-					},
-					aiRunnableConfig
-				);
-			} else {
-				aiStream = aiRunnable.stream(
-					{
-						input: `
+    const buildStream = async () => {
+      let aiStream = null;
+      if (!isSessionHistoryExists) {
+        delete sessionIdHistoriesMap[sessionId];
+        aiStream = aiRunnable.stream(
+          {
+            input: prompt,
+          },
+          aiRunnableConfig,
+        );
+      } else {
+        aiStream = aiRunnable.stream(
+          {
+            input: `
                           continue, please do not reply with any text other than the code, and do not use markdown syntax.
                           go continue.
                       `,
-					},
-					aiRunnableConfig
-				);
-			}
-			return aiStream;
-		};
+          },
+          aiRunnableConfig,
+        );
+      }
+      return aiStream;
+    };
 
-		let result = [];
-		const aiStream = await buildStream();
-		if (aiStream) {
-			for await (const chunk of aiStream) {
-				const text = GlmModelProvider.answerContentToText(chunk.content);
-				result.push(text);
-			}
-		}
-		const ai_stream_string = result.join("");
-		const code_array = extractCodeBlocks(ai_stream_string);
-		console.log(code_array);
-		// 解析生成的代码
+    let result = [];
+    const aiStream = await buildStream();
+    if (aiStream) {
+      for await (const chunk of aiStream) {
+        const text = GlmModelProvider.answerContentToText(chunk.content);
+        result.push(text);
+      }
+    }
+    const ai_stream_string = result.join('');
+    const code_array = extractCodeBlocks(ai_stream_string);
+    console.log(code_array);
+    // 解析生成的代码
 
-		return [code_array[0], code_array[1]];
-	}
+    return [code_array[0], code_array[1]];
+  }
 }
 
 module.exports = new AiService();

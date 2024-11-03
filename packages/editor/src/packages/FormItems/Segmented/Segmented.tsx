@@ -29,7 +29,7 @@ export interface IConfig {
 const MSegmented = ({ id, type, config, onChange }: ComponentType<IConfig>, ref: any) => {
   const [data, setData] = useState<Array<string>>([]);
   const [visible, setVisible] = useState(true);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState<boolean | undefined>();
   const { form, formId, setFormData } = useFormContext();
   const variableData = usePageStore((state) => state.page.variableData);
 
@@ -46,7 +46,7 @@ const MSegmented = ({ id, type, config, onChange }: ComponentType<IConfig>, ref:
 
   // 启用和禁用
   useEffect(() => {
-    setDisabled(config.props.formWrap?.disabled || false);
+    if (typeof config.props.formWrap.disabled === 'boolean') setDisabled(config.props.formWrap.disabled);
   }, [config.props.formWrap?.disabled]);
 
   useEffect(() => {

@@ -1,11 +1,10 @@
 import React, { MouseEvent, useState, useEffect, memo } from 'react';
 import { useParams } from 'react-router-dom';
-import { ConfigProvider, FloatButton, Image, Popover } from 'antd';
-import { CommentOutlined, InfoCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { ConfigProvider, FloatButton, Image, Popover, Tooltip } from 'antd';
+import { CommentOutlined, LinkOutlined, QuestionCircleOutlined, SoundOutlined } from '@ant-design/icons';
 import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
-import * as Components from '@/packages/index';
-import { Page } from '@/packages/Page';
+import { getComponent } from '@/packages/index';
 import { IDragTargetItem } from '@/packages/types/index';
 import { createId, getElement } from '@/utils/util';
 import storage from '@/utils/storage';
@@ -13,7 +12,8 @@ import { getPageDetail } from '@/api';
 import Toolbar from '@/components/Toolbar/Toolbar';
 import { message } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
-import { PageConfig } from '@/packages/Page';
+import Page from '@/packages/Page/Page';
+import PageConfig from '@/packages/Page/Schema';
 import './index.less';
 
 /**
@@ -111,14 +111,14 @@ const Editor = () => {
   // 拖拽接收
   const [, drop] = useDrop({
     accept: 'MENU_ITEM',
-    drop(item: IDragTargetItem, monitor: any) {
+    async drop(item: IDragTargetItem, monitor: any) {
       // 此处必须检测该组件是否已经被放入完成，如果已经放置到其它容器中，直接返回。
       if (monitor.didDrop()) return;
       // 生成默认配置
-      const { config, events, methods = [], elements = [] }: any = Components[(item.type + 'Config') as keyof typeof Components] || {};
+      const { config, events, methods = [], elements = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
       const childElement =
-        elements.map((child: IDragTargetItem) => {
-          const { config, events, methods = [] }: any = Components[(child.type + 'Config') as keyof typeof Components] || {};
+        elements.map(async (child: IDragTargetItem) => {
+          const { config, events, methods = [] }: any = (await getComponent(child.type + 'Config'))?.default || {};
           return {
             id: createId(child.type),
             name: child.name,
@@ -129,14 +129,16 @@ const Editor = () => {
             methods,
           };
         }) || [];
-      addElement({
-        type: item.type,
-        name: item.name,
-        id: item.id,
-        config,
-        events,
-        methods,
-        elements: childElement,
+      Promise.all(childElement).then((res) => {
+        addElement({
+          type: item.type,
+          name: item.name,
+          id: item.id,
+          config,
+          events,
+          methods,
+          elements: res,
+        });
       });
     },
     collect: (monitor) => ({
@@ -281,7 +283,10 @@ const Editor = () => {
         },
       }}
     >
-      <FloatButton.Group trigger="click" type="primary" style={{ insetInlineEnd: 24 }} icon={<InfoCircleOutlined />}>
+      <FloatButton.Group trigger="click" type="primary" style={{ insetInlineEnd: 24 }} icon={<SoundOutlined />}>
+        <Tooltip title="使用文档" placement="left">
+          <FloatButton icon={<LinkOutlined />} onClick={() => window.open('http://docs.marsview.cc', '_blank')} />
+        </Tooltip>
         <Popover
           content={
             <>

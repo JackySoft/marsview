@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, Col, Layout, Row, Pagination, Spin, Empty, Button, Form, Tooltip, Image } from 'antd';
 import { UserOutlined, DeleteOutlined, LockOutlined, PlusOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
+import { useMediaQuery } from 'react-responsive';
 import { getProjectList, delProject } from '@/api';
 import { Project } from '@/api/types';
 import { Modal, message } from '@/utils/AntdGlobal';
@@ -23,6 +24,10 @@ export default function Index() {
   const [current, setCurrent] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(12);
   const createRef = useRef<{ open: () => void }>();
+
+  // 判断是否是超大屏
+  const isXLarge = useMediaQuery({ query: '(min-width: 1920px)' });
+
 
   useEffect(() => {
     getList(current, pageSize);
@@ -72,15 +77,12 @@ export default function Index() {
           <>
             <div className={styles.projectList}>
               <Spin spinning={loading} size="large" tip="加载中...">
-                <Row gutter={[20, 20]}>
+                <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(${isXLarge ? 400 : 300}px, 1fr))`,
+                    gap: isXLarge ? 30 : 20, }}>
                   {projectList.map((item: Project.ProjectItem, index) => {
-                    return (
-                      <Col span={6} key={item.id || index}>
-                        <CardItem item={item} isAuth={item.id ? true : false} getList={getList} />
-                      </Col>
-                    );
+                    return <CardItem item={item} isAuth={item.id ? true : false} getList={getList} key={item.id || item.user_name + index} />;
                   })}
-                </Row>
+                </div>
               </Spin>
             </div>
             <Pagination

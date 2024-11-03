@@ -131,10 +131,14 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
       }),
     );
   },
-  setFormData({ name, value }: any) {
+  setFormData({ name, value, type }: any) {
     set(
       produce((state) => {
-        state.page.formData[name] = { ...state.page.formData[name], ...value };
+        if (type === 'override') {
+          state.page.formData[name] = value;
+        } else {
+          state.page.formData[name] = { ...state.page.formData[name], ...value };
+        }
       }),
     );
   },

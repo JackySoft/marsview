@@ -4,31 +4,44 @@
 export interface SysComItem {
   type: string;
   title: string;
+  hidden?: boolean;
   data: Array<{
     icon: string;
     name: string;
     type: string;
+    hidden?: boolean;
   }>;
 }
 const components = [
+  {
+    type: 'Page',
+    title: '页面组件',
+    hidden: true,
+    data: [],
+  },
   {
     type: 'Scene',
     title: '场景组件',
     data: [
       {
         icon: '',
-        name: '搜索表单',
+        name: '行内查询表单',
         type: 'SearchForm',
       },
       {
         icon: '',
-        name: '普通表格',
+        name: '网格查询表单',
+        type: 'GridForm',
+      },
+      {
+        icon: '',
+        name: '基础表格',
         type: 'MarsTable',
       },
     ],
   },
   {
-    type: 'Layouts',
+    type: 'Container',
     title: '容器组件',
     data: [
       {
@@ -54,7 +67,7 @@ const components = [
     ],
   },
   {
-    type: 'LayoutComp',
+    type: 'Layout',
     title: '布局组件',
     data: [
       {
@@ -80,7 +93,7 @@ const components = [
     ],
   },
   {
-    type: 'Form',
+    type: 'FormItems',
     title: '表单组件',
     data: [
       {
@@ -201,7 +214,7 @@ const components = [
     ],
   },
   {
-    type: 'Echarts',
+    type: 'Echart',
     title: '图表组件',
     data: [
       {
@@ -281,6 +294,12 @@ const components = [
         name: '标签页',
         type: 'Tabs',
       },
+      {
+        icon: '',
+        name: '子标签页',
+        type: 'Tab',
+        hidden: true,
+      },
     ],
   },
   {
@@ -310,7 +329,7 @@ const components = [
     ],
   },
   {
-    type: 'BasicComp',
+    type: 'Basic',
     title: '基础组件',
     data: [
       {
@@ -361,7 +380,7 @@ const components = [
     ],
   },
   {
-    type: 'Map',
+    type: 'Other',
     title: '地图',
     data: [
       {
@@ -369,12 +388,6 @@ const components = [
         name: 'BMap',
         type: 'BMap',
       },
-    ],
-  },
-  {
-    type: 'MicroApp',
-    title: '微服务',
-    data: [
       {
         icon: '',
         name: 'IFrame',

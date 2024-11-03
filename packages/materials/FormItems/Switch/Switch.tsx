@@ -13,7 +13,7 @@ import { useFormContext } from '../../utils/context';
 const MSwitch = ({ config, onChange }: ComponentType, ref: any) => {
   const { form, formId, setFormData } = useFormContext();
   const [visible, setVisible] = useState(true);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState<boolean | undefined>();
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
@@ -27,7 +27,7 @@ const MSwitch = ({ config, onChange }: ComponentType, ref: any) => {
 
   // 启用和禁用
   useEffect(() => {
-    setDisabled(config.props.formWrap.disabled || false);
+    if (typeof config.props.formWrap.disabled === 'boolean') setDisabled(config.props.formWrap.disabled);
   }, [config.props.formWrap.disabled]);
 
   useImperativeHandle(ref, () => {
