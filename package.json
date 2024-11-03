@@ -73,6 +73,7 @@
     "react-dom": "latest",
     "react-error-boundary": "^4.0.13",
     "react-quill": "^2.0.0",
+    "react-responsive": "^10.0.0",
     "react-router-dom": "^6.21.2",
     "standard-version": "^9.5.0",
     "styled-components": "^6.1.13",

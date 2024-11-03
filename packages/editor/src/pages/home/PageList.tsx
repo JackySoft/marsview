@@ -11,8 +11,9 @@ import {
   ClockCircleOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
-import { Button, Col, Empty, Form, Image, Layout, Pagination, Row, Spin, Tag, Tooltip } from 'antd';
+import { Button, Empty, Form, Image, Layout, Pagination, Spin, Tag, Tooltip } from 'antd';
 import dayjs from 'dayjs';
+import { useMediaQuery } from 'react-responsive';
 import { getPageList, copyPageData, delPageData } from '@/api';
 import { PageItem } from '@/api/types';
 import { message, Modal } from '@/utils/AntdGlobal';
@@ -35,6 +36,9 @@ export default function Index() {
   const [previewUrl, setPreviewUrl] = useState('');
   const createPageRef = useRef<{ open: () => void }>();
   const navigate = useNavigate();
+
+  // 判断是否是超大屏
+  const isXLarge = useMediaQuery({ query: '(min-width: 1920px)' });
 
   useEffect(() => {
     getList(current, pageSize);
@@ -173,7 +177,13 @@ export default function Index() {
           <>
             <div className={styles.pagesContent}>
               <Spin spinning={loading} size="large" tip="加载中...">
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: 20 }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(auto-fill, minmax(${isXLarge ? 400 : 300}px, 1fr))`,
+                    gap: isXLarge ? 30 : 20,
+                  }}
+                >
                   {content.map((item: PageItem, index: number) => {
                     return <SectionItem item={item} key={item.id || item.user_name + index} />;
                   })}
