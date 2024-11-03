@@ -1,7 +1,7 @@
-import { ComponentType } from '../../types';
-import { handleApi } from '../../utils/handleApi';
-import { createId, isNotEmpty, loadScript } from '../../utils/util';
-import { usePageStore } from '../../stores/pageStore';
+import { ComponentType } from '@materials/types';
+import { handleApi } from '@materials/utils/handleApi';
+import { createId, isNotEmpty, loadScript } from '@materials/utils/util';
+import { usePageStore } from '@materials/stores/pageStore';
 import { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
 
 /**

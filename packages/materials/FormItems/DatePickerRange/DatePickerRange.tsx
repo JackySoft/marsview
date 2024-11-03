@@ -1,8 +1,8 @@
-import { ComponentType } from '../../types';
-import { getDateRangeByType, isNull } from '../../utils/util';
+import { ComponentType } from '@materials/types';
+import { getDateRangeByType, isNull } from '@materials/utils/util';
 import { Form, DatePicker, FormItemProps } from 'antd';
 import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
-import { useFormContext } from '../../utils/context';
+import { useFormContext } from '@materials/utils/context';
 
 export interface IConfig {
   defaultValue: string;

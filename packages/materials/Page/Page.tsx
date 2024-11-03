@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
-import MarsRender from '../MarsRender/MarsRender';
-import { usePageStore } from '../stores/pageStore';
-import { handleActionFlow } from '../utils/action';
+import MarsRender from '@materials/MarsRender/MarsRender';
+import { usePageStore } from '@materials/stores/pageStore';
+import { handleActionFlow } from '@materials/utils/action';
 
 /**
  * @param props 组件本身属性

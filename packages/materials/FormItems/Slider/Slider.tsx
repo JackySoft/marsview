@@ -1,8 +1,8 @@
 import { Form, FormItemProps, Slider } from 'antd';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { ComponentType } from '../../types';
-import { isNull } from '../../utils/util';
-import { useFormContext } from '../../utils/context';
+import { ComponentType } from '@materials/types';
+import { isNull } from '@materials/utils/util';
+import { useFormContext } from '@materials/utils/context';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {

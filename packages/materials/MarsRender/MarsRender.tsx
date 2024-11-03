@@ -1,14 +1,14 @@
 import React, { lazy, Suspense, forwardRef, memo, useEffect, useState } from 'react';
-import { ComItemType, ConfigType } from '../types/index';
-import { module as Components } from '../index';
-import { handleActionFlow } from '../utils/action';
-import { setComponentRef } from '../utils/useComponentRefs';
-import { usePageStore } from '../stores/pageStore';
+import { ComItemType, ConfigType } from '@materials/types/index';
+import { module as Components } from '@materials/index';
+import { handleActionFlow } from '@materials/utils/action';
+import { setComponentRef } from '@materials/utils/useComponentRefs';
+import { usePageStore } from '@materials/stores/pageStore';
 import { useShallow } from 'zustand/react/shallow';
 import { produce } from 'immer';
 import dayjs from 'dayjs';
 import * as antd from 'antd';
-import { isNull, loadStyle, renderFormula } from '../utils/util';
+import { isNull, loadStyle, renderFormula } from '@materials/utils/util';
 import { omit } from 'lodash-es';
 import './index.less';
 

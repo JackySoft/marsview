@@ -1,9 +1,9 @@
 import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { Typography } from 'antd';
 import dayjs from 'dayjs';
-import { ComponentType } from '../../types';
-import { formatNumber } from '../../utils/util';
-import { message } from '../../utils/AntdGlobal';
+import { ComponentType } from '@materials/types';
+import { formatNumber } from '@materials/utils/util';
+import { message } from '@materials/utils/AntdGlobal';
 import { omit } from 'lodash-es';
 /**
  *

@@ -2,10 +2,10 @@
  * 对组件配置的api进行处理
  */
 
-import { usePageStore } from '../stores/pageStore';
-import { ApiConfig } from '../types';
+import { usePageStore } from '@materials/stores/pageStore';
+import { ApiConfig } from '@materials/types';
 import request from './request';
-import { message } from '../utils/AntdGlobal';
+import { message } from '@materials/utils/AntdGlobal';
 import { getEnv, handleArrayVariable, renderFormula, renderTemplate } from './util';
 import { get } from 'lodash-es';
 import qs from 'qs';

@@ -1,4 +1,4 @@
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import { useState, useImperativeHandle, forwardRef } from 'react';
 
 /**

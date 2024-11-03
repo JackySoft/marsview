@@ -1,11 +1,11 @@
 import { Form } from 'antd';
 import { forwardRef, memo, useImperativeHandle, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
-import MarsRender from '../../MarsRender/MarsRender';
-import { FormContext } from '../../utils/context';
-import { usePageStore } from '../../stores/pageStore';
-import { ComponentType } from '../../types';
-import { dateFormat } from '../../utils/util';
+import MarsRender from '@materials/MarsRender/MarsRender';
+import { FormContext } from '@materials/utils/context';
+import { usePageStore } from '@materials/stores/pageStore';
+import { ComponentType } from '@materials/types';
+import { dateFormat } from '@materials/utils/util';
 /**
  *
  * @param props 组件本身属性

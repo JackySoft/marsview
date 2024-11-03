@@ -1,7 +1,7 @@
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import { Flex } from 'antd';
 import React from 'react';
-import MarsRender from '../../MarsRender/MarsRender';
+import MarsRender from '@materials/MarsRender/MarsRender';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
 /*泛型只需要定义组件本身用到的属性*/

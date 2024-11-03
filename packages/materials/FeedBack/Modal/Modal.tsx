@@ -1,7 +1,7 @@
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import { Modal, Spin } from 'antd';
 import { forwardRef, memo, useEffect, useImperativeHandle, useState } from 'react';
-import MarsRender from '../../MarsRender/MarsRender';
+import MarsRender from '@materials/MarsRender/MarsRender';
 
 /**
  *

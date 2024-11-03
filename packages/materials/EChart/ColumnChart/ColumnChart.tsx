@@ -1,9 +1,9 @@
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { Column } from '@ant-design/plots';
-import { handleApi } from '../../utils/handleApi';
+import { handleApi } from '@materials/utils/handleApi';
 import { Spin } from 'antd';
-import { usePageStore } from '../../stores/pageStore';
+import { usePageStore } from '@materials/stores/pageStore';
 /**
  *
  * @param config 组件配置属性值

@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Button, ButtonProps, Result } from 'antd';
 import * as icons from '@ant-design/icons';
-import { ComponentType } from '../../types';
-import { handleActionFlow } from '../../utils/action';
+import { ComponentType } from '@materials/types';
+import { handleActionFlow } from '@materials/utils/action';
 
 /*泛型只需要定义组件本身用到的属性*/
 export interface IConfig {

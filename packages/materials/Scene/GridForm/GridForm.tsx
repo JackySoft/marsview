@@ -3,11 +3,11 @@ import { Button, Form, Space } from 'antd';
 import { DownOutlined, UpOutlined, SearchOutlined, RedoOutlined } from '@ant-design/icons';
 import { omit } from 'lodash-es';
 import styled from 'styled-components';
-import MarsRender from '../../MarsRender/MarsRender';
-import { usePageStore } from '../../stores/pageStore';
-import { FormContext } from '../../utils/context';
-import { dateFormat } from '../../utils/util';
-import { ComponentType } from '../../types';
+import MarsRender from '@materials/MarsRender/MarsRender';
+import { usePageStore } from '@materials/stores/pageStore';
+import { FormContext } from '@materials/utils/context';
+import { dateFormat } from '@materials/utils/util';
+import { ComponentType } from '@materials/types';
 
 // 定义包裹容器
 const DivWrapper: any = memo(styled.div<{ $minWidth: number; $len: number }>`

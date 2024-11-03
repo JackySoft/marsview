@@ -3,8 +3,8 @@
  */
 
 import dayjs from 'dayjs';
-import { usePageStore } from '../stores/pageStore';
-import { ComponentType } from '../types';
+import { usePageStore } from '@materials/stores/pageStore';
+import { ComponentType } from '@materials/types';
 import { get } from 'lodash-es';
 import { cloneDeep } from 'lodash-es';
 import copy from 'copy-to-clipboard';

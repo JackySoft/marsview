@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { usePageStore } from '../stores/pageStore';
+import { usePageStore } from '@materials/stores/pageStore';
 import { handleArrayVariable } from './util';
 declare module 'axios' {
   interface AxiosRequestConfig {

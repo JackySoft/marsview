@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { Statistic } from 'antd';
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import * as icons from '@ant-design/icons';
-import { message } from '../../utils/AntdGlobal';
+import { message } from '@materials/utils/AntdGlobal';
 import { omit } from 'lodash-es';
 /**
  *

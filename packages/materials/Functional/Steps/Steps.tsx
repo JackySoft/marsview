@@ -1,8 +1,8 @@
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import { Steps } from 'antd';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { handleApi } from '../../utils/handleApi';
-import { usePageStore } from '../../stores/pageStore';
+import { handleApi } from '@materials/utils/handleApi';
+import { usePageStore } from '@materials/stores/pageStore';
 
 /*泛型只需要定义组件本身用到的属性*/
 export interface IConfig {

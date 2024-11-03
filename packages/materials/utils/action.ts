@@ -8,14 +8,14 @@ import {
   MethodsAction,
   NotificationAction,
   VariableAction,
-} from '../types';
+} from '@materials/types';
 import { getComponentRef } from './useComponentRefs';
 import { handleApi } from './handleApi';
-import { usePageStore } from '../stores/pageStore';
+import { usePageStore } from '@materials/stores/pageStore';
 import { copyText, handleArrayVariable, handleParamVariable, isNotEmpty, renderFormula, renderTemplate } from './util';
-import { Modal, message, notification } from '../utils/AntdGlobal';
+import { Modal, message, notification } from '@materials/utils/AntdGlobal';
 import request from './request';
-import router from './../../admin/src/router/index';
+import router from '../../admin/src/router/index';
 
 // 把工作流转换为链表结构，此算法需要进一步优化。
 function convertArrayToLinkedList(nodes: any, isSuccessBranch = true) {

@@ -1,4 +1,4 @@
-import request from './../utils/request';
+import request from '@materials/utils/request';
 
 // 图片上传
 export const uploadImg = (params: any) => {

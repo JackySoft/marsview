@@ -2,13 +2,13 @@ import React, { forwardRef, memo, useEffect, useImperativeHandle, useState } fro
 import { Button, Table, Image, Tag, TablePaginationConfig, Tooltip, Typography, Badge } from 'antd';
 import { pickBy } from 'lodash-es';
 import * as icons from '@ant-design/icons';
-import MarsRender from '../../MarsRender/MarsRender';
-import { handleApi } from '../../utils/handleApi';
-import { handleActionFlow } from '../../utils/action';
-import * as util from '../../utils/util';
-import { usePageStore } from '../../stores/pageStore';
-import { ComponentType } from '../../types';
-import AuthButton from '../../Functional/Button/AuthButton';
+import MarsRender from '@materials/MarsRender/MarsRender';
+import { handleApi } from '@materials/utils/handleApi';
+import { handleActionFlow } from '@materials/utils/action';
+import * as util from '@materials/utils/util';
+import { usePageStore } from '@materials/stores/pageStore';
+import { ComponentType } from '@materials/types';
+import AuthButton from '@materials/Functional/Button/AuthButton';
 import { get } from 'lodash-es';
 import styles from './index.module.less';
 
