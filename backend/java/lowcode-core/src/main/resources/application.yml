@@ -8,7 +8,8 @@ spring:
     username: yangshare2023@qq.com
     password: nqmblqofepasgjhd
     properties: { 'mail.smtp.ssl.enable', true }
-    test-connection: true
+    # 测试连接,如果需要启动就检查邮箱服务设置为true
+    test-connection: false
     protocol: smtps
     port: 465
   #redis配置
