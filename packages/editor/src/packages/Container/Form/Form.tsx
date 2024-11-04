@@ -1,13 +1,14 @@
 import { ComponentType, IDragTargetItem } from '@/packages/types';
 import { Form } from 'antd';
-import { forwardRef, memo, useImperativeHandle, useState } from 'react';
+import { forwardRef, memo, useCallback, useImperativeHandle, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { useShallow } from 'zustand/react/shallow';
 import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { usePageStore } from '@/stores/pageStore';
 import { FormContext } from '@/packages/utils/context';
-import { dateFormat } from '@/packages/utils/util';
+import { dateFormat, getDateByType, getDateRangeByType, isNotEmpty } from '@/packages/utils/util';
+import dayjs from 'dayjs';
 /**
  *
  * @param props 组件本身属性
@@ -26,6 +27,7 @@ const MForm = ({ id, type, config, elements, onFinish, onChange }: ComponentType
   );
 
   const [visible, setVisible] = useState(true);
+  const [initialValues, setInitialValues] = useState({});
 
   // 拖拽接收
   const [, drop] = useDrop({
@@ -95,10 +97,10 @@ const MForm = ({ id, type, config, elements, onFinish, onChange }: ComponentType
       },
       init(values: any = {}) {
         const initData = dateFormat(elements, values);
-        form.setFieldsValue(initData);
+        form.setFieldsValue({ ...initData });
         setFormData({
           name: id,
-          value: initData,
+          value: { ...initData },
           type: 'override',
         });
       },
@@ -110,9 +112,26 @@ const MForm = ({ id, type, config, elements, onFinish, onChange }: ComponentType
       },
     };
   });
+
+  // 设置默认值
+  const initValues = useCallback((type: string, name: string, value: any) => {
+    if (name && isNotEmpty(value)) {
+      let initValue = value;
+      if (type === 'InputNumber') initValue = Number(value);
+      if (type === 'DatePicker') initValue = getDateByType(value);
+      if (type === 'DatePickerRange') initValue = getDateRangeByType(value);
+      if (type === 'TimePicker') initValue = dayjs(value, 'HH:mm:ss');
+      setInitialValues({ [name]: initValue });
+      form.setFieldValue([name], initValue);
+      setFormData({
+        name: id,
+        value: { [name]: initValue },
+      });
+    }
+  }, []);
   return (
     visible && (
-      <FormContext.Provider value={{ form, formId: id, setFormData }}>
+      <FormContext.Provider value={{ initValues }}>
         <div ref={drop}>
           <Form
             form={form}
@@ -120,6 +139,7 @@ const MForm = ({ id, type, config, elements, onFinish, onChange }: ComponentType
             {...config.props}
             data-id={id}
             data-type={type}
+            initialValues={initialValues}
             onFinish={handleFinish}
             onValuesChange={handleChange}
           >

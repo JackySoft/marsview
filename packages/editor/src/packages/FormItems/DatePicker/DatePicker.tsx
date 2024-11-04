@@ -16,19 +16,14 @@ export interface IConfig {
  * @returns 返回组件
  */
 const MDatePicker = ({ id, type, config, onChange }: ComponentType<IConfig> & { form: FormInstance }, ref: any) => {
-  const { form, formId, setFormData } = useFormContext();
+  const { initValues } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
-    // 日期组件初始化值
-    if (name && !isNull(value)) {
-      const date = getDateByType(value);
-      form?.setFieldValue(name, date);
-      setFormData({ name: formId, value: { [name]: date } });
-    }
+    initValues(type, name, value);
   }, [config.props.defaultValue]);
 
   // 启用和禁用

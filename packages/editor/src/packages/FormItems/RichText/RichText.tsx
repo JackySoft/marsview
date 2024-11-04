@@ -3,7 +3,6 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import ReactQuill, { Range, UnprivilegedEditor } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { ComponentType } from '@/packages/types';
-import { isNull } from '@/packages/utils/util';
 import { useFormContext } from '@/packages/utils/context';
 import styles from './index.module.less';
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
@@ -22,18 +21,14 @@ export interface IConfig {
  * @returns 返回组件
  */
 const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, ref: any) => {
-  const { form, formId, setFormData } = useFormContext();
+  const { initValues } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
-    // 日期组件初始化值
-    if (name && !isNull(value)) {
-      form?.setFieldValue(name, value);
-      setFormData({ name: formId, value: { [name]: value } });
-    }
+    initValues(type, name, value);
   }, [config.props.defaultValue]);
 
   // 启用和禁用
@@ -42,23 +37,11 @@ const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, 
   }, [config.props.formWrap.readOnly]);
 
   const handleChange = (val: string) => {
-    let value = val;
-    // 处理空值
-    if (val === '<p><br></p>') {
-      form?.setFieldValue(config.props.formItem?.name, '');
-      value = '';
-    }
     onChange?.({
-      [config.props.formItem.name]: value,
+      [config.props.formItem.name]: val,
     });
   };
   const handleBlur = (range: Range, val: string, editor: UnprivilegedEditor) => {
-    let value = editor.getHTML();
-    // 处理空值
-    if (val === '<p><br></p>') {
-      form?.setFieldValue(config.props.formItem?.name, '');
-      value = '';
-    }
     onBlur?.({
       [config.props.formItem.name]: editor.getHTML(),
     });

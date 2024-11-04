@@ -21,19 +21,15 @@ export interface IConfig {
  * @param props 系统属性值：componentid、componentname等
  * @returns 返回组件
  */
-const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, ref: any) => {
-  const { form, formId, setFormData } = useFormContext();
+const MInput = ({ type, config, onChange, onBlur }: ComponentType<IConfig>, ref: any) => {
+  const { initValues } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
-    // 日期组件初始化值
-    if (name && !isNull(value)) {
-      form?.setFieldValue(name, value);
-      setFormData({ name: formId, value: { [name]: value } });
-    }
+    initValues(type, name, value);
   }, []);
 
   // 启用和禁用
@@ -42,25 +38,13 @@ const MInput = ({ id, type, config, onChange, onBlur }: ComponentType<IConfig>, 
   }, [config.props.formWrap.readOnly]);
 
   const handleChange = (val: string) => {
-    let value = val;
-    // 处理空值
-    if (val === '<p><br></p>') {
-      form?.setFieldValue(config.props.formItem?.name, '');
-      value = '';
-    }
     onChange?.({
       [config.props.formItem.name]: val,
     });
   };
   const handleBlur = (range: Range, val: string, editor: UnprivilegedEditor) => {
-    let value = editor.getHTML();
-    // 处理空值
-    if (val === '<p><br></p>') {
-      form?.setFieldValue(config.props.formItem?.name, '');
-      value = '';
-    }
     onBlur?.({
-      [config.props.formItem.name]: value,
+      [config.props.formItem.name]: editor.getHTML(),
     });
   };
   useImperativeHandle(ref, () => {

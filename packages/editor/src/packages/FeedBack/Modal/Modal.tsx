@@ -17,7 +17,11 @@ const AntdModal = forwardRef(({ id, type, config, elements, onLoad, onOk, onCanc
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(config.props.confirmLoading || false);
   const [loading, setLoading] = useState(false);
-  const { mode, addChildElements } = usePageStore((state) => ({ mode: state.mode, addChildElements: state.addChildElements }));
+  const { mode, addChildElements, setSelectedElement } = usePageStore((state) => ({
+    mode: state.mode,
+    addChildElements: state.addChildElements,
+    setSelectedElement: state.setSelectedElement,
+  }));
   // 拖拽接收
   const [, drop] = useDrop({
     accept: 'MENU_ITEM',
@@ -54,10 +58,14 @@ const AntdModal = forwardRef(({ id, type, config, elements, onLoad, onOk, onCanc
         // 打开弹框
         open: () => {
           return new Promise((resolve) => {
-            setVisible(() => {
+            setVisible(true);
+            setTimeout(() => {
               resolve(true);
-              return true;
-            });
+              setSelectedElement({
+                id,
+                type,
+              });
+            }, 0);
           });
         },
         // 显示确认Loading
@@ -97,6 +105,9 @@ const AntdModal = forwardRef(({ id, type, config, elements, onLoad, onOk, onCanc
     onCancel?.();
     // 取消事件
     setVisible(false);
+    setTimeout(() => {
+      setSelectedElement(undefined);
+    }, 0);
   };
   /**
    * 开发模式下处理弹框根样式

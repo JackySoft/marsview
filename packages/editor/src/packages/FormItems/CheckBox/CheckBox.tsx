@@ -27,7 +27,7 @@ const MCheckBox = ({ id, type, config, onChange }: ComponentType<IConfig>, ref: 
   const [data, setData] = useState<Array<{ label: string; value: any }>>([]);
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
-  const { form, formId, setFormData } = useFormContext();
+  const { initValues } = useFormContext();
   const variableData = usePageStore((state) => state.page.variableData);
 
   /**
@@ -37,10 +37,7 @@ const MCheckBox = ({ id, type, config, onChange }: ComponentType<IConfig>, ref: 
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue || [];
-    if (name && !isNull(value)) {
-      form?.setFieldValue(name, value);
-      setFormData({ name: formId, value: { [name]: value } });
-    }
+    initValues(type, name, value);
   }, [JSON.stringify(config.props.defaultValue)]);
 
   // 启用和禁用
