@@ -11,7 +11,6 @@ import { message } from '@materials/utils/AntdGlobal';
  */
 function EditTable({ id, type, config }: ComponentType, ref: any) {
   const [visible, setVisible] = useState(true);
-  const { form } = useFormContext();
 
   useImperativeHandle(ref, () => ({
     show() {
@@ -25,15 +24,15 @@ function EditTable({ id, type, config }: ComponentType, ref: any) {
   return (
     visible && (
       <Form.Item {...config.props.formItem} data-id={id} data-type={type}>
-        <TableForm config={config} form={form} />
+        <TableForm config={config} />
       </Form.Item>
     )
   );
 }
 
-function TableForm({ config, form }: any) {
+function TableForm({ config }: any) {
   const [data, setData] = useState<any[]>([]);
-
+  const { form } = useFormContext();
   const initRow = useMemo(() => {
     const dataMap: { [key: string]: any } = { key: util.createId('key') };
     config.props.formWrap?.columns.map((item: any) => {

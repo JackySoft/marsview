@@ -1,11 +1,12 @@
 import { Form } from 'antd';
-import { forwardRef, memo, useImperativeHandle, useState } from 'react';
+import { forwardRef, memo, useCallback, useImperativeHandle, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import MarsRender from '@materials/MarsRender/MarsRender';
 import { FormContext } from '@materials/utils/context';
 import { usePageStore } from '@materials/stores/pageStore';
 import { ComponentType } from '@materials/types';
-import { dateFormat } from '@materials/utils/util';
+import { dateFormat, getDateByType, getDateRangeByType, isNotEmpty } from '@materials/utils/util';
+import dayjs from 'dayjs';
 /**
  *
  * @param props 组件本身属性
@@ -24,6 +25,7 @@ const MForm = ({ id, config, elements, onFinish, onChange }: ComponentType, ref:
     }),
   );
   const [visible, setVisible] = useState(true);
+  const [initialValues, setInitialValues] = useState({});
 
   // 提交表单
   const handleFinish = (values: any) => {
@@ -85,10 +87,26 @@ const MForm = ({ id, config, elements, onFinish, onChange }: ComponentType, ref:
     };
   });
 
+  // 设置默认值
+  const initValues = useCallback((type: string, name: string, value: any) => {
+    if (name && isNotEmpty(value)) {
+      let initValue = value;
+      if (type === 'InputNumber') initValue = Number(value);
+      if (type === 'DatePicker') initValue = getDateByType(value);
+      if (type === 'DatePickerRange') initValue = getDateRangeByType(value);
+      if (type === 'TimePicker') initValue = dayjs(value, 'HH:mm:ss');
+      setInitialValues({ [name]: initValue });
+      form.setFieldValue([name], initValue);
+      setFormData({
+        name: id,
+        value: { [name]: initValue },
+      });
+    }
+  }, []);
   return (
     visible && (
-      <FormContext.Provider value={{ form, formId: id, setFormData }}>
-        <Form form={form} style={config.style} {...config.props} onFinish={handleFinish} onValuesChange={handleChange}>
+      <FormContext.Provider value={{ initValues }}>
+        <Form form={form} style={config.style} {...config.props} initialValues={initialValues} onFinish={handleFinish} onValuesChange={handleChange}>
           <MarsRender elements={elements} />
         </Form>
       </FormContext.Provider>

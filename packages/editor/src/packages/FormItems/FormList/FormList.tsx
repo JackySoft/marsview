@@ -22,10 +22,10 @@ export interface IConfig {
  */
 const MFormList = ({ id, type, config, elements }: ComponentType<IConfig>, ref: any) => {
   const [visible, setVisible] = useState(true);
-  const { form } = useFormContext();
+  const { initValues } = useFormContext();
   // 初始化默认值
   useEffect(() => {
-    form?.setFieldValue(config.props.formItem.name, [{}]);
+    initValues(type, config.props.formItem.name, [{}]);
   }, []);
 
   useImperativeHandle(ref, () => {

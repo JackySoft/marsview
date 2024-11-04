@@ -148,7 +148,6 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
     return (
       <Suspense fallback={<antd.Spin size="default"></antd.Spin>}>
         <Component
-          className={['mars-component']} // 暂时还没用，日后可能会用
           id={item.id}
           type={item.type}
           config={{ ...config, props: { ...omit(config?.props, ['showOrHide']) } }}

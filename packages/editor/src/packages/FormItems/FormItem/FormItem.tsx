@@ -23,17 +23,13 @@ export interface IConfig {
  */
 const MFormItem = ({ id, type, config, elements }: ComponentType<IConfig>, ref: any) => {
   const addChildElements = usePageStore((state) => state.addChildElements);
-  const { form, formId, setFormData } = useFormContext();
+  const { initValues } = useFormContext();
   const [visible, setVisible] = useState(true);
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
-    // 日期组件初始化值
-    if (name && !isNull(value)) {
-      form?.setFieldValue(name, value);
-      setFormData({ name: formId, value: { [name]: value } });
-    }
+    initValues(type, name, value);
   }, [config.props.defaultValue]);
 
   // 拖拽接收

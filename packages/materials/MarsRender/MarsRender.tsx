@@ -168,8 +168,8 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
       return (
         <Suspense fallback={<antd.Spin size="default"></antd.Spin>}>
           <Component
-            className={['mars-component']} // 暂时还没用，日后可能会用
             id={item.id}
+            type={item.type}
             config={{ ...config, props: { ...omit(config?.props, ['showOrHide']) } }}
             elements={item.elements || []}
             // 把事件函数传递给子组件，子组件触发对应事件时，会执行回调函数

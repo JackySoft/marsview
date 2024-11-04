@@ -38,7 +38,7 @@ export type ComItemType = Pick<ComponentType, 'id' | 'type' | 'name' | 'parentId
 export interface ComponentType<T = any> {
   id: string;
   type: string;
-  name: string;
+  name: string | number;
   remoteUrl?: string;
   remoteConfigUrl?: string;
   remoteCssUrl?: string;

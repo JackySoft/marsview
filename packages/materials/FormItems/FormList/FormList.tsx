@@ -20,12 +20,12 @@ export interface IConfig {
  * @param props 系统属性值：componentid、componentname等
  * @returns 返回组件
  */
-const MFormList = ({ config, elements }: ComponentType<IConfig>, ref: any) => {
+const MFormList = ({ type, config, elements }: ComponentType<IConfig>, ref: any) => {
   const [visible, setVisible] = useState(true);
-  const { form } = useFormContext();
+  const { initValues } = useFormContext();
   // 初始化默认值
   useEffect(() => {
-    form?.setFieldValue(config.props.formItem.name, [{}]);
+    initValues(type, config.props.formItem.name, [{}]);
   }, []);
 
   useImperativeHandle(ref, () => {

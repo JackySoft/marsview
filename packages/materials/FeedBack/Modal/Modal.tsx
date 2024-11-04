@@ -25,10 +25,8 @@ const AntdModal = forwardRef(({ config, elements, onLoad, onOk, onCancel }: Comp
         // 打开弹框
         open: () => {
           return new Promise((resolve) => {
-            setVisible(() => {
-              resolve(true);
-              return true;
-            });
+            setVisible(true);
+            setTimeout(() => resolve(true), 0);
           });
         },
         // 显示确认Loading
