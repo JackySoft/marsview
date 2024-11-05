@@ -232,6 +232,7 @@ export interface ApiType {
   tips?: {
     success: string;
     fail: string;
+    isSuccess: boolean; // 是否开启系统成功提示
     isError: boolean; // 是否开启系统错误提示
   };
 }

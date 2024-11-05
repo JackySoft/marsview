@@ -46,7 +46,12 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
     const res = await getMenuList({
       project_id: parseInt(project_id),
     });
-    const menuData = arrayToTree(res.list);
+    // 菜单编辑时，父菜单不能选择自身子菜单，会产生冲突。
+    const parentId = form.getFieldValue('parent_id');
+    const filterList = res.list.filter((item: Menu.MenuItem) => {
+      return item.type === 1 && item.parent_id != parentId;
+    });
+    const menuData = arrayToTree(filterList);
     setMenuList(menuData);
   };
 
