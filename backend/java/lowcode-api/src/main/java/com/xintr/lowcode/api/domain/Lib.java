@@ -69,10 +69,6 @@ public class Lib extends BaseObject implements Serializable {
      */
     private String user_name;
 
-    /**
-     * 是否开放 1-公开 2-私有
-     */
-    private String is_public;
 
     /**
      * 创建时间
@@ -206,13 +202,6 @@ public class Lib extends BaseObject implements Serializable {
         this.created_at = created_at;
     }
 
-    public String getIs_public() {
-        return is_public;
-    }
-
-    public void setIs_public(String is_public) {
-        this.is_public = is_public;
-    }
 
     public String getReact_code() {
         return react_code;

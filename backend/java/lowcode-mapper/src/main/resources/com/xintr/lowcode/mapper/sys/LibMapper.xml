@@ -29,7 +29,6 @@
         <result column="hash" jdbcType="VARCHAR" property="hash"/>
         <result column="user_id" jdbcType="BIGINT" property="user_id"/>
         <result column="user_name" jdbcType="VARCHAR" property="user_name"/>
-        <result column="is_public" jdbcType="VARCHAR" property="is_public"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updated_at"/>
         <result column="created_at" jdbcType="TIMESTAMP" property="created_at"/>
     </resultMap>
@@ -43,9 +42,6 @@
                 <when test="type == 1">
                     and user_id = #{user_id}
                 </when>
-                <otherwise>
-                    and is_public = '1'
-                </otherwise>
             </choose>
         </where>
     </select>
