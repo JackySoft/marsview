@@ -52,8 +52,8 @@ export default {
     },
     {
       type: 'InputNumber',
-      label: '最小宽度',
-      name: ['minWidth'],
+      label: '每行几列',
+      name: ['cols'],
     },
     {
       type: 'Title',

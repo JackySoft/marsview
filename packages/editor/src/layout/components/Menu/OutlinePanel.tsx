@@ -79,6 +79,7 @@ const OutlinePanel = memo(() => {
       name,
       elements: dragChildren,
     };
+    let parentId = null;
     // 移动到组件里面，添加为子组件
     if (!info.dropToGap) {
       if (dropKey == 'page') {
@@ -86,19 +87,22 @@ const OutlinePanel = memo(() => {
       } else {
         const { element } = getElement(list, dropKey);
         if (element) {
+          parentId = dropKey;
           element.elements = element.elements || [];
-          element.elements.unshift(dropItem);
+          element.elements.unshift({ ...dropItem, parentId: dropKey });
         }
       }
     } else {
       const { index, elements } = getElement(list, dropKey) || { item: {}, index: 0 };
+      parentId = elements[index].parentId;
       if (dropPosition === -1) {
-        elements?.splice(index, 0, dropItem);
+        elements?.splice(index, 0, { ...dropItem, parentId });
       } else {
-        elements?.splice(index + 1, 0, dropItem);
+        elements?.splice(index + 1, 0, { ...dropItem, parentId });
       }
     }
-    dragSortElements(list);
+    dragSortElements({ id: dragKey, list, parentId });
+    setSelectedKeys([]);
   };
 
   return (
