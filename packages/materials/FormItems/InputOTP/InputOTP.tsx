@@ -1,9 +1,9 @@
 import { Form, Input, FormItemProps } from 'antd';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import type { GetProps } from 'antd';
-import { ComponentType } from '../../types';
-import { isNull } from '../../utils/util';
-import { useFormContext } from '../../utils/context';
+import { ComponentType } from '@materials/types';
+import { isNull } from '@materials/utils/util';
+import { useFormContext } from '@materials/utils/context';
 
 type OTPProps = GetProps<typeof Input.OTP>;
 
@@ -20,19 +20,15 @@ export interface IConfig {
  * @param props 系统属性值：componentid、componentname等
  * @returns 返回组件
  */
-const MInputPassword = ({ id, type, config, onChange }: ComponentType<IConfig>, ref: any) => {
-  const { form, formId, setFormData } = useFormContext();
+const MInputPassword = ({ type, config, onChange }: ComponentType<IConfig>, ref: any) => {
+  const { initValues } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
-    // 日期组件初始化值
-    if (name && !isNull(value)) {
-      form?.setFieldValue(name, value);
-      setFormData({ name: formId, value: { [name]: value } });
-    }
+    initValues(type, name, value);
   }, [config.props.defaultValue]);
 
   // 启用和禁用
@@ -63,7 +59,7 @@ const MInputPassword = ({ id, type, config, onChange }: ComponentType<IConfig>, 
   });
   return (
     visible && (
-      <Form.Item {...config.props.formItem} data-id={id} data-type={type}>
+      <Form.Item {...config.props.formItem}>
         <Input.OTP
           {...config.props.formWrap}
           disabled={disabled}

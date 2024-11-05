@@ -1,8 +1,8 @@
 import { Form, InputProps, FormItemProps } from 'antd';
 import { forwardRef, useImperativeHandle, useState } from 'react';
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 
-import MarsRender from '../../MarsRender/MarsRender';
+import MarsRender from '@materials/MarsRender/MarsRender';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {

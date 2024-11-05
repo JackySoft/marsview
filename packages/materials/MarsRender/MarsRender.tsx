@@ -1,14 +1,14 @@
 import React, { lazy, Suspense, forwardRef, memo, useEffect, useState } from 'react';
-import { ComItemType, ConfigType } from '../types/index';
-import { module as Components } from '../index';
-import { handleActionFlow } from '../utils/action';
-import { setComponentRef } from '../utils/useComponentRefs';
-import { usePageStore } from '../stores/pageStore';
+import { ComItemType, ConfigType } from '@materials/types/index';
+import { module as Components } from '@materials/index';
+import { handleActionFlow } from '@materials/utils/action';
+import { setComponentRef } from '@materials/utils/useComponentRefs';
+import { usePageStore } from '@materials/stores/pageStore';
 import { useShallow } from 'zustand/react/shallow';
 import { produce } from 'immer';
 import dayjs from 'dayjs';
 import * as antd from 'antd';
-import { isNull, loadStyle, renderFormula } from '../utils/util';
+import { isNull, loadStyle, renderFormula } from '@materials/utils/util';
 import { omit } from 'lodash-es';
 import './index.less';
 
@@ -64,22 +64,7 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
         return Comp;
       });
     } else if (Components[item.type as keyof typeof Components]) {
-      const Comp = lazy(() => {
-        let res = Components[item.type as keyof typeof Components]().then((mod: any) => {
-          if (mod[item.type]) {
-            cachedComponents[item.type] = mod[item.type];
-            return Promise.resolve({
-              default: mod[item.type],
-              get [Symbol.toStringTag]() {
-                return 'Module';
-              },
-            });
-          } else {
-            return Promise.reject();
-          }
-        });
-        return res;
-      });
+      const Comp = lazy(Components[item.type as keyof typeof Components]);
       setComponent(Comp);
     }
     setConfig(elementsMap[item.id].config);
@@ -181,10 +166,10 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
       );
     } else {
       return (
-        <Suspense fallback={<div>加载中</div>}>
+        <Suspense fallback={<antd.Spin size="default"></antd.Spin>}>
           <Component
-            className={['mars-component']} // 暂时还没用，日后可能会用
             id={item.id}
+            type={item.type}
             config={{ ...config, props: { ...omit(config?.props, ['showOrHide']) } }}
             elements={item.elements || []}
             // 把事件函数传递给子组件，子组件触发对应事件时，会执行回调函数

@@ -1,7 +1,7 @@
 import { Button } from 'antd';
-import storage from './../../utils/storage';
+import storage from '@materials/utils/storage';
 import { useParams } from 'react-router-dom';
-import { renderFormula } from '../../utils/util';
+import { renderFormula } from '@materials/utils/util';
 
 /**
  * 按钮权限控制

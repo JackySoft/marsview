@@ -1,10 +1,10 @@
 import { Form, InputProps, FormItemProps, Image } from 'antd';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import dayjs from 'dayjs';
-import { formatNumber, isNull } from '../../utils/util';
-import { useFormContext } from '../../utils/context';
-import { message } from '../../utils/AntdGlobal';
+import { formatNumber, isNull } from '@materials/utils/util';
+import { useFormContext } from '@materials/utils/context';
+import { message } from '@materials/utils/AntdGlobal';
 
 export interface IConfig {
   defaultValue: string;
@@ -12,18 +12,14 @@ export interface IConfig {
   formWrap: InputProps;
 }
 
-const StaticItem = ({ config }: ComponentType<IConfig>, ref: any) => {
-  const { form, formId, setFormData } = useFormContext();
+const StaticItem = ({ type, config }: ComponentType<IConfig>, ref: any) => {
+  const { initValues } = useFormContext();
   const [visible, setVisible] = useState(true);
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
-    // 日期组件初始化值
-    if (name && !isNull(value)) {
-      form?.setFieldValue(name, value);
-      setFormData({ name: formId, value: { [name]: value } });
-    }
+    initValues(type, name, value);
   }, [config.props.defaultValue]);
 
   useImperativeHandle(ref, () => {

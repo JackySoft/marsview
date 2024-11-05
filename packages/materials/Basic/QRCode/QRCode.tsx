@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { QRCode } from 'antd';
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 import { omit } from 'lodash-es';
 
 export type QRStatus = 'active' | 'expired' | 'loading' | 'scanned';

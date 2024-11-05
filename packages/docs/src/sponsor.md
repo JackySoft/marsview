@@ -12,6 +12,7 @@ Marsview 是一个开源的可视化搭建平台，采用 MIT 许可的开源项
 
 | 名称            | 头像                                                           |
 | --------------- | -------------------------------------------------------------- |
+| 钢铁侠          | <img src="http://docs.marsview.cc/sponsor/10.png"  width="50"> |
 | 物联网方案-肖工 | <img src="http://docs.marsview.cc/sponsor/3.png"  width="50">  |
 | 🥕 二月贝弋 🥕  | <img src="http://docs.marsview.cc/sponsor/2.png"  width="50">  |
 | 猩猩点灯        | <img src="http://docs.marsview.cc/sponsor/1.png"  width="50">  |

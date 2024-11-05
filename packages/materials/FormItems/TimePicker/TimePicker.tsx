@@ -1,8 +1,8 @@
-import { ComponentType } from '../../types';
-import { isNull } from '../../utils/util';
+import { ComponentType } from '@materials/types';
+import { isNull } from '@materials/utils/util';
 import { Form, FormItemProps, DatePickerProps, FormInstance, TimePicker } from 'antd';
 import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
-import { useFormContext } from '../../utils/context';
+import { useFormContext } from '@materials/utils/context';
 
 import dayjs from 'dayjs';
 
@@ -17,22 +17,15 @@ export interface IConfig {
  * @param props 系统属性值：componentid、componentname等
  * @returns 返回组件
  */
-const MTimePicker = ({ id, type, config, onChange }: ComponentType<IConfig> & { form: FormInstance }, ref: any) => {
-  const { form, formId, setFormData } = useFormContext();
+const MTimePicker = ({ type, config, onChange }: ComponentType<IConfig> & { form: FormInstance }, ref: any) => {
+  const { initValues } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState(config.props.formWrap.disabled);
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
-    // 日期组件初始化值
-    if (name && !isNull(value)) {
-      const timeObj = dayjs(value, 'HH:mm:ss');
-      if (timeObj.isValid()) {
-        form?.setFieldValue(name, timeObj);
-        setFormData({ name: formId, value: { [name]: timeObj } });
-      }
-    }
+    initValues(type, name, value);
   }, []);
 
   // 启用和禁用

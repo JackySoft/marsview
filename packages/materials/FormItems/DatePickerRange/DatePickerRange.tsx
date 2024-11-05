@@ -1,8 +1,8 @@
-import { ComponentType } from '../../types';
-import { getDateRangeByType, isNull } from '../../utils/util';
+import { ComponentType } from '@materials/types';
+import { getDateRangeByType, isNull } from '@materials/utils/util';
 import { Form, DatePicker, FormItemProps } from 'antd';
 import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
-import { useFormContext } from '../../utils/context';
+import { useFormContext } from '@materials/utils/context';
 
 export interface IConfig {
   defaultValue: string;
@@ -17,21 +17,16 @@ export interface IConfig {
  * @param props 系统属性值：componentid、componentname等
  * @returns 返回组件
  */
-const MDatePickerRange = ({ config, onChange }: ComponentType<IConfig>, ref: any) => {
+const MDatePickerRange = ({ type, config, onChange }: ComponentType<IConfig>, ref: any) => {
   const { RangePicker } = DatePicker;
-  const { form, formId, setFormData } = useFormContext();
+  const { initValues } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
-    // 日期组件初始化值
-    if (name && !isNull(value)) {
-      const date = getDateRangeByType(value);
-      form?.setFieldValue(name, date);
-      setFormData({ name: formId, value: { [name]: date } });
-    }
+    initValues(type, name, value);
   }, [config.props.defaultValue]);
 
   // 启用和禁用

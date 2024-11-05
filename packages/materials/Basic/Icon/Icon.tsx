@@ -1,6 +1,6 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import * as Icons from '@ant-design/icons';
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 /**
  *
  * @param props 组件本身属性

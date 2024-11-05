@@ -1,7 +1,7 @@
-import { ComponentType } from '../../types';
-import * as Components from '../../index';
-import MarsRender, { Material } from '../../MarsRender/MarsRender';
-import { usePageStore } from '../../stores/pageStore';
+import { ComponentType } from '@materials/types';
+import * as Components from '@materials/index';
+import MarsRender, { Material } from '@materials/MarsRender/MarsRender';
+import { usePageStore } from '@materials/stores/pageStore';
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Button, Space } from 'antd';
 

@@ -18,21 +18,14 @@ export interface IConfig {
  * @returns 返回组件
  */
 const MTimePicker = ({ id, type, config, onChange }: ComponentType<IConfig> & { form: FormInstance }, ref: any) => {
-  const { form, formId, setFormData } = useFormContext();
+  const { initValues } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState(config.props.formWrap.disabled);
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
-    // 日期组件初始化值
-    if (name && !isNull(value)) {
-      const timeObj = dayjs(value, 'HH:mm:ss');
-      if (timeObj.isValid()) {
-        form?.setFieldValue(name, timeObj);
-        setFormData({ name: formId, value: { [name]: timeObj } });
-      }
-    }
+    initValues(type, name, value);
   }, [config.props.defaultValue]);
 
   // 启用和禁用

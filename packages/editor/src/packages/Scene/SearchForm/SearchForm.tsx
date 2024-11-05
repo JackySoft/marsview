@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Button, ButtonProps, Form, Space } from 'antd';
 import { useDrop } from 'react-dnd';
 import { ComponentType, IDragTargetItem } from '@/packages/types';
@@ -8,9 +8,10 @@ import { DownOutlined, UpOutlined, SearchOutlined, RedoOutlined } from '@ant-des
 import * as icons from '@ant-design/icons';
 import { usePageStore } from '@/stores/pageStore';
 import { FormContext } from '@/packages/utils/context';
-import { dateFormat } from '../../utils/util';
+import { dateFormat, getDateByType, getDateRangeByType, isNotEmpty } from '../../utils/util';
 import { handleActionFlow } from '@/packages/utils/action';
 import styles from './index.module.less';
+import dayjs from 'dayjs';
 export interface IConfig {
   form: {
     submitText: string;
@@ -31,6 +32,7 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
   const [isExpand, setIsExpand] = useState(false);
   const [isMore, setIsMore] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [initialValues, setInitialValues] = useState({});
 
   const { addChildElements, updateToolbar, formData, setFormData } = usePageStore((state) => ({
     addChildElements: state.addChildElements,
@@ -157,12 +159,35 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
   const { submitText, resetText } = config.props.form || {};
   // 批量操作按钮
   const bulkActionList = config.props.bulkActionList || [];
-
+  // 设置默认值
+  const initValues = useCallback((type: string, name: string, value: any) => {
+    if (name && isNotEmpty(value)) {
+      let initValue = value;
+      if (type === 'InputNumber') initValue = Number(value);
+      if (type === 'DatePicker') initValue = getDateByType(value);
+      if (type === 'DatePickerRange') initValue = getDateRangeByType(value);
+      if (type === 'TimePicker') initValue = dayjs(value, 'HH:mm:ss');
+      setInitialValues({ [name]: initValue });
+      form.setFieldValue([name], initValue);
+      setFormData({
+        name: id,
+        value: { [name]: initValue },
+      });
+    }
+  }, []);
   const iconsList: { [key: string]: any } = icons;
   return (
     visible && (
-      <FormContext.Provider value={{ form, formId: id, setFormData }}>
-        <Form form={form} layout="inline" style={config.style} data-id={id} data-type={type} onValuesChange={handleValuesChange}>
+      <FormContext.Provider value={{ initValues }}>
+        <Form
+          form={form}
+          layout="inline"
+          style={config.style}
+          data-id={id}
+          data-type={type}
+          initialValues={initialValues}
+          onValuesChange={handleValuesChange}
+        >
           <div className={styles.formWrap} ref={drop} style={!isExpand ? { height: 32, overflow: 'hidden' } : {}}>
             {elements.length ? <MarsRender elements={elements} /> : <div className="slots">拖拽表单组件到这里</div>}
             <div ref={emptyRef}></div>

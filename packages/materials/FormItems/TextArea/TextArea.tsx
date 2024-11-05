@@ -1,8 +1,8 @@
 import { Form, Input, FormItemProps } from 'antd';
 import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
-import { ComponentType } from '../../types';
-import { isNull } from '../../utils/util';
-import { useFormContext } from '../../utils/context';
+import { ComponentType } from '@materials/types';
+import { isNull } from '@materials/utils/util';
+import { useFormContext } from '@materials/utils/context';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {
@@ -16,19 +16,15 @@ export interface IConfig {
  * @param props 系统属性值：componentid、componentname等
  * @returns 返回组件
  */
-const MTextArea = ({ config, onChange }: ComponentType<IConfig>, ref: any) => {
-  const { form, formId, setFormData } = useFormContext();
+const MTextArea = ({ type, config, onChange }: ComponentType<IConfig>, ref: any) => {
+  const { initValues } = useFormContext();
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
-    // 日期组件初始化值
-    if (name && !isNull(value)) {
-      form?.setFieldValue(name, value);
-      setFormData({ name: formId, value: { [name]: value } });
-    }
+    initValues(type, name, value);
   }, [config.props.defaultValue]);
 
   // 启用和禁用

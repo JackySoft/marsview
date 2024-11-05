@@ -1,5 +1,5 @@
-import { ComponentType } from '../../types';
-import MarsRender from '../../MarsRender/MarsRender';
+import { ComponentType } from '@materials/types';
+import MarsRender from '@materials/MarsRender/MarsRender';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Col } from 'antd';
 

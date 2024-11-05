@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useImperativeHandle, memo, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, memo, useRef, useState, useCallback } from 'react';
 import { Button, Form, Space } from 'antd';
 import { useDrop } from 'react-dnd';
 import { DownOutlined, UpOutlined, SearchOutlined, RedoOutlined } from '@ant-design/icons';
@@ -7,9 +7,10 @@ import styled from 'styled-components';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { usePageStore } from '@/stores/pageStore';
 import { FormContext } from '@/packages/utils/context';
-import { dateFormat } from '../../utils/util';
+import { dateFormat, getDateByType, getDateRangeByType, isNotEmpty } from '../../utils/util';
 import { getComponent } from '@/packages/index';
 import { ComponentType, IDragTargetItem } from '@/packages/types';
+import dayjs from 'dayjs';
 
 // 定义包裹容器
 const DivWrapper: any = memo(styled.div<{ $minWidth: number; $len: number }>`
@@ -37,6 +38,8 @@ const GridForm = ({ id, type, config, elements, onSearch, onChange, onReset }: C
   const [isExpand, setIsExpand] = useState(true);
   const [visible, setVisible] = useState(true);
   const [len, setlen] = useState(0);
+  const [minWidth, setMinWidth] = useState(200);
+  const [initialValues, setInitialValues] = useState({});
   const formRef = useRef<HTMLDivElement>(null);
   const formItemRef = useRef<HTMLDivElement>(null);
 
@@ -140,13 +143,15 @@ const GridForm = ({ id, type, config, elements, onSearch, onChange, onReset }: C
     const subEl = formItemRef.current?.getBoundingClientRect();
     if (!parentEl || !subEl) return;
     // 计算可以放入的个数
-    const count = Math.floor(parentEl.width / subEl.width);
+    const count = config.props.cols;
+    const minWidth = Math.floor(parentEl.width / count);
+    setMinWidth(minWidth);
     if (!isExpand) {
       setlen(count);
     } else {
       setlen(elements.length + 1);
     }
-  }, [elements, isExpand]);
+  }, [elements, isExpand, config.props.cols]);
 
   useEffect(() => {
     if (formRef.current) {
@@ -160,11 +165,36 @@ const GridForm = ({ id, type, config, elements, onSearch, onChange, onReset }: C
     updateToolbar();
   };
 
+  // 设置默认值
+  const initValues = useCallback((type: string, name: string, value: any) => {
+    if (name && isNotEmpty(value)) {
+      let initValue = value;
+      if (type === 'InputNumber') initValue = Number(value);
+      if (type === 'DatePicker') initValue = getDateByType(value);
+      if (type === 'DatePickerRange') initValue = getDateRangeByType(value);
+      if (type === 'TimePicker') initValue = dayjs(value, 'HH:mm:ss');
+      setInitialValues({ [name]: initValue });
+      form.setFieldValue([name], initValue);
+      setFormData({
+        name: id,
+        value: { [name]: initValue },
+      });
+    }
+  }, []);
+
   return (
     visible && (
-      <FormContext.Provider value={{ form, formId: id, setFormData }}>
-        <Form form={form} style={config.style} {...omit(config.props, 'minWidth')} data-id={id} data-type={type} onValuesChange={handleValuesChange}>
-          <DivWrapper $len={len} $minWidth={config.props.minWidth} ref={formRef}>
+      <FormContext.Provider value={{ initValues }}>
+        <Form
+          form={form}
+          style={config.style}
+          {...omit(config.props, 'cols')}
+          initialValues={initialValues}
+          onValuesChange={handleValuesChange}
+          data-id={id}
+          data-type={type}
+        >
+          <DivWrapper $len={len} $minWidth={minWidth} ref={formRef}>
             {elements.length ? (
               <MarsRender elements={elements} />
             ) : (

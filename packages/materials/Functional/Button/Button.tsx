@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import * as icons from '@ant-design/icons';
 import AuthButton from './AuthButton';
-import { ComponentType } from '../../types';
+import { ComponentType } from '@materials/types';
 /*泛型只需要定义组件本身用到的属性*/
 export interface IConfig {
   icon: string;

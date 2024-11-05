@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.16.2](https://github.com/JackySoft/marsview/compare/v4.16.1...v4.16.2) (2024-11-05)
+
+
+### Documentation
+
+* 补充捐赠者 ([f5e4b92](https://github.com/JackySoft/marsview/commit/f5e4b9233d0fa926a08197ebd898f9af71ee31e2))
+
+### [4.16.1](https://github.com/JackySoft/marsview/compare/v4.16.0...v4.16.1) (2024-11-05)
+
+
+### Bug Fixes
+
+* 修复问题 ([31ded9f](https://github.com/JackySoft/marsview/commit/31ded9f99d4d13da6eabdf789ddaa49bd1b2c4b7))
+
+## [4.16.0](https://github.com/JackySoft/marsview/compare/v4.15.1...v4.16.0) (2024-11-04)
+
+
+### Feature Improvements
+
+* 表单赋值逻辑优化 ([fbdface](https://github.com/JackySoft/marsview/commit/fbdface9f6cefb54e62720f25ba31843a8c28e52))
+
+### [4.15.1](https://github.com/JackySoft/marsview/compare/v4.15.0...v4.15.1) (2024-11-03)
+
+
+### Bug Fixes
+
+* 修复问题 ([0c75e42](https://github.com/JackySoft/marsview/commit/0c75e422dbe225d31209334e244c2da43e91a11a))
+
+## [4.15.0](https://github.com/JackySoft/marsview/compare/v4.14.5...v4.15.0) (2024-11-03)
+
+
+### Bug Fixes
+
+* 修复漏改问题 ([aec4699](https://github.com/JackySoft/marsview/commit/aec4699c52f2c97e5c94fe67ca34e5eda0d4af98))
+
+
+### Feature Improvements
+
+* 代码优化 ([2962ede](https://github.com/JackySoft/marsview/commit/2962ede42f0947527a99100e262d5764f3fc735b))
+
+### [4.14.5](https://github.com/JackySoft/marsview/compare/v4.14.4...v4.14.5) (2024-11-03)
+
+
+### Features
+
+* 添加别名映射 ([9252fb5](https://github.com/JackySoft/marsview/commit/9252fb5c8864495ba1302f77b582e498be8b7ae3))
+
 ### [4.14.4](https://github.com/JackySoft/marsview/compare/v4.14.3...v4.14.4) (2024-11-03)
 
 ### [4.14.3](https://github.com/JackySoft/marsview/compare/v4.14.2...v4.14.3) (2024-11-03)

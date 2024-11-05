@@ -1,6 +1,6 @@
 import { Button, Collapse, Form, Modal, Popover, Tree } from 'antd';
 import type { CollapseProps } from 'antd';
-import { forwardRef, useCallback, useImperativeHandle, useState } from 'react';
+import { forwardRef, memo, useCallback, useImperativeHandle, useState } from 'react';
 import { DownOutlined, NotificationOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { usePageStore } from '@/stores/pageStore';
 import VsEditor from '../VsEditor';
@@ -27,11 +27,11 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
   const getFormAndTable = useCallback(() => {
     const list: Array<{ id: string; name: string; elements: any[] }> = [];
     Object.keys(elementsMap).map((id) => {
-      if (id.startsWith('SearchForm_') || id.startsWith('Form_') || id.startsWith('MarsTable_')) {
+      if (id.startsWith('SearchForm_') || id.startsWith('Form_') || id.startsWith('GridForm_') || id.startsWith('MarsTable_')) {
         const { element }: any = getElement(cloneDeep(elements), id);
         if (!element) return;
         element.elements?.map((item: any) => {
-          const formItem = elementsMap[item.id].config.props.formItem;
+          const formItem = elementsMap[item.id]?.config.props.formItem;
           if (formItem) {
             item.name = `${formItem.label}(${formItem.name})`;
           } else {
@@ -46,7 +46,7 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
       }
     });
     return list;
-  }, [elementsMap]);
+  }, [elementsMap, elements]);
 
   // 定义树形结构
   const treeData: any = [
@@ -293,4 +293,4 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
   );
 };
 
-export default forwardRef(SelectVariableModal);
+export default memo(forwardRef(SelectVariableModal));

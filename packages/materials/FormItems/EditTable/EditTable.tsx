@@ -1,17 +1,16 @@
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { Table, Form, Input, InputNumber, Select, DatePicker, Switch, Space, Button } from 'antd';
-import { ComponentType } from '../../types';
-import { useFormContext } from '../../utils/context';
-import * as util from '../../utils/util';
+import { ComponentType } from '@materials/types';
+import { useFormContext } from '@materials/utils/context';
+import * as util from '@materials/utils/util';
 import dayjs from 'dayjs';
 import { PlusOutlined } from '@ant-design/icons';
-import { message } from '../../utils/AntdGlobal';
+import { message } from '@materials/utils/AntdGlobal';
 /**
  * 编辑表格
  */
 function EditTable({ id, type, config }: ComponentType, ref: any) {
   const [visible, setVisible] = useState(true);
-  const { form } = useFormContext();
 
   useImperativeHandle(ref, () => ({
     show() {
@@ -25,15 +24,15 @@ function EditTable({ id, type, config }: ComponentType, ref: any) {
   return (
     visible && (
       <Form.Item {...config.props.formItem} data-id={id} data-type={type}>
-        <TableForm config={config} form={form} />
+        <TableForm config={config} />
       </Form.Item>
     )
   );
 }
 
-function TableForm({ config, form }: any) {
+function TableForm({ config }: any) {
   const [data, setData] = useState<any[]>([]);
-
+  const { form } = useFormContext();
   const initRow = useMemo(() => {
     const dataMap: { [key: string]: any } = { key: util.createId('key') };
     config.props.formWrap?.columns.map((item: any) => {

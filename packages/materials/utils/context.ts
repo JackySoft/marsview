@@ -3,12 +3,23 @@
  * 主要用在Form、SearchForm中
  * 子表单中进行消费
  */
-
 import { FormInstance } from 'antd';
-import React, { createContext } from 'react';
+import { createContext, useContext } from 'react';
+import { message } from './AntdGlobal';
 
-export const FormContext = createContext<{ form: FormInstance<any>; formId: string; setFormData: (payload: any) => void } | null>(null);
+export const FormContext = createContext<{
+  form?: FormInstance;
+  initValues: (type: string, name: string, value: any) => void;
+} | null>(null);
 
 export const useFormContext = () => {
-  return React.useContext(FormContext) || { form: null, setFormData: () => {}, formId: '' };
+  const context = useContext(FormContext);
+  if (!context) {
+    console.warn('表单组件必须放在Form组件、SearchForm组件或者GridForm组件内');
+    message.warning('表单项必须放在Form组件、SearchForm组件或者GridForm组件内');
+    return {
+      initValues() {},
+    };
+  }
+  return context;
 };

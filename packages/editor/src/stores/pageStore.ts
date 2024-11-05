@@ -407,10 +407,11 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     );
   },
   // 组件大纲拖拽排序
-  dragSortElements(payload: any) {
+  dragSortElements({ id, list, parentId }: any) {
     set(
       produce((state) => {
-        state.page.elements = payload;
+        state.page.elements = list;
+        state.page.elementsMap[id].parentId = parentId;
       }),
     );
   },
