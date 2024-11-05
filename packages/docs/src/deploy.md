@@ -56,6 +56,33 @@ mybatis：
 
 > 注意，邮箱必须是自己的 163 邮箱，并且开启 POP3 服务，否则无法发送验证码
 
+### java 代码生成使用说明
+
+1. 修改 resources 目录下的 mybatis-config.properties 文件
+
+> 1. 配置生成 java bean 实体类工程所在位置，示例：project_bean=D:/IdeaProjects/lowcode/lowcode-api/src/main/java
+> 2. 配置生成 java mapper 接口工程所在位置，示例：project_mapper=D:/IdeaProjects/lowcode/lowcode-mapper/src/main/java
+> 3. 配置生成 xml mapper 文件工程所在位置，示例：project_xml=D:/IdeaProjects/lowcode/lowcode-mapper/src/main/resources
+> 4. 配置 mysql 驱动包路径，示例：D:/tools/apache-maven-3.8.1/repository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar
+> 5. 配置 mysql 连接地址：jdbc_url=jdbc:mysql://XXXXXXX:3306/lowcode?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior\
+
+     =convertToNull&allowMultiQueries=true
+
+> 6. 配置 mysql 数据库访问用户名：username
+> 7. 配置 mysql 数据库访问密码：password
+> 8. 配置 mysql 需要连接的库名：db_name
+
+2. 修改 resources 目录下的 mybatis-generator.xml 文件
+
+> 1. 引入配置文件：<properties url="file:D:\IdeaProjects\xtr-mybatis-generator\src\main\resources\mybatis-config.properties"/>
+> 2. 分别修改生成 bean 实体类、mapper 接口、xml mapper 文件所在包名：<property name="targetPackage" value="com.xintr.lowcode.mapper.sys"></property>
+> 3. 指定需要生成表名：tableName="表名"
+> 4. 指定生成生成 java 实体类名称：domainObjectName="实体类名称"
+
+3. 修改 com.xintr.MybatisGenerator 类 main 方法中的 path 变量，指定 mybatis-generator.xml 绝对路径
+
+4. 运行 com.xintr.MybatisGenerator，生成代码
+
 ### koa 版本启动：
 
 1. 请务必安装 `node.js 18.0.0` 以上版本
@@ -136,33 +163,6 @@ yarn dev
 ```
 
 > 启动成功后，控制台会打印接口地址：`http://localhost:5000`
-
-## java 代码生成使用说明
-
-1. 修改 resources 目录下的 mybatis-config.properties 文件
-
-> 1. 配置生成 java bean 实体类工程所在位置，示例：project_bean=D:/IdeaProjects/lowcode/lowcode-api/src/main/java
-> 2. 配置生成 java mapper 接口工程所在位置，示例：project_mapper=D:/IdeaProjects/lowcode/lowcode-mapper/src/main/java
-> 3. 配置生成 xml mapper 文件工程所在位置，示例：project_xml=D:/IdeaProjects/lowcode/lowcode-mapper/src/main/resources
-> 4. 配置 mysql 驱动包路径，示例：D:/tools/apache-maven-3.8.1/repository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar
-> 5. 配置 mysql 连接地址：jdbc_url=jdbc:mysql://XXXXXXX:3306/lowcode?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior\
-
-     =convertToNull&allowMultiQueries=true
-
-> 6. 配置 mysql 数据库访问用户名：username
-> 7. 配置 mysql 数据库访问密码：password
-> 8. 配置 mysql 需要连接的库名：db_name
-
-2. 修改 resources 目录下的 mybatis-generator.xml 文件
-
-> 1. 引入配置文件：<properties url="file:D:\IdeaProjects\xtr-mybatis-generator\src\main\resources\mybatis-config.properties"/>
-> 2. 分别修改生成 bean 实体类、mapper 接口、xml mapper 文件所在包名：<property name="targetPackage" value="com.xintr.lowcode.mapper.sys"></property>
-> 3. 指定需要生成表名：tableName="表名"
-> 4. 指定生成生成 java 实体类名称：domainObjectName="实体类名称"
-
-3. 修改 com.xintr.MybatisGenerator 类 main 方法中的 path 变量，指定 mybatis-generator.xml 绝对路径
-
-4. 运行 com.xintr.MybatisGenerator，生成代码
 
 ## 前端编辑器启动
 

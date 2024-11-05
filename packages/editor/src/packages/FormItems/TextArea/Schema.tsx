@@ -134,9 +134,6 @@ export default {
       formItem: {
         label: '多行输入框',
         name: 'textarea',
-        labelCol: {
-          offset: -1,
-        },
       },
       // 组件默认属性值
       formWrap: {
@@ -154,10 +151,5 @@ export default {
       name: 'onChange事件',
     },
   ],
-  methods: [
-    {
-      name: 'update',
-      title: '更新数据',
-    },
-  ],
+  methods: [],
 };
