@@ -38,6 +38,7 @@ const GridForm = ({ id, type, config, elements, onSearch, onChange, onReset }: C
   const [isExpand, setIsExpand] = useState(true);
   const [visible, setVisible] = useState(true);
   const [len, setlen] = useState(0);
+  const [minWidth, setMinWidth] = useState(200);
   const [initialValues, setInitialValues] = useState({});
   const formRef = useRef<HTMLDivElement>(null);
   const formItemRef = useRef<HTMLDivElement>(null);
@@ -142,13 +143,15 @@ const GridForm = ({ id, type, config, elements, onSearch, onChange, onReset }: C
     const subEl = formItemRef.current?.getBoundingClientRect();
     if (!parentEl || !subEl) return;
     // 计算可以放入的个数
-    const count = Math.floor(parentEl.width / subEl.width);
+    const count = config.props.cols;
+    const minWidth = Math.floor(parentEl.width / count);
+    setMinWidth(minWidth);
     if (!isExpand) {
       setlen(count);
     } else {
       setlen(elements.length + 1);
     }
-  }, [elements, isExpand]);
+  }, [elements, isExpand, config.props.cols]);
 
   useEffect(() => {
     if (formRef.current) {
@@ -185,13 +188,13 @@ const GridForm = ({ id, type, config, elements, onSearch, onChange, onReset }: C
         <Form
           form={form}
           style={config.style}
-          {...omit(config.props, 'minWidth')}
+          {...omit(config.props, 'cols')}
           initialValues={initialValues}
           onValuesChange={handleValuesChange}
           data-id={id}
           data-type={type}
         >
-          <DivWrapper $len={len} $minWidth={config.props.minWidth} ref={formRef}>
+          <DivWrapper $len={len} $minWidth={minWidth} ref={formRef}>
             {elements.length ? (
               <MarsRender elements={elements} />
             ) : (
