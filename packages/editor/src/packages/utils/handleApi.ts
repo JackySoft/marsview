@@ -73,8 +73,12 @@ export const handleApi = async (
     const data = result.data ? res[result.data] || res : res;
     const msg = result.msg ? res[result.msg] || '' : '';
     if (code === result.codeValue) {
-      if (tips?.success) {
-        message.success(tips.success);
+      // 如果开启了系统提示，则优先使用系统提示
+      if (tips?.isSuccess) {
+        msg && message.success(msg);
+      } else if (tips?.success) {
+        // 最后使用自定义错误
+        message.success(tips?.success);
       }
     } else {
       // 如果开启了系统错误，则优先使用系统报错

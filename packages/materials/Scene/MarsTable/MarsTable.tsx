@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, memo, useCallback, useMemo, useEffect, useImperativeHandle, useState } from 'react';
 import { Button, Table, Image, Tag, TablePaginationConfig, Tooltip, Typography, Badge } from 'antd';
 import { pickBy } from 'lodash-es';
 import * as icons from '@ant-design/icons';
@@ -70,7 +70,7 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
   }, [config.api?.sourceType == 'variable' ? variableData : '']);
 
   // 列表加载
-  const getDataList = (params: any) => {
+  const getDataList = useCallback((params: any) => {
     setLoading(true);
     handleApi(config.api, params)
       .then((res) => {
@@ -87,7 +87,7 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
       .catch(() => {
         setLoading(false);
       });
-  };
+  }, []);
 
   useImperativeHandle(ref, () => {
     return {
@@ -169,200 +169,206 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
   }
 
   // 表格配置
-  const tableProps = {
-    rowSelection,
-    rowKey: config.props.rowKey || 'id',
-    bordered: config.props.bordered,
-    size: config.props.size,
-    columns: config.props.columns.map((item, index: number) => {
-      return {
-        ...item,
-        key: item.dataIndex || index,
-        onCell(record: any, index: number) {
-          // onCell处理，用于跨行跨列展示
-          if (item.onCell) {
-            try {
-              const renderFn = new Function('record', 'index', `return (${item.onCell})(record,index);`);
-              return renderFn(record, index);
-            } catch (error) {
-              console.error(`列[${item.title}]渲染失败`, error);
+  const tableProps = useMemo(() => {
+    return {
+      rowSelection,
+      rowKey: config.props.rowKey || 'id',
+      bordered: config.props.bordered,
+      size: config.props.size,
+      columns: config.props.columns.map((item, index: number) => {
+        return {
+          ...item,
+          key: item.dataIndex || index,
+          onCell(record: any, index: number) {
+            // onCell处理，用于跨行跨列展示
+            if (item.onCell) {
+              try {
+                const renderFn = new Function('record', 'index', `return (${item.onCell})(record,index);`);
+                return renderFn(record, index);
+              } catch (error) {
+                console.error(`列[${item.title}]渲染失败`, error);
+              }
             }
-          }
-          return {};
-        },
-        render(text: any, record: any, index: number) {
-          let txt = text;
-          if (!util.isNotEmpty(txt)) {
-            if (typeof item.empty === 'undefined') {
-              txt = '-';
-            } else if (item.empty) {
-              txt = item.empty;
-            }
-          } else if (item.type === 'money') txt = util.formatNumber(text, 'currency');
-          else if (item.type === 'number') txt = util.formatNumber(text);
-          else if (item.type === 'date1') txt = util.formatDate(text, 'YYYY-MM-DD');
-          else if (item.type === 'date2') txt = util.formatDate(text);
+            return {};
+          },
+          render(text: any, record: any, index: number) {
+            let txt = text;
+            if (!util.isNotEmpty(txt)) {
+              if (typeof item.empty === 'undefined') {
+                txt = '-';
+              } else if (item.empty) {
+                txt = item.empty;
+              }
+            } else if (item.type === 'money') txt = util.formatNumber(text, 'currency');
+            else if (item.type === 'number') txt = util.formatNumber(text);
+            else if (item.type === 'date1') txt = util.formatDate(text, 'YYYY-MM-DD');
+            else if (item.type === 'date2') txt = util.formatDate(text);
 
-          // 文本处理完后，如果存在render，则执行render
-          if (item.render) {
-            try {
-              const renderFn = new Function('text', 'record', 'index', `return (${item.render})(text,record,index);`);
-              txt = renderFn(txt, record, index);
-            } catch (error) {
-              console.error(`列[${item.title}]渲染失败`, error);
-              txt = '解析异常';
+            // 文本处理完后，如果存在render，则执行render
+            if (item.render) {
+              try {
+                const renderFn = new Function('text', 'record', 'index', `return (${item.render})(text,record,index);`);
+                txt = renderFn(txt, record, index);
+              } catch (error) {
+                console.error(`列[${item.title}]渲染失败`, error);
+                txt = '解析异常';
+              }
             }
-          }
-          if (item.type === 'text') {
-            // 提取公共组件
-            const ButtonComp = (
-              <Button type="link" onClick={() => handleActionClick(item.eventName, record)}>
-                {txt.toString()}
-              </Button>
-            );
-            // 超出省略、可复制、可点击
-            if (item.ellipsis && item.copyable) {
-              return (
-                <Tooltip title={txt}>
-                  <Typography.Paragraph copyable style={{ marginBottom: 0 }}>
-                    {item.clickable ? ButtonComp : txt.toString()}
-                  </Typography.Paragraph>
-                </Tooltip>
+            if (item.type === 'text') {
+              // 提取公共组件
+              const ButtonComp = (
+                <Button type="link" onClick={() => handleActionClick(item.eventName, record)}>
+                  {txt.toString()}
+                </Button>
               );
-            }
-            // 超出省略
-            if (item.ellipsis) return <Tooltip title={txt}>{item.clickable ? ButtonComp : txt.toString()}</Tooltip>;
-            // 可复制
-            if (item.copyable) {
-              return <Typography.Paragraph copyable>{item.clickable ? ButtonComp : txt.toString()}</Typography.Paragraph>;
-            }
-            return item.clickable ? (
-              <Button type="link" onClick={() => handleActionClick(item.eventName, record)}>
-                {txt.toString()}
-              </Button>
-            ) : (
-              txt.toString()
-            );
-          }
-          if (item.type === 'multiline') {
-            if (Array.isArray(txt)) {
-              return txt.map((item, index) => {
+              // 超出省略、可复制、可点击
+              if (item.ellipsis && item.copyable) {
                 return (
-                  <div key={index}>
-                    <span>{item.label}</span>
-                    <span>{item.value}</span>
-                  </div>
+                  <Tooltip title={txt}>
+                    <Typography.Paragraph copyable style={{ marginBottom: 0 }}>
+                      {item.clickable ? ButtonComp : txt.toString()}
+                    </Typography.Paragraph>
+                  </Tooltip>
                 );
-              });
-            }
-            return txt.toString();
-          }
-          if (item.type === 'status') {
-            if (Array.isArray(txt)) {
-              return txt.map((item, index) => {
-                return <Badge key={index} status={item.status} text={item.text} />;
-              });
-            }
-            if (typeof txt === 'object') {
-              return <Badge status={txt.status} text={txt.text} />;
-            }
-            return <Badge status="success" text={txt.toString()} />;
-          }
-          if (item.type === 'image') {
-            if (Array.isArray(txt)) {
-              return (
-                <Image.PreviewGroup items={txt}>
-                  <Image width={30} src={txt[0]} />
-                </Image.PreviewGroup>
+              }
+              // 超出省略
+              if (item.ellipsis) return <Tooltip title={txt}>{item.clickable ? ButtonComp : txt.toString()}</Tooltip>;
+              // 可复制
+              if (item.copyable) {
+                return <Typography.Paragraph copyable>{item.clickable ? ButtonComp : txt.toString()}</Typography.Paragraph>;
+              }
+              return item.clickable ? (
+                <Button type="link" onClick={() => handleActionClick(item.eventName, record)}>
+                  {txt.toString()}
+                </Button>
+              ) : (
+                txt.toString()
               );
             }
-            return <Image src={txt} width={30} />;
-          }
-          if (item.type === 'tag') {
-            if (Array.isArray(txt)) {
-              return txt.map((tag, index) => {
-                if (typeof tag === 'object') {
+            if (item.type === 'multiline') {
+              if (Array.isArray(txt)) {
+                return txt.map((item, index) => {
                   return (
-                    <Tag key={index} color={tag.color}>
-                      {tag.label}
+                    <div key={index}>
+                      <span>{item.label}</span>
+                      <span>{item.value}</span>
+                    </div>
+                  );
+                });
+              }
+              return txt.toString();
+            }
+            if (item.type === 'status') {
+              if (Array.isArray(txt)) {
+                return txt.map((item, index) => {
+                  return <Badge key={index} status={item.status} text={item.text} />;
+                });
+              }
+              if (typeof txt === 'object') {
+                return <Badge status={txt.status} text={txt.text} />;
+              }
+              return <Badge status="success" text={txt.toString()} />;
+            }
+            if (item.type === 'image') {
+              if (Array.isArray(txt)) {
+                return (
+                  <Image.PreviewGroup items={txt}>
+                    <Image width={30} src={txt[0]} />
+                  </Image.PreviewGroup>
+                );
+              }
+              return (txt?.startsWith('http') && <Image src={txt} width={30} />) || txt;
+            }
+            if (item.type === 'tag') {
+              if (Array.isArray(txt)) {
+                return txt.map((tag, index) => {
+                  if (typeof tag === 'object') {
+                    return (
+                      <Tag key={index} color={tag.color}>
+                        {tag.label}
+                      </Tag>
+                    );
+                  }
+                  return (
+                    <Tag key={tag} color="green">
+                      {tag}
                     </Tag>
                   );
-                }
-                return (
-                  <Tag key={tag} color="green">
-                    {tag}
-                  </Tag>
-                );
-              });
-            } else if (typeof txt === 'string' || typeof txt === 'number') {
-              return <Tag color="green">{txt}</Tag>;
+                });
+              } else if (typeof txt === 'string' || typeof txt === 'number') {
+                return <Tag color="green">{txt}</Tag>;
+              }
+              return txt?.toString();
             }
-            return txt?.toString();
-          }
-          if (item.type === 'action')
-            return (
-              <div className={styles.action}>
-                {item.list?.map((btn: any) => {
-                  let btnTxt = '';
-                  if (typeof btn.text === 'string') {
-                    btnTxt = btn.text;
-                  } else if (btn.text?.type === 'static') {
-                    btnTxt = btn.text.value;
-                  } else {
-                    try {
-                      const renderFn = new Function('text', 'record', 'index', `return (${btn.text.value})(text,record,index);`);
-                      btnTxt = renderFn('', record, index);
-                    } catch (error) {
-                      console.error(`列[${btn.title}]渲染失败`, error);
-                      btnTxt = '解析异常';
+            if (item.type === 'action')
+              return (
+                <div className={styles.action}>
+                  {item.list?.map((btn: any) => {
+                    let btnTxt = '';
+                    if (typeof btn.text === 'string') {
+                      btnTxt = btn.text;
+                    } else if (btn.text?.type === 'static') {
+                      btnTxt = btn.text.value;
+                    } else {
+                      try {
+                        const renderFn = new Function('text', 'record', 'index', `return (${btn.text.value})(text,record,index);`);
+                        btnTxt = renderFn('', record, index);
+                      } catch (error) {
+                        console.error(`列[${btn.title}]渲染失败`, error);
+                        btnTxt = '解析异常';
+                      }
                     }
-                  }
-                  if (btnTxt === '') return;
-                  return (
-                    <AuthButton
-                      key={btn.eventName}
-                      type="link"
-                      size="small"
-                      danger={btn.danger}
-                      onClick={() => handleActionClick(btn.eventName, record)}
-                      authCode={btn.authCode}
-                      authScript={btn.authScript}
-                    >
-                      {btnTxt}
-                    </AuthButton>
-                  );
-                })}
-              </div>
-            );
-          return txt;
-        },
-      };
-    }),
-    dataSource: data,
-    loading,
-  };
+                    if (btnTxt === '') return;
+                    return (
+                      <AuthButton
+                        key={btn.eventName}
+                        type="link"
+                        size="small"
+                        danger={btn.danger}
+                        onClick={() => handleActionClick(btn.eventName, record)}
+                        authCode={btn.authCode}
+                        authScript={btn.authScript}
+                      >
+                        {btnTxt}
+                      </AuthButton>
+                    );
+                  })}
+                </div>
+              );
+            return txt;
+          },
+        };
+      }),
+      dataSource: data,
+      loading,
+    };
+  }, [config.props, data, loading]);
 
   // 分页配置
-  const pagination: TablePaginationConfig = {
-    total,
-    current: pageParams[config.props.field.pageNum] || 1,
-    pageSize: pageParams[config.props.field.pageSize] || 10,
-    showSizeChanger: config.props.pagination?.showSizeChanger,
-    showQuickJumper: config.props.pagination?.showQuickJumper,
-    showTotal: config.props.pagination?.showTotal ? (total: number) => `共 ${total} 条数据` : undefined,
-    position: config.props.pagination?.position,
-    onChange: (pageNum: number, pageSize: number) => {
-      setPageParams({
-        [config.props.field.pageNum]: pageNum,
-        [config.props.field.pageSize]: pageSize,
-      });
-      getDataList({
-        [config.props.field.pageNum]: pageNum,
-        [config.props.field.pageSize]: pageSize,
-        ...searchParams,
-      });
-    },
-  };
+  const pagination: TablePaginationConfig = useMemo(() => {
+    const { pageNum = 'pageNum', pageSize = 'pageSize' } = config.props.field;
+    const { showSizeChanger, showQuickJumper, showTotal, position } = config.props.pagination || {};
+    return {
+      total,
+      current: pageParams[pageNum] || 1,
+      pageSize: pageParams[pageSize] || 10,
+      showSizeChanger: showSizeChanger,
+      showQuickJumper: showQuickJumper,
+      showTotal: showTotal ? (total: number) => `共 ${total} 条数据` : undefined,
+      position: position,
+      onChange: (pageNum: number, pageSize: number) => {
+        setPageParams({
+          [pageNum]: pageNum,
+          [pageSize]: pageSize,
+        });
+        getDataList({
+          [pageNum]: pageNum,
+          [pageSize]: pageSize,
+          ...searchParams,
+        });
+      },
+    };
+  }, [config.props.field, config.props.pagination]);
 
   /**
    * 操作按钮点击

@@ -38,6 +38,7 @@ const SettingModal = ({ update }: SettingModalProp, ref: any) => {
     tips: {
       success: '请求成功',
       fail: '请求失败',
+      isSuccess: true,
       isError: true,
     },
   };
