@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.16.2](https://github.com/JackySoft/marsview/compare/v4.16.1...v4.16.2) (2024-11-05)
+
+
+### Documentation
+
+* 补充捐赠者 ([f5e4b92](https://github.com/JackySoft/marsview/commit/f5e4b9233d0fa926a08197ebd898f9af71ee31e2))
+
 ### [4.16.1](https://github.com/JackySoft/marsview/compare/v4.16.0...v4.16.1) (2024-11-05)
 
 
