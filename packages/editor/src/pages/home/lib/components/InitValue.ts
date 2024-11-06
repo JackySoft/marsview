@@ -4,9 +4,11 @@
 
 // 默认组件代码
 export const defaultReactCode = `/**
-* 支持React、Antd、dayjs 等插件使用，需要从window对象中导入：
-* eg: const { Button } = window.antd;
+* 支持React、Antd、dayjs、Plots 等插件使用，需要从window对象中导入：
+* 例如: 
+* const { Button } = window.antd;
 * const { useEffect,useState } = window.React;
+* const { Line } = window.Plots;
 */
 export default ({ id, type, config, onClick }, ref) => {
   const { Button } = window.antd;
@@ -97,16 +99,7 @@ export default {
       name: '点击事件',
     },
   ],
-  methods: [
-    {
-      name: 'startLoading',
-      title: '开始loading',
-    },
-    {
-      name: 'endLoading',
-      title: '结束loading',
-    },
-  ],
+  methods: [],
 };   
 `;
 

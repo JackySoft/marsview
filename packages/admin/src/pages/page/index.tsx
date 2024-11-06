@@ -8,12 +8,17 @@ import { message } from '@/utils/AntdGlobal';
 import { getPageDetail } from '@/api/index';
 import locale from 'antd/locale/zh_CN';
 import 'dayjs/locale/zh-cn';
+import { ComItemType, ConfigType } from '@materials/types/index';
 export default function () {
   const [theme, setTheme] = useState('');
+  const [pageData, setPageData] = useState<{ config: ConfigType; elements: ComItemType[] }>();
   const { id, env } = useParams();
-  const savePageInfo = usePageStore(
+  const { savePageInfo, clearPageInfo } = usePageStore(
     useShallow((state) => {
-      return state.savePageInfo;
+      return {
+        savePageInfo: state.savePageInfo,
+        clearPageInfo: state.clearPageInfo,
+      };
     }),
   );
   const navigate = useNavigate();
@@ -32,6 +37,7 @@ export default function () {
             console.info('【json数据】', res.page_data);
             message.error('页面数据格式错误，请检查');
           }
+          clearPageInfo();
           savePageInfo({
             pageId: res.id,
             pageName: res.name,
@@ -42,6 +48,7 @@ export default function () {
             prd_publish_id: res.prd_publish_id,
             ...pageData,
           });
+          setPageData(pageData);
           setTheme(pageData.config.props.theme || '#1677ff');
         })
         .catch(() => {
@@ -62,7 +69,7 @@ export default function () {
         },
       }}
     >
-      <Page />
+      <Page config={pageData?.config} elements={pageData?.elements} />
     </ConfigProvider>
   );
 }

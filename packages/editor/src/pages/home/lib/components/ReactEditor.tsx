@@ -4,6 +4,7 @@ import * as prettier from 'prettier';
 import parserJavaScript from 'prettier/parser-babel';
 import { useDebounceFn } from 'ahooks';
 import * as antd from 'antd';
+import * as Plots from '@ant-design/plots';
 import { Spin, Splitter } from 'antd';
 import dayjs from 'dayjs';
 import { useKeyPress } from 'ahooks';
@@ -30,6 +31,7 @@ export default forwardRef((_: any, ref: any) => {
     window.React = window.React || React;
     window.dayjs = window.dayjs || dayjs;
     window.antd = window.antd || antd;
+    window.Plots = window.Plots || Plots;
   }
 
   // 初始化代码
