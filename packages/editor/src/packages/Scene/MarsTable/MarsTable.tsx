@@ -71,7 +71,7 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
     };
     setPageParams(params);
     getDataList(config.props.hidePager ? {} : params);
-  }, [config.api, JSON.stringify(config.props.field), config.api?.sourceType == 'variable' ? variableData : '']);
+  }, [config.api, config.props.pagination.pageSize, JSON.stringify(config.props.field), config.api?.sourceType == 'variable' ? variableData : '']);
 
   // 列表加载
   const getDataList = useCallback(
@@ -378,28 +378,30 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
   // 分页配置
   const pagination: TablePaginationConfig = useMemo(() => {
     const { pageNum = 'pageNum', pageSize = 'pageSize' } = config.props.field || {};
-    const { showSizeChanger, showQuickJumper, showTotal, position } = config.props.pagination || {};
+    const { showSizeChanger, showQuickJumper, showTotal, pageSize: page_size, position } = config.props.pagination || {};
+    const pageSizeOptions = page_size ? [page_size, page_size * 2, page_size * 3, page_size * 4] : [10, 20, 30, 40];
     return {
       total,
       current: pageParams[pageNum] || 1,
       pageSize: pageParams[pageSize] || 10,
+      pageSizeOptions,
       showSizeChanger: showSizeChanger,
       showQuickJumper: showQuickJumper,
       showTotal: showTotal ? (total: number) => `共 ${total} 条数据` : undefined,
       position: position,
-      onChange: (pageNum: number, pageSize: number) => {
+      onChange: (num: number, size: number) => {
         setPageParams({
-          [pageNum]: pageNum,
-          [pageSize]: pageSize,
+          [pageNum]: num,
+          [pageSize]: size,
         });
         getDataList({
-          [pageNum]: pageNum,
-          [pageSize]: pageSize,
+          [pageNum]: num,
+          [pageSize]: size,
           ...searchParams,
         });
       },
     };
-  }, [config.props.field, config.props.pagination]);
+  }, [total, config.props.field, pageParams, config.props.pagination]);
 
   /**
    * 操作按钮点击
