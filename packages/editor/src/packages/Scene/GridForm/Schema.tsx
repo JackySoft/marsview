@@ -128,7 +128,7 @@ export default {
       colon: true,
       labelAlign: 'right',
       layout: 'horizontal',
-      minWidth: 300,
+      cols: 4,
       labelCol: {
         span: 8,
       },
