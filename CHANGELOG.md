@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.17.0](https://github.com/JackySoft/marsview/compare/v4.16.5...v4.17.0) (2024-11-07)
+
+
+### Features
+
+* 提取cdn到环境变量 ([a45b52b](https://github.com/JackySoft/marsview/commit/a45b52b07bd09775d80515cf9bc4cd14619d037e))
+
 ### [4.16.5](https://github.com/JackySoft/marsview/compare/v4.16.4...v4.16.5) (2024-11-06)
 
 
