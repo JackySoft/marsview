@@ -7,6 +7,19 @@ export function isEnv(env?: string) {
   return env && ['stg', 'pre', 'prd'].includes(env);
 }
 /**
+ * 获取页面ID
+ * @param pageId 页面路径或者页面ID
+ * @param pageMap 菜单映射对象
+ * @returns
+ */
+export function getPageId(pageId: string | number | undefined, pageMap: Record<number, any>): number {
+  if (!pageId || !pageMap) return 0;
+  const page_id = isNaN(Number(pageId))
+    ? Object.values(pageMap).filter((item) => (item.path.startsWith('/') ? item.path.slice(1) === pageId : item.path === pageId))?.[0]?.page_id
+    : pageId;
+  return page_id;
+}
+/**
  * 菜单数据转换
  * treeList: 树形菜单
  * buttons: 按钮
@@ -16,7 +29,7 @@ export function isEnv(env?: string) {
  */
 export function arrayToTree(array: IMenuItem[] = []) {
   const buttons: IMenuItem[] = [];
-  const pageMap: { [key: number]: IMenuItem } = {};
+  const pageMap: { [key: number]: Pick<IMenuItem, 'id' | 'page_id' | 'parent_id' | 'name' | 'path'> } = {};
   const menuMap: { [key: number]: IMenuItem } = {};
   // 创建一个映射，将id映射到节点对象
   const map: { [key: number]: IMenuItem & { children?: IMenuItem[] } } = {};
@@ -25,7 +38,7 @@ export function arrayToTree(array: IMenuItem[] = []) {
     if (item.type === 2) buttons.push(item);
     if (item.type === 1 || item.type === 3) {
       if (item.page_id) {
-        pageMap[item.page_id] = { ...item };
+        pageMap[item.page_id] = { id: item.id, page_id: item.page_id, parent_id: item.parent_id, name: item.name, path: item.path };
       } else {
         menuMap[item.id] = { ...item };
       }

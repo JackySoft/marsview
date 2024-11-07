@@ -142,21 +142,6 @@ export function arrayToTree(array: Menu.MenuItem[], parentId = null) {
     .sort((a, b) => a.sort_num - b.sort_num);
 }
 
-// 获取cookie
-export function getCookie(name: string) {
-  const cookies = document.cookie.split(';');
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    // Does this cookie string begin with the name we want?
-    if (cookie.startsWith(name + '=')) {
-      // Get the value of the cookie.
-      return decodeURIComponent(cookie.substring(name.length + 1));
-    }
-  }
-  // If there is no cookie with the specified name, return null.
-  return null;
-}
-
 /**
  * 动态加载JS，主要用于解决不常用的JS包，防止影响整体性能
  * @param src
@@ -174,6 +159,12 @@ export const loadScript = (src: string) => {
   });
 };
 
+/**
+ * 查找某组件的所有父元素类型
+ * @param id 组件ID
+ * @param elementsMap 所有组件映射对象
+ * @returns
+ */
 function findParentTypesById(id: string, elementsMap: { [id: string]: ComponentType }) {
   const types = [elementsMap[id].type];
   let parentItem = elementsMap[id];
@@ -208,6 +199,7 @@ export const checkComponentType = (type: string, parentId: string = '', parentTy
 
 /**
  * 文件导出
+ * 由于只支持https协议，所以当前在http下不可用。
  */
 export async function saveFile(name: string, content: string) {
   try {

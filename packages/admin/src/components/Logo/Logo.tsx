@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 function Logo() {
   const { collapsed, projectInfo } = useProjectStore();
   const navigate = useNavigate();
-  const { projectId, env } = useParams();
+  const { projectId } = useParams();
   const [style, setStyle] = useState({});
   const [nameStyle, setNameStyle] = useState({});
   useEffect(() => {
@@ -30,7 +30,7 @@ function Logo() {
     <div
       className={styles.logo}
       onClick={() => {
-        navigate(`/project/${env}/${projectId}/welcome`);
+        navigate(`/project/${projectId}/welcome`);
       }}
       style={style}
     >

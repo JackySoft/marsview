@@ -1,5 +1,5 @@
 /**
- * @description: 星云特效
+ *  星云特效
  */
 export const initStarCanvas = () => {
   const num = 300;

@@ -1,12 +1,10 @@
 import axios, { AxiosError } from 'axios';
 import router from '@/router';
 import { message } from './AntdGlobal';
-import { showLoading, hideLoading } from './loading';
 import storage from './storage';
 
 declare module 'axios' {
   interface AxiosRequestConfig {
-    showLoading?: boolean;
     showError?: boolean;
   }
 }
@@ -31,7 +29,6 @@ const instance = axios.create({
 // 请求拦截
 instance.interceptors.request.use(
   (config) => {
-    config.showLoading === false ? null : showLoading();
     config.baseURL = import.meta.env.VITE_BASE_API;
     const token = storage.get('token');
     if (token) {
@@ -55,7 +52,6 @@ instance.interceptors.request.use(
 // 响应拦截
 instance.interceptors.response.use(
   async (response) => {
-    response.config.showLoading === false ? null : hideLoading();
     const res: IResult = await response.data;
     if (!res) {
       message.error(ErrorMsg);
@@ -78,7 +74,6 @@ instance.interceptors.response.use(
     return res;
   },
   (error) => {
-    hideLoading();
     if (error.response && error.response.status === 403) {
       router.navigate('/403');
     } else {
@@ -90,13 +85,13 @@ instance.interceptors.response.use(
 
 // 调用函数导出
 export default {
-  get<R = any>(url: string, params: any = {}, options: any = { showLoading: true, showError: true }): Promise<R> {
+  get<R = any>(url: string, params: any = {}, options: any = { showLoading: false, showError: true }): Promise<R> {
     return instance.get(url, {
       params,
       ...options,
     });
   },
-  post<R = any>(url: string, params: any = {}, options: any = { showLoading: true, showError: true }): Promise<R> {
+  post<R = any>(url: string, params: any = {}, options: any = { showLoading: false, showError: true }): Promise<R> {
     return instance.post(url, params, options);
   },
 };

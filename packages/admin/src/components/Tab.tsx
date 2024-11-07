@@ -3,6 +3,7 @@ import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { useShallow } from 'zustand/react/shallow';
 import { Tabs } from 'antd';
 import { useProjectStore } from '@/stores/projectStore';
+import { getPageId } from '@/utils/util';
 interface TabsItem {
   key: string;
   label: string;
@@ -31,7 +32,8 @@ function Tab() {
       setActiveKey('welcome');
       return;
     }
-    const menuItem = pageMap[Number(pageId)];
+    const page_id = getPageId(pageId, pageMap);
+    const menuItem = pageMap[Number(page_id)];
     if (!menuItem) return;
     if (!tabsList.find((item) => item.key == pathname)) {
       tabsList.push({

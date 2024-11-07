@@ -28,7 +28,6 @@ export default function Index() {
   // 判断是否是超大屏
   const isXLarge = useMediaQuery({ query: '(min-width: 1920px)' });
 
-
   useEffect(() => {
     getList(current, pageSize);
   }, [current, pageSize]);
@@ -77,8 +76,13 @@ export default function Index() {
           <>
             <div className={styles.projectList}>
               <Spin spinning={loading} size="large" tip="加载中...">
-                <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(${isXLarge ? 400 : 300}px, 1fr))`,
-                    gap: isXLarge ? 30 : 20, }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(auto-fill, minmax(${isXLarge ? 400 : 300}px, 1fr))`,
+                    gap: isXLarge ? 30 : 20,
+                  }}
+                >
                   {projectList.map((item: Project.ProjectItem, index) => {
                     return <CardItem item={item} isAuth={item.id ? true : false} getList={getList} key={item.id || item.user_name + index} />;
                   })}
@@ -121,7 +125,7 @@ const CardItem: React.FC<ProjectCardItemProps> = memo(({ item, isAuth, getList }
     }[env];
     return (
       <Tooltip title={title}>
-        <a href={`${import.meta.env.VITE_ADMIN_URL}/project/${env}/${item.id}`} target="_blank">
+        <a href={`${import.meta.env.VITE_ADMIN_URL}/project/${item.id}?env=${env}`} target="_blank">
           {name}
         </a>
       </Tooltip>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Col, Layout, Row, Pagination, Spin, Empty, Button } from 'antd';
+import { Card, Col, Layout, Row, Pagination, Spin, Empty, Button, Tooltip } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { getProjectList } from '@/api';
 import { ProjectItem } from '@/types';
@@ -35,9 +35,24 @@ function Console() {
     }
   };
 
+  const getEnvTag = (env: 'stg' | 'pre' | 'prd', name: string, id: number) => {
+    const title = {
+      stg: '访问测试环境',
+      pre: '访问预发布环境',
+      prd: '访问生产环境',
+    }[env];
+    return (
+      <Tooltip title={title}>
+        <a href={`/project/${id}?env=${env}`} target="_blank">
+          {name}
+        </a>
+      </Tooltip>
+    );
+  };
+
   // 页面操作
   const handleAction = async (id: number) => {
-    navigate(`/project/stg/${id}`);
+    navigate(`/project/${id}`);
   };
 
   // 分页事件
@@ -54,7 +69,14 @@ function Console() {
             {projectList.map((item: ProjectItem) => {
               return (
                 <Col span={6} key={item.id}>
-                  <Card hoverable>
+                  <Card
+                    hoverable
+                    actions={[
+                      item.id ? getEnvTag('stg', 'STG', item.id) : <span style={{ cursor: 'not-allowed' }}>STG</span>,
+                      item.id ? getEnvTag('pre', 'PRE', item.id) : <span style={{ cursor: 'not-allowed' }}>PRE</span>,
+                      item.id ? getEnvTag('prd', 'PRD', item.id) : <span style={{ cursor: 'not-allowed' }}>PRD</span>,
+                    ]}
+                  >
                     <div onClick={() => handleAction(item.id)}>
                       <Card.Meta
                         style={{ cursor: 'pointer' }}
