@@ -101,7 +101,7 @@ const UploadImages: React.FC<UploadImagesProps> = memo(
         })
         .catch(() => {
           setLoading(false);
-          onChange('https://marsview.cdn.bcebos.com/mars-logo.png');
+          onChange(`${import.meta.env.VITE_CDN_URL}/mars-logo.png`);
           message.error('图片上传失败');
         });
     };

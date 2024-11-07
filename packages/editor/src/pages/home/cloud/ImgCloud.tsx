@@ -134,7 +134,7 @@ export default function ImgCloud() {
                       </Tooltip>
                     </Space>
                   </div>
-                  <Image src={item.type.startsWith('image') ? item.url : 'https://marsview.cdn.bcebos.com/js.png'} height={'100%'} />
+                  <Image src={item.type.startsWith('image') ? item.url : `${import.meta.env.VITE_CDN_URL}/js.png`} height={'100%'} />
                 </div>
                 <div className={styles.desc}>{(item.size / 1024).toFixed(2)} KB</div>
               </div>

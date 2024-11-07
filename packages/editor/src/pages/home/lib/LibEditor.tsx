@@ -37,7 +37,7 @@ export default () => {
   // 初始化monaco，默认为jsdelivery分发，由于网络原因改为本地cdn
   loader.config({
     paths: {
-      vs: 'https://marsview.cdn.bcebos.com/static/monaco-editor/vs',
+      vs: `${import.meta.env.VITE_CDN_URL}/static/monaco-editor/vs`,
     },
   });
 
@@ -71,8 +71,8 @@ export default () => {
   const initWasm = async () => {
     try {
       setLoading(true);
-      await loadScript('https://marsview.cdn.bcebos.com/static/esbuild-wasm%400.20.2/browser.min.js');
-      await window.esbuild.initialize({ wasmURL: 'https://marsview.cdn.bcebos.com/static/esbuild-wasm%400.20.2/esbuild.wasm' });
+      await loadScript(`${import.meta.env.VITE_CDN_URL}/static/esbuild-wasm%400.20.2/browser.min.js`);
+      await window.esbuild.initialize({ wasmURL: `${import.meta.env.VITE_CDN_URL}/static/esbuild-wasm%400.20.2/esbuild.wasm` });
       setLoading(false);
       setTabs(items);
     } catch (error) {

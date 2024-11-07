@@ -209,7 +209,7 @@ const Header = memo(() => {
     <>
       <Layout.Header className={styles.layoutHeader}>
         <div className={styles.logo} onClick={goHome}>
-          <img src="https://marsview.cdn.bcebos.com/mars-logo.png" width={42} />
+          <img src={`${import.meta.env.VITE_CDN_URL}/mars-logo.png`} width={42} />
           <span>Marsview</span>
         </div>
         {/* 首页 - 导航菜单 */}

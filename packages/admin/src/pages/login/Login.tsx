@@ -38,7 +38,7 @@ export default function Login() {
         </div>
         <div className={style.form}>
           <div className={style.title}>
-            <img src="https://marsview.cdn.bcebos.com/mars-logo.png" width={45} />
+            <img src={`${import.meta.env.VITE_CDN_URL}/mars-logo.png`} width={45} />
           </div>
           <Form name="basic" layout="vertical" className={style.form} onFinish={onFinish} autoComplete="off" size="large" form={form}>
             <Form.Item<FieldType> name="userName" rules={[{ required: true, message: '请输入邮箱' }]}>
