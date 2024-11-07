@@ -61,6 +61,8 @@ Marsview is a low code visualization platform for middle and backend development
 
 ## Local development 👨‍💻
 
+### Frontend
+
 ```bash
 git clone https://github.com/JackySoft/marsview.git
 ```
@@ -75,13 +77,15 @@ cd marsview
 
 # Install dependencies (if the installation dependency time is too long, please configure the image source first)
 pnpm i
-# 启动编辑器
+# Launch Editor
 pnpm start:editor
 # 启动用户端（用户端是当你页面搭建完成后，给用户提供独立访问的系统）
 pnpm start:admin
 ```
 
-> Note: Vite_SBASEAPI can also choose to use an online address,eg: VITE_BASE_API = http://mars-api.marsview.cc/api.
+> Note: By default, online interfaces are used. If private deployment is required, please refer to the private deployment documentation.
+
+[Documentation](http://docs.marsview.cc/deploy.html)
 
 ### Synchronization Code
 
@@ -155,6 +159,7 @@ Thank you to the following brothers for their donation:
 | 朱红宾          | <img src="http://docs.marsview.cc/sponsor/7.png"  width="50">  |
 | yangshare       | <img src="http://docs.marsview.cc/sponsor/8.jpeg"  width="50"> |
 | Joker6578       | <img src="http://docs.marsview.cc/sponsor/9.png"  width="50">  |
+| xiaoqingbbbb    | <img src="http://docs.marsview.cc/sponsor/11.png"  width="50"> |
 
 ## 🤝 Participate and contribute
 
