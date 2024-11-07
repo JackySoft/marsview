@@ -55,7 +55,7 @@ export default function VsEditor({ height, language, value, onChange }: any) {
   // 初始化monaco，默认为jsdelivery分发，由于网络原因改为本地cdn
   loader.config({
     paths: {
-      vs: 'https://marsview.cdn.bcebos.com/static/monaco-editor/vs',
+      vs: `${import.meta.env.VITE_CDN_URL}/static/monaco-editor/vs`,
     },
   });
   return (

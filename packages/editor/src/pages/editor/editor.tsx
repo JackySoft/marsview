@@ -304,7 +304,7 @@ const Editor = () => {
         >
           <FloatButton icon={<QuestionCircleOutlined />} />
         </Popover>
-        <Popover placement="left" title="加我微信" content={<Image width={180} src="https://marsview.cdn.bcebos.com/mywechat.jpg" />}>
+        <Popover placement="left" title="加我微信" content={<Image width={180} src={`${import.meta.env.VITE_CDN_URL}/mywechat.jpg`} />}>
           <FloatButton icon={<CommentOutlined />} />
         </Popover>
       </FloatButton.Group>

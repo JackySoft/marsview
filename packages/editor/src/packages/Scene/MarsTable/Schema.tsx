@@ -319,7 +319,7 @@ export default {
           id: 1001,
           name: '萤火虫',
           type: '昆虫',
-          avatar: 'https://marsview.cdn.bcebos.com/s1.png',
+          avatar: `${import.meta.env.VITE_CDN_URL}/s1.png`,
           time: 10,
           skill: ['飞', '发光', '御敌'],
           sales: 9.9,

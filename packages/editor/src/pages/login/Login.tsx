@@ -87,7 +87,7 @@ export default function Login() {
         <div className={style.form}>
           {type === 'login' ? (
             <div className={style.title}>
-              <img src="https://marsview.cdn.bcebos.com/mars-logo.png" width={45} />
+              <img src={`${import.meta.env.VITE_CDN_URL}/mars-logo.png`} width={45} />
               <span>登录</span>
             </div>
           ) : (

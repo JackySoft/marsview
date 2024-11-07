@@ -51,7 +51,7 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
       breadcrumb: true,
       tag: true,
       footer: false,
-      logo: 'https://marsview.cdn.bcebos.com/mars-logo.png',
+      logo: `${import.meta.env.VITE_CDN_URL}/mars-logo.png`,
       is_public: 1,
     };
   }, []);
