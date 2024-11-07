@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { useShallow } from 'zustand/react/shallow';
 import Page from '@marsview/materials/Page/Page';
@@ -9,10 +9,22 @@ import { getPageDetail } from '@/api/index';
 import locale from 'antd/locale/zh_CN';
 import 'dayjs/locale/zh-cn';
 import { ComItemType, ConfigType } from '@materials/types/index';
+import storage from '@/utils/storage';
+import { styled } from 'styled-components';
+import { isEnv } from '@/utils/util';
+const EnvMarker = styled.img`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  pointer-events: none;
+`;
 export default function () {
   const [theme, setTheme] = useState('');
   const [pageData, setPageData] = useState<{ config: ConfigType; elements: ComItemType[] }>();
-  const { id, env } = useParams();
+  const [envTag, setEnvTag] = useState('');
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const { savePageInfo, clearPageInfo } = usePageStore(
     useShallow((state) => {
       return {
@@ -24,7 +36,19 @@ export default function () {
   const navigate = useNavigate();
   useEffect(() => {
     if (id) {
-      getPageDetail(env as string, Number(id))
+      let env = searchParams.get('env') || storage.get(`${id}-env`) || 'prd';
+      // 设置环境标识
+      if (env === 'stg') {
+        setEnvTag('https://imgcloud.cdn.bcebos.com/349626543730cd39bd152e1c6.svg');
+      } else if (env === 'pre') {
+        setEnvTag('https://imgcloud.cdn.bcebos.com/349626543730cd39bd152e1c7.svg');
+      } else {
+        setEnvTag('');
+      }
+      if (!isEnv(env)) {
+        env = 'prd';
+      }
+      getPageDetail(env, Number(id))
         .then((res: any) => {
           if (!res.id) {
             return navigate('/404');
@@ -69,6 +93,7 @@ export default function () {
         },
       }}
     >
+      {envTag && <EnvMarker src={envTag} />}
       <Page config={pageData?.config} elements={pageData?.elements} />
     </ConfigProvider>
   );

@@ -195,6 +195,9 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
                         </Radio.Group>
                       </Form.Item>
                     )}
+                    <Form.Item label="页面路径" name="path" extra="配置页面路径后，访问时会优先使用页面路径">
+                      <Input placeholder="请输入页面路径，例如: /dashboard" />
+                    </Form.Item>
                   </>
                 );
               }}

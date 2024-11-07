@@ -200,9 +200,3 @@ export namespace AIChat {
     message: string;
   }
 }
-
-declare global {
-  interface Window {
-    $vanSSO?: any;
-  }
-}

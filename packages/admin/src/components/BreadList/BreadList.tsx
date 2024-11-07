@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useShallow } from 'zustand/react/shallow';
 import { useProjectStore } from '@/stores/projectStore';
+import { getPageId } from '@/utils/util';
 
 export default function BreadList() {
   const { pageId } = useParams();
@@ -11,8 +12,9 @@ export default function BreadList() {
   const { pageMap, menuMap } = useProjectStore(useShallow((state) => ({ pageMap: state.pageMap, menuMap: state.menuMap })));
   // 生成面包屑
   useEffect(() => {
-    if (!pageId) return;
-    const menuItem = pageMap[Number(pageId)];
+    const page_id = getPageId(pageId, pageMap);
+    if (!page_id) return;
+    const menuItem = pageMap[Number(page_id)];
     if (pathname.endsWith('/welcome')) {
       setMenuPath([{ title: '欢迎页' }]);
       return;

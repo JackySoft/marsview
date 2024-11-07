@@ -477,7 +477,7 @@ const handleSendMessage = async (
   { action, next }: ActionNode<{ msg_type: string; content: string; template_id: string; receive_id: number }>,
   data: any,
 ) => {
-  const res = await request.post('https://mars-api.marsview.cc/api/robot/sendMessage', { ...action, variables: data });
+  const res = await request.post(`${import.meta.env.VITE_BASE_API}/robot/sendMessage`, { ...action, variables: data });
   if (res.data.code === 0) {
     execAction(next?.success || next, res.data.data);
   } else {
@@ -489,7 +489,7 @@ const handleSendMessage = async (
  * 创建知识库副本
  */
 const handleCreateNode = async ({ action, next }: ActionNode<{ space_id: number; node_token: string; title: string }>, data: any) => {
-  const res = await request.post('https://mars-api.marsview.cc/api/robot/createNode', { ...action, variables: data });
+  const res = await request.post(`${import.meta.env.VITE_BASE_API}/robot/createNode`, { ...action, variables: data });
   if (res.data.code === 0) {
     execAction(next?.success || next, res.data.data);
   } else {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Menu } from 'antd';
 import type { MenuProps, MenuTheme } from 'antd';
-import Icon, * as Icons from '@ant-design/icons';
+import * as Icons from '@ant-design/icons';
 import { useProjectStore } from '@/stores/projectStore';
 import { IMenuItem } from '@/types';
 
@@ -13,7 +13,7 @@ const MenuComponent: React.FC = () => {
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { env, projectId } = useParams();
+  const { projectId } = useParams();
   const { collapsed, menuTree, projectInfo } = useProjectStore();
 
   useEffect(() => {
@@ -31,10 +31,10 @@ const MenuComponent: React.FC = () => {
       if (item.type === 1 && item.status === 1) {
         const iconsList: { [key: string]: any } = Icons;
         if (item.buttons?.length || !item.children) {
-          const path = `/project/${env}/${projectId}/${item.page_id || -item.id}`;
+          const path = `/project/${projectId}/${item.path.startsWith('/') ? item.path.slice(1) : item.path || item.page_id || -item.id}`;
           return treeList.push(getMenuItem(item.name, path, iconsList[item.icon] && React.createElement(iconsList[item.icon])));
         }
-        const path = `/project/${env}/${projectId}/${item.id}`;
+        const path = `${projectId}-${item.id}`;
         treeList.push(
           getMenuItem(item.name, path, iconsList[item.icon] && React.createElement(iconsList[item.icon]), getTreeMenu(item.children || [])),
         );

@@ -120,7 +120,7 @@ export default function Index() {
           <Tooltip title="页面访问">
             <SendOutlined
               onClick={() => {
-                window.open(`${import.meta.env.VITE_ADMIN_URL}/page/stg/${item.id}`, '_blank');
+                window.open(`${import.meta.env.VITE_ADMIN_URL}/page/${item.id}?env=stg`, '_blank');
               }}
             />
           </Tooltip>
