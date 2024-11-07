@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.18.0](https://github.com/JackySoft/marsview/compare/v4.17.0...v4.18.0) (2024-11-07)
+
+
+### Features
+
+* 迁移后端仓库 ([d533ddf](https://github.com/JackySoft/marsview/commit/d533ddf7acd91fbc2a1cf87bf69f687e7a514223))
+* 增加页面路径和环境标识 ([66a3b2e](https://github.com/JackySoft/marsview/commit/66a3b2e8c326d02988a6b3378b60c4ea150eba9d))
+
+
+### Documentation
+
+* 修改文档，增加捐赠者名单 ([88d3005](https://github.com/JackySoft/marsview/commit/88d3005102430d49c2ae59a902e620e192950678))
+
 ## [4.17.0](https://github.com/JackySoft/marsview/compare/v4.16.5...v4.17.0) (2024-11-07)
 
 
