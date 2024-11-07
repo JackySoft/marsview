@@ -58,6 +58,8 @@ Marsview 是一款中后台方向的低代码可视化搭建平台，开发者�
 
 ## 本地开发 👨‍💻
 
+### 前端仓库
+
 ```bash
 # 克隆代码
 git clone https://github.com/JackySoft/marsview.git
@@ -72,43 +74,38 @@ git clone https://github.com/JackySoft/marsview.git
 | packges/editor     | 编辑器端                   |
 | packages/materials | 组件物料 ，仅供 admin 使用 |
 | packages/docs      | 低代码使用文档             |
-| backend            | 后端服务，包括 2 个版本    |
-| backend/java       | JAVA 版本                  |
-| backend/koa        | KOA 版本                   |
-| backend/koa/config | 项目配置文件               |
-| backend/sql        | 数据库脚本                 |
+
+### 后端仓库
+
+```bash
+git clone https://github.com/JackySoft/marsview-backend.git
+```
+
+| 目录               | 说明                    |
+| ------------------ | ----------------------- |
+| backend            | 后端服务，包括 2 个版本 |
+| backend/java       | JAVA 版本               |
+| backend/koa        | KOA 版本                |
+| backend/koa/config | 项目配置文件            |
+| backend/sql        | 数据库脚本              |
 
 ### 快速开始
 
 运行需要 node 环境，建议`node:18`以上版本。使用`pnpm`作为依赖管理工具，如未安装，请先执行安装命令`npm install -g pnpm`。
 
-1. 安装 MySQL 数据库，执行`backend/db.sql`脚本
-
-2. 启动 Node 后端
-
-```bash
-cd backend/koa
-
-pnpm i
-
-pnpm run dev
-```
-
-> 注意：运行前需要修改 koa/config.js 配置文件。
-
-3. 启动前端
+1. 启动项目
 
 ```bash
 
 # 安装依赖（安装依赖时间如过长，请先配置镜像源）
 pnpm i
-# 修改 .env.development 文件
-VITE_BASE_API = 'http://localhost:5000/api'
 # 启动编辑器
 pnpm start:editor
 ```
 
-> 注意：VITE_BASE_API 也可以选择使用在线地址，例如：VITE_BASE_API = http://mars-api.marsview.cc/api
+> 注意：默认使用线上接口，如果需要私有化部署，请参考私有化部署文档。
+
+[Documentation](http://docs.marsview.cc/deploy.html)
 
 ### 同步代码
 
@@ -173,6 +170,7 @@ git merge upstream/main
 | 朱红宾          | <img src="http://docs.marsview.cc/sponsor/7.png"  width="50">  |
 | yangshare       | <img src="http://docs.marsview.cc/sponsor/8.jpeg"  width="50"> |
 | Joker6578       | <img src="http://docs.marsview.cc/sponsor/9.png"  width="50">  |
+| xiaoqingbbbb    | <img src="http://docs.marsview.cc/sponsor/11.png"  width="50"> |
 
 ## 🤝 参与贡献
 

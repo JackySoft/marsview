@@ -58,6 +58,8 @@ Marsview is a low code visualization platform for middle and backend development
 
 ## Local development 👨‍💻
 
+### Frontend
+
 ```bash
 git clone https://github.com/JackySoft/marsview.git
 ```
@@ -71,43 +73,42 @@ Project Description
 | packges/editor     | Editor end                                  |
 | packages/materials | Component materials, for admin use only     |
 | packages/docs      | Low code usage documentation                |
-| backend            | Backend services, including 2 versions      |
-| backend/java       | JAVA version                                |
-| backend/koa        | Node version                                |
-| backend/koa/config | Project configuration file                  |
-| backend/sql        | Database SQL Script                         |
+
+### Backend
+
+```bash
+git clone https://github.com/JackySoft/marsview-backend.git
+```
+
+Project Description
+| directory | description |
+| backend | Backend services, including 2 versions |
+| backend/java | JAVA version |
+| backend/koa | Node version |
+| backend/koa/config | Project configuration file |
+| backend/sql | Database SQL Script |
+
+### Deploy Documentation
+
+[Documentation](http://docs.marsview.cc/deploy.html)
 
 ### Quick start
 
 Running requires a node environment, it is recommended to have a version of 'node: 18' or higher. Use `pnpm` as a dependency management tool. If it is not installed, please execute the installation command `npm install - g pnpm` first.
 
-1. Install MySQL database and execute the `backend/db. sql` script
-
-2. Start Node backend
-
-```bash
-cd backend/koa
-
-pnpm i
-
-pnpm run dev
-```
-
-> Note: The koa/config. js configuration file needs to be modified before running.
-
-3. Start the front-end
+1. Start the front-end
 
 ```bash
 
 # Install dependencies (if the installation dependency time is too long, please configure the image source first)
 pnpm i
-# Modify the. env. development file
-VITE_BASE_API = 'http://localhost:5000/api'
-# 启动编辑器
+# Launch Editor
 pnpm start:editor
 ```
 
-> Note: Vite_SBASEAPI can also choose to use an online address,eg: VITE_BASE_API = http://mars-api.marsview.cc/api.
+> Note: By default, online interfaces are used. If private deployment is required, please refer to the private deployment documentation.
+
+[Documentation](http://docs.marsview.cc/deploy.html)
 
 ### Synchronization Code
 
@@ -173,6 +174,7 @@ Thank you to the following brothers for their donation:
 | 朱红宾          | <img src="http://docs.marsview.cc/sponsor/7.png"  width="50">  |
 | yangshare       | <img src="http://docs.marsview.cc/sponsor/8.jpeg"  width="50"> |
 | Joker6578       | <img src="http://docs.marsview.cc/sponsor/9.png"  width="50">  |
+| xiaoqingbbbb    | <img src="http://docs.marsview.cc/sponsor/11.png"  width="50"> |
 
 ## 🤝 Participate and contribute
 
