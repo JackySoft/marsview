@@ -304,7 +304,15 @@ const Editor = () => {
         >
           <FloatButton icon={<QuestionCircleOutlined />} />
         </Popover>
-        <Popover placement="left" title="加我微信" content={<Image width={180} src={`${import.meta.env.VITE_CDN_URL}/mywechat.jpg`} />}>
+        <Popover
+          placement="left"
+          content={
+            <>
+              <img width={150} src={`https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f02.png`} />
+              <p style={{ textAlign: 'center' }}>请备注：marsview</p>
+            </>
+          }
+        >
           <FloatButton icon={<CommentOutlined />} />
         </Popover>
       </FloatButton.Group>

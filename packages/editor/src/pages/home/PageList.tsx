@@ -331,17 +331,17 @@ const StateTag = ({ item }: { item: PageItem }) => {
   return (
     <>
       <Tooltip title={stgTag.tooltip}>
-        <Tag color={stgTag.color} icon={stgTag.icon}>
+        <Tag color={stgTag.color} icon={stgTag.icon} bordered={false}>
           STG
         </Tag>
       </Tooltip>
       <Tooltip title={preTag.tooltip}>
-        <Tag color={preTag.color} icon={preTag.icon}>
+        <Tag color={preTag.color} icon={preTag.icon} bordered={false}>
           PRE
         </Tag>
       </Tooltip>
       <Tooltip title={prdTag.tooltip}>
-        <Tag color={prdTag.color} icon={prdTag.icon}>
+        <Tag color={prdTag.color} icon={prdTag.icon} bordered={false}>
           PRD
         </Tag>
       </Tooltip>

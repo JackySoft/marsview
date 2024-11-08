@@ -1,10 +1,10 @@
 import { ComponentType } from '@materials/types';
 import { Form, FormItemProps, SelectProps, TreeSelect } from 'antd';
-import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, memo, useEffect, useImperativeHandle, useState } from 'react';
 import { handleApi } from '@materials/utils/handleApi';
-import { isNull } from '@materials/utils/util';
 import { useFormContext } from '@materials/utils/context';
 import { usePageStore } from '@materials/stores/pageStore';
+import { useShallow } from 'zustand/react/shallow';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {
@@ -28,7 +28,7 @@ const MTreeSelect = ({ type, config, onChange }: ComponentType<IConfig>, ref: an
   const [data, setData] = useState<Array<{ label: string; value: any }>>([]);
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
-  const variableData = usePageStore((state) => state.page.variableData);
+  const variableData = usePageStore(useShallow((state) => state.page.variableData));
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;
@@ -102,4 +102,4 @@ const MTreeSelect = ({ type, config, onChange }: ComponentType<IConfig>, ref: an
     )
   );
 };
-export default forwardRef(MTreeSelect);
+export default memo(forwardRef(MTreeSelect));

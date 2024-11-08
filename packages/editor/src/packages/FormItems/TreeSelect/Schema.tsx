@@ -227,43 +227,46 @@ export default {
           children: 'children',
         },
         labelInValue: false,
-        multiple: false,
         placement: 'bottomLeft',
       },
     },
     // 组件样式
     style: {
-      minWidth: 120,
+      minWidth: 180,
     },
     // 接口配置
     api: {
       sourceType: 'json',
       source: [
         {
-          value: 'parent 1',
-          title: 'parent 1',
+          value: '1001',
+          title: '湖北省',
           children: [
             {
-              value: 'parent 1-0',
-              title: 'parent 1-0',
+              value: '100101',
+              title: '武汉市',
               children: [
                 {
-                  value: 'leaf1',
-                  title: 'leaf1',
+                  value: '1001011',
+                  title: '江夏区',
                 },
                 {
-                  value: 'leaf2',
-                  title: 'leaf2',
+                  value: '1001012',
+                  title: '汉阳区',
                 },
               ],
             },
             {
-              value: 'parent 1-1',
-              title: 'parent 1-1',
+              value: '100102',
+              title: '襄阳市',
               children: [
                 {
-                  value: 'leaf3',
-                  title: <b style={{ color: '#08c' }}>leaf3</b>,
+                  value: '1001021',
+                  title: '襄城区',
+                },
+                {
+                  value: '1001022',
+                  title: '樊城区',
                 },
               ],
             },
