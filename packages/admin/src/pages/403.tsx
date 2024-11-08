@@ -1,19 +1,16 @@
 import { Button, Result } from 'antd';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function Forbidden() {
-  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-  const navigate = (path: string) => {
-    window.open(path);
-  };
   return (
     <Result
       status={403}
       title="403"
-      subTitle={`抱歉，您当前没有权限访问此${searchParams.get('type') === 'project' ? '项目' : '页面'}`}
+      subTitle="抱歉，您当前暂无权限访问"
       extra={
-        <Button type="primary" onClick={() => navigate(`http://www.marsview.cc/`)}>
-          返回Marsview平台
+        <Button type="primary" onClick={() => navigate('/')}>
+          回首页
         </Button>
       }
     />

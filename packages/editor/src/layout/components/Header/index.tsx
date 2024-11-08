@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Flex, Tooltip } from 'antd';
+import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Flex } from 'antd';
 import {
   ProjectOutlined,
   OneToOneOutlined,
@@ -248,16 +248,34 @@ const Header = memo(() => {
 
         {/* 用户信息&发布&发布记录 */}
         <div className={styles.user}>
-          {isEditPage && mode === 'edit' && (
-            <>
-              <Popover placement="bottom" content={<Publish />} trigger="click">
-                <Button type="primary">
-                  发布
-                  <CaretDownFilled />
-                </Button>
-              </Popover>
-            </>
-          )}
+          <Space>
+            <Popover
+              placement="bottom"
+              content={
+                <>
+                  <img width={150} src={`https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f02.png`} />
+                  <p style={{ textAlign: 'center' }}>请备注：marsview</p>
+                </>
+              }
+            >
+              <Button type="text" onClick={() => window.open('http://docs.marsview.cc', '_blank')}>
+                联系我
+              </Button>
+            </Popover>
+            <Button type="text" onClick={() => window.open('http://docs.marsview.cc', '_blank')}>
+              帮助文档
+            </Button>
+            {isEditPage && mode === 'edit' && (
+              <>
+                <Popover placement="bottom" content={<Publish />} trigger="click">
+                  <Button type="primary">
+                    发布
+                    <CaretDownFilled />
+                  </Button>
+                </Popover>
+              </>
+            )}
+          </Space>
           {/* 编辑和发布 */}
           {(isEditPage || isPublishPage) && mode === 'edit' && (
             <Dropdown menu={{ items: pathItems, selectable: true, defaultSelectedKeys: [...pageFrom.split('/').slice(-1)] }}>
@@ -275,9 +293,7 @@ const Header = memo(() => {
               退出预览
             </Button>
           )}
-          <Tooltip title="使用文档">
-            <QuestionCircleOutlined onClick={() => window.open('http://docs.marsview.cc', '_blank')} style={{ fontSize: 20 }} />
-          </Tooltip>
+
           {/* 用户头像 */}
           <div className={styles.avatar}>
             <Dropdown

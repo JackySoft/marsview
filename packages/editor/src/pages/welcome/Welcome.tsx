@@ -135,6 +135,9 @@ export default function Welcome() {
         <p className={style.beian}>
           <span>Copyright © 2024</span>
           <a href="https://beian.miit.gov.cn/#/Integrated/index">京ICP备14041985号-2</a>
+          <a href="https://httpsok.com/p/4Dl1" style={{ color: '#fff' }} target="_blank">
+            友情链接：httpsok
+          </a>
         </p>
       </section>
     </div>
