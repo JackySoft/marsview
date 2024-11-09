@@ -22,3 +22,4 @@ Marsview 是一个开源的可视化搭建平台，采用 MIT 许可的开源项
 | 朱红宾          | <img src="http://docs.marsview.cc/sponsor/7.png"  width="50">  |
 | yangshare       | <img src="http://docs.marsview.cc/sponsor/8.jpeg"  width="50"> |
 | Joker6578       | <img src="http://docs.marsview.cc/sponsor/9.png"  width="50">  |
+| xiaoqingbbbb    | <img src="http://docs.marsview.cc/sponsor/11.png"  width="50"> |
