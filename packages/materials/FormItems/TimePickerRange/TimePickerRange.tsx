@@ -28,7 +28,7 @@ const MTimePickerRange = ({ type, config, onChange }: ComponentType<IConfig> & {
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
     // 日期组件初始化值
-    if (name && !isNotEmpty(value)) {
+    if (name && isNotEmpty(value)) {
       const fmt = config.props.formWrap.format || 'HH:mm:ss';
       const rangeTime = value.split(',').map((item) => dayjs(item, fmt));
       initValues(type, name, rangeTime);
