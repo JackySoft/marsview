@@ -10,6 +10,7 @@ import SearchForm from '../components/SearchForm';
 import { getMenuList, delMenu, copyMenu } from '@/api';
 import { arrayToTree } from '@/utils/util';
 import * as icons from '@ant-design/icons';
+import BaseTable from '../components/BaseTable';
 
 /**
  * 菜单配置
@@ -104,14 +105,16 @@ export default function MenuList() {
       title: '菜单名称',
       dataIndex: 'name',
       key: 'name',
-      width: 200,
+      width: 220,
       align: 'center',
+      fixed: 'left',
     },
     {
       title: '菜单图标',
       dataIndex: 'icon',
       key: 'icon',
       align: 'center',
+      width: 120,
       render(icon: string) {
         if (!icon) return '-';
         const iconsList: { [key: string]: any } = icons;
@@ -127,6 +130,7 @@ export default function MenuList() {
       dataIndex: 'type',
       key: 'type',
       align: 'center',
+      width: 120,
       render(type: number) {
         return {
           1: '菜单',
@@ -140,6 +144,7 @@ export default function MenuList() {
       dataIndex: 'code',
       key: 'code',
       align: 'center',
+      width: 120,
       render(code: string) {
         if (!code) return '-';
         return code;
@@ -150,6 +155,7 @@ export default function MenuList() {
       dataIndex: 'page_id',
       key: 'page_id',
       align: 'center',
+      width: 120,
       render(page_id: string) {
         return page_id;
       },
@@ -159,34 +165,46 @@ export default function MenuList() {
       dataIndex: 'sort_num',
       key: 'sort_num',
       align: 'center',
+      width: 100,
     },
     {
       title: '状态',
       dataIndex: 'status',
       key: 'status',
       align: 'center',
+      width: 120,
       render(status: number) {
         if (status === 1) return <Badge status="success" text="正常" />;
         if (status === 2) return <Badge status="error" text="停用" />;
       },
     },
     {
+      title: '更新时间',
+      dataIndex: 'updated_at',
+      key: 'updated_at',
+      align: 'center',
+      width: 180,
+    },
+    {
       title: '创建时间',
       dataIndex: 'created_at',
       key: 'created_at',
       align: 'center',
+      width: 180,
     },
     {
       title: '创建人',
       dataIndex: 'user_name',
       key: 'user_name',
       align: 'center',
+      width: 200,
     },
     {
       title: '操作',
       key: 'action',
       width: 320,
       align: 'center',
+      fixed: 'right',
       render(_, record) {
         return (
           <>
@@ -222,17 +240,16 @@ export default function MenuList() {
           </Select>
         </Form.Item>
       </SearchForm>
-      <div className="base-table">
-        <div className="header-wrapper">
-          <div className="title">菜单列表</div>
-          <div className="action">
-            <Button type="primary" onClick={handleCreate}>
-              新增
-            </Button>
-          </div>
-        </div>
-        <Table bordered rowKey="id" loading={loading} columns={columns} dataSource={data} pagination={false} />
-      </div>
+      <BaseTable
+        title="菜单列表"
+        action={
+          <Button type="primary" onClick={handleCreate}>
+            新增
+          </Button>
+        }
+      >
+        <Table bordered rowKey="id" loading={loading} columns={columns} dataSource={data} pagination={false} scroll={{ x: 1100 }} />
+      </BaseTable>
       {/* 新增菜单 */}
       <CreateMenu mRef={menuRef} update={getMenus} />
     </div>

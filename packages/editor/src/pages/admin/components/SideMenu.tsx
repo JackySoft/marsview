@@ -1,6 +1,5 @@
 import React from 'react';
 import { Menu } from 'antd';
-import styles from './index.module.less';
 import type { MenuProps } from 'antd/es/menu';
 import { useEffect, useState } from 'react';
 import { ProjectOutlined, MenuOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
@@ -43,21 +42,16 @@ const SideMenu = () => {
     navigate(key);
   };
   return (
-    <div className={styles.navSide}>
-      <Menu
-        mode="inline"
-        theme="light"
-        style={{
-          width: 200,
-          height: 'calc(100vh - 64px)',
-          flex: 1,
-          minWidth: 0,
-        }}
-        selectedKeys={selectedKeys}
-        onClick={handleClickMenu}
-        items={menuList}
-      />
-    </div>
+    <Menu
+      mode="inline"
+      theme="light"
+      style={{
+        height: 'calc(100vh - 64px)',
+      }}
+      selectedKeys={selectedKeys}
+      onClick={handleClickMenu}
+      items={menuList}
+    />
   );
 };
 

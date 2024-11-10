@@ -134,7 +134,7 @@ export default function Welcome() {
         </Link>
         <p className={style.beian}>
           <span>Copyright © 2024</span>
-          <a href="https://beian.miit.gov.cn/#/Integrated/index">京ICP备14041985号-2</a>
+          <a href="https://beian.miit.gov.cn/#/Integrated/index">{location.hostname === 'www.marsview.com.cn'?'沪ICP备2024101697号-1':'京ICP备14041985号-2'}</a>
           <a href="https://httpsok.com/p/4Dl1" style={{ color: '#fff' }} target="_blank">
             友情链接：httpsok
           </a>
