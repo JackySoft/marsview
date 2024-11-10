@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Outlet, useParams, useSearchParams, useNavigate, useLoaderData, useLocation } from 'react-router-dom';
 import { ConfigProvider, Layout } from 'antd';
 import Header from '../components/Header/Header';
@@ -90,18 +90,15 @@ const AdminLayout = () => {
   }, [projectId]);
 
   // 计算渲染区容器实际高度
-  let height = 64;
-  let calcHeight = '';
-  if (projectInfo.tag) {
-    height += 50;
-  }
-  calcHeight = `calc(100vh - ${height}px)`;
+  const calcHeight = useMemo(() => {
+    return projectInfo.tag ? `calc(100vh - 114px)` : `calc(100vh - 64px)`;
+  }, [projectInfo.tag]);
 
   // 定义Footer
   const Footer = () => (
     <Layout.Footer>
       <div className="footnote">
-        <span>Marsview 访问端</span>
+        <span>Copyright © 2024 Marsview. All Rights Reserved. </span>
       </div>
     </Layout.Footer>
   );
@@ -139,23 +136,17 @@ const AdminLayout = () => {
             </div>
           </Layout>
         )}
-        {/* 上左右布局 */}
+        {/* 上下布局 */}
         {projectInfo.layout === 2 && (
           <>
             <Header />
-            <Layout style={{ flexDirection: 'row' }}>
-              <Menu />
-              <Layout style={{ width: 'calc(100vw - 255px)' }}>
-                {/* 加载页签 */}
-                {projectInfo.tag ? <Tab /> : null}
-                {/* 加载内容 */}
-                <div style={{ height: calcHeight, overflow: 'auto' }}>
-                  {/* 加载面包屑 */}
-                  {projectInfo.breadcrumb === 1 && <BreadList />}
-                  <Outlet></Outlet>
-                  {projectInfo.footer === 1 && <Footer />}
-                </div>
-              </Layout>
+            {/* 加载页签 */}
+            {projectInfo.tag ? <Tab /> : null}
+            <Layout style={{ padding: 20, backgroundColor: '#f3f5f9', height: calcHeight, overflow: 'auto' }}>
+              {/* 加载面包屑 */}
+              {projectInfo.breadcrumb === 1 && <BreadList />}
+              <Outlet></Outlet>
+              {projectInfo.footer === 1 && <Footer />}
             </Layout>
           </>
         )}
