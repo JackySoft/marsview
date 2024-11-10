@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.19.0](https://github.com/JackySoft/marsview/compare/v4.18.3...v4.19.0) (2024-11-10)
+
+
+### Features
+
+* 优化菜单布局 ([e10ffff](https://github.com/JackySoft/marsview/commit/e10ffff57f8a167d51407a4c96bc7416ee353cc1))
+
+
+### Bug Fixes
+
+* 更换github图标成角标 ([d52a344](https://github.com/JackySoft/marsview/commit/d52a344e147036abb47fba3f81367e07a39b80bf))
+
+
+### Styles
+
+* 优化样式 ([137da5e](https://github.com/JackySoft/marsview/commit/137da5e539d53783e98bb5da3666bf6d996327e3))
+
 ### [4.18.3](https://github.com/JackySoft/marsview/compare/v4.18.2...v4.18.3) (2024-11-10)
 
 
