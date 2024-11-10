@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/JackySoft/marsview/compare/v4.19.0...v5.0.0) (2024-11-10)
+
+
+### Features
+
+* 增加暗黑主题 ([3566e62](https://github.com/JackySoft/marsview/commit/3566e62ccfd3117a9346a6b06762c3650447e5b9))
+
 ## [4.19.0](https://github.com/JackySoft/marsview/compare/v4.18.3...v4.19.0) (2024-11-10)
 
 
