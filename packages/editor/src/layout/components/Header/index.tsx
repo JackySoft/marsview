@@ -1,6 +1,6 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Flex } from 'antd';
+import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Flex, Switch } from 'antd';
 import {
   ProjectOutlined,
   OneToOneOutlined,
@@ -11,12 +11,15 @@ import {
   PieChartOutlined,
   CloudOutlined,
   QuestionCircleOutlined,
+  SunOutlined,
+  MoonFilled,
 } from '@ant-design/icons';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
 import { updatePageData } from '@/api';
 import Publish from './PublishPopover';
 import styles from './index.module.less';
+import storage from '@/utils/storage';
 
 /**
  * 编辑器顶部组件
@@ -31,6 +34,27 @@ const Header = memo(() => {
   const { id } = useParams();
   const location = useLocation();
 
+  const {
+    userInfo,
+    page: { pageId, pageName, remark, is_public, is_edit, ...pageData },
+    mode,
+    theme,
+    setMode,
+    setTheme,
+    updatePageState,
+  } = usePageStore((state) => {
+    return {
+      userInfo: state.userInfo,
+      page: state.page,
+      mode: state.mode,
+      theme: state.theme,
+      setMode: state.setMode,
+      setTheme: state.setTheme,
+      updatePageState: state.updatePageState,
+    };
+  });
+
+  // 返回首页
   const goHome = () => {
     setMode('edit');
     // 点击Logo返回最近操作的列表，对用户友好
@@ -43,54 +67,43 @@ const Header = memo(() => {
     if (isLib) navigate('/libs');
     if (isTmpl) navigate('/templates');
   };
-  const {
-    userInfo,
-    page: { pageId, pageName, remark, is_public, is_edit, ...pageData },
-    mode,
-    setMode,
-    updatePageState,
-  } = usePageStore((state) => {
-    return {
-      userInfo: state.userInfo,
-      page: state.page,
-      mode: state.mode,
-      setMode: state.setMode,
-      updatePageState: state.updatePageState,
-    };
-  });
+
   // Tab切换项
-  const items: MenuProps['items'] = [
-    {
-      label: '项目列表',
-      key: 'projects',
-      icon: <ProjectOutlined style={{ fontSize: 16 }} />,
-    },
-    {
-      label: '页面列表',
-      key: 'pages',
-      icon: <OneToOneOutlined style={{ fontSize: 16 }} />,
-    },
-    {
-      label: '组件库',
-      key: 'libs',
-      icon: <AppstoreOutlined style={{ fontSize: 16 }} />,
-    },
-    {
-      label: '精选模板',
-      key: 'templates',
-      icon: <PieChartOutlined style={{ fontSize: 16 }} />,
-    },
-    // {
-    //   label: '工作流',
-    //   key: 'workflows',
-    //   icon: <ApartmentOutlined style={{ fontSize: 16 }} />,
-    // },
-    {
-      label: '图片云',
-      key: 'cloud',
-      icon: <CloudOutlined style={{ fontSize: 16 }} />,
-    },
-  ];
+  const items: MenuProps['items'] = useMemo(
+    () => [
+      {
+        label: '项目列表',
+        key: 'projects',
+        icon: <ProjectOutlined style={{ fontSize: 16 }} />,
+      },
+      {
+        label: '页面列表',
+        key: 'pages',
+        icon: <OneToOneOutlined style={{ fontSize: 16 }} />,
+      },
+      {
+        label: '组件库',
+        key: 'libs',
+        icon: <AppstoreOutlined style={{ fontSize: 16 }} />,
+      },
+      {
+        label: '精选模板',
+        key: 'templates',
+        icon: <PieChartOutlined style={{ fontSize: 16 }} />,
+      },
+      // {
+      //   label: '工作流',
+      //   key: 'workflows',
+      //   icon: <ApartmentOutlined style={{ fontSize: 16 }} />,
+      // },
+      {
+        label: '图片云',
+        key: 'cloud',
+        icon: <CloudOutlined style={{ fontSize: 16 }} />,
+      },
+    ],
+    [],
+  );
 
   useEffect(() => {
     if (['/projects', '/pages', '/libs', '/templates', '/workflows', '/cloud'].includes(location.pathname)) {
@@ -105,11 +118,18 @@ const Header = memo(() => {
   // 获取用户头像
   useEffect(() => {
     const [email, suffix] = userInfo.userName.split('@');
-    if (suffix === 'qq.com') {
+    if (suffix === 'qq.com' && /^\d+$/g.test(email)) {
       setAvatar(`https://q2.qlogo.cn/headimg_dl?dst_uin=${email}&spec=640`);
     } else {
       setAvatar('');
     }
+    const isDark = storage.get('marsview-theme');
+    if (isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+    setTheme(isDark ? 'dark' : 'light');
   }, [userInfo]);
 
   // Tab切换点击
@@ -215,7 +235,7 @@ const Header = memo(() => {
         {/* 首页 - 导航菜单 */}
         {isNav && (
           <div className={styles.menu}>
-            <Menu onClick={handleTab} selectedKeys={navKey} mode="horizontal" items={items} />
+            <Menu onClick={handleTab} selectedKeys={navKey} theme={theme} mode="horizontal" items={items} />
           </div>
         )}
 
@@ -258,13 +278,24 @@ const Header = memo(() => {
                 </>
               }
             >
-              <Button type="text" onClick={() => window.open('http://docs.marsview.cc', '_blank')}>
+              <Button type="text" style={{ color: 'var(--mars-theme-text-color)' }} onClick={() => window.open('http://docs.marsview.cc', '_blank')}>
                 联系我
               </Button>
             </Popover>
-            <Button type="text" onClick={() => window.open('http://docs.marsview.cc', '_blank')}>
+            <Button type="text" style={{ color: 'var(--mars-theme-text-color)' }} onClick={() => window.open('http://docs.marsview.cc', '_blank')}>
               帮助文档
             </Button>
+            <Switch
+              checkedChildren={<MoonFilled />}
+              unCheckedChildren={<SunOutlined />}
+              defaultChecked
+              checked={theme == 'dark' ? true : false}
+              onChange={(val) => {
+                storage.set('marsview-theme', val);
+                setTheme(val ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', val ? 'dark' : 'light');
+              }}
+            />
             {isEditPage && mode === 'edit' && (
               <>
                 <Popover placement="bottom" content={<Publish />} trigger="click">
@@ -318,7 +349,7 @@ const Header = memo(() => {
               }}
             >
               <Flex align="center" style={{ height: 64 }}>
-                <a type="link" onClick={(e) => e.preventDefault()} style={{ marginInline: 5 }}>
+                <a onClick={(e) => e.preventDefault()} style={{ marginInline: 5 }}>
                   {`${userInfo?.userName.split('@')[0]}` || '开发者'}
                 </a>
                 {avatar && <img width={25} style={{ verticalAlign: 'sub', borderRadius: '50%' }} src={avatar} />}

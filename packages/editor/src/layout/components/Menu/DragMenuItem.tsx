@@ -4,8 +4,8 @@ import { IDragTarget } from '@/packages/types/index';
 import { checkComponentType, createId } from '@/utils/util';
 import { getComponent } from '@/packages/index';
 import { usePageStore } from '@/stores/pageStore';
-import styles from './index.module.less';
 import { message } from '@/utils/AntdGlobal';
+import { Button } from 'antd';
 /**
  * 拖拽目标
  * @param props 拖拽对象属性值
@@ -89,15 +89,10 @@ const DragMenuItem = (props: IDragTarget) => {
     });
   };
 
-  // 拖拽样式
-  const style = {
-    color: '#7d33ff',
-    borderColor: '#7d33ff',
-  };
   return (
-    <div className={styles.menuItem} style={isDragging ? style : {}} ref={drag} onClick={() => handleClick(props)}>
+    <Button type="default" block ref={drag} onClick={() => handleClick(props)}>
       {props.name}
-    </div>
+    </Button>
   );
 };
 

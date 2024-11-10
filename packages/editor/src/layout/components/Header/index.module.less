@@ -1,18 +1,20 @@
-.header {
+.header,
+.layoutHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 30px;
-  background-color: #fff;
+  background-color: var(--mars-theme-color);
   height: 64px;
   line-height: 64px;
   padding: 0 20px;
   font-size: 14px;
+  color: var(--mars-theme-text-color);
 }
 .layoutHeader {
-  &:extend(.header);
-  border-bottom: 1px solid @border-color;
+  border-bottom: 1px solid var(--mars-theme-border-color);
 }
+
 .logo {
   font-size: 20px;
   display: flex;

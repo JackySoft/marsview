@@ -212,7 +212,7 @@ export default function PublishHistory() {
   return (
     <div>
       <Layout.Content className={style.publishHistoryList}>
-        <Tabs size="middle" className={style.envTab} defaultActiveKey="1" items={items} onChange={(key) => onTabChange(key as EnvType)}></Tabs>
+        <Tabs size="middle" defaultActiveKey="1" items={items} onChange={(key) => onTabChange(key as EnvType)}></Tabs>
         <SearchForm form={form} submit={onSearch} style={{ marginBottom: 0 }} initialValues={{ date: [] }}>
           <Form.Item label="用户名" name="name">
             <Input autoComplete="off" placeholder="用户名"></Input>
@@ -222,7 +222,6 @@ export default function PublishHistory() {
           </Form.Item>
         </SearchForm>
         <Table
-          rootClassName={style.historyTable}
           rowKey="id"
           loading={loading}
           scroll={{

@@ -4,6 +4,7 @@ import { useDebounceFn } from 'ahooks';
 import { Splitter } from 'antd';
 import ComPreview from './ComPreview';
 import less from 'less';
+import { usePageStore } from '@/stores/pageStore';
 
 /**
  * 组件代码编辑
@@ -13,6 +14,8 @@ export default forwardRef((_: any, ref: React.ForwardedRef<{ getCode: () => void
   const [css, setCss] = useState('');
   const [refreshTag, setRefreshTag] = useState(0);
   const editorRef = useRef<any>(null);
+
+  const theme = usePageStore((state) => state.theme);
 
   useImperativeHandle(ref, () => {
     return {
@@ -72,6 +75,7 @@ export default forwardRef((_: any, ref: React.ForwardedRef<{ getCode: () => void
         <Splitter.Panel defaultSize="50%">
           <Editor
             language={'less'}
+            theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
             value={code}
             onChange={run}
             options={{

@@ -13,7 +13,7 @@
   }
 }
 .card {
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--mars-theme-card-border-color);
   border-radius: 8px;
   padding: 0 20px;
   box-sizing: border-box;
@@ -43,7 +43,7 @@
   font-size: 14px;
   margin-top: 8px;
   margin-bottom: 5px;
-  color: rgba(0, 0, 0, 0.88);
+  color: var(--mars-theme-text-secondary-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -56,12 +56,12 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--mars-theme-card-border-color);
   font-size: 20px;
   padding: 10px;
   :global {
     .anticon {
-      color: #000000bd;
+      color: var(--mars-theme-card-text-color);
       &:hover {
         cursor: pointer;
         color: #7d33ff;
@@ -123,7 +123,7 @@
     justify-content: space-between;
     align-items: center;
     padding-inline: 10px;
-    border-bottom: 1px solid @border-color;
+    border-bottom: 1px solid var(--mars-theme-card-border-color);
     height: 110px;
     .itemInfo {
       .remark {
@@ -131,7 +131,7 @@
       }
       p {
         line-height: 30px;
-        color: #0006;
+        color: var(--mars-theme-text-secondary-color);
       }
     }
   }

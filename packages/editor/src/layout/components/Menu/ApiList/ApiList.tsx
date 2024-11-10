@@ -38,7 +38,7 @@ export default () => {
 
   return (
     <>
-      <Flex justify="space-between" align="center" style={{ borderBottom: '1px solid #e8e9eb' }}>
+      <Flex justify="space-between" align="center" style={{ borderBottom: '1px solid var(--mars-theme-card-border-color)' }}>
         <Button type="link" icon={<PlusOutlined />} onClick={() => handleAdd()}>
           新增
         </Button>

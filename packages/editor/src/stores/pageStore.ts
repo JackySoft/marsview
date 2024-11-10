@@ -13,6 +13,7 @@ export interface UserInfoStore {
 export interface PageState {
   userInfo: UserInfoStore;
   mode: 'edit' | 'preview';
+  theme: 'light' | 'dark';
   selectedElement: { type: string; id: string } | undefined;
   isUpdateToolbar: boolean; // 更新遮罩
   page: {
@@ -74,6 +75,7 @@ export interface PageAction {
   updateApi: (api: ApiType) => void;
   removeApi: (name: string) => void;
   setMode: (mode: 'edit' | 'preview') => void;
+  setTheme: (theme: 'light' | 'dark') => void;
   addElement: (element: any) => void;
   addChildElements: (element: any) => void;
   editElement: (payload: any) => void;
@@ -98,6 +100,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     userName: '',
   },
   mode: 'edit',
+  theme: 'light',
   selectedElement: undefined,
   isUpdateToolbar: false,
   page: {
@@ -207,6 +210,8 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   },
   // 切换编辑模式
   setMode: (mode: 'edit' | 'preview') => set({ mode }),
+  // 切换主题
+  setTheme: (theme: 'light' | 'dark') => set({ theme }),
   // 添加组件
   addElement: (element: ComponentType) => {
     set(
