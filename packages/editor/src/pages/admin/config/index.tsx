@@ -98,21 +98,33 @@ const Config: React.FC = memo(() => {
         </Form.Item>
         <h3>系统配置</h3>
         <Form.Item label="系统布局" name="layout">
-          <Radio.Group {...props}>
+          <Radio.Group {...props} onChange={(event) => form.setFieldValue('menu_mode', event.target.value === 1 ? 'inline' : 'horizontal')}>
             <Radio value={1}>
-              <img style={{ width: 150 }} src="/imgs/layout-1.png" alt="左右布局" />
+              <img style={{ width: 100 }} src="https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f3c.png" alt="左右布局" />
             </Radio>
             <Radio value={2}>
-              <img style={{ width: 150 }} src="/imgs/layout-2.png" alt="上左右下布局" />
+              <img style={{ width: 100 }} src="https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f3d.png" alt="上左右下布局" />
             </Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="菜单模式" name="menu_mode">
-          <Radio.Group {...props} buttonStyle="solid">
-            <Radio.Button value="vertical">垂直</Radio.Button>
-            {/* <Radio.Button value="horizontal">水平</Radio.Button> */}
-            <Radio.Button value="inline">内嵌</Radio.Button>
-          </Radio.Group>
+        <Form.Item noStyle shouldUpdate>
+          {(form: any) => {
+            const layout = form.getFieldValue('layout');
+            return layout === 1 ? (
+              <Form.Item label="菜单模式" name="menu_mode">
+                <Radio.Group {...props} buttonStyle="solid">
+                  <Radio.Button value="vertical">垂直</Radio.Button>
+                  <Radio.Button value="inline">内嵌</Radio.Button>
+                </Radio.Group>
+              </Form.Item>
+            ) : (
+              <Form.Item label="菜单模式" name="menu_mode">
+                <Radio.Group {...props} buttonStyle="solid">
+                  <Radio.Button value="horizontal">水平</Radio.Button>
+                </Radio.Group>
+              </Form.Item>
+            );
+          }}
         </Form.Item>
         <Form.Item label="菜单主题" name="menu_theme_color">
           <Radio.Group {...props}>
