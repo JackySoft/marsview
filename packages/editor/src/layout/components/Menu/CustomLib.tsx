@@ -1,9 +1,8 @@
 import { getInstallList, ILibPublish } from '@/api/lib';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { usePageStore } from '@/stores/pageStore';
-import { Flex, Spin } from 'antd';
+import { Button, Flex, Spin } from 'antd';
 import { createId } from '@/utils/util';
-import styles from './index.module.less';
 /**
  * 自定义组件库
  */
@@ -90,9 +89,9 @@ function CustomLib(_: any, ref: any) {
           {list.map((item) => {
             return (
               <div style={{ width: '45%' }} key={item.id}>
-                <div className={styles.menuItemLib} onClick={() => handleClick(item)}>
+                <Button type="default" block onClick={() => handleClick(item)}>
                   {item.name}
-                </div>
+                </Button>
               </div>
             );
           })}

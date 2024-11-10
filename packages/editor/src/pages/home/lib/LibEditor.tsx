@@ -26,7 +26,6 @@ export default () => {
   const [detail, setDetail] = useState<ILib>();
   const [loading, setLoading] = useState(false);
   const [activeTabKey, setActiveTabKey] = useState<string>('react');
-
   const [cacheAICode, setCacheAICode] = useState<{ jsx: string; config: string } | null>(null);
 
   const navigate = useNavigate();

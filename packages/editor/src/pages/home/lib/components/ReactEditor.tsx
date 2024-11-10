@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 import { useKeyPress } from 'ahooks';
 import ComPreview from './ComPreview';
 import './index.less';
+import { usePageStore } from '@/stores/pageStore';
 
 /**
  * 组件代码编辑
@@ -21,6 +22,8 @@ export default forwardRef((_: any, ref: any) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const editorRef = useRef<any>(null);
+
+  const theme = usePageStore((state) => state.theme);
 
   /**
    * 把React、dayjs、antd挂载到window上，否则esbuild无法编译
@@ -164,6 +167,7 @@ export default forwardRef((_: any, ref: any) => {
         <Splitter.Panel defaultSize="50%">
           <Editor
             language={'javascript'}
+            theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
             value={code}
             onChange={(value) => {
               setLoading(true);

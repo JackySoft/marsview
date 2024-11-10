@@ -1,14 +1,15 @@
 /*****行为弹框********/
 .actionBox {
   display: flex;
-  border: 1px solid @border-color;
+  border: 1px solid var(--mars-theme-card-border-color);
   border-radius: 8px;
   margin-top: 15px;
   .menuAction {
     width: 200px;
     height: 500px;
     overflow: auto;
-    border-right: 1px solid @border-color;
+    border-right: 1px solid var(--mars-theme-card-border-color);
+    background-color: var(--mars-theme-color);
     ul,
     li {
       list-style: none;
@@ -17,13 +18,13 @@
       line-height: 32px;
       font-size: 14px;
       font-weight: 500;
-      background-color: #f5f5f5;
+      background-color: var(--mars-theme-color);
       .navTitle {
         padding-left: 10px;
       }
       .subItem {
         line-height: 32px;
-        background-color: #fff;
+        background-color: var(--mars-theme-bg-color);
         padding-left: 30px;
         font-weight: normal;
         cursor: pointer;

@@ -186,7 +186,7 @@ const CardItem: React.FC<ProjectCardItemProps> = memo(({ item, isAuth, getList }
               {item.id && item.is_edit ? (
                 <DeleteOutlined className={styles.delIcon} onClick={(event) => deleteProjectConfirm(event, item.id)} />
               ) : null}
-              <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.remark || '暂无描述'}</p>
+              <p style={{ color: 'var(--mars-theme-text-secondary-color)' }}>{item.remark || '暂无描述'}</p>
               <p style={{ marginTop: 10 }}>
                 <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
                 {item.user_name}

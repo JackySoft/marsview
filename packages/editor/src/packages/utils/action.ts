@@ -158,7 +158,7 @@ const execAction = (node: any, params: any = {}) => {
   try {
     const data = mergeParams(node.action.data, params);
     delete node.action.data;
-    node.action = handleParamVariable(node.action);
+    node.action = handleParamVariable(node.action, params);
     if (node.action.actionType === 'methods') {
       handleMethods(node, data);
     } else if (node.action.actionType === 'showConfirm') {

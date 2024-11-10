@@ -11,8 +11,9 @@ import { message } from '@/utils/AntdGlobal';
 const CodingPanel = () => {
   const editorRef = useRef<any>(null);
   const [loading, setLoading] = useState(false);
-  const { userInfo, page, savePageInfo } = usePageStore((state) => ({
+  const { userInfo, theme, page, savePageInfo } = usePageStore((state) => ({
     userInfo: state.userInfo,
+    theme: state.theme,
     page: state.page,
     savePageInfo: state.savePageInfo,
   }));
@@ -104,7 +105,7 @@ const CodingPanel = () => {
       <Editor
         height="calc(100vh - 170px)"
         language="json"
-        theme="vs-light"
+        theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
         options={{
           lineNumbers: 'on',
           minimap: {

@@ -1,4 +1,5 @@
 import { isNotEmpty } from '@/packages/utils/util';
+import { usePageStore } from '@/stores/pageStore';
 import Editor, { loader, useMonaco } from '@monaco-editor/react';
 import { useEffect, useRef } from 'react';
 /**
@@ -6,6 +7,7 @@ import { useEffect, useRef } from 'react';
  */
 
 export default function VsEditor({ height, language, value, onChange }: any) {
+  const theme = usePageStore((state) => state.theme);
   const monaco = useMonaco();
   const editorRef = useRef<any>(null);
   useEffect(() => {
@@ -62,6 +64,7 @@ export default function VsEditor({ height, language, value, onChange }: any) {
     <Editor
       height={height || '150px'}
       language={language || 'javascript'}
+      theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
       value={isNotEmpty(value) ? (typeof value === 'string' ? value : JSON.stringify(value, null, 2)) : ''}
       onChange={onChange}
       onMount={(editor, monaco) => {
