@@ -75,12 +75,40 @@
   .avatar {
     display: flex;
     align-items: center;
+    margin-right: 30px;
+    cursor: pointer;
   }
 }
 .github {
-  vertical-align: middle;
+  vertical-align: sub;
 }
 .publishPopover {
   padding: 20px;
   width: 100%;
+}
+
+.githubCorner:hover .octoArm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+@media (max-width: 500px) {
+  .githubCorner:hover .octoArm {
+    animation: none;
+  }
+  .githubCorner .octoArm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
 }
