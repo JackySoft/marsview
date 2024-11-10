@@ -6,7 +6,7 @@ function Welcome() {
   return (
     <div className={style.welcome}>
       <img src="/imgs/welcome.svg" alt="" />
-      <div className={style.title}>欢迎使用 Marsview 访问端系统</div>
+      <div className={style.title}>欢迎使用 Marsview 低代码管理系统</div>
       {location.pathname === '/' && (
         <div className={style.content}>
           <p>

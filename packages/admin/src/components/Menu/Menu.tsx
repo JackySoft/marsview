@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Menu } from 'antd';
+import { ConfigProvider, Menu } from 'antd';
 import type { MenuProps, MenuTheme } from 'antd';
 import * as Icons from '@ant-design/icons';
 import { useProjectStore } from '@/stores/projectStore';
@@ -69,20 +69,33 @@ const MenuComponent: React.FC = () => {
   return (
     <div
       style={{
-        width: collapsed ? 80 : 255,
+        width: collapsed ? 79 : 255,
         background: projectInfo.menu_theme_color === 'light' ? '#fff' : '#001529',
         borderRight: projectInfo.layout === 2 ? '1px solid #e8e9eb' : 'none',
+        overflowX: 'hidden',
       }}
     >
-      <Menu
-        onClick={onClick}
-        theme={projectInfo.menu_theme_color as MenuTheme}
-        selectedKeys={selectedKeys}
-        style={{ height: 'calc(100vh - 64px)', border: 'none', overflowY: 'auto' }}
-        mode={projectInfo.menu_mode}
-        inlineCollapsed={collapsed}
-        items={menuList}
-      />
+      <ConfigProvider
+        theme={{
+          components: {
+            Menu: {
+              darkItemColor: '#fff',
+              darkItemHoverColor: projectInfo.system_theme_color,
+              iconSize: 16,
+            },
+          },
+        }}
+      >
+        <Menu
+          onClick={onClick}
+          theme={projectInfo.menu_theme_color as MenuTheme}
+          selectedKeys={selectedKeys}
+          style={{ height: 'calc(100vh - 64px)', border: 'none', overflowY: 'auto' }}
+          mode={projectInfo.menu_mode}
+          inlineCollapsed={collapsed}
+          items={menuList}
+        />
+      </ConfigProvider>
     </div>
   );
 };
