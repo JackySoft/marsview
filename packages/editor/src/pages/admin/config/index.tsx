@@ -120,7 +120,7 @@ const Config: React.FC = memo(() => {
             <Radio value="light">浅色</Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="系统主题色" name="system_theme_color">
+        <Form.Item label="系统主题" name="system_theme_color">
           <ColorPicker {...props} />
         </Form.Item>
         <Form.Item label="面包屑" name="breadcrumb" valuePropName="checked">

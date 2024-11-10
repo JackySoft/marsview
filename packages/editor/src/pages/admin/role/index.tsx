@@ -10,6 +10,7 @@ import { getRoleList, delRoleById } from '@/api';
 import { IAction } from '@/pages/types';
 import { Role } from '@/api/types';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import BaseTable from '../components/BaseTable';
 export default function RoleList() {
   const [list, setList] = useState<Role.RoleItem[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -84,30 +85,38 @@ export default function RoleList() {
       title: '角色名称',
       dataIndex: 'name',
       key: 'name',
+      width: 150,
+      fixed: 'left',
     },
     {
       title: '备注',
       dataIndex: 'remark',
       key: 'remark',
+      width: 150,
     },
     {
       title: '创建人',
       dataIndex: 'user_name',
       key: 'user_name',
+      width: 200,
     },
     {
       title: '更新时间',
       dataIndex: 'updated_at',
       key: 'updated_at',
+      width: 180,
     },
     {
       title: '创建时间',
       dataIndex: 'created_at',
       key: 'created_at',
+      width: 180,
     },
     {
       title: '操作',
       key: 'action',
+      width: 260,
+      fixed: 'right',
       render(_, record) {
         return (
           <Space>
@@ -140,22 +149,23 @@ export default function RoleList() {
           <Input placeholder="请输入角色名称" />
         </Form.Item>
       </SearchForm>
-      <div className="base-table">
-        <div className="header-wrapper">
+      <BaseTable
+        title={
           <Space>
             <span>角色列表</span>
             <Tooltip title="角色主要用来配置权限，一个用户对应一个角色，一个角色对应一批权限，从而实现菜单和按钮的显示控制。">
               <QuestionCircleOutlined />
             </Tooltip>
           </Space>
-          <div className="action">
-            <Button type="primary" onClick={handleCreate}>
-              新增
-            </Button>
-          </div>
-        </div>
-        <Table bordered rowKey="id" loading={loading} columns={columns} dataSource={list} pagination={pagination} />
-      </div>
+        }
+        action={
+          <Button type="primary" onClick={handleCreate}>
+            新增
+          </Button>
+        }
+      >
+        <Table bordered rowKey="id" loading={loading} columns={columns} dataSource={list} pagination={pagination} scroll={{ x: 1100 }} />
+      </BaseTable>
       {/* 创建角色组件 */}
       <CreateRole mRef={roleRef} update={getList} />
       {/* 设置权限 */}

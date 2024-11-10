@@ -9,6 +9,7 @@ import CreateUser from './CreateUser';
 import SearchForm from '../components/SearchForm';
 import { getUserList, getRoleListAll, delUser } from '@/api';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import BaseTable from '../components/BaseTable';
 
 /**
  * 用户配置
@@ -150,22 +151,23 @@ export default function MenuList() {
           <Input placeholder="用户名称" />
         </Form.Item>
       </SearchForm>
-      <div className="base-table">
-        <div className="header-wrapper">
+      <BaseTable
+        title={
           <Space>
             <span>用户列表</span>
             <Tooltip title="添加项目对应的用户，管理员默认具备该项目所有权限，普通用户可分配角色来精细化控制菜单和按钮。">
               <QuestionCircleOutlined />
             </Tooltip>
           </Space>
-          <div className="action">
-            <Button type="primary" onClick={handleCreate}>
-              新增
-            </Button>
-          </div>
-        </div>
+        }
+        action={
+          <Button type="primary" onClick={handleCreate}>
+            新增
+          </Button>
+        }
+      >
         <Table bordered rowKey="id" loading={loading} columns={columns} dataSource={list} pagination={pagination} />
-      </div>
+      </BaseTable>
       <CreateUser mRef={userRef} update={getList} />
     </div>
   );
