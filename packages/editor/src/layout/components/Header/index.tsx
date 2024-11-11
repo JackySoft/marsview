@@ -229,7 +229,7 @@ const Header = memo(() => {
     <>
       <Layout.Header className={styles.layoutHeader}>
         <div className={styles.logo} onClick={goHome}>
-          <img src={`${import.meta.env.VITE_CDN_URL}/mars-logo.png`} width={42} />
+          <img src={`${theme === 'dark' ? '/imgs/mars-logo-dark.png' : '/imgs/mars-logo.png'}`} width={42} />
           <span>Marsview</span>
         </div>
         {/* 首页 - 导航菜单 */}
@@ -245,21 +245,21 @@ const Header = memo(() => {
             {/* 源码 */}
             <a onClick={() => handleClick('edit')}>
               <div className={styles.iconBlock}>
-                <img src="/imgs/code.png" alt="源码" />
+                <img src={`/imgs/${theme === 'dark' ? 'code-dark' : 'code'}.png`} alt="源码" />
                 <span>源码</span>
               </div>
             </a>
             {/* 保存 */}
             <a onClick={() => handleClick('save')}>
               <div className={styles.iconBlock}>
-                {loading ? <LoadingOutlined /> : <img src="/imgs/save.png" alt="保存" />}
+                {loading ? <LoadingOutlined /> : <img src={`/imgs/${theme === 'dark' ? 'save-dark' : 'save'}.png`} alt="保存" />}
                 <span>保存</span>
               </div>
             </a>
             {/* 预览 */}
             <a onClick={() => handleClick('preview')}>
               <div className={styles.iconBlock}>
-                <img src="/imgs/preview.png" alt="预览" />
+                <img src={`/imgs/${theme === 'dark' ? 'preview-dark' : 'preview'}.png`} alt="预览" />
                 <span>预览</span>
               </div>
             </a>
