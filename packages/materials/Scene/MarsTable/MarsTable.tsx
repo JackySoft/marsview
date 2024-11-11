@@ -137,7 +137,7 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
       },
       // 获取选中的key值
       getSelectedRowKeys: () => {
-        return selectedRowKeys || [];
+        return { selectedRowKeys: selectedRowKeys || [] };
       },
       // 获取选中的数据
       getSelectedRow: () => {
@@ -146,28 +146,27 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
     };
   });
 
-  // 单选或者多选事件绑定
-  let rowSelection: any = null;
-  if (config.props.selectionType) {
-    rowSelection = {
-      type: config.props.selectionType,
-      selectedRowKeys,
-      onChange(selectedRowKeys: React.Key[], selectedRows: any[]) {
-        onCheckedChange?.(selectedRowKeys);
-        setSelectedRowKeys(selectedRowKeys);
-        setSelectedRows(selectedRows);
-      },
-      // getCheckboxProps(record: any) {
-      //   return {
-      //     disabled: record.name === 'Disabled User', // Column configuration not to be checked
-      //     name: record.name,
-      //   };
-      // },
-    };
-  }
-
   // 表格配置
   const tableProps = useMemo(() => {
+    // 单选或者多选事件绑定
+    let rowSelection: any = null;
+    if (config.props.selectionType) {
+      rowSelection = {
+        type: config.props.selectionType,
+        selectedRowKeys,
+        onChange(newSelectedRowKeys: React.Key[], selectedRows: any[]) {
+          onCheckedChange?.({ selectedRowKeys: newSelectedRowKeys });
+          setSelectedRowKeys(newSelectedRowKeys);
+          setSelectedRows(selectedRows);
+        },
+        // getCheckboxProps(record: any) {
+        //   return {
+        //     disabled: record.name === 'Disabled User', // Column configuration not to be checked
+        //     name: record.name,
+        //   };
+        // },
+      };
+    }
     return {
       rowSelection,
       rowKey: config.props.rowKey || 'id',
@@ -340,7 +339,7 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
       dataSource: data,
       loading,
     };
-  }, [data, loading]);
+  }, [data, loading, selectedRowKeys]);
 
   // 分页配置
   const pagination: TablePaginationConfig = useMemo(() => {

@@ -408,14 +408,12 @@ export const loadScript = (src: string) => {
 
 /**
  * 获取环境变量
- * 1. vanEnv 当前项目环境
  * 2. isDev 是否是开发环境
  * 3. isPage 是否是页面环境
  * 4. isProject 是否是项目环境
  * 5. env 当前真实环境
  */
 export const getEnv = () => {
-  const vanEnv = document.documentElement.dataset?.vanEnv;
   const isDev = /^\/editor\/\d+\/edit/.test(location.pathname);
   const isPage = /^\/page\/(stg|pre|prd)\/\d+/.test(location.pathname);
   const isProject = /^\/project\/(stg|pre|prd)\/\d+/.test(location.pathname);
@@ -423,7 +421,6 @@ export const getEnv = () => {
   const result2 = location.pathname.match(/^\/project\/(stg|pre|prd)\/\d+/);
   const env = (result1 ? result1[1] : result2 ? result2[1] : 'stg') as 'stg' | 'pre' | 'prd';
   return {
-    vanEnv,
     isDev,
     isPage,
     isProject,
