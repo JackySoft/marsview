@@ -76,10 +76,13 @@ export default {
     return instance.post(url, params, config);
   },
   put<R = any>(url: string, params: any = {}, config: any = {}): Promise<R> {
-    return instance.post(url, params, config);
+    return instance.put(url, params, config);
+  },
+  patch<R = any>(url: string, params: any = {}, config: any = {}): Promise<R> {
+    return instance.patch(url, params, config);
   },
   delete<R = any>(url: string, config: any = {}): Promise<R> {
-    return instance.get(url, config);
+    return instance.delete(url, config);
   },
   download(url: string, params: any = {}, config: any = {}) {
     return instance.post(url, params, { ...config, responseType: 'blob' }).then((response) => {
