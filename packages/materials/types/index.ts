@@ -191,7 +191,7 @@ export interface ApiType {
   stgApi: string;
   preApi: string;
   prdApi: string;
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   sourceType?: string; //数据源类型，枚举值
   // 静态数据源映射
   source: any;
