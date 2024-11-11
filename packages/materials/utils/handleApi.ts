@@ -45,8 +45,14 @@ export const handleApi = async (
           return { code: 0, data: response.data, msg: '' };
         }
       } else {
-        if (method === 'GET' || method === 'DELETE') {
+        if (method === 'GET') {
           response = (await request.get(config.url, config)) || {};
+        } else if (method === 'PUT') {
+          response = (await request.put(config.url, config)) || {};
+        } else if (method === 'PATCH') {
+          response = (await request.patch(config.url, config)) || {};
+        } else if (method === 'DELETE') {
+          response = (await request.delete(config.url, config)) || {};
         } else {
           config.headers = {
             ...config.headers,
