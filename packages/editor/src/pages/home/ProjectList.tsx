@@ -165,7 +165,7 @@ const CardItem: React.FC<ProjectCardItemProps> = memo(({ item, isAuth, getList }
       hoverable
       style={{
         opacity: isAuth ? 1 : 0.6,
-        background: isAuth ? 'none' : "url('/imgs/cross-bg.png')",
+        background: isAuth ? 'none' : 'var(--mars-cross-bg)',
       }}
       actions={[
         item.id ? getEnvTag('stg', 'STG') : <span style={{ cursor: 'not-allowed' }}>STG</span>,
