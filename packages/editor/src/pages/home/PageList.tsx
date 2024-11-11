@@ -129,7 +129,7 @@ export default function Index() {
         style={{
           borderRadius: 8,
           opacity: isAuth ? 1 : 0.6,
-          background: isAuth ? 'none' : "url('/imgs/cross-bg.png')",
+          background: isAuth ? 'none' : 'var(--mars-cross-bg)',
           overflow: 'hidden',
         }}
       >
