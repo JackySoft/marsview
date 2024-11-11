@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.1](https://github.com/JackySoft/marsview/compare/v5.0.0...v5.0.1) (2024-11-11)
+
+
+### Bug Fixes
+
+* 修正DELETE、PUT、PATCH请求参数问题 ([b1693f2](https://github.com/JackySoft/marsview/commit/b1693f2b587fa8495a21d04ccabc841574430993))
+* 修正DELETE、PUT请求逻辑，新增PATCH请求动词 ([f9913ee](https://github.com/JackySoft/marsview/commit/f9913ee33d510e5ba1d064922073e8145086da8e))
+
+
+### Styles
+
+* 优化主题色 ([0626be9](https://github.com/JackySoft/marsview/commit/0626be9d25c98e7dc592dcacf9e17e31dc138fc8))
+
 ## [5.0.0](https://github.com/JackySoft/marsview/compare/v4.19.0...v5.0.0) (2024-11-10)
 
 
