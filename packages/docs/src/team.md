@@ -12,7 +12,7 @@ const members = [
   },
   {
     avatar: 'https://www.github.com/waiterxiaoyy.png',
-    name: 'waiterxiaoyy',
+    name: 'Mars啄木鸟',
     title: 'Developer',
     links: [
       { icon: 'github', link: 'https://github.com/waiterxiaoyy' },
