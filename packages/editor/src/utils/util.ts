@@ -181,7 +181,7 @@ function findParentTypesById(id: string, elementsMap: { [id: string]: ComponentT
  * 主要判断表单组件只能添加到Form或者SearchForm中
  */
 export const checkComponentType = (type: string, parentId: string = '', parentType: string = '', elementsMap: { [id: string]: ComponentType }) => {
-  const childFormList = components.find((item) => item.type === 'Form')?.data.map((item) => item.type);
+  const childFormList = components.find((item) => item.type === 'FormItems')?.data.map((item) => item.type);
   if (!parentType) {
     if (childFormList?.includes(type)) {
       return false;
