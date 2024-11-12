@@ -30,7 +30,7 @@ var _hmt = _hmt || [];
     logo: '/mars-logo.png',
     nav: [
       { text: '首页', link: '/' },
-      { text: '平台', link: '/home' },
+      { text: '平台介绍', link: '/home' },
       { text: '项目', link: '/project' },
       { text: '页面', link: '/page' },
       { text: '组件', link: '/lib' },
@@ -45,7 +45,8 @@ var _hmt = _hmt || [];
         text: 'Marsview',
         items: [
           { text: '介绍', link: '/home' },
-          { text: '部署', link: '/deploy' },
+          { text: '本地部署', link: '/deploy-dev' },
+          { text: '线上部署', link: '/deploy-prd' },
         ],
       },
       {
