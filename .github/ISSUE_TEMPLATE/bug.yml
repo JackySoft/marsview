@@ -1,0 +1,64 @@
+name: 问题反馈
+description: 详细清晰的描述你遇到的问题
+title: "问题标题"
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢对项目的支持与关注，在提出问题之前，请确保你已查看相关开发或使用文档：
+        - [x] 我已确认目前没有类似 issue
+        - [x] 我已完整查看过项目 README，以及 [项目文档](http://docs.marsview.cc/)
+        - [x] 我理解并愿意跟进此 issue，协助测试和提供反馈
+        - [x] 我理解并认可上述内容，并理解项目维护者精力有限
+        :warning: **不遵循规则的 issue 可能会被无视或直接关闭**  
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: 问题描述
+      description: 请详细描述你所遇到的问题
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: 如何复现
+      description: 请详细告诉我们如何复现你遇到的问题，如涉及代码，可提供一个最小代码示例，并使用反引号```附上它
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: 预期效果
+      description: 详细描述你所期待的预期效果
+  - type: textarea
+    attributes:
+      label: 视频或截图
+      description: 提供一些视频或截图，帮助我们理解你所遇到的问题
+      value: |
+        [在这里上传图片或视频文件]
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: 操作系统版本
+      description: 描述问题发生在那个操作系统版本上
+  - type: dropdown
+    attributes:
+      label: 版本或分支
+      description: 你当前正在使用我们软件的哪个版本/分支？
+      options:
+        - main(默认)
+        - feat/主题切换
+        - fix/20241110_githublogo
+        - revert-57-main
+        - impr/组件按需加载
+        - feat/workflow
+        - 其他    
+  - type: textarea
+    attributes:
+      label: 其他
+      description: 添加一些其他的信息
