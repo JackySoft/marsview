@@ -2,13 +2,20 @@
 
 `Marsview` 包含前端和后端，数据库使用的是 `MySQL`，如果后端采用`koa`需要提前安装 `Node` 和 `NPM`以及`PNPM`，如果后端采用`java`需要安装`jdk` `maven` 。
 
+## 仓库地址
+
+1. 前端仓库：https://github.com/JackySoft/marsview
+2. 后端仓库：https://github.com/JackySoft/marsview-backend
+
 ## 数据库安装
 
 1. 安装过程省略，请自行百度。
 
 2. 创建数据库，名称随意，比如 `marsview`
 
-3. 初始化数据库脚本，执行 `backend/sql` 文件夹下的 `DDL_mars.sql` 脚本
+3. 初始化数据库脚本，执行 `sql` 文件夹下的 `DDL_mars.sql` 脚本
+
+> 如果后期数据库有脚本更新，我会把更新脚本放在`sql`文件夹的`更新说明.md`中。
 
 ## 后端启动
 
@@ -56,33 +63,6 @@ mybatis：
 
 > 注意，邮箱必须是自己的 163 邮箱，并且开启 POP3 服务，否则无法发送验证码
 
-### java 代码生成使用说明
-
-1. 修改 resources 目录下的 mybatis-config.properties 文件
-
-> 1. 配置生成 java bean 实体类工程所在位置，示例：project_bean=D:/IdeaProjects/lowcode/lowcode-api/src/main/java
-> 2. 配置生成 java mapper 接口工程所在位置，示例：project_mapper=D:/IdeaProjects/lowcode/lowcode-mapper/src/main/java
-> 3. 配置生成 xml mapper 文件工程所在位置，示例：project_xml=D:/IdeaProjects/lowcode/lowcode-mapper/src/main/resources
-> 4. 配置 mysql 驱动包路径，示例：D:/tools/apache-maven-3.8.1/repository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar
-> 5. 配置 mysql 连接地址：jdbc_url=jdbc:mysql://XXXXXXX:3306/lowcode?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior\
-
-     =convertToNull&allowMultiQueries=true
-
-> 6. 配置 mysql 数据库访问用户名：username
-> 7. 配置 mysql 数据库访问密码：password
-> 8. 配置 mysql 需要连接的库名：db_name
-
-2. 修改 resources 目录下的 mybatis-generator.xml 文件
-
-> 1. 引入配置文件：<properties url="file:D:\IdeaProjects\xtr-mybatis-generator\src\main\resources\mybatis-config.properties"/>
-> 2. 分别修改生成 bean 实体类、mapper 接口、xml mapper 文件所在包名：<property name="targetPackage" value="com.xintr.lowcode.mapper.sys"></property>
-> 3. 指定需要生成表名：tableName="表名"
-> 4. 指定生成生成 java 实体类名称：domainObjectName="实体类名称"
-
-3. 修改 com.xintr.MybatisGenerator 类 main 方法中的 path 变量，指定 mybatis-generator.xml 绝对路径
-
-4. 运行 com.xintr.MybatisGenerator，生成代码
-
 ### koa 版本启动：
 
 1. 请务必安装 `node.js 18.0.0` 以上版本
@@ -93,8 +73,8 @@ mybatis：
 /**
  * MySQL数据库配置
  */
-const SERVER_HOST = 'http://localhost';
-const SERVER_PORT = 5000;
+const SERVER_HOST = 'http://localhost';//可不用修改
+const SERVER_PORT = 5000;// 可默认5000
 const DATABASE_HOST = 'localhost';// 自己数据库地址，本地可以写localhost
 const DATABASE_PORT = 3306;// 自己数据库端口
 const DATABASE_USER = '';// 自己数据库用户名
@@ -129,8 +109,8 @@ const OSS_CDNDOMAIN2 = '';
  */
 const EMAIL_HOST = 'smtp.163.com';
 const EMAIL_PORT = 465;
-const EMAIL_USER = '';
-const EMAIL_PASSWORD = '';
+const EMAIL_USER = '';//填写163邮箱账号
+const EMAIL_PASSWORD = '';//填写163邮箱授权密码，注意不是密码
 
 /**
  * 大模型配置，大模型密钥，在自定义组件中，会调用大模型生成代码，如果没有可以忽略。
@@ -148,7 +128,7 @@ const ZHIPU_AI_KEY = '';
 3. 安装依赖
 
 ```
-cd backend/koa
+cd koa
 
 yarn install
 ```
@@ -166,6 +146,8 @@ yarn dev
 
 ## 前端编辑器启动
 
+前端是一个`monorepo`仓库，因此必须使用`pnpm`启动。里面包含三个项目，分别是编辑器(editor)、访问端(admin)和文档(docs)。
+
 1. 安装依赖
 
 ```
@@ -182,7 +164,7 @@ pnpm i
 
 打开`marsview/packages/editor/vite.config.ts`，修改`proxy`中的`target`为本地后端接口地址
 
-```
+```shell
 proxy: {
   '/api': {
     // 如果本地启动后端，请替换为后端地址
@@ -192,8 +174,10 @@ proxy: {
 },
 ```
 
-> 注意：为了解决本地开发环境下报跨域问题，前端`editor`和`admin`项目在开发模式下通过`vite.config.ts`做接口代理。
-> 生产环境需要修改 `.env.production` 文件，将`VITE_API_URL`改为后端地址。
+注意：
+
+- `target`对应自己后端服务地址。`Java` 和 `Koa` 他们的默认端口不同，请对应修改。
+- 生产环境需要在`nginx`中添加反向代理。
 
 3. 启动编辑器
 
@@ -205,7 +189,11 @@ pnpm start:editor
 
 http://127.0.0.1:8080
 
+启动后，即可在浏览器访问`Marsview`编辑器项目。
+
 ## 前端用户端启动
+
+用户端主要用来访问搭建好的项目或者页面，但前提是页面必须已经发布到对应的环境中。
 
 1. 修改接口配置
 
@@ -221,8 +209,8 @@ proxy: {
 },
 ```
 
-> 注意：为了解决本地开发环境下报跨域问题，前端`editor`和`admin`项目在开发模式下通过`vite.config.ts`做接口代理。
-> 生产环境需要修改 `.env.production` 文件，将`VITE_API_URL`改为后端地址。
+- `target`对应自己后端服务地址。`Java` 和 `Koa` 他们的默认端口不同，请对应修改。
+- 生产环境需要在`nginx`中添加反向代理。
 
 2. 启动用户端
 
@@ -236,14 +224,4 @@ http://127.0.0.1:8090
 
 ## 总结
 
-以上是本地部署和启动的过程，服务器部署类似。如果你用的是阿里云服务器，可能关于`cdn`部分需要修改一下上传接口代码，比如：`upload.router.js`，因为我代码基于百度云的存储`SDK`实现的。
-
-### 域名介绍：
-
-1. `www.marsview.cc` 是给开发者搭建页面使用的。
-2. `admin.marsview.cc` 是给用户访最终访问的。
-
-### 项目介绍
-
-1. `editor`项目是给开发者使用的，提供可视化搭建功能。
-2. `admin` 项目是给用户访问的，搭建好以后，通过`admin`域名可以访问搭建的成果。
+以上是本地部署和启动的过程，由于项目依赖百度云`OSS`和`CDN`，所以没有百度云的同学，可能会导致图片云服务和自定义组件功能不可用。
