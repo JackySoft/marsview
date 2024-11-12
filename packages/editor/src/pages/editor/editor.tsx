@@ -5,7 +5,7 @@ import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
 import { getComponent } from '@/packages/index';
 import { IDragTargetItem } from '@/packages/types/index';
-import { createId, getElement } from '@/utils/util';
+import { checkComponentType, createId, getElement } from '@/utils/util';
 import storage from '@/utils/storage';
 import { getPageDetail } from '@/api';
 import Toolbar from '@/components/Toolbar/Toolbar';
@@ -115,6 +115,10 @@ const Editor = () => {
       if (monitor.didDrop()) return;
       // 生成默认配置
       const { config, events, methods = [], elements = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
+      if (!checkComponentType(item.type, selectedElement?.id, selectedElement?.type, elementsMap)) {
+        message.info('请把表单项放在Form容器内');
+        return;
+      }
       const childElement =
         elements.map(async (child: IDragTargetItem) => {
           const { config, events, methods = [] }: any = (await getComponent(child.type + 'Config'))?.default || {};

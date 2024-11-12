@@ -195,7 +195,12 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
                         </Radio.Group>
                       </Form.Item>
                     )}
-                    <Form.Item label="页面路径" name="path" extra="配置页面路径后，访问时会优先使用页面路径">
+                    <Form.Item
+                      label="页面路由"
+                      name="path"
+                      extra="配置页面路由后，访问时会优先使用页面路由"
+                      rules={[{ pattern: /^\/?[a-zA-Z-_]+$/g, message: '页面路由只支持字母-_ 组合' }]}
+                    >
                       <Input placeholder="请输入页面路径，例如: /dashboard" />
                     </Form.Item>
                   </>
