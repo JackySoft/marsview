@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.5](https://github.com/JackySoft/marsview/compare/v5.0.4...v5.0.5) (2024-11-12)
+
+
+### Bug Fixes
+
+* 验证表单录入组件是否放在Form容器内 ([6b09cc8](https://github.com/JackySoft/marsview/commit/6b09cc8915a6e49eb50d7ab502e1574526a8b4fd))
+
+
+### Others
+
+* 更新问题单模板 ([4dc1c53](https://github.com/JackySoft/marsview/commit/4dc1c532119a3dd2a27c396ab0566b2e6d893fc3))
+* 添加配置模板文件 ([800467e](https://github.com/JackySoft/marsview/commit/800467ee9503d4e35b7218ba0d44843bb120808d))
+* 添加需求单模板 ([06c2520](https://github.com/JackySoft/marsview/commit/06c2520221d302017c8cab1f23902d49b9f807ab))
+
+
+### Documentation
+
+* 修改title ([c8fcaf8](https://github.com/JackySoft/marsview/commit/c8fcaf89cba0e894f2dc5cba7c49535c3488f850))
+
 ### [5.0.4](https://github.com/JackySoft/marsview/compare/v5.0.3...v5.0.4) (2024-11-12)
 
 
