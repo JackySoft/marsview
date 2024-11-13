@@ -45,4 +45,4 @@ Marsview 是一款中后台方向的低代码可视化搭建平台，**面向前
 
 可添加我个人微信，备注：`Marsview` 我会拉你进群。
 
-![菜单关联页面](/my_qrcode.jpg)
+<img src="/my_qrcode.jpg" width="200" height="200" />

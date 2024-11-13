@@ -33,35 +33,7 @@
 
 4. 安装 `mysql` 安装方式自行百度
 
-5. 修改 `application.yml` 配置文件的 `eamil`、`redis`、`mybatis` 连接信息
-
-```java
-spring：
-  #邮箱配置
-  mail：
-    host：smtp地址，例如：smtp.qq.com
-    username：demo@qq.com（换成自己的邮箱）
-    password：yitmkgakdggbbceg（qq邮箱开启服务生成的密文，注意不是qq密码）
-  # redis配置
-  data：
-    redis：
-      host: XXXX
-      port: XXXX
-      password: XXXX
-      database: XXXX
-
-#mybatis配置
-mybatis：
-  jdbc：
-    url：XXXX
-    username: XXXX
-    password: XXXX
-
-```
-
-6. 运行 com.xintr.LowcodeApplication 启动服务
-
-> 注意，邮箱必须是自己的 163 邮箱，并且开启 POP3 服务，否则无法发送验证码
+详细文档请参考：[Java 启动和部署文档](https://github.com/JackySoft/marsview-backend/blob/main/java/README.md)
 
 ### koa 版本启动：
 
@@ -191,6 +163,11 @@ http://127.0.0.1:8080
 
 启动后，即可在浏览器访问`Marsview`编辑器项目。
 
+**注意：**
+此时本地访问的项目地址是`admin.marsview.cc`，如果想要跳转到本地，需要修改`packages/editor/.env.development`文件中的`VITE_ADMIN_URL`，改为用户端启动后的地址。
+
+线上部署时，同样需要修改`packages/editor/.env.production`文件中的`VITE_ADMIN_URL`。
+
 ## 前端用户端启动
 
 用户端主要用来访问搭建好的项目或者页面，但前提是页面必须已经发布到对应的环境中。
@@ -222,6 +199,24 @@ pnpm start:admin
 
 http://127.0.0.1:8090
 
+**注意：**
+此时本地访问的项目地址是`admin.marsview.cc`，如果想要跳转到本地，需要修改`packages/admin/.env.development`文件中的`VITE_ADMIN_URL`，改为用户端启动后的地址。
+
+线上部署时，同样需要修改`packages/admin/.env.production`文件中的`VITE_ADMIN_URL`。
+
 ## 总结
 
-以上是本地部署和启动的过程，由于项目依赖百度云`OSS`和`CDN`，所以没有百度云的同学，可能会导致图片云服务和自定义组件功能不可用。
+1. 以上是本地部署和启动的过程，由于项目依赖百度云`OSS`和`CDN`，所以没有百度云的同学，可能会导致图片云服务和自定义组件功能不可用。
+
+2. `Java` 版本支持阿里云配置，`Koa`版本只支持百度云配置。
+
+3. 本地部署时需要关注`.env.development`文件配置。
+
+4. 线上部署需要关注`.env.production`文件配置，同时线上`nginx`需要添加反向代理。
+
+```shell
+# 通过反向代理可以解决跨域问题。
+location ^~/api {
+  proxy_pass http://106.xx.xx.xx:9001;
+}
+```

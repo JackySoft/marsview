@@ -12,14 +12,14 @@ export default defineConfig({
       'script',
       {},
       `
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?e0b36c5433838f284c65581c1de9b9bd";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-`,
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?e0b36c5433838f284c65581c1de9b9bd";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      `,
     ],
   ],
   lang: 'zh-CN',
@@ -99,7 +99,6 @@ var _hmt = _hmt || [];
         link: '/team',
       },
     ],
-
     socialLinks: [{ icon: 'github', link: 'https://github.com/JackySoft/marsview' }],
     footer: {
       message: 'Released under the MIT License.',
