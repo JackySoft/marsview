@@ -4,9 +4,7 @@ import MarsRender from '@/packages/MarsRender/MarsRender';
 import { getComponent } from '@/packages/index';
 import { useDrop } from 'react-dnd';
 import { usePageStore } from '@/stores/pageStore';
-import { default as DivConfig } from '../../Container/Div/Schema'
 import { ComponentType, IDragTargetItem } from '../../types';
-import './index.less';
 
 export type BadgeSize = 'small' | 'default';
 
@@ -17,6 +15,11 @@ interface IConfig {
   color?: string; // 缎带颜色
   styles?: Record<string, React.CSSProperties>; // 语义化结构 style
   classNames?: Record<string, string>; // 语义化结构 class
+}
+
+const wrapperStyle: React.CSSProperties = {
+  display: 'inline-block',
+  width: 'fit-content',
 }
 
 /**
@@ -65,12 +68,11 @@ const MRibbon = ({ id, type, config, elements }: ComponentType<IConfig>, ref: an
   });
   return (
     visible && ((
-      <span
-        className='ant-badge'
-        data-id={id} data-type={type}
+      <span data-type={type} ref={drop}
+        style={{ ...wrapperStyle }}
       >
         <Badge.Ribbon style={config.style} {...config.props}>
-          {(<div style={config.style} {...config.props} data-type={type} ref={drop}>
+          {(<div >
             {elements?.length ? (
               <MarsRender elements={elements || []} />
             ) : (
