@@ -15,7 +15,7 @@ export interface IConfig {
 /**
  *
  * @param config 组件配置属性值
- * @param props 系统属性值：componentid、componentname等
+ * @param props 系统属性值：componentId、componentName等
  * @returns 返回组件
  */
 const MInput = ({ id, type, config, onChange, onBlur, onPressEnter }: ComponentType<IConfig>, ref: any) => {
