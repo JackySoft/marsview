@@ -17,3 +17,23 @@ export interface ProjectCardItemProps {
   isAuth: boolean;
   getList: () => void;
 }
+
+/**
+ * 反馈
+ */
+export interface FeedbackItem {
+  id: number;
+  title: string;
+  content: string;
+  isSolve: boolean;
+  isTop: boolean;
+  like: number;
+  userAvatar: string;
+  time: string;
+  userName: string;
+  type: string;
+}
+export interface ItemCardProps {
+  info: FeedbackItem;
+  click: () => void;
+}
