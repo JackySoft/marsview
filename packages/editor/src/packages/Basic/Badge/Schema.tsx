@@ -1,10 +1,3 @@
-import { Tooltip } from "antd";
-import Ribbon from "antd/es/badge/Ribbon";
-import { count } from "console";
-import { options } from "less";
-import { over } from "lodash-es";
-import { off } from "process";
-import { OPTIONS } from "react-infinite-viewer";
 
 /**
  * 组件配置和属性值
