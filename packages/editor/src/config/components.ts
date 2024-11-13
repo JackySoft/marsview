@@ -211,6 +211,11 @@ const components = [
         name: '表单项',
         type: 'FormItem',
       },
+      {
+        icon: '',
+        name: '颜色选择器',
+        type: 'ColorPicker',
+      },
     ],
   },
   {
