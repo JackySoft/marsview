@@ -4,6 +4,8 @@ import { lazyLoad } from './LazyLoad';
 import AuthLoader from './AuthLoader';
 import Root from './Root';
 import ErrorBoundary from './ErrorBoundary';
+import { FeedbackItem } from '@/pages/types';
+import IssueDetail from '@/pages/feedback/IssueDetail';
 
 /**
  * 定义页面路由
@@ -100,6 +102,14 @@ export const router = [
       {
         path: '/cloud',
         element: lazyLoad(React.lazy(() => import('@/pages/home/cloud/ImgCloud'))),
+      },
+      {
+        path: '/feedback',
+        element: lazyLoad(React.lazy(() => import('@/pages/feedback'))),
+      },
+      {
+        path: '/feedback/:id/detail',
+        element: lazyLoad(React.lazy(() => import('@/pages/feedback/IssueDetail'))),
       },
       {
         path: '*',
