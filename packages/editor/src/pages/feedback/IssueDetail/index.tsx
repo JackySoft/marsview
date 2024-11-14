@@ -1,7 +1,21 @@
 import { useState } from 'react'
 import styles from './index.module.less'
-import { Button, Image, Tag } from 'antd'
-import { CheckCircleFilled, CheckOutlined, CloseCircleOutlined, FrownOutlined, HeartOutlined, LikeOutlined } from '@ant-design/icons'
+import { Button, Image, Tag,Typography, Input, Avatar } from 'antd'
+import { CheckCircleFilled, CheckOutlined, CloseCircleOutlined, FrownOutlined, HeartOutlined, LikeOutlined, SendOutlined } from '@ant-design/icons'
+const { Title, Text } = Typography;
+const { TextArea } = Input;
+
+interface User {
+  id: string;
+  name: string;
+  avatar: string;
+}
+
+const currentUser: User = {
+  id: 'current-user',
+  name: 'Current User',
+  avatar: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+};
 
 export default function IssueDetail() {
   const [likes, setLikes] = useState(156)
@@ -47,6 +61,15 @@ export default function IssueDetail() {
       helpful: false
     }
   ]
+
+  const [replyContent, setReplyContent] = useState('');
+  const [isResolved, setIsResolved] = useState(false);
+
+  const handleReply = () => {
+    console.log('Reply submitted:', replyContent);
+    setReplyContent('');
+    // Here you would typically send the reply to your backend
+  };
 
   return (
     <div className={styles.container}>
@@ -157,6 +180,25 @@ export default function IssueDetail() {
           ></textarea>
           <Button className={styles.commentButton}>发布</Button>
         </div> */}
+        <div className={styles.replyModule}>
+          <Avatar src={currentUser.avatar} size={40} className={styles.userAvatar} />
+          <div className={styles.replyInputArea}>
+            <TextArea
+              value={replyContent}
+              onChange={(e) => setReplyContent(e.target.value)}
+              placeholder="写下你的回复..."
+              autoSize={{ minRows: 2, maxRows: 6 }}
+            />
+            <Button
+              type="primary"
+              icon={<SendOutlined />}
+              onClick={handleReply}
+              disabled={!replyContent.trim()}
+            >
+              发送
+            </Button>
+          </div>
+        </div>
         <div>
           {demoComments.map((comment) => (
             <div key={comment.id} className={styles.commentCard}>
