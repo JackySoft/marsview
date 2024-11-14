@@ -20,9 +20,9 @@ const Designer = () => {
   const { id } = useParams();
   useEffect(() => {
     api.getTemplateDetail(Number(id)).then((res) => {
-      setName(res.form_name);
-      if (res?.template_data) {
-        const list = JSON.parse(res?.template_data);
+      setName(res.formName);
+      if (res?.templateData) {
+        const list = JSON.parse(res?.templateData);
         setNodeList(list);
       }
     });
@@ -37,7 +37,7 @@ const Designer = () => {
   const handleSave = async () => {
     const list = nodeRef.current?.getNodeList();
     await api.updateTemplate({
-      template_data: JSON.stringify(list),
+      templateData: JSON.stringify(list),
       id: Number(id),
     });
     message.success('保存成功');
