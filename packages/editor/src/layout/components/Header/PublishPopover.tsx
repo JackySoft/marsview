@@ -13,7 +13,7 @@ export default function Publish() {
   const [loading3, setLoading3] = useState(false);
   const {
     userId,
-    page: { pageId, stg_state, pre_state, prd_state, stg_publish_id, pre_publish_id, prd_publish_id },
+    page: { pageId, stgState, preState, prdState, stgPublishId, prePublishId, prdPublishId },
     updatePageState,
   } = usePageStore((state) => ({
     userId: state.userInfo.userId,
@@ -39,26 +39,26 @@ export default function Publish() {
   // 发布到指定环境
   async function publishToEnv(env: 'stg' | 'pre' | 'prd') {
     if (env === 'stg') {
-      if (stg_state === 3) return message.warning('STG已发布，请勿重复发布');
+      if (stgState === 3) return message.warning('STG已发布，请勿重复发布');
       setLoading1(true);
     }
     if (env === 'pre') {
-      if (pre_state === 3) return message.warning('PRE已发布，请勿重复发布');
+      if (preState === 3) return message.warning('PRE已发布，请勿重复发布');
       setLoading2(true);
     }
     if (env === 'prd') {
-      if (prd_state === 3) return message.warning('PRD已发布，请勿重复发布');
+      if (prdState === 3) return message.warning('PRD已发布，请勿重复发布');
       setLoading3(true);
     }
     try {
-      const preview_img = await createPreviewImg();
+      const previewImg = await createPreviewImg();
       await publishPage({
         env,
-        page_id: pageId,
-        preview_img,
+        pageId: pageId,
+        previewImg,
       });
       updatePageState({
-        env: env === 'stg' ? 'stg_state' : env === 'pre' ? 'pre_state' : 'prd_state',
+        env: env === 'stg' ? 'stgState' : env === 'pre' ? 'preState' : 'prdState',
         pageState: 3,
       });
       message.success('发布成功');
@@ -72,17 +72,17 @@ export default function Publish() {
   return (
     <div className={styles.publishPopover}>
       <Space size={10}>
-        <Button type={stg_publish_id || stg_state >= 3 ? 'link' : 'text'} danger={stg_state === 4} onClick={() => publishToEnv('stg')}>
+        <Button type={stgPublishId || stgState >= 3 ? 'link' : 'text'} danger={stgState === 4} onClick={() => publishToEnv('stg')}>
           <Tooltip title="测试环境"> STG</Tooltip>
-          {!loading1 ? stg_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
+          {!loading1 ? stgState >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
         </Button>
-        <Button type={pre_publish_id || pre_state >= 3 ? 'link' : 'text'} danger={pre_state === 4} onClick={() => publishToEnv('pre')}>
+        <Button type={prePublishId || preState >= 3 ? 'link' : 'text'} danger={preState === 4} onClick={() => publishToEnv('pre')}>
           <Tooltip title="预发布环境">PRE</Tooltip>
-          {!loading2 ? pre_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
+          {!loading2 ? preState >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
         </Button>
-        <Button type={prd_publish_id || prd_state >= 3 ? 'link' : 'text'} danger={prd_state === 4} onClick={() => publishToEnv('prd')}>
+        <Button type={prdPublishId || prdState >= 3 ? 'link' : 'text'} danger={prdState === 4} onClick={() => publishToEnv('prd')}>
           <Tooltip title="生产环境">PRD</Tooltip>
-          {!loading3 ? prd_state >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
+          {!loading3 ? prdState >= 3 ? <CheckOutlined /> : <ClockCircleOutlined /> : <LoadingOutlined />}
         </Button>
       </Space>
     </div>

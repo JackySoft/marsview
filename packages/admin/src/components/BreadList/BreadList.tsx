@@ -26,7 +26,7 @@ export default function BreadList() {
       breadList.unshift({
         title: cur.name,
       });
-      cur = menuMap[cur.parent_id];
+      cur = menuMap[cur.parentId];
     }
     setMenuPath(breadList);
   }, [pathname, menuMap]);

@@ -15,7 +15,7 @@ export default function ImgCloud() {
   const [pageSize, setPageSize] = useState<number>(24);
   const [state, setState] = useState(false);
   const [list, setList] = useState<
-    Array<{ id: number; type: string; origin_name: string; file_name: string; size: number; user_name: string; created_at: string; url: string }>
+    Array<{ id: number; type: string; origin_name: string; file_name: string; size: number; userName: string; createdAt: string; url: string }>
   >([]);
 
   useEffect(() => {
@@ -95,6 +95,7 @@ export default function ImgCloud() {
                     <Space>
                       <Popover
                         placement="right"
+                        title={item.origin_name}
                         content={
                           <div>
                             <p>
@@ -103,15 +104,14 @@ export default function ImgCloud() {
                             </p>
                             <p>
                               <span style={{ display: 'inline-block', width: 80 }}>创建时间：</span>
-                              <span>{item.created_at}</span>
+                              <span>{item.createdAt}</span>
                             </p>
                             <p>
                               <span style={{ display: 'inline-block', width: 80 }}>创建人：</span>
-                              <span>{item.user_name}</span>
+                              <span>{item.userName.split('@')[0]}</span>
                             </p>
                           </div>
                         }
-                        title={item.origin_name}
                         trigger="click"
                       >
                         <InfoCircleOutlined />

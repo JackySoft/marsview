@@ -55,7 +55,13 @@ export default function AIChatModal({ mRef, onGenerateLoad, onReloadWrite }: AIC
 
   const popTitle = '温馨提示';
 
-  const popContent = `MarsAI是代码生成工具，不支持对话。由于Mars暂不支持用户开发一些复杂的组件，故生成的代码可能存在一些问题，仅供参考，请调试通过后再发布组件。`;
+  const popContent = (
+    <>
+      <p>1. MarsAI是代码生成工具，不支持对话。</p>
+      <p>2. 由于Mars暂不支持用户开发一些复杂的组件，故生成的代码可能存在一些问题，仅供参考。</p>
+      <p>3. 请调试通过后再发布组件。</p>
+    </>
+  );
 
   useEffect(() => {
     if (message) {
@@ -250,7 +256,7 @@ export default function AIChatModal({ mRef, onGenerateLoad, onReloadWrite }: AIC
           </div>
           <div className={styles.chatInput}>
             <div className={styles.chatOtherInfo}>
-              <Popover placement="top" title={popTitle} content={popContent}>
+              <Popover placement="top" title={popTitle} content={popContent} style={{ maxWidth: 200 }}>
                 <BellOutlined />
               </Popover>
             </div>

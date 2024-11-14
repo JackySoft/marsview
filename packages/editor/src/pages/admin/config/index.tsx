@@ -67,11 +67,11 @@ const Config: React.FC = memo(() => {
       <Form
         form={form}
         initialValues={{
-          is_public: 1,
+          isPublic: 1,
           layout: 1,
-          menu_mode: 'inline',
-          menu_theme_color: 'dark',
-          system_theme_color: '#1677ff',
+          menuMode: 'inline',
+          menuThemeColor: 'dark',
+          systemThemeColor: '#1677ff',
           breadcrumb: true,
           tag: true,
           footer: false,
@@ -98,7 +98,7 @@ const Config: React.FC = memo(() => {
         </Form.Item>
         <h3>系统配置</h3>
         <Form.Item label="系统布局" name="layout">
-          <Radio.Group {...props} onChange={(event) => form.setFieldValue('menu_mode', event.target.value === 1 ? 'inline' : 'horizontal')}>
+          <Radio.Group {...props} onChange={(event) => form.setFieldValue('menuMode', event.target.value === 1 ? 'inline' : 'horizontal')}>
             <Radio value={1}>
               <img style={{ width: 100 }} src="https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f3c.png" alt="左右布局" />
             </Radio>
@@ -111,14 +111,14 @@ const Config: React.FC = memo(() => {
           {(form: any) => {
             const layout = form.getFieldValue('layout');
             return layout === 1 ? (
-              <Form.Item label="菜单模式" name="menu_mode">
+              <Form.Item label="菜单模式" name="menuMode">
                 <Radio.Group {...props} buttonStyle="solid">
                   <Radio.Button value="vertical">垂直</Radio.Button>
                   <Radio.Button value="inline">内嵌</Radio.Button>
                 </Radio.Group>
               </Form.Item>
             ) : (
-              <Form.Item label="菜单模式" name="menu_mode">
+              <Form.Item label="菜单模式" name="menuMode">
                 <Radio.Group {...props} buttonStyle="solid">
                   <Radio.Button value="horizontal">水平</Radio.Button>
                 </Radio.Group>
@@ -126,13 +126,13 @@ const Config: React.FC = memo(() => {
             );
           }}
         </Form.Item>
-        <Form.Item label="菜单主题" name="menu_theme_color">
+        <Form.Item label="菜单主题" name="menuThemeColor">
           <Radio.Group {...props}>
             <Radio value="dark">深色</Radio>
             <Radio value="light">浅色</Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="系统主题" name="system_theme_color">
+        <Form.Item label="系统主题" name="systemThemeColor">
           <ColorPicker {...props} />
         </Form.Item>
         <Form.Item label="面包屑" name="breadcrumb" valuePropName="checked">
@@ -149,7 +149,7 @@ const Config: React.FC = memo(() => {
           label="访问权限"
           tooltip="项目访问权限"
           extra="公开项目所有人可访问；私有项目可通过RBAC分配菜单权限。"
-          name="is_public"
+          name="isPublic"
           rules={[{ required: true, message: '请输入项目描述' }]}
         >
           <Radio.Group {...props}>
@@ -207,7 +207,7 @@ const Developer = ({ value, onChange }: any) => {
 
   // 获取用户列表
   const getMemberList = async () => {
-    const res = await api.getMemberList({ page_id: parseInt(projectId) });
+    const res = await api.getMemberList({ pageId: parseInt(projectId) });
     setList(res.list);
   };
 
@@ -230,7 +230,7 @@ const Developer = ({ value, onChange }: any) => {
           <Space>
             {list.map((item) => (
               <Tag key={item.id} color="green" closable onClose={() => handleDelete(item.id)}>
-                {item.user_name}
+                {item.userName}
               </Tag>
             ))}
           </Space>

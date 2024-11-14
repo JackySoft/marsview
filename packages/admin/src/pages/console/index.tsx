@@ -88,7 +88,7 @@ function Console() {
                             <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.remark}</p>
                             <p style={{ marginTop: 10 }}>
                               <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
-                              {item.updated_at}
+                              {item.updatedAt}
                             </p>
                           </>
                         }

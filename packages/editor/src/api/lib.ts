@@ -6,31 +6,31 @@ export interface ILib {
   tag: string;
   name: string;
   description?: string;
-  react_code: string;
-  less_code: string;
-  config_code: string;
-  md_code: string;
+  reactCode: string;
+  lessCode: string;
+  configCode: string;
+  mdCode: string;
   hash: string;
-  release_id: string;
-  react_url?: string;
-  css_url?: string;
-  config_url?: string;
-  react_config: string;
-  release_hash: string;
-  user_id: string;
-  user_name: string;
-  created_at: string;
-  updated_at: string;
+  releaseId: string;
+  reactUrl?: string;
+  cssUrl?: string;
+  configUrl?: string;
+  reactConfig: string;
+  releaseHash: string;
+  userId: string;
+  userName: string;
+  createdAt: string;
+  updatedAt: string;
 }
 export type ILibPublish = {
   id: number;
   tag: string;
   name: string;
-  react_url: string;
-  css_url?: string;
-  config_url: string;
-  release_id: string;
-  release_hash: string;
+  reactUrl: string;
+  cssUrl?: string;
+  configUrl: string;
+  releaseId: string;
+  releaseHash: string;
 };
 // 获取组件列表
 export const getLibList = (params: PageParams) => {
@@ -53,11 +53,11 @@ export const createLib = (params: { tag: string; name: string; description?: str
 };
 
 // 保存组件
-export const updateLib = (params: { react_code: string; less_code: string; config_code: string; md_code: string; id: string; hash: string }) => {
+export const updateLib = (params: { reactCode: string; lessCode: string; configCode: string; mdCode: string; id: string; hash: string }) => {
   return request.post('/lib/update', params);
 };
 
 // 发布组件
-export const publish = (params: { lib_id: number; react_compile: string; css_compile?: string; config_code: string; release_hash: string }) => {
+export const publish = (params: { libId: number; reactCompile: string; cssCompile?: string; configCode: string; releaseHash: string }) => {
   return request.post('/lib/publish', params);
 };

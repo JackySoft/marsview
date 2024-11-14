@@ -4,16 +4,16 @@
 
 export interface IMenuItem {
   id: number;
-  project_id: number;
+  projectId: number;
   name: string;
-  parent_id: number;
+  parentId: number;
   type: number;
   icon: string;
   path: string;
-  page_id: number;
-  sort_num: number;
+  pageId: number;
+  sortNum: number;
   status: number;
-  created_at: string;
+  createdAt: string;
   buttons?: IMenuItem[];
   children?: IMenuItem[];
 }
@@ -23,14 +23,8 @@ export interface ProjectItem {
   name: string;
   remark: string;
   logo: string;
-  user_name: string;
-  user_id: string;
-  updated_at: string;
-  created_at: string;
-  members: Array<{
-    id: number;
-    role: 1 | 2;
-    user_id: string;
-    user_name: string;
-  }>;
+  userName: string;
+  userId: string;
+  updatedAt: string;
+  createdAt: string;
 }

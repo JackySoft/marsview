@@ -306,7 +306,7 @@ const ActionModal = (props: any, ref: any) => {
       });
     } else if (item.key === 'sendMessage') {
       form.setFieldsValue({
-        msg_type: 'text',
+        msgType: 'text',
         content: '你好，我是飞书机器人',
       });
     } else if (item.key === 'script') {

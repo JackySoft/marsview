@@ -77,10 +77,10 @@ export default function Index() {
   // 页面操作
   const handleAction = async (type: string, params: PageItem, isAuth: boolean) => {
     if (type === 'preview') {
-      if (!params.preview_img) {
+      if (!params.previewImg) {
         return message.warning('该页面未生成预览图');
       }
-      setPreviewUrl(params.preview_img);
+      setPreviewUrl(params.previewImg);
       setShowPreview(true);
       return;
     }
@@ -122,7 +122,7 @@ export default function Index() {
 
   // 页面列表项
   const SectionItem = ({ item }: { item: PageItem }) => {
-    const isAuth = item.id ? true : false;
+    const isAuth = form.getFieldValue('type') === 1 || item.isPublic === 1 ? true : false;
     return (
       <section
         className={styles.card}
@@ -142,9 +142,9 @@ export default function Index() {
           <div className={styles.updateUser}>
             <span style={{ marginRight: 10 }}>
               <UserOutlined style={{ fontSize: 15, marginRight: 5 }} />
-              {item.user_name}
+              {item.userName}
             </span>
-            <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
+            <span>更新于 {dayjs(item.updatedAt).fromNow()}</span>
           </div>
         </div>
         <div className={styles.itemFooter}>
@@ -185,7 +185,7 @@ export default function Index() {
                   }}
                 >
                   {content.map((item: PageItem, index: number) => {
-                    return <SectionItem item={item} key={item.id || item.user_name + index} />;
+                    return <SectionItem item={item} key={item.id || item.userName + index} />;
                   })}
                 </div>
               </Spin>
@@ -230,7 +230,7 @@ export default function Index() {
 // 页面状态标签
 const StateTag = ({ item }: { item: PageItem }) => {
   // 新页面
-  if (item.stg_state === 1 && item.pre_state === 1 && item.prd_state === 1) {
+  if (item.stgState === 1 && item.preState === 1 && item.prdState === 1) {
     return (
       <Tag>
         <Tooltip title="待开发">NEW</Tooltip>
@@ -252,19 +252,19 @@ const StateTag = ({ item }: { item: PageItem }) => {
     icon: <CheckCircleOutlined />,
     tooltip: '已发布',
   };
-  if (item.stg_state === 4) {
+  if (item.stgState === 4) {
     stgTag = {
       color: 'red',
       icon: <ExclamationCircleOutlined />,
       tooltip: '版本已回滚',
     };
-  } else if (item.stg_state === 3) {
+  } else if (item.stgState === 3) {
     stgTag = {
       color: 'success',
       icon: <CheckCircleOutlined />,
       tooltip: '版本已发布',
     };
-  } else if (item.stg_state === 2 && item.stg_publish_id) {
+  } else if (item.stgState === 2 && item.stgPublishId) {
     stgTag = {
       color: 'warning',
       icon: <ExclamationCircleOutlined />,
@@ -277,19 +277,19 @@ const StateTag = ({ item }: { item: PageItem }) => {
       tooltip: '版本未发布',
     };
   }
-  if (item.pre_state === 4) {
+  if (item.preState === 4) {
     preTag = {
       color: 'red',
       icon: <ExclamationCircleOutlined />,
       tooltip: '版本已回滚',
     };
-  } else if (item.pre_state === 3) {
+  } else if (item.preState === 3) {
     preTag = {
       color: 'success',
       icon: <CheckCircleOutlined />,
       tooltip: '版本已发布',
     };
-  } else if (item.pre_state === 2 && item.pre_publish_id) {
+  } else if (item.preState === 2 && item.prePublishId) {
     preTag = {
       color: 'warning',
       icon: <ExclamationCircleOutlined />,
@@ -302,19 +302,19 @@ const StateTag = ({ item }: { item: PageItem }) => {
       tooltip: '版本未发布',
     };
   }
-  if (item.prd_state === 4) {
+  if (item.prdState === 4) {
     prdTag = {
       color: 'red',
       icon: <ExclamationCircleOutlined />,
       tooltip: '版本已回滚',
     };
-  } else if (item.prd_state === 3) {
+  } else if (item.prdState === 3) {
     prdTag = {
       color: 'success',
       icon: <CheckCircleOutlined />,
       tooltip: '版本已发布',
     };
-  } else if (item.prd_state === 2 && item.prd_publish_id) {
+  } else if (item.prdState === 2 && item.prdPublishId) {
     prdTag = {
       color: 'warning',
       icon: <ExclamationCircleOutlined />,

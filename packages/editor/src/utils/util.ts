@@ -129,17 +129,17 @@ export function arrayToTree(array: Menu.MenuItem[], parentId = null) {
 
   // 找到每个节点的父节点
   array.forEach((item) => {
-    if (item.parent_id !== null && map[item.parent_id]) {
-      const parentItem = map[item.parent_id];
+    if (item.parentId !== null && map[item.parentId]) {
+      const parentItem = map[item.parentId];
       if (!parentItem.children) parentItem.children = [];
       parentItem.children?.push(map[item.id]);
-      // 按照sort_num进行降序排序
-      parentItem.children = parentItem.children.sort((a, b) => a.sort_num - b.sort_num);
+      // 按照sortNum进行降序排序
+      parentItem.children = parentItem.children.sort((a, b) => a.sortNum - b.sortNum);
     }
   });
   return Object.values(map)
-    .filter((item) => (parentId ? item.parent_id === parentId : !item.parent_id))
-    .sort((a, b) => a.sort_num - b.sort_num);
+    .filter((item) => (parentId ? item.parentId === parentId : !item.parentId))
+    .sort((a, b) => a.sortNum - b.sortNum);
 }
 
 /**

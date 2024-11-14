@@ -13,16 +13,16 @@ export default function SetPermission(props: IModalPropData<Role.RoleItem>) {
   const [checkedKeys, setCheckedKeys] = useState<number[]>([]);
   const [roleInfo, setRoleInfo] = useState<Role.RoleItem>();
   const [permission, setPermission] = useState<Role.Permission>();
-  const project_id = useParams().id as string;
+  const projectId = useParams().id as string;
 
   useEffect(() => {
     getTreeMenu();
   }, []);
 
   const getTreeMenu = async () => {
-    if (!project_id) return;
+    if (!projectId) return;
     const res = await getMenuList({
-      project_id: parseInt(project_id),
+      projectId: parseInt(projectId),
     });
     const menuData = arrayToTree(res.list);
     setMenuList(menuData || []);
@@ -40,9 +40,9 @@ export default function SetPermission(props: IModalPropData<Role.RoleItem>) {
     setRoleInfo(data);
     setPermission({
       id: roleInfo?.id || 0,
-      project_id: parseInt(project_id),
+      projectId: parseInt(projectId),
       checked: data.checked,
-      half_checked: data.half_checked,
+      halfChecked: data.halfChecked,
     });
     setCheckedKeys(data.checked?.split(',').map((key: string) => parseInt(key)) || []);
   };
@@ -62,9 +62,9 @@ export default function SetPermission(props: IModalPropData<Role.RoleItem>) {
     });
     setPermission({
       id: roleInfo?.id || 0,
-      project_id: parseInt(project_id),
+      projectId: parseInt(projectId),
       checked: checkedKeys.join(','),
-      half_checked: parentKeys.concat(item.halfCheckedKeys).join(','),
+      halfChecked: parentKeys.concat(item.halfCheckedKeys).join(','),
     });
   };
 

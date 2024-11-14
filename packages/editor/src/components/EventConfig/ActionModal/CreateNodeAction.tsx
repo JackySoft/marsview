@@ -12,7 +12,7 @@ const CreateNodeAction = () => {
       </div>
       <Form.Item
         label="空间ID"
-        name="space_id"
+        name="spaceId"
         tooltip="打开知识库，点击左下角的设置就可以在地址栏中看到当前的SpaceId"
         rules={[{ required: true, message: '请输入空间ID' }]}
       >
@@ -20,7 +20,7 @@ const CreateNodeAction = () => {
       </Form.Item>
       <Form.Item
         label="节点Token"
-        name="node_token"
+        name="nodeToken"
         tooltip="创建副本时，需要指定基于哪个节点进行创建，打开该知识库，地址栏末尾的即为Token"
         rules={[{ required: true, message: '请输入节点Token' }]}
       >

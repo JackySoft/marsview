@@ -31,7 +31,7 @@ const MenuComponent: React.FC = () => {
       if (item.type === 1 && item.status === 1) {
         const iconsList: { [key: string]: any } = Icons;
         if (item.buttons?.length || !item.children) {
-          const path = `/project/${projectId}/${item.path.startsWith('/') ? item.path.slice(1) : item.path || item.page_id || -item.id}`;
+          const path = `/project/${projectId}/${item.path.startsWith('/') ? item.path.slice(1) : item.path || item.pageId || -item.id}`;
           return treeList.push(getMenuItem(item.name, path, iconsList[item.icon] && React.createElement(iconsList[item.icon])));
         }
         const path = `${projectId}-${item.id}`;
@@ -69,11 +69,11 @@ const MenuComponent: React.FC = () => {
   return (
     <div
       style={
-        projectInfo.menu_mode === 'horizontal'
+        projectInfo.menuMode === 'horizontal'
           ? { width: 'calc(100vw - 458px)' }
           : {
               width: collapsed ? 79 : 255,
-              background: projectInfo.menu_theme_color === 'light' ? '#fff' : '#001529',
+              background: projectInfo.menuThemeColor === 'light' ? '#fff' : '#001529',
               borderRight: projectInfo.layout === 2 ? '1px solid #e8e9eb' : 'none',
               overflowX: 'hidden',
             }
@@ -84,7 +84,7 @@ const MenuComponent: React.FC = () => {
           components: {
             Menu: {
               darkItemColor: '#fff',
-              darkItemHoverColor: projectInfo.system_theme_color,
+              darkItemHoverColor: projectInfo.systemThemeColor,
               iconSize: 16,
             },
           },
@@ -92,11 +92,11 @@ const MenuComponent: React.FC = () => {
       >
         <Menu
           onClick={onClick}
-          theme={projectInfo.menu_theme_color as MenuTheme}
+          theme={projectInfo.menuThemeColor as MenuTheme}
           selectedKeys={selectedKeys}
-          style={projectInfo.menu_mode === 'horizontal' ? {} : { height: 'calc(100vh - 64px)', border: 'none', overflowY: 'auto' }}
-          mode={projectInfo.menu_mode}
-          inlineCollapsed={projectInfo.menu_mode === 'horizontal' ? undefined : collapsed}
+          style={projectInfo.menuMode === 'horizontal' ? {} : { height: 'calc(100vh - 64px)', border: 'none', overflowY: 'auto' }}
+          mode={projectInfo.menuMode}
+          inlineCollapsed={projectInfo.menuMode === 'horizontal' ? undefined : collapsed}
           items={menuList}
         />
       </ConfigProvider>

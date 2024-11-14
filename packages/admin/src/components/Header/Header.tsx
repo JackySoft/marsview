@@ -30,10 +30,10 @@ const Header = memo(() => {
     updateCollapsed();
   };
 
-  const isLight = projectInfo.menu_theme_color === 'light' || projectInfo.layout === 1;
+  const isLight = projectInfo.menuThemeColor === 'light' || projectInfo.layout === 1;
   const style: React.CSSProperties = {
     backgroundColor: isLight ? '#fff' : '#001529',
-    color: projectInfo.menu_theme_color === 'light' ? '#000' : '#fff',
+    color: projectInfo.menuThemeColor === 'light' ? '#000' : '#fff',
   };
   return (
     <div className={styles.header} style={style}>

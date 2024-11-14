@@ -50,13 +50,13 @@ function CustomLib(_: any, ref: any) {
 
   const handleClick = async (item: ILibPublish) => {
     // 生成默认配置
-    const { config, events, methods = [] }: any = await loadModule(item.config_url);
+    const { config, events, methods = [] }: any = await loadModule(item.configUrl);
     const newId = createId(item.tag);
     if (selectedElement) {
       addChildElements({
-        remoteUrl: item.react_url,
-        remoteConfigUrl: item.config_url,
-        remoteCssUrl: item.css_url,
+        remoteUrl: item.reactUrl,
+        remoteConfigUrl: item.configUrl,
+        remoteCssUrl: item.cssUrl,
         type: item.tag,
         name: item.name,
         elements: [],
@@ -68,9 +68,9 @@ function CustomLib(_: any, ref: any) {
       });
     } else {
       addElement({
-        remoteUrl: item.react_url,
-        remoteConfigUrl: item.config_url,
-        remoteCssUrl: item.css_url,
+        remoteUrl: item.reactUrl,
+        remoteConfigUrl: item.configUrl,
+        remoteCssUrl: item.cssUrl,
         type: item.tag,
         name: item.name,
         id: newId,

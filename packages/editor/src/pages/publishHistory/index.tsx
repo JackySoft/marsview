@@ -26,12 +26,12 @@ const items: Array<{ key: EnvType; label: string }> = [
 interface HistoryItem {
   id: number;
   env: EnvType;
-  page_id: number;
+  pageId: number;
   page_name: string;
   page_data: string;
-  user_name: string;
-  created_at: string;
-  updated_at: string;
+  userName: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 /**
@@ -65,8 +65,8 @@ export default function PublishHistory() {
     },
     {
       title: '操作人',
-      dataIndex: 'user_name',
-      key: 'user_name',
+      dataIndex: 'userName',
+      key: 'userName',
     },
     {
       title: '版本ID',
@@ -87,8 +87,8 @@ export default function PublishHistory() {
     },
     {
       title: '发布时间',
-      dataIndex: 'created_at',
-      key: 'created_at',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
     },
     {
       title: '操作',
@@ -138,8 +138,8 @@ export default function PublishHistory() {
         pageNum: pagination.current,
         pageSize: pagination.pageSize,
         env: activeKey,
-        page_id: parseInt(id),
-        publish_user_id: name,
+        pageId: parseInt(id),
+        publish_userId: name,
         start,
         end,
       });
@@ -183,7 +183,7 @@ export default function PublishHistory() {
   // 页面回滚
   async function rollback(item: HistoryItem) {
     await rollbackPage({
-      page_id: item.page_id,
+      pageId: item.pageId,
       env: activeKey,
       last_publish_id: item.id,
     });
