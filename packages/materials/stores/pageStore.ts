@@ -13,12 +13,12 @@ export interface PageState {
     pageId: number;
     pageName: string;
     remark: string;
-    stg_publish_id: number;
-    pre_publish_id: number;
-    prd_publish_id: number;
-    stg_state: number;
-    pre_state: number;
-    prd_state: number;
+    stgPublishId: number;
+    prePublishId: number;
+    prdPublishId: number;
+    stgState: number;
+    preState: number;
+    prdState: number;
     // 页面配置数据
     config: {
       props: any;
@@ -74,12 +74,12 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     pageId: 0,
     pageName: '',
     remark: '',
-    stg_state: 1,
-    pre_state: 1,
-    prd_state: 1,
-    stg_publish_id: 0,
-    pre_publish_id: 0,
-    prd_publish_id: 0,
+    stgState: 1,
+    preState: 1,
+    prdState: 1,
+    stgPublishId: 0,
+    prePublishId: 0,
+    prdPublishId: 0,
     config: {
       props: {},
       style: {},
@@ -150,9 +150,9 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           pageId: 0,
           pageName: '',
           remark: '',
-          stg_state: 1,
-          pre_state: 1,
-          prd_state: 1,
+          stgState: 1,
+          preState: 1,
+          prdState: 1,
           config: {
             props: {},
             style: {},

@@ -44,7 +44,7 @@ const ApiConfigComponent = () => {
     () => {
       handleUpdate(form.getFieldValue('id'));
     },
-    { wait: 500 },
+    { wait: 800 },
   );
 
   // 更新接口配置

@@ -55,7 +55,7 @@ export interface PublishListParams {
   env: 'stg' | 'pre' | 'prd'; // 1 stg 2 pre 3 prod;
   start?: string;
   end?: string;
-  publishUserId?: string;
+  userName?: string;
   pageId: number;
 }
 

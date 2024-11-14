@@ -36,14 +36,14 @@ const Config: React.FC = memo(() => {
   const handleSubmit = async () => {
     try {
       await form.validateFields();
-      const values = form.getFieldsValue();
+      const { breadcrumb, tag, footer, ...rest } = form.getFieldsValue();
       setLoading(true);
       if (type === 'create') {
-        await addProject(values);
+        await addProject({ ...rest, tag: tag ? 1 : 0, footer: footer ? 1 : 0, breadcrumb: breadcrumb ? 1 : 0 });
         message.success('创建成功');
         navigate('/projects');
       } else {
-        await updateProject(values);
+        await updateProject({ ...rest, tag: tag ? 1 : 0, footer: footer ? 1 : 0, breadcrumb: breadcrumb ? 1 : 0 });
         message.success('更新成功');
       }
       setLoading(false);

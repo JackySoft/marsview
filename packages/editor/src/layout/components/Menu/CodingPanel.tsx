@@ -59,7 +59,7 @@ const CodingPanel = () => {
       pageData: JSON.stringify({
         ...pageData,
         pageId: undefined,
-        // 下面字段排除在page_data外
+        // 下面字段排除在pageData外
         stgState: undefined,
         preState: undefined,
         prdState: undefined,
