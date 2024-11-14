@@ -2,7 +2,6 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { Form, ColorPicker, ColorPickerProps, FormItemProps } from 'antd';
 import { ComponentType } from '@/packages/types';
 import { useFormContext } from '@/packages/utils/context';
-import { Color } from 'antd/es/color-picker';
 
 /*泛型只需要定义组件本身用到的属性*/
 export interface IConfig {

@@ -20,7 +20,7 @@ interface IConfig {
 const wrapperStyle: React.CSSProperties = {
   display: 'inline-block',
   width: 'fit-content',
-}
+};
 
 /**
  *
@@ -67,23 +67,22 @@ const MRibbon = ({ id, type, config, elements }: ComponentType<IConfig>, ref: an
     };
   });
   return (
-    visible && ((
-      <span data-type={type} ref={drop}
-        style={{ ...wrapperStyle }}
-      >
+    visible && (
+      <span data-id={id} data-type={type} ref={drop} style={{ ...wrapperStyle }}>
         <Badge.Ribbon style={config.style} {...config.props}>
-          {(<div >
-            {elements?.length ? (
-              <MarsRender elements={elements || []} />
-            ) : (
-              <div className="slots" style={{ height: 100, width: 100, lineHeight: '100px' }}>
-                拖拽组件到这里
-              </div>
-            )}
-          </div>)}
-        </Badge.Ribbon >
+          {
+            <div>
+              {elements?.length ? (
+                <MarsRender elements={elements || []} />
+              ) : (
+                <div className="slots" style={{ height: 100, width: 100, lineHeight: '100px' }}>
+                  拖拽组件到这里
+                </div>
+              )}
+            </div>
+          }
+        </Badge.Ribbon>
       </span>
-    )
     )
   );
 };
