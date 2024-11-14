@@ -63,7 +63,7 @@ const Editor = () => {
         pageData = JSON.parse(res.pageData || '{}');
       } catch (error) {
         console.error(error);
-        console.info('【json数据】', res.page_data);
+        console.info('【json数据】', res.pageData);
         message.error('页面数据格式错误，请检查');
       }
       savePageInfo({
@@ -73,15 +73,15 @@ const Editor = () => {
         pageId: res.id,
         pageName: res.name,
         remark: res.remark,
-        is_public: res.isPublic,
-        is_edit: res.isEdit,
-        preview_img: res.previewImg,
-        stg_publish_id: res.stgPublishId,
-        pre_publish_id: res.prePublishId,
-        prd_publish_id: res.prdPublishId,
-        stg_state: res.stgState,
-        pre_state: res.preState,
-        prd_state: res.prdState,
+        isPublic: res.isPublic,
+        isEdit: res.isEdit,
+        previewImg: res.previewImg,
+        stgPublishId: res.stgPublishId,
+        prePublishId: res.prePublishId,
+        prdPublishId: res.prdPublishId,
+        stgState: res.stgState,
+        preState: res.preState,
+        prdState: res.prdState,
         userId: res.userId,
       });
       setLoaded(true);

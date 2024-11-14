@@ -28,7 +28,7 @@ interface HistoryItem {
   env: EnvType;
   pageId: number;
   page_name: string;
-  page_data: string;
+  pageData: string;
   userName: string;
   createdAt: string;
   updatedAt: string;
@@ -75,11 +75,11 @@ export default function PublishHistory() {
     },
     {
       title: '页面数据',
-      key: 'page_data',
+      key: 'pageData',
       align: 'center',
       render(_, record) {
         return (
-          <Button type="link" onClick={() => handleView(record.page_data)}>
+          <Button type="link" onClick={() => handleView(record.pageData)}>
             查看页面数据
           </Button>
         );
@@ -139,7 +139,7 @@ export default function PublishHistory() {
         pageSize: pagination.pageSize,
         env: activeKey,
         pageId: parseInt(id),
-        publishUserId: name,
+        userName: name,
         start,
         end,
       });
@@ -161,9 +161,9 @@ export default function PublishHistory() {
   async function getReleaseVersion() {
     const res = await getPageDetail(parseInt(id));
     setLastPublish({
-      stg: res.stg_publish_id,
-      pre: res.pre_publish_id,
-      prd: res.prd_publish_id,
+      stg: res.stgPublishId,
+      pre: res.prePublishId,
+      prd: res.prdPublishId,
     });
   }
 

@@ -204,9 +204,8 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
     }
     return {
       rowSelection,
+      ...config.props,
       rowKey: config.props.rowKey || 'id',
-      bordered: config.props.bordered,
-      size: config.props.size,
       columns: config.props.columns.map((item, index) => {
         return {
           ...item,

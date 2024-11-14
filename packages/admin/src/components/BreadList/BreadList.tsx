@@ -12,9 +12,9 @@ export default function BreadList() {
   const { pageMap, menuMap } = useProjectStore(useShallow((state) => ({ pageMap: state.pageMap, menuMap: state.menuMap })));
   // 生成面包屑
   useEffect(() => {
-    const page_id = getPageId(pageId, pageMap);
-    if (!page_id) return;
-    const menuItem = pageMap[Number(page_id)];
+    const id = getPageId(pageId, pageMap);
+    if (!id) return;
+    const menuItem = pageMap[Number(id)];
     if (pathname.endsWith('/welcome')) {
       setMenuPath([{ title: '欢迎页' }]);
       return;
