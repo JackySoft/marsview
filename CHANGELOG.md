@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/JackySoft/marsview/compare/v5.0.6...v5.1.0) (2024-11-14)
+
+
+### Features
+
+* 替换变量为驼峰 ([246d764](https://github.com/JackySoft/marsview/commit/246d764b5ca8d789715bd4a347f54872fdd3801c))
+
 ### [5.0.6](https://github.com/JackySoft/marsview/compare/v5.0.5...v5.0.6) (2024-11-13)
 
 
