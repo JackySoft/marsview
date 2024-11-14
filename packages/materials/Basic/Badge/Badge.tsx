@@ -1,20 +1,13 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Badge } from 'antd';
-import MarsRender from '@/packages/MarsRender/MarsRender';
-import { getComponent } from '@/packages/index';
-import { useDrop } from 'react-dnd';
-import { usePageStore } from '@/stores/pageStore';
-import { default as DivConfig } from '../../Container/Div/Schema'
-import { ComponentType, IDragTargetItem } from '../../types';
-import { off } from 'process';
-import { platform } from 'os';
-import { rest } from 'lodash-es';
+import MarsRender from '@materials/MarsRender/MarsRender';
+import { ComponentType } from '../../types';
 
 export type BadgeSize = 'small' | 'default';
 
 /*泛型只需要定义组件本身用到的属性*/
 interface IConfig {
-  ribbon?: boolean;//是否使用缎带模式
+  ribbon?: boolean; //是否使用缎带模式
   placement?: 'start' | 'end'; //缎带模式下，设置Badge位置
   color?: string; // 自定义小圆点的颜色
   count?: React.ReactNode; // 展示的数字，大于 overflowCount 时显示为 ${overflowCount}+，为 0 时隐藏
@@ -38,30 +31,6 @@ interface IConfig {
  */
 const MBadge = ({ id, type, config, elements }: ComponentType<IConfig>, ref: any) => {
   const [visible, setVisible] = useState(true);
-  const addChildElements = usePageStore((state) => state.addChildElements);
-  //拖拽接受
-  const [, drop] = useDrop({
-    accept: 'MENU_ITEM',
-    async drop(item: IDragTargetItem, monitor) {
-      if (monitor.didDrop()) return;
-      // 生成默认配置
-      const { config, events, methods = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
-      addChildElements({
-        type: item.type,
-        name: item.name,
-        parentId: id,
-        id: item.id,
-        config,
-        events,
-        methods,
-      });
-    },
-    // TODO: 拖拽组件时，容器呈现背景色（后期需要判断组件是否可以拖入）
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-  });
 
   // 对外暴露方法
   useImperativeHandle(ref, () => {
@@ -75,33 +44,23 @@ const MBadge = ({ id, type, config, elements }: ComponentType<IConfig>, ref: any
     };
   });
 
-
   const { placement, ...restProps } = config.props;
 
-  const rewriteProps = !config.props.ribbon ? {
-    offset: [config.props.offsetX, config.props.offsetY],
-    ...restProps,
-  } : {
-  };
-
-  const ribbonProps = config.props.ribbon ? {
-    color: config.props.color,
-    placement: config.props.placement,
-    text: config.props.text,
-  } : {};
+  const rewriteProps = !config.props.ribbon
+    ? {
+        offset: [config.props.offsetX, config.props.offsetY],
+        ...restProps,
+      }
+    : {};
 
   return (
     visible && (
-      <Badge data-id={id} data-type={type} style={config.style} {...rewriteProps}>
-        {(<div style={config.style} {...config.props} data-type={type} ref={drop}>
-          {elements?.length ? (
-            <MarsRender elements={elements || []} />
-          ) : (
-            <div className="slots" style={{ height: 100, lineHeight: '100px' }}>
-              拖拽组件到这里
-            </div>
-          )}
-        </div>)}
+      <Badge style={config.style} {...rewriteProps}>
+        {
+          <div style={config.style} {...config.props}>
+            {elements?.length ? <MarsRender elements={elements || []} /> : null}
+          </div>
+        }
       </Badge>
     )
   );
