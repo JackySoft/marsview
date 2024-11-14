@@ -139,7 +139,7 @@ export default function PublishHistory() {
         pageSize: pagination.pageSize,
         env: activeKey,
         pageId: parseInt(id),
-        publish_userId: name,
+        publishUserId: name,
         start,
         end,
       });
@@ -185,7 +185,7 @@ export default function PublishHistory() {
     await rollbackPage({
       pageId: item.pageId,
       env: activeKey,
-      last_publish_id: item.id,
+      lastPublishId: item.id,
     });
     message.success('操作成功');
     getReleaseVersion();

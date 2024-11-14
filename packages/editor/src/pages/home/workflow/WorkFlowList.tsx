@@ -92,11 +92,11 @@ export default function WorkFlow() {
         <div className={styles.projectCard} onClick={() => handleAction(item.id)}>
           <Card.Meta
             style={{ cursor: 'pointer' }}
-            title={item.form_name}
+            title={item.formName}
             description={
               <>
                 <DeleteOutlined className={styles.delIcon} onClick={(event) => handleDelete(event, item.id)} />
-                <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.form_desc || '暂无描述'}</p>
+                <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.formDesc || '暂无描述'}</p>
                 <p style={{ marginTop: 10 }}>
                   <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
                   {item.userName}
