@@ -382,6 +382,16 @@ const components = [
         name: '二维码',
         type: 'QRCode',
       },
+      {
+        icon: '',
+        name: '徽标',
+        type: 'Badge',
+      },
+      {
+        icon: '',
+        name: '缎带',
+        type: 'Ribbon',
+      },
     ],
   },
   {
