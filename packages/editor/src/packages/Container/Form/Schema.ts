@@ -129,7 +129,7 @@ export default {
       labelAlign: 'right',
       layout: 'horizontal',
       labelCol: {
-        span: 8,
+        span: 6,
       },
       wrapperCol: {
         span: 16,
