@@ -20,10 +20,10 @@ export default function MenuList() {
   const [form] = Form.useForm();
   const [data, setData] = useState<Menu.MenuItem[]>([]);
   const [loading, setLoading] = useState(false);
-  const project_id = useParams().id as string;
+  const projectId = useParams().id as string;
 
   const menuRef = useRef<{
-    open: (type: IAction, data: Menu.EditParams | { parentId?: string; sort_num?: number }, list?: Menu.MenuItem[]) => void;
+    open: (type: IAction, data: Menu.EditParams | { parentId?: number; sortNum?: number }, list?: Menu.MenuItem[]) => void;
   }>();
 
   useEffect(() => {
@@ -33,10 +33,10 @@ export default function MenuList() {
   // 获取菜单列表
   const getMenus = async () => {
     const { name, status } = form.getFieldsValue();
-    if (!project_id) return;
+    if (!projectId) return;
     setLoading(true);
     const res = await getMenuList({
-      project_id: parseInt(project_id),
+      projectId: parseInt(projectId),
       name,
       status,
     });
@@ -53,7 +53,7 @@ export default function MenuList() {
   // 创建菜单
   const handleCreate = () => {
     menuRef.current?.open('create', {
-      sort_num: data.length,
+      sortNum: data.length,
     });
   };
 
@@ -69,7 +69,7 @@ export default function MenuList() {
 
   // 创建子菜单
   const handleSubCreate = (record: Menu.MenuItem) => {
-    menuRef.current?.open('create', { parent_id: record.id, sort_num: (record.children?.length || 0) + 1 });
+    menuRef.current?.open('create', { parentId: record.id, sortNum: (record.children?.length || 0) + 1 });
   };
 
   // 编辑菜单
@@ -152,18 +152,18 @@ export default function MenuList() {
     },
     {
       title: '绑定页面',
-      dataIndex: 'page_id',
-      key: 'page_id',
+      dataIndex: 'pageId',
+      key: 'pageId',
       align: 'center',
       width: 120,
-      render(page_id: string) {
-        return page_id;
+      render(pageId: string) {
+        return pageId;
       },
     },
     {
       title: '排序值',
-      dataIndex: 'sort_num',
-      key: 'sort_num',
+      dataIndex: 'sortNum',
+      key: 'sortNum',
       align: 'center',
       width: 100,
     },
@@ -180,22 +180,22 @@ export default function MenuList() {
     },
     {
       title: '更新时间',
-      dataIndex: 'updated_at',
-      key: 'updated_at',
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
       align: 'center',
       width: 180,
     },
     {
       title: '创建时间',
-      dataIndex: 'created_at',
-      key: 'created_at',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
       align: 'center',
       width: 180,
     },
     {
       title: '创建人',
-      dataIndex: 'user_name',
-      key: 'user_name',
+      dataIndex: 'userName',
+      key: 'userName',
       align: 'center',
       width: 200,
     },
@@ -220,7 +220,7 @@ export default function MenuList() {
             <Button type="link" danger onClick={() => handleDelete(record)}>
               删除
             </Button>
-            {record.page_id > 0 && <Link to={`/editor/${record.page_id}/edit`}>去设计</Link>}
+            {record.pageId > 0 && <Link to={`/editor/${record.pageId}/edit`}>去设计</Link>}
           </>
         );
       },

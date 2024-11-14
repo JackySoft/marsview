@@ -99,9 +99,9 @@ export default function WorkFlow() {
                 <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.form_desc || '暂无描述'}</p>
                 <p style={{ marginTop: 10 }}>
                   <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
-                  {item.user_name}
+                  {item.userName}
                   &nbsp;&nbsp;
-                  <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
+                  <span>更新于 {dayjs(item.updatedAt).fromNow()}</span>
                 </p>
               </>
             }

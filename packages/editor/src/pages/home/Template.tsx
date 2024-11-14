@@ -65,10 +65,10 @@ export default function Index() {
   // 页面操作
   const handleAction = async (type: string, params: PageItem) => {
     if (type === 'preview') {
-      if (!params.preview_img) {
+      if (!params.previewImg) {
         return message.warning('该页面未生成预览图');
       }
-      setPreviewUrl(params.preview_img);
+      setPreviewUrl(params.previewImg);
       setShowPreview(true);
       return;
     }
@@ -105,9 +105,9 @@ export default function Index() {
           <div className={styles.updateUser}>
             <span style={{ marginRight: 10 }}>
               <UserOutlined style={{ fontSize: 15, marginRight: 5 }} />
-              {item.user_name}
+              {item.userName}
             </span>
-            <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
+            <span>更新于 {dayjs(item.updatedAt).fromNow()}</span>
           </div>
         </div>
         <div className={styles.itemFooter}>
@@ -186,19 +186,19 @@ const StateTag = ({ item }: { item: PageItem }) => {
     icon: <CheckCircleOutlined />,
     tooltip: '已发布',
   };
-  if (item.stg_state === 4) {
+  if (item.stgState === 4) {
     stgTag = {
       color: 'red',
       icon: <ExclamationCircleOutlined />,
       tooltip: '版本已回滚',
     };
-  } else if (item.stg_state === 3) {
+  } else if (item.stgState === 3) {
     stgTag = {
       color: 'success',
       icon: <CheckCircleOutlined />,
       tooltip: '版本已发布',
     };
-  } else if (item.stg_state === 2 && item.stg_publish_id) {
+  } else if (item.stgState === 2 && item.stgPublishId) {
     stgTag = {
       color: 'warning',
       icon: <ExclamationCircleOutlined />,

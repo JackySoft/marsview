@@ -10,7 +10,7 @@ export default function CreateRole(props: IModalProp<Role.RoleItem>) {
   const [action, setAction] = useState<IAction>('create');
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [form] = Form.useForm();
-  const { id: project_id } = useParams();
+  const { id: projectId } = useParams();
   // 暴露组件方法
   useImperativeHandle(props.mRef, () => {
     return {
@@ -28,14 +28,14 @@ export default function CreateRole(props: IModalProp<Role.RoleItem>) {
   // 提交
   const handleOk = async () => {
     const valid = await form.validateFields();
-    if (valid && project_id) {
+    if (valid && projectId) {
       try {
         setConfirmLoading(true);
         const { id, name, remark = '' } = form.getFieldsValue();
         if (action === 'create') {
-          await createRole({ name, remark, project_id });
+          await createRole({ name, remark, projectId });
         } else {
-          await updateRole({ name, remark, id, project_id });
+          await updateRole({ name, remark, id, projectId });
         }
         setConfirmLoading(false);
         message.success('操作成功');

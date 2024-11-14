@@ -32,8 +32,8 @@ function Tab() {
       setActiveKey('welcome');
       return;
     }
-    const page_id = getPageId(pageId, pageMap);
-    const menuItem = pageMap[Number(page_id)];
+    const id = getPageId(pageId, pageMap);
+    const menuItem = pageMap[Number(id)];
     if (!menuItem) return;
     if (!tabsList.find((item) => item.key == pathname)) {
       tabsList.push({

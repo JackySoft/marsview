@@ -1,5 +1,5 @@
 import { Input, Modal, Form, Radio } from 'antd';
-import { useImperativeHandle, useState, forwardRef, useMemo, memo } from 'react';
+import { useImperativeHandle, useState, forwardRef, memo } from 'react';
 import { addProject } from '@/api';
 import UploadImages from './UploadImages/UploadImages';
 import { message } from '@/utils/AntdGlobal';
@@ -26,7 +26,7 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
       await form.validateFields();
       const values = form.getFieldsValue();
       setLoading(true);
-      await addProject({ ...initValue, ...values });
+      await addProject({ ...values });
       message.success('创建成功');
       props.update();
       setLoading(false);
@@ -41,20 +41,6 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
     form.resetFields();
     setVisible(false);
   };
-
-  const initValue = useMemo(() => {
-    return {
-      layout: 1,
-      menu_mode: 'inline',
-      menu_theme_color: 'dark',
-      system_theme_color: '#1677ff',
-      breadcrumb: true,
-      tag: true,
-      footer: false,
-      logo: `${import.meta.env.VITE_CDN_URL}/mars-logo.png`,
-      is_public: 1,
-    };
-  }, []);
   return (
     <Modal
       title="创建项目"
@@ -66,7 +52,12 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
       okText="确定"
       cancelText="取消"
     >
-      <Form form={form} labelCol={{ span: 5 }} wrapperCol={{ span: 16 }} initialValues={initValue}>
+      <Form
+        form={form}
+        labelCol={{ span: 5 }}
+        wrapperCol={{ span: 16 }}
+        initialValues={{ logo: 'https://marsview.cdn.bcebos.com/mars-logo.png', isPublic: 1 }}
+      >
         <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入页面名称' }]}>
           <Input placeholder="请输入项目名称" maxLength={15} showCount />
         </Form.Item>
@@ -76,7 +67,7 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
         <Form.Item label="LOGO" name="logo" rules={[{ required: true, message: '请上传项目Logo' }]}>
           <UploadImages />
         </Form.Item>
-        <Form.Item label="权限" name="is_public" rules={[{ required: true, message: '请选择访问类型' }]} extra="公开项目支持所有人访问，但不可修改。">
+        <Form.Item label="权限" name="isPublic" rules={[{ required: true, message: '请选择访问类型' }]} extra="公开项目支持所有人访问，但不可修改。">
           <Radio.Group>
             <Radio value={1}>公开</Radio>
             <Radio value={2}>私有</Radio>

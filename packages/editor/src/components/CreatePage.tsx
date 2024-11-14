@@ -77,7 +77,7 @@ const CreatePage = (props: IModalProp) => {
       okText="确定"
       cancelText="取消"
     >
-      <Form form={form} labelCol={{ span: 5 }} wrapperCol={{ span: 16 }} initialValues={{ is_public: 1, is_edit: 1 }}>
+      <Form form={form} labelCol={{ span: 5 }} wrapperCol={{ span: 16 }} initialValues={{ isPublic: 1, isEdit: 1 }}>
         <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入页面名称' }]}>
           <Input placeholder="请输入页面名称" maxLength={15} showCount />
         </Form.Item>
@@ -86,7 +86,7 @@ const CreatePage = (props: IModalProp) => {
         </Form.Item>
         <Form.Item
           label="权限"
-          name="is_public"
+          name="isPublic"
           rules={[{ required: true, message: '请选择访问类型' }]}
           extra="公开页面支持所有人访问。私有页面仅自己可访问。"
         >
@@ -97,7 +97,7 @@ const CreatePage = (props: IModalProp) => {
             {userId == 50 ? <Radio value={3}>公开模板</Radio> : null}
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="模式" name="is_edit" rules={[{ required: true, message: '请选择编辑模式' }]} extra="公开后设置他人可查看或编辑；">
+        <Form.Item label="模式" name="isEdit" rules={[{ required: true, message: '请选择编辑模式' }]} extra="公开后设置他人可查看或编辑；">
           <Radio.Group>
             <Radio value={1}>编辑</Radio>
             <Radio value={2}>查看</Radio>

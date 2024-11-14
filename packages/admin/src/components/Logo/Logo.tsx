@@ -10,7 +10,7 @@ function Logo() {
   const [nameStyle, setNameStyle] = useState({});
   useEffect(() => {
     // 左右布局模式下，Logo背景需要跟着主题色变化
-    if (projectInfo.menu_theme_color === 'dark') {
+    if (projectInfo.menuThemeColor === 'dark') {
       setStyle({ backgroundColor: '#001529', color: '#fff', height: 64, padding: '10px 20px' });
     } else {
       setStyle({ backgroundColor: '#fff', color: '#000', height: 64, padding: '10px 20px' });
@@ -25,7 +25,7 @@ function Logo() {
         fontSize: projectInfo.name.length > 9 ? 14 : 16,
       });
     }
-  }, [projectInfo.layout, projectInfo.menu_theme_color]);
+  }, [projectInfo.layout, projectInfo.menuThemeColor]);
   return (
     <div
       className={styles.logo}

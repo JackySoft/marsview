@@ -60,7 +60,7 @@ const Editor = () => {
     getPageDetail(parseInt(id)).then((res) => {
       let pageData: any = {};
       try {
-        pageData = JSON.parse(res.page_data || '{}');
+        pageData = JSON.parse(res.pageData || '{}');
       } catch (error) {
         console.error(error);
         console.info('【json数据】', res.page_data);
@@ -73,16 +73,16 @@ const Editor = () => {
         pageId: res.id,
         pageName: res.name,
         remark: res.remark,
-        is_public: res.is_public,
-        is_edit: res.is_edit,
-        preview_img: res.preview_img,
-        stg_publish_id: res.stg_publish_id,
-        pre_publish_id: res.pre_publish_id,
-        prd_publish_id: res.prd_publish_id,
-        stg_state: res.stg_state,
-        pre_state: res.pre_state,
-        prd_state: res.prd_state,
-        user_id: res.user_id,
+        is_public: res.isPublic,
+        is_edit: res.isEdit,
+        preview_img: res.previewImg,
+        stg_publish_id: res.stgPublishId,
+        pre_publish_id: res.prePublishId,
+        prd_publish_id: res.prdPublishId,
+        stg_state: res.stgState,
+        pre_state: res.preState,
+        prd_state: res.prdState,
+        userId: res.userId,
       });
       setLoaded(true);
     });

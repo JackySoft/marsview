@@ -108,7 +108,7 @@ const AdminLayout = () => {
       locale={locale}
       theme={{
         token: {
-          colorPrimary: projectInfo.system_theme_color || '#1677ff',
+          colorPrimary: projectInfo.systemThemeColor || '#1677ff',
         },
         hashed: false,
       }}

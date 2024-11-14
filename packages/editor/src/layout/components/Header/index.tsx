@@ -36,7 +36,7 @@ const Header = memo(() => {
 
   const {
     userInfo,
-    page: { pageId, pageName, remark, is_public, is_edit, ...pageData },
+    page: { pageId, pageName, remark, isPublic, isEdit, ...pageData },
     mode,
     theme,
     setMode,
@@ -141,28 +141,27 @@ const Header = memo(() => {
   const handleClick = async (name: string) => {
     if (name === 'save') {
       setLoading(true);
-      const page_data = JSON.stringify({
+      const pageInfo = JSON.stringify({
         ...pageData,
         // 下面字段排除在page_data外
-        stg_state: undefined,
-        pre_state: undefined,
-        prd_state: undefined,
-        preview_img: undefined,
+        stgState: undefined,
+        preState: undefined,
+        prdState: undefined,
+        previewImg: undefined,
         variableData: {},
         formData: {},
-        stg_publish_id: undefined,
-        pre_publish_id: undefined,
-        prd_publish_id: undefined,
-        user_id: undefined, //页面创建者
+        stgPublishId: undefined,
+        prePublishId: undefined,
+        prdPublishId: undefined,
       });
       try {
         await updatePageData({
           id: pageId,
           name: pageName,
           remark: remark,
-          is_public: is_public ?? 1,
-          is_edit: is_edit ?? 1,
-          page_data,
+          isPublic: isPublic ?? 1,
+          isEdit: isEdit ?? 1,
+          pageData: pageInfo,
         });
         updatePageState({ env: 'all' });
         setLoading(false);

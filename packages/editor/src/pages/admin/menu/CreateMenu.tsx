@@ -20,7 +20,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
   const [pageList, setPageList] = useState<PageItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const { id: project_id } = useParams();
+  const { id: projectId } = useParams();
 
   useImperativeHandle(props.mRef, () => ({
     open,
@@ -35,21 +35,21 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
     getMenus();
     type === 'edit' && getMyPageList();
     setLoading(false);
-    if (data && project_id) {
-      form.setFieldsValue({ ...data, project_id: parseInt(project_id), code: data.code?.split('_')[2] || '' });
+    if (data && projectId) {
+      form.setFieldsValue({ ...data, projectId: parseInt(projectId), code: data.code?.split('_')[2] || '' });
     }
   };
 
   // 获取菜单列表，生成菜单树
   const getMenus = async () => {
-    if (!project_id) return;
+    if (!projectId) return;
     const res = await getMenuList({
-      project_id: parseInt(project_id),
+      projectId: parseInt(projectId),
     });
     // 菜单编辑时，父菜单不能选择自身子菜单，会产生冲突。
-    const parentId = form.getFieldValue('parent_id');
+    const parentId = form.getFieldValue('parentId');
     const filterList = res.list.filter((item: Menu.MenuItem) => {
-      return item.type === 1 && item.parent_id != parentId;
+      return item.type === 1 && item.parentId != parentId;
     });
     const menuData = arrayToTree(filterList);
     setMenuList(menuData);
@@ -69,11 +69,11 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
       const values = form.getFieldsValue();
       try {
         if (values.type === 2) {
-          values.code = values.project_id + '_' + values.parent_id + '_' + values.code;
+          values.code = values.projectId + '_' + values.parentId + '_' + values.code;
         } else {
           values.code = '';
         }
-        values.page_id = values.page_id || 0;
+        values.pageId = values.pageId || 0;
         if (action === 'create') {
           await addMenu(values);
         } else {
@@ -110,10 +110,10 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
             <Form.Item hidden name="id">
               <Input />
             </Form.Item>
-            <Form.Item hidden name="project_id">
+            <Form.Item hidden name="projectId">
               <InputNumber />
             </Form.Item>
-            <Form.Item label="父级菜单" name="parent_id">
+            <Form.Item label="父级菜单" name="parentId">
               <TreeSelect
                 placeholder="请选择父级菜单"
                 allowClear
@@ -176,7 +176,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
                             </a>
                           </span>
                         }
-                        name="page_id"
+                        name="pageId"
                       >
                         <Select
                           placeholder="请选择关联页面"
@@ -208,7 +208,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
               }}
             </Form.Item>
 
-            <Form.Item label="排序" name="sort_num" extra="排序值越大越靠后。">
+            <Form.Item label="排序" name="sortNum" extra="排序值越大越靠后。">
               <InputNumber placeholder="请输入排序值" />
             </Form.Item>
             <Form.Item label="菜单状态" name="status" extra="停用后，菜单不会在admin系统中展示。">

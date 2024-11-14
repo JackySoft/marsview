@@ -64,7 +64,7 @@ export const publishList = (params: PublishListParams) => {
 };
 
 // 页面回滚
-export const rollbackPage = (params: { page_id: number; env: string; last_publish_id: number }) => {
+export const rollbackPage = (params: { pageId: number; env: string; lastPublishId: number }) => {
   return request.post('/page/rollback', params);
 };
 
@@ -134,7 +134,7 @@ export const delUser = (params: { id: number }) => {
 };
 
 // 更新项目用户
-export const updateUser = (params: { id: number; system_role: number; role_id: number }) => {
+export const updateUser = (params: { id: number; systemRole: number; roleId: number }) => {
   return request.post('/project/user/update', params);
 };
 
@@ -144,8 +144,8 @@ export const getRoleList = (params: Role.Params) => {
 };
 
 // 获取所有角色
-export const getRoleListAll = (project_id: number) => {
-  return request.get('/role/listAll', { project_id });
+export const getRoleListAll = (projectId: number) => {
+  return request.get('/role/listAll', { projectId });
 };
 
 // 新增角色
@@ -154,16 +154,16 @@ export const createRole = (params: Role.CreateParams) => {
 };
 
 // 删除角色
-export const delRoleById = (params: { id: number; project_id: number }) => {
+export const delRoleById = (params: { id: number; projectId: number }) => {
   return request.post('/role/delete', params);
 };
 
 // 更新角色
-export const updateRoleLimits = (params: { id: number; checked: string; half_checked: string }) => {
+export const updateRoleLimits = (params: { id: number; checked: string; halfChecked: string }) => {
   return request.post('/role/updateLimits', params);
 };
 
 // 更新角色权限
-export const updateRole = (params: { id: number; project_id: string; name: string; remark: string }) => {
+export const updateRole = (params: { id: number; projectId: string; name: string; remark: string }) => {
   return request.post('/role/update', params);
 };
