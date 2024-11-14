@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.1](https://github.com/JackySoft/marsview/compare/v5.1.0...v5.1.1) (2024-11-14)
+
+
+### Features
+
+* add color-picker component ([b05075c](https://github.com/JackySoft/marsview/commit/b05075cb7140b15c5ae8b33e7b4fd7ff794a61ec))
+
+
+### Bug Fixes
+
+* 修复类型问题 ([678b597](https://github.com/JackySoft/marsview/commit/678b5978986e17e615614c68b502a9ec2748ced6))
+
 ## [5.1.0](https://github.com/JackySoft/marsview/compare/v5.0.6...v5.1.0) (2024-11-14)
 
 
