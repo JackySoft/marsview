@@ -27,6 +27,24 @@ export default {
       name: ['defaultValue'],
     },
     {
+      type: 'Input',
+      label: 'Extra',
+      name: ['formItem', 'extra'],
+      tooltip: '表单控件下方显示的提示信息',
+      props: {
+        placeholder: '请输入',
+      },
+    },
+    {
+      type: 'Input',
+      label: 'Tooltip',
+      name: ['formItem', 'tooltip'],
+      tooltip: '表单项后面显示的提示信息',
+      props: {
+        placeholder: '请输入',
+      },
+    },
+    {
       type: 'Title',
       label: '表单配置',
       key: 'title2',
@@ -73,18 +91,6 @@ export default {
       label: '包含Label',
       name: ['formWrap', 'labelInValue'],
       tooltip: '提交时，会把label包装到value中',
-    },
-    {
-      type: 'Input',
-      label: 'Extra',
-      name: ['formItem', 'extra'],
-      tooltip: '表单控件下方显示的提示信息',
-    },
-    {
-      type: 'Input',
-      label: 'Tooltip',
-      name: ['formItem', 'tooltip'],
-      tooltip: '表单项后面显示的提示信息',
     },
     {
       type: 'Select',
