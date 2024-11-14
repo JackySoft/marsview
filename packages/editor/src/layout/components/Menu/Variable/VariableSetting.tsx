@@ -14,7 +14,8 @@ const VariableSetting = (_: any, ref: any) => {
   const [dataType, setDataType] = useState('string');
   const editorRef = useRef<any>(null);
   const [form] = Form.useForm();
-  const { addVariable, editVariable } = usePageStore((state) => ({
+  const { theme, addVariable, editVariable } = usePageStore((state) => ({
+    theme: state.theme,
     variables: state.page.variables,
     addVariable: state.addVariable,
     editVariable: state.editVariable,
@@ -110,6 +111,7 @@ const VariableSetting = (_: any, ref: any) => {
             <Editor
               height="250px"
               language="json"
+              theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
               options={{
                 lineNumbers: 'on',
                 minimap: {

@@ -13,22 +13,23 @@ export interface UserInfoStore {
 export interface PageState {
   userInfo: UserInfoStore;
   mode: 'edit' | 'preview';
+  theme: 'light' | 'dark';
   selectedElement: { type: string; id: string } | undefined;
   isUpdateToolbar: boolean; // 更新遮罩
   page: {
     pageId: number;
     pageName: string;
     remark: string;
-    is_public: number;
-    is_edit: number;
-    stg_state: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
-    pre_state: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
-    prd_state: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
-    stg_publish_id: number;
-    pre_publish_id: number;
-    prd_publish_id: number;
-    preview_img: string;
-    user_id: string;
+    isPublic: number;
+    isEdit: number;
+    stgState: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
+    preState: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
+    prdState: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
+    stgPublishId: number;
+    prePublishId: number;
+    prdPublishId: number;
+    previewImg: string;
+    userId: string;
     // 页面配置数据
     config: {
       props: any;
@@ -74,6 +75,7 @@ export interface PageAction {
   updateApi: (api: ApiType) => void;
   removeApi: (name: string) => void;
   setMode: (mode: 'edit' | 'preview') => void;
+  setTheme: (theme: 'light' | 'dark') => void;
   addElement: (element: any) => void;
   addChildElements: (element: any) => void;
   editElement: (payload: any) => void;
@@ -98,22 +100,23 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     userName: '',
   },
   mode: 'edit',
+  theme: 'light',
   selectedElement: undefined,
   isUpdateToolbar: false,
   page: {
     pageId: 0,
     pageName: '',
     remark: '',
-    is_public: 1,
-    is_edit: 1,
-    stg_state: 1,
-    pre_state: 1,
-    prd_state: 1,
-    stg_publish_id: 0,
-    pre_publish_id: 0,
-    prd_publish_id: 0,
-    preview_img: '',
-    user_id: '',
+    isPublic: 1,
+    isEdit: 1,
+    stgState: 1,
+    preState: 1,
+    prdState: 1,
+    stgPublishId: 0,
+    prePublishId: 0,
+    prdPublishId: 0,
+    previewImg: '',
+    userId: '',
     config: {
       props: {},
       style: {},
@@ -175,9 +178,9 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     set(
       produce((state) => {
         if (env === 'all') {
-          state.page.stg_state = 2;
-          state.page.pre_state = 2;
-          state.page.prd_state = 2;
+          state.page.stgState = 2;
+          state.page.preState = 2;
+          state.page.prdState = 2;
         } else {
           state.page[env] = pageState;
         }
@@ -207,6 +210,8 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   },
   // 切换编辑模式
   setMode: (mode: 'edit' | 'preview') => set({ mode }),
+  // 切换主题
+  setTheme: (theme: 'light' | 'dark') => set({ theme }),
   // 添加组件
   addElement: (element: ComponentType) => {
     set(
@@ -526,7 +531,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           stg_state: 1,
           pre_state: 1,
           prd_state: 1,
-          user_id: '',
+          userId: '',
           config: {
             props: {},
             style: {},

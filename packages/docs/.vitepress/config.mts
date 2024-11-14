@@ -12,14 +12,14 @@ export default defineConfig({
       'script',
       {},
       `
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?e0b36c5433838f284c65581c1de9b9bd";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-`,
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?e0b36c5433838f284c65581c1de9b9bd";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      `,
     ],
   ],
   lang: 'zh-CN',
@@ -30,7 +30,7 @@ var _hmt = _hmt || [];
     logo: '/mars-logo.png',
     nav: [
       { text: '首页', link: '/' },
-      { text: '平台', link: '/home' },
+      { text: '平台介绍', link: '/home' },
       { text: '项目', link: '/project' },
       { text: '页面', link: '/page' },
       { text: '组件', link: '/lib' },
@@ -45,7 +45,8 @@ var _hmt = _hmt || [];
         text: 'Marsview',
         items: [
           { text: '介绍', link: '/home' },
-          { text: '部署', link: '/deploy' },
+          { text: '本地部署', link: '/deploy-dev' },
+          { text: '线上部署', link: '/deploy-prd' },
         ],
       },
       {
@@ -98,7 +99,6 @@ var _hmt = _hmt || [];
         link: '/team',
       },
     ],
-
     socialLinks: [{ icon: 'github', link: 'https://github.com/JackySoft/marsview' }],
     footer: {
       message: 'Released under the MIT License.',

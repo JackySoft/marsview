@@ -12,24 +12,19 @@ export interface PageParams {
 export interface PageItem {
   id: number;
   name: string;
-  user_name: string;
-  user_id: number;
+  userName: string;
+  userId: number;
   remark: string;
-  updated_at: string;
-  created_at: string;
-  stg_publish_id: number;
-  pre_publish_id: number;
-  prd_publish_id: number;
-  stg_state: number;
-  pre_state: number;
-  prd_state: number;
-  members: Array<{
-    id: number;
-    role: 1 | 2;
-    user_id: string;
-    user_name: string;
-  }>;
-  preview_img: string;
+  updatedAt: string;
+  createdAt: string;
+  stgPublishId: number;
+  prePublishId: number;
+  prdPublishId: number;
+  stgState: number;
+  preState: number;
+  prdState: number;
+  previewImg: string;
+  isPublic: number;
 }
 
 export interface PageReqParams {
@@ -38,20 +33,20 @@ export interface PageReqParams {
 
 export interface CreatePageParams {
   name: string;
-  user_name: string;
-  user_id: string;
+  userName: string;
+  userId: string;
 }
 
 export interface UpdatePageParams {
   id: number;
-  user_id: string;
+  userId: string;
   name: string;
 }
 
 export interface PublishPageParams {
-  page_id: number;
+  pageId: number;
   env: 'stg' | 'pre' | 'prd'; // 1 stg 2 pre 3 prod;
-  preview_img: string;
+  previewImg: string;
 }
 
 export interface PublishListParams {
@@ -60,8 +55,8 @@ export interface PublishListParams {
   env: 'stg' | 'pre' | 'prd'; // 1 stg 2 pre 3 prod;
   start?: string;
   end?: string;
-  publish_user_id?: string;
-  page_id: number;
+  publishUserId?: string;
+  pageId: number;
 }
 
 /**
@@ -73,17 +68,10 @@ export namespace Project {
     name: string;
     remark: string;
     logo: string;
-    user_name: string;
-    user_id: number;
-    is_edit: boolean;
-    updated_at: string;
-    created_at: string;
-    members?: Array<{
-      id: number;
-      role: 1 | 2;
-      user_id: string;
-      user_name: string;
-    }>;
+    userId: number;
+    userName: string;
+    isPublic: number;
+    updatedAt: string;
   }
 }
 /**
@@ -91,26 +79,26 @@ export namespace Project {
  */
 export namespace Menu {
   export interface SearchParams {
-    project_id: number;
+    projectId: number;
     name?: string;
     status?: number;
   }
   // 菜单创建
   export interface CreateParams {
-    project_id: number;
+    projectId: number;
     name: string;
-    parent_id: number;
+    parentId: number;
     type: number;
     icon: string;
     path: string;
-    page_id: number;
+    pageId: number;
     code: string;
-    sort_num: number;
+    sortNum: number;
     status: number;
   }
   export interface MenuItem extends CreateParams {
     id: number;
-    created_at: string;
+    createdAt: string;
     buttons?: MenuItem[];
     children?: MenuItem[];
   }
@@ -135,7 +123,7 @@ export interface ProjectCreateParams {
   name: string;
   remark?: string;
   logo: string;
-  is_public: number;
+  isPublic: number;
 }
 
 export interface ProjectUpdateParams extends ProjectCreateParams {
@@ -145,22 +133,22 @@ export interface ProjectUpdateParams extends ProjectCreateParams {
 export interface UserListParams {
   pageNum: number;
   pageSize: number;
-  project_id: number;
-  user_name?: string;
+  projectId: number;
+  userName?: string;
 }
 
 export interface UserCreateParams {
-  user_id: number;
-  user_name: string;
-  project_id: number;
-  system_role: 1 | 2;
-  role_id: number;
+  userId: number;
+  userName: string;
+  projectId: number;
+  systemRole: 1 | 2;
+  roleId: number;
 }
 
 export interface UserItem extends UserCreateParams {
   id: number;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 /**
@@ -169,29 +157,29 @@ export interface UserItem extends UserCreateParams {
 export namespace Role {
   export interface Params extends PageParams {
     name?: string;
-    project_id: number;
+    projectId: number;
   }
   export interface CreateParams {
     name: string;
     remark: string;
-    project_id: string;
+    projectId: string;
   }
   export interface RoleItem extends CreateParams {
     id: number;
     checked: string;
-    half_checked: string;
-    project_id: string;
-    updated_at: string;
-    created_at: string;
+    halfChecked: string;
+    projectId: string;
+    updatedAt: string;
+    createdAt: string;
   }
   export interface EditParams extends CreateParams {
     id: string;
   }
   export interface Permission {
     id: number;
-    project_id: number;
+    projectId: number;
     checked: string;
-    half_checked: string;
+    halfChecked: string;
   }
 }
 

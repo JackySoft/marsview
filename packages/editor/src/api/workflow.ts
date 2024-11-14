@@ -3,14 +3,14 @@ import { PageParams } from './types';
 
 export interface IWorkFlow {
   id: number;
-  form_name: string;
-  form_desc: string;
-  page_id: number;
-  template_data: string;
-  user_id: number;
-  user_name: string;
-  created_at: string;
-  updated_at: string;
+  formName: string;
+  formDesc: string;
+  pageId: number;
+  templateData: string;
+  userId: number;
+  userName: string;
+  createdAt: string;
+  updatedAt: string;
 }
 export default {
   // 获取模板列表
@@ -22,11 +22,11 @@ export default {
     return request.get<IWorkFlow>(`/workflow/detail/${id}`);
   },
   // 创建模板
-  createTemplate: (params: { form_name: string; form_desc?: string }) => {
+  createTemplate: (params: { formName: string; formDesc?: string }) => {
     return request.post('/workflow/create', params);
   },
   // 更新模板
-  updateTemplate: (params: Pick<IWorkFlow, 'id' | 'template_data'>) => {
+  updateTemplate: (params: Pick<IWorkFlow, 'id' | 'templateData'>) => {
     return request.post('/workflow/update', params);
   },
   // 删除模板

@@ -9,16 +9,16 @@ export default () => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState<PageMember[]>([]);
   const memberRef = useRef<{ open: (type: 2) => void }>();
-  const { id: page_id } = useParams();
+  const { id: pageId } = useParams();
   useEffect(() => {
     getMemberList();
   }, []);
 
   // 获取用户列表
   const getMemberList = async () => {
-    if (!page_id) return message.error('当前页面不存在');
+    if (!pageId) return message.error('当前页面不存在');
     setLoading(true);
-    const res = await api.getMemberList({ page_id: parseInt(page_id as string) });
+    const res = await api.getMemberList({ pageId: parseInt(pageId as string) });
     setList(res.list);
     setLoading(false);
   };
@@ -36,7 +36,7 @@ export default () => {
 
   return (
     <>
-      <Flex justify="space-between" align="center" style={{ borderBottom: '1px solid #e8e9eb' }}>
+      <Flex justify="space-between" align="center" style={{ borderBottom: '1px solid var(--mars-theme-card-border-color)' }}>
         <Button type="link" icon={<PlusOutlined />} onClick={() => handleAdd()}>
           新增
         </Button>
@@ -58,7 +58,7 @@ export default () => {
                   </Button>,
                 ]}
               >
-                <List.Item.Meta avatar={<UserOutlined />} title={<span>{item.user_name}</span>} description={item.role == 1 ? '开发者' : '体验者'} />
+                <List.Item.Meta avatar={<UserOutlined />} title={<span>{item.userName}</span>} description={item.role == 1 ? '开发者' : '体验者'} />
               </List.Item>
             );
           }}

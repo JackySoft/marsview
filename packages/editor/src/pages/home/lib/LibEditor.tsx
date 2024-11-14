@@ -26,7 +26,6 @@ export default () => {
   const [detail, setDetail] = useState<ILib>();
   const [loading, setLoading] = useState(false);
   const [activeTabKey, setActiveTabKey] = useState<string>('react');
-
   const [cacheAICode, setCacheAICode] = useState<{ jsx: string; config: string } | null>(null);
 
   const navigate = useNavigate();
@@ -86,10 +85,10 @@ export default () => {
       getLibDetail(parseInt(id))
         .then((res) => {
           // 如果hash有值，说明已经提交过
-          localStorage.setItem('react-code', res.hash ? res.react_code : defaultReactCode);
-          localStorage.setItem('less-code', res.hash ? res.less_code : defaultLessCode);
-          localStorage.setItem('config-code', res.hash ? res.config_code : defaultConfigCode);
-          localStorage.setItem('md-code', res.hash ? res.md_code : defaultMdCode);
+          localStorage.setItem('react-code', res.hash ? res.reactCode : defaultReactCode);
+          localStorage.setItem('less-code', res.hash ? res.lessCode : defaultLessCode);
+          localStorage.setItem('config-code', res.hash ? res.configCode : defaultConfigCode);
+          localStorage.setItem('md-code', res.hash ? res.mdCode : defaultMdCode);
 
           initWasm();
           setDetail(res);
@@ -137,10 +136,10 @@ export default () => {
           return message.success('组件代码和组件配置不能为空');
         }
         await updateLib({
-          react_code: reactCode,
-          less_code: cssCode,
-          config_code: configCode,
-          md_code: mdCode,
+          reactCode: reactCode,
+          lessCode: cssCode,
+          configCode: configCode,
+          mdCode: mdCode,
           id,
           hash: md5(reactCode + cssCode + configCode),
         });
@@ -158,7 +157,7 @@ export default () => {
     if (!reactjs || !configjs) {
       return message.success('组件代码和组件配置不能为空');
     }
-    if (detail?.release_hash === md5(reactjs + css + configjs) && detail.md_code === mdRef.current?.getCode()) {
+    if (detail?.releaseHash === md5(reactjs + css + configjs) && detail.mdCode === mdRef.current?.getCode()) {
       return message.success('系统未检测到当前组件代码有变化');
     }
 
@@ -169,11 +168,11 @@ export default () => {
       cancelText: '取消',
       onOk: async () => {
         await publish({
-          lib_id: parseInt(id),
-          react_compile: reactjs,
-          config_code: configjs,
-          css_compile: css,
-          release_hash: md5(reactjs + css + configjs),
+          libId: parseInt(id),
+          reactCompile: reactjs,
+          configCode: configjs,
+          cssCompile: css,
+          releaseHash: md5(reactjs + css + configjs),
         });
         message.success('发布成功');
       },

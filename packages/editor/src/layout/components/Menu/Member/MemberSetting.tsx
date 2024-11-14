@@ -31,11 +31,11 @@ const MemberSetting = (props: any, ref: any) => {
   const handleOk = async () => {
     const valid = await form.validateFields();
     if (!valid) return;
-    const { role, user_name } = form.getFieldsValue();
+    const { role, userName } = form.getFieldsValue();
 
     try {
       setConfirmLoading(true);
-      await api.addPageMember({ type, page_id: type == 1 ? parseInt(projectId) : pageId, role, user_name });
+      await api.addPageMember({ type, pageId: type == 1 ? parseInt(projectId) : pageId, role, userName });
       setConfirmLoading(false);
       handleCancel();
       props?.update();
@@ -60,7 +60,7 @@ const MemberSetting = (props: any, ref: any) => {
       cancelText="取消"
     >
       <Form form={form} labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} initialValues={{ role: 1 }}>
-        <Form.Item label="用户" name="user_name" rules={[{ required: true, message: '请输入用户邮箱' }]}>
+        <Form.Item label="用户" name="userName" rules={[{ required: true, message: '请输入用户邮箱' }]}>
           <Input placeholder="请输入用户邮箱" />
         </Form.Item>
         <Form.Item label="角色" name="role" rules={[{ required: true, message: '请选择角色' }]}>

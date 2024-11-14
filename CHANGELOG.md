@@ -2,6 +2,109 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.1](https://github.com/JackySoft/marsview/compare/v5.1.0...v5.1.1) (2024-11-14)
+
+
+### Features
+
+* add color-picker component ([b05075c](https://github.com/JackySoft/marsview/commit/b05075cb7140b15c5ae8b33e7b4fd7ff794a61ec))
+
+
+### Bug Fixes
+
+* 修复类型问题 ([678b597](https://github.com/JackySoft/marsview/commit/678b5978986e17e615614c68b502a9ec2748ced6))
+
+## [5.1.0](https://github.com/JackySoft/marsview/compare/v5.0.6...v5.1.0) (2024-11-14)
+
+
+### Features
+
+* 替换变量为驼峰 ([246d764](https://github.com/JackySoft/marsview/commit/246d764b5ca8d789715bd4a347f54872fdd3801c))
+
+### [5.0.6](https://github.com/JackySoft/marsview/compare/v5.0.5...v5.0.6) (2024-11-13)
+
+
+### Documentation
+
+* 修改说明文档 ([b86a629](https://github.com/JackySoft/marsview/commit/b86a629f1c3aedfcad828424d67ab1363194ccf5))
+
+### [5.0.5](https://github.com/JackySoft/marsview/compare/v5.0.4...v5.0.5) (2024-11-12)
+
+
+### Bug Fixes
+
+* 验证表单录入组件是否放在Form容器内 ([6b09cc8](https://github.com/JackySoft/marsview/commit/6b09cc8915a6e49eb50d7ab502e1574526a8b4fd))
+
+
+### Others
+
+* 更新问题单模板 ([4dc1c53](https://github.com/JackySoft/marsview/commit/4dc1c532119a3dd2a27c396ab0566b2e6d893fc3))
+* 添加配置模板文件 ([800467e](https://github.com/JackySoft/marsview/commit/800467ee9503d4e35b7218ba0d44843bb120808d))
+* 添加需求单模板 ([06c2520](https://github.com/JackySoft/marsview/commit/06c2520221d302017c8cab1f23902d49b9f807ab))
+
+
+### Documentation
+
+* 修改title ([c8fcaf8](https://github.com/JackySoft/marsview/commit/c8fcaf89cba0e894f2dc5cba7c49535c3488f850))
+
+### [5.0.4](https://github.com/JackySoft/marsview/compare/v5.0.3...v5.0.4) (2024-11-12)
+
+
+### Documentation
+
+* 完善文档 ([08ad5c5](https://github.com/JackySoft/marsview/commit/08ad5c502d6eb7de1e1c7409475d27dd71ad9078))
+
+### [5.0.3](https://github.com/JackySoft/marsview/compare/v5.0.2...v5.0.3) (2024-11-11)
+
+
+### Bug Fixes
+
+* 修复暗黑模式下无权限背景问题 ([f927b60](https://github.com/JackySoft/marsview/commit/f927b6087e7ab86b84d29179f6350e330a96c760))
+
+### [5.0.2](https://github.com/JackySoft/marsview/compare/v5.0.1...v5.0.2) (2024-11-11)
+
+
+### Bug Fixes
+
+* 修改图片路径 ([1cec13c](https://github.com/JackySoft/marsview/commit/1cec13c02953dd385a3fcb39caaa711c94ab2c11))
+
+### [5.0.1](https://github.com/JackySoft/marsview/compare/v5.0.0...v5.0.1) (2024-11-11)
+
+
+### Bug Fixes
+
+* 修正DELETE、PUT、PATCH请求参数问题 ([b1693f2](https://github.com/JackySoft/marsview/commit/b1693f2b587fa8495a21d04ccabc841574430993))
+* 修正DELETE、PUT请求逻辑，新增PATCH请求动词 ([f9913ee](https://github.com/JackySoft/marsview/commit/f9913ee33d510e5ba1d064922073e8145086da8e))
+
+
+### Styles
+
+* 优化主题色 ([0626be9](https://github.com/JackySoft/marsview/commit/0626be9d25c98e7dc592dcacf9e17e31dc138fc8))
+
+## [5.0.0](https://github.com/JackySoft/marsview/compare/v4.19.0...v5.0.0) (2024-11-10)
+
+
+### Features
+
+* 增加暗黑主题 ([3566e62](https://github.com/JackySoft/marsview/commit/3566e62ccfd3117a9346a6b06762c3650447e5b9))
+
+## [4.19.0](https://github.com/JackySoft/marsview/compare/v4.18.3...v4.19.0) (2024-11-10)
+
+
+### Features
+
+* 优化菜单布局 ([e10ffff](https://github.com/JackySoft/marsview/commit/e10ffff57f8a167d51407a4c96bc7416ee353cc1))
+
+
+### Bug Fixes
+
+* 更换github图标成角标 ([d52a344](https://github.com/JackySoft/marsview/commit/d52a344e147036abb47fba3f81367e07a39b80bf))
+
+
+### Styles
+
+* 优化样式 ([137da5e](https://github.com/JackySoft/marsview/commit/137da5e539d53783e98bb5da3666bf6d996327e3))
+
 ### [4.18.3](https://github.com/JackySoft/marsview/compare/v4.18.2...v4.18.3) (2024-11-10)
 
 

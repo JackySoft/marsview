@@ -14,10 +14,10 @@ export function isEnv(env?: string) {
  */
 export function getPageId(pageId: string | number | undefined, pageMap: Record<number, any>): number {
   if (!pageId || !pageMap) return 0;
-  const page_id = isNaN(Number(pageId))
-    ? Object.values(pageMap).filter((item) => (item.path.startsWith('/') ? item.path.slice(1) === pageId : item.path === pageId))?.[0]?.page_id
+  const id = isNaN(Number(pageId))
+    ? Object.values(pageMap).filter((item) => (item.path.startsWith('/') ? item.path.slice(1) === pageId : item.path === pageId))?.[0]?.pageId
     : pageId;
-  return page_id;
+  return id;
 }
 /**
  * 菜单数据转换
@@ -29,7 +29,7 @@ export function getPageId(pageId: string | number | undefined, pageMap: Record<n
  */
 export function arrayToTree(array: IMenuItem[] = []) {
   const buttons: IMenuItem[] = [];
-  const pageMap: { [key: number]: Pick<IMenuItem, 'id' | 'page_id' | 'parent_id' | 'name' | 'path'> } = {};
+  const pageMap: { [key: number]: Pick<IMenuItem, 'id' | 'pageId' | 'parentId' | 'name' | 'path'> } = {};
   const menuMap: { [key: number]: IMenuItem } = {};
   // 创建一个映射，将id映射到节点对象
   const map: { [key: number]: IMenuItem & { children?: IMenuItem[] } } = {};
@@ -37,8 +37,8 @@ export function arrayToTree(array: IMenuItem[] = []) {
     map[item.id] = { ...item };
     if (item.type === 2) buttons.push(item);
     if (item.type === 1 || item.type === 3) {
-      if (item.page_id) {
-        pageMap[item.page_id] = { id: item.id, page_id: item.page_id, parent_id: item.parent_id, name: item.name, path: item.path };
+      if (item.pageId) {
+        pageMap[item.pageId] = { id: item.id, pageId: item.pageId, parentId: item.parentId, name: item.name, path: item.path };
       } else {
         menuMap[item.id] = { ...item };
       }
@@ -47,13 +47,13 @@ export function arrayToTree(array: IMenuItem[] = []) {
 
   // 找到每个节点的父节点
   array.forEach((item) => {
-    if (item.parent_id && map[item.parent_id]) {
-      const parentItem = map[item.parent_id];
+    if (item.parentId && map[item.parentId]) {
+      const parentItem = map[item.parentId];
       if (item.type === 1 || item.type === 3) {
         if (!parentItem.children) parentItem.children = [];
         parentItem.children?.push(map[item.id]);
-        // 按照sort_num进行降序排序
-        parentItem.children = parentItem.children.sort((a, b) => a.sort_num - b.sort_num);
+        // 按照sortNum进行降序排序
+        parentItem.children = parentItem.children.sort((a, b) => a.sortNum - b.sortNum);
       } else {
         if (!parentItem.buttons) parentItem.buttons = [];
         parentItem.buttons?.push(map[item.id]);
@@ -61,8 +61,8 @@ export function arrayToTree(array: IMenuItem[] = []) {
     }
   });
   const menuTree = Object.values(map)
-    .filter((item) => !item.parent_id)
-    .sort((a, b) => a.sort_num - b.sort_num);
+    .filter((item) => !item.parentId)
+    .sort((a, b) => a.sortNum - b.sortNum);
   return {
     menuTree,
     buttons,

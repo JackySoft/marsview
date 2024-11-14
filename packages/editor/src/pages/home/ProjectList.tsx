@@ -84,7 +84,7 @@ export default function Index() {
                   }}
                 >
                   {projectList.map((item: Project.ProjectItem, index) => {
-                    return <CardItem item={item} isAuth={item.id ? true : false} getList={getList} key={item.id || item.user_name + index} />;
+                    return <CardItem item={item} type={form.getFieldValue('type')} getList={getList} key={item.id || item.userName + index} />;
                   })}
                 </div>
               </Spin>
@@ -115,8 +115,9 @@ export default function Index() {
   );
 }
 // 项目卡片
-const CardItem: React.FC<ProjectCardItemProps> = memo(({ item, isAuth, getList }) => {
+const CardItem: React.FC<ProjectCardItemProps> = memo(({ item, type, getList }) => {
   const navigate = useNavigate();
+  const isAuth = type === 1 || item.isPublic === 1;
   const getEnvTag = (env: 'stg' | 'pre' | 'prd', name: string) => {
     const title = {
       stg: '访问测试环境',
@@ -133,15 +134,18 @@ const CardItem: React.FC<ProjectCardItemProps> = memo(({ item, isAuth, getList }
   };
 
   // 页面操作
-  const handleAction = async (id: number, isEdit: boolean) => {
-    if (!id) {
-      message.warning('该项目为私有项目');
-      return false;
+  const handleAction = async (id: number, isPublic: number) => {
+    if (type === 2) {
+      if (isPublic === 1) {
+        message.warning('您不是该项目开发者，当前只有访问权限。');
+        return false;
+      }
+      if (isPublic === 2) {
+        message.warning('该项目为私有项目');
+        return false;
+      }
     }
-    if (!isEdit) {
-      message.warning('您不是该项目开发者，当前只有访问权限。');
-      return false;
-    }
+
     navigate(`/project/${id}/config`);
   };
 
@@ -165,7 +169,7 @@ const CardItem: React.FC<ProjectCardItemProps> = memo(({ item, isAuth, getList }
       hoverable
       style={{
         opacity: isAuth ? 1 : 0.6,
-        background: isAuth ? 'none' : "url('/imgs/cross-bg.png')",
+        background: isAuth ? 'none' : 'var(--mars-cross-bg)',
       }}
       actions={[
         item.id ? getEnvTag('stg', 'STG') : <span style={{ cursor: 'not-allowed' }}>STG</span>,
@@ -173,7 +177,7 @@ const CardItem: React.FC<ProjectCardItemProps> = memo(({ item, isAuth, getList }
         item.id ? getEnvTag('prd', 'PRD') : <span style={{ cursor: 'not-allowed' }}>PRD</span>,
       ]}
     >
-      <div className={styles.projectCard} onClick={() => handleAction(item.id, item.is_edit)}>
+      <div className={styles.projectCard} onClick={() => handleAction(item.id, item.isPublic)}>
         <Card.Meta
           style={{ cursor: isAuth ? 'pointer' : 'not-allowed' }}
           avatar={<Image src={item.logo} width={50} />}
@@ -183,15 +187,13 @@ const CardItem: React.FC<ProjectCardItemProps> = memo(({ item, isAuth, getList }
               <div className={isAuth ? 'unlock' : 'lock'}>
                 <LockOutlined />
               </div>
-              {item.id && item.is_edit ? (
-                <DeleteOutlined className={styles.delIcon} onClick={(event) => deleteProjectConfirm(event, item.id)} />
-              ) : null}
-              <p style={{ color: 'rgba(0, 0, 0, 0.88)' }}>{item.remark || '暂无描述'}</p>
+              {type === 1 ? <DeleteOutlined className={styles.delIcon} onClick={(event) => deleteProjectConfirm(event, item.id)} /> : null}
+              <p style={{ color: 'var(--mars-theme-text-secondary-color)' }}>{item.remark || '暂无描述'}</p>
               <p style={{ marginTop: 10 }}>
                 <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
-                {item.user_name}
+                {item.userName}
                 &nbsp;&nbsp;
-                <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
+                <span>更新于 {dayjs(item.updatedAt).fromNow()}</span>
               </p>
             </>
           }

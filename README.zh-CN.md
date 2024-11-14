@@ -8,7 +8,7 @@
 
 [项目文档](http://docs.marsview.cc/) |
 [开源仓库](https://github.com/JackySoft/marsview) |
-[交流群](./.github/imgs/mywechat.jpg)
+[交流群](https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f02.png)
 
 </div>
 
@@ -34,12 +34,12 @@ Marsview 是一款中后台方向的低代码可视化搭建平台，开发者�
 
 - 🌍 [Marsview](http://www.marsview.cc/)
 
-|                                    |                                    |
-| ---------------------------------- | ---------------------------------- |
-| ![Demo](./.github/imgs/intro1.png) | ![Demo](./.github/imgs/intro2.png) |
-| ![Demo](./.github/imgs/intro3.png) | ![Demo](./.github/imgs/intro4.png) |
-| ![Demo](./.github/imgs/intro5.png) | ![Demo](./.github/imgs/intro6.png) |
-| ![Demo](./.github/imgs/intro7.png) | ![Demo](./.github/imgs/intro8.png) |
+|                                                                        |                                                                        |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| ![Demo](https://imgcloud.cdn.bcebos.com/09d56ca14e47f7880d67bae37.png) | ![Demo](https://imgcloud.cdn.bcebos.com/09d56ca14e47f7880d67bae38.png) |
+| ![Demo](https://imgcloud.cdn.bcebos.com/09d56ca14e47f7880d67bae39.png) | ![Demo](https://imgcloud.cdn.bcebos.com/09d56ca14e47f7880d67bae3a.png) |
+| ![Demo](https://imgcloud.cdn.bcebos.com/09d56ca14e47f7880d67bae3b.png) | ![Demo](https://imgcloud.cdn.bcebos.com/09d56ca14e47f7880d67bae3c.png) |
+| ![Demo](https://imgcloud.cdn.bcebos.com/09d56ca14e47f7880d67bae3d.png) | ![Demo](https://imgcloud.cdn.bcebos.com/09d56ca14e47f7880d67bae3e.png) |
 
 ## 特色 💥
 
@@ -150,7 +150,7 @@ git merge upstream/main
 
 在使用过程中，遇到任何技术问题或商用授权问题，都可微信联系我：
 
-<img src="/.github/imgs/mywechat.jpg"  width="200">
+<img src="https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f02.png"  width="200">
 
 ## 参与捐赠 ✨
 

@@ -11,13 +11,13 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
   const [form] = Form.useForm();
   const [action, setAction] = useState<IAction>('create');
   const [systemRole, setSystemRole] = useState<number>(1);
-  const [users, setUsers] = useState<Array<{ id: string; user_name: string }>>([]);
+  const [users, setUsers] = useState<Array<{ label: string; value: string }>>([]);
   const [roleList, setRoleList] = useState<Array<{ id: number; name: string }>>([]);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userLoading, setUserLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const project_id = useParams().id as string;
+  const projectId = useParams().id as string;
 
   useImperativeHandle(props.mRef, () => ({
     open,
@@ -27,15 +27,15 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
   const open = async (type: IAction, data?: UserItem) => {
     setAction(type);
     setVisible(true);
-    setSystemRole(data?.system_role || 1);
+    setSystemRole(data?.systemRole || 1);
     setLoading(true);
     setConfirmLoading(false);
     try {
-      const roleList = await getRoleListAll(parseInt(project_id));
+      const roleList = await getRoleListAll(parseInt(projectId));
       setRoleList(roleList);
       setLoading(false);
-      if (data && project_id) {
-        form.setFieldsValue({ ...data, project_id: parseInt(project_id) });
+      if (data && projectId) {
+        form.setFieldsValue({ ...data, projectId: parseInt(projectId) });
       }
     } catch (error) {
       setLoading(false);
@@ -53,12 +53,12 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
       if (!val) return;
       setUserLoading(true);
       searchUser(val).then((res) => {
-        setUsers(
-          res.map((item: any) => ({
-            label: item.user_name,
-            value: item.id,
-          })),
-        );
+        setUsers([
+          {
+            label: res.userName,
+            value: res.id,
+          },
+        ]);
         setUserLoading(false);
       });
     },
@@ -69,25 +69,25 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
 
   // 菜单提交
   const handleSubmit = async () => {
-    if (!project_id) return;
+    if (!projectId) return;
     const valid = await form.validateFields();
     if (valid) {
       setConfirmLoading(true);
-      const { id, system_role, role_id = '', sso_info: { label, value } = { label: '', value: '' } } = form.getFieldsValue();
+      const { id, systemRole, roleId = '', user_info: { label, value } = { label: '', value: '' } } = form.getFieldsValue();
       try {
         if (action === 'create') {
           await addUser({
-            system_role,
-            user_id: value,
-            user_name: label,
-            project_id: parseInt(project_id),
-            role_id,
+            systemRole,
+            userId: value,
+            userName: label,
+            projectId: parseInt(projectId),
+            roleId,
           });
         } else {
           await updateUser({
             id,
-            system_role,
-            role_id,
+            systemRole,
+            roleId,
           });
         }
         setConfirmLoading(false);
@@ -119,18 +119,18 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
         onCancel={handleCancel}
       >
         <Spin spinning={loading}>
-          <Form form={form} labelAlign="right" labelCol={{ span: 4 }} initialValues={{ system_role: 1 }}>
+          <Form form={form} labelAlign="right" labelCol={{ span: 4 }} initialValues={{ systemRole: 1 }}>
             <Form.Item hidden name="id">
               <Input />
             </Form.Item>
-            <Form.Item label="系统角色" name="system_role" extra="管理员拥有本系统所有功能权限，普通用户需要通过RBAC分配角色权限">
+            <Form.Item label="系统角色" name="systemRole" extra="管理员拥有本系统所有功能权限，普通用户需要通过RBAC分配角色权限">
               <Radio.Group onChange={(event) => handleRole(event.target.value)}>
                 <Radio value={1}>管理员</Radio>
                 <Radio value={2}>普通用户</Radio>
               </Radio.Group>
             </Form.Item>
             {action === 'create' && (
-              <Form.Item label="用户" name="sso_info" rules={[{ required: true, message: '请输入用户邮箱' }]}>
+              <Form.Item label="用户" name="user_info" rules={[{ required: true, message: '请输入用户邮箱' }]}>
                 <Select
                   labelInValue
                   filterOption={false}
@@ -145,7 +145,7 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
 
             {/* 只有普通用户才需要设置角色 */}
             {systemRole === 2 && (
-              <Form.Item label="角色" name="role_id" rules={[{ required: true, message: '请输入菜单名称' }]}>
+              <Form.Item label="角色" name="roleId" rules={[{ required: true, message: '请输入菜单名称' }]}>
                 <Select showSearch>
                   {roleList.map((item) => (
                     <Select.Option key={item.id} value={item.id}>

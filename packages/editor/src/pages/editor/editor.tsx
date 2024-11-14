@@ -1,12 +1,11 @@
 import React, { MouseEvent, useState, useEffect, memo } from 'react';
 import { useParams } from 'react-router-dom';
-import { ConfigProvider, FloatButton, Image, Popover, Tooltip } from 'antd';
-import { CommentOutlined, LinkOutlined, QuestionCircleOutlined, SoundOutlined } from '@ant-design/icons';
+import { ConfigProvider, theme as AntdTheme } from 'antd';
 import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
 import { getComponent } from '@/packages/index';
 import { IDragTargetItem } from '@/packages/types/index';
-import { createId, getElement } from '@/utils/util';
+import { checkComponentType, createId, getElement } from '@/utils/util';
 import storage from '@/utils/storage';
 import { getPageDetail } from '@/api';
 import Toolbar from '@/components/Toolbar/Toolbar';
@@ -61,7 +60,7 @@ const Editor = () => {
     getPageDetail(parseInt(id)).then((res) => {
       let pageData: any = {};
       try {
-        pageData = JSON.parse(res.page_data || '{}');
+        pageData = JSON.parse(res.pageData || '{}');
       } catch (error) {
         console.error(error);
         console.info('【json数据】', res.page_data);
@@ -74,16 +73,16 @@ const Editor = () => {
         pageId: res.id,
         pageName: res.name,
         remark: res.remark,
-        is_public: res.is_public,
-        is_edit: res.is_edit,
-        preview_img: res.preview_img,
-        stg_publish_id: res.stg_publish_id,
-        pre_publish_id: res.pre_publish_id,
-        prd_publish_id: res.prd_publish_id,
-        stg_state: res.stg_state,
-        pre_state: res.pre_state,
-        prd_state: res.prd_state,
-        user_id: res.user_id,
+        is_public: res.isPublic,
+        is_edit: res.isEdit,
+        preview_img: res.previewImg,
+        stg_publish_id: res.stgPublishId,
+        pre_publish_id: res.prePublishId,
+        prd_publish_id: res.prdPublishId,
+        stg_state: res.stgState,
+        pre_state: res.preState,
+        prd_state: res.prdState,
+        userId: res.userId,
       });
       setLoaded(true);
     });
@@ -116,6 +115,10 @@ const Editor = () => {
       if (monitor.didDrop()) return;
       // 生成默认配置
       const { config, events, methods = [], elements = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
+      if (!checkComponentType(item.type, selectedElement?.id, selectedElement?.type, elementsMap)) {
+        message.info('请把表单项放在Form容器内');
+        return;
+      }
       const childElement =
         elements.map(async (child: IDragTargetItem) => {
           const { config, events, methods = [] }: any = (await getComponent(child.type + 'Config'))?.default || {};
@@ -276,6 +279,7 @@ const Editor = () => {
       theme={{
         cssVar: true,
         hashed: false,
+        algorithm: AntdTheme.defaultAlgorithm,
         token: {
           colorPrimary: theme || '#1677ff',
           colorLink: theme || '#1677ff',
@@ -283,39 +287,6 @@ const Editor = () => {
         },
       }}
     >
-      <FloatButton.Group trigger="click" type="primary" style={{ insetInlineEnd: 24 }} icon={<SoundOutlined />}>
-        <Tooltip title="使用文档" placement="left">
-          <FloatButton icon={<LinkOutlined />} onClick={() => window.open('http://docs.marsview.cc', '_blank')} />
-        </Tooltip>
-        <Popover
-          content={
-            <>
-              <p>1. 强烈建议直接点击左侧组件物料，无需拖拽即可渲染到画布中。</p>
-              <p>2. 添加子组件时，直接选中父组件，点击左侧物料即可填充。</p>
-              <p>3. 画布中的组件支持快捷键：ctrl+c/v 复制和粘贴；Del 删除。</p>
-              <p>4. 表单组件，只能放在Form容器和搜索表单组件中，请勿单独使用。</p>
-              <p>5. 支持接口调用，表单联动、自定义样式、逻辑编排，脚本运行，变量绑定等等。</p>
-              <p>6. 页面支持通过微前端框架集成到自身传统项目中。</p>
-              <p>7. 有任何技术和使用问题，请联系我，24H为你解答。</p>
-            </>
-          }
-          title="使用说明(不建议使用拖拽功能)"
-          placement="left"
-        >
-          <FloatButton icon={<QuestionCircleOutlined />} />
-        </Popover>
-        <Popover
-          placement="left"
-          content={
-            <>
-              <img width={150} src={`https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f02.png`} />
-              <p style={{ textAlign: 'center' }}>请备注：marsview</p>
-            </>
-          }
-        >
-          <FloatButton icon={<CommentOutlined />} />
-        </Popover>
-      </FloatButton.Group>
       {/* 编辑器 */}
       <div ref={drop} className={mode === 'edit' ? 'mars-editor' : 'mars-preview'}>
         {/* 页面渲染 */}

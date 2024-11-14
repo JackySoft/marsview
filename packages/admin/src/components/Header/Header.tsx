@@ -6,6 +6,7 @@ import { usePageStore } from '@marsview/materials/stores/pageStore';
 import { useProjectStore } from '@/stores/projectStore';
 import Logo from '../Logo/Logo';
 import BreadList from '../BreadList/BreadList';
+import Menu from '../Menu/Menu';
 import { getUserAvatar } from '@/api';
 import styles from './index.module.less';
 
@@ -29,15 +30,15 @@ const Header = memo(() => {
     updateCollapsed();
   };
 
-  const isLight = projectInfo.menu_theme_color === 'light' || projectInfo.layout === 1;
+  const isLight = projectInfo.menuThemeColor === 'light' || projectInfo.layout === 1;
   const style: React.CSSProperties = {
     backgroundColor: isLight ? '#fff' : '#001529',
-    color: projectInfo.menu_theme_color === 'light' ? '#000' : '#fff',
+    color: projectInfo.menuThemeColor === 'light' ? '#000' : '#fff',
   };
   return (
     <div className={styles.header} style={style}>
       {/* 加载面包屑，左右布局时，面包屑在顶部 */}
-      {projectInfo.layout === 1 && (
+      {projectInfo.layout === 1 ? (
         <Flex align="center">
           <div onClick={toggleCollapsed} style={{ cursor: 'pointer' }}>
             {collapsed ? (
@@ -48,9 +49,15 @@ const Header = memo(() => {
           </div>
           {projectInfo.breadcrumb === 1 && <BreadList />}
         </Flex>
-      )}
+      ) : null}
 
-      {projectInfo.layout === 2 ? <Logo /> : <span></span>}
+      {projectInfo.layout === 2 ? (
+        <Flex align="center">
+          <Logo />
+          <Menu />
+        </Flex>
+      ) : null}
+
       {/* 用户信息 */}
       <div className={styles.user}>
         {/* 用户头像 */}

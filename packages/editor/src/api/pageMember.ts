@@ -2,9 +2,9 @@ import request from '@/utils/request';
 
 export interface AddParams {
   type: 1 | 2;
-  page_id: number;
+  pageId: number;
   role: number;
-  user_name: string;
+  userName: string;
 }
 
 export interface DelParams {
@@ -18,14 +18,14 @@ export interface PageItem {
   id: number;
   name: string;
   remark: string;
-  is_public: number;
+  isPublic: number;
 }
 
 /**
  * 页面和项目成员接口定义
  */
 export default {
-  getMemberList(params: { page_id: number }) {
+  getMemberList(params: { pageId: number }) {
     return request.post('/page/role/list', params);
   },
   addPageMember(params: AddParams) {

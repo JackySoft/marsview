@@ -117,6 +117,7 @@ const OutlinePanel = memo(() => {
         selectedKeys={selectedKeys}
         onSelect={handleSelect}
         onDrop={onDrop}
+        style={{ width: '100%' }}
       />
     </Row>
   );

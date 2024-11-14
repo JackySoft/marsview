@@ -83,13 +83,13 @@ export default () => {
           <p>
             <span style={{ marginRight: 10 }}>
               <UserOutlined style={{ fontSize: 14, marginRight: 5 }} />
-              {item.user_name}
+              {item.userName}
             </span>
-            <span>更新于 {dayjs(item.updated_at).fromNow()}</span>
+            <span>更新于 {dayjs(item.updatedAt).fromNow()}</span>
           </p>
         </div>
         <Space>
-          {userInfo.userId === item.user_id ? (
+          {userInfo.userId === item.userId ? (
             <Button type="primary" icon={<CodeOutlined />} onClick={() => handleEdit('edit', item.id)}>
               开发
             </Button>

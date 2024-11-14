@@ -5,6 +5,7 @@ import { Form, Spin, Splitter } from 'antd';
 import SetterRender from '@/components/SetterRender/SetterRender';
 import ComPreview from './ComPreview';
 import './index.less';
+import { usePageStore } from '@/stores/pageStore';
 
 /**
  * 组件配置编辑
@@ -19,6 +20,8 @@ export default memo(
     const [refreshTag, setRefreshTag] = useState(0);
     const editorRef = useRef<any>(null);
     const [form] = Form.useForm();
+
+    const theme = usePageStore((state) => state.theme);
 
     useImperativeHandle(ref, () => {
       return {
@@ -123,6 +126,7 @@ export default memo(
           <Splitter.Panel min={300}>
             <Editor
               language="javascript"
+              theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
               value={code}
               onChange={(value) => {
                 setLoading(true);

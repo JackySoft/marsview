@@ -45,16 +45,27 @@ export const handleApi = async (
           return { code: 0, data: response.data, msg: '' };
         }
       } else {
-        if (method === 'GET' || method === 'DELETE') {
+        if (method === 'GET') {
           response = (await request.get(config.url, config)) || {};
         } else {
+          const data = contentType === 'application/x-www-form-urlencoded'
+            ? qs.stringify(config.data)
+            : config.data;
+
           config.headers = {
             ...config.headers,
             'Content-Type': contentType,
           };
-          response =
-            (await request.post(config.url, contentType === 'application/x-www-form-urlencoded' ? qs.stringify(config.data) : config.data, config)) ||
-            {};
+
+          if (method === 'PUT') {
+            response = (await request.put(config.url, data, config)) || {};
+          } else if (method === 'PATCH') {
+            response = (await request.patch(config.url, data, config)) || {};
+          } else if (method === 'DELETE') {
+            response = (await request.delete(config.url, { ...config, data })) || {};
+          } else {
+            response = (await request.post(config.url, data, config)) || {};
+          }
         }
       }
     } catch (error: any) {

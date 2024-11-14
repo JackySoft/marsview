@@ -158,7 +158,7 @@ const execAction = (node: any, params: any = {}) => {
   try {
     const data = mergeParams(node.action.data, params);
     delete node.action.data;
-    node.action = handleParamVariable(node.action);
+    node.action = handleParamVariable(node.action, params);
     if (node.action.actionType === 'methods') {
       handleMethods(node, data);
     } else if (node.action.actionType === 'showConfirm') {
@@ -474,7 +474,7 @@ const handleDisable = async (
  * 发送飞书消息
  */
 const handleSendMessage = async (
-  { action, next }: ActionNode<{ msg_type: string; content: string; template_id: string; receive_id: number }>,
+  { action, next }: ActionNode<{ msgType: string; content: string; templateId: string; receiveId: number }>,
   data: any,
 ) => {
   const res = await request.post(`${import.meta.env.VITE_BASE_API}/robot/sendMessage`, { ...action, variables: data });

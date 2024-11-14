@@ -13,8 +13,12 @@ dayjs.extend(weekday);
 dayjs.extend(localeData);
 dayjs.locale('zh-cn');
 import './App.less';
+import storage from './utils/storage';
+import { usePageStore } from './stores/pageStore';
 
 function App() {
+  const isDark = storage.get('marsview-theme');
+  const marsTheme = usePageStore((state) => state.theme);
   return (
     <ConfigProvider
       locale={locale}
@@ -26,6 +30,13 @@ function App() {
           colorLink: '#7D33FF',
           colorInfo: '#7D33FF',
         },
+        components: {
+          Menu: {
+            darkItemBg: '#000',
+            darkItemHoverColor: '#7D33FF',
+          },
+        },
+        algorithm: marsTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}
     >
       <AntdApp>

@@ -11,8 +11,9 @@ import { message } from '@/utils/AntdGlobal';
 const CodingPanel = () => {
   const editorRef = useRef<any>(null);
   const [loading, setLoading] = useState(false);
-  const { userInfo, page, savePageInfo } = usePageStore((state) => ({
+  const { userInfo, theme, page, savePageInfo } = usePageStore((state) => ({
     userInfo: state.userInfo,
+    theme: state.theme,
     page: state.page,
     savePageInfo: state.savePageInfo,
   }));
@@ -45,7 +46,7 @@ const CodingPanel = () => {
       message.error('页面数据格式异常，请检查重试');
       return;
     }
-    const { pageName, remark, is_public, is_edit, ...pageData } = value.page;
+    const { pageName, remark, isPublic, isEdit, ...pageData } = value.page;
     /**
      * 页面ID和用户信息不允许修改
      */
@@ -53,22 +54,22 @@ const CodingPanel = () => {
       id: page.pageId,
       name: pageName,
       remark,
-      is_public,
-      is_edit,
-      page_data: JSON.stringify({
+      isPublic,
+      isEdit,
+      pageData: JSON.stringify({
         ...pageData,
         pageId: undefined,
         // 下面字段排除在page_data外
-        stg_state: undefined,
-        pre_state: undefined,
-        prd_state: undefined,
-        preview_img: undefined,
+        stgState: undefined,
+        preState: undefined,
+        prdState: undefined,
+        previewImg: undefined,
         variableData: {},
         formData: {},
-        stg_publish_id: undefined,
-        pre_publish_id: undefined,
-        prd_publish_id: undefined,
-        user_id: undefined, //页面创建者
+        stgPublishId: undefined,
+        prePublishId: undefined,
+        prdPublishId: undefined,
+        userId: undefined, //页面创建者
       }),
     };
     setLoading(true);
@@ -76,20 +77,20 @@ const CodingPanel = () => {
       await updatePageData(params);
       setLoading(false);
       savePageInfo({
-        ...JSON.parse(params.page_data),
+        ...JSON.parse(params.pageData),
         pageId: page.pageId,
         pageName,
         remark,
-        is_public,
-        is_edit,
-        preview_img: page.preview_img,
-        stg_publish_id: page.stg_publish_id,
-        pre_publish_id: page.pre_publish_id,
-        prd_publish_id: page.prd_publish_id,
-        stg_state: page.stg_state,
-        pre_state: page.pre_state,
-        prd_state: page.prd_state,
-        user_id: page.user_id,
+        isPublic,
+        isEdit,
+        previewImg: page.previewImg,
+        stgPublishId: page.stgPublishId,
+        prePublishId: page.prePublishId,
+        prdPublishId: page.prdPublishId,
+        stgState: page.stgState,
+        preState: page.preState,
+        prdState: page.prdState,
+        userId: page.userId,
         variableData: page.variableData,
         formData: page.formData,
       });
@@ -104,7 +105,7 @@ const CodingPanel = () => {
       <Editor
         height="calc(100vh - 170px)"
         language="json"
-        theme="vs-light"
+        theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
         options={{
           lineNumbers: 'on',
           minimap: {

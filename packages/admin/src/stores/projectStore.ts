@@ -7,10 +7,10 @@ export interface ProjectInfo {
   footer?: number;
   layout?: number;
   logo?: string;
-  menu_mode: 'inline' | 'horizontal' | 'vertical';
-  menu_theme_color?: string;
+  menuMode: 'inline' | 'horizontal' | 'vertical';
+  menuThemeColor?: string;
   name: string;
-  system_theme_color?: string;
+  systemThemeColor?: string;
   breadcrumb?: number;
   tag?: number;
 }
@@ -32,7 +32,7 @@ export interface ProjectAction {
 export const useProjectStore = create<PageState & ProjectAction>((set, get) => ({
   projectInfo: {
     name: '',
-    menu_mode: 'inline',
+    menuMode: 'inline',
   },
   collapsed: false,
   menuTree: [],

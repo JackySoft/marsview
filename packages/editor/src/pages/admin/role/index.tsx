@@ -17,7 +17,7 @@ export default function RoleList() {
   const [current, setCurrent] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
   const [form] = Form.useForm();
-  const { id: project_id } = useParams();
+  const { id: projectId } = useParams();
 
   const roleRef = useRef<{
     open: (type: IAction, data?: Role.RoleItem) => void;
@@ -31,13 +31,13 @@ export default function RoleList() {
 
   // 获取用户列表
   const getList = async (pageNum: number = current) => {
-    if (!project_id) return;
+    if (!projectId) return;
     setLoading(true);
     const { name } = form.getFieldsValue();
     const res = await getRoleList({
       pageNum,
       pageSize: 10,
-      project_id: parseInt(project_id),
+      projectId: parseInt(projectId),
       name,
     });
     setLoading(false);
@@ -63,13 +63,13 @@ export default function RoleList() {
 
   // 删除确认
   const handleDelete = (id: number) => {
-    if (!project_id) return;
+    if (!projectId) return;
     Modal.confirm({
       title: '确认',
       content: <span>确认删除该角色吗？</span>,
       async onOk() {
         message.success('删除成功');
-        await delRoleById({ id, project_id: parseInt(project_id) });
+        await delRoleById({ id, projectId: parseInt(projectId) });
         getList();
       },
     });
@@ -96,20 +96,20 @@ export default function RoleList() {
     },
     {
       title: '创建人',
-      dataIndex: 'user_name',
-      key: 'user_name',
+      dataIndex: 'userName',
+      key: 'userName',
       width: 200,
     },
     {
       title: '更新时间',
-      dataIndex: 'updated_at',
-      key: 'updated_at',
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
       width: 180,
     },
     {
       title: '创建时间',
-      dataIndex: 'created_at',
-      key: 'created_at',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
       width: 180,
     },
     {

@@ -7,6 +7,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { usePageStore } from '@/stores/pageStore';
 import SpinLoading from '@/components/SpinLoading';
 import './layout.less';
+import Notice from './components/Notice';
 
 const Menu = lazy(() => import('./components/Menu'));
 const ConfigPanel = lazy(() => import('./components/ConfigPanel/ConfigPanel'));
@@ -29,6 +30,7 @@ const EditLayout = () => {
     <DndProvider backend={HTML5Backend}>
       {/* 编辑器 */}
       <div style={{ height: 'calc(100vh - 64px)' }}>
+        <Notice />
         <ConfigProvider
           theme={{
             components: {

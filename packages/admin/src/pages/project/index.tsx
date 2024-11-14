@@ -28,22 +28,22 @@ export default function () {
   useEffect(() => {
     let env = storage.get(`${projectId}-env`) || 'prd';
     // 获取页面ID
-    const page_id = getPageId(pageId, pageMap);
-    if (!page_id) {
+    const id = getPageId(pageId, pageMap);
+    if (!id) {
       setNotFound(true);
       return;
     }
     if (!isEnv(env)) {
       env = 'prd';
     }
-    getPageDetail(env as string, Number(page_id))
+    getPageDetail(env as string, Number(id))
       .then((res: any) => {
         let pageData: any = {};
         try {
-          pageData = JSON.parse(res.page_data || '{}');
+          pageData = JSON.parse(res.pageData || '{}');
         } catch (error) {
           console.error(error);
-          console.info('【json数据】', res.page_data);
+          console.info('【json数据】', res.pageData);
           message.error('页面数据格式错误，请检查');
         }
         clearPageInfo();
