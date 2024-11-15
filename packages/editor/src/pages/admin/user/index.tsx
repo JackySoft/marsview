@@ -54,7 +54,7 @@ export default function MenuList() {
 
   const getRoles = async () => {
     const roleList = await getRoleListAll(parseInt(projectId));
-    setRoleList(roleList);
+    setRoleList(roleList || []);
   };
 
   // 分页事件
@@ -106,7 +106,7 @@ export default function MenuList() {
       title: '角色列表',
       dataIndex: 'roleId',
       render(roleId) {
-        return roleList.find((item) => item.id === roleId)?.name;
+        return roleList?.find((item) => item.id === roleId)?.name;
       },
     },
     {
