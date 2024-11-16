@@ -356,7 +356,10 @@ const handleRequest = async ({ action, next }: ActionNode<ApiConfig>, data: any)
 const handleJumpLink = async ({ action, next }: ActionNode<JumpLinkAction>, data: any) => {
   const params = new URLSearchParams(data);
   if (action.jumpType === 'route') {
-    const url = `${action.url}${action.url.indexOf('?') > -1 ? '&' : '?'}${params}`;
+    let url = action.url;
+    if (params) {
+      url += action.url.indexOf('?') > -1 ? '&' : '?' + params;
+    }
     router.navigate(url);
   } else if (action.jumpType === 'micro') {
     if (!window.microApp) {

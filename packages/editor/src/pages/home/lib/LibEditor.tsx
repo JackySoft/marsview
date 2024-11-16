@@ -267,9 +267,9 @@ export default () => {
           onChange={handleTabChange}
           tabBarExtraContent={
             <Space size={20}>
-              <Button type="primary" onClick={handleAICodeChat} icon={<BulbOutlined />}>
+              {/* <Button type="primary" onClick={handleAICodeChat} icon={<BulbOutlined />}>
                 AI助手
-              </Button>
+              </Button> */}
               <Button type="default" onClick={handleBack}>
                 返回
               </Button>
