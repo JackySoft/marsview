@@ -66,12 +66,15 @@ const mockData: QAItem[] = [
     publishTime: '2024-09-15 15:45',
   },
 ];
-const DailyFresh2024: React.FC = () => {
+const FeedbackIndex: React.FC = () => {
 
   const navigate = useNavigate();
   const handleCardClick = (id: string) => {
-    console.log('Card Clicked:', id);
     navigate(`/feedback/${id}/detail`);
+  }
+
+  const handleNavigatePost = () => {
+    navigate('/feedback/post');
   }
 
   const tabs = [
@@ -132,7 +135,7 @@ const DailyFresh2024: React.FC = () => {
             </div>
           </div>
           <Space className={style.headerActions}>
-            <Button type="primary" className={style.followButton}>+ 发布</Button>
+            <Button type="primary" className={style.followButton} onClick={handleNavigatePost}>+ 发布</Button>
             <Button icon={<ShareAltOutlined />} className={style.shareButton}>分享</Button>
           </Space>
         </div>
@@ -188,4 +191,4 @@ const DailyFresh2024: React.FC = () => {
   );
 };
 
-export default DailyFresh2024;
+export default FeedbackIndex;
