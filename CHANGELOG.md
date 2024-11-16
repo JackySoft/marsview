@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.2](https://github.com/JackySoft/marsview/compare/v5.1.1...v5.1.2) (2024-11-16)
+
+
+### Features
+
+* 添加徽标和缎带组件 ([1a2a8a8](https://github.com/JackySoft/marsview/commit/1a2a8a83f2837164bb6ec0734a227f1b336a1148))
+* 文档完善 ([1be021f](https://github.com/JackySoft/marsview/commit/1be021f1bedaa7a7ebe7b878e473593a4c91743a))
+* 优化功能，修复问题。 ([33b2475](https://github.com/JackySoft/marsview/commit/33b2475f918b17485e311e139194b66f9d57e758))
+
+
+### Bug Fixes
+
+* 修复问题 ([80df17d](https://github.com/JackySoft/marsview/commit/80df17d6bf3b3791ca18e86af70ae1d44e1541bd))
+* 修复问题 ([835801e](https://github.com/JackySoft/marsview/commit/835801ed53836521717685aefd43a7c35f790dca))
+* 修复问题 ([8b3b02b](https://github.com/JackySoft/marsview/commit/8b3b02ba94f0e01240dc1f14f886784003f0ca9d))
+* 修复问题 ([d4f4ec0](https://github.com/JackySoft/marsview/commit/d4f4ec0a0e34d8eb318748c55c0b30b206919548))
+* 修复问题 ([2290e5d](https://github.com/JackySoft/marsview/commit/2290e5d4ff8469752465657c2db61a00bdf04bc5))
+* 修复问题 ([40b97d7](https://github.com/JackySoft/marsview/commit/40b97d7262c1c52f91dcabe3565983734548ae63))
+
+
+### Documentation
+
+* fix typo ([c366a92](https://github.com/JackySoft/marsview/commit/c366a92e0f34fc22f5fc447463177b91d36c0b77))
+
 ### [5.1.1](https://github.com/JackySoft/marsview/compare/v5.1.0...v5.1.1) (2024-11-14)
 
 
