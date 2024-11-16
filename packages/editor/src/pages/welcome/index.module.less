@@ -100,20 +100,30 @@
 .module {
   padding-top: 100px;
   padding-bottom: 100px;
+  padding-inline: 40px;
   h1 {
+    color: var(--mars-primary-color);
     font-size: 36px;
     text-align: center;
     margin-bottom: 80px;
   }
+  &:nth-child(2n) {
+    .moduleList {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
   .moduleList {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 120px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2.5rem;
     .moduleItem {
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 1rem;
+      background-color: rgb(250 245 255 / 1);
+      border-color: rgb(243 232 255 / 1);
+      border-radius: 0.5rem;
       img {
         width: 110px;
         cursor: pointer;
@@ -122,10 +132,14 @@
           transform: scale(1.2);
         }
       }
-      span {
+      h3 {
         font-size: 24px;
-        color: #000;
+        color: var(--mars-primary-color);
         margin-top: 20px;
+      }
+      p {
+        color: rgb(75 85 99 / 1);
+        margin-top: 8px;
       }
     }
   }

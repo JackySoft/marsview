@@ -66,6 +66,7 @@ const Header = memo(() => {
     if (isPage) navigate('/pages');
     if (isLib) navigate('/libs');
     if (isTmpl) navigate('/templates');
+    navigate('/projects');
   };
 
   // Tab切换项
