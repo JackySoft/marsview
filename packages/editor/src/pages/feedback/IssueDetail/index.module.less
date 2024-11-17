@@ -79,8 +79,8 @@
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -199,8 +199,13 @@
   color: #6b7280;
 }
 
+.solveIcon {
+  color: #87d068;
+}
+
 .commentsSection {
   margin-top: 24px;
+  // padding: 0 80px;
 }
 
 .commentsHeader {
@@ -214,6 +219,7 @@
   font-size: 18px;
   font-weight: 600;
 }
+
 
 .commentCard {
   background-color: white;
@@ -267,7 +273,8 @@
 .replyModule {
   display: flex;
   align-items: flex-start;
-  margin-top: 24px;
+  margin: 24px 0;
+  // padding: 0 80px;
 }
 
 .userAvatar {
@@ -277,13 +284,46 @@
 .replyInputArea {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  margin-bottom: 10px;
 }
 
 :global(.ant-input-textarea) {
   margin-bottom: 16px;
 }
 
-:global(.ant-btn-primary) {
-  align-self: flex-end;
+.action {
+  width: 45px;
+  height: 45px;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+  transition: all 0.3s;
+  color: #6b7280;
+  cursor: pointer;
+  .sendIcon {
+    font-size: 14px;
+  }
+}
+
+.action:hover {
+  border: 1px solid #7d33ff;
+  color: #7d33ff;
+  background-color: #f3f4f6;
+}
+
+.loadMore {
+  display: flex;
+  height: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+
+  .loadMoreText {
+    cursor: pointer;
+    color: #6b7280;
+    font-size: 14px;
+  }
 }

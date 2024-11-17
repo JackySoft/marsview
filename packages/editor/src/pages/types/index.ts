@@ -23,17 +23,25 @@ export interface ProjectCardItemProps {
  */
 export interface FeedbackItem {
   id: number;
+  userId?: number;
   title: string;
   content: string;
-  isSolve: boolean;
-  isTop: boolean;
-  like: number;
+  isSolve: number;
+  isTop: number;
+  like?: number;
   userAvatar: string;
-  time: string;
-  userName: string;
-  type: string;
+  createdAt: string;
+  nickName: string;
+  type: number;
+  images?: string;
 }
-export interface ItemCardProps {
-  info: FeedbackItem;
-  click: () => void;
+
+export interface FeedbackCommentItem {
+  id: number;
+  userAvatar?: string;
+  nickName: string;
+  content: string;
+  createdAt: string;
+  feedbackId: number;
+  isTop?: number
 }
