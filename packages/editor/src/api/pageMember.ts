@@ -18,7 +18,7 @@ export interface PageItem {
   id: number;
   name: string;
   remark: string;
-  isPublic: number;
+  projectId: number;
 }
 
 /**

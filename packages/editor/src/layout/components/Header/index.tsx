@@ -36,7 +36,7 @@ const Header = memo(() => {
 
   const {
     userInfo,
-    page: { pageId, pageName, remark, isPublic, isEdit, ...pageData },
+    page: { pageId, pageName, remark, ...pageData },
     mode,
     theme,
     setMode,
@@ -58,14 +58,14 @@ const Header = memo(() => {
   const goHome = () => {
     setMode('edit');
     // 点击Logo返回最近操作的列表，对用户友好
-    const isProject = /project\/\d+\/\w+/.test(location.pathname);
+    const isProject = /projects\/\d+\/\w+/.test(location.pathname);
     const isPage = /editor\/\d+\/(edit|publishHistory)/.test(location.pathname);
     const isLib = /lib\/\d+/.test(location.pathname);
     const isTmpl = /editor\/\d+\/template/.test(location.pathname);
-    if (isProject) navigate('/projects');
-    if (isPage) navigate('/pages');
-    if (isLib) navigate('/libs');
-    if (isTmpl) navigate('/templates');
+    if (isProject) return navigate('/projects');
+    if (isPage) return navigate('/projects');
+    if (isLib) return navigate('/libs');
+    if (isTmpl) return navigate('/templates');
     navigate('/projects');
   };
 
@@ -73,14 +73,9 @@ const Header = memo(() => {
   const items: MenuProps['items'] = useMemo(
     () => [
       {
-        label: '项目列表',
+        label: '我的项目',
         key: 'projects',
         icon: <ProjectOutlined style={{ fontSize: 16 }} />,
-      },
-      {
-        label: '页面列表',
-        key: 'pages',
-        icon: <OneToOneOutlined style={{ fontSize: 16 }} />,
       },
       {
         label: '组件库',
@@ -107,7 +102,7 @@ const Header = memo(() => {
   );
 
   useEffect(() => {
-    if (['/projects', '/pages', '/libs', '/templates', '/workflows', '/cloud'].includes(location.pathname)) {
+    if (['/projects', '/libs', '/lib', '/templates', '/workflows', '/cloud'].includes(location.pathname)) {
       setNav(true);
       setNavKey([location.pathname.slice(1)]);
     } else {
@@ -160,8 +155,6 @@ const Header = memo(() => {
           id: pageId,
           name: pageName,
           remark: remark,
-          isPublic: isPublic ?? 1,
-          isEdit: isEdit ?? 1,
           pageData: pageInfo,
         });
         updatePageState({ env: 'all' });

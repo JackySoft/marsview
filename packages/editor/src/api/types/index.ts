@@ -6,6 +6,7 @@ export interface PageParams {
   keyword?: string;
   pageNum: number;
   pageSize?: number;
+  projectId: number;
 }
 
 export interface PageItem {
@@ -23,7 +24,6 @@ export interface PageItem {
   preState: number;
   prdState: number;
   previewImg: string;
-  isPublic: number;
 }
 
 export interface PageReqParams {
@@ -69,8 +69,8 @@ export namespace Project {
     logo: string;
     userId: number;
     userName: string;
-    isPublic: number;
     updatedAt: string;
+    count: number;
   }
 }
 /**
@@ -122,7 +122,6 @@ export interface ProjectCreateParams {
   name: string;
   remark?: string;
   logo: string;
-  isPublic: number;
 }
 
 export interface ProjectUpdateParams extends ProjectCreateParams {

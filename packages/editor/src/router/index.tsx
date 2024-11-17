@@ -25,11 +25,11 @@ export const router = [
     children: [
       {
         path: '/projects',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/ProjectList'))),
+        element: lazyLoad(React.lazy(() => import('@/pages/home/project/Category'))),
       },
       {
-        path: '/pages',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/Page/PageList'))),
+        path: '/project/pages',
+        element: lazyLoad(React.lazy(() => import('@/pages/home/project/Pages'))),
       },
       {
         path: '/libs',

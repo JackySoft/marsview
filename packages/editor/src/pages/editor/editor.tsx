@@ -73,8 +73,6 @@ const Editor = () => {
         pageId: res.id,
         pageName: res.name,
         remark: res.remark,
-        isPublic: res.isPublic,
-        isEdit: res.isEdit,
         previewImg: res.previewImg,
         stgPublishId: res.stgPublishId,
         prePublishId: res.prePublishId,

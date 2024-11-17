@@ -1,11 +1,11 @@
 import { useEffect, useState, memo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Form, Input, Button, Space, Image, Radio, Switch, Tag } from 'antd';
+import { Form, Input, Button, Space, Image, Radio, Switch, Tag, Modal } from 'antd';
 import { message } from '@/utils/AntdGlobal';
 import { RollbackOutlined, EditOutlined, SaveOutlined } from '@ant-design/icons';
 import UploadImages from '@/components/UploadImages/UploadImages';
 import ColorPicker from '@/components/ColorPicker';
-import { getProjectDetail, updateProject, addProject } from '@/api';
+import { getProjectDetail, updateProject, addProject, delProject } from '@/api';
 import MemberSetting from '@/layout/components/Menu/Member/MemberSetting';
 import api, { PageMember } from '@/api/pageMember';
 import styles from './index.module.less';
@@ -17,16 +17,15 @@ const Config: React.FC = memo(() => {
   const { id } = useParams();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState<boolean>(false);
+  const [delLoading, setDelLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
   const [type, setType] = useState<'detail' | 'edit' | 'create'>('detail');
 
   const navigate = useNavigate();
+
   // 项目加载
   useEffect(() => {
     if (!id) return;
-    if (id === '0') {
-      setType('create');
-      return;
-    }
     getProjectDetail(parseInt(id)).then((res) => {
       form.setFieldsValue(res);
     });
@@ -38,18 +37,29 @@ const Config: React.FC = memo(() => {
       await form.validateFields();
       const { breadcrumb, tag, footer, ...rest } = form.getFieldsValue();
       setLoading(true);
-      if (type === 'create') {
-        await addProject({ ...rest, tag: tag ? 1 : 0, footer: footer ? 1 : 0, breadcrumb: breadcrumb ? 1 : 0 });
-        message.success('创建成功');
-        navigate('/projects');
-      } else {
-        await updateProject({ ...rest, tag: tag ? 1 : 0, footer: footer ? 1 : 0, breadcrumb: breadcrumb ? 1 : 0 });
-        message.success('更新成功');
-      }
+      await updateProject({ ...rest, tag: tag ? 1 : 0, footer: footer ? 1 : 0, breadcrumb: breadcrumb ? 1 : 0 });
+      message.success('更新成功');
       setLoading(false);
       setType('detail');
     } catch (error) {
       setLoading(false);
+    }
+  };
+
+  // 删除确认
+  const handleDelConfirm = () => {
+    setOpen(true);
+  };
+  // 删除提交
+  const handleOk = async (val?: string) => {
+    setDelLoading(true);
+    try {
+      await delProject({ id: Number(id), type: val });
+      message.success('删除成功');
+      navigate('/projects');
+    } finally {
+      setOpen(false);
+      setDelLoading(false);
     }
   };
 
@@ -184,7 +194,37 @@ const Config: React.FC = memo(() => {
             </Space>
           )}
         </div>
+        <h3>危险区域</h3>
+        <div className={styles.delBtn}>
+          <Button danger type="primary" onClick={handleDelConfirm} loading={delLoading}>
+            删除项目
+          </Button>
+        </div>
       </Form>
+
+      {/* 项目删除弹框 */}
+      <Modal
+        open={open}
+        title="项目删除确认"
+        centered
+        onOk={() => handleOk()}
+        onCancel={() => setOpen(false)}
+        footer={[
+          <Button key="back" onClick={() => setOpen(false)}>
+            关闭
+          </Button>,
+          <Button key="submit" type="primary" loading={delLoading} onClick={() => handleOk()}>
+            仅删除项目
+          </Button>,
+          <Button key="link" type="primary" danger loading={delLoading} onClick={() => handleOk('all')}>
+            删除所有数据
+          </Button>,
+        ]}
+      >
+        <p>1. 删除项目后，您将无法找回，请慎重操作！</p>
+        <p>2. 仅删除项目会保留项目下页面列表。</p>
+        <p>3. 删除所有数据，会彻底删除项目本身、菜单列表以及归属页面列表。</p>
+      </Modal>
     </>
   );
 });
@@ -194,8 +234,8 @@ const ImageFC = ({ value }: any) => {
   return <Image src={value} style={{ width: 100 }} />;
 };
 
-// 添加开发者
-const Developer = ({ value, onChange }: any) => {
+// 项目设置开发者
+const Developer = () => {
   const projectId = useParams().id as string;
   const memberRef = useRef<{ open: (type: 1 | 2, projectId: number) => void }>();
   const [list, setList] = useState<PageMember[]>([]);
@@ -223,22 +263,16 @@ const Developer = ({ value, onChange }: any) => {
   };
   return (
     <>
-      {projectId == '0' ? (
-        '项目创建以后，才能添加开发者'
-      ) : (
-        <>
-          <Space>
-            {list.map((item) => (
-              <Tag key={item.id} color="green" closable onClose={() => handleDelete(item.id)}>
-                {item.userName}
-              </Tag>
-            ))}
-          </Space>
-          <Button type="link" onClick={handleAdd}>
-            添加
-          </Button>
-        </>
-      )}
+      <Space>
+        {list.map((item) => (
+          <Tag key={item.id} color="green" closable onClose={() => handleDelete(item.id)}>
+            {item.userName}
+          </Tag>
+        ))}
+      </Space>
+      <Button type="link" onClick={handleAdd}>
+        添加
+      </Button>
       <MemberSetting ref={memberRef} update={getMemberList} />
     </>
   );

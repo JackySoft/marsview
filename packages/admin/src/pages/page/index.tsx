@@ -66,7 +66,6 @@ export default function () {
             pageId: res.id,
             pageName: res.name,
             remark: res.remark,
-            isPublic: res.isPublic,
             stgPublishId: res.stgPublishId,
             prePublishId: res.prePublishId,
             prdPublishId: res.prdPublishId,

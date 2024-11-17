@@ -57,7 +57,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
 
   // 获取用户页面列表
   const getMyPageList = async () => {
-    const res = await getPageList({ pageNum: 1, pageSize: 50 });
+    const res = await getPageList({ pageNum: 1, pageSize: 50, projectId: Number(projectId) });
     setPageList(res.list);
   };
 
