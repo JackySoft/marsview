@@ -33,7 +33,7 @@ export type ILibPublish = {
   releaseHash: string;
 };
 // 获取组件列表
-export const getLibList = (params: PageParams) => {
+export const getLibList = (params: Omit<PageParams, 'projectId'> & { type: number }) => {
   return request.get('/lib/list', params, { showLoading: false });
 };
 
