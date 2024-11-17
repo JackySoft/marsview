@@ -1,51 +1,102 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Input, Tabs, Card, Alert, Button, message, Image } from 'antd';
+import { Input, Tabs, Card, Alert, Button, message, Image, Form, Spin } from 'antd';
 import { DeleteOutlined, InfoCircleOutlined, PictureOutlined } from '@ant-design/icons';
 import styles from './index.module.less';
-
+import { uploadImg, createFeedback } from '@/api';
+import storage from '@/utils/storage';
+import { Modal } from '@/utils/AntdGlobal';
+import { userInfo } from 'os';
+import { usePageStore } from '@/stores/pageStore';
+import { useNavigate } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 const { TabPane } = Tabs;
 
 const PostCreation: React.FC = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [selectedTab, setSelectedTab] = useState('2');
+  const [selectedTab, setSelectedTab] = useState('1');
   const [images, setImages] = useState<string[]>([]);
   const editorRef = useRef<HTMLDivElement>(null);
+  const [uploadLoding, setUploadLoding] = useState(false);
+  const navigate = useNavigate();
+  const {
+    userInfo,
+  } = usePageStore((state) => {
+    return {
+      userInfo: state.userInfo,
+    };
+  });
 
   const tabs = [
+    { key: '1', label: 'Bug' },
     { key: '2', label: '建议' },
-    { key: '3', label: 'Bug' },
-    { key: '4', label: '前端' },
-    { key: '5', label: '设计' },
-    { key: '6', label: '其他' },
+    { key: '3', label: '其他' }
   ];
 
   useEffect(() => {
-    setImages([
-      'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    ]);
+    // 读取草稿
+    const draft = storage.get('draft');
+    if (draft) {
+      // 询问是否读取草稿antddesign
+      Modal.confirm({
+        title: '确认',
+        content: '草稿未发布，是否读取？',
+        okText: '确认',
+        cancelText: '取消',
+        onOk: async () => {
+          setTitle(draft.title);
+          setContent(draft.content);
+          setSelectedTab(draft.type);
+          setImages(draft.images);
+        },
+        onCancel: async () => {
+        },
+      });
 
+    }
   }, []);
 
+   // 上传前校验
+   const validateImageFile = (file: File) => {
+    const accept = ['image/jpeg', 'image/png'];
+    const limitSize = 500; // 500KB
+    const isJpgOrPng = accept.includes(file.type);
+    if (!isJpgOrPng) {
+      message.error('不支持该文件格式，请重新选择');
+      return false;
+    }
+    const isGt = file.size > limitSize * 1024;
+    if (isGt) {
+      message.error('图片超出最大限制');
+      return false;
+    }
+    return true;
+  };
+
+
+
   const handlePaste = (e: React.ClipboardEvent) => {
-    e.preventDefault();
+
     const items = e.clipboardData?.items;
     if (items) {
       for (let i = 0; i < items.length; i++) {
         if (items[i].type.indexOf('image') !== -1 && images.length < 3) {
+          e.preventDefault();
           const file = items[i].getAsFile();
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-              if (typeof e.target?.result === 'string') {
-                if (typeof e.target?.result === 'string') {
-                  setImages(prev => [...prev, e.target?.result as string]);
-                }
+          if (file && validateImageFile(file)) {
+            setUploadLoding(true);
+            uploadImg({ file }).then((res) => {
+              setUploadLoding(false);
+              const { url = '' } = res;
+              if (url) {
+                setImages(prev => [...prev, url]);
               }
-            };
-            reader.readAsDataURL(file);
+
+            }).catch(() => {
+              setUploadLoding(false);
+              message.error('图片上传失败');
+            });
           }
         }
       }
@@ -57,14 +108,18 @@ const PostCreation: React.FC = () => {
     const files = e.dataTransfer.files;
     if (files && images.length < 3) {
       Array.from(files).forEach(file => {
-        if (file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            if (typeof e.target?.result === 'string') {
-              setImages(prev => [...prev, e.target?.result as string]);
+        if (file.type.startsWith('image/') && validateImageFile(file)) {
+          setUploadLoding(true);
+          uploadImg({ file }).then((res) => {
+            setUploadLoding(false);
+            const { url = '' } = res;
+            if (url) {
+              setImages(prev => [...prev, url]);
             }
-          };
-          reader.readAsDataURL(file);
+          }).catch(() => {
+            setUploadLoding(false);
+            message.error('图片上传失败');
+          });
         }
       });
     }
@@ -75,11 +130,35 @@ const PostCreation: React.FC = () => {
   };
 
   const handlePublish = () => {
-    // 这里添加发布逻辑
-    message.success('帖子发布成功！');
+    if (!title.trim()) {
+      message.error('标题不能为空');
+      return;
+    }
+    if(title.length > 30) {
+      message.error('标题不能超过30个字');
+      return;
+    }
+    if (!content.trim()) {
+      message.error('内容不能为空');
+      return;
+    }
+    const data = {
+      title,
+      content,
+      type: Number(selectedTab),
+      images: images.join(',')
+    }
+    createFeedback(data).then(() => {
+      message.success('发布成功');
+      storage.remove('draft');
+      navigate('/feedback');
+    }).catch(() => {
+      message.error('发布失败');
+    });
   };
 
   const handleSaveDraft = () => {
+    storage.set('draft', { title, content, type: selectedTab, images });
     // 这里添加保存草稿逻辑
     message.info('草稿已保存');
   };
@@ -110,15 +189,35 @@ const PostCreation: React.FC = () => {
             ))}
           </Tabs>
 
-          <Input
-            placeholder="填写标题，最多50个字"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            maxLength={100}
-            className={styles.titleInput}
-          />
 
-          <div
+          <Form>
+          <Form.Item>
+            <Input
+              placeholder="填写标题，最多50个字"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              maxLength={50}
+              className={styles.titleInput}
+            />
+          </Form.Item>
+          <Form.Item>
+          <Input.TextArea
+                ref={editorRef}
+                placeholder="请输入反馈内容"
+                value={content}
+                onPaste={handlePaste}
+                onDrop={handleDrop}
+                autoSize={{ minRows: 6 }}
+                onChange={(e) => setContent(e.target.value)}
+                className={styles.editor}
+              />
+          </Form.Item>
+        </Form>
+           <div className={styles.imageTip}>
+              <span>如需上传图像可在编辑区域粘贴or拖拽</span>
+          </div>
+
+          {/* <div
             ref={editorRef}
             contentEditable
             className={styles.editor}
@@ -126,8 +225,8 @@ const PostCreation: React.FC = () => {
             data-append-placeholder="如需上传图像可在编辑区域粘贴or拖拽"
             onPaste={handlePaste}
             onDrop={handleDrop}
-            onInput={(e) => setContent(e.currentTarget.textContent || '')}
-          />
+            onInput={(e) => setContent(e.currentTarget.textContent || '')} */}
+          {/* /> */}
 
           {images.length > 0 && (
             <div className={styles.imageGrid}>
@@ -141,6 +240,13 @@ const PostCreation: React.FC = () => {
                   <DeleteOutlined onClick={() => removeImage(index)} className={styles.removeButton} />
                 </div>
               ))}
+              {
+                uploadLoding && (
+                  <div className={styles.imageWrapper}>
+                    <Spin />
+                  </div>
+                )
+              }
             </div>
           )}
 

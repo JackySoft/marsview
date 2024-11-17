@@ -3,7 +3,6 @@
   margin: 0 auto;
   height: calc(100vh - 64px);
   background-color: transparent;
-  // padding: 24px;
   overflow: auto;
 
   ::-webkit-scrollbar {
@@ -23,9 +22,9 @@
   background: linear-gradient(to right, rgba(168, 224, 99, 0.7), rgba(255, 105, 180, 0.6), rgba(147, 112, 219, 0.5));
   border-radius: 16px;
   padding: 24px;
-  color: white;
+  color: #fff;
   margin-bottom: 24px;
-  backdrop-filter: blur(50px); /* 添加磨砂效果 */
+  // backdrop-filter: blur(50px); /* 添加磨砂效果 */
 }
 
 .headerContent {
@@ -115,7 +114,6 @@
 }
 
 .tabs {
-  margin-bottom: 10px;
 
   :global {
     .ant-tabs-nav::before {
@@ -145,9 +143,7 @@
 .searchInput {
   border: none;
   border-radius: 8px;
-  width: 350px;;
-  border: 1px solid #888;
-  height: 38px;
+  width: 350px;
   input {
     // background-color: transparent;
     color: #fff;
@@ -163,7 +159,8 @@
 .listContent {
   background-color: white;
   border-radius: 16px;
-  padding: 20px 20px 0 20px;
+  padding: 5px 20px 0 20px;
+  min-height: 200px;
 }
 
 .listTitle {
@@ -212,7 +209,7 @@
 }
 
 .avatar {
-  margin: 0 20px 0 14px;
+  margin: 0 20px 0 5px;
   width: 50px;
 }
 
@@ -233,6 +230,8 @@
   background-color: #f0f0f0;
   color: #333;
   border: none;
+  font-weight: 500;
+  width: fit-content;
 }
 
 .rightContent {
@@ -268,4 +267,27 @@
   display: flex;
   padding: 10px;
   justify-content: center;
+}
+
+.feedbackIcon {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  color: #7d3fff;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.feedbackIcon:hover {
+  color: #5a2ecc; /* 改变颜色 */
+  transform: translateY(-50%) scale(1.1); /* 放大 */
+}
+
+.hidden {
+  display: none;
 }
