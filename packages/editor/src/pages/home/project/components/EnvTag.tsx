@@ -1,9 +1,12 @@
+import { memo } from 'react';
 import { Tag, Tooltip } from 'antd';
 import { CheckCircleOutlined, ExclamationCircleOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { PageItem } from '@/api/types';
+import { useLocation } from 'react-router-dom';
 
 // 页面状态标签
 const EnvTag = ({ item }: { item: PageItem }) => {
+  const { pathname } = useLocation();
   // 新页面
   if (item.stgState === 1 && item.preState === 1 && item.prdState === 1) {
     return (
@@ -103,25 +106,36 @@ const EnvTag = ({ item }: { item: PageItem }) => {
     };
   }
 
+  // 环境访问
+  const visit = (e: React.MouseEvent, env: string) => {
+    e.stopPropagation();
+    window.open(`${import.meta.env.VITE_ADMIN_URL}/page/${item.id}?env=${env}`, '_blank');
+  };
+
   return (
     <>
       <Tooltip title={stgTag.tooltip}>
-        <Tag color={stgTag.color} icon={stgTag.icon} bordered={false}>
-          STG
+        <Tag color={stgTag.color} icon={stgTag.icon} bordered={false} onClick={(e) => visit(e, 'stg')}>
+          <a>STG</a>
         </Tag>
       </Tooltip>
-      <Tooltip title={preTag.tooltip}>
-        <Tag color={preTag.color} icon={preTag.icon} bordered={false}>
-          PRE
-        </Tag>
-      </Tooltip>
-      <Tooltip title={prdTag.tooltip}>
-        <Tag color={prdTag.color} icon={prdTag.icon} bordered={false}>
-          PRD
-        </Tag>
-      </Tooltip>
+      {/* 模板页面暂不显示 */}
+      {pathname === '/templates' ? null : (
+        <>
+          <Tooltip title={preTag.tooltip}>
+            <Tag color={preTag.color} icon={preTag.icon} bordered={false} onClick={(e) => visit(e, 'pre')}>
+              <a>PRE</a>
+            </Tag>
+          </Tooltip>
+          <Tooltip title={prdTag.tooltip}>
+            <Tag color={prdTag.color} icon={prdTag.icon} bordered={false} onClick={(e) => visit(e, 'prd')}>
+              <a>PRD</a>
+            </Tag>
+          </Tooltip>
+        </>
+      )}
     </>
   );
 };
 
-export default EnvTag;
+export default memo(EnvTag);

@@ -67,8 +67,6 @@
       "timeout": 8,
       "timeoutErrorMessage": "请求超时，请稍后再试"
     },
-    "isPublic": 1,
-    "isEdit": 1,
     "preview_img": null,
     "stgPublishId": 0,
     "prePublishId": 0,

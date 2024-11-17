@@ -46,7 +46,7 @@ const CodingPanel = () => {
       message.error('页面数据格式异常，请检查重试');
       return;
     }
-    const { pageName, remark, isPublic, isEdit, ...pageData } = value.page;
+    const { pageName, remark, ...pageData } = value.page;
     /**
      * 页面ID和用户信息不允许修改
      */
@@ -54,8 +54,6 @@ const CodingPanel = () => {
       id: page.pageId,
       name: pageName,
       remark,
-      isPublic,
-      isEdit,
       pageData: JSON.stringify({
         ...pageData,
         pageId: undefined,
@@ -81,8 +79,6 @@ const CodingPanel = () => {
         pageId: page.pageId,
         pageName,
         remark,
-        isPublic,
-        isEdit,
         previewImg: page.previewImg,
         stgPublishId: page.stgPublishId,
         prePublishId: page.prePublishId,

@@ -10,8 +10,9 @@
 
 .projectGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
+  margin-bottom: 20px;
 }
 
 .projectCard {
@@ -46,45 +47,46 @@
 }
 
 .cardContent {
-  background-color: #f9fafb;
   padding: 16px;
+  padding-bottom: 10px;
+  border: 1px solid var(--mars-theme-card-border-color);
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
 .description {
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.65);
+  color: var(--mars-theme-text-secondary-color);
   margin-bottom: 8px;
 }
 
 .metaInfo {
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   margin-top: 4px;
+  color: var(--mars-theme-text-secondary-color);
+  span {
+    font-size: 14px;
+  }
 }
 
 .metaIcon {
   margin-right: 4px;
 }
 
-.pageList {
-  background-color: white;
-  padding: 16px;
-  border-top: 1px solid #f0f0f0;
-}
-
-.pageListTitle {
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.doubleClickHint {
+.moreInfo {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: 10px;
+  right: 10px;
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.25);
+  color: var(--mars-theme-text-secondary-color);
+}
+
+.moreIcon {
+  margin-left: 10px;
+  font-size: 14px;
+  color: var(--mars-theme-text-color);
 }
 
 .projectLogo {

@@ -1,8 +1,9 @@
-import { Input, Modal, Form, Radio } from 'antd';
+import { Input, Modal, Form, Select, Space, Flex } from 'antd';
 import { useImperativeHandle, useState, MutableRefObject } from 'react';
-import { createPageData, updatePageData } from '@/api';
+import { createPageData, updatePageData, getAllProjects } from '@/api';
 import { PageItem } from '@/api/pageMember';
-import { usePageStore } from '@/stores/pageStore';
+import { Project } from '@/api/types';
+import { useSearchParams } from 'react-router-dom';
 /**
  * 创建页面
  */
@@ -19,18 +20,31 @@ const CreatePage = (props: IModalProp) => {
   const [type, setType] = useState<'create' | 'edit'>('create');
   const [recordId, setRecordId] = useState(0);
   const [loading, setLoading] = useState(false);
-  const userId = usePageStore((store) => store.userInfo.userId);
-
+  const [projectList, setProjectList] = useState<Project.ProjectItem[]>([]);
+  const [searchParams] = useSearchParams();
   // 暴露方法
   useImperativeHandle(props.createRef, () => ({
-    open(record?: PageItem) {
+    async open(record?: PageItem) {
+      const list = await getAllProjects();
+      setProjectList(
+        list.map((item: Project.ProjectItem) => {
+          return {
+            name: item.name,
+            id: item.id,
+            logo: item.logo,
+            remark: item.remark,
+          };
+        }),
+      );
       if (record) {
         setType('edit');
         setRecordId(record.id);
         form.setFieldsValue(record);
       } else {
+        const projectId = searchParams.get('projectId');
         setType('create');
         setRecordId(0);
+        if (projectId) form.setFieldValue('projectId', Number(projectId));
       }
       setVisible(true);
     },
@@ -77,31 +91,28 @@ const CreatePage = (props: IModalProp) => {
       okText="确定"
       cancelText="取消"
     >
-      <Form form={form} labelCol={{ span: 5 }} wrapperCol={{ span: 16 }} initialValues={{ isPublic: 1, isEdit: 1 }}>
+      <Form form={form} labelCol={{ span: 5 }} wrapperCol={{ span: 16 }}>
         <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入页面名称' }]}>
           <Input placeholder="请输入页面名称" maxLength={15} showCount />
         </Form.Item>
         <Form.Item label="描述" name="remark">
           <Input placeholder="请输入页面描述" maxLength={20} showCount />
         </Form.Item>
-        <Form.Item
-          label="权限"
-          name="isPublic"
-          rules={[{ required: true, message: '请选择访问类型' }]}
-          extra="公开页面支持所有人访问。私有页面仅自己可访问。"
-        >
-          <Radio.Group>
-            <Radio value={1}>公开</Radio>
-            <Radio value={2}>私有</Radio>
-            {/* 普通用户暂不开放模板设置 */}
-            {userId == 50 ? <Radio value={3}>公开模板</Radio> : null}
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label="模式" name="isEdit" rules={[{ required: true, message: '请选择编辑模式' }]} extra="公开后设置他人可查看或编辑；">
-          <Radio.Group>
-            <Radio value={1}>编辑</Radio>
-            <Radio value={2}>查看</Radio>
-          </Radio.Group>
+        <Form.Item label="所属项目" name="projectId" rules={[{ required: true, message: '请选择所属项目' }]}>
+          <Select
+            placeholder="请选择所属项目"
+            options={projectList}
+            fieldNames={{ label: 'name', value: 'id' }}
+            optionRender={(option) => (
+              <Space>
+                <img src={option.data.logo} style={{ maxWidth: 50, maxHeight: 50 }} />
+                <Flex vertical>
+                  <span>{option.data.name}</span>
+                  <span>{option.data.remark}</span>
+                </Flex>
+              </Space>
+            )}
+          />
         </Form.Item>
       </Form>
     </Modal>

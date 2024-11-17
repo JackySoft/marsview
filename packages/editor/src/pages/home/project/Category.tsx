@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
+import { useSearchParams } from 'react-router-dom';
 import { Button, Empty, Form, Layout, Pagination, Spin } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { useMediaQuery } from 'react-responsive';
 import { getPageList } from '@/api';
 import pageApi from '@/api/page';
 import CreatePage from '@/components/CreatePage';
 import SearchBar from '@/components/Searchbar/SearchBar';
 import PageCard from './components/PageCard';
 import ProjectCard from './components/ProjectCard';
-import styles from './../index.module.less';
 import styles2 from './page.module.less';
+import CreateProject from '@/components/CreateProject';
+import styles from './../index.module.less';
 
 /**
  * 页面列表
@@ -21,11 +24,17 @@ export default function Index() {
   const [total, setTotal] = useState<number>(0);
   const [current, setCurrent] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(12);
-  const createPageRef = useRef<{ open: () => void }>();
   const [type, setType] = useState('project');
+  const [searchParams] = useSearchParams();
+  const createProjectRef = useRef<{ open: () => void }>();
+  const createPageRef = useRef<{ open: () => void }>();
+
+  // 判断是否是超大屏
+  const isXLarge = useMediaQuery({ query: '(min-width: 1920px)' });
 
   useEffect(() => {
-    getList(current, pageSize);
+    isXLarge ? setPageSize(15) : setPageSize(12);
+    getList(current, isXLarge ? 15 : 12);
   }, [current, pageSize]);
 
   // 列表切换
@@ -46,6 +55,7 @@ export default function Index() {
         pageNum,
         pageSize: size,
         keyword,
+        projectId: Number(searchParams.get('projectId')),
       });
       setTotal(res?.total || 0);
       setList(res?.list || []);
@@ -63,7 +73,11 @@ export default function Index() {
 
   // 新建页面
   const handleCreate = () => {
-    createPageRef.current?.open();
+    if (type === 'project') {
+      createProjectRef.current?.open();
+    } else {
+      createPageRef.current?.open();
+    }
   };
 
   // 提交搜索
@@ -78,7 +92,7 @@ export default function Index() {
         <SearchBar
           showGroup={false}
           form={form}
-          from="页面"
+          from={type === 'project' ? '项目' : '页面'}
           submit={handleSearch}
           refresh={getList}
           onCreate={handleCreate}
@@ -102,30 +116,33 @@ export default function Index() {
                 <PageCard list={list} getList={getList} />
               </Spin>
             </div>
-            <Pagination
-              total={total}
-              current={current}
-              showSizeChanger
-              pageSize={pageSize}
-              pageSizeOptions={['12', '16', '20', '50']}
-              showTotal={(total) => `总共 ${total} 条`}
-              align="end"
-              onChange={handleChange}
-            />
           </>
         ) : (
           !loading &&
           type === 'list' && (
             <Empty style={{ marginTop: 100 }}>
               <Button type="dashed" icon={<PlusOutlined />} onClick={handleCreate}>
-                创建页面
+                创建项目
               </Button>
             </Empty>
           )
         )}
 
+        <Pagination
+          total={total}
+          current={current}
+          showSizeChanger
+          pageSize={pageSize}
+          pageSizeOptions={['12', '16', '20', '50']}
+          showTotal={(total) => `总共 ${total} 条`}
+          align="end"
+          onChange={handleChange}
+        />
+
+        {/* 新建项目 */}
+        <CreateProject ref={createProjectRef} update={() => getList(1, pageSize)} />
         {/* 新建页面 */}
-        <CreatePage title="创建页面" createRef={createPageRef} update={() => getList(1, pageSize)} />
+        <CreatePage title="创建项目" createRef={createPageRef} update={() => getList(1, pageSize)} />
       </Layout.Content>
     </>
   );

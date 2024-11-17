@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Tooltip, Image } from 'antd';
-import { UserOutlined, EyeOutlined, CopyOutlined, DeleteOutlined, SendOutlined } from '@ant-design/icons';
+import { Tooltip, Image, Card } from 'antd';
+import { UserOutlined, EyeOutlined, CopyOutlined, DeleteOutlined, SendOutlined, GlobalOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
-import { useMediaQuery } from 'react-responsive';
 import { message, Modal } from '@/utils/AntdGlobal';
 import { copyPageData, delPageData } from '@/api';
 import EnvTag from './EnvTag';
@@ -16,8 +15,6 @@ const PageCard = ({ list, getList }: { list: PageItem[]; getList: () => void }) 
   const [previewUrl, setPreviewUrl] = useState('');
   const navigate = useNavigate();
 
-  // 判断是否是超大屏
-  const isXLarge = useMediaQuery({ query: '(min-width: 1920px)' });
   // 页面操作
   const handleAction = async (type: string, params: PageItem) => {
     if (type === 'preview') {
@@ -61,22 +58,36 @@ const PageCard = ({ list, getList }: { list: PageItem[]; getList: () => void }) 
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(auto-fill, minmax(${isXLarge ? 400 : 300}px, 1fr))`,
-          gap: isXLarge ? 30 : 20,
+          gridTemplateColumns: `repeat(auto-fill, minmax(340px, 1fr))`,
+          gap: 20,
         }}
       >
         {list.map((item: PageItem, index: number) => {
           return (
-            <section
+            <Card
               key={item.id || item.userName + index}
-              className={styles.card}
-              style={{
-                borderRadius: 8,
-                overflow: 'hidden',
-              }}
+              actions={[
+                <Tooltip title="预览">
+                  <EyeOutlined style={{ fontSize: 16 }} onClick={() => handleAction('preview', item)} />
+                </Tooltip>,
+                <Tooltip title="复制">
+                  <CopyOutlined style={{ fontSize: 16 }} onClick={() => handleAction('copy', item)} />
+                </Tooltip>,
+                <Tooltip title="删除">
+                  <DeleteOutlined style={{ fontSize: 16 }} onClick={() => handleAction('delete', item)} />
+                </Tooltip>,
+                <Tooltip title="访问STG">
+                  <GlobalOutlined
+                    style={{ fontSize: 16 }}
+                    onClick={() => {
+                      window.open(`${import.meta.env.VITE_ADMIN_URL}/page/${item.id}?env=stg`, '_blank');
+                    }}
+                  />
+                </Tooltip>,
+              ]}
             >
-              <div className={styles.itemContent} onClick={() => handleAction('edit', item)}>
-                <div className={styles.itemHeader}>
+              <div className={styles.cardBody} onClick={() => handleAction('edit', item)}>
+                <div className={styles.itemEnv}>
                   <EnvTag item={item} />
                 </div>
                 <div className={styles.itemTitle}>{item.name}</div>
@@ -84,30 +95,12 @@ const PageCard = ({ list, getList }: { list: PageItem[]; getList: () => void }) 
                 <div className={styles.updateUser}>
                   <span style={{ marginRight: 10 }}>
                     <UserOutlined style={{ fontSize: 15, marginRight: 5 }} />
-                    {item.userName}
+                    <span>{item.userName}</span>
                   </span>
                   <span>更新于 {dayjs(item.updatedAt).fromNow()}</span>
                 </div>
               </div>
-              <div className={styles.itemFooter}>
-                <Tooltip title="预览">
-                  <EyeOutlined onClick={() => handleAction('preview', item)} />
-                </Tooltip>
-                <Tooltip title="复制">
-                  <CopyOutlined onClick={() => handleAction('copy', item)} />
-                </Tooltip>
-                <Tooltip title="删除">
-                  <DeleteOutlined onClick={() => handleAction('delete', item)} />
-                </Tooltip>
-                <Tooltip title="访问STG">
-                  <SendOutlined
-                    onClick={() => {
-                      window.open(`${import.meta.env.VITE_ADMIN_URL}/page/${item.id}?env=stg`, '_blank');
-                    }}
-                  />
-                </Tooltip>
-              </div>
-            </section>
+            </Card>
           );
         })}
       </div>

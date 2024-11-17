@@ -73,13 +73,18 @@ export const getProjectList = (params: ProjectListParams) => {
   return request.get('/project/list', params);
 };
 
+// 获取我名下所有项目列表
+export const getAllProjects = () => {
+  return request.get('/project/queryAllProjects');
+};
+
 // 新增项目
 export const addProject = (params: ProjectCreateParams) => {
   return request.post('/project/create', params);
 };
 
 // 删除项目
-export const delProject = (params: { id: number }) => {
+export const delProject = (params: { id: number; type?: string }) => {
   return request.post('/project/delete', params);
 };
 

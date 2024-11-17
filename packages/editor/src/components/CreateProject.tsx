@@ -1,4 +1,4 @@
-import { Input, Modal, Form, Radio } from 'antd';
+import { Input, Modal, Form } from 'antd';
 import { useImperativeHandle, useState, forwardRef, memo } from 'react';
 import { addProject } from '@/api';
 import UploadImages from './UploadImages/UploadImages';
@@ -52,12 +52,7 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
       okText="确定"
       cancelText="取消"
     >
-      <Form
-        form={form}
-        labelCol={{ span: 5 }}
-        wrapperCol={{ span: 16 }}
-        initialValues={{ logo: 'https://marsview.cdn.bcebos.com/mars-logo.png', isPublic: 1 }}
-      >
+      <Form form={form} labelCol={{ span: 5 }} wrapperCol={{ span: 16 }} initialValues={{ logo: 'https://marsview.cdn.bcebos.com/mars-logo.png' }}>
         <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入页面名称' }]}>
           <Input placeholder="请输入项目名称" maxLength={15} showCount />
         </Form.Item>
@@ -66,12 +61,6 @@ const CreateProject = (props: { update: () => void }, ref: any) => {
         </Form.Item>
         <Form.Item label="LOGO" name="logo" rules={[{ required: true, message: '请上传项目Logo' }]}>
           <UploadImages />
-        </Form.Item>
-        <Form.Item label="权限" name="isPublic" rules={[{ required: true, message: '请选择访问类型' }]} extra="公开项目支持所有人访问，但不可修改。">
-          <Radio.Group>
-            <Radio value={1}>公开</Radio>
-            <Radio value={2}>私有</Radio>
-          </Radio.Group>
         </Form.Item>
       </Form>
     </Modal>

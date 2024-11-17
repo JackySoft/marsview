@@ -20,8 +20,6 @@ export interface PageState {
     pageId: number;
     pageName: string;
     remark: string;
-    isPublic: number;
-    isEdit: number;
     stgState: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
     preState: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
     prdState: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
@@ -107,8 +105,6 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     pageId: 0,
     pageName: '',
     remark: '',
-    isPublic: 1,
-    isEdit: 1,
     stgState: 1,
     preState: 1,
     prdState: 1,
