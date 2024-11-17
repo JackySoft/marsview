@@ -4,8 +4,6 @@ import { lazyLoad } from './LazyLoad';
 import AuthLoader from './AuthLoader';
 import Root from './Root';
 import ErrorBoundary from './ErrorBoundary';
-import { FeedbackItem } from '@/pages/types';
-import IssueDetail from '@/pages/feedback/IssueDetail';
 
 /**
  * 定义页面路由
@@ -31,7 +29,7 @@ export const router = [
       },
       {
         path: '/pages',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/PageList'))),
+        element: lazyLoad(React.lazy(() => import('@/pages/home/Page/PageList'))),
       },
       {
         path: '/libs',

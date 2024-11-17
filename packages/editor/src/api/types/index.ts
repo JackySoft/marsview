@@ -6,7 +6,6 @@ export interface PageParams {
   keyword?: string;
   pageNum: number;
   pageSize?: number;
-  type?: number;
 }
 
 export interface PageItem {

@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import { Button, Form, Input, Radio, Space } from 'antd';
-import { PlusOutlined, RedoOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Radio, Space, Segmented } from 'antd';
+import { PlusOutlined, RedoOutlined, BarsOutlined, AppstoreOutlined } from '@ant-design/icons';
 import styles from './index.module.less';
 
 const SearchBar = memo((props: any) => {
@@ -33,12 +33,19 @@ const SearchBar = memo((props: any) => {
             </Form.Item>
           </Form>
         </div>
-        <div className={styles.searchBarBtns}>
+        <Space>
+          <Segmented
+            onChange={(value) => props.onViewChange(value)}
+            options={[
+              { value: 'project', icon: <AppstoreOutlined /> },
+              { value: 'list', icon: <BarsOutlined /> },
+            ]}
+          />
           <Button type="dashed" style={{ marginRight: '10px' }} icon={<PlusOutlined />} onClick={onCreate}>
             新建{from}
           </Button>
           <Button shape="circle" icon={<RedoOutlined />} onClick={() => refresh()}></Button>
-        </div>
+        </Space>
       </div>
     </>
   );
