@@ -1,86 +1,133 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './index.module.less'
-import { Button, Image, Tag,Typography, Input, Avatar } from 'antd'
+import { Image, Input, Avatar, Skeleton, Spin, Badge } from 'antd'
 import { CheckCircleFilled, CheckOutlined, CloseCircleOutlined, FrownOutlined, HeartOutlined, LikeOutlined, SendOutlined } from '@ant-design/icons'
-const { Title, Text } = Typography;
+import { FeedbackCommentItem, FeedbackItem } from '@/pages/types';
+import { useParams } from 'react-router-dom';
+import { createFeedbackComment, getFeedbackComments, getFeedbackDetail } from '@/api';
+import RandomAvatar from '../UserDefaultAvatar';
+import { usePageStore } from '@/stores/pageStore';
+import { message } from '@/utils/AntdGlobal';
 const { TextArea } = Input;
 
-interface User {
-  id: string;
-  name: string;
-  avatar: string;
+
+const CommentCard = (props: { comment: FeedbackCommentItem }) => {
+  const { comment } = props;
+  return (
+    <div key={comment.id} className={styles.commentCard}>
+      <div className={styles.authorInfo}>
+        <div className={styles.avatar}>
+          {
+            comment.userAvatar ? (
+              <Avatar src={comment.userAvatar} size={40} className={styles.avatar} />
+            ) : (
+              <RandomAvatar size={40} className={styles.avatar} seed={comment.nickName + ''} />
+            )
+          }
+        </div>
+        <div className={styles.commentHeader}>
+          <div className={styles.commentAuthor}>{comment.nickName}</div>
+          <div className={styles.commentTime}>{comment.createdAt}</div>
+        </div>
+      </div>
+      <p className={styles.commentContent}>{comment.content}</p>
+    </div>
+  )
 }
-
-const currentUser: User = {
-  id: 'current-user',
-  name: 'Current User',
-  avatar: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-};
-
 export default function IssueDetail() {
-  const [likes, setLikes] = useState(156)
-  const [hasLiked, setHasLiked] = useState(false)
 
-  const handleLike = () => {
-    if (hasLiked) {
-      setLikes(prev => prev - 1)
-    } else {
-      setLikes(prev => prev + 1)
-    }
-    setHasLiked(!hasLiked)
-  }
+  const {
+    userInfo,
+  } = usePageStore((state) => {
+    return {
+      userInfo: state.userInfo,
+    };
+  });
 
-  const itemDetail = {
-    id: 5,
-    title: '希望新增反馈功能',
-    content: '当用户可以提供反馈时，我们能够更好地了解他们的需求和意见。这有助于改进产品和服务，使其更贴近用户的期望，从而提高用户满意度。此外，用户反馈也为我们提供了改进产品和服务的宝贵线索，帮助我们更好地满足他们的需求。因此，新增反馈功能对于促进用户参与、提高产品质量、以及加强用户与产品之间的互动十分必要。',
-    isSolve: true,
-    isTop: true,
+  const [itemDetail, setItemDetail] = useState<FeedbackItem>({
+    id: 0,
+    title: '',
+    content: '',
+    isSolve: 0,
+    isTop: 0,
     like: 0,
-    userAvatar: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    time: '2024-09-01',
-    userName: '用户名',
-    type: 'advise',
+    userAvatar: '',
+    createdAt: '',
+    nickName: '',
+    type: 1
+  });
+
+  // 在组件内部
+  const { id } = useParams<{ id: string }>();
+
+  const [comments, setComments] = useState<FeedbackCommentItem[]>([]);
+  const [pageNum, setPageNum] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [total, setTotal] = useState(0);
+
+
+  useEffect(() => {
+    fetchFeedbackDetail(Number(id));
+  }, [id]);
+
+  const fetchFeedbackDetail = async (id: number) => {
+      const res = await getFeedbackDetail(id);
+      setItemDetail(res);
   }
 
-  const demoComments = [
-    {
-      id: 1,
-      userAvatar: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      userName: "Garrett",
-      content: "小说平台，漫画平台",
-      time: "2024-10-08 08:30",
-      helpful: true
-    },
-    {
-      id: 2,
-      userAvatar: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      userName: "白码",
-      content: "有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码有没有插件源码 ",
-      time: "2024-09-29 12:01",
-      helpful: false
-    }
-  ]
+  useEffect(() => {
+    fetchComments(pageNum);
+  }, [pageNum]);
+
+  const fetchComments = async (pageNum: number) => {
+    setLoading(true);
+    const { list, total } = await getFeedbackComments(Number(id), 12, pageNum);
+    setHasMore(comments.length + list.length < total);
+    setComments((prevComments) => [...prevComments, ...list]);
+    setTotal(total);
+    setLoading(false);
+  };
 
   const [replyContent, setReplyContent] = useState('');
-  const [isResolved, setIsResolved] = useState(false);
 
-  const handleReply = () => {
-    console.log('Reply submitted:', replyContent);
+  const handleReply = async () => {
+    if (!replyContent) {
+      message.info('请输入评论内容');
+      return
+    }
+    if(replyContent.length > 60) {
+      message.info('评论内容不能超过60字符～');
+      return
+    }
+    const data = {
+      feedbackId: itemDetail.id,
+      content: replyContent
+    }
+    const res = await createFeedbackComment(data);
+
+    setComments((prevComments) => [{
+      id: res.id,
+      nickName: userInfo.userName,
+      content: replyContent,
+      createdAt: new Date().toLocaleString(),
+      feedbackId: itemDetail.id
+    }, ...prevComments]);
     setReplyContent('');
   };
+
 
   return (
     <div className={styles.container}>
       {/* Header Section */}
       <div className={styles.header}>
         <div>
-          <h1 className={styles.title}>{itemDetail.title}</h1>
+          <h1 className={styles.title}>{itemDetail.title ? itemDetail.title : "不知名用户"}</h1>
           <div className={styles.tagContainer}>
               {
-                itemDetail.type === 'bug' ? (
+                itemDetail.type === 1 ? (
                   <span className={`${styles.tag} ${styles.tagBug}`}>Bug</span>
-                ) : itemDetail.type === 'advise' ? (
+                ) : itemDetail.type === 2 ? (
                   <span className={`${styles.tag} ${styles.tagAdvise}`}>建议</span>
                 ) : (
                   <span className={`${styles.tag} ${styles.tagOther}`}>其他</span>
@@ -89,33 +136,32 @@ export default function IssueDetail() {
           </div>
           <div className={styles.authorInfo}>
             <div className={styles.avatar}>
-              <Image src={itemDetail.userAvatar} alt={itemDetail.userName} width={40} height={40} />
+              {
+                itemDetail.userAvatar ? (
+                  <Avatar src={itemDetail.userAvatar} size={40} className={styles.avatar} />
+                ) : (
+                  <RandomAvatar size={40} className={styles.avatar} seed={itemDetail.userId + ''} />
+                )
+              }
             </div>
             <div>
-              <div className={styles.authorName}>{itemDetail.userName}</div>
+              <div className={styles.authorName}>{itemDetail.nickName}</div>
               <div className={styles.authorTime}>
-                发布于 {itemDetail.time} • {itemDetail.isTop ? '置顶' : '未置顶'}
+                发布于 {itemDetail.createdAt} • {itemDetail.isTop ? '置顶' : '未置顶'}
               </div>
             </div>
           </div>
         </div>
 
-        <Button
-          onClick={handleLike}
-          className={`${styles.likeButton} ${hasLiked ? styles.likeButtonActive : styles.likeButtonInactive}`}
-        >
-          {/* <ThumbsUp className={`h-4 w-4 ${hasLiked ? 'fill-current' : ''}`} /> */}
-          <span><HeartOutlined /> {likes}</span>
-        </Button>
       </div>
 
       {/* Content Section */}
       <div className={styles.content}>
         <div className={styles.imageGallery}>
-          {[1, 2, 3, 4].map((i) => (
+          {itemDetail.images && itemDetail.images.split(",").map( (item, i) => (
             <div key={i} className={styles.imageWrapper}>
               <Image
-                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                src={item}
                 alt={`Image ${i}`}
                 className="object-cover"
               />
@@ -124,11 +170,13 @@ export default function IssueDetail() {
         </div>
 
         <div className={styles.description}>
-          {
+        {
+          itemDetail && itemDetail.content ? (
             itemDetail.content.split('\n').map((paragraph, index) => (
               <p key={index} className={styles.paragraph}>{paragraph}</p>
             ))
-          }
+          ) : null
+        }
         </div>
       </div>
 
@@ -141,7 +189,7 @@ export default function IssueDetail() {
                   <div className={styles.statusText}>
                     <CheckCircleFilled className={styles.solveIcon} /> <span>
                       {
-                        itemDetail.type === 'bug' ? '问题已解决' : '建议已采纳'
+                        itemDetail.type === 1 ? '问题已被解决' : '建议已被采纳'
                       }
                       </span>
                   </div>
@@ -154,7 +202,7 @@ export default function IssueDetail() {
                 <div className={styles.statusText}>
                   <FrownOutlined /> <span>
                     {
-                      itemDetail.type === 'bug' ? '问题未解决' : '建议未采纳'
+                      itemDetail.type === 1 ? '问题还未被解决' : '建议还未被采纳'
                     }
                   </span>
                 </div>
@@ -162,19 +210,19 @@ export default function IssueDetail() {
             </div>
           )
         }
-        {
+        {/* {
           !itemDetail.isSolve? (
             <div className={styles.statusChange}>
                 <div className={styles.statusChangeButton}>
                   <CheckOutlined className={styles.statusChangeIcon} />
                 </div>
             </div>) : null
-        }
+        } */}
       </div>
 
       {/* Comments Section */}
       <div className={styles.replyModule}>
-          <Avatar src={currentUser.avatar} size={40} className={styles.userAvatar} />
+      <RandomAvatar size={40} className={styles.userAvatar} seed={userInfo.userId + ''} />
           <div className={styles.replyInputArea}>
             <TextArea
               value={replyContent}
@@ -185,32 +233,50 @@ export default function IssueDetail() {
               autoSize={{ minRows: 2, maxRows:10 }}
             />
           </div>
-          <div className={styles.action}>
-            <SendOutlined className={styles.sendIcon} onClick={handleReply} />
+          <div className={styles.action} onClick={handleReply}>
+            <SendOutlined className={styles.sendIcon} />
           </div>
         </div>
       <div className={styles.commentsSection}>
         <div className={styles.commentsHeader}>
-          {/* <MessageSquare className="h-5 w-5" /> */}
-          <h2 className={styles.commentsTitle}>讨论 (18)</h2>
+          <h2 className={styles.commentsTitle}>讨论 ({total})</h2>
         </div>
 
         <div>
-          {demoComments.map((comment) => (
-            <div key={comment.id} className={styles.commentCard}>
-              <div className={styles.authorInfo}>
-                <div className={styles.avatar}>
-                  <Image src={comment.userAvatar} alt={comment.userName} width={30} height={30} />
-                </div>
-                <div className={styles.commentHeader}>
-                  <div className={styles.commentAuthor}>{comment.userName}</div>
-                  <div className={styles.commentTime}>{comment.time}</div>
-                </div>
-              </div>
-              <p className={styles.commentContent}>{comment.content}</p>
-            </div>
-          ))}
+               {
+                  comments.map((comment) =>
+                    (
+                      comment.isTop ? (
+                        <Badge.Ribbon text="置顶" color="#f50">
+                          <CommentCard comment={comment} />
+                        </Badge.Ribbon>
+                      ) : (
+                        <CommentCard comment={comment} />
+                      )
+                    )
+                )
+               }
         </div>
+        {
+          comments.length === 0 && !hasMore && (
+            <div className={styles.loadMore}>
+              <span className={styles.loadMoreText}>暂无讨论，快来抢沙发吧~</span>
+            </div>
+          )
+        }
+        {hasMore && (
+          <div className={styles.loadMore}>
+            {
+              loading ? <Spin /> :<span className={styles.loadMoreText} onClick={() => setPageNum((prevPage) => prevPage + 1)} >更 多</span>
+            }
+          </div>
+        )}
+
+        {!hasMore && comments.length > 0 && (
+          <div className={styles.loadMore}>
+            <span className={styles.loadMoreText}>到底啦～</span>
+          </div>
+        )}
       </div>
     </div>
   )

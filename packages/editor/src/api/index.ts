@@ -167,3 +167,31 @@ export const updateRoleLimits = (params: { id: number; checked: string; halfChec
 export const updateRole = (params: { id: number; projectId: string; name: string; remark: string }) => {
   return request.post('/role/update', params);
 };
+
+
+// 发布反馈
+export const createFeedback = (params: { title: string; content: string, type: number, images: string}) => {
+  return request.post('/feedback/create', params);
+}
+
+// 获取反馈列表
+export const getFeedbackList = (params: { pageNum: number; pageSize: number; title: string; type: number }) => {
+  return request.get('/feedback/list', params);
+}
+
+export const getFeedbackDetail = (id: number) => {
+  return request.get('/feedback/detail', { id });
+}
+
+export const createFeedbackComment = (params: { feedbackId: number; content: string }) => {
+  return request.post('/feedback/createComment', params);
+}
+
+
+export const getFeedbackComments = (feedbackId: number, pageSize: number, pageNum: number) => {
+  return request.get('/feedback/getComments', { feedbackId, pageSize, pageNum });
+}
+
+export const queryFeedbackTotal = () => {
+  return request.get('/feedback/queryFeedbackTotal');
+}

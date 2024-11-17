@@ -19,7 +19,7 @@
 }
 
 .card {
-  max-width: 800px;
+  // max-width: 800px;
   margin: 0 auto;
 }
 
@@ -41,8 +41,8 @@
 }
 
 .titleInput {
-  margin-bottom: 16px;
-  color: @text-color;
+  // margin-bottom: 16px;
+  color: #000;
 
   &::placeholder {
     color: #8c8c8c;
@@ -60,7 +60,7 @@
   padding: 16px 16px 20px 16px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-  margin-bottom: 16px;
+  // margin-bottom: 16px;
 
   &:focus {
     outline: none;
@@ -112,7 +112,11 @@
   right: 4px;
   color: #8c8c8c;
 }
-
+.imageTip {
+  color: #8c8c8c;
+  margin-top: -14px;
+  margin-bottom: 16px;
+}
 .imageUploadTip {
   display: flex;
   align-items: center;
@@ -155,3 +159,13 @@
     }
   }
 }
+
+.richTextQuill {
+  :global {
+    // 解决 quill 编辑器高度问题（总高度去掉工具条的高度）
+    .ql-container {
+      height: calc(100% - 43px);
+    }
+  }
+}
+
