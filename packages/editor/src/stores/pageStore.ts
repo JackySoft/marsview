@@ -528,9 +528,9 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           pageId: 0,
           pageName: '',
           remark: '',
-          stg_state: 1,
-          pre_state: 1,
-          prd_state: 1,
+          stgState: 1,
+          preState: 1,
+          prdState: 1,
           userId: '',
           config: {
             props: {},

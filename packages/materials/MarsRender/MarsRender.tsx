@@ -8,6 +8,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { produce } from 'immer';
 import dayjs from 'dayjs';
 import * as antd from 'antd';
+import * as Plots from '@ant-design/plots';
 import { isNull, loadStyle, renderFormula } from '@materials/utils/util';
 import { omit } from 'lodash-es';
 import './index.less';
@@ -32,6 +33,7 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
     window.React = window.React || React;
     window.dayjs = window.dayjs || dayjs;
     window.antd = window.antd || antd;
+    window.Plots = window.Plots || Plots;
   }
 
   useEffect(() => {

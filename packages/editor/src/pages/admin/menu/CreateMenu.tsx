@@ -106,7 +106,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
         onCancel={handleCancel}
       >
         <Spin spinning={loading}>
-          <Form form={form} labelAlign="right" labelCol={{ span: 4 }} wrapperCol={{ span: 18 }} initialValues={{ type: 1, status: 1, is_create: 2 }}>
+          <Form form={form} labelAlign="right" labelCol={{ span: 4 }} wrapperCol={{ span: 18 }} initialValues={{ type: 1, status: 1, isCreate: 2 }}>
             <Form.Item hidden name="id">
               <Input />
             </Form.Item>
@@ -188,7 +188,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
                         ></Select>
                       </Form.Item>
                     ) : (
-                      <Form.Item label="生成页面" name="is_create" extra="如果你创建的是末级菜单，请给它生成一个页面，父菜单不需要生成。">
+                      <Form.Item label="生成页面" name="isCreate" extra="如果你创建的是末级菜单，请给它生成一个页面，父菜单不需要生成。">
                         <Radio.Group>
                           <Radio value={1}>是</Radio>
                           <Radio value={2}>否</Radio>

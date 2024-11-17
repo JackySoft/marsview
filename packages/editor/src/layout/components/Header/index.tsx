@@ -66,6 +66,7 @@ const Header = memo(() => {
     if (isPage) navigate('/pages');
     if (isLib) navigate('/libs');
     if (isTmpl) navigate('/templates');
+    navigate('/projects');
   };
 
   // Tab切换项
@@ -143,7 +144,7 @@ const Header = memo(() => {
       setLoading(true);
       const pageInfo = JSON.stringify({
         ...pageData,
-        // 下面字段排除在page_data外
+        // 下面字段排除在pageData外
         stgState: undefined,
         preState: undefined,
         prdState: undefined,

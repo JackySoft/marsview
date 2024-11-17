@@ -31,18 +31,7 @@ export default {
       label: '显示边框',
       name: ['bordered'],
     },
-    {
-      type: 'Select',
-      label: '表格尺寸',
-      name: ['size'],
-      props: {
-        options: [
-          { label: '默认', value: 'large' },
-          { label: '中等', value: 'middle' },
-          { label: '紧凑', value: 'small' },
-        ],
-      },
-    },
+
     {
       type: 'Select',
       label: '单选/多选',
@@ -74,6 +63,12 @@ export default {
       },
     },
     {
+      type: 'Switch',
+      label: '虚拟滚动',
+      name: ['virtual'],
+      tooltip: '开启虚拟滚动时，必须设置滚动轴X和Y值。',
+    },
+    {
       type: 'Select',
       label: '空值显示',
       name: ['empty'],
@@ -83,6 +78,18 @@ export default {
           { label: '无', value: '' },
           { label: '-', value: '-' },
           { label: '/', value: '/' },
+        ],
+      },
+    },
+    {
+      type: 'Select',
+      label: '表格尺寸',
+      name: ['size'],
+      props: {
+        options: [
+          { label: '默认', value: 'large' },
+          { label: '中等', value: 'middle' },
+          { label: '紧凑', value: 'small' },
         ],
       },
     },
@@ -106,6 +113,27 @@ export default {
       render(form: FormInstance) {
         return <TableSetting key="TableSetting" form={form} />;
       },
+    },
+    {
+      type: 'Title',
+      label: '展开配置',
+      key: 'expandable',
+      tooltip: '树形表格时生效',
+    },
+    {
+      type: 'Input',
+      label: '树形结构列名',
+      name: ['expandable', 'childrenColumnName'],
+    },
+    {
+      type: 'Switch',
+      label: '展开所有',
+      name: ['expandable', 'defaultExpandAllRows'],
+    },
+    {
+      type: 'InputNumber',
+      label: '缩进宽度',
+      name: ['expandable', 'indentSize'],
     },
     {
       type: 'Title',
@@ -193,13 +221,18 @@ export default {
       selectionType: '',
       leftTitle: '查询列表',
       empty: '-',
+      expandable: {
+        defaultExpandAllRows: true,
+        childrenColumnName: 'children',
+        indentSize: 15,
+      },
       // 组件默认属性值
       columns: [
         {
           title: '姓名',
           dataIndex: 'name',
           key: 'name',
-          width: 90,
+          width: 190,
           align: 'center',
         },
         {
@@ -326,6 +359,44 @@ export default {
           status: '在售',
           createdAt: new Date().getTime(),
           area: '热带、亚热带和温带地区',
+          children: [
+            {
+              id: 1002,
+              name: '萤火虫',
+              type: '昆虫',
+              avatar: `${import.meta.env.VITE_CDN_URL}/s1.png`,
+              time: 10,
+              skill: ['飞', '发光', '御敌'],
+              sales: 9.9,
+              status: '在售',
+              createdAt: new Date().getTime(),
+            },
+          ],
+        },
+        {
+          id: 1003,
+          name: '萤火虫',
+          type: '昆虫',
+          avatar: `${import.meta.env.VITE_CDN_URL}/s1.png`,
+          time: 10,
+          skill: ['飞', '发光', '御敌'],
+          sales: 9.9,
+          status: '在售',
+          createdAt: new Date().getTime(),
+          area: '热带、亚热带和温带地区',
+          children: [
+            {
+              id: 1004,
+              name: '萤火虫',
+              type: '昆虫',
+              avatar: `${import.meta.env.VITE_CDN_URL}/s1.png`,
+              time: 10,
+              skill: ['飞', '发光', '御敌'],
+              sales: 9.9,
+              status: '在售',
+              createdAt: new Date().getTime(),
+            },
+          ],
         },
       ],
     },

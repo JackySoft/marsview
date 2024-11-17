@@ -18,10 +18,10 @@
     "pageId": 341,
     "pageName": "dsfc",
     "remark": "432432",
-    "stg_state": 1,
-    "pre_state": 1,
-    "prd_state": 1,
-    "user_id": 49,
+    "stgState": 1,
+    "preState": 1,
+    "prdState": 1,
+    "userId": 49,
     "config": {
       "props": {
         "theme": "#1677ff"
@@ -67,12 +67,12 @@
       "timeout": 8,
       "timeoutErrorMessage": "请求超时，请稍后再试"
     },
-    "is_public": 1,
-    "is_edit": 1,
+    "isPublic": 1,
+    "isEdit": 1,
     "preview_img": null,
-    "stg_publish_id": 0,
-    "pre_publish_id": 0,
-    "prd_publish_id": 0
+    "stgPublishId": 0,
+    "prePublishId": 0,
+    "prdPublishId": 0
   }
 }
 ```

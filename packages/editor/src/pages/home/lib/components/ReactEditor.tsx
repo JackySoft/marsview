@@ -9,8 +9,8 @@ import { Spin, Splitter } from 'antd';
 import dayjs from 'dayjs';
 import { useKeyPress } from 'ahooks';
 import ComPreview from './ComPreview';
-import './index.less';
 import { usePageStore } from '@/stores/pageStore';
+import './index.less';
 
 /**
  * 组件代码编辑
