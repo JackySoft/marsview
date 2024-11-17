@@ -21,7 +21,6 @@ export default () => {
   const [pageSize, setPageSize] = useState<number>(16);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [moreLoading, setMoreLoading] = useState<boolean>(false);
-
   const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
@@ -38,7 +37,7 @@ export default () => {
     const res = await getPageList({
       pageNum: current || pageNum,
       pageSize,
-      type: 1,
+      projectId: 0,
     });
     setPageNum(current);
     setLoading(false);

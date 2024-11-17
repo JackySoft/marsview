@@ -14,7 +14,7 @@ export interface IWorkFlow {
 }
 export default {
   // 获取模板列表
-  getTemplateList: (params: PageParams) => {
+  getTemplateList: (params: { pageNum: number; pageSize: number; keyword: string }) => {
     return request.get('/workflow/list', params, { showLoading: false });
   },
   // 获取模板详情
