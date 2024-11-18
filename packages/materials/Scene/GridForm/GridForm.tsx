@@ -160,13 +160,7 @@ const GridForm = ({ id, type, config, elements, onSearch, onChange, onReset }: C
           onValuesChange={handleValuesChange}
         >
           <DivWrapper $len={len} $minWidth={minWidth} ref={formRef}>
-            {elements.length ? (
-              <MarsRender elements={elements} />
-            ) : (
-              <div>
-                <div className="slots">拖拽表单组件到这里</div>
-              </div>
-            )}
+            {elements.length ? <MarsRender elements={elements} /> : null}
             <Form.Item {...config.props.formItem} wrapperCol={{ span: 24 }} style={{ textAlign: 'right', gridColumn: '-2/-1' }}>
               <Space ref={formItemRef} style={{ justifyContent: 'right', width: '100%' }}>
                 <Button type="default" icon={<RedoOutlined />} onClick={handleReset}>
