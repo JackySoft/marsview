@@ -1,11 +1,13 @@
 # 开发者本地启动
 
-`Marsview` 包含前端和后端，数据库使用的是 `MySQL`，如果后端采用`koa`需要提前安装 `Node` 和 `NPM`以及`PNPM`，如果后端采用`java`需要安装`jdk` `maven` 。
+`Marsview` 包含前端和后端，数据库使用的是 `MySQL`，后端使用`Node.js`开发，请提前安装 `Node`、 `NPM`以及`PNPM` 。
 
 ## 仓库地址
 
 1. 前端仓库：https://github.com/JackySoft/marsview
 2. 后端仓库：https://github.com/JackySoft/marsview-backend
+
+请部署的同学，动动小手，给项目点个`Star`，赠人玫瑰，手留余香，开源作者在此感谢。
 
 ## 数据库安装
 
@@ -13,27 +15,11 @@
 
 2. 创建数据库，名称随意，比如 `marsview`
 
-3. 初始化数据库脚本，执行 `sql` 文件夹下的 `DDL_mars.sql` 脚本
-
-> 如果后期数据库有脚本更新，我会把更新脚本放在`sql`文件夹的`更新说明.md`中。
+3. 初始化数据库脚本，当前暂不开放，如有需要请向作者申请，并说明理由。
 
 ## 后端启动
 
-后端提供 `JAVA` 和 `Koa` 两个版本。
-
-### `java` 版本启动：
-
-环境准备：`jdk` `mysql` `maven` `redis`
-
-1. 安装 `jdk` 建议使用 `17` 及以上版本
-
-2. 安装 `maven` 安装方式自行百度
-
-3. 安装 `redis` 安装方式自行百度
-
-4. 安装 `mysql` 安装方式自行百度
-
-详细文档请参考：[Java 启动和部署文档](https://github.com/JackySoft/marsview-backend/blob/main/java/README.md)
+后端当前只支持`Node`版本，其它语言如有需要，请自行实现。
 
 ### koa 版本启动：
 
@@ -140,7 +126,7 @@ pnpm i
 proxy: {
   '/api': {
     // 如果本地启动后端，请替换为后端地址
-    target: 'http://localhost:5000',
+    target: 'http://mars-api.marsview.cc',
     changeOrigin: true,
   },
 },
@@ -148,7 +134,7 @@ proxy: {
 
 注意：
 
-- `target`对应自己后端服务地址。`Java` 和 `Koa` 他们的默认端口不同，请对应修改。
+- `target`对应`Node`服务地址，默认连接线上服务。
 - 生产环境需要在`nginx`中添加反向代理。
 
 3. 启动编辑器
@@ -180,13 +166,13 @@ http://127.0.0.1:8080
 proxy: {
   '/api': {
     // 如果本地启动后端，请替换为后端地址
-    target: 'http://localhost:5000',
+    target: 'http://mars-api.marsview.cc',
     changeOrigin: true,
   },
 },
 ```
 
-- `target`对应自己后端服务地址。`Java` 和 `Koa` 他们的默认端口不同，请对应修改。
+- `target`对应`Node`服务地址，默认连接线上服务。
 - 生产环境需要在`nginx`中添加反向代理。
 
 2. 启动用户端
@@ -208,7 +194,7 @@ http://127.0.0.1:8090
 
 1. 以上是本地部署和启动的过程，由于项目依赖百度云`OSS`和`CDN`，所以没有百度云的同学，可能会导致图片云服务和自定义组件功能不可用。
 
-2. `Java` 版本支持阿里云配置，`Koa`版本只支持百度云配置。
+2. 后端服务默认只支持`Node`版本。
 
 3. 本地部署时需要关注`.env.development`文件配置。
 
