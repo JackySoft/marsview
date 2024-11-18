@@ -140,7 +140,8 @@ export default function IssueDetail() {
                 itemDetail.userAvatar ? (
                   <Avatar src={itemDetail.userAvatar} size={40} className={styles.avatar} />
                 ) : (
-                  <RandomAvatar size={40} className={styles.avatar} seed={itemDetail.userId + ''} />
+                  <RandomAvatar size={40} className={styles.avatar} seed={itemDetail.nickName
+                     + ''} />
                 )
               }
             </div>
