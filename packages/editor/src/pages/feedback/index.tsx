@@ -202,11 +202,11 @@ const FeedbackIndex: React.FC = () => {
                         {tabs.find((tab) => Number(tab.key) === item.type)?.label}
                       </Tag>
                       {
-                        item.isSolve === 1 ? (
-                          <Tag key={item.id + Math.random()} className={style.tag} color="success">
-                            已解决
+                        item.isSolve === 1 && (
+                          <Tag key={item.id} className={style.tag} color="success">
+                            {item.type === 1 ? '已解决' : '已采纳'}
                           </Tag>
-                        ) : null
+                        )
                       }
                     </Space>
                   </div>
