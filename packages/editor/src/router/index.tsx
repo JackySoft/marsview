@@ -25,7 +25,7 @@ export const router = [
     children: [
       {
         path: '/projects',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/project/Category'))),
+        element: lazyLoad(React.lazy(() => import('@/pages/home/project/index'))),
       },
       {
         path: '/project/pages',
