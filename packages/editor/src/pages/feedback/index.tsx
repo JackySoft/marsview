@@ -68,6 +68,10 @@ const FeedbackIndex: React.FC = () => {
       pageSize: pageSize,
       ...formData,
     }).then((res) => {
+      // 判断issue列表是否有下一页
+      if (currentTab === '4') {
+        setHasMore(res.list.length === pageSize);
+      }
       return {
         total: res.total,
         list: res.list,
@@ -87,14 +91,11 @@ const FeedbackIndex: React.FC = () => {
   // 查询反馈总量
   const getFeedbackTotal = async () => {
     const res = await queryFeedbackTotal();
-
     setResolveTotal(res.resolveCount);
     setBugTotal(res.bugCount);
   };
 
   const handleTabChange = useCallback((activeKey: string) => {
-    form.setFieldsValue({ type: activeKey });
-    form.setFieldsValue({ state: 'open' });
     setCurrentTab(activeKey);
     search.submit();
   }, []);
@@ -156,8 +157,7 @@ const FeedbackIndex: React.FC = () => {
               <Form.Item name="state">
                 <Segmented
                   options={['open', 'closed', 'all']}
-                  onChange={(value: string) => {
-                    form.setFieldsValue({ state: value });
+                  onChange={() => {
                     search.submit();
                   }}
                 />
