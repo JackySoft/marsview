@@ -114,6 +114,10 @@ export const router = [
         element: lazyLoad(React.lazy(() => import('@/pages/feedback/IssuePost'))),
       },
       {
+        path: '/user/profile',
+        element: lazyLoad(React.lazy(() => import('@/pages/user'))),
+      },
+      {
         path: '*',
         element: <Navigate to="/404" />,
       },
