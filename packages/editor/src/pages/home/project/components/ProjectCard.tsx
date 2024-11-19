@@ -20,15 +20,9 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
     navigate(`/project/${item.id}/config`);
   };
 
-  // 双击加载项目下属页面
+  // 双击加载项目下子页面
   const handleDoubleClick = (id: number) => {
     navigate(`/project/pages?projectId=${id}`);
-  };
-  // 打开对应环境
-  const handleVisitEnv = (e: React.MouseEvent, env: string) => {
-    e.preventDefault();
-    e.stopPropagation();
-    return window.open(`${import.meta.env.VITE_ADMIN_URL}/project/${item.id}?env=${env}`, '_blank');
   };
 
   // 卡片下拉项
@@ -36,7 +30,7 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
     {
       key: 'config',
       icon: <SettingOutlined />,
-      label: <span onClick={handleClick}>设置</span>,
+      label: '设置',
     },
     {
       type: 'divider',
@@ -44,19 +38,25 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
     {
       key: 'stg',
       icon: <DeploymentUnitOutlined />,
-      label: <a onClick={(e) => handleVisitEnv(e, 'stg')}>测试环境</a>,
+      label: '测试环境',
     },
     {
       key: 'pre',
       icon: <DeploymentUnitOutlined />,
-      label: <a onClick={(e) => handleVisitEnv(e, 'pre')}>预览环境</a>,
+      label: '预览环境',
     },
     {
       key: 'prd',
       icon: <DeploymentUnitOutlined />,
-      label: <a onClick={(e) => handleVisitEnv(e, 'prd')}>生产环境</a>,
+      label: '生产环境',
     },
   ];
+
+  // 环境跳转
+  const onClick = ({ key }: { key: string }) => {
+    if (key === 'config') return handleClick();
+    return window.open(`${import.meta.env.VITE_ADMIN_URL}/project/${item.id}?env=${key}`, '_blank');
+  };
 
   // 项目列表
   return (
@@ -88,7 +88,7 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
             {/* 卡片更多 */}
             <Flex align="center" className={styles.moreInfo}>
               <div>双击查看页面</div>
-              <Dropdown menu={{ items }} arrow placement="bottomRight" trigger={['click']}>
+              <Dropdown menu={{ items, onClick }} arrow placement="bottomRight" trigger={['click']}>
                 <MoreOutlined className={styles.moreIcon} onClick={() => setItem(project)} />
               </Dropdown>
             </Flex>

@@ -1,9 +1,5 @@
-@primary-color: #7d3fff;
-@text-color: #ffffff;
-
 .container {
   height: calc(100vh - 64px);
-  // background-color: #f0f2f5;
   padding: 24px;
   margin: 0 auto;
   max-width: 1024px;
@@ -14,44 +10,22 @@
   }
 
   /* 隐藏滚动条 - Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.card {
-  // max-width: 800px;
-  margin: 0 auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .title {
-  // font-size: 24px;
   font-weight: bold;
-  color: #000;
+  color: var(--mars-theme-text-color);
   margin-bottom: 16px;
 }
 
 .alertList {
-  list-style-type: none;
-  padding-left: 0;
   color: #faad14;
 }
 
 .content {
   margin-top: 24px;
-}
-
-.titleInput {
-  // margin-bottom: 16px;
-  color: #000;
-
-  &::placeholder {
-    color: #8c8c8c;
-  }
-
-  &:focus,
-  &:hover {
-    border-color: @primary-color;
-  }
 }
 
 .editor {
@@ -60,29 +34,6 @@
   padding: 16px 16px 20px 16px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-  // margin-bottom: 16px;
-
-  &:focus {
-    outline: none;
-    border-color: @primary-color;
-  }
-
-  &:empty::before {
-    content: attr(data-placeholder);
-    color: #aaa;
-    position: absolute;
-    pointer-events: none;
-  }
-
-  &::after {
-    content: attr(data-append-placeholder);
-    color: #aaa;
-    position: absolute;
-    left: 8px;
-    bottom: 2px;
-    font-size: 12px;
-    clear: both;
-  }
 }
 
 .imageGrid {
@@ -117,55 +68,3 @@
   margin-top: -14px;
   margin-bottom: 16px;
 }
-.imageUploadTip {
-  display: flex;
-  align-items: center;
-  color: #8c8c8c;
-  margin-bottom: 16px;
-
-  span {
-    margin-left: 8px;
-  }
-}
-
-.buttonGroup {
-  display: flex;
-  justify-content: flex-end;
-  gap: 16px;
-}
-
-:global {
-  .ant-tabs-tab {
-    color: #8c8c8c;
-    &.ant-tabs-tab-active {
-      .ant-tabs-tab-btn {
-        color: @primary-color;
-      }
-    }
-  }
-
-  .ant-tabs-ink-bar {
-    background-color: @primary-color;
-  }
-
-  .ant-btn-primary {
-    background-color: #ff6b6b !important;
-    border-color: #ff6b6b !important;
-
-    &:hover,
-    &:focus {
-      background-color: lighten(@primary-color, 10%);
-      border-color: lighten(@primary-color, 10%);
-    }
-  }
-}
-
-.richTextQuill {
-  :global {
-    // 解决 quill 编辑器高度问题（总高度去掉工具条的高度）
-    .ql-container {
-      height: calc(100% - 43px);
-    }
-  }
-}
-
