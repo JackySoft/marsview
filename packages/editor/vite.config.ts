@@ -17,7 +17,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         // 如果本地启动后端，请替换为后端地址
-        target: 'http://mars-api.marsview.cc',
+        target: 'http://localhost:5000',
         changeOrigin: true,
       },
     },

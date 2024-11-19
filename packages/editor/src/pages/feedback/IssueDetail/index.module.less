@@ -9,11 +9,9 @@
   }
 
   /* 隐藏滚动条 - Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
-
-
 
 .header {
   display: flex;
@@ -21,7 +19,6 @@
   align-items: flex-start;
   margin-bottom: 24px;
   margin-top: 30px;
-
 }
 
 .title {
@@ -150,8 +147,8 @@
 .statusCard {
   width: 220px;
   height: 60px;
-  background-color: white;
-  border: 1px solid #e5e7eb;
+  background-color: var(--mars-theme-bg-color);
+  border: 1px solid var(--mars-theme-border-color);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 24px;
@@ -161,7 +158,6 @@
 }
 
 .statusChange {
-
   width: 60px;
   height: 60px;
   background-color: #87d068;
@@ -178,9 +174,7 @@
   color: #fff;
   transition: all 0.3s ease;
   &:hover {
-
     transform: scale(1.05);
-
   }
 }
 
@@ -188,7 +182,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .statusText {
@@ -205,7 +198,6 @@
 
 .commentsSection {
   margin-top: 24px;
-  // padding: 0 80px;
 }
 
 .commentsHeader {
@@ -220,10 +212,9 @@
   font-weight: 600;
 }
 
-
 .commentCard {
-  background-color: white;
-  border: 1px solid #e5e7eb;
+  background-color: var(--mars-theme-bg-color);
+  border: 1px solid var(--mars-theme-border-color);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
@@ -268,7 +259,6 @@
 .commentButton:hover {
   color: #1f2937;
 }
-
 
 .replyModule {
   display: flex;

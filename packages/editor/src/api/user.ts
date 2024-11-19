@@ -32,3 +32,18 @@ export const getUserAvatar = () => {
 export const searchUser = (keyword: string) => {
   return request.post(`/user/search`, { keyword });
 };
+
+// 密码找回 - 发送邮件
+export const createResetLink = (params: { userEmail: string }) => {
+  return request.post('/user/password/forget', params);
+};
+
+// 密码找回 - 获取用户名
+export const getAccountByToken = (token: string) => {
+  return request.post(`/user/password/getUserByToken?resetToken=${token}`);
+};
+
+// 密码找回提交
+export const resetSubmit = (params: { resetToken: string; userPwd: string }) => {
+  return request.post('/user/password/reset', params);
+};

@@ -10,7 +10,7 @@
 - 参数支持模板字符串、动态变量。比如：`/api/${id}`。
 - 接口支持代理，解决跨域问题。
 
-参考示例：[CRUD 调用](http://www.marsview.cc/editor/144/edit)
+参考示例：[CRUD 调用](https://www.marsview.com.cn/editor/144/edit)
 
 ## 创建接口
 

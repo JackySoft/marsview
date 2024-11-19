@@ -11,11 +11,11 @@ function Welcome() {
         <div className={style.content}>
           <p>
             当前需要正确的项目地址才可以访问，如果没有创建项目，请先去Marsview低代码平台{' '}
-            <a href={`http://www.marsview.cc/projects`} target="_blank">
+            <a href={`https://www.marsview.com.cn/projects`} target="_blank">
               创建
             </a>
           </p>
-          <Button type="primary" onClick={() => window.open(`http://www.marsview.cc/projects`, '_blank')}>
+          <Button type="primary" onClick={() => window.open(`https://www.marsview.com.cn/projects`, '_blank')}>
             去创建
           </Button>
         </div>
