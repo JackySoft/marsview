@@ -97,9 +97,9 @@
     height: 625px;
   }
 }
-.module {
-  padding-top: 100px;
-  padding-bottom: 100px;
+.module1,
+.module2 {
+  padding-block: 100px;
   padding-inline: 40px;
   h1 {
     color: var(--mars-primary-color);
@@ -107,14 +107,9 @@
     text-align: center;
     margin-bottom: 80px;
   }
-  &:nth-child(2n) {
-    .moduleList {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
+
   .moduleList {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 2.5rem;
     .moduleItem {
       display: flex;
@@ -168,76 +163,110 @@
     margin-left: 10px;
   }
 }
-
-@media (max-width: 1025px) {
-  :global(.ant-btn) {
-    height: 35px; /* 设置高度 */
-    padding: 0 10px; /* 设置左右内边距 */
-    font-size: 14px; /* 设置字体大小 */
+@media screen and (min-width: 1920px) {
+  .module1 {
+    .moduleList {
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
   }
+  .module2 {
+    .moduleList {
+      grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    }
+  }
+}
 
-  .bg {
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    .content {
-      margin: 20px 0;
-      width: 100%;
+@media screen and (min-width: 1430px) and (max-width: 1919px) {
+  .module1 {
+    .moduleList {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+  }
+  .module2 {
+    .moduleList {
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+  }
+}
+@media (max-width: 1430px) {
+  .welcome {
+    :global(.ant-btn) {
+      height: 35px; /* 设置高度 */
+      padding: 0 10px; /* 设置左右内边距 */
+      font-size: 14px; /* 设置字体大小 */
+    }
+
+    .header .doc {
+      display: none;
+    }
+    .bg {
+      height: 50vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      .title {
-        font-size: 30px;
-        margin-top: 20%;
-      }
-      .desc {
-        font-size: 20px;
-        margin-top: 30px;
-      }
-      .btnGroup {
-        gap: 20px;
-        justify-content: center;
+      justify-content: center;
+      .content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
         align-items: center;
-      }
-    }
-    .cube {
-      width: 100%;
-      margin-left: 10%;
-    }
-  }
-  .module {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    h1 {
-      font-size: 23px;
-      margin-bottom: 30px;
-    }
-    .moduleList {
-      gap: 60px;
-      // flex-direction: column;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      .moduleItem {
-        width: 42%;
-        img {
-          width: 80px;
+        margin: 0;
+        .title {
+          font-size: 30px;
+          margin-top: auto;
         }
-        span {
-          font-size: 18px;
-          margin-top: 10px;
+        .desc {
+          font-size: 20px;
+          margin-top: 30px;
+        }
+        .count {
+          font-size: 20px;
+          span {
+            font-size: 20px;
+            width: auto;
+          }
+        }
+        .btnGroup {
+          gap: 20px;
+          justify-content: center;
+          align-items: center;
         }
       }
+      .cube {
+        display: none;
+      }
     }
-  }
-  .footer {
-    padding-top: 50px;
-    padding-bottom: 30px;
-    h1 {
-      font-size: 20px;
-      margin-block: 20px;
+    .module1,
+    .module2 {
+      padding-top: 50px;
+      padding-bottom: 50px;
+      h1 {
+        font-size: 23px;
+        margin-bottom: 30px;
+      }
+      .moduleList {
+        gap: 60px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        .moduleItem {
+          img {
+            width: 80px;
+          }
+          span {
+            font-size: 18px;
+            margin-top: 10px;
+          }
+        }
+      }
     }
-    img {
-      width: 80px;
+    .footer {
+      padding-top: 50px;
+      padding-bottom: 30px;
+      h1 {
+        font-size: 20px;
+        margin-block: 20px;
+      }
+      img {
+        width: 80px;
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { initStarCanvas } from '@/utils/canvas';
 import CountUp from 'react-countup';
@@ -78,7 +78,7 @@ export default function Welcome() {
         </div>
         <div className={style.cube}></div>
       </section>
-      <section className={style.module} style={{ backgroundColor: '#fff' }}>
+      <section className={style.module1} style={{ backgroundColor: '#fff' }}>
         <h1>模块介绍</h1>
         <div className={style.moduleList}>
           <div className={style.moduleItem}>
@@ -146,7 +146,7 @@ export default function Welcome() {
           </div>
         </div>
       </section>
-      <section className={style.module} style={{ backgroundColor: '#fafafa' }}>
+      <section className={style.module2} style={{ backgroundColor: '#fafafa' }}>
         <h1>项目特色</h1>
         <div className={style.moduleList}>
           <div className={style.moduleItem}>
