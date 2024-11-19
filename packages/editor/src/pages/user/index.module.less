@@ -1,0 +1,109 @@
+.layout {
+  height: calc(100vh - 64px);
+  overflow: auto;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 隐藏滚动条 - Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+}
+
+.sider {
+  background: #fff;
+}
+
+.menu {
+  height: 100%;
+  border-right: 0;
+}
+
+.content {
+  padding: 24px;
+  background: #f0f2f5;
+}
+
+.breadcrumb {
+  margin-bottom: 16px;
+}
+
+.card {
+  // max-width: 1024px;
+  min-height: calc(100vh - 108px);
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+.headerBanner {
+  height: 130px;
+  background: linear-gradient(to right, #7d3fff, #3f7dff);
+}
+
+.profileContent {
+  margin-top: -64px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.profileInfo {
+  display: flex;
+
+}
+
+.avatar {
+  border-radius: 8px;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.changeAvatarBtn {
+  margin-top: 16px;
+}
+
+.userInfo {
+  margin-top: 60px;
+  margin-left: 30px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    margin-bottom: 4px;
+  }
+
+  p {
+    color: rgba(0, 0, 0, 0.45);
+  }
+}
+
+.emailInput {
+  margin-top: 16px;
+  max-width: 300px;
+}
+
+.aboutSection, .settingsSection {
+  margin-top: 24px;
+  width: 100%;
+  max-width: 500px;
+
+  h3 {
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  p {
+    margin-bottom: 8px;
+  }
+}
+
+.settingsSection {
+  div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
