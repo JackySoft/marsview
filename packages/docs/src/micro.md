@@ -61,7 +61,7 @@ new Vue({
     name: 'MicroMars',
     data() {
       return {
-        url: 'http://admin.marsview.cc/',
+        url: 'https://admin.marsview.com.cn',
       };
     },
     methods: {
@@ -105,6 +105,6 @@ new Vue({
 },
 ```
 
-示例：http://admin.marsview.cc/page/stg/149 这是一个数据看板的页面地址，对应的是测试环境，那上面的地址就对应数据看板，当在你的老项目中，点击该菜单时，就会加载该`marsview`页面。
+示例：https://admin.marsview.com.cn/page/stg/149 这是一个数据看板的页面地址，对应的是测试环境，那上面的地址就对应数据看板，当在你的老项目中，点击该菜单时，就会加载该`marsview`页面。
 
 如果你们公司的菜单也是动态创建的，那此处可能需要修改为动态路由，比如：`/page/:env/:id`，然后再你们公司后台配置菜单时，配置对应的页面路由即可，比如：`/page/stg/149`。

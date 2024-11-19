@@ -4,7 +4,7 @@
 
 平台已经创建了几个关于变量使用的页面，大家可以参考一下：
 
-1. [计数器](http://www.marsview.cc/editor/147/edit)
+1. [计数器](https://www.marsview.com.cn/editor/147/edit)
 
 ## 创建变量
 

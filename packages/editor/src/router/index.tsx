@@ -18,6 +18,10 @@ export const router = [
     element: lazyLoad(React.lazy(() => import('@/pages/login/Login'))),
   },
   {
+    path: '/password-reset',
+    element: lazyLoad(React.lazy(() => import('@/pages/login/Reset'))),
+  },
+  {
     path: '/',
     loader: AuthLoader,
     element: <Root />,
