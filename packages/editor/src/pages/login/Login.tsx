@@ -18,12 +18,14 @@ export default function Login() {
   const [count, setCount] = useState(0);
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
+  const [status, setStatus] = useState(false);
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const saveUserInfo = usePageStore((state) => state.saveUserInfo);
 
   // 类型切换
   const onChange = (val?: string) => {
+    setStatus(false);
     if (val) {
       setType(val);
     } else {
@@ -67,6 +69,7 @@ export default function Login() {
       if (type === 'reset') {
         await createResetLink({ userEmail: values.userName });
         message.success('请查收重置邮件');
+        setStatus(true);
         setLoading2(false);
       } else {
         const res = type === 'login' ? await login<FieldType>(values) : await regist(values);
@@ -135,8 +138,8 @@ export default function Login() {
             )}
 
             <Form.Item style={{ marginTop: 40 }}>
-              <Button type="primary" block htmlType="submit" loading={loading2}>
-                {type === 'login' ? '登录' : type === 'resist' ? '注册' : '发送重置邮件'}
+              <Button type="primary" block htmlType="submit" loading={loading2} disabled={status}>
+                {type === 'login' ? '登录' : type === 'regist' ? '注册' : '发送重置邮件'}
               </Button>
             </Form.Item>
             <Form.Item style={{ marginTop: 40 }}>
