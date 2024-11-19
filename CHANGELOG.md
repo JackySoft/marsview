@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.0.3](https://github.com/JackySoft/marsview/compare/v6.0.2...v6.0.3) (2024-11-19)
+
+
+### Features
+
+* 1.开发重置密码功能 2.替换域名 ([d522c08](https://github.com/JackySoft/marsview/commit/d522c086b4e33fd1d7c3d65b2b73ab788a2a92eb))
+
+
+### Others
+
+* 优化代码 ([32f0e55](https://github.com/JackySoft/marsview/commit/32f0e55c6f5dada0f0f54172b683a6a782d81370))
+
 ### [6.0.2](https://github.com/JackySoft/marsview/compare/v6.0.1...v6.0.2) (2024-11-18)
 
 
