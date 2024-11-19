@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Tag, Button, Space, List, Tabs, Input, Avatar, Pagination, Skeleton, Form, Flex } from 'antd';
+import { Typography, Tag, Button, Space, List, Tabs, Input, Avatar, Pagination, Skeleton, Form, Flex, Segmented } from 'antd';
 import { ShareAltOutlined, SearchOutlined } from '@ant-design/icons';
 import { useAntdTable } from 'ahooks';
 import { FeedbackItem } from '../types';
@@ -13,12 +13,18 @@ const { Title, Paragraph, Text } = Typography;
 const FeedbackIndex: React.FC = () => {
   const [resolveTotal, setResolveTotal] = useState(0);
   const [bugTotal, setBugTotal] = useState(0);
-
+  const [currentTab, setCurrentTab] = useState('0');
+  const [hasMore, setHasMore] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
   // 打开反馈详情
-  const handleCardClick = (id: number) => {
+  const handleCardClick = (id: number, item: FeedbackItem) => {
+    if (currentTab === '4') {
+      window.open(item.issuelUrl);
+      return;
+    }
     navigate(`/feedback/${id}/detail`);
   };
 
@@ -46,12 +52,17 @@ const FeedbackIndex: React.FC = () => {
         key: '3',
         label: '其他',
       },
+      {
+        key: '4',
+        label: 'Github Issue',
+      },
     ],
     [],
   );
 
   // 获取列表数据
-  const getTableData = ({ current, pageSize }: { current: number; pageSize: number }, formData: { title: string; type: number }) => {
+  const getTableData = ({ current, pageSize }: { current: number; pageSize: number }, formData: { title: string; type: number; state: string }) => {
+    setCurrentPage(current);
     return getFeedbackList({
       pageNum: current,
       pageSize: pageSize,
@@ -79,6 +90,25 @@ const FeedbackIndex: React.FC = () => {
 
     setResolveTotal(res.resolveCount);
     setBugTotal(res.bugCount);
+  };
+
+  const handleTabChange = useCallback((activeKey: string) => {
+    form.setFieldsValue({ type: activeKey });
+    form.setFieldsValue({ state: 'open' });
+    setCurrentTab(activeKey);
+    search.submit();
+  }, []);
+
+  const handleLoadMore = async (direction: 'next' | 'prev') => {
+    const nextPage = direction === 'next' ? currentPage + 1 : currentPage - 1;
+    const result = await getTableData({ current: nextPage, pageSize: tableProps.pagination.pageSize }, form.getFieldsValue());
+    if (result.list.length > 0) {
+      setCurrentPage(nextPage);
+      tableProps.onChange({ current: nextPage, pageSize: tableProps.pagination.pageSize });
+      setHasMore(result.list.length === tableProps.pagination.pageSize);
+    } else {
+      setHasMore(false);
+    }
   };
 
   return (
@@ -120,18 +150,30 @@ const FeedbackIndex: React.FC = () => {
         <div className={style.tabsContainer}>
           <Form form={form}>
             <Form.Item name="type">
-              <Tabs defaultActiveKey="0" items={tabs} onChange={search.submit}></Tabs>
+              <Tabs defaultActiveKey="0" items={tabs} onChange={(activeKey) => handleTabChange(activeKey)}></Tabs>
             </Form.Item>
-            <Form.Item name="title">
-              <Input.Search
-                placeholder="根据标题进行检索"
-                prefix={<SearchOutlined />}
-                className={style.searchInput}
-                size="large"
-                onPressEnter={search.submit}
-                onSearch={search.submit}
-              />
-            </Form.Item>
+            {currentTab === '4' ? (
+              <Form.Item name="state">
+                <Segmented
+                  options={['open', 'closed', 'all']}
+                  onChange={(value: string) => {
+                    form.setFieldsValue({ state: value });
+                    search.submit();
+                  }}
+                />
+              </Form.Item>
+            ) : (
+              <Form.Item name="title">
+                <Input.Search
+                  placeholder="根据标题进行检索"
+                  prefix={<SearchOutlined />}
+                  className={style.searchInput}
+                  size="large"
+                  onPressEnter={search.submit}
+                  onSearch={search.submit}
+                />
+              </Form.Item>
+            )}
           </Form>
         </div>
         <div className={style.listContent}>
@@ -141,7 +183,7 @@ const FeedbackIndex: React.FC = () => {
               dataSource={tableProps.dataSource}
               renderItem={(item: FeedbackItem) => (
                 <List.Item className={style.qaCard} key={item.id}>
-                  <div className={style.cardContent} onClick={() => handleCardClick(item.id)}>
+                  <div className={style.cardContent} onClick={() => handleCardClick(item.id, item)}>
                     {item.userAvatar ? (
                       <Avatar src={item.userAvatar} size={48} className={style.avatar} />
                     ) : (
@@ -152,7 +194,9 @@ const FeedbackIndex: React.FC = () => {
                       <Space size={[0, 8]} wrap>
                         {item.isTop === 1 ? <Tag color="#f50">置顶</Tag> : null}
                         <Tag color="#2db7f5">{tabs.find((tab) => Number(tab.key) === item.type)?.label}</Tag>
-                        {item.isSolve === 1 && <Tag color="success">{item.type === 1 ? '已解决' : '已采纳'}</Tag>}
+                        {item.isSolve === 1 && (
+                          <Tag color="success">{item.type === 1 ? '已解决' : item.type === 2 ? '已采纳' : item.type === 4 ? '已关闭' : '已处理'}</Tag>
+                        )}
                       </Space>
                     </div>
                     <div className={style.rightContent}>
@@ -168,11 +212,24 @@ const FeedbackIndex: React.FC = () => {
           </Skeleton>
         </div>
         {/* 分页器 */}
-        {tableProps.pagination.total > 0 ? (
-          <div className={style.pageControl}>
-            <Pagination {...tableProps.pagination} onChange={(current, pageSize) => tableProps.onChange({ current, pageSize })} />
-          </div>
-        ) : null}
+        <div>
+          {currentTab !== '4' ? (
+            tableProps.pagination.total > 0 && (
+              <div className={style.pageControl}>
+                <Pagination {...tableProps.pagination} onChange={(current, pageSize) => tableProps.onChange({ current, pageSize })} />
+              </div>
+            )
+          ) : (
+            <div className={style.loadMoreControl}>
+              <Button onClick={() => handleLoadMore('prev')} disabled={currentPage === 1}>
+                上一页
+              </Button>
+              <Button onClick={() => handleLoadMore('next')} disabled={!hasMore}>
+                下一页
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

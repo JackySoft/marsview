@@ -26,14 +26,15 @@ export interface FeedbackItem {
   userId?: number;
   title: string;
   content: string;
-  isSolve: number;
-  isTop: number;
+  isSolve?: number;
+  isTop?: number;
   like?: number;
-  userAvatar: string;
+  userAvatar?: string;
   createdAt: string;
   nickName: string;
   type: number;
   images?: string;
+  issuelUrl?: string;
 }
 
 export interface FeedbackCommentItem {
