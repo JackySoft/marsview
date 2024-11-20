@@ -109,7 +109,7 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
   return (
     <>
       <Modal
-        title={action === 'create' ? '创建用户' : '编辑用户'}
+        title={action === 'create' ? '添加用户' : '编辑用户'}
         width={600}
         open={visible}
         okText="确定"
@@ -119,7 +119,7 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
         onCancel={handleCancel}
       >
         <Spin spinning={loading}>
-          <Form form={form} labelAlign="right" labelCol={{ span: 4 }} initialValues={{ systemRole: 1 }}>
+          <Form form={form} layout="vertical" labelCol={{ span: 4 }} initialValues={{ systemRole: 1 }} style={{ marginTop: 20 }}>
             <Form.Item hidden name="id">
               <Input />
             </Form.Item>
@@ -130,7 +130,12 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
               </Radio.Group>
             </Form.Item>
             {action === 'create' && (
-              <Form.Item label="用户" name="user_info" rules={[{ required: true, message: '请输入用户邮箱' }]}>
+              <Form.Item
+                label="用户"
+                name="user_info"
+                rules={[{ required: true, message: '请输入用户邮箱' }]}
+                extra="该用户必须为系统已注册用户，最终通过此角色来控制用户访问"
+              >
                 <Select
                   labelInValue
                   filterOption={false}
@@ -145,7 +150,7 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
 
             {/* 只有普通用户才需要设置角色 */}
             {systemRole === 2 && (
-              <Form.Item label="角色" name="roleId" rules={[{ required: true, message: '请输入菜单名称' }]}>
+              <Form.Item label="角色" name="roleId" rules={[{ required: true, message: '请输入菜单名称' }]} extra="若没有角色，可先去角色列表创建">
                 <Select showSearch>
                   {roleList.map((item) => (
                     <Select.Option key={item.id} value={item.id}>

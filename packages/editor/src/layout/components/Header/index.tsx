@@ -262,22 +262,30 @@ const Header = memo(() => {
         {/* 用户信息&发布&发布记录 */}
         <div className={styles.user}>
           <Space>
-            <Popover
-              placement="bottom"
-              content={
-                <>
-                  <img width={150} src={`https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f02.png`} />
-                  <p style={{ textAlign: 'center' }}>请备注：marsview</p>
-                </>
-              }
-            >
-              <Button type="text" style={{ color: 'var(--mars-theme-text-color)' }}>
-                联系我
-              </Button>
-            </Popover>
-            <Button type="text" style={{ color: 'var(--mars-theme-text-color)' }} onClick={() => window.open('http://docs.marsview.cc', '_blank')}>
-              帮助文档
-            </Button>
+            {isEditPage ? null : (
+              <>
+                <Popover
+                  placement="bottom"
+                  content={
+                    <>
+                      <img width={150} src={`https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f02.png`} />
+                      <p style={{ textAlign: 'center' }}>请备注：marsview</p>
+                    </>
+                  }
+                >
+                  <Button type="text" style={{ color: 'var(--mars-theme-text-color)' }}>
+                    联系我
+                  </Button>
+                </Popover>
+                <Button
+                  type="text"
+                  style={{ color: 'var(--mars-theme-text-color)' }}
+                  onClick={() => window.open('http://docs.marsview.cc', '_blank')}
+                >
+                  帮助文档
+                </Button>
+              </>
+            )}
             <Switch
               checkedChildren={<MoonFilled />}
               unCheckedChildren={<SunOutlined />}
@@ -353,8 +361,8 @@ const Header = memo(() => {
             {
               <a href="https://github.com/JackySoft/marsview" className={styles.githubCorner} aria-label="View source on GitHub" target="_blank">
                 <svg
-                  width="50"
-                  height="50"
+                  width="40"
+                  height="40"
                   viewBox="0 0 250 250"
                   style={{ fill: '#7d33ff', color: '#fff', position: 'absolute', top: 0, border: 0, right: 0 }}
                   aria-hidden="true"

@@ -12,16 +12,15 @@ const { Paragraph } = Typography;
  */
 
 export default function Category({ list }: { list: Project.ProjectItem[] }) {
-  const [item, setItem] = useState({ id: 0 });
   const navigate = useNavigate();
 
   // 单击打开项目配置
-  const handleClick = (id: number) => {
+  const handleOpenProject = (id: number) => {
     navigate(`/project/${id}/config`);
   };
 
   // 双击加载项目下子页面
-  const handleDoubleClick = (id: number) => {
+  const handleOpenPages = (id: number) => {
     navigate(`/project/pages?projectId=${id}`);
   };
 
@@ -30,7 +29,7 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
     {
       key: 'config',
       icon: <SettingOutlined />,
-      label: '设置',
+      label: '项目配置',
     },
     {
       type: 'divider',
@@ -53,9 +52,9 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
   ];
 
   // 环境跳转
-  const onClick = ({ key }: { key: string }) => {
-    if (key === 'config') return handleClick(item.id);
-    return window.open(`${import.meta.env.VITE_ADMIN_URL}/project/${item.id}?env=${key}`, '_blank');
+  const onClick = (key: string, id: number) => {
+    if (key === 'config') return handleOpenProject(id);
+    return window.open(`${import.meta.env.VITE_ADMIN_URL}/project/${id}?env=${key}`, '_blank');
   };
 
   // 项目列表
@@ -63,16 +62,16 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
     <div className={styles.projectGrid}>
       {list.map((project) => {
         return (
-          <div className={styles.projectCard} key={project.id} onDoubleClick={() => handleDoubleClick(project.id)}>
+          <div className={styles.projectCard} key={project.id}>
             {/* 卡片头部 */}
-            <div className={styles.cardHeader} onClick={() => handleClick(project.id)}>
+            <div className={styles.cardHeader} onClick={() => handleOpenProject(project.id)}>
               <h3 className={styles.cardTitle}>
                 <GlobalOutlined className={styles.cardIcon} />
                 {project.name}
               </h3>
             </div>
             {/* 卡片内容 */}
-            <div className={styles.cardContent}>
+            <div className={styles.cardContent} onClick={() => handleOpenPages(project.id)}>
               <Paragraph className={styles.description}>{project.remark}</Paragraph>
               <div className={styles.metaInfo}>
                 <UserOutlined className={styles.metaIcon} />
@@ -86,12 +85,11 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
               </div>
             </div>
             {/* 卡片更多 */}
-            <Flex align="center" className={styles.moreInfo}>
-              <div>双击查看页面</div>
-              <Dropdown menu={{ items, onClick }} arrow placement="bottomRight" trigger={['click']}>
-                <MoreOutlined className={styles.moreIcon} onClick={() => setItem(project)} />
+            <div className={styles.moreInfo}>
+              <Dropdown menu={{ items, onClick: ({ key }) => onClick(key, project.id) }} arrow placement="bottomRight" trigger={['click']}>
+                <MoreOutlined className={styles.moreIcon} />
               </Dropdown>
-            </Flex>
+            </div>
             {/* 项目Logo */}
             <Avatar src={project.logo} className={styles.projectLogo} />
           </div>
