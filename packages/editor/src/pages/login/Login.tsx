@@ -105,7 +105,7 @@ export default function Login() {
               <span>登录</span>
             </div>
           ) : (
-            <div className={style.title}>邮箱注册</div>
+            <div className={style.title}>{type === 'regist' ? '邮箱注册' : '密码找回'}</div>
           )}
           <Form name="basic" layout="vertical" className={style.form} onFinish={onFinish} size="large" form={form}>
             <Form.Item<FieldType>
@@ -131,7 +131,7 @@ export default function Login() {
               </Form.Item>
             )}
 
-            {type === 'login' && (
+            {type !== 'reset' && (
               <Form.Item<FieldType> style={{ marginTop: 32 }} name="userPwd" rules={[{ required: true, message: '请输入密码' }]}>
                 <Input.Password prefix={<LockOutlined />} autoComplete="off" allowClear placeholder="请输入密码" />
               </Form.Item>

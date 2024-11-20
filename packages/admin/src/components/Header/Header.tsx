@@ -66,23 +66,20 @@ const Header = memo(() => {
           menu={{
             items: [
               {
-                key: '1',
-                label: `${userName}`,
+                key: 'profile',
+                label: userName,
               },
               {
-                key: '2',
-                label: (
-                  <div
-                    onClick={(e) => {
-                      localStorage.clear();
-                      navigate(`/login?callback=${window.location.href}`);
-                    }}
-                  >
-                    退出
-                  </div>
-                ),
+                key: 'logout',
+                label: '退出',
               },
             ],
+            onClick: ({ key }) => {
+              if (key === 'logout') {
+                localStorage.clear();
+                navigate(`/login?callback=${window.location.href}`);
+              }
+            },
             selectable: true,
           }}
         >

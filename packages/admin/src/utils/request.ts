@@ -1,6 +1,5 @@
 import axios, { AxiosError } from 'axios';
 import { message } from './AntdGlobal';
-import { showLoading, hideLoading } from './loading';
 import router from '@/router';
 import storage from './storage';
 
@@ -25,7 +24,6 @@ const instance = axios.create({
 // 请求拦截
 instance.interceptors.request.use(
   (config) => {
-    showLoading();
     config.baseURL = import.meta.env.VITE_BASE_API;
     const token = storage.get('token');
     if (token) {
@@ -43,7 +41,6 @@ instance.interceptors.request.use(
 // 响应拦截
 instance.interceptors.response.use(
   async (response) => {
-    hideLoading();
     const res: IResult = await response.data;
     if (!res) {
       message.error(ErrorMsg);
@@ -66,7 +63,6 @@ instance.interceptors.response.use(
     return res;
   },
   (error) => {
-    hideLoading();
     if (error.response && error.response.status === 403) {
       router.navigate('/403');
     } else {
