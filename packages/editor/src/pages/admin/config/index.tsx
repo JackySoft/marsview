@@ -172,25 +172,28 @@ const Config: React.FC = memo(() => {
         </Form.Item>
         <div className={styles.editBtn}>
           {type === 'detail' ? (
-            <Button
-              type="primary"
-              icon={<EditOutlined />}
-              onClick={() => {
-                setType('edit');
-              }}
-            >
-              编辑
-            </Button>
+            <Space>
+              <Button
+                type="primary"
+                icon={<EditOutlined />}
+                onClick={() => {
+                  setType('edit');
+                }}
+              >
+                编辑
+              </Button>
+              <Button icon={<RollbackOutlined />} onClick={() => history.back()}>
+                返回
+              </Button>
+            </Space>
           ) : (
             <Space>
               <Button type="primary" icon={<SaveOutlined />} loading={loading} onClick={handleSubmit}>
                 保存
               </Button>
-              {id !== '0' && (
-                <Button icon={<RollbackOutlined />} onClick={() => setType('detail')}>
-                  取消
-                </Button>
-              )}
+              <Button icon={<RollbackOutlined />} onClick={() => setType('detail')}>
+                取消
+              </Button>
             </Space>
           )}
         </div>

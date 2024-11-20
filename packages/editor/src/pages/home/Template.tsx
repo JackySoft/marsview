@@ -65,7 +65,7 @@ export default function Index() {
           <>
             <div className={styles.pagesContent}>
               <Spin spinning={loading} size="large">
-                <PageCard list={content} getList={getList} />
+                <PageCard list={content} refresh={getList} />
               </Spin>
             </div>
             <Pagination

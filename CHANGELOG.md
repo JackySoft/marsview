@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.0.5](https://github.com/JackySoft/marsview/compare/v6.0.4...v6.0.5) (2024-11-20)
+
+
+### Bug Fixes
+
+* 修复问题 ([0ff76c2](https://github.com/JackySoft/marsview/commit/0ff76c2fd28520805d4525d4b455a9a2618fbc9e))
+
+### [6.0.4](https://github.com/JackySoft/marsview/compare/v6.0.3...v6.0.4) (2024-11-19)
+
+
+### Features
+
+* 新增Github ISSUE列表 ([39d87f5](https://github.com/JackySoft/marsview/commit/39d87f5e43335a650ab84de8af32f818a4ac36f1))
+
+
+### Bug Fixes
+
+* 修复问题 ([a83285f](https://github.com/JackySoft/marsview/commit/a83285f9a32967319446af5633a9c156b74fd1c6))
+
+### [6.0.3](https://github.com/JackySoft/marsview/compare/v6.0.2...v6.0.3) (2024-11-19)
+
+
+### Features
+
+* 1.开发重置密码功能 2.替换域名 ([d522c08](https://github.com/JackySoft/marsview/commit/d522c086b4e33fd1d7c3d65b2b73ab788a2a92eb))
+
+
+### Others
+
+* 优化代码 ([32f0e55](https://github.com/JackySoft/marsview/commit/32f0e55c6f5dada0f0f54172b683a6a782d81370))
+
+### [6.0.2](https://github.com/JackySoft/marsview/compare/v6.0.1...v6.0.2) (2024-11-18)
+
+
+### Bug Fixes
+
+* 问答主页tag ([53fef5d](https://github.com/JackySoft/marsview/commit/53fef5da8dd38a3fcc6b2e336d9e14c4b8d85fb9))
+
+
+### Documentation
+
+* 修改文档 ([e146373](https://github.com/JackySoft/marsview/commit/e14637349ccfced23372d12eff3785569bc8caa5))
+
+### [6.0.1](https://github.com/JackySoft/marsview/compare/v6.0.0...v6.0.1) (2024-11-18)
+
+
+### Features
+
+* 优化代码 ([9645e02](https://github.com/JackySoft/marsview/commit/9645e02c545a130dfd7c80a41309bd7ccc5f09c6))
+
+
+### Bug Fixes
+
+* 问答详情页用户头像问题 ([82bd842](https://github.com/JackySoft/marsview/commit/82bd842f40511f783f4a8c17f4cab8178d3d1b20))
+* 修复ts报错 ([af16f68](https://github.com/JackySoft/marsview/commit/af16f688adafedceb26695b295b547a5e8c8a7b8))
+
 ## [6.0.0](https://github.com/JackySoft/marsview/compare/v5.1.2...v6.0.0) (2024-11-17)
 
 

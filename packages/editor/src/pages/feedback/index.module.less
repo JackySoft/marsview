@@ -10,8 +10,8 @@
   }
 
   /* 隐藏滚动条 - Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .content {
@@ -24,130 +24,71 @@
   padding: 24px;
   color: #fff;
   margin-bottom: 24px;
-  // backdrop-filter: blur(50px); /* 添加磨砂效果 */
-}
 
-.headerContent {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
+  .headerLeft {
+    flex: 1;
+    .title {
+      color: white !important;
+      margin-bottom: 16px !important;
+    }
 
-.headerLeft {
-  flex: 1;
-}
+    .tags {
+      margin-bottom: 16px;
+    }
 
-.title {
-  color: white !important;
-  margin-bottom: 16px !important;
-}
-
-.tags {
-  margin-bottom: 16px;
-
-  :global(.ant-tag) {
-    background-color: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
+    .description {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 10px;
+    }
   }
-}
 
-.description {
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 10px;
-}
+  .headerRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: auto;
 
-.headerRight {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  height: auto;
-}
+    .statCard {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 8px 16px;
+      margin-bottom: 8px;
+      min-width: 80px;
+      min-height: 80px;
+      text-align: center;
+    }
 
-.statCard {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  padding: 8px 16px;
-  margin-bottom: 8px;
-  min-width: 80px;
-  min-height: 80px;
-  text-align: center;
-}
+    .statNumber {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      display: block;
+    }
 
-.statNumber {
-  font-size: 24px;
-  font-weight: bold;
-  color: #fff;
-  display: block;
-}
-
-.statLabel {
-  font-size: 12px;
-  color: #fff;
-}
-
-.headerActions {
-  margin-top: 10px;
-}
-
-.followButton {
-  background-color: #ff6b6b !important;
-  border-color: #ff6b6b !important;
-}
-
-.shareButton {
-  background-color: rgba(255, 255, 255, 0.2) !important;
-  border: none !important;
-  color: white !important;
-}
-
-.publishInfo {
-  display: block;
-  margin-top: 16px;
-  font-size: 12px;
+    .statLabel {
+      font-size: 14px;
+      color: #fff;
+    }
+  }
+  .headerActions {
+    margin-top: 10px;
+  }
 }
 
 .tabsContainer {
   border-radius: 16px;
   padding: 16px;
-  margin-bottom: 14px;
-}
-
-.tabs {
 
   :global {
-    .ant-tabs-nav::before {
-      border-bottom: none;
-    }
-
-    .ant-tabs-tab {
-      color: #888;
-      font-size: 16px;
-    }
-
-    .ant-tabs-tab-active {
-      background-color: #fff;
-      border-radius: 8px;
-
-      .ant-tabs-tab-btn {
-        color: #1e1e1e !important;
-      }
-    }
-
-    .ant-tabs-ink-bar {
-      display: none;
+    .ant-form-item {
+      margin-bottom: 0;
     }
   }
 }
 
 .searchInput {
-  border: none;
   border-radius: 8px;
   width: 350px;
-  input {
-    // background-color: transparent;
-    color: #fff;
-  }
 
   :global {
     .ant-input-prefix {
@@ -157,48 +98,22 @@
 }
 
 .listContent {
-  background-color: white;
-  border-radius: 16px;
-  padding: 5px 20px 0 20px;
+  padding: 16px;
   min-height: 200px;
 }
 
-.listTitle {
-  margin-bottom: 16px !important;
-}
-
-.listItem {
-  background-color: #f0f2f5;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-}
-
-.calendarIcon {
-  color: #1890ff;
-}
-
-:global {
-  .ant-list-item-meta-title > a {
-    color: #1890ff;
-  }
-}
-
 .qaCard {
-  background-color: #ffffff;
+  background-color: var(--mars-theme-bg-color);
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--mars-theme-border-color);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   margin-bottom: 16px;
-  padding: 16px;
   width: 100%;
   transition: all 0.3s ease;
 
   &:hover {
-    // background-color: #f0f2f5;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   }
-
 }
 
 .cardContent {
@@ -206,61 +121,54 @@
   cursor: pointer;
   width: 100%;
   padding: 0 14px;
-}
 
-.avatar {
-  margin: 0 20px 0 5px;
-  width: 50px;
-}
+  .avatar {
+    margin: 0 20px 0 5px;
+    width: 50px;
+  }
 
-.middleContent {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  .middleContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .itemTitle {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 500;
+    }
 
-.itemTitle {
-  margin: 0 0 8px;
-  font-size: 16px;
-  font-weight: 500;
-}
+    .tag {
+      background-color: #f0f0f0;
+      color: #333;
+      border: none;
+      font-weight: 500;
+      width: fit-content;
+    }
+  }
+  .rightContent {
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-.tag {
-  background-color: #f0f0f0;
-  color: #333;
-  border: none;
-  font-weight: 500;
-  width: fit-content;
-}
+    .userInfo {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
 
-.rightContent {
-  // text-align: right;
-  min-width: 120px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+      .username {
+        margin-right: 16px;
+        font-weight: 500;
+      }
 
-.userInfo {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  // margin-bottom: 4px;
-}
-
-
-
-.username {
-  margin-right: 16px;
-  font-weight: 500;
-}
-
-.publishTime {
-  font-size: 12px;
-  color: #888;
-  text-align: right;
+      .publishTime {
+        font-size: 12px;
+        color: #888;
+        text-align: right;
+      }
+    }
+  }
 }
 
 .pageControl {
@@ -283,11 +191,19 @@
   transition: all 0.3s;
 }
 
+// 反馈悬浮图标
 .feedbackIcon:hover {
-  color: #5a2ecc; /* 改变颜色 */
+  color: var(--mars-primary-color); /* 改变颜色 */
   transform: translateY(-50%) scale(1.1); /* 放大 */
 }
 
 .hidden {
   display: none;
+}
+
+.loadMoreControl {
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  gap: 10px;
 }

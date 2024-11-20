@@ -32,7 +32,7 @@ Marsview is a low code visualization platform for middle and backend development
 
 ## Online use 🛸
 
-- 🌍 [Marsview](http://www.marsview.cc/)
+- 🌍 [Marsview](https://www.marsview.com.cn/)
 
 |                                                                        |                                                                        |
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |

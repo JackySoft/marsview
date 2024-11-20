@@ -113,7 +113,7 @@ function Console() {
         ) : (
           !loading && (
             <Empty style={{ marginTop: 100 }} description="当前暂无可访问的项目">
-              <Button type="primary" onClick={() => window.open('http://www.marsview.cc/projects', 'blank')}>
+              <Button type="primary" onClick={() => window.open('https://www.marsview.com.cn/projects', 'blank')}>
                 去创建
               </Button>
             </Empty>

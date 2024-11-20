@@ -18,6 +18,10 @@ export const router = [
     element: lazyLoad(React.lazy(() => import('@/pages/login/Login'))),
   },
   {
+    path: '/password-reset',
+    element: lazyLoad(React.lazy(() => import('@/pages/login/Reset'))),
+  },
+  {
     path: '/',
     loader: AuthLoader,
     element: <Root />,
@@ -25,7 +29,7 @@ export const router = [
     children: [
       {
         path: '/projects',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/project/Category'))),
+        element: lazyLoad(React.lazy(() => import('@/pages/home/project/index'))),
       },
       {
         path: '/project/pages',

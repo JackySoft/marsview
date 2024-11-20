@@ -10,7 +10,7 @@ import { PageItem } from '@/api/types';
 import styles from './../../index.module.less';
 
 // 页面列表项
-const PageCard = ({ list, getList }: { list: PageItem[]; getList: () => void }) => {
+const PageCard = ({ list, refresh }: { list: PageItem[]; refresh: () => void }) => {
   const [showPreview, setShowPreview] = useState(false);
   const [previewUrl, setPreviewUrl] = useState('');
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const PageCard = ({ list, getList }: { list: PageItem[]; getList: () => void }) 
         id: params.id,
       });
       message.success('复制成功');
-      getList();
+      refresh();
     }
     if (type === 'delete') {
       Modal.confirm({
@@ -48,7 +48,7 @@ const PageCard = ({ list, getList }: { list: PageItem[]; getList: () => void }) 
             id: params.id,
           });
           message.success('删除成功');
-          getList();
+          refresh();
         },
       });
     }
@@ -58,7 +58,7 @@ const PageCard = ({ list, getList }: { list: PageItem[]; getList: () => void }) 
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(auto-fill, minmax(340px, 1fr))`,
+          gridTemplateColumns: `repeat(auto-fill, minmax(320px, 1fr))`,
           gap: 20,
         }}
       >

@@ -271,7 +271,7 @@ const Header = memo(() => {
                 </>
               }
             >
-              <Button type="text" style={{ color: 'var(--mars-theme-text-color)' }} onClick={() => window.open('http://docs.marsview.cc', '_blank')}>
+              <Button type="text" style={{ color: 'var(--mars-theme-text-color)' }}>
                 联系我
               </Button>
             </Popover>
