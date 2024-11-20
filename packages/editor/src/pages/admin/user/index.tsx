@@ -162,7 +162,7 @@ export default function MenuList() {
         }
         action={
           <Button type="primary" onClick={handleCreate}>
-            新增
+            添加
           </Button>
         }
       >

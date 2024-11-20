@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Col, Row, Space, Tabs, Tooltip } from 'antd';
+import { Col, Flex, Row, Space, Tabs, Tooltip } from 'antd';
 import {
   AppstoreOutlined,
   PartitionOutlined,
@@ -32,30 +32,33 @@ const VariableList = lazy(() => import('./Variable/VariableList'));
 const panels = [
   {
     key: 'ComponentPanel',
-    icon: <AppstoreOutlined />,
+    icon: <AppstoreOutlined style={{ fontSize: 16 }} />,
+    label: '组件',
     title: (
       <Space>
-        <span>组件物料</span>
+        <span>组件</span>
         <Tooltip title="无需拖拽，直接点击就能添加到画布中。">
           <QuestionCircleOutlined />
         </Tooltip>
       </Space>
     ),
-    component: () => {
+    children: () => {
       return <ComponentPanel />;
     },
   },
   {
     key: 'home',
-    icon: <ProjectOutlined />,
+    icon: <ProjectOutlined style={{ fontSize: 16 }} />,
+    label: '页面',
     title: '页面列表',
-    component: () => {
+    children: () => {
       return <PageList />;
     },
   },
   {
     key: 'OutlinePanel',
-    icon: <PartitionOutlined />,
+    icon: <PartitionOutlined style={{ fontSize: 16 }} />,
+    label: '大纲',
     title: (
       <Space>
         <span>页面大纲</span>
@@ -64,39 +67,43 @@ const panels = [
         </Tooltip>
       </Space>
     ),
-    component: () => {
+    children: () => {
       return <OutlinePanel />;
     },
   },
   {
     key: 'CodingPanel',
-    icon: <CodeOutlined />,
+    icon: <CodeOutlined style={{ fontSize: 16 }} />,
+    label: '代码',
     title: '页面JSON',
-    component: () => {
+    children: () => {
       return <CodingPanel />;
     },
   },
   {
     key: 'ApiList',
-    icon: <ApiOutlined />,
+    icon: <ApiOutlined style={{ fontSize: 16 }} />,
+    label: '接口',
     title: '页面接口',
-    component: () => {
+    children: () => {
       return <ApiList />;
     },
   },
   {
     key: 'Variable',
-    icon: <FunctionOutlined />,
+    icon: <FunctionOutlined style={{ fontSize: 16 }} />,
+    label: '变量',
     title: '页面变量',
-    component: () => {
+    children: () => {
       return <VariableList />;
     },
   },
   {
     key: 'Member',
-    icon: <UsergroupAddOutlined />,
+    icon: <UsergroupAddOutlined style={{ fontSize: 16 }} />,
+    label: '成员',
     title: '页面成员',
-    component: () => {
+    children: () => {
       return <MemberList />;
     },
   },
@@ -113,16 +120,17 @@ const Menu = () => {
         size={'small'}
         defaultActiveKey={panels[0].key}
         tabPosition="left"
-        tabBarStyle={{ width: '50px', height: 'calc(100vh - 64px)' }}
+        tabBarStyle={{ width: 50, height: 'calc(100vh - 64px)' }}
         className={styles.leftTool}
         centered={true}
         items={panels.map((item) => {
           return {
             key: item.key,
             label: (
-              <Tooltip placement="right" title={item.title}>
+              <Flex vertical justify="center" align="center" gap={5}>
                 {item.icon}
-              </Tooltip>
+                <span style={{ fontSize: 12 }}>{item.label}</span>
+              </Flex>
             ),
             children: (
               <div style={{ marginLeft: -10, marginRight: 10 }}>
@@ -131,7 +139,7 @@ const Menu = () => {
                     <span style={{ fontWeight: 'bold' }}>{item.title}</span>
                   </Col>
                 </Row>
-                <Suspense fallback={<SpinLoading />}>{item.component?.()}</Suspense>
+                <Suspense fallback={<SpinLoading />}>{item.children?.()}</Suspense>
               </div>
             ),
           };
