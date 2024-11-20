@@ -16,8 +16,8 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
   const navigate = useNavigate();
 
   // 单击打开项目配置
-  const handleClick = () => {
-    navigate(`/project/${item.id}/config`);
+  const handleClick = (id: number) => {
+    navigate(`/project/${id}/config`);
   };
 
   // 双击加载项目下子页面
@@ -54,7 +54,7 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
 
   // 环境跳转
   const onClick = ({ key }: { key: string }) => {
-    if (key === 'config') return handleClick();
+    if (key === 'config') return handleClick(item.id);
     return window.open(`${import.meta.env.VITE_ADMIN_URL}/project/${item.id}?env=${key}`, '_blank');
   };
 
@@ -65,7 +65,7 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
         return (
           <div className={styles.projectCard} key={project.id} onDoubleClick={() => handleDoubleClick(project.id)}>
             {/* 卡片头部 */}
-            <div className={styles.cardHeader} onClick={handleClick}>
+            <div className={styles.cardHeader} onClick={() => handleClick(project.id)}>
               <h3 className={styles.cardTitle}>
                 <GlobalOutlined className={styles.cardIcon} />
                 {project.name}
