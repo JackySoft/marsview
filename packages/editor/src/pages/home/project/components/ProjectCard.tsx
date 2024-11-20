@@ -30,7 +30,7 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
     {
       key: 'config',
       icon: <SettingOutlined />,
-      label: '设置',
+      label: '项目配置',
     },
     {
       type: 'divider',
@@ -72,7 +72,7 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
               </h3>
             </div>
             {/* 卡片内容 */}
-            <div className={styles.cardContent}>
+            <div className={styles.cardContent} onClick={() => handleDoubleClick(project.id)}>
               <Paragraph className={styles.description}>{project.remark}</Paragraph>
               <div className={styles.metaInfo}>
                 <UserOutlined className={styles.metaIcon} />
@@ -86,12 +86,11 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
               </div>
             </div>
             {/* 卡片更多 */}
-            <Flex align="center" className={styles.moreInfo}>
-              <div>双击查看页面</div>
+            <div className={styles.moreInfo}>
               <Dropdown menu={{ items, onClick }} arrow placement="bottomRight" trigger={['click']}>
                 <MoreOutlined className={styles.moreIcon} onClick={() => setItem(project)} />
               </Dropdown>
-            </Flex>
+            </div>
             {/* 项目Logo */}
             <Avatar src={project.logo} className={styles.projectLogo} />
           </div>
