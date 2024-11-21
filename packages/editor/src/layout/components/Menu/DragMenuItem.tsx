@@ -90,7 +90,7 @@ const DragMenuItem = (props: IDragTarget) => {
   };
 
   return (
-    <Button type="default" block ref={drag} onClick={() => handleClick(props)}>
+    <Button type="default" style={{ fontSize: 12 }} block ref={drag} onClick={() => handleClick(props)}>
       {props.name}
     </Button>
   );
