@@ -3,6 +3,7 @@ import React, { forwardRef, useContext, useEffect, useImperativeHandle, useState
 import { Form, FormItemProps, Rate, RateProps } from 'antd';
 import { useFormContext } from '@/packages/utils/context';
 import { isNull } from '@/packages/utils/util';
+import { iconsList } from '@/packages/components/IConSetting';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {
@@ -59,7 +60,7 @@ const MRate = forwardRef<MRateRef, ComponentType<IConfig>>(({
 
     // 获取对应的组件实例
     useEffect(() => {
-        ImportCharacterFromAntdIcon(config.props.formWrap.character)
+        setCharacter(iconsList[config.props.formWrap.character]?.render())
     }, [config.props.formWrap.character]);
 
     // 输入事件
@@ -76,18 +77,6 @@ const MRate = forwardRef<MRateRef, ComponentType<IConfig>>(({
 
     if (!visible) {
         return null
-    }
-
-    const ImportCharacterFromAntdIcon = async (componentName: string) => {
-        try {
-            // 动态导入模块
-            const module: any = await import(`@ant-design/icons`);
-            // 访问模块中的导出
-            const dynamicImport = module[componentName];
-            setCharacter(dynamicImport.render())
-        } catch (error) {
-            console.log(`error: ${error}`)
-        }
     }
 
     return (

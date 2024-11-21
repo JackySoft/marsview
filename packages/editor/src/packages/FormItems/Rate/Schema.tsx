@@ -61,17 +61,12 @@ const FormSetting = [
         label: '是否禁用',
         name: ['formWrap', 'disabled'],
     },
-    // {
-    //     type: '',
-    //     label: '自定义字符',
-    //     name: ['formWrap', 'character']
-    // }
     {
         type: 'function',
         label: '自定义字符',
         name: ['formWrap', 'character'],
         render: (form: FormInstance) => {
-            return <IConSetting name={['formWrap', 'character']} />;
+            return <IConSetting name={['formWrap', 'character']} initalValue="StarFilled" />;
         },
     },
 ]
