@@ -39,18 +39,22 @@ const FeedbackIndex: React.FC = () => {
       {
         key: '0',
         label: '全部',
+        color: '#2db7f5',
       },
       {
         key: '1',
         label: 'BUG',
+        color: '#f50',
       },
       {
         key: '2',
         label: '建议',
+        color: '#2db7f5',
       },
       {
         key: '3',
         label: '其他',
+        color: '#108ee9',
       },
       {
         key: '4',
@@ -192,8 +196,10 @@ const FeedbackIndex: React.FC = () => {
                     <div className={style.middleContent}>
                       <div className={style.itemTitle}>{item.title}</div>
                       <Space size={[0, 8]} wrap>
-                        {item.isTop === 1 ? <Tag color="#f50">置顶</Tag> : null}
-                        <Tag color="#2db7f5">{tabs.find((tab) => Number(tab.key) === item.type)?.label}</Tag>
+                        {item.isTop === 1 ? <Tag color="var(--mars-primary-color)">置顶</Tag> : null}
+                        <Tag color={tabs.find((tab) => Number(tab.key) === item.type)?.color}>
+                          {tabs.find((tab) => Number(tab.key) === item.type)?.label}
+                        </Tag>
                         {item.isSolve === 1 && (
                           <Tag color="success">{item.type === 1 ? '已解决' : item.type === 2 ? '已采纳' : item.type === 4 ? '已关闭' : '已处理'}</Tag>
                         )}
