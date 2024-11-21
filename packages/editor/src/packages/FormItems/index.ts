@@ -21,3 +21,4 @@ export { TreeSelect, TreeSelectConfig } from './TreeSelect';
 export { FormList, FormListConfig } from './FormList';
 export { EditTable, EditTableConfig } from './EditTable';
 export { RichText, RichTextConfig } from './RichText';
+export { Rate, RateConfig } from './Rate'
