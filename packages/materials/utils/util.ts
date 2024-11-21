@@ -8,6 +8,7 @@ import { ComponentType } from '@materials/types';
 import { get } from 'lodash-es';
 import { cloneDeep } from 'lodash-es';
 import copy from 'copy-to-clipboard';
+import storage from './storage';
 
 /**
  * 生成ID
@@ -408,25 +409,22 @@ export const loadScript = (src: string) => {
 
 /**
  * 获取环境变量
- * 1. vanEnv 当前项目环境
- * 2. isDev 是否是开发环境
- * 3. isPage 是否是页面环境
- * 4. isProject 是否是项目环境
+ * 开发环境默认返回 stg
+ * 页面打开，获取环境参数
+ * 项目打开，优先通过storage获取环境参数
  * 5. env 当前真实环境
  */
 export const getEnv = () => {
-  const vanEnv = document.documentElement.dataset?.vanEnv;
   const isDev = /^\/editor\/\d+\/edit/.test(location.pathname);
-  const isPage = /^\/page\/(stg|pre|prd)\/\d+/.test(location.pathname);
-  const isProject = /^\/project\/(stg|pre|prd)\/\d+/.test(location.pathname);
-  const result1 = location.pathname.match(/^\/page\/(stg|pre|prd)\/\d+/);
-  const result2 = location.pathname.match(/^\/project\/(stg|pre|prd)\/\d+/);
-  const env = (result1 ? result1[1] : result2 ? result2[1] : 'stg') as 'stg' | 'pre' | 'prd';
-  return {
-    vanEnv,
-    isDev,
-    isPage,
-    isProject,
-    env,
-  };
+  if (isDev) return 'stg';
+  const isPage = /^\/page\/\d+/.test(location.pathname);
+  if (isPage) {
+    const search = new URLSearchParams(location.search);
+    return search.get('env') || 'prd';
+  }
+  const match = location.pathname.match(/^\/project\/(\d+)\/(\d+)/);
+  if (match && match[1]) {
+    return storage.get(match[1] + '-env') || 'prd';
+  }
+  return 'prd';
 };
