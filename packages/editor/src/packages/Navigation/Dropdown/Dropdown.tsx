@@ -108,7 +108,7 @@ const MDropdown = forwardRef<MDropdownRef, ComponentType<IConfig>>(({
     >
       <a onClick={(e) => e.preventDefault()}>
         <Space>
-          Hover me
+          {config.props.text || 'hover me'}
           {/* <DownOutlined /> */}
         </Space>
       </a>
