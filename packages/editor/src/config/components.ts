@@ -93,6 +93,17 @@ const components = [
     ],
   },
   {
+    type: 'Navigation',
+    title: '导航',
+    data: [
+      {
+        icon: '',
+        name: '下拉菜单',
+        type: 'Dropdown',
+      }
+    ]
+  },
+  {
     type: 'FormItems',
     title: '表单录入',
     data: [
