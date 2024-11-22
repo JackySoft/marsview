@@ -91,7 +91,9 @@ export default {
       type: '',
       level: 1,
     },
-    style: {},
+    style: {
+      margin: 0,
+    },
     events: [],
     api: {},
     source: '',
