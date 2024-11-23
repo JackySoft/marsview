@@ -5,6 +5,8 @@ import { ComponentType, ApiType, PageVariable, EventType, ComItemType } from '@m
 export interface UserInfoStore {
   userId: number;
   userName: string;
+  nickName: string;
+  avatar: string;
   identifier: string;
 }
 export interface PageState {
@@ -67,6 +69,8 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   userInfo: {
     userId: 0,
     userName: '',
+    nickName: '',
+    avatar: '',
     identifier: '',
   },
   selectedElement: undefined,

@@ -3,14 +3,12 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Flex, Switch } from 'antd';
 import {
   ProjectOutlined,
-  OneToOneOutlined,
   CaretDownFilled,
   DownOutlined,
   AppstoreOutlined,
   LoadingOutlined,
   PieChartOutlined,
   CloudOutlined,
-  QuestionCircleOutlined,
   SunOutlined,
   MoonFilled,
 } from '@ant-design/icons';
@@ -29,7 +27,6 @@ const Header = memo(() => {
   const [loading, setLoading] = useState(false);
   const [navKey, setNavKey] = useState(['projects']);
   const [pageFrom, setPageFrom] = useState('projects');
-  const [avatar, setAvatar] = useState<string>();
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
@@ -113,12 +110,6 @@ const Header = memo(() => {
 
   // 获取用户头像
   useEffect(() => {
-    const [email, suffix] = userInfo.userName.split('@');
-    if (suffix === 'qq.com' && /^\d+$/g.test(email)) {
-      setAvatar(`https://q2.qlogo.cn/headimg_dl?dst_uin=${email}&spec=640`);
-    } else {
-      setAvatar('');
-    }
     const isDark = storage.get('marsview-theme');
     if (isDark) {
       document.documentElement.setAttribute('data-theme', 'dark');
@@ -354,9 +345,9 @@ const Header = memo(() => {
             >
               <Flex align="center" style={{ height: 64 }}>
                 <a onClick={(e) => e.preventDefault()} style={{ marginInline: 5 }}>
-                  {`${userInfo?.userName.split('@')[0]}` || '开发者'}
+                  {`${userInfo.nickName}` || '开发者'}
                 </a>
-                {avatar && <img width={25} style={{ verticalAlign: 'sub', borderRadius: '50%' }} src={avatar} />}
+                {userInfo.avatar && <img width={25} style={{ verticalAlign: 'sub', borderRadius: '50%' }} src={userInfo.avatar} />}
               </Flex>
             </Dropdown>
 

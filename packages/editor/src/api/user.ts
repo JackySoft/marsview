@@ -20,14 +20,6 @@ export const getUserInfo = async () => {
   return request.get('/user/info', {});
 };
 
-// 获取用户头像
-export const getUserAvatar = () => {
-  // TODO 等后续接入微信扫码后生成用户头像
-  return Promise.resolve({
-    avatar: '',
-  });
-};
-
 // 搜索用户
 export const searchUser = (keyword: string) => {
   return request.post(`/user/search`, { keyword });
