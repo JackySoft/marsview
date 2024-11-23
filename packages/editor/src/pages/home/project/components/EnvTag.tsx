@@ -106,31 +106,31 @@ const EnvTag = ({ item }: { item: PageItem }) => {
     };
   }
 
-  // 环境访问
-  const visit = (e: React.MouseEvent, env: string) => {
-    e.stopPropagation();
-    window.open(`${import.meta.env.VITE_ADMIN_URL}/page/${item.id}?env=${env}`, '_blank');
-  };
-
   return (
     <>
       <Tooltip title={stgTag.tooltip}>
-        <Tag color={stgTag.color} icon={stgTag.icon} bordered={false} onClick={(e) => visit(e, 'stg')}>
-          <a>STG</a>
-        </Tag>
+        <a href={`${import.meta.env.VITE_ADMIN_URL}/page/${item.id}?env=stg`} target="_blank">
+          <Tag color={stgTag.color} icon={stgTag.icon} bordered={false} onClick={(e) => e.stopPropagation()}>
+            STG
+          </Tag>
+        </a>
       </Tooltip>
       {/* 模板页面暂不显示 */}
       {pathname === '/templates' ? null : (
         <>
           <Tooltip title={preTag.tooltip}>
-            <Tag color={preTag.color} icon={preTag.icon} bordered={false} onClick={(e) => visit(e, 'pre')}>
-              <a>PRE</a>
-            </Tag>
+            <a href={`${import.meta.env.VITE_ADMIN_URL}/page/${item.id}?env=pre`} target="_blank">
+              <Tag color={preTag.color} icon={preTag.icon} bordered={false} onClick={(e) => e.stopPropagation()}>
+                PRE
+              </Tag>
+            </a>
           </Tooltip>
           <Tooltip title={prdTag.tooltip}>
-            <Tag color={prdTag.color} icon={prdTag.icon} bordered={false} onClick={(e) => visit(e, 'prd')}>
-              <a>PRD</a>
-            </Tag>
+            <a href={`${import.meta.env.VITE_ADMIN_URL}/page/${item.id}?env=prd`} target="_blank">
+              <Tag color={prdTag.color} icon={prdTag.icon} bordered={false} onClick={(e) => e.stopPropagation()}>
+                PRD
+              </Tag>
+            </a>
           </Tooltip>
         </>
       )}
