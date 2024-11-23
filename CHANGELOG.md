@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.1.1](https://github.com/JackySoft/marsview/compare/v6.0.8...v6.1.1) (2024-11-23)
+
+
+### Features
+
+* 优化代码 ([2cc4f54](https://github.com/JackySoft/marsview/commit/2cc4f5434c6ea84c61e8e74ecc9cd2d07fc11aaa))
+
+
+### Bug Fixes
+
+* 修复问题 ([8fb3692](https://github.com/JackySoft/marsview/commit/8fb3692e7d7be8e4ed637f5d27b3fb3f63dc8765))
+
+## [6.1.0](https://github.com/JackySoft/marsview/compare/v6.0.7...v6.1.0) (2024-11-23)
+
+
+### Features
+
+* 画布增加尺寸选择 ([cea7116](https://github.com/JackySoft/marsview/commit/cea7116f5c02b9467e0edd9162f47fc3dc8cb0b1))
+
+
+### Others
+
+* **release:** 6.1.0 ([f33710e](https://github.com/JackySoft/marsview/commit/f33710e163b56258c6d41ec28456c1df2bb983b8))
+
 ## [6.1.0](https://github.com/JackySoft/marsview/compare/v6.0.7...v6.1.0) (2024-11-23)
 
 
