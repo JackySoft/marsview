@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { Avatar, Input, Upload, Button, Form, Alert, Spin, Modal } from 'antd';
-import { CameraOutlined, EditOutlined, LockOutlined, PhoneOutlined, SaveOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons';
+import {
+  CameraOutlined,
+  CheckOutlined,
+  EditOutlined,
+  LockOutlined,
+  PhoneOutlined,
+  SaveOutlined,
+  UserOutlined,
+  WechatOutlined,
+} from '@ant-design/icons';
 import { getUserProfile, updatePassword, updateUserProfile } from '@/api/user';
 import { UserInfo } from '@/pages/types';
 import { message } from '@/utils/AntdGlobal';
@@ -16,7 +25,6 @@ const UserCenter = () => {
   const [editType, setEditType] = useState(1);
   const [editorForm] = Form.useForm();
   const [editNickName, setEditNickName] = useState('');
-  const editNickNameRef = useRef(editNickName);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     id: 0,
     nickName: '',
@@ -71,8 +79,8 @@ const UserCenter = () => {
 
   const updateUserInfo = async (type: number, url = '') => {
     if (type === 1) {
-      await updateUserProfile({ nickName: editNickNameRef.current || editNickName });
-      saveUserInfo({ userId: userInfo.id, userName: editNickNameRef.current || editNickName });
+      await updateUserProfile({ nickName: editNickName });
+      saveUserInfo({ ...userInfo, userId: userInfo.id, userName: editNickName });
       setUserNameEdit(false);
     } else if (type === 2) {
       await updateUserProfile({ avatar: url });
@@ -91,12 +99,7 @@ const UserCenter = () => {
   };
 
   const handleNicknameInputChange = (e: any) => {
-    let value = e.target.value;
-    if (value.length > 15) {
-      value = value.slice(0, 15);
-    }
-    setEditNickName(value);
-    editNickNameRef.current = value;
+    setEditNickName(e.target.value);
   };
 
   const handlePasswordSubmit = async (values: { oldPwd: string; userPwd: string; confirmPwd: string }) => {
@@ -138,10 +141,8 @@ const UserCenter = () => {
               <div className={styles.userName}>
                 {userNameEdit ? (
                   <>
-                    <Input type="text" value={editNickName} onChange={(e) => handleNicknameInputChange(e)} onBlur={handleBlur} />
-                    <div className={styles.nameAction} onClick={handleUserNameEdit}>
-                      <SaveOutlined />
-                    </div>
+                    <Input type="text" value={editNickName} onChange={(e) => handleNicknameInputChange(e)} onBlur={handleBlur} maxLength={15} />
+                    <Button icon={<CheckOutlined />}>保存</Button>
                   </>
                 ) : (
                   <>
