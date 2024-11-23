@@ -1,17 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Avatar, Input, Upload, Button, Form, Alert, Spin, Modal } from 'antd';
-import {
-  CameraOutlined,
-  CheckOutlined,
-  EditOutlined,
-  LockOutlined,
-  PhoneOutlined,
-  SaveOutlined,
-  UserOutlined,
-  WechatOutlined,
-} from '@ant-design/icons';
+import { CameraOutlined, CheckOutlined, EditOutlined, LockOutlined, PhoneOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons';
 import { getUserProfile, updatePassword, updateUserProfile } from '@/api/user';
-import { UserInfo } from '@/pages/types';
 import { message } from '@/utils/AntdGlobal';
 import { uploadImg } from '@/api';
 import { useNavigate } from 'react-router-dom';
@@ -25,8 +15,8 @@ const UserCenter = () => {
   const [editType, setEditType] = useState(1);
   const [editorForm] = Form.useForm();
   const [editNickName, setEditNickName] = useState('');
-  const [userInfo, setUserInfo] = useState<UserInfo>({
-    id: 0,
+  const [userInfo, setUserInfo] = useState({
+    userId: 0,
     nickName: '',
     userName: '',
     avatar: '',
@@ -42,7 +32,6 @@ const UserCenter = () => {
 
   const getUserInfo = async () => {
     const res = await getUserProfile();
-    console.log(res);
     if (res) {
       setEditNickName(res.nickName);
       setUserInfo(res);
@@ -52,11 +41,11 @@ const UserCenter = () => {
   const beforeUpload = (file: any) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG file!');
+      message.error('头像只支持图片格式');
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
+    const isLt2M = file.size / 1024 / 1024 < 1.5;
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
+      message.error('头像尺寸不能超过1.5M!');
     }
     return isJpgOrPng && isLt2M;
   };
@@ -80,16 +69,13 @@ const UserCenter = () => {
   const updateUserInfo = async (type: number, url = '') => {
     if (type === 1) {
       await updateUserProfile({ nickName: editNickName });
-      saveUserInfo({ ...userInfo, userId: userInfo.id, userName: editNickName });
+      saveUserInfo({ ...userInfo, nickName: editNickName });
       setUserNameEdit(false);
     } else if (type === 2) {
       await updateUserProfile({ avatar: url });
+      saveUserInfo({ ...userInfo, avatar: url });
     }
     await getUserInfo();
-  };
-
-  const handleUserNameEdit = () => {
-    updateUserInfo(1);
   };
 
   const handleBlur = () => {
@@ -138,7 +124,9 @@ const UserCenter = () => {
                 {userNameEdit ? (
                   <>
                     <Input type="text" value={editNickName} onChange={(e) => handleNicknameInputChange(e)} onBlur={handleBlur} maxLength={15} />
-                    <Button icon={<CheckOutlined />}>保存</Button>
+                    <Button icon={<CheckOutlined />} onClick={() => updateUserInfo(1)}>
+                      保存
+                    </Button>
                   </>
                 ) : (
                   <>
@@ -157,7 +145,7 @@ const UserCenter = () => {
             <div className={styles.baseInfo}>
               <div className={styles.baseItem}>
                 <span>User ID</span>
-                <span>{userInfo.id}</span>
+                <span>{userInfo.userId}</span>
               </div>
               <div className={styles.baseItem}>
                 <span>注册日期</span>

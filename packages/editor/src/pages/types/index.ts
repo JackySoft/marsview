@@ -46,11 +46,3 @@ export interface FeedbackCommentItem {
   feedbackId: number;
   isTop?: number;
 }
-
-export interface UserInfo {
-  id: number;
-  nickName: string;
-  userName: string;
-  createdAt: string;
-  avatar: string;
-}
