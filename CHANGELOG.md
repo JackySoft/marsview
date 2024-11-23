@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.1.5](https://github.com/JackySoft/marsview/compare/v6.1.4...v6.1.5) (2024-11-23)
+
+
+### Bug Fixes
+
+* 修复问题 ([bdc7dc6](https://github.com/JackySoft/marsview/commit/bdc7dc684911ad03a91d955c368f128b995692c5))
+
 ### [6.1.4](https://github.com/JackySoft/marsview/compare/v6.1.3...v6.1.4) (2024-11-23)
 
 
