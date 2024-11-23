@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from './index.module.less';
 import { Avatar, Input, Upload, Button, Form, Alert, Spin, Modal } from 'antd';
 import { CameraOutlined, EditOutlined, LockOutlined, PhoneOutlined, SaveOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons';
 import { getUserProfile, updatePassword, updateUserProfile } from '@/api/user';
@@ -7,7 +6,8 @@ import { UserInfo } from '@/pages/types';
 import { message } from '@/utils/AntdGlobal';
 import { uploadImg } from '@/api';
 import { useNavigate } from 'react-router-dom';
-import { UserInfoStore, usePageStore } from '@/stores/pageStore';
+import { usePageStore } from '@/stores/pageStore';
+import styles from './index.module.less';
 
 const UserCenter = () => {
   const [editModalVisible, setEditModalVisible] = useState(false);
@@ -115,129 +115,131 @@ const UserCenter = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.headerBanner} />
-      <div className={styles.profileContent}>
-        <div className={styles.profileInfo}>
-          <div className={styles.avatarWrapper}>
-            <Avatar
-              src={userInfo.avatar || 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'}
-              size={128}
-              className={styles.avatar}
-            ></Avatar>
-            <Upload
-              showUploadList={false}
-              beforeUpload={beforeUpload}
-              customRequest={({ file }) => handleUploadAvatar(file)}
-              className={styles.uploadOverlay}
-            >
-              {uploadLoading ? <Spin /> : <CameraOutlined className={styles.icon} />}
-            </Upload>
-          </div>
-          <div className={styles.userInfo}>
-            <div className={styles.userName}>
-              {userNameEdit ? (
-                <>
-                  <Input type="text" value={editNickName} onChange={(e) => handleNicknameInputChange(e)} onBlur={handleBlur} />
-                  <div className={styles.nameAction} onClick={handleUserNameEdit}>
-                    <SaveOutlined />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className={styles.nameInfo}>{userInfo.nickName}</div>
-                  <div className={styles.nameAction} onClick={() => setUserNameEdit(true)}>
-                    <EditOutlined />
-                  </div>
-                </>
-              )}
-            </div>
-            <div className={styles.userEmail}>{userInfo.userName}</div>
-          </div>
-        </div>
-        <div className={styles.baseSection}>
-          <h2>基本信息</h2>
-          <div className={styles.baseInfo}>
-            <div className={styles.baseItem}>
-              <span>User ID</span>
-              <span>{userInfo.id}</span>
-            </div>
-            <div className={styles.baseItem}>
-              <span>注册日期</span>
-              <span>{userInfo.createdAt}</span>
-            </div>
-          </div>
-        </div>
-        <div className={styles.splitLine} />
-        <div className={styles.settingsSection}>
-          <h2>账号绑定</h2>
-          <div className={styles.settingsInfo}>
-            <div className={styles.settingsItem}>
-              <div className={styles.settingsLeft}>
-                <UserOutlined className={styles.settingsIcon} />
-                <div className={styles.settingsContent}>
-                  <span className={styles.settingsTitle}>域名绑定</span>
-                  <span className={styles.settingsDesc}>敬请期待</span>
-                </div>
-              </div>
-              <Button
-                disabled
-                onClick={() => {
-                  setEditType(1);
-                  setEditModalTitle('域名绑定');
-                  setEditModalVisible(true);
-                }}
+      <div className={styles.wrapper}>
+        <div className={styles.headerBanner} />
+        <div className={styles.profileContent}>
+          <div className={styles.profileInfo}>
+            <div className={styles.avatarWrapper}>
+              <Avatar
+                src={userInfo.avatar || 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'}
+                size={128}
+                className={styles.avatar}
+              ></Avatar>
+              <Upload
+                showUploadList={false}
+                beforeUpload={beforeUpload}
+                customRequest={({ file }) => handleUploadAvatar(file)}
+                className={styles.uploadOverlay}
               >
-                绑定
-              </Button>
+                {uploadLoading ? <Spin /> : <CameraOutlined className={styles.icon} />}
+              </Upload>
             </div>
-          </div>
-          <div className={styles.settingsInfo}>
-            <div className={styles.settingsItem}>
-              <div className={styles.settingsLeft}>
-                <PhoneOutlined className={styles.settingsIcon} />
-                <div className={styles.settingsContent}>
-                  <span className={styles.settingsTitle}>手机绑定</span>
-                  <span className={styles.settingsDesc}>敬请期待</span>
-                </div>
+            <div className={styles.userInfo}>
+              <div className={styles.userName}>
+                {userNameEdit ? (
+                  <>
+                    <Input type="text" value={editNickName} onChange={(e) => handleNicknameInputChange(e)} onBlur={handleBlur} />
+                    <div className={styles.nameAction} onClick={handleUserNameEdit}>
+                      <SaveOutlined />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={styles.nameInfo}>{userInfo.nickName}</div>
+                    <div className={styles.nameAction} onClick={() => setUserNameEdit(true)}>
+                      <EditOutlined />
+                    </div>
+                  </>
+                )}
               </div>
-              <Button disabled>绑定</Button>
+              <div className={styles.userEmail}>{userInfo.userName}</div>
             </div>
           </div>
+          <div className={styles.baseSection}>
+            <h2>基本信息</h2>
+            <div className={styles.baseInfo}>
+              <div className={styles.baseItem}>
+                <span>User ID</span>
+                <span>{userInfo.id}</span>
+              </div>
+              <div className={styles.baseItem}>
+                <span>注册日期</span>
+                <span>{userInfo.createdAt}</span>
+              </div>
+            </div>
+          </div>
+          <div className={styles.splitLine} />
+          <div className={styles.settingsSection}>
+            <h2>账号绑定</h2>
+            <div className={styles.settingsInfo}>
+              <div className={styles.settingsItem}>
+                <div className={styles.settingsLeft}>
+                  <UserOutlined className={styles.settingsIcon} />
+                  <div className={styles.settingsContent}>
+                    <span className={styles.settingsTitle}>域名绑定</span>
+                    <span className={styles.settingsDesc}>敬请期待</span>
+                  </div>
+                </div>
+                <Button
+                  disabled
+                  onClick={() => {
+                    setEditType(1);
+                    setEditModalTitle('域名绑定');
+                    setEditModalVisible(true);
+                  }}
+                >
+                  绑定
+                </Button>
+              </div>
+            </div>
+            <div className={styles.settingsInfo}>
+              <div className={styles.settingsItem}>
+                <div className={styles.settingsLeft}>
+                  <PhoneOutlined className={styles.settingsIcon} />
+                  <div className={styles.settingsContent}>
+                    <span className={styles.settingsTitle}>手机绑定</span>
+                    <span className={styles.settingsDesc}>敬请期待</span>
+                  </div>
+                </div>
+                <Button disabled>绑定</Button>
+              </div>
+            </div>
 
-          <div className={styles.settingsInfo}>
-            <div className={styles.settingsItem}>
-              <div className={styles.settingsLeft}>
-                <WechatOutlined className={styles.settingsIcon} />
-                <div className={styles.settingsContent}>
-                  <span className={styles.settingsTitle}>微信绑定</span>
-                  <span className={styles.settingsDesc}>敬请期待</span>
+            <div className={styles.settingsInfo}>
+              <div className={styles.settingsItem}>
+                <div className={styles.settingsLeft}>
+                  <WechatOutlined className={styles.settingsIcon} />
+                  <div className={styles.settingsContent}>
+                    <span className={styles.settingsTitle}>微信绑定</span>
+                    <span className={styles.settingsDesc}>敬请期待</span>
+                  </div>
                 </div>
+                <Button disabled>绑定</Button>
               </div>
-              <Button disabled>绑定</Button>
             </div>
           </div>
-        </div>
-        <div className={styles.splitLine} />
-        <div className={styles.settingsSection}>
-          <h2>账号安全</h2>
-          <div className={styles.settingsInfo}>
-            <div className={styles.settingsItem}>
-              <div className={styles.settingsLeft}>
-                <LockOutlined className={styles.settingsIcon} />
-                <div className={styles.settingsContent}>
-                  <span className={styles.settingsTitle}>密码修改</span>
-                  <span className={styles.settingsDesc}>*********</span>
+          <div className={styles.splitLine} />
+          <div className={styles.settingsSection}>
+            <h2>账号安全</h2>
+            <div className={styles.settingsInfo}>
+              <div className={styles.settingsItem}>
+                <div className={styles.settingsLeft}>
+                  <LockOutlined className={styles.settingsIcon} />
+                  <div className={styles.settingsContent}>
+                    <span className={styles.settingsTitle}>密码修改</span>
+                    <span className={styles.settingsDesc}>*********</span>
+                  </div>
                 </div>
+                <Button
+                  onClick={() => {
+                    setEditType(2);
+                    setEditModalTitle('密码修改');
+                    setEditModalVisible(true);
+                  }}
+                >
+                  修改
+                </Button>
               </div>
-              <Button
-                onClick={() => {
-                  setEditType(2);
-                  setEditModalTitle('密码修改');
-                  setEditModalVisible(true);
-                }}
-              >
-                修改
-              </Button>
             </div>
           </div>
         </div>
