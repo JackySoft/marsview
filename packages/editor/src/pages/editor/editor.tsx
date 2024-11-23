@@ -1,6 +1,7 @@
-import React, { MouseEvent, useState, useEffect, memo } from 'react';
+import React, { MouseEvent, useState, useEffect, memo, useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { ConfigProvider, theme as AntdTheme } from 'antd';
+import { ConfigProvider, theme as AntdTheme, Select, Button } from 'antd';
+import { SettingOutlined } from '@ant-design/icons';
 import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
 import { getComponent } from '@/packages/index';
@@ -13,6 +14,9 @@ import { message } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
 import Page from '@/packages/Page/Page';
 import PageConfig from '@/packages/Page/Schema';
+import { PageItem } from '@/api/pageMember';
+
+import CreatePage from '@/components/CreatePage';
 import './index.less';
 
 /**
@@ -26,6 +30,8 @@ const Editor = () => {
     mode,
     selectedElement,
     theme,
+    pageName,
+    remark,
     elements,
     elementsMap,
     savePageInfo,
@@ -34,6 +40,7 @@ const Editor = () => {
     setSelectedElement,
     removeElements,
     clearPageInfo,
+    updateToolbar,
   } = usePageStore((state) => {
     return {
       mode: state.mode,
@@ -42,21 +49,29 @@ const Editor = () => {
       pageStyle: state.page.config.style,
       elements: state.page.elements,
       elementsMap: state.page.elementsMap,
+      pageName: state.page.pageName,
+      remark: state.page.remark,
       savePageInfo: state.savePageInfo,
       addElement: state.addElement,
       addChildElements: state.addChildElements,
       setSelectedElement: state.setSelectedElement,
       removeElements: state.removeElements,
       clearPageInfo: state.clearPageInfo,
+      updateToolbar: state.updateToolbar,
     };
   });
   // 悬浮组件 - 展示悬浮条
   const [hoverTarget, setHoverTarget] = useState<HTMLElement | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [canvasWidth, setCanvasWidth] = useState('auto');
+  const [projectId, setProjectId] = useState(0);
+  const createRef = useRef<{ open: (record?: PageItem) => void }>();
   const { id } = useParams();
+
   useEffect(() => {
     if (!id) return;
     setLoaded(false);
+    setCanvasWidth(storage.get('canvasWidth'));
     getPageDetail(parseInt(id)).then((res) => {
       let pageData: any = {};
       try {
@@ -82,6 +97,7 @@ const Editor = () => {
         prdState: res.prdState,
         userId: res.userId,
       });
+      setProjectId(res.projectId);
       setLoaded(true);
     });
     return () => {
@@ -272,35 +288,92 @@ const Editor = () => {
     }
   };
 
+  // 修改画布尺寸
+  const handleClickCanvas = (val: string) => {
+    storage.set('canvasWidth', val);
+    setCanvasWidth(val);
+    updateToolbar();
+  };
+
+  // 自适应时，需要计算画布宽度
+  const editorWidth = useMemo(() => {
+    if (canvasWidth !== 'auto') return '';
+    const editorWidth = document.querySelector('.designer')?.getBoundingClientRect()?.width;
+    return `${editorWidth}px`;
+  }, [canvasWidth]);
+
+  // 修改页面
+  const handleEditPage = () => {
+    createRef.current?.open({
+      id: Number(id),
+      name: pageName,
+      remark: remark,
+      projectId,
+    });
+  };
+
   return (
-    <ConfigProvider
-      theme={{
-        cssVar: true,
-        hashed: false,
-        algorithm: AntdTheme.defaultAlgorithm,
-        token: {
-          colorPrimary: theme || '#1677ff',
-          colorLink: theme || '#1677ff',
-          colorInfo: theme || '#1677ff',
-        },
-      }}
-    >
-      {/* 编辑器 */}
-      <div ref={drop} className={mode === 'edit' ? 'mars-editor' : 'mars-preview'}>
-        {/* 页面渲染 */}
-        <div
-          id="editor"
-          className="pageWrapper"
-          style={mode === 'preview' ? { height: 'calc(100vh - 64px)', overflow: 'auto', padding: 0 } : { minWidth: 1440, height: '100%' }}
-          onClick={handleClick}
-          onMouseOver={run}
-        >
-          {/* 根据选中目标的相对位置，设置工具条 */}
-          {mode === 'edit' && <Toolbar copyElement={copyElement} pastElement={pastElement} delElement={delElement} hoverTarget={hoverTarget} />}
-          <React.Suspense fallback={<div>Loading...</div>}>{loaded && <Page />}</React.Suspense>
-        </div>
+    <div ref={drop} className="designer" onClick={handleClick}>
+      <div className={`designer-bar ${mode === 'preview' ? 'hidden' : ''}`}>
+        <Select
+          variant="borderless"
+          options={[
+            { label: '1920px', value: '1920px' },
+            { label: '1440px', value: '1440px' },
+            { label: '1280px', value: '1280px' },
+            { label: '1024px', value: '1024px' },
+            { label: '960px', value: '960px' },
+            { label: '自适应', value: 'auto' },
+          ]}
+          style={{ width: 100 }}
+          value={canvasWidth}
+          onChange={handleClickCanvas}
+        />
+        <Button type="text" icon={<SettingOutlined />} onClick={handleEditPage}>
+          设置
+        </Button>
       </div>
-    </ConfigProvider>
+      <ConfigProvider
+        theme={{
+          cssVar: true,
+          hashed: false,
+          algorithm: AntdTheme.defaultAlgorithm,
+          token: {
+            colorPrimary: theme || '#1677ff',
+            colorLink: theme || '#1677ff',
+            colorInfo: theme || '#1677ff',
+          },
+        }}
+      >
+        <div className="designer-editor">
+          <div
+            id="editor"
+            className="pageWrapper"
+            style={
+              mode === 'preview'
+                ? { height: 'calc(100vh - 64px)', overflow: 'auto', padding: 0 }
+                : { width: canvasWidth === 'auto' ? editorWidth : canvasWidth }
+            }
+            onMouseOver={run}
+          >
+            {/* 根据选中目标的相对位置，设置工具条 */}
+            {mode === 'edit' && <Toolbar copyElement={copyElement} pastElement={pastElement} delElement={delElement} hoverTarget={hoverTarget} />}
+            <React.Suspense fallback={<div>Loading...</div>}>{loaded && <Page />}</React.Suspense>
+          </div>
+        </div>
+      </ConfigProvider>
+      {/* 修改页面 */}
+      <CreatePage
+        title="修改页面"
+        createRef={createRef}
+        update={(record) => {
+          savePageInfo({
+            pageName: record?.name,
+            remark: record?.remark,
+          });
+        }}
+      />
+    </div>
   );
 };
 

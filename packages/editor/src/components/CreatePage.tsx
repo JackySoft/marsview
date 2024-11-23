@@ -11,7 +11,7 @@ import { useSearchParams } from 'react-router-dom';
 export interface IModalProp {
   title: string;
   createRef: MutableRefObject<{ open: (record: PageItem) => void } | undefined>;
-  update?: () => void;
+  update?: (record?: PageItem) => void;
 }
 
 const CreatePage = (props: IModalProp) => {
@@ -66,7 +66,7 @@ const CreatePage = (props: IModalProp) => {
           });
         }
         // 编辑器界面 - 左侧菜单修改后刷新
-        props.update?.();
+        props.update?.(params);
         handleCancel();
         setLoading(false);
       } catch (error) {
