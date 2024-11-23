@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.0.8](https://github.com/JackySoft/marsview/compare/v6.0.7...v6.0.8) (2024-11-23)
+
+
+### Features
+
+* 个人中心上线 ([dddb989](https://github.com/JackySoft/marsview/commit/dddb98921592aa329a260d17503f958960eddb69))
+* 用户信息页 ([609f016](https://github.com/JackySoft/marsview/commit/609f016c1d1d85b6bced1c3a784ac08e04f29d31))
+* 用户信息页静态页面 ([3e26449](https://github.com/JackySoft/marsview/commit/3e264490e0d27a4d18f71ca0b202204230059a74))
+* issue [#67](https://github.com/JackySoft/marsview/issues/67):添加编辑器画布拖拽能力 ([0e81a0f](https://github.com/JackySoft/marsview/commit/0e81a0f43c57e19345c4cf7c0583b7afcd332f82))
+
+
+### Bug Fixes
+
+* 修复内容审核 ([5a4c8ab](https://github.com/JackySoft/marsview/commit/5a4c8ab15f6eae54adf31936607db1482b913eec))
+* 修复问题 ([15959c6](https://github.com/JackySoft/marsview/commit/15959c6811f18c154b77e3c3ce5eef16e106b3ca))
+* 修复问题 ([6dced75](https://github.com/JackySoft/marsview/commit/6dced75460f5a057393dc8756ff0cc6af7e635bc))
+* 修复问题 ([632d7ab](https://github.com/JackySoft/marsview/commit/632d7abab92b2247e7ca079427c4b2bbfc5b140c))
+* 修复问题 ([b9d209a](https://github.com/JackySoft/marsview/commit/b9d209a6a0edb1ba070018b4f35948899b37234f))
+* 修复问题 ([b35137c](https://github.com/JackySoft/marsview/commit/b35137cdeae414385ed1c9d1e487207c8a1be08b))
+* 修复页面问题 ([bf8c370](https://github.com/JackySoft/marsview/commit/bf8c370a70a380658ba1cb2b7f51c02e3e9cb91c))
+
+
+### Styles
+
+* 修改样式 ([a83d9ed](https://github.com/JackySoft/marsview/commit/a83d9ed0ea2f146589369bf183f0ff67a064dcde))
+
 ### [6.0.7](https://github.com/JackySoft/marsview/compare/v6.0.6...v6.0.7) (2024-11-20)
 
 
