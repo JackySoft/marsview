@@ -1,0 +1,33 @@
+.layout {
+  height: calc(100vh - 64px);
+  overflow: auto;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 隐藏滚动条 - Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.sider {
+  background: #fff;
+}
+
+.menu {
+  height: 100%;
+  border-right: 0;
+}
+
+.content {
+  padding: 24px;
+  background: #f0f2f5;
+  height: calc(100vh - 108px);
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.breadcrumb {
+  margin-bottom: 16px;
+}

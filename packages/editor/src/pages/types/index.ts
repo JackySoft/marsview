@@ -44,5 +44,13 @@ export interface FeedbackCommentItem {
   content: string;
   createdAt: string;
   feedbackId: number;
-  isTop?: number
+  isTop?: number;
+}
+
+export interface UserInfo {
+  id: number;
+  nickName: string;
+  userName: string;
+  createdAt: string;
+  avatar: string;
 }
