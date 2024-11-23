@@ -12,14 +12,6 @@ const ProfilePage: React.FC = () => {
           <Menu.Item key="1" icon={<UserOutlined />}>
             个人中心
           </Menu.Item>
-          {/* <Menu.Item key="2" icon={<ShoppingOutlined />}>
-            市场中心
-          </Menu.Item> */}
-          {/* <Menu.Item key="3" icon={<DollarOutlined />></Menu.Item> */}
-          {/* <Menu.Item key="4" icon={<SettingOutlined />}>Settings</Menu.Item> */}
-          {/* <Menu.Item key="5" icon={<DeleteOutlined />}>
-            注销
-          </Menu.Item> */}
         </Menu>
       </Sider>
       <Layout>

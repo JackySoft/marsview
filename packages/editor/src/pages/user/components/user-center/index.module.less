@@ -2,11 +2,12 @@
   background-color: #fff;
   height: 100%;
   border-radius: 5px;
-  overflow: hidden;
+  overflow: auto;
+  position: relative;
 }
 
 .headerBanner {
-  height: 130px;
+  height: 100px;
   background: linear-gradient(to right, #7d3fff, #3f7dff);
 }
 
@@ -74,7 +75,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 18px;
+    margin-top: 10px;
     .baseItem {
       display: flex;
       flex-direction: column;
@@ -95,7 +96,7 @@
 }
 
 .splitLine {
-  margin-top: 24px;
+  margin-top: 20px;
   height: 1.3px;
   width: 500px;
   background-color: #f0f0f0;
@@ -104,7 +105,7 @@
 .settingsSection {
   .settingsInfo {
     display: flex;
-    margin-top: 18px;
+    margin-top: 10px;
     width: 100%;
 
     .settingsItem {
@@ -147,6 +148,7 @@
   width: 128px;
   height: 128px;
   border-radius: 8px;
+  cursor: pointer;
   .avatar {
     width: 100%;
     height: 100%;
@@ -165,7 +167,6 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    cursor: pointer;
     transition: opacity 0.3s ease-in-out;
     border-radius: 8px;
 
@@ -184,4 +185,11 @@
     font-size: 32px; /* 替代 Tailwind 的 `h-8 w-8` */
     color: #fff;
   }
+}
+
+.editorModal {
+  width: 380px;
+  position: absolute;
+  top: 35%;
+  right: 10%;
 }
