@@ -71,7 +71,7 @@ const Editor = () => {
   useEffect(() => {
     if (!id) return;
     setLoaded(false);
-    setCanvasWidth(storage.get('canvasWidth'));
+    setCanvasWidth(storage.get('canvasWidth') || 'auto');
     getPageDetail(parseInt(id)).then((res) => {
       let pageData: any = {};
       try {
