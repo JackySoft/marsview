@@ -123,11 +123,7 @@ const UserCenter = () => {
         <div className={styles.profileContent}>
           <div className={styles.profileInfo}>
             <div className={styles.avatarWrapper}>
-              <Avatar
-                src={userInfo.avatar || 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'}
-                size={128}
-                className={styles.avatar}
-              ></Avatar>
+              <Avatar src={userInfo.avatar || '/imgs/avatar_default.png'} size={128} className={styles.avatar}></Avatar>
               <Upload
                 showUploadList={false}
                 beforeUpload={beforeUpload}
