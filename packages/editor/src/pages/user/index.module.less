@@ -2,22 +2,28 @@
   height: calc(100vh - 64px);
   overflow: auto;
   position: relative;
-  max-width: 1024px;
-  margin: 0 auto;
 
   ::-webkit-scrollbar {
     display: none;
   }
+  padding-block: 30px;
+  background-color: var(--mars-theme-bg-color);
 
   /* 隐藏滚动条 - Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  .wrapper {
+    max-width: 1024px;
+    margin: 0 auto;
+    background-color: var(--mars-theme-color);
+    border-radius: 8px;
+    overflow: hidden;
+  }
 }
 
 .headerBanner {
   height: 120px;
   background: linear-gradient(to right, #7d3fff, #3f7dff);
-  border-radius: 0 0 8px 8px;
 }
 
 .profileContent {
@@ -98,7 +104,7 @@
       }
 
       span:nth-child(2) {
-        color: #000;
+        color: var(--mars-theme-text-color);
         font-size: 16px;
       }
     }
@@ -107,9 +113,9 @@
 
 .splitLine {
   margin-top: 20px;
-  height: 1.3px;
+  height: 1px;
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: var(--mars-theme-card-border-color);
 }
 
 .settingsSection {
@@ -158,7 +164,7 @@
   height: 128px;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #fff;
+  background-color: var(--mars-theme-bg-color);
   .avatar {
     width: 100%;
     height: 100%;
