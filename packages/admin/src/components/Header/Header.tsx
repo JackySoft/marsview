@@ -53,7 +53,7 @@ const Header = memo(() => {
       {/* 用户信息 */}
       <div className={styles.user}>
         {/* 用户头像 */}
-        {userInfo.avatar ? <img width={30} src={userInfo.avatar} style={{ borderRadius: '50%' }} /> : null}
+        {userInfo.avatar ? <img width={30} src={userInfo.avatar} style={{ borderRadius: '100%' }} /> : null}
         <Dropdown
           menu={{
             items: [
