@@ -347,7 +347,7 @@ const Header = memo(() => {
                 <a onClick={(e) => e.preventDefault()} style={{ marginInline: 5 }}>
                   {`${userInfo.nickName}` || '开发者'}
                 </a>
-                {userInfo.avatar && <img width={25} style={{ verticalAlign: 'sub', borderRadius: '50%' }} src={userInfo.avatar} />}
+                {userInfo.avatar && <img width={25} style={{ verticalAlign: 'sub', borderRadius: '100%' }} src={userInfo.avatar} />}
               </Flex>
             </Dropdown>
 
