@@ -15,7 +15,7 @@
 
 2. 创建数据库，名称随意，比如 `marsview`
 
-3. 初始化数据库脚本，当前暂不开放，如有需要请向作者申请，并说明理由。
+3. 初始化数据库脚本，当前只对`Sass`付费用户开放。
 
 ## 后端启动
 
@@ -86,7 +86,7 @@ const ZHIPU_AI_KEY = '';
 3. 安装依赖
 
 ```
-cd koa
+cd marsview-backend
 
 yarn install
 ```

@@ -35,12 +35,13 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
   const [Component, setComponent] = useState<any>(null);
   const [config, setConfig] = useState<ConfigType>();
 
-  const { elementsMap, variableData, formData } = usePageStore(
+  const { elementsMap, variableData, formData, updateToolbar } = usePageStore(
     useShallow((state) => ({
       elementsMap: state.page.elementsMap,
       variables: state.page.variables,
       variableData: state.page.variableData,
       formData: state.page.formData,
+      updateToolbar: state.updateToolbar,
     })),
   );
 
@@ -60,9 +61,11 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
         setComponent(() => {
           return forwardRef(res.default);
         });
+        updateToolbar();
       });
     } else {
       setComponent(getComponent(item.type));
+      updateToolbar();
     }
     setConfig(elementsMap[item.id].config);
   }, []);

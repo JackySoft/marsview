@@ -15,15 +15,17 @@ const Page: React.FC = () => {
   const cache = useRef({ offset: { x: 0, y: 0 }, isDragging: false });
 
   // 页面组件
-  const { config, elements } = usePageStore((state) => {
+  const { config, elements, setSelectedElement } = usePageStore((state) => {
     return {
       config: state.page.config,
       elements: state.page.elements,
+      setSelectedElement: state.setSelectedElement,
     };
   });
 
   const handleMouseMove = (e: MouseEvent) => {
     if (isDragging) {
+      setSelectedElement(null);
       setPosition({
         x: e.clientX - cache.current.offset.x,
         y: e.clientY - cache.current.offset.y,
@@ -75,11 +77,11 @@ const Page: React.FC = () => {
     <div
       style={{
         ...config.style,
-        transform: `translate(${position.x}px, ${position.y}px)`,
-        cursor: isDragging ? 'move' : 'default',
+        // transform: `translate(${position.x}px, ${position.y}px)`,
+        // cursor: isDragging ? 'move' : 'default',
       }}
       id="page"
-      onMouseDown={handleMouseDown}
+      // onMouseDown={handleMouseDown}
     >
       {<MarsRender elements={elements || []} />}
     </div>
