@@ -333,7 +333,7 @@ const Header = memo(() => {
                 items: [
                   {
                     key: 'profile',
-                    label: `${userInfo?.userName}`,
+                    label: '个人中心',
                   },
                   {
                     key: 'logout',
@@ -341,6 +341,9 @@ const Header = memo(() => {
                   },
                 ],
                 onClick: (e) => {
+                  if (e.key === 'profile') {
+                    navigate(`/user/profile`);
+                  }
                   if (e.key === 'logout') {
                     localStorage.clear();
                     navigate(`/login?callback=${window.location.href}`);
