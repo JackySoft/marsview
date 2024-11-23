@@ -216,6 +216,11 @@ const components = [
         name: '颜色选择器',
         type: 'ColorPicker',
       },
+      {
+        icon: '',
+        name: '评分',
+        type: 'Rate'
+      }
     ],
   },
   {

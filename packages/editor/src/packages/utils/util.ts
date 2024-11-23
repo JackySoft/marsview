@@ -408,22 +408,8 @@ export const loadScript = (src: string) => {
 
 /**
  * 获取环境变量
- * 2. isDev 是否是开发环境
- * 3. isPage 是否是页面环境
- * 4. isProject 是否是项目环境
- * 5. env 当前真实环境
+ * 开发环境下，固定返回 stg
  */
 export const getEnv = () => {
-  const isDev = /^\/editor\/\d+\/edit/.test(location.pathname);
-  const isPage = /^\/page\/(stg|pre|prd)\/\d+/.test(location.pathname);
-  const isProject = /^\/project\/(stg|pre|prd)\/\d+/.test(location.pathname);
-  const result1 = location.pathname.match(/^\/page\/(stg|pre|prd)\/\d+/);
-  const result2 = location.pathname.match(/^\/project\/(stg|pre|prd)\/\d+/);
-  const env = (result1 ? result1[1] : result2 ? result2[1] : 'stg') as 'stg' | 'pre' | 'prd';
-  return {
-    isDev,
-    isPage,
-    isProject,
-    env,
-  };
+  return 'stg';
 };

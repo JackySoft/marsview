@@ -190,7 +190,7 @@ export const checkComponentType = (type: string, parentId: string = '', parentTy
   } else {
     if (childFormList?.includes(type)) {
       const types = findParentTypesById(parentId, elementsMap);
-      if (types.includes('Form') || types.includes('SearchForm')) return true;
+      if (types.includes('Form') || types.includes('SearchForm') || types.includes('GridForm')) return true;
       return false;
     }
   }

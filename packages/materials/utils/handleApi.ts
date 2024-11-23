@@ -34,7 +34,8 @@ export const handleApi = async (
     const stgUrl = renderTemplate(stgApi, sendParams);
     const preUrl = renderTemplate(preApi, sendParams);
     const prdUrl = renderTemplate(prdApi, sendParams);
-    config.url = getEnv().env === 'stg' ? stgUrl : getEnv().env === 'pre' ? preUrl : prdUrl;
+    const env = getEnv();
+    config.url = env === 'stg' ? stgUrl : env === 'pre' ? preUrl : prdUrl;
     config.isCors = isCors;
     let response = null;
     try {
@@ -48,9 +49,7 @@ export const handleApi = async (
         if (method === 'GET') {
           response = (await request.get(config.url, config)) || {};
         } else {
-          const data = contentType === 'application/x-www-form-urlencoded'
-            ? qs.stringify(config.data)
-            : config.data;
+          const data = contentType === 'application/x-www-form-urlencoded' ? qs.stringify(config.data) : config.data;
 
           config.headers = {
             ...config.headers,
