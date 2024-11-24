@@ -82,13 +82,10 @@ git clone https://github.com/JackySoft/marsview-backend.git
 
 Project Description
 
-| directory          | description                            |
-| ------------------ | -------------------------------------- |
-| backend            | Backend services, including 2 versions |
-| backend/java       | JAVA version                           |
-| backend/koa        | Node version                           |
-| backend/koa/config | Project configuration file             |
-| backend/sql        | Database SQL Script                    |
+| directory      | description                            |
+| -------------- | -------------------------------------- |
+| backend        | Backend services, including 2 versions |
+| backend/config | Project configuration file             |
 
 ### Deploy Documentation
 
@@ -134,6 +131,12 @@ git checkout main
 git merge upstream/main
 ```
 
+## Team Recruitment
+
+-Passionate about programming and open source, with a strong interest in low code.
+-Continuous passion and long termism.
+-After meeting the requirements, they will enter the internal team open source group and share profits in the future.
+
 ## Activities 🆕
 
 - 2024-10-30: Marsview open-source backend service.
@@ -167,16 +170,6 @@ Thank you to the following brothers for their donation:
 | --------------- | -------------------------------------------------------------- |
 | 钢铁侠          | <img src="http://docs.marsview.cc/sponsor/10.png"  width="50"> |
 | 物联网方案-肖工 | <img src="http://docs.marsview.cc/sponsor/3.png"  width="50">  |
-| 物联网方案-肖工 | <img src="http://docs.marsview.cc/sponsor/3.png"  width="50">  |
-| 🥕 二月贝弋 🥕  | <img src="http://docs.marsview.cc/sponsor/2.png"  width="50">  |
-| 猩猩点灯        | <img src="http://docs.marsview.cc/sponsor/1.png"  width="50">  |
-| 元次达          | <img src="http://docs.marsview.cc/sponsor/4.png"  width="50">  |
-| IoT-Fast        | <img src="http://docs.marsview.cc/sponsor/5.png"  width="50">  |
-| w10752842       | <img src="http://docs.marsview.cc/sponsor/6.png"  width="50">  |
-| 朱红宾          | <img src="http://docs.marsview.cc/sponsor/7.png"  width="50">  |
-| yangshare       | <img src="http://docs.marsview.cc/sponsor/8.jpeg"  width="50"> |
-| Joker6578       | <img src="http://docs.marsview.cc/sponsor/9.png"  width="50">  |
-| xiaoqingbbbb    | <img src="http://docs.marsview.cc/sponsor/11.png"  width="50"> |
 
 ## 🤝 Participate and contribute
 
