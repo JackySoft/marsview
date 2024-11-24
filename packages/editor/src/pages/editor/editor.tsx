@@ -18,7 +18,8 @@ import { PageItem } from '@/api/pageMember';
 
 import CreatePage from '@/components/CreatePage';
 import './index.less';
-
+import FloatingCollector from '@/components/FloatingCollector';
+import { handleActionFlow } from '@/packages/utils/action';
 /**
  * 画布
  * 1. 从左侧拖拽组件到画布中
@@ -67,6 +68,8 @@ const Editor = () => {
   const [projectId, setProjectId] = useState(0);
   const createRef = useRef<{ open: (record?: PageItem) => void }>();
   const { id } = useParams();
+
+  const [modalList, setModalList] = useState<any[]>([]);
 
   useEffect(() => {
     if (!id) return;
@@ -129,6 +132,29 @@ const Editor = () => {
       if (monitor.didDrop()) return;
       // 生成默认配置
       const { config, events, methods = [], elements = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
+      if(item.type === 'Modal') {
+        console.log('Modal', config, events, methods, elements);
+        modalList.push({
+          id: createId(item.type),
+          name: item.name,
+          type: item.type,
+          config,
+          events: [
+            {
+              id: createId('Modal_event'),
+              title: '弹框选定点击事件',
+              type: 'normal',
+              config: {
+                actionName: '打开弹框',
+                actionType: 'openModal',
+                target: item.id
+              }
+            }
+          ],
+          methods,
+          elements,
+        });
+      }
       if (!checkComponentType(item.type, selectedElement?.id, selectedElement?.type, elementsMap)) {
         message.info('请把表单项放在Form容器内');
         return;
@@ -312,6 +338,11 @@ const Editor = () => {
     });
   };
 
+  // 浮动组件点击事件
+  const handleFloateItemClick = (item: any) => {
+    handleActionFlow(item.events, null);
+  };
+
   return (
     <div ref={drop} className="designer" onClick={handleClick}>
       <div className={`designer-bar ${mode === 'preview' ? 'hidden' : ''}`}>
@@ -373,6 +404,8 @@ const Editor = () => {
           });
         }}
       />
+      {/* <FloatingCollector /> */}
+      <FloatingCollector modalList={modalList} drawerList={modalList} clickItem={handleFloateItemClick} />
     </div>
   );
 };
