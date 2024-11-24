@@ -81,13 +81,10 @@ git clone https://github.com/JackySoft/marsview.git
 git clone https://github.com/JackySoft/marsview-backend.git
 ```
 
-| 目录               | 说明                    |
-| ------------------ | ----------------------- |
-| backend            | 后端服务，包括 2 个版本 |
-| backend/java       | JAVA 版本               |
-| backend/koa        | KOA 版本                |
-| backend/koa/config | 项目配置文件            |
-| backend/sql        | 数据库脚本              |
+| 目录           | 说明                    |
+| -------------- | ----------------------- |
+| backend        | 后端服务，包括 2 个版本 |
+| backend/config | 项目配置文件            |
 
 ### 快速开始
 
@@ -129,6 +126,12 @@ git checkout main
 git merge upstream/main
 ```
 
+## 团队招募
+
+- 热爱编程、喜欢开源，对低代码有浓厚的兴趣。
+- 持续有激情，长期主义。
+- 符合要求后，会进入内部团队开源群，未来共享收益。
+
 ## 活动记录 🆕
 
 - 2024-10-30: Marsview 开源后端服务。
@@ -162,15 +165,6 @@ git merge upstream/main
 | --------------- | -------------------------------------------------------------- |
 | 钢铁侠          | <img src="http://docs.marsview.cc/sponsor/10.png"  width="50"> |
 | 物联网方案-肖工 | <img src="http://docs.marsview.cc/sponsor/3.png"  width="50">  |
-| 🥕 二月贝弋 🥕  | <img src="http://docs.marsview.cc/sponsor/2.png"  width="50">  |
-| 猩猩点灯        | <img src="http://docs.marsview.cc/sponsor/1.png"  width="50">  |
-| 元次达          | <img src="http://docs.marsview.cc/sponsor/4.png"  width="50">  |
-| IoT-Fast        | <img src="http://docs.marsview.cc/sponsor/5.png"  width="50">  |
-| w10752842       | <img src="http://docs.marsview.cc/sponsor/6.png"  width="50">  |
-| 朱红宾          | <img src="http://docs.marsview.cc/sponsor/7.png"  width="50">  |
-| yangshare       | <img src="http://docs.marsview.cc/sponsor/8.jpeg"  width="50"> |
-| Joker6578       | <img src="http://docs.marsview.cc/sponsor/9.png"  width="50">  |
-| xiaoqingbbbb    | <img src="http://docs.marsview.cc/sponsor/11.png"  width="50"> |
 
 ## 🤝 参与贡献
 
