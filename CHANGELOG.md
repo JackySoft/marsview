@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.1.6](https://github.com/JackySoft/marsview/compare/v6.1.5...v6.1.6) (2024-11-25)
+
+
+### Bug Fixes
+
+* 修复react18.3带来的类型报错问题 ([d4a169d](https://github.com/JackySoft/marsview/commit/d4a169d412eb9e59d247827a47180798c5184650))
+
+
+### Documentation
+
+* 修改文档 ([ed5a698](https://github.com/JackySoft/marsview/commit/ed5a698ec5c7ac2844a59a2e6f5d3448e23ee951))
+
 ### [6.1.5](https://github.com/JackySoft/marsview/compare/v6.1.4...v6.1.5) (2024-11-23)
 
 
