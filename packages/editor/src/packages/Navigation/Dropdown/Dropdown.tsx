@@ -4,8 +4,9 @@ import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { usePageStore } from '@/stores/pageStore';
 import { forwardRef, useImperativeHandle, useState, memo } from 'react';
-import { Dropdown, MenuProps, Space } from 'antd';
+import { Button, Dropdown, MenuProps, Space } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
+import { iconsList } from '@/packages/components/IConSetting';
 
 /*泛型只需要定义组件本身用到的属性*/
 export interface IConfig {
@@ -13,11 +14,11 @@ export interface IConfig {
 }
 
 type MDropdownRef = {
-  show: () => void,
-  hide: () => void,
+  show: () => void;
+  hide: () => void;
   // enable: () => void,
   // disable: () => void,
-}
+};
 
 /**
  *
@@ -60,15 +61,8 @@ const items: MenuProps['items'] = [
   },
 ];
 
-const MDropdown = forwardRef<MDropdownRef, ComponentType<IConfig>>(({
-  id,
-  type,
-  config,
-  onChange,
-  onHoverChange,
-}, ref) => {
-
-  const [visible, setVisible] = useState(true)
+const MDropdown = forwardRef<MDropdownRef, ComponentType<IConfig>>(({ id, type, config, onChange, onHoverChange }, ref) => {
+  const [visible, setVisible] = useState(true);
 
   useImperativeHandle(ref, () => ({
     show() {
@@ -83,7 +77,7 @@ const MDropdown = forwardRef<MDropdownRef, ComponentType<IConfig>>(({
     // disable() {
     //     setDisabled(true);
     // },
-  }))
+  }));
 
   // const renderChildren = () => {
   //   return (
@@ -97,22 +91,22 @@ const MDropdown = forwardRef<MDropdownRef, ComponentType<IConfig>>(({
   // }
 
   if (!visible) {
-    return null
+    return null;
   }
-
-  console.log(config.props)
+  console.log(config.props);
   return (
-    <Dropdown
-      {...config.props}
-      menu={{ items }}
-    >
-      <a onClick={(e) => e.preventDefault()}>
+    <Dropdown {...config.props} menu={{ items }}>
+      {/* <a onClick={(e) => e.preventDefault()}>
         <Space>
-          {config.props.text || 'hover me'}
-          {/* <DownOutlined /> */}
+          {config.props.text || ''}
+          {config.props.textIcon && iconsList[config.props.textIcon].render()}
         </Space>
-      </a>
+      </a> */}
+      <Button>
+        {config.props.text || ''}
+        {config.props.textIcon && iconsList[config.props.textIcon].render()}
+      </Button>
     </Dropdown>
   );
 });
-export default MDropdown;
+export default memo(MDropdown);
