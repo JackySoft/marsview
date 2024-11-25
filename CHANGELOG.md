@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.2.0](https://github.com/JackySoft/marsview/compare/v6.1.6...v6.2.0) (2024-11-25)
+
+
+### Features
+
+* 修改接口定义，同步代码。 ([db23308](https://github.com/JackySoft/marsview/commit/db2330886803fd983e1cd6320b0d2634d7cfc39d))
+
+
+### Others
+
+* 替换代理地址 ([5eb7e0c](https://github.com/JackySoft/marsview/commit/5eb7e0c17521c21a3a1d046089ad8f42f7644010))
+
 ### [6.1.6](https://github.com/JackySoft/marsview/compare/v6.1.5...v6.1.6) (2024-11-25)
 
 
