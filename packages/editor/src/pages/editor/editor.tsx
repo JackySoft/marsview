@@ -20,6 +20,7 @@ import CreatePage from '@/components/CreatePage';
 import './index.less';
 import FloatingCollector from '@/components/FloatingCollector';
 import { handleActionFlow } from '@/packages/utils/action';
+import { collectFloatItem } from '@/packages/utils/util';
 /**
  * 画布
  * 1. 从左侧拖拽组件到画布中
@@ -70,6 +71,7 @@ const Editor = () => {
   const { id } = useParams();
 
   const [modalList, setModalList] = useState<any[]>([]);
+  const [drawerList, setDrawerList] = useState<any[]>([]);
 
   useEffect(() => {
     if (!id) return;
@@ -84,6 +86,17 @@ const Editor = () => {
         console.info('【json数据】', res.pageData);
         message.error('页面数据格式错误，请检查');
       }
+      // 对pageData做一次轮询，把页面本身已有的modal和drawer组件放入浮动组件列表
+      pageData.elements?.forEach((item: any) => {
+        if (item.type === 'Modal') {
+          collectFloatItem('Modal', item, item.config, setModalList);
+        }
+
+        if (item.type === 'Drawer') {
+          collectFloatItem('Drawer', item, item.config, setDrawerList);
+        }
+      });
+
       savePageInfo({
         config: PageConfig.config,
         events: PageConfig.events,
@@ -132,29 +145,14 @@ const Editor = () => {
       if (monitor.didDrop()) return;
       // 生成默认配置
       const { config, events, methods = [], elements = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
-      if(item.type === 'Modal') {
-        console.log('Modal', config, events, methods, elements);
-        modalList.push({
-          id: createId(item.type),
-          name: item.name,
-          type: item.type,
-          config,
-          events: [
-            {
-              id: createId('Modal_event'),
-              title: '弹框选定点击事件',
-              type: 'normal',
-              config: {
-                actionName: '打开弹框',
-                actionType: 'openModal',
-                target: item.id
-              }
-            }
-          ],
-          methods,
-          elements,
-        });
+      if (item.type === 'Modal') {
+        collectFloatItem('Modal', item, config, setModalList);
       }
+
+      if (item.type === 'Drawer') {
+        collectFloatItem('Drawer', item, config, setDrawerList);
+      }
+
       if (!checkComponentType(item.type, selectedElement?.id, selectedElement?.type, elementsMap)) {
         message.info('请把表单项放在Form容器内');
         return;
@@ -311,6 +309,9 @@ const Editor = () => {
   const delElement = () => {
     if (selectedElement) {
       removeElements(selectedElement.id);
+      if (selectedElement.type === 'Modal' || selectedElement.type === 'Drawer') {
+        handleFloateItemDelete(selectedElement.id);
+      }
     }
   };
 
@@ -340,7 +341,19 @@ const Editor = () => {
 
   // 浮动组件点击事件
   const handleFloateItemClick = (item: any) => {
-    handleActionFlow(item.events, null);
+    handleActionFlow(item.events?.open, null);
+  };
+
+  // 浮动组件关闭事件
+  const handleFloateItemClose = (item: any) => {
+    handleActionFlow(item.events?.close, null);
+  };
+
+  // 浮动组件删除事件, 删除浮动组件, 同时删除页面中的组件
+  const handleFloateItemDelete = (targetId: string) => {
+    setModalList((prev) => prev.filter((item) => item.targetId !== targetId));
+    setDrawerList((prev) => prev.filter((item) => item.targetId !== targetId));
+    removeElements(targetId);
   };
 
   return (
@@ -405,7 +418,13 @@ const Editor = () => {
         }}
       />
       {/* <FloatingCollector /> */}
-      <FloatingCollector modalList={modalList} drawerList={modalList} clickItem={handleFloateItemClick} />
+      <FloatingCollector
+        modalList={modalList}
+        drawerList={drawerList}
+        clickItem={handleFloateItemClick}
+        closeItem={handleFloateItemClose}
+        deleteItem={handleFloateItemDelete}
+      />
     </div>
   );
 };

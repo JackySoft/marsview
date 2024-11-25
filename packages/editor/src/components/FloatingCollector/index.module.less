@@ -9,6 +9,12 @@
   align-items: flex-start;
   border-radius: 4px;
   overflow: hidden;
+  :global {
+    .ant-btn {
+      border: none;
+      background: none;
+    }
+  }
 }
 
 .collectorContent {
@@ -25,7 +31,6 @@
   &.expanded {
     width: 220px;
     padding: 16px;
-
   }
 }
 
@@ -40,8 +45,6 @@
 }
 
 .item {
-  background: none;
-  border: none;
   text-align: left;
   padding: 8px;
   cursor: pointer;
@@ -49,6 +52,7 @@
   display: flex;
   justify-content: space-between;
   transition: background-color 0.2s;
+  border: 1px solid #e1e2e8;
 
   &:hover {
     background-color: #f0f0f0;
@@ -80,7 +84,7 @@
   display: flex;
   flex-direction: column;
   width: 40px;
-  padding: 10px 4px 6px 0;
+  padding: 6px 4px 6px 2px;
   gap: 8px;
   align-items: flex-start;
   justify-content: center;
@@ -93,19 +97,31 @@
   &:hover {
     width: 80px;
   }
+
+  &.expanded {
+    width: 80px;
+  }
 }
 
 .iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   cursor: pointer;
   padding: 8px;
   border-radius: 4px;
   transition: background-color 0.2s;
+  font-size: 14px;
+
+  &:disabled {
+    cursor: not-allowed;
+    background: none;
+  }
 
   svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 }
-
