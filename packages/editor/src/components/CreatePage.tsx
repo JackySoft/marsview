@@ -1,6 +1,7 @@
 import { Input, Modal, Form, Select, Space, Flex } from 'antd';
 import { useImperativeHandle, useState, MutableRefObject } from 'react';
-import { createPageData, updatePageData, getAllProjects } from '@/api';
+import { getAllProjects } from '@/api';
+import api from '@/api/page';
 import { PageItem } from '@/api/pageMember';
 import { Project } from '@/api/types';
 import { useSearchParams } from 'react-router-dom';
@@ -58,9 +59,9 @@ const CreatePage = (props: IModalProp) => {
       setLoading(true);
       try {
         if (type === 'create') {
-          await createPageData(params);
+          await api.createPageData(params);
         } else {
-          await updatePageData({
+          await api.updatePageData({
             ...params,
             id: recordId,
           });
