@@ -43,7 +43,7 @@ export interface ComItemType {
  * @param {events} api 组件自带的事件
  * @param {elements} elements 子组件
  */
-export interface ComponentType<T = any> {
+export type ComponentType<T = any> = {
   id: string;
   type: string;
   name: string;
@@ -58,8 +58,11 @@ export interface ComponentType<T = any> {
   methods: ComponentMethodType[];
   apis: { [key: string]: ApiType };
   elements: ComponentType<T>[];
-  [key: string]: any; // 自定义属性，比如事件函数挂载
-}
+} & OnProps<string>;
+
+type OnProps<TKeys extends string> = {
+  [P in `on${TKeys}` as `on${TKeys}`]: (data?: any) => void;
+};
 
 /**
  * 组件配置类型
