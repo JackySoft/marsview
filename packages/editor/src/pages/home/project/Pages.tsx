@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Button, Empty, Form, Layout, Spin } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useAntdTable } from 'ahooks';
-import { getPageList } from '@/api';
+import api from '@/api/page';
 import CreatePage from '@/components/CreatePage';
 import SearchBar from '@/components/Searchbar/SearchBar';
 import PageCard from './components/PageCard';
@@ -23,17 +23,19 @@ export default function Index() {
 
   // 获取列表数据
   const getTableData = ({ current, pageSize }: { current: number; pageSize: number }, { keyword }: { keyword: string }) => {
-    return getPageList({
-      pageNum: current,
-      pageSize: pageSize,
-      keyword,
-      projectId: Number(searchParams.get('projectId')),
-    }).then((res) => {
-      return {
-        total: res.total,
-        list: res.list,
-      };
-    });
+    return api
+      .getPageList({
+        pageNum: current,
+        pageSize: pageSize,
+        keyword,
+        projectId: Number(searchParams.get('projectId')),
+      })
+      .then((res) => {
+        return {
+          total: res.total,
+          list: res.list,
+        };
+      });
   };
 
   const { tableProps, loading, search } = useAntdTable(getTableData, {

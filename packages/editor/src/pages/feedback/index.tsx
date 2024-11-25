@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Typography, Tag, Button, Space, List, Tabs, Input, Avatar, Pagination, Skeleton, Form, Flex, Segmented } from 'antd';
 import { ShareAltOutlined, SearchOutlined } from '@ant-design/icons';
 import { useAntdTable } from 'ahooks';
-import { FeedbackItem } from '../types';
-import { getFeedbackList, queryFeedbackTotal } from '@/api';
+
+import api, { FeedbackItem } from '@/api/feedback';
 import RandomAvatar from './UserDefaultAvatar';
 import style from './index.module.less';
 
@@ -67,20 +67,22 @@ const FeedbackIndex: React.FC = () => {
   // 获取列表数据
   const getTableData = ({ current, pageSize }: { current: number; pageSize: number }, formData: { title: string; type: number; state: string }) => {
     setCurrentPage(current);
-    return getFeedbackList({
-      pageNum: current,
-      pageSize: pageSize,
-      ...formData,
-    }).then((res) => {
-      // 判断issue列表是否有下一页
-      if (currentTab === '4') {
-        setHasMore(res.list.length === pageSize);
-      }
-      return {
-        total: res.total,
-        list: res.list,
-      };
-    });
+    return api
+      .getFeedbackList({
+        pageNum: current,
+        pageSize: pageSize,
+        ...formData,
+      })
+      .then((res) => {
+        // 判断issue列表是否有下一页
+        if (currentTab === '4') {
+          setHasMore(res.list.length === pageSize);
+        }
+        return {
+          total: res.total,
+          list: res.list,
+        };
+      });
   };
 
   const { tableProps, loading, search } = useAntdTable(getTableData, {
@@ -94,7 +96,7 @@ const FeedbackIndex: React.FC = () => {
 
   // 查询反馈总量
   const getFeedbackTotal = async () => {
-    const res = await queryFeedbackTotal();
+    const res = await api.queryFeedbackTotal();
     setResolveTotal(res.resolveCount);
     setBugTotal(res.bugCount);
   };

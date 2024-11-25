@@ -3,7 +3,8 @@ import { Button, Space, Tooltip } from 'antd';
 import { CheckOutlined, ClockCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import { toBlob } from 'html-to-image';
 import { usePageStore } from '@/stores/pageStore';
-import { publishPage, uploadImg } from '@/api';
+import { uploadImg } from '@/api';
+import api from '@/api/page';
 import { message } from '@/utils/AntdGlobal';
 import styles from './index.module.less';
 
@@ -52,7 +53,7 @@ export default function Publish() {
     }
     try {
       const previewImg = await createPreviewImg();
-      await publishPage({
+      await api.publishPage({
         env,
         pageId: pageId,
         previewImg,

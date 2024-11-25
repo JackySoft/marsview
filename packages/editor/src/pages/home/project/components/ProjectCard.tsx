@@ -4,7 +4,6 @@ import { UserOutlined, GlobalOutlined, MoreOutlined, SettingOutlined, Deployment
 import type { MenuProps } from 'antd';
 import { Project } from '@/api/types';
 import styles from './../page.module.less';
-import { useState } from 'react';
 const { Paragraph } = Typography;
 
 /**
@@ -59,42 +58,44 @@ export default function Category({ list }: { list: Project.ProjectItem[] }) {
 
   // 项目列表
   return (
-    <div className={styles.projectGrid}>
-      {list.map((project) => {
-        return (
-          <div className={styles.projectCard} key={project.id}>
-            {/* 卡片头部 */}
-            <div className={styles.cardHeader} onClick={() => handleOpenProject(project.id)}>
-              <h3 className={styles.cardTitle}>
-                <GlobalOutlined className={styles.cardIcon} />
-                {project.name}
-              </h3>
-            </div>
-            {/* 卡片内容 */}
-            <div className={styles.cardContent} onClick={() => handleOpenPages(project.id)}>
-              <Paragraph className={styles.description}>{project.remark}</Paragraph>
-              <div className={styles.metaInfo}>
-                <UserOutlined className={styles.metaIcon} />
-                <p>{project.userName}</p>
+    <>
+      <div className={styles.projectGrid}>
+        {list.map((project) => {
+          return (
+            <div className={styles.projectCard} key={project.id}>
+              {/* 卡片头部 */}
+              <div className={styles.cardHeader} onClick={() => handleOpenProject(project.id)}>
+                <h3 className={styles.cardTitle}>
+                  <GlobalOutlined className={styles.cardIcon} />
+                  {project.name}
+                </h3>
               </div>
-              <div className={styles.metaInfo}>
-                <FolderOpenOutlined className={styles.metaIcon} />
-                <p>
-                  <span>{project.count} </span>个页面
-                </p>
+              {/* 卡片内容 */}
+              <div className={styles.cardContent} onClick={() => handleOpenPages(project.id)}>
+                <Paragraph className={styles.description}>{project.remark}</Paragraph>
+                <div className={styles.metaInfo}>
+                  <UserOutlined className={styles.metaIcon} />
+                  <p>{project.userName}</p>
+                </div>
+                <div className={styles.metaInfo}>
+                  <FolderOpenOutlined className={styles.metaIcon} />
+                  <p>
+                    <span>{project.count} </span>个页面
+                  </p>
+                </div>
               </div>
+              {/* 卡片更多 */}
+              <div className={styles.moreInfo}>
+                <Dropdown menu={{ items, onClick: ({ key }) => onClick(key, project.id) }} arrow placement="bottomRight" trigger={['click']}>
+                  <MoreOutlined className={styles.moreIcon} />
+                </Dropdown>
+              </div>
+              {/* 项目Logo */}
+              <Avatar src={project.logo} className={styles.projectLogo} />
             </div>
-            {/* 卡片更多 */}
-            <div className={styles.moreInfo}>
-              <Dropdown menu={{ items, onClick: ({ key }) => onClick(key, project.id) }} arrow placement="bottomRight" trigger={['click']}>
-                <MoreOutlined className={styles.moreIcon} />
-              </Dropdown>
-            </div>
-            {/* 项目Logo */}
-            <Avatar src={project.logo} className={styles.projectLogo} />
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
