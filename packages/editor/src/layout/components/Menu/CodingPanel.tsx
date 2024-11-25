@@ -1,7 +1,7 @@
 import { Button, Row } from 'antd';
 import Editor, { loader } from '@monaco-editor/react';
 import { useRef, useEffect, useState } from 'react';
-import { updatePageData } from '@/api';
+import api from '@/api/page';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
 
@@ -72,7 +72,7 @@ const CodingPanel = () => {
     };
     setLoading(true);
     try {
-      await updatePageData(params);
+      await api.updatePageData(params);
       setLoading(false);
       savePageInfo({
         ...JSON.parse(params.pageData),

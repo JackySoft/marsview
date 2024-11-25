@@ -14,7 +14,7 @@ import {
 } from '@ant-design/icons';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
-import { updatePageData } from '@/api';
+import api from '@/api/page';
 import Publish from './PublishPopover';
 import styles from './index.module.less';
 import storage from '@/utils/storage';
@@ -142,7 +142,7 @@ const Header = memo(() => {
         prdPublishId: undefined,
       });
       try {
-        await updatePageData({
+        await api.updatePageData({
           id: pageId,
           name: pageName,
           remark: remark,

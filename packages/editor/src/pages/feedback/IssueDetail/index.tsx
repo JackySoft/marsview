@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Image, Input, Avatar, Spin, Badge } from 'antd';
 import { CheckCircleFilled, FrownOutlined, SendOutlined } from '@ant-design/icons';
-import { FeedbackCommentItem, FeedbackItem } from '@/pages/types';
-import { createFeedbackComment, getFeedbackComments, getFeedbackDetail } from '@/api';
+import api, { FeedbackCommentItem, FeedbackItem } from '@/api/feedback';
 import RandomAvatar from '../UserDefaultAvatar';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
@@ -65,7 +64,7 @@ export default function IssueDetail() {
   }, [id]);
 
   const fetchFeedbackDetail = async (id: number) => {
-    const res = await getFeedbackDetail(id);
+    const res = await api.getFeedbackDetail(id);
     setItemDetail(res);
   };
 
@@ -75,7 +74,7 @@ export default function IssueDetail() {
 
   const fetchComments = async (pageNum: number) => {
     setLoading(true);
-    const { list, total } = await getFeedbackComments(Number(id), 12, pageNum);
+    const { list, total } = await api.getFeedbackComments(Number(id), 12, pageNum);
     setHasMore(comments.length + list.length < total);
     setComments((prevComments) => [...prevComments, ...list]);
     setTotal(total);
@@ -97,7 +96,7 @@ export default function IssueDetail() {
       feedbackId: itemDetail.id,
       content: replyContent,
     };
-    const res = await createFeedbackComment(data);
+    const res = await api.createFeedbackComment(data);
 
     setComments((prevComments) => [
       {

@@ -1,5 +1,4 @@
 import request from '@/utils/request';
-import { PageParams } from './types';
 
 export interface IWorkFlow {
   id: number;

@@ -1,7 +1,7 @@
 import { Tabs, Layout, Form, Input, DatePicker, Button, Table, Badge, Modal } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useState, useEffect } from 'react';
-import { getPageDetail, publishList, rollbackPage } from '@/api';
+import api from '@/api/page';
 import { useParams } from 'react-router-dom';
 import SearchForm from '../admin/components/SearchForm';
 import { message } from '@/utils/AntdGlobal';
@@ -134,7 +134,7 @@ export default function PublishHistory() {
       // 查询当前页面发布历史记录
       const { name, date } = form.getFieldsValue();
       const [start, end] = date || [];
-      const res = await publishList({
+      const res = await api.publishList({
         pageNum: pagination.current,
         pageSize: pagination.pageSize,
         env: activeKey,
@@ -159,7 +159,7 @@ export default function PublishHistory() {
 
   // 获取当前页面发布的版本
   async function getReleaseVersion() {
-    const res = await getPageDetail(parseInt(id));
+    const res = await api.getPageDetail(parseInt(id));
     setLastPublish({
       stg: res.stgPublishId,
       pre: res.prePublishId,
@@ -182,7 +182,7 @@ export default function PublishHistory() {
 
   // 页面回滚
   async function rollback(item: HistoryItem) {
-    await rollbackPage({
+    await api.rollbackPage({
       pageId: item.pageId,
       env: activeKey,
       lastPublishId: item.id,
