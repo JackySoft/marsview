@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.2.1](https://github.com/JackySoft/marsview/compare/v6.2.0...v6.2.1) (2024-11-26)
+
+
+### Features
+
+* 增加弹框收集器 ([38f30f2](https://github.com/JackySoft/marsview/commit/38f30f2b5e66dc8235fa07b55d92bcbccf26a669))
+
+
+### Bug Fixes
+
+* 开始优化弹窗和抽屉编辑 ([a23a182](https://github.com/JackySoft/marsview/commit/a23a1821ab951a7ae3fdf8635d03d79117136968))
+* 优化弹框和抽屉收集 ([32f7297](https://github.com/JackySoft/marsview/commit/32f72974e0bccfe27045b73bc02dc69908a395ee))
+
 ## [6.2.0](https://github.com/JackySoft/marsview/compare/v6.1.6...v6.2.0) (2024-11-25)
 
 
