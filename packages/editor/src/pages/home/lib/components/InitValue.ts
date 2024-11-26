@@ -4,42 +4,61 @@
 
 // 默认组件代码
 export const defaultReactCode = `/**
-* 支持React、Antd、dayjs、Plots 等插件使用，需要从window对象中导入：
-* 例如: 
-* const { Button } = window.antd;
-* const { useEffect,useState } = window.React;
-* const { Line } = window.Plots;
-*/
+ * 支持React、Antd、dayjs、Plots 等插件使用，需要从window对象中导入：
+ * 例如:
+ * const { Button } = window.antd;
+ * const { useEffect,useState } = window.React;
+ * const { Stock } = window.Plots;
+ */
 export default ({ id, type, config, onClick }, ref) => {
-  const { Button } = window.antd;
-  const format = () => {
-    return dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
+  const { useEffect, useState } = window.React;
+  const { Flex, Button,Spin } = window.antd;
+  const { Stock } = window.Plots;
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    asyncFetch();
+  }, []);
+
+  // 异步加载
+  const asyncFetch = () => {
+    setLoading(true);
+    fetch(
+      'https://gw.alipayobjects.com/os/antfincdn/qtQ9nYfYJe/stock-data.json'
+    )
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .finally(()=>{
+        setLoading(false);
+      });
   };
-  // 点击会触发父组件的onClick事件，可以在平台中配置事件流。
-  const handleClick = () => {
-    onClick?.({ id, type });
+
+  const chartConfig = {
+    xField: 'date',
+    yField: ['open', 'close', 'high', 'low'],
+    data: data.map((i) => ({ ...i, date: new Date(i.trade_date) })),
   };
   return (
-    <div className="bgColor" data-id={id} data-type={type}>
-      <Button style={config.style} {...config.props} onClick={handleClick}>
-        {config.props.text}
-      </Button>
-      <p>{format()}</p>
+    <div data-id={id} data-type={type}>
+      <Flex justify="space-between">
+        <span class="stock-title">{config.props.title}</span>
+        <Button type={config.props.type} onClick={asyncFetch}>
+          刷新
+        </Button>
+      </Flex>
+      <Spin spinning={loading}>
+        <Stock {...chartConfig} />
+      </Spin>
     </div>
   );
 };
 `;
 
 // 默认组件样式
-export const defaultLessCode = `.bgColor{
-  background-color: #4096ff;
-  height: 150px;
-  padding: 50px;
-  text-align: center;
-  p{
-      color: #fff;
-      line-height: 30px;
-  }
+export const defaultLessCode = `.stock-title{
+  font-size: 18px;
+  font-weight: bold;
 }`;
 
 // 默认组件配置
@@ -57,8 +76,8 @@ export default {
     },
     {
       type: 'Variable',
-      label: '按钮名称',
-      name: ['text'],
+      label: '标题',
+      name: ['title'],
     },
     {
       type: 'Select',
@@ -74,18 +93,13 @@ export default {
           { value: 'link', label: 'link' },
         ],
       },
-    },
-    {
-      type: 'Switch',
-      label: '块状按钮',
-      name: ['block'],
     }
   ],
   config: {
     // 组件默认属性值
     props: {
+      title: '股票分析图',
       type: 'primary',
-      text: '按钮',
     },
     // 组件样式
     style: {},
@@ -93,14 +107,9 @@ export default {
     events: [],
   },
   // 组件事件
-  events: [
-    {
-      value: 'onClick',
-      name: '点击事件',
-    },
-  ],
+  events: [],
   methods: [],
-};   
+};
 `;
 
 export const defaultMdCode = `# 自定义组件
