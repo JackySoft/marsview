@@ -389,7 +389,7 @@ const Editor = () => {
           },
         }}
       >
-        <div className="designer-editor">
+        <div className="designer-editor" style={{ height: mode === 'preview' ? 'calc(100vh - 64px)' : 'calc(100vh - 104px)' }}>
           <div
             id="editor"
             className="pageWrapper"
@@ -417,14 +417,16 @@ const Editor = () => {
           });
         }}
       />
-      {/* <FloatingCollector /> */}
-      <FloatingCollector
-        modalList={modalList}
-        drawerList={drawerList}
-        clickItem={handleFloateItemClick}
-        closeItem={handleFloateItemClose}
-        deleteItem={handleFloateItemDelete}
-      />
+      {/* 弹框收集器 */}
+      {mode === 'edit' ? (
+        <FloatingCollector
+          modalList={modalList}
+          drawerList={drawerList}
+          clickItem={handleFloateItemClick}
+          closeItem={handleFloateItemClose}
+          deleteItem={handleFloateItemDelete}
+        />
+      ) : null}
     </div>
   );
 };
