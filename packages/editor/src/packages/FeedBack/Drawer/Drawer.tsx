@@ -80,9 +80,9 @@ const AntDrawer = forwardRef(({ id, type, config, elements, onClose, onAfterOpen
 
   return (
     <>
-      <div>
+      {/* <div>
         <Button onClick={() => setVisible(true)}>{config.props.title}</Button>
-      </div>
+      </div> */}
       <Drawer
         {...config.props}
         data-id={id}
