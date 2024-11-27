@@ -81,9 +81,8 @@ const FloatingCollector = (props: FloatingCollectorProps) => {
         <div className={`${styles.collectorContent} ${styles.expanded}`}>
           <div className={styles.itemList}>
             {currentItems.map((item) => (
-              <Tooltip title="单击选中，双击打开" placement="top">
+              <Tooltip title="单击选中，双击打开" placement="top" key={item.id}>
                 <Button
-                  key={item.id}
                   onClick={() => handleItemClick(item, 'single')}
                   onDoubleClick={() => handleItemClick(item, 'double')}
                   className={`${styles.item} ${selectedItem === item.id ? styles.active : ''}`}
