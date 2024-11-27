@@ -166,6 +166,8 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
         //   };
         // },
       };
+    } else {
+      rowSelection = null;
     }
     return {
       rowSelection,

@@ -271,7 +271,7 @@ const Header = memo(() => {
                 <Button
                   type="text"
                   style={{ color: 'var(--mars-theme-text-color)' }}
-                  onClick={() => window.open('http://docs.marsview.cc', '_blank')}
+                  onClick={() => window.open('http://docs.marsview.com.cn', '_blank')}
                 >
                   帮助文档
                 </Button>

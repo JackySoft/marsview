@@ -201,6 +201,8 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
         //   };
         // },
       };
+    } else {
+      rowSelection = null;
     }
     return {
       rowSelection,
