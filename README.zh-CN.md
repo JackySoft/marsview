@@ -6,7 +6,7 @@
 
 让搭建更简单，让开发更高效
 
-[项目文档](http://docs.marsview.cc/) |
+[项目文档](http://docs.marsview.com.cn/) |
 [开源仓库](https://github.com/JackySoft/marsview) |
 [交流群](https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f02.png)
 
@@ -102,7 +102,7 @@ pnpm start:editor
 
 > 注意：默认使用线上接口，如果需要私有化部署，请参考私有化部署文档。
 
-[Documentation](http://docs.marsview.cc/deploy.html)
+[Documentation](http://docs.marsview.com.cn/deploy.html)
 
 ### 同步代码
 
@@ -138,7 +138,7 @@ git merge upstream/main
 - 2024-09-27: 上线邮箱注册服务。
 - 2024-08-30: MarsView 发布在[阮一峰周刊](https://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html)
 - 2024-08-27: MarsAI v1.0 上线，在自定义编写中实现辅助生成代码
-- 2024-08-17: 项目[在线文档](http://docs.marsview.cc/)发布
+- 2024-08-17: 项目[在线文档](http://docs.marsview.com.cn/)发布
 - 2024-08-13: 开源文章登上掘金论坛热榜第一
 - 2024-08-10: 项目开源
   - 公告项目开源，发布开源文章：[我的低代码平台 Marsview 终于开源了](https://juejin.cn/post/7401009128204894244)
@@ -161,10 +161,10 @@ git merge upstream/main
 
 感谢以下兄弟的捐赠：
 
-| 名称            | 头像                                                           |
-| --------------- | -------------------------------------------------------------- |
-| 钢铁侠          | <img src="http://docs.marsview.cc/sponsor/10.png"  width="50"> |
-| 物联网方案-肖工 | <img src="http://docs.marsview.cc/sponsor/3.png"  width="50">  |
+| 名称            | 头像                                                               |
+| --------------- | ------------------------------------------------------------------ |
+| 钢铁侠          | <img src="http://docs.marsview.com.cn/sponsor/10.png"  width="50"> |
+| 物联网方案-肖工 | <img src="http://docs.marsview.com.cn/sponsor/3.png"  width="50">  |
 
 ## 🤝 参与贡献
 

@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: 浏览文档
-    url: http://docs.marsview.cc/
+    url: http://docs.marsview.com.cn/
     about: 官方文档，快速搭建后台管理系统！
   - name: 在线体验
     url: https://www.marsview.cc/login?callback=https://www.marsview.cc/
