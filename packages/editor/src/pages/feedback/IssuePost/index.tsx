@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input, Tabs, Card, Alert, Button, message, Image, Form, Spin, Flex } from 'antd';
 import { DeleteOutlined, InfoCircleOutlined, PictureOutlined } from '@ant-design/icons';
-import { uploadImg, createFeedback } from '@/api';
+import { uploadImg } from '@/api';
+import api from '@/api/feedback';
 import storage from '@/utils/storage';
 import { Modal } from '@/utils/AntdGlobal';
 const { TabPane } = Tabs;
@@ -78,9 +79,9 @@ const PostCreation: React.FC = () => {
                   setImages((prev) => [...prev, url]);
                 }
               })
-              .catch(() => {
+              .catch((error) => {
+                message.error(error);
                 setUploadLoding(false);
-                message.error('图片上传失败');
               });
           }
         }
@@ -103,9 +104,9 @@ const PostCreation: React.FC = () => {
                 setImages((prev) => [...prev, url]);
               }
             })
-            .catch(() => {
+            .catch((error) => {
+              message.error(error);
               setUploadLoding(false);
-              message.error('图片上传失败');
             });
         }
       });
@@ -135,15 +136,10 @@ const PostCreation: React.FC = () => {
       type: Number(selectedTab),
       images: images.join(','),
     };
-    createFeedback(data)
-      .then(() => {
-        message.success('发布成功');
-        storage.remove('draft');
-        navigate('/feedback');
-      })
-      .catch(() => {
-        message.error('发布失败');
-      });
+    api.createFeedback(data).then(() => {
+      storage.remove('draft');
+      navigate('/feedback');
+    });
   };
 
   const handleSaveDraft = () => {

@@ -4,7 +4,7 @@ export default () => {
   return (
     <FloatButton.Group trigger="click" type="primary" style={{ insetInlineEnd: 24 }} icon={<SoundOutlined />}>
       <Tooltip title="使用文档" placement="left">
-        <FloatButton icon={<LinkOutlined />} onClick={() => window.open('http://docs.marsview.cc', '_blank')} />
+        <FloatButton icon={<LinkOutlined />} onClick={() => window.open('http://docs.marsview.com.cn', '_blank')} />
       </Tooltip>
       <Popover
         content={

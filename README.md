@@ -6,7 +6,7 @@
 
 Make building simpler and development more efficient
 
-[Project documentation](http://docs.marsview.cc/) |
+[Project documentation](http://docs.marsview.com.cn/) |
 [Open source repository](https://github.com/JackySoft/marsview) |
 [Communication group](https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f02.png)
 
@@ -82,17 +82,14 @@ git clone https://github.com/JackySoft/marsview-backend.git
 
 Project Description
 
-| directory          | description                            |
-| ------------------ | -------------------------------------- |
-| backend            | Backend services, including 2 versions |
-| backend/java       | JAVA version                           |
-| backend/koa        | Node version                           |
-| backend/koa/config | Project configuration file             |
-| backend/sql        | Database SQL Script                    |
+| directory      | description                            |
+| -------------- | -------------------------------------- |
+| backend        | Backend services, including 2 versions |
+| backend/config | Project configuration file             |
 
 ### Deploy Documentation
 
-[Documentation](http://docs.marsview.cc/deploy.html)
+[Documentation](http://docs.marsview.com.cn/deploy.html)
 
 ### Quick start
 
@@ -110,7 +107,7 @@ pnpm start:editor
 
 > Note: By default, online interfaces are used. If private deployment is required, please refer to the private deployment documentation.
 
-[Documentation](http://docs.marsview.cc/deploy.html)
+[Documentation](http://docs.marsview.com.cn/deploy.html)
 
 ### Synchronization Code
 
@@ -134,13 +131,19 @@ git checkout main
 git merge upstream/main
 ```
 
+## Team Recruitment
+
+-Passionate about programming and open source, with a strong interest in low code.
+-Continuous passion and long termism.
+-After meeting the requirements, they will enter the internal team open source group and share profits in the future.
+
 ## Activities 🆕
 
 - 2024-10-30: Marsview open-source backend service.
 - 2024-09-27: Online email registration service.
 - 2024-08-30: MarsView Published in [Ruan Yifeng Weekly](https://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html)
 - 2024-08-27: MarsAI v1.0 is launched, and auxiliary code generation is implemented in custom writing.
-- 2024-08-17: Project [Online Document](http://docs.marsview.cc/) Publish.
+- 2024-08-17: Project [Online Document](http://docs.marsview.com.cn/) Publish.
 - 2024-08-13: Open source article ranks first on the hot list of the Gold Mining Forum.
 - 2024-08-10: Project open source
   - Announce project open source, publish open source article: [My low code platform Marsview is finally open source](https://juejin.cn/post/7401009128204894244)
@@ -163,20 +166,10 @@ If you encounter any technical or commercial authorization issues during use, pl
 
 Thank you to the following brothers for their donation:
 
-| name            | profile picture                                                |
-| --------------- | -------------------------------------------------------------- |
-| 钢铁侠          | <img src="http://docs.marsview.cc/sponsor/10.png"  width="50"> |
-| 物联网方案-肖工 | <img src="http://docs.marsview.cc/sponsor/3.png"  width="50">  |
-| 物联网方案-肖工 | <img src="http://docs.marsview.cc/sponsor/3.png"  width="50">  |
-| 🥕 二月贝弋 🥕  | <img src="http://docs.marsview.cc/sponsor/2.png"  width="50">  |
-| 猩猩点灯        | <img src="http://docs.marsview.cc/sponsor/1.png"  width="50">  |
-| 元次达          | <img src="http://docs.marsview.cc/sponsor/4.png"  width="50">  |
-| IoT-Fast        | <img src="http://docs.marsview.cc/sponsor/5.png"  width="50">  |
-| w10752842       | <img src="http://docs.marsview.cc/sponsor/6.png"  width="50">  |
-| 朱红宾          | <img src="http://docs.marsview.cc/sponsor/7.png"  width="50">  |
-| yangshare       | <img src="http://docs.marsview.cc/sponsor/8.jpeg"  width="50"> |
-| Joker6578       | <img src="http://docs.marsview.cc/sponsor/9.png"  width="50">  |
-| xiaoqingbbbb    | <img src="http://docs.marsview.cc/sponsor/11.png"  width="50"> |
+| name            | profile picture                                                    |
+| --------------- | ------------------------------------------------------------------ |
+| 钢铁侠          | <img src="http://docs.marsview.com.cn/sponsor/10.png"  width="50"> |
+| 物联网方案-肖工 | <img src="http://docs.marsview.com.cn/sponsor/3.png"  width="50">  |
 
 ## 🤝 Participate and contribute
 

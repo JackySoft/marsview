@@ -1,6 +1,7 @@
 import { Input, Modal, Form, Select, Space, Flex } from 'antd';
 import { useImperativeHandle, useState, MutableRefObject } from 'react';
-import { createPageData, updatePageData, getAllProjects } from '@/api';
+import { getAllProjects } from '@/api';
+import api from '@/api/page';
 import { PageItem } from '@/api/pageMember';
 import { Project } from '@/api/types';
 import { useSearchParams } from 'react-router-dom';
@@ -11,7 +12,7 @@ import { useSearchParams } from 'react-router-dom';
 export interface IModalProp {
   title: string;
   createRef: MutableRefObject<{ open: (record: PageItem) => void } | undefined>;
-  update?: () => void;
+  update?: (record?: PageItem) => void;
 }
 
 const CreatePage = (props: IModalProp) => {
@@ -58,15 +59,15 @@ const CreatePage = (props: IModalProp) => {
       setLoading(true);
       try {
         if (type === 'create') {
-          await createPageData(params);
+          await api.createPageData(params);
         } else {
-          await updatePageData({
+          await api.updatePageData({
             ...params,
             id: recordId,
           });
         }
         // 编辑器界面 - 左侧菜单修改后刷新
-        props.update?.();
+        props.update?.(params);
         handleCancel();
         setLoading(false);
       } catch (error) {

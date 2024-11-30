@@ -1,14 +1,23 @@
 // 页面编辑器样式
-.mars-editor {
+.designer {
   position: relative;
-  height: 1000px;
+  overflow: auto;
 
-  // 当前页面样式
-  .pageWrapper {
-    background-color: var(--mars-theme-bg-color);
-    min-height: 100%;
+  .designer-bar {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 99;
+    &.hidden {
+      display: none;
+    }
+  }
+  .designer-editor {
     position: relative;
-    padding: 20px;
+    overflow: auto;
+    background-color: var(--mars-theme-bg-color);
     /* 设置背景图像为重复的径向渐变，每个渐变代表一个点 */
     background-image: radial-gradient(circle, rgba(185, 185, 185, 0.5) 1px, transparent 1px),
       radial-gradient(circle, rgba(0, 0, 0, 0.5) 1px, transparent 1px);
@@ -16,8 +25,14 @@
     background-size: 20px 20px; /* 根据需要调整间距 */
     /* 让背景图像在水平和垂直方向上重复 */
     background-repeat: repeat;
+  }
+  // 当前页面样式
+  .pageWrapper {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
     #page {
-      min-height: calc(100vh - 64px - 40px);
+      min-height: calc(100vh - 64px - 40px - 40px);
     }
   }
 }

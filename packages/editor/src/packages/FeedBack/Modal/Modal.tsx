@@ -1,5 +1,5 @@
 import { ComponentType, IDragTargetItem } from '@/packages/types';
-import { Button, Modal, Spin } from 'antd';
+import { Modal, Spin } from 'antd';
 import { forwardRef, memo, useEffect, useImperativeHandle, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { getComponent } from '@/packages/index';
@@ -121,12 +121,6 @@ const AntdModal = forwardRef(({ id, type, config, elements, onLoad, onOk, onCanc
   }
   return (
     <>
-      {/* 虚拟一个按钮，来模拟弹框，生产模式下，需要删除 */}
-      {mode === 'edit' ? (
-        <div>
-          <Button onClick={() => setVisible(true)}>{config.props.title}</Button>
-        </div>
-      ) : null}
       <Modal
         {...config.props}
         data-id={id}

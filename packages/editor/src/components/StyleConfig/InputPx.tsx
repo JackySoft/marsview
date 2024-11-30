@@ -21,7 +21,7 @@ const InputPx = ({ value, onChange, ...props }: any) => {
       onChange(unit === 'auto' ? unit : value + unit);
     } else {
       setNum(null);
-      onChange('');
+      onChange('auto');
     }
   };
 

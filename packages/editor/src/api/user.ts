@@ -20,14 +20,6 @@ export const getUserInfo = async () => {
   return request.get('/user/info', {});
 };
 
-// 获取用户头像
-export const getUserAvatar = () => {
-  // TODO 等后续接入微信扫码后生成用户头像
-  return Promise.resolve({
-    avatar: '',
-  });
-};
-
 // 搜索用户
 export const searchUser = (keyword: string) => {
   return request.post(`/user/search`, { keyword });
@@ -43,7 +35,22 @@ export const getAccountByToken = (token: string) => {
   return request.post(`/user/password/getUserByToken?resetToken=${token}`);
 };
 
+// 修改密码
+export const updatePassword = (params: { oldPwd: string; userPwd: string; confirmPwd: string }) => {
+  return request.post('/user/password/update', params);
+};
+
 // 密码找回提交
 export const resetSubmit = (params: { resetToken: string; userPwd: string }) => {
   return request.post('/user/password/reset', params);
+};
+
+// 获取用户profile
+export const getUserProfile = () => {
+  return request.get('/user/profile');
+};
+
+// 更新用户profile
+export const updateUserProfile = (params: { avatar?: string; nickName?: string }) => {
+  return request.post('/user/update/profile', params);
 };

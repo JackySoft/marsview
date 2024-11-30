@@ -2,7 +2,7 @@ import { Button, Flex, List, Spin, Tag } from 'antd';
 import { PlusOutlined, SyncOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useEffect, useRef, useState } from 'react';
 import { PageItem } from '@/api/pageMember';
-import { getPageList, delPageData } from '@/api';
+import api from '@/api/page';
 import { useNavigate } from 'react-router-dom';
 import { Modal, message } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
@@ -34,7 +34,7 @@ export default () => {
     } else {
       setLoading(true);
     }
-    const res = await getPageList({
+    const res = await api.getPageList({
       pageNum: current || pageNum,
       pageSize,
       projectId: 0,
@@ -65,7 +65,7 @@ export default () => {
       okText: '确认',
       cancelText: '取消',
       onOk: async () => {
-        await delPageData({
+        await api.delPageData({
           id,
         });
         message.success('删除成功');

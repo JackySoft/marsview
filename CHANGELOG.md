@@ -2,6 +2,130 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.2.3](https://github.com/JackySoft/marsview/compare/v6.2.2...v6.2.3) (2024-11-27)
+
+### [6.2.2](https://github.com/JackySoft/marsview/compare/v6.2.1...v6.2.2) (2024-11-26)
+
+
+### Features
+
+* 修改自定义组件Demo ([6bfe8a0](https://github.com/JackySoft/marsview/commit/6bfe8a0c9a2c5d5c20691e927b6ec23ad7d9e7c5))
+
+
+### Bug Fixes
+
+* 删除注释 ([b1855eb](https://github.com/JackySoft/marsview/commit/b1855eb59f4bb7de0a2efd569b1b21024ebabb94))
+
+### [6.2.1](https://github.com/JackySoft/marsview/compare/v6.2.0...v6.2.1) (2024-11-26)
+
+
+### Features
+
+* 增加弹框收集器 ([38f30f2](https://github.com/JackySoft/marsview/commit/38f30f2b5e66dc8235fa07b55d92bcbccf26a669))
+
+
+### Bug Fixes
+
+* 开始优化弹窗和抽屉编辑 ([a23a182](https://github.com/JackySoft/marsview/commit/a23a1821ab951a7ae3fdf8635d03d79117136968))
+* 优化弹框和抽屉收集 ([32f7297](https://github.com/JackySoft/marsview/commit/32f72974e0bccfe27045b73bc02dc69908a395ee))
+
+## [6.2.0](https://github.com/JackySoft/marsview/compare/v6.1.6...v6.2.0) (2024-11-25)
+
+
+### Features
+
+* 修改接口定义，同步代码。 ([db23308](https://github.com/JackySoft/marsview/commit/db2330886803fd983e1cd6320b0d2634d7cfc39d))
+
+
+### Others
+
+* 替换代理地址 ([5eb7e0c](https://github.com/JackySoft/marsview/commit/5eb7e0c17521c21a3a1d046089ad8f42f7644010))
+
+### [6.1.6](https://github.com/JackySoft/marsview/compare/v6.1.5...v6.1.6) (2024-11-25)
+
+
+### Bug Fixes
+
+* 修复react18.3带来的类型报错问题 ([d4a169d](https://github.com/JackySoft/marsview/commit/d4a169d412eb9e59d247827a47180798c5184650))
+
+
+### Documentation
+
+* 修改文档 ([ed5a698](https://github.com/JackySoft/marsview/commit/ed5a698ec5c7ac2844a59a2e6f5d3448e23ee951))
+
+### [6.1.5](https://github.com/JackySoft/marsview/compare/v6.1.4...v6.1.5) (2024-11-23)
+
+
+### Bug Fixes
+
+* 修复问题 ([bdc7dc6](https://github.com/JackySoft/marsview/commit/bdc7dc684911ad03a91d955c368f128b995692c5))
+
+### [6.1.4](https://github.com/JackySoft/marsview/compare/v6.1.3...v6.1.4) (2024-11-23)
+
+
+### Bug Fixes
+
+* 修复问题 ([45ff4dd](https://github.com/JackySoft/marsview/commit/45ff4dd05725da4d5198fc2993c5a11cd54a6fd9))
+
+### [6.1.3](https://github.com/JackySoft/marsview/compare/v6.1.2...v6.1.3) (2024-11-23)
+
+
+### Bug Fixes
+
+* 修复标签点击 ([c5877e8](https://github.com/JackySoft/marsview/commit/c5877e8b9e9b5a3054ec08ce7ad2632bb41432ec))
+
+### [6.1.2](https://github.com/JackySoft/marsview/compare/v6.1.1...v6.1.2) (2024-11-23)
+
+
+### Bug Fixes
+
+* 修复问题 ([b676619](https://github.com/JackySoft/marsview/commit/b67661950ebff292df3f4879ff9a657c9e043d03))
+
+### [6.1.1](https://github.com/JackySoft/marsview/compare/v6.0.8...v6.1.1) (2024-11-23)
+
+
+### Features
+
+* 优化代码 ([2cc4f54](https://github.com/JackySoft/marsview/commit/2cc4f5434c6ea84c61e8e74ecc9cd2d07fc11aaa))
+
+
+### Bug Fixes
+
+* 修复问题 ([8fb3692](https://github.com/JackySoft/marsview/commit/8fb3692e7d7be8e4ed637f5d27b3fb3f63dc8765))
+
+## [6.1.0](https://github.com/JackySoft/marsview/compare/v6.0.7...v6.1.0) (2024-11-23)
+
+
+### Features
+
+* 画布增加尺寸选择 ([cea7116](https://github.com/JackySoft/marsview/commit/cea7116f5c02b9467e0edd9162f47fc3dc8cb0b1))
+
+
+### Others
+
+* **release:** 6.1.0 ([f33710e](https://github.com/JackySoft/marsview/commit/f33710e163b56258c6d41ec28456c1df2bb983b8))
+
+## [6.1.0](https://github.com/JackySoft/marsview/compare/v6.0.7...v6.1.0) (2024-11-23)
+
+
+### Features
+
+* 个人中心上线 ([dddb989](https://github.com/JackySoft/marsview/commit/dddb98921592aa329a260d17503f958960eddb69))
+* 画布增加尺寸选择 ([cea7116](https://github.com/JackySoft/marsview/commit/cea7116f5c02b9467e0edd9162f47fc3dc8cb0b1))
+* 用户信息页 ([609f016](https://github.com/JackySoft/marsview/commit/609f016c1d1d85b6bced1c3a784ac08e04f29d31))
+* 用户信息页静态页面 ([3e26449](https://github.com/JackySoft/marsview/commit/3e264490e0d27a4d18f71ca0b202204230059a74))
+* issue [#67](https://github.com/JackySoft/marsview/issues/67):添加编辑器画布拖拽能力 ([0e81a0f](https://github.com/JackySoft/marsview/commit/0e81a0f43c57e19345c4cf7c0583b7afcd332f82))
+
+
+### Bug Fixes
+
+* 修复内容审核 ([5a4c8ab](https://github.com/JackySoft/marsview/commit/5a4c8ab15f6eae54adf31936607db1482b913eec))
+* 修复问题 ([15959c6](https://github.com/JackySoft/marsview/commit/15959c6811f18c154b77e3c3ce5eef16e106b3ca))
+* 修复问题 ([6dced75](https://github.com/JackySoft/marsview/commit/6dced75460f5a057393dc8756ff0cc6af7e635bc))
+* 修复问题 ([632d7ab](https://github.com/JackySoft/marsview/commit/632d7abab92b2247e7ca079427c4b2bbfc5b140c))
+* 修复问题 ([b9d209a](https://github.com/JackySoft/marsview/commit/b9d209a6a0edb1ba070018b4f35948899b37234f))
+* 修复问题 ([b35137c](https://github.com/JackySoft/marsview/commit/b35137cdeae414385ed1c9d1e487207c8a1be08b))
+
 ### [6.0.7](https://github.com/JackySoft/marsview/compare/v6.0.6...v6.0.7) (2024-11-20)
 
 

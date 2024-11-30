@@ -1,11 +1,11 @@
 import { useImperativeHandle, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Modal, Form, TreeSelect, Input, Select, InputNumber, Radio, Spin } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
 import { message } from '@/utils/AntdGlobal';
 import { IAction, IModalProp } from '@/pages/types';
 import { Menu } from '@/api/types';
-import { getMenuList, addMenu, updateMenu, getPageList } from '@/api';
+import { getMenuList, addMenu, updateMenu } from '@/api';
+import api from '@/api/page';
 import { PageItem } from '@/api/pageMember';
 import { arrayToTree } from '@/utils/util';
 import CreatePage from '@/components/CreatePage';
@@ -57,7 +57,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
 
   // 获取用户页面列表
   const getMyPageList = async () => {
-    const res = await getPageList({ pageNum: 1, pageSize: 50, projectId: Number(projectId) });
+    const res = await api.getPageList({ pageNum: 1, pageSize: 50, projectId: Number(projectId) });
     setPageList(res.list);
   };
 

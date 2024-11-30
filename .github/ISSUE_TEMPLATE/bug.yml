@@ -1,6 +1,6 @@
 name: 问题反馈
 description: 详细清晰的描述你遇到的问题
-title: "问题标题"
+title: '问题标题'
 labels: [bug]
 body:
   - type: markdown
@@ -8,10 +8,10 @@ body:
       value: |
         感谢对项目的支持与关注，在提出问题之前，请确保你已查看相关开发或使用文档：
         - [x] 我已确认目前没有类似 issue
-        - [x] 我已完整查看过项目 README，以及 [项目文档](http://docs.marsview.cc/)
+        - [x] 我已完整查看过项目 README，以及 [项目文档](http://docs.marsview.com.cn/)
         - [x] 我理解并愿意跟进此 issue，协助测试和提供反馈
         - [x] 我理解并认可上述内容，并理解项目维护者精力有限
-        :warning: **不遵循规则的 issue 可能会被无视或直接关闭**  
+        :warning: **不遵循规则的 issue 可能会被无视或直接关闭**
   - type: textarea
     validations:
       required: true
@@ -57,7 +57,7 @@ body:
         - revert-57-main
         - impr/组件按需加载
         - feat/workflow
-        - 其他    
+        - 其他
   - type: textarea
     attributes:
       label: 其他

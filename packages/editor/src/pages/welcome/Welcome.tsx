@@ -24,7 +24,7 @@ export default function Welcome() {
   }, []);
 
   const openDoc = () => {
-    window.open('http://docs.marsview.cc', '_blank');
+    window.open('http://docs.marsview.com.cn', '_blank');
   };
 
   return (
@@ -40,7 +40,7 @@ export default function Welcome() {
           <span>Marsview</span>
         </div>
         <div className={style.doc}>
-          <a href="http://docs.marsview.cc" target="_blank">
+          <a href="http://docs.marsview.com.cn" target="_blank">
             使用文档
           </a>
           <span>|</span>
@@ -63,7 +63,7 @@ export default function Welcome() {
           <p className={style.desc}>让搭建更简单，让开发更高效</p>
           <div className={style.count}>
             服务 <CountUp end={2000} duration={3} />+ 项目，
-            <CountUp end={2500} duration={3} />+ 页面
+            <CountUp end={3000} duration={3} />+ 页面
           </div>
           <div className={style.btnGroup}>
             <Button type="primary" ghost size="large" onClick={openDoc}>

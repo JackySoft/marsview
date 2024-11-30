@@ -9,6 +9,8 @@ import { createId, getElement } from '@/utils/util';
 export interface UserInfoStore {
   userId: number;
   userName: string;
+  nickName: string;
+  avatar: string;
 }
 export interface PageState {
   userInfo: UserInfoStore;
@@ -96,6 +98,8 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   userInfo: {
     userId: 0,
     userName: '',
+    nickName: '',
+    avatar: '',
   },
   mode: 'edit',
   theme: 'light',

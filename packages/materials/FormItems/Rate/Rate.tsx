@@ -1,8 +1,8 @@
-import { ComponentType } from '@/packages/types';
+import { ComponentType } from '@materials/types';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { Form, FormItemProps, Rate, RateProps } from 'antd';
-import { useFormContext } from '@/packages/utils/context';
-import { iconsList } from '@/packages/components/IConSetting';
+import { useFormContext } from '@materials/utils/context';
+import * as icons from '@ant-design/icons';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {
@@ -18,7 +18,7 @@ type MRateRef = {
   disable: () => void;
 };
 
-const MRate = forwardRef<MRateRef, ComponentType<IConfig>>(({ id, type, config, onChange, onHoverChange }, ref) => {
+const MRate = forwardRef<MRateRef, ComponentType<IConfig>>(({ type, config, onChange, onHoverChange }, ref) => {
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState(false);
   const [character, setCharacter] = useState();
@@ -51,6 +51,7 @@ const MRate = forwardRef<MRateRef, ComponentType<IConfig>>(({ id, type, config, 
 
   // 获取对应的组件实例
   useEffect(() => {
+    const iconsList: { [key: string]: any } = icons;
     setCharacter(iconsList[config.props.formWrap.character as string]?.render());
   }, [config.props.formWrap.character]);
 
@@ -72,7 +73,7 @@ const MRate = forwardRef<MRateRef, ComponentType<IConfig>>(({ id, type, config, 
   }
 
   return (
-    <Form.Item {...config.props.formItem} data-id={id} data-type={type}>
+    <Form.Item {...config.props.formItem}>
       <Rate
         {...config.props.formWrap}
         disabled={disabled}

@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Typography, Tag, Button, Space, List, Tabs, Input, Avatar, Pagination, Skeleton, Form, Flex, Segmented } from 'antd';
 import { ShareAltOutlined, SearchOutlined } from '@ant-design/icons';
 import { useAntdTable } from 'ahooks';
-import { FeedbackItem } from '../types';
-import { getFeedbackList, queryFeedbackTotal } from '@/api';
+
+import api, { FeedbackItem } from '@/api/feedback';
 import RandomAvatar from './UserDefaultAvatar';
 import style from './index.module.less';
 
@@ -39,18 +39,22 @@ const FeedbackIndex: React.FC = () => {
       {
         key: '0',
         label: '全部',
+        color: '#2db7f5',
       },
       {
         key: '1',
         label: 'BUG',
+        color: '#f50',
       },
       {
         key: '2',
         label: '建议',
+        color: '#2db7f5',
       },
       {
         key: '3',
         label: '其他',
+        color: '#108ee9',
       },
       {
         key: '4',
@@ -63,20 +67,22 @@ const FeedbackIndex: React.FC = () => {
   // 获取列表数据
   const getTableData = ({ current, pageSize }: { current: number; pageSize: number }, formData: { title: string; type: number; state: string }) => {
     setCurrentPage(current);
-    return getFeedbackList({
-      pageNum: current,
-      pageSize: pageSize,
-      ...formData,
-    }).then((res) => {
-      // 判断issue列表是否有下一页
-      if (currentTab === '4') {
-        setHasMore(res.list.length === pageSize);
-      }
-      return {
-        total: res.total,
-        list: res.list,
-      };
-    });
+    return api
+      .getFeedbackList({
+        pageNum: current,
+        pageSize: pageSize,
+        ...formData,
+      })
+      .then((res) => {
+        // 判断issue列表是否有下一页
+        if (currentTab === '4') {
+          setHasMore(res.list.length === pageSize);
+        }
+        return {
+          total: res.total,
+          list: res.list,
+        };
+      });
   };
 
   const { tableProps, loading, search } = useAntdTable(getTableData, {
@@ -90,7 +96,7 @@ const FeedbackIndex: React.FC = () => {
 
   // 查询反馈总量
   const getFeedbackTotal = async () => {
-    const res = await queryFeedbackTotal();
+    const res = await api.queryFeedbackTotal();
     setResolveTotal(res.resolveCount);
     setBugTotal(res.bugCount);
   };
@@ -192,8 +198,10 @@ const FeedbackIndex: React.FC = () => {
                     <div className={style.middleContent}>
                       <div className={style.itemTitle}>{item.title}</div>
                       <Space size={[0, 8]} wrap>
-                        {item.isTop === 1 ? <Tag color="#f50">置顶</Tag> : null}
-                        <Tag color="#2db7f5">{tabs.find((tab) => Number(tab.key) === item.type)?.label}</Tag>
+                        {item.isTop === 1 ? <Tag color="var(--mars-primary-color)">置顶</Tag> : null}
+                        <Tag color={tabs.find((tab) => Number(tab.key) === item.type)?.color}>
+                          {tabs.find((tab) => Number(tab.key) === item.type)?.label}
+                        </Tag>
                         {item.isSolve === 1 && (
                           <Tag color="success">{item.type === 1 ? '已解决' : item.type === 2 ? '已采纳' : item.type === 4 ? '已关闭' : '已处理'}</Tag>
                         )}

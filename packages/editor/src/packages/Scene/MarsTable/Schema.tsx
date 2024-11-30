@@ -181,7 +181,7 @@ export default {
     },
     {
       type: 'Title',
-      label: '字段映射',
+      label: '分页参数',
       key: 'fieldmap',
       popover: {
         title: '结构说明',

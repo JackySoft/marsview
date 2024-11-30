@@ -1,0 +1,204 @@
+.container {
+  height: calc(100vh - 64px);
+  overflow: auto;
+  position: relative;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  padding-block: 30px;
+  background-color: var(--mars-theme-bg-color);
+
+  /* 隐藏滚动条 - Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  .wrapper {
+    max-width: 1024px;
+    margin: 0 auto;
+    background-color: var(--mars-theme-color);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}
+
+.headerBanner {
+  height: 120px;
+  background: linear-gradient(to right, #7d3fff, #3f7dff);
+}
+
+.profileContent {
+  margin-top: -84px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.profileInfo {
+  display: flex;
+
+  .userInfo {
+    margin-top: 60px;
+    margin-left: 30px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+
+    .userName {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 10px;
+
+      .nameInfo {
+        font-size: 26px;
+        font-weight: 500;
+      }
+      .nameAction {
+        padding: 12px 10px 8px 10px;
+        cursor: pointer;
+        &:hover {
+          background-color: #f0f0f0;
+          border-radius: 4px;
+        }
+      }
+    }
+    .userEmail {
+      font-size: 16px;
+      color: #717179;
+    }
+  }
+}
+
+.changeAvatarBtn {
+  margin-top: 16px;
+}
+
+.emailInput {
+  margin-top: 16px;
+  max-width: 300px;
+}
+
+.baseSection,
+.settingsSection {
+  margin-top: 30px;
+  width: 100%;
+  // max-width: 500px;
+}
+
+.baseSection {
+  .baseInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    // gap: 20px;
+    margin-top: 20px;
+    .baseItem {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      span:nth-child(1) {
+        color: #717179;
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      span:nth-child(2) {
+        color: var(--mars-theme-text-color);
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.splitLine {
+  margin-top: 20px;
+  height: 1px;
+  width: 100%;
+  background-color: var(--mars-theme-card-border-color);
+}
+
+.settingsSection {
+  .settingsInfo {
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
+
+    .settingsItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      .settingsLeft {
+        display: flex;
+        gap: 10px;
+
+        .settingsIcon {
+          font-size: 20px;
+          margin-right: 8px;
+          color: #717179;
+        }
+
+        .settingsContent {
+          display: flex;
+          align-items: flex-start;
+
+          flex-direction: column;
+          .settingsTitle {
+            font-size: 16px;
+            font-weight: 500;
+          }
+          .settingsDesc {
+            font-size: 14px;
+            color: #717179;
+          }
+        }
+      }
+    }
+  }
+}
+
+.avatarWrapper {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: var(--mars-theme-bg-color);
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: 4px solid #fff;
+  }
+
+  .uploadOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 8px;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .overlayContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon {
+    font-size: 32px; /* 替代 Tailwind 的 `h-8 w-8` */
+    color: #fff;
+  }
+}

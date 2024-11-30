@@ -4,7 +4,7 @@ import { Tooltip, Image, Card } from 'antd';
 import { UserOutlined, EyeOutlined, CopyOutlined, DeleteOutlined, SendOutlined, GlobalOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { message, Modal } from '@/utils/AntdGlobal';
-import { copyPageData, delPageData } from '@/api';
+import api from '@/api/page';
 import EnvTag from './EnvTag';
 import { PageItem } from '@/api/types';
 import styles from './../../index.module.less';
@@ -30,7 +30,7 @@ const PageCard = ({ list, refresh }: { list: PageItem[]; refresh: () => void }) 
       return navigate(`/editor/${params?.id}/edit`);
     }
     if (type === 'copy') {
-      await copyPageData({
+      await api.copyPageData({
         id: params.id,
       });
       message.success('复制成功');
@@ -44,7 +44,7 @@ const PageCard = ({ list, refresh }: { list: PageItem[]; refresh: () => void }) 
         okButtonProps: { danger: true },
         cancelText: '取消',
         onOk: async () => {
-          await delPageData({
+          await api.delPageData({
             id: params.id,
           });
           message.success('删除成功');

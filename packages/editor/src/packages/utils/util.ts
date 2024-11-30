@@ -4,7 +4,7 @@
 
 import dayjs from 'dayjs';
 import { usePageStore } from '@/stores/pageStore';
-import { ComponentType } from '../types';
+import { CollectorItem, ComponentType } from '../types';
 import { get } from 'lodash-es';
 import { cloneDeep } from 'lodash-es';
 import copy from 'copy-to-clipboard';
@@ -408,22 +408,56 @@ export const loadScript = (src: string) => {
 
 /**
  * 获取环境变量
- * 2. isDev 是否是开发环境
- * 3. isPage 是否是页面环境
- * 4. isProject 是否是项目环境
- * 5. env 当前真实环境
+ * 开发环境下，固定返回 stg
  */
 export const getEnv = () => {
-  const isDev = /^\/editor\/\d+\/edit/.test(location.pathname);
-  const isPage = /^\/page\/(stg|pre|prd)\/\d+/.test(location.pathname);
-  const isProject = /^\/project\/(stg|pre|prd)\/\d+/.test(location.pathname);
-  const result1 = location.pathname.match(/^\/page\/(stg|pre|prd)\/\d+/);
-  const result2 = location.pathname.match(/^\/project\/(stg|pre|prd)\/\d+/);
-  const env = (result1 ? result1[1] : result2 ? result2[1] : 'stg') as 'stg' | 'pre' | 'prd';
-  return {
-    isDev,
-    isPage,
-    isProject,
-    env,
-  };
+  return 'stg';
+};
+
+/**
+ * 针对弹窗和抽屉组件的收集
+ */
+export const collectFloatItem = (
+  type: 'Modal' | 'Drawer',
+  item: { id: string; name: string },
+  config: any,
+  setList: React.Dispatch<React.SetStateAction<CollectorItem[]>>,
+) => {
+  setList((prev: CollectorItem[]) => {
+    const index = prev.length + 1;
+    const newItem: CollectorItem = {
+      id: createId(type),
+      targetId: item.id,
+      name: `${item.name}(${type.toLowerCase()}_${index})`,
+      type,
+      config,
+      events: {
+        open: [
+          {
+            id: createId(`${type}_event`),
+            title: `${type === 'Modal' ? '弹框' : '抽屉'}选定点击事件`,
+            type: 'normal',
+            config: {
+              actionName: `打开${type === 'Modal' ? '弹框' : '抽屉'}`,
+              actionType: `open${type}`,
+              target: item.id,
+            },
+          },
+        ],
+        close: [
+          {
+            id: createId(`${type}_event`),
+            title: `${type === 'Modal' ? '弹框' : '抽屉'}关闭点击事件`,
+            type: 'normal',
+            config: {
+              actionName: `关闭${type === 'Modal' ? '弹框' : '抽屉'}`,
+              actionType: `close${type}`,
+              target: item.id,
+            },
+          },
+        ],
+      },
+    };
+    return prev.concat(newItem);
+  });
 };

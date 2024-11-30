@@ -7,23 +7,15 @@ import { useProjectStore } from '@/stores/projectStore';
 import Logo from '../Logo/Logo';
 import BreadList from '../BreadList/BreadList';
 import Menu from '../Menu/Menu';
-import { getUserAvatar } from '@/api';
 import styles from './index.module.less';
 
 /**
  * 编辑器顶部组件
  */
 const Header = memo(() => {
-  const [avatar, setAvatar] = useState('');
-  const { userName = '-' } = usePageStore((state) => state.userInfo);
+  const userInfo = usePageStore((state) => state.userInfo);
   const { projectInfo, collapsed, updateCollapsed } = useProjectStore();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getUserAvatar().then((res) => {
-      setAvatar(res.avatar);
-    });
-  }, []);
 
   // 控制菜单图标关闭和展开
   const toggleCollapsed = () => {
@@ -61,13 +53,13 @@ const Header = memo(() => {
       {/* 用户信息 */}
       <div className={styles.user}>
         {/* 用户头像 */}
-        {avatar ? <img width={30} src={avatar} style={{ borderRadius: '50%' }} /> : null}
+        {userInfo.avatar ? <img width={30} src={userInfo.avatar} style={{ borderRadius: '100%' }} /> : null}
         <Dropdown
           menu={{
             items: [
               {
                 key: 'profile',
-                label: userName,
+                label: userInfo.nickName,
               },
               {
                 key: 'logout',
@@ -85,7 +77,7 @@ const Header = memo(() => {
         >
           <a onClick={(e) => e.preventDefault()}>
             <Space>
-              <span style={{ marginLeft: '10px', color: isLight ? '' : '#fff' }}>{`${userName}` || '开发者'}</span>
+              <span style={{ marginLeft: '10px', color: isLight ? '' : '#fff' }}>{`${userInfo.nickName}` || '开发者'}</span>
               <DownOutlined />
             </Space>
           </a>
