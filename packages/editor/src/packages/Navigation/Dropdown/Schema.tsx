@@ -1,4 +1,5 @@
-import DynamicItemSetting from '@/packages/components/dynamicItemSetting';
+import DynamicItemSetting from '@/packages/components/DynamicItemSetting';
+import { FormInstance } from 'antd';
 
 export default {
   attrs: [
@@ -12,9 +13,15 @@ export default {
       name: 'text',
     },
     {
-      type: 'Icons',
-      label: '文字图标',
-      name: 'textIcon',
+      type: 'Select',
+      label: '类型',
+      name: 'type',
+      props: {
+        options: [
+          { value: 'primary', label: '主要' },
+          { value: 'default', label: '默认' },
+        ],
+      },
     },
     {
       type: 'Select',
@@ -22,12 +29,12 @@ export default {
       name: 'placement',
       props: {
         options: [
-          { value: 'top', label: 'top' },
-          { value: 'topLeft', label: 'topLeft' },
-          { value: 'topRight', label: 'topRight' },
-          { value: 'bottom', label: 'bottom' },
-          { value: 'bottomLeft', label: 'bottomLeft' },
-          { value: 'bottomRight', label: 'bottomRight' },
+          { value: 'top', label: '正上方' },
+          { value: 'topLeft', label: '左上方' },
+          { value: 'topRight', label: '右上方' },
+          { value: 'bottom', label: '正下方' },
+          { value: 'bottomLeft', label: '左下方' },
+          { value: 'bottomRight', label: '右下方' },
         ],
       },
     },
@@ -37,11 +44,20 @@ export default {
       name: 'destroyPopupOnHide',
     },
     {
+      type: 'Variable',
+      label: '是否禁用',
+      name: ['disabled'],
+    },
+    {
+      type: 'Title',
+      label: '配置项',
+    },
+    {
       type: 'function',
       label: '动态列',
       name: 'itemConfig',
-      render: () => {
-        return <DynamicItemSetting />;
+      render: (form: FormInstance) => {
+        return <DynamicItemSetting labelSpan={8} form={form} name={'itemConfig'} />;
       },
     },
   ],
@@ -49,28 +65,15 @@ export default {
     // 组件默认属性值
     props: {
       text: 'DropDown',
-
-      // closable: true,
-      // footer: true,
-      // open: true,
-      // okText: '确定',
-      // cancelText: '取消',
-      // destroyOnClose: false,
-      // confirmLoading: false,
+      type: 'default',
+      placement: 'bottom',
+      itemConfig: [],
     },
   },
   events: [
     {
-      value: 'onLoad',
-      name: '初始化事件',
-    },
-    {
-      value: 'onOk',
-      name: '确认事件',
-    },
-    {
-      value: 'onCancel',
-      name: '取消事件',
-    },
+      name: '配置项点击事件',
+      value: 'onMenuClick'
+    }
   ],
 };
