@@ -1,0 +1,47 @@
+@px: 8px;
+@2x: 2 * @px;
+@3x: 3 * @px;
+@4x: 4 * @px;
+
+
+.area_wrapper{
+    background: #f7f7f9;
+    padding: @2x 0;
+    position: relative;
+    margin-left: @2x;
+    margin-right: @2x;
+
+    &::before{
+        content: '';
+        position: absolute; /* 伪元素使用绝对定位 */
+        top: 50%; /* 竖直居中 */
+        left: -@px; /* 将伪元素定位到 box 的左侧 */
+        transform: translateY(-50%); /* 确保完全竖直居中 */
+        width: 0;
+        height: 0;
+        border-bottom: @px solid transparent; /* 左边透明 */
+        border-right: 10px solid #f7f7f9; /* 右边透明 */
+        border-top: @px solid transparent; /* 上边为白色，形成三角形 */
+    }
+
+    :global{
+        .ant-form-item-explain-error{
+            position: absolute;
+        }
+
+        
+    }
+}
+
+.dynamic_delete_button{
+    position: absolute;
+    right: @px;
+    top: -@px;
+
+    &:hover{
+        &>svg{
+            fill: red;
+            transition: fill 0.2s ease-in-out;
+        }
+    }
+}
