@@ -56,8 +56,11 @@ Marsview is a low code visualization platform for middle and backend development
 - **environment:** The platform supports three environments, STG, PRE, and PRD. The page can only be accessed on the user side after being published to the corresponding environment.
 - **rollback：** After the platform is released, the page supports one click rollback.
 - **Micro front-end integration:** If you are a traditional Vue project and want to use this platform, you can first build a page on the platform and publish it to the PRD environment, and finally integrate it through microservices.
+  <<<<<<< HEAD
 - The backend provides two versions, JAVA and Koa, with MySQL as the database.
-  > > > > > > > 4ac0c61 (feat: 添加中英文 readme)
+  > > > > > > > # 4ac0c61 (feat: 添加中英文 readme)
+- The backend provides Node versions, with MySQL as the database.
+  > > > > > > > 7a5f341 (docs: 修改文档)
 
 ## Local development 👨‍💻
 
