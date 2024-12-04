@@ -149,7 +149,7 @@ function FlowNode(_: any, ref: any) {
 
       // 拿到点击创建的当前节点，查看当前节点的下一个节点是否为是条件节点
       const nestNode = (parentNode ? parentNode.children : nodeList)[node.index + 1];
-      if (nestNode.type === 'condition' && type === 'condition') {
+      if (nestNode && nestNode.type === 'condition' && type === 'condition') {
         message.error('分支节点前一个节点不能添加分支节点');
         return;
       }
