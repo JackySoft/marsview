@@ -159,7 +159,7 @@ function FlowNode(_: any, ref: any) {
         id: generateId(),
         type,
         title,
-        content: '编排节点',
+        content: '行为配置',
         config: {},
         children: [],
       };
