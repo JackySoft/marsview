@@ -177,9 +177,11 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
       bordered: config.props.bordered,
       size: config.props.size,
       columns: config.props.columns.map((item, index: number) => {
+        const dataIndex = item.dataIndex || '-' + index;
         return {
           ...item,
-          key: item.dataIndex || index,
+          dataIndex,
+          key: dataIndex,
           onCell(record: any, index: number) {
             // onCell处理，用于跨行跨列展示
             if (item.onCell) {

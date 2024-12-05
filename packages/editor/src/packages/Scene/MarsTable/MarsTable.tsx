@@ -211,9 +211,11 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
       ...config.props,
       rowKey: config.props.rowKey || 'id',
       columns: config.props.columns.map((item, index) => {
+        const dataIndex = item.dataIndex || '-' + index;
         return {
           ...item,
-          key: item.dataIndex || index,
+          dataIndex,
+          key: dataIndex,
           onCell(record: any, index: number) {
             // onCell处理，用于跨行跨列展示
             if (item.onCell) {

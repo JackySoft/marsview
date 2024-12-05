@@ -1,3 +1,12 @@
+/*
+ * @Author: zq
+ * @Description: 文件说明
+ * @LastEditors: zq
+ * @Company: 沃尔玛
+ * @Date: 2024-12-05 09:19:37
+ * @LastEditTime: 2024-12-05 09:49:38
+ * @FilePath: /lowcode-web/packages/editor/src/packages/Basic/Image/Schema.ts
+ */
 /**
  * 组件配置和属性值
  */
