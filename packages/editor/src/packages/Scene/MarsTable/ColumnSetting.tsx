@@ -141,8 +141,10 @@ const ColumnSetting = memo((props: IModalProp) => {
   const handleCancel = () => {
     setVisible(false);
   };
+  const values = form.getFieldsValue();
+  const title = `列设置(${values?.dataIndex})`
   return (
-    <Modal title="列设置" open={visible} onOk={handleOk} onCancel={handleCancel} width={900}>
+    <Modal title={title} open={visible} onOk={handleOk} onCancel={handleCancel} width={900}>
       <Form form={form} labelCol={{ span: 6 }}>
         <Tabs items={items} />
       </Form>
@@ -271,6 +273,37 @@ const DisplaySetting = () => {
       </Form.Item>
       <Form.Item label="可复制" name="copyable" tooltip="开启后，列增加复制功能，只对文本生效" {...layout}>
         <Switch />
+      </Form.Item>
+      <Form.Item shouldUpdate noStyle>
+        {(form: FormInstance) => {
+          const type = form.getFieldValue('type');
+          if (type === 'image')
+            return (
+                <Form.Item name="imageConfig">
+                  <Form.Item label="宽度" name={['imageConfig', 'width']} {...layout}>
+                    <Input placeholder='string | number' />
+                  </Form.Item>
+                  <Form.Item label="高度" name={['imageConfig', 'height']} {...layout}>
+                    <Input placeholder='string | number' />
+                  </Form.Item>
+                </Form.Item>
+            );
+        }}
+      </Form.Item>
+      <Form.Item shouldUpdate>
+        {(form: FormInstance) => {
+          const type = form.getFieldValue('type'); // 假设你在某个地方已经定义了'type'字段
+          if (type === 'action') {
+            return (
+              <Form.Item label="折叠按钮" name="moreActionIndex" {...layout} tooltip="指定从第n个按钮开始折叠">
+                  <InputNumber min={0} max={999} style={{
+                    width: '60px',
+                  }} />
+              </Form.Item>
+            );
+          }
+          return null;
+        }}
       </Form.Item>
       <Form.Item shouldUpdate noStyle>
         {(form: FormInstance) => {

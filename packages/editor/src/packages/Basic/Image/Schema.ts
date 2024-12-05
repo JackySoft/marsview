@@ -1,3 +1,12 @@
+/*
+ * @Author: zq
+ * @Description: 文件说明
+ * @LastEditors: zq
+ * @Company: 沃尔玛
+ * @Date: 2024-12-05 09:19:37
+ * @LastEditTime: 2024-12-05 09:49:38
+ * @FilePath: /lowcode-web/packages/editor/src/packages/Basic/Image/Schema.ts
+ */
 /**
  * 组件配置和属性值
  */
@@ -46,7 +55,7 @@ export default {
   // 组件事件
   events: [
     {
-      value: 'handleClick',
+      value: 'onClick',
       name: '点击事件',
     },
   ],
