@@ -367,6 +367,7 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
                   </Button>
                 );
               });
+              // 配置了折叠功能，且存在需要折叠的按钮
               if (moreActionIndex && btns.slice(moreActionIndex - 1).length) {
                 const content = <div style={{
                   display: 'flex',

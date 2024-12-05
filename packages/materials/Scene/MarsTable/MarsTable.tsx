@@ -333,6 +333,7 @@ const MarsTable = ({ config, elements, onCheckedChange }: ComponentType<IConfig>
                 })
               // 过滤掉空按钮
               .filter((i: any) => i)
+              // 配置了折叠功能，且存在需要折叠的按钮
               if (moreActionIndex && btns.slice(moreActionIndex - 1).length) {
                 const content = <div style={{
                   display: 'flex',
