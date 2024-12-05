@@ -5,6 +5,8 @@ import { message } from '@/utils/AntdGlobal';
 import NodeEdit from './NodeEdit';
 import ActionModal from '../EventConfig/ActionModal/ActionModal';
 import './index.less';
+import { findNodeIndexAndParent } from '@/utils/util';
+import { cloneDeep } from 'lodash-es';
 
 export type NodeType = {
   id: string;
@@ -132,9 +134,27 @@ function FlowNode(_: any, ref: any) {
       createNode('');
     }
 
+    /**
+     * 不能创建节点的情况
+     * 1. 开始节点后第一个节点不能添加分支节点
+     * 2. 分支节点后第一个节点不能添加分支节点
+     * 3. 分支节点前第一个节点不能添加分支节点
+     */
     function createNode(title: string) {
-      const nodeList = JSON.parse(JSON.stringify(list));
+      const nodeList = cloneDeep(list);
       const node = findNodeIndexAndParent(nodeList, id);
+      if (!node) return;
+
+      const parentNode = node.parentNode;
+
+      // 拿到点击创建的当前节点，查看当前节点的下一个节点是否为是条件节点
+      const nestNode = (parentNode ? parentNode.children : nodeList)[node.index + 1];
+      if (nestNode && nestNode.type === 'condition' && type === 'condition') {
+        message.error('分支节点前一个节点不能添加分支节点');
+        return;
+      }
+
+      // 创建一个普通节点
       const taskNode = {
         id: generateId(),
         type,
@@ -143,48 +163,49 @@ function FlowNode(_: any, ref: any) {
         config: {},
         children: [],
       };
-      if (!node.parentNode) {
-        if (type === 'normal') {
-          nodeList.splice(node.index + 1, 0, taskNode);
-        } else {
-          if (node.selfNode.type === 'start') {
-            message.error('开始节点后第一个不能添加分支节点');
+
+      const parentNodeType: 'condition' | 'success' | 'fail' | 'normal' | undefined = parentNode?.type;
+
+      switch (parentNodeType) {
+        case undefined:
+          if (type === 'normal') {
+            nodeList.splice(node.index + 1, 0, taskNode);
+          } else {
+            if (node.selfNode.type === 'start') {
+              message.error('开始节点后第一个节点不能添加分支节点');
+              return;
+            }
+            if (node.selfNode.type === 'condition') {
+              message.error('分支节点后第一个节点不能添加分支节点');
+              return;
+            }
+            nodeList.splice(node.index + 1, 0, {
+              ...taskNode,
+              children: [
+                {
+                  id: generateId(),
+                  type: 'success',
+                  children: [],
+                  title: '成功',
+                  content: '成功时执行此流程',
+                },
+                {
+                  id: generateId(),
+                  type: 'fail',
+                  title: '失败',
+                  content: '失败时执行此流程',
+                  children: [],
+                },
+              ],
+            });
+          }
+          break;
+        case 'success':
+        case 'fail':
+          if (node.selfNode.type === 'condition' && type === 'condition') {
+            message.error('分支节点后第一个节点不能添加分支节点');
             return;
           }
-          if (node.selfNode.type === 'condition') {
-            message.error('分支节点后第一个不能添加分支节点');
-            return;
-          }
-          nodeList.splice(node.index + 1, 0, {
-            ...taskNode,
-            children: [
-              {
-                id: generateId(),
-                type: 'success',
-                children: [],
-                title: '成功',
-                content: '成功时执行此流程',
-              },
-              {
-                id: generateId(),
-                type: 'fail',
-                title: '失败',
-                content: '失败时执行此流程',
-                children: [],
-              },
-            ],
-          });
-        }
-      } else if (node?.parentNode?.type === 'condition') {
-        if (type === 'condition') {
-          message.error('分支节点后第一个不能添加分支节点');
-          return;
-        }
-        node.parentNode.children[node.index].children.unshift(taskNode);
-      } else if (['normal', 'success', 'fail'].includes(node?.parentNode?.type)) {
-        if (type === 'normal') {
-          node.parentNode.children.splice(node.index + 1, 0, taskNode);
-        } else {
           node.parentNode.children.splice(node.index + 1, 0, {
             ...taskNode,
             children: [
@@ -206,8 +227,19 @@ function FlowNode(_: any, ref: any) {
               },
             ],
           });
-        }
+          break;
+        case 'normal':
+          node.parentNode.children.splice(node.index + 1, 0, taskNode);
+          break;
+        case 'condition':
+          if (type === 'condition') {
+            message.error('分支节点后第一个节点不能添加分支节点');
+            return;
+          }
+          node.parentNode.children[node.index].children.unshift(taskNode);
+          break;
       }
+
       setList(() => [...nodeList]);
     }
   };
@@ -215,14 +247,16 @@ function FlowNode(_: any, ref: any) {
   //   删除节点
   const handleDelNode = (event: React.MouseEvent, id: string) => {
     event.stopPropagation();
-    const nodeList = JSON.parse(JSON.stringify(list));
+    const nodeList = cloneDeep(list);
     const node = findNodeIndexAndParent(nodeList, id);
+    if (!node) return;
     if (!node.parentNode) {
       nodeList.splice(node.index, 1);
     } else if (['success', 'fail', 'normal'].includes(node?.parentNode?.type)) {
       node.parentNode.children.splice(node.index, 1);
     } else if (node?.parentNode?.type === 'condition') {
       const parentNode = findNodeIndexAndParent(nodeList, node?.parentNode?.id);
+      if (!parentNode) return;
       if (parentNode.parentNode) {
         parentNode.parentNode.children.splice(parentNode.index, 1);
       } else {
@@ -239,8 +273,9 @@ function FlowNode(_: any, ref: any) {
       return;
     }
     nodeRef.current?.open(node.title, (title) => {
-      const nodeList = JSON.parse(JSON.stringify(list)) as NodeType[];
+      const nodeList = cloneDeep(list) as NodeType[];
       const editNode = findNodeIndexAndParent(nodeList, node.id);
+      if (!editNode) return;
       editNode.selfNode.title = title;
       setList(() => [...nodeList]);
     });
@@ -253,8 +288,9 @@ function FlowNode(_: any, ref: any) {
       return;
     }
     actionRef.current?.open(node.config, (values: any) => {
-      const nodeList = JSON.parse(JSON.stringify(list)) as NodeType[];
+      const nodeList = cloneDeep(list) as NodeType[];
       const editNode = findNodeIndexAndParent(nodeList, node.id);
+      if (!editNode) return;
       editNode.selfNode.content = values.actionName;
       editNode.selfNode.config = values;
       setList(() => [...nodeList]);
@@ -307,22 +343,6 @@ function FlowNode(_: any, ref: any) {
       <ActionModal ref={actionRef} />
     </>
   );
-}
-
-// 查找节点的索引及其父节点
-export function findNodeIndexAndParent(children: any, nodeId: string, parentNode = null): any {
-  for (let i = 0; i < children.length; i++) {
-    if (children[i].id === nodeId) {
-      return { index: i, parentNode, selfNode: children[i] };
-    }
-    if (children[i].children) {
-      const result = findNodeIndexAndParent(children[i].children, nodeId, children[i]);
-      if (result) {
-        return result;
-      }
-    }
-  }
-  return null;
 }
 
 export default forwardRef(FlowNode);
