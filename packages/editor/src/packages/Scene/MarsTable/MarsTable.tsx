@@ -1,5 +1,5 @@
 import React, { forwardRef, memo, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
-import { Button, Table, Image, Tag, TablePaginationConfig, Tooltip, Typography, Badge } from 'antd';
+import { Button, Table, Image, Tag, TablePaginationConfig, Tooltip, Typography, Badge, Popover } from 'antd';
 import { useDrop } from 'react-dnd';
 import { pickBy } from 'lodash-es';
 import * as icons from '@ant-design/icons';
@@ -12,6 +12,8 @@ import { usePageStore } from '@/stores/pageStore';
 import { ComponentType, IDragTargetItem } from '@/packages/types';
 import { get } from 'lodash-es';
 import styles from './index.module.less';
+import { isNumber } from 'lodash-es';
+import { EllipsisOutlined } from '@ant-design/icons';
 
 export interface IConfig {
   bordered: boolean;
@@ -303,14 +305,16 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
               return <Badge status="success" text={txt.toString()} />;
             }
             if (item.type === 'image') {
+              const { width, height } = item?.imageConfig || {};
               if (Array.isArray(txt)) {
                 return (
                   <Image.PreviewGroup items={txt}>
-                    <Image width={30} src={txt[0]} />
+                    <Image width={width} height={height} src={txt[0]} />
                   </Image.PreviewGroup>
                 );
               }
-              return (txt?.startsWith('http') && <Image src={txt} width={30} />) || txt;
+              const adaptVal = (val: string) => isNumber(Number(val)) ? Number(val) : val;
+              return (txt?.startsWith?.('http') && <Image src={txt} width={adaptVal(width)} height={adaptVal(height)} />) || txt;
             }
             if (item.type === 'tag') {
               if (Array.isArray(txt)) {
@@ -333,39 +337,62 @@ const MarsTable = ({ id, type, config, elements, onCheckedChange }: ComponentTyp
               }
               return txt?.toString();
             }
-            if (item.type === 'action')
+            if (item.type === 'action'){
+              const { moreActionIndex } = item;
+              const btns = item.list?.map((btn: any) => {
+                let btnTxt = '';
+                if (typeof btn.text === 'string') {
+                  btnTxt = btn.text;
+                } else if (btn.text?.type === 'static') {
+                  btnTxt = btn.text.value;
+                } else {
+                  try {
+                    const renderFn = new Function('text', 'record', 'index', `return (${btn.text.value})(text,record,index);`);
+                    btnTxt = renderFn('', record, index);
+                  } catch (error) {
+                    console.error(`列[${btn.title}]渲染失败`, error);
+                    btnTxt = '解析异常';
+                  }
+                }
+                if (btnTxt === '') return;
+                return (
+                  <Button
+                    key={btn.eventName}
+                    type="link"
+                    size="small"
+                    danger={btn.danger}
+                    onClick={() => handleActionClick(btn.eventName, record)}
+                  >
+                    {btnTxt}
+                  </Button>
+                );
+              });
+              // 配置了折叠功能，且存在需要折叠的按钮
+              if (moreActionIndex && btns.slice(moreActionIndex - 1).length) {
+                const content = <div style={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}>
+                  {btns.slice(moreActionIndex - 1)}
+                </div>
+                return (
+                  <div className={styles.action}>
+                    { btns.slice(0, moreActionIndex - 1)}
+                     <Popover
+                      trigger="click"
+                      content={ content }
+                    >
+                      <EllipsisOutlined />
+                    </Popover>
+                  </div>
+                );
+              }
               return (
                 <div className={styles.action}>
-                  {item.list?.map((btn: any) => {
-                    let btnTxt = '';
-                    if (typeof btn.text === 'string') {
-                      btnTxt = btn.text;
-                    } else if (btn.text?.type === 'static') {
-                      btnTxt = btn.text.value;
-                    } else {
-                      try {
-                        const renderFn = new Function('text', 'record', 'index', `return (${btn.text.value})(text,record,index);`);
-                        btnTxt = renderFn('', record, index);
-                      } catch (error) {
-                        console.error(`列[${btn.title}]渲染失败`, error);
-                        btnTxt = '解析异常';
-                      }
-                    }
-                    if (btnTxt === '') return;
-                    return (
-                      <Button
-                        key={btn.eventName}
-                        type="link"
-                        size="small"
-                        danger={btn.danger}
-                        onClick={() => handleActionClick(btn.eventName, record)}
-                      >
-                        {btnTxt}
-                      </Button>
-                    );
-                  })}
+                  {btns}
                 </div>
               );
+            }
             return txt;
           },
         };

@@ -1,3 +1,12 @@
+/*
+ * @Author: zq
+ * @Description: 文件说明
+ * @LastEditors: zq
+ * @Company: 沃尔玛
+ * @Date: 2024-12-05 12:43:19
+ * @LastEditTime: 2024-12-05 12:44:05
+ * @FilePath: /lowcode-web/packages/materials/Basic/Text/Text.tsx
+ */
 import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { Typography } from 'antd';
 import dayjs from 'dayjs';
