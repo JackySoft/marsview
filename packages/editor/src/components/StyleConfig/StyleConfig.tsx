@@ -15,6 +15,15 @@ import Shadow from './Shadow';
 import VsEditor from '../VsEditor';
 import InputPx from './InputPx';
 import styles from './index.module.less';
+import { styled } from 'styled-components';
+// 修复contextmenu被裁剪显示不完整问题
+const StyleCodeEditor = styled.div `
+  .suggest-widget {
+    width: 100% !important;
+    left: 0 !important;
+    max-width: 500px !important;
+  }
+`;
 /**
  * 通用样式-配置组件
  */
@@ -83,9 +92,11 @@ const StyleConfig = () => {
   return (
     <Form className={styles.ui} {...formLayout} form={form} layout="horizontal" labelAlign="right" onValuesChange={run}>
       <TitleStyle>自定义样式</TitleStyle>
-      <Form.Item name="scopeCss" noStyle>
-        <VsEditor language="css" />
-      </Form.Item>
+      <StyleCodeEditor>
+        <Form.Item name="scopeCss" noStyle>
+          <VsEditor language="css" />
+        </Form.Item>
+      </StyleCodeEditor>
       <TitleStyle>基础</TitleStyle>
       <Form.Item name={['scopeStyle', 'width']} label={'宽度'}>
         <InputPx />
