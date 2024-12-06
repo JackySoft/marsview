@@ -16,7 +16,6 @@ import VsEditor from '../VsEditor';
 import InputPx from './InputPx';
 import styles from './index.module.less';
 import { styled } from 'styled-components';
-
 // 修复contextmenu被裁剪显示不完整问题
 const StyleCodeEditor = styled.div`
   .suggest-widget {
