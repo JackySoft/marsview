@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.0](https://github.com/JackySoft/marsview/compare/v6.2.3...v8.0.0) (2024-12-07)
+
+
+### Features
+
+* 同步最新代码，修复线上问题。 ([657198b](https://github.com/JackySoft/marsview/commit/657198b123eacec4416b0bc13eef2d9e55210d2b))
+
+
+### Bug Fixes
+
+* 修复编辑器中抽屉及弹框收集器map的key设置错误的问题 ([ff40b94](https://github.com/JackySoft/marsview/commit/ff40b940d0db6e8def697c6d4690a234b0448d52))
+* 优化代码 ([03c34d1](https://github.com/JackySoft/marsview/commit/03c34d10a7288420383e2ce4129a55670e69dbe8))
+
+
+### Documentation
+
+* 修改文档 ([7a5f341](https://github.com/JackySoft/marsview/commit/7a5f341a57e172e964e5d60b0506763f70c96adc))
+
 ### [6.2.3](https://github.com/JackySoft/marsview/compare/v6.2.2...v6.2.3) (2024-11-27)
 
 ### [6.2.2](https://github.com/JackySoft/marsview/compare/v6.2.1...v6.2.2) (2024-11-26)
