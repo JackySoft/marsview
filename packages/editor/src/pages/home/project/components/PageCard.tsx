@@ -10,7 +10,7 @@ import { PageItem } from '@/api/types';
 import styles from './../../index.module.less';
 
 // 页面列表项
-const PageCard = ({ list, refresh }: { list: PageItem[]; refresh: () => void }) => {
+const PageCard = ({ list, copy, refresh }: { list: PageItem[]; copy: (item: PageItem) => void; refresh: () => void }) => {
   const [showPreview, setShowPreview] = useState(false);
   const [previewUrl, setPreviewUrl] = useState('');
   const navigate = useNavigate();
@@ -30,11 +30,7 @@ const PageCard = ({ list, refresh }: { list: PageItem[]; refresh: () => void }) 
       return navigate(`/editor/${params?.id}/edit`);
     }
     if (type === 'copy') {
-      await api.copyPageData({
-        id: params.id,
-      });
-      message.success('复制成功');
-      refresh();
+      return copy?.(params);
     }
     if (type === 'delete') {
       Modal.confirm({

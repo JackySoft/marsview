@@ -112,7 +112,7 @@ const UploadFC = ({ config, value, disabled, onChange }: any) => {
       file: options.file as File, // File 对象
     })
       .then((res) => {
-        const { name, url = '' } = res;
+        const { name, url = '' } = res.data.data;
         setLoading(false);
         if (url) {
           const fileObj = { uid: options.file.uid, name, url, status: 'done' };
@@ -153,7 +153,11 @@ const UploadFC = ({ config, value, disabled, onChange }: any) => {
         return null;
       } else {
         // 上传多个文件，需要显示上传按钮
-        return <Button icon={<UploadOutlined />}>{config.props.text}</Button>;
+        return (
+          <Button icon={<UploadOutlined />} loading={loading}>
+            {config.props.text}
+          </Button>
+        );
       }
     } else {
       // 图片卡片类型展示正方形上传

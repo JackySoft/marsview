@@ -74,19 +74,6 @@ Project Description
 | packages/materials | Component materials, for admin use only     |
 | packages/docs      | Low code usage documentation                |
 
-### Backend
-
-```bash
-git clone https://github.com/JackySoft/marsview-backend.git
-```
-
-Project Description
-
-| directory      | description                |
-| -------------- | -------------------------- |
-| backend        | Backend services           |
-| backend/config | Project configuration file |
-
 ### Deploy Documentation
 
 [Documentation](https://docs.marsview.com.cn/home.html)
@@ -106,8 +93,6 @@ pnpm start:editor
 ```
 
 > Note: By default, online interfaces are used. If private deployment is required, please refer to the private deployment documentation.
-
-[Documentation](http://docs.marsview.com.cn/deploy.html)
 
 ### Synchronization Code
 

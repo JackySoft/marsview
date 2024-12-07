@@ -19,10 +19,10 @@ const ApiConfigComponent = () => {
     let values: any = undefined;
     // 如果未选中，则填充页面接口配置
     if (!state.selectedElement) {
-      values = state.page.config.api || {};
+      values = state.page.pageData.config.api || {};
     } else {
       // 如果选中，填充组件接口配置
-      values = state.page.elementsMap[state.selectedElement.id]?.config.api || {};
+      values = state.page.pageData.elementsMap[state.selectedElement.id]?.config.api || {};
     }
     setSourceType(values?.sourceType || 'json');
     const source = JSON.stringify(values?.source || '', null, 2);
@@ -104,9 +104,18 @@ const ApiConfigComponent = () => {
           const sourceType = form.getFieldValue('sourceType');
           if (sourceType === 'json') {
             return (
-              <Form.Item name="source" noStyle>
-                <VsEditor height="calc(100vh - 300px)" language="json" />
-              </Form.Item>
+              <>
+                <Form.Item name="source" noStyle>
+                  <VsEditor height="300px" language="json" />
+                </Form.Item>
+                <Form.Item
+                  label="数据处理"
+                  name="sourceField"
+                  tooltip="示例：{ code:0 ,data:{ list: [], total: 10 } } ，字段对应是list，默认可不填。"
+                >
+                  <VariableBind placeholder="返回值字段映射,eg: data.list" />
+                </Form.Item>
+              </>
             );
           }
           if (sourceType === 'api') {
@@ -115,12 +124,8 @@ const ApiConfigComponent = () => {
                 <Form.Item label="请求地址" name="id">
                   <ApiInput showModal={showModal} />
                 </Form.Item>
-                <Form.Item
-                  label="数据处理"
-                  name="sourceField"
-                  tooltip="示例：{ code:0 ,data:{ list: [], total: 10 } } ，字段对应是list，因为表格的数据源只能是数组格式。"
-                >
-                  <VariableBind placeholder="返回值字段映射,eg: data.list" />
+                <Form.Item label="数据处理" name="sourceField" tooltip="示例：{ code:0 ,data:{ list: [], total: 10 } } ，字段对应是data.list.">
+                  <VariableBind placeholder="字段映射,eg: data.list" />
                 </Form.Item>
                 <Form.Item name="source" hidden>
                   <VsEditor height="350px" language="json" />
@@ -156,7 +161,7 @@ function ApiInput({ value, onChange, showModal }: any) {
   return (
     <>
       <Select placeholder="请选择接口" showSearch allowClear style={{ width: '82%' }} value={value} onChange={(val: string) => onChange(val)}>
-        {Object.values(state.page.apis).map((item) => {
+        {Object.values(state.page.pageData.apis).map((item) => {
           return (
             <Select.Option value={item.id} key={item.id}>
               {item.name}

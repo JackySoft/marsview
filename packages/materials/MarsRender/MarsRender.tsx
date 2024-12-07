@@ -22,10 +22,10 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
   const [cached, setCached] = useState(false);
   const { elementsMap, variableData, formData } = usePageStore(
     useShallow((state) => ({
-      elementsMap: state.page.elementsMap,
-      variables: state.page.variables,
-      variableData: state.page.variableData,
-      formData: state.page.formData,
+      elementsMap: state.page.pageData.elementsMap,
+      variables: state.page.pageData.variables,
+      variableData: state.page.pageData.variableData,
+      formData: state.page.pageData.formData,
     })),
   );
 
@@ -37,6 +37,7 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
   }
 
   useEffect(() => {
+    if (Object.keys(elementsMap).length === 0) return;
     // 动态获取组件
     if (cachedComponents[item.type]) {
       setCached(true);
@@ -73,6 +74,7 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
   }, []);
 
   useEffect(() => {
+    if (Object.keys(elementsMap).length === 0) return;
     setConfig(() => {
       return produce(elementsMap[item.id].config, (draft: ConfigType) => {
         handleFormRegExp(draft);

@@ -264,7 +264,7 @@ export default function Welcome() {
       </section>
       <section className={style.footer}>
         <img src="/imgs/mars-logo-dark.png" />
-        <h1>欢迎使用 Marsview 零代码搭建平台</h1>
+        <h1>欢迎使用 Marsview 低代码搭建平台</h1>
         <Link to="/projects">
           <Button type="primary" size="large">
             快速开始

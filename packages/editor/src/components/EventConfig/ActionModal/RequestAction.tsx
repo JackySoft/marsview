@@ -34,7 +34,7 @@ const RequestAction = ({ type }: { type: 'request' | 'download' }) => {
  * 由于FormItem中的组件不可以用其他元素包裹，因此自定义一个
  */
 const ReqInput = ({ value, onChange }: any) => {
-  const apis = usePageStore((state) => state.page.apis);
+  const apis = usePageStore((state) => state.page.pageData.apis);
   const modalRef = useRef<{ showModal: (url: string) => void }>();
   const handleClick = () => {
     modalRef.current?.showModal(value);

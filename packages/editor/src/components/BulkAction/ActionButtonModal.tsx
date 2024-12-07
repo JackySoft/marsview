@@ -20,7 +20,7 @@ const ActionButtonModal = memo((props: IModalProp) => {
 
   const { selectedElement, elementsMap, editTableProps } = usePageStore((state) => ({
     selectedElement: state.selectedElement,
-    elementsMap: state.page.elementsMap,
+    elementsMap: state.page.pageData.elementsMap,
     editTableProps: state.editTableProps,
   }));
 

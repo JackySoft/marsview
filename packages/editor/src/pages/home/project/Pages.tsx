@@ -1,21 +1,22 @@
 import { useRef } from 'react';
-import { Button, Empty, Form, Layout, Spin } from 'antd';
+import { useSearchParams } from 'react-router-dom';
+import { Button, Empty, Form, Layout, Pagination, Spin } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useAntdTable } from 'ahooks';
+import { useMediaQuery } from 'react-responsive';
 import api from '@/api/page';
-import CreatePage from '@/components/CreatePage';
+import CreatePage, { CreatePageRef } from '@/components/CreatePage';
 import SearchBar from '@/components/Searchbar/SearchBar';
 import PageCard from './components/PageCard';
+import { PageItem } from '@/api/types';
 import styles from './../index.module.less';
-import { useSearchParams } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
 
 /**
  * 项目所属页面列表
  */
 export default function Index() {
   const [form] = Form.useForm();
-  const createPageRef = useRef<{ open: () => void }>();
+  const createPageRef = useRef<CreatePageRef>();
   const [searchParams] = useSearchParams();
 
   // 判断是否是超大屏
@@ -45,7 +46,12 @@ export default function Index() {
 
   // 新建页面
   const handleCreate = () => {
-    createPageRef.current?.open();
+    createPageRef.current?.open('create');
+  };
+
+  // 复制页面
+  const handleCopy = (item: PageItem) => {
+    createPageRef.current?.open('copy', item);
   };
 
   return (
@@ -56,7 +62,7 @@ export default function Index() {
         <div className={styles.pagesContent}>
           <Spin spinning={loading} size="large" tip="加载中...">
             {tableProps.dataSource.length > 0 ? (
-              <PageCard list={tableProps.dataSource} refresh={search.submit} />
+              <PageCard list={tableProps.dataSource} copy={handleCopy} refresh={search.submit} />
             ) : (
               <Empty style={{ marginTop: 100 }}>
                 <Button type="dashed" icon={<PlusOutlined />} onClick={handleCreate}>
@@ -66,9 +72,19 @@ export default function Index() {
             )}
           </Spin>
         </div>
+        {/* 分页器 */}
+        {tableProps.dataSource.length > 0 ? (
+          <Pagination
+            {...tableProps.pagination}
+            onChange={(current, pageSize) => tableProps.onChange({ current, pageSize })}
+            showSizeChanger
+            showTotal={(total) => `总共 ${total} 条`}
+            align="end"
+          />
+        ) : null}
 
         {/* 新建页面 */}
-        <CreatePage title="创建页面" createRef={createPageRef} update={search.submit} />
+        <CreatePage createRef={createPageRef} update={search.submit} />
       </Layout.Content>
     </>
   );

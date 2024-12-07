@@ -130,6 +130,7 @@ export default {
       name: ['legend', 'position'],
       key: 'legendPosition',
       props: {
+        allowClear: true,
         options: [
           { label: 'top', value: 'top' },
           { label: 'top-left', value: 'top-left' },

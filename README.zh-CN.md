@@ -75,17 +75,6 @@ git clone https://github.com/JackySoft/marsview.git
 | packages/materials | 组件物料 ，仅供 admin 使用 |
 | packages/docs      | 低代码使用文档             |
 
-### 后端仓库
-
-```bash
-git clone https://github.com/JackySoft/marsview-backend.git
-```
-
-| 目录           | 说明         |
-| -------------- | ------------ |
-| backend        | 后端服务     |
-| backend/config | 项目配置文件 |
-
 ### 快速开始
 
 运行需要 node 环境，建议`node:18`以上版本。使用`pnpm`作为依赖管理工具，如未安装，请先执行安装命令`npm install -g pnpm`。
@@ -101,8 +90,6 @@ pnpm start:editor
 ```
 
 > 注意：默认使用线上接口，如果需要私有化部署，请参考私有化部署文档。
-
-[Documentation](https://docs.marsview.com.cn/home.html)
 
 ### 同步代码
 

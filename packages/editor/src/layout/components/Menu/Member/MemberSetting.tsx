@@ -11,7 +11,7 @@ const MemberSetting = (props: any, ref: any) => {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [type, setType] = useState<1 | 2>(1);
-  const { pageId } = usePageStore((state) => ({ pageId: state.page.pageId }));
+  const pageId = usePageStore((state) => state.page.id);
   const [form] = Form.useForm();
   const projectId = useParams().id as string; // 获取项目ID
   // 暴露方法
@@ -60,13 +60,13 @@ const MemberSetting = (props: any, ref: any) => {
       cancelText="取消"
     >
       <Form form={form} labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} initialValues={{ role: 1 }}>
-        <Form.Item label="用户" name="userName" rules={[{ required: true, message: '请输入用户邮箱' }]}>
+        <Form.Item label="用户" name="userName" rules={[{ required: true, message: '请输入用户邮箱' }]} extra="不支持模糊搜索，请精准输入用户邮箱。">
           <Input placeholder="请输入用户邮箱" />
         </Form.Item>
-        <Form.Item label="角色" name="role" rules={[{ required: true, message: '请选择角色' }]}>
+        <Form.Item label="角色" name="role" rules={[{ required: true, message: '请选择角色' }]} extra="开发者拥有修改权限，体验者只有访问权限。">
           <Radio.Group>
             <Radio value={1}>开发者</Radio>
-            <Radio value={2}>体验者</Radio>
+            {type == 2 ? <Radio value={2}>体验者</Radio> : null}
           </Radio.Group>
         </Form.Item>
       </Form>

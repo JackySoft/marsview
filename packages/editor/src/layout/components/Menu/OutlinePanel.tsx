@@ -12,8 +12,8 @@ import { getElement } from '@/utils/util';
 const OutlinePanel = memo(() => {
   const { pageName, elements, selectedEl, setSelectedElement, dragSortElements } = usePageStore(
     useShallow((state) => ({
-      pageName: state.page.pageName,
-      elements: state.page.elements,
+      pageName: state.page.name,
+      elements: state.page.pageData.elements,
       selectedEl: state.selectedElement,
       setSelectedElement: state.setSelectedElement,
       dragSortElements: state.dragSortElements,
@@ -59,7 +59,6 @@ const OutlinePanel = memo(() => {
 
   // 拖拽排序
   const onDrop = (info: any) => {
-    console.log(info);
     const { key: dragKey, type: dragType, name, elements: dragChildren } = info.dragNode;
     const { key: dropKey } = info.node;
     const dropPos = info.node.pos.split('-');

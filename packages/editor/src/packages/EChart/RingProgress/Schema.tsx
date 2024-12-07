@@ -80,8 +80,7 @@ export default {
     // 组件样式
     style: {
       display: 'inline-block',
-      width: '100px',
-      height: '100px',
+      height: '80px',
     },
     api: {
       sourceType: 'json',

@@ -249,6 +249,10 @@ export default {
           type: 'image',
           width: 90,
           align: 'center',
+          imageConfig: {
+            width: 30,
+            height: 30,
+          },
         },
         {
           title: '分布区域',
@@ -345,7 +349,7 @@ export default {
     events: [],
     api: {
       sourceType: 'json',
-      sourceField: 'list',
+      sourceField: 'data.list',
       // 数据源
       source: [
         {

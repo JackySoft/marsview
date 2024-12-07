@@ -1,5 +1,5 @@
 import { getPageDetail } from '@/api/index';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { usePageStore } from '@marsview/materials/stores/pageStore';
 import { useProjectStore } from '@/stores/projectStore';
@@ -15,28 +15,33 @@ export default function () {
   const [pageData, setPageData] = useState<{ config: ConfigType; elements: ComItemType[] }>();
   const [notFound, setNotFound] = useState(false);
 
-  const { projectId, pageId } = useParams();
-  const { savePageInfo, clearPageInfo } = usePageStore(
+  const { projectId } = useParams();
+
+  const { initPageData, savePageInfo, clearPageInfo } = usePageStore(
     useShallow((state) => {
       return {
+        initPageData: state.page.pageData,
         savePageInfo: state.savePageInfo,
         clearPageInfo: state.clearPageInfo,
       };
     }),
   );
   const pageMap = useProjectStore(useShallow((state) => state.pageMap));
+  const { pathname } = useLocation();
   useEffect(() => {
+    if (!projectId) return;
     let env = storage.get(`${projectId}-env`) || 'prd';
+    const pageId = pathname.split(projectId)[1].slice(1);
     // 获取页面ID
     const id = getPageId(pageId, pageMap);
-    if (!id) {
+    if (!pageMap[id] || !id) {
       setNotFound(true);
       return;
     }
     if (!isEnv(env)) {
       env = 'prd';
     }
-    getPageDetail(env as string, Number(id))
+    getPageDetail(env as string, Number(projectId), Number(id))
       .then((res: any) => {
         let pageData: any = {};
         try {
@@ -48,10 +53,8 @@ export default function () {
         }
         clearPageInfo();
         savePageInfo({
-          pageId: res.id,
-          pageName: res.name,
-          remark: res.remark,
-          ...pageData,
+          ...res,
+          pageData,
         });
         setPageData(pageData);
         setNotFound(false);
@@ -59,7 +62,10 @@ export default function () {
       .catch(() => {
         setNotFound(true);
       });
-  }, [projectId, pageId]);
+    return () => {
+      setPageData({ config: initPageData.config, elements: [] });
+    };
+  }, [projectId, pathname]);
 
   return <>{notFound ? <NotFound /> : <Page config={pageData?.config} elements={pageData?.elements} />}</>;
 }

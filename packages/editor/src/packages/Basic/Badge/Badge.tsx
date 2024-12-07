@@ -33,7 +33,7 @@ interface IConfig {
  */
 const MBadge = ({ id, type, config, elements }: ComponentType<IConfig>, ref: any) => {
   const [visible, setVisible] = useState(true);
-  const addChildElements = usePageStore((state) => state.addChildElements);
+  const { addChildElements, mode } = usePageStore((state) => ({ addChildElements: state.addChildElements, mode: state.mode }));
   //拖拽接受
   const [, drop] = useDrop({
     accept: 'MENU_ITEM',
@@ -70,28 +70,16 @@ const MBadge = ({ id, type, config, elements }: ComponentType<IConfig>, ref: any
     };
   });
 
-
-  const { offsetX, offsetY, ...restProps } = config.props;
-
-  const rewriteProps: IConfig = useMemo(() => {
-    return {
-      offset: [offsetX || 0, offsetY || 0],
-      ...restProps,
-    }
-  }, [config.props])
-
   return (
     visible && (
-      <Badge data-id={id} data-type={type} style={config.style} {...rewriteProps} ref={drop}>
-        {(<div>
-          {elements?.length ? (
-            <MarsRender elements={elements || []} />
-          ) : (
-            <div className="slots" style={{ height: 100, lineHeight: '100px' }}>
-              拖拽组件到这里
-            </div>
-          )}
-        </div>)}
+      <Badge data-id={id} data-type={type} style={config.style} {...config.props} ref={drop}>
+        {elements?.length ? (
+          <MarsRender elements={elements || []} />
+        ) : mode === 'edit' ? (
+          <div className="slots" style={{ height: 100, lineHeight: '100px' }}>
+            拖拽组件到这里
+          </div>
+        ) : null}
       </Badge>
     )
   );

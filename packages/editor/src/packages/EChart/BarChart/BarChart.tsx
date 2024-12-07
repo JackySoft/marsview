@@ -16,7 +16,7 @@ const BarChart = ({ id, type, config, apis }: ComponentType, ref: any) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(true);
-  const variableData = usePageStore((state) => state.page.variableData);
+  const variableData = usePageStore((state) => state.page.pageData.variableData);
   useEffect(() => {
     getDataList({});
   }, [config.api, config.api?.sourceType == 'variable' ? variableData : '']);

@@ -28,7 +28,7 @@ const MCheckBox = ({ type, config, onChange }: ComponentType<IConfig>, ref: any)
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
   const { initValues } = useFormContext();
-  const variableData = usePageStore((state) => state.page.variableData);
+  const variableData = usePageStore((state) => state.page.pageData.variableData);
 
   /**
    * 初始化默认值

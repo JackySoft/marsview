@@ -21,7 +21,7 @@ const FileUpload = ({ id, type, config, onSuccess, onFail }: ComponentType, ref:
   const [disabled, setDisabled] = useState<boolean | undefined>();
   const [loading, setLoading] = useState(false);
 
-  const apis = usePageStore((state) => state.page.apis);
+  const apis = usePageStore((state) => state.page.pageData.apis);
 
   type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 

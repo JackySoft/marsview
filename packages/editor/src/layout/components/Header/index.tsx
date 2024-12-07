@@ -1,20 +1,8 @@
 import { memo, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Layout, Menu, MenuProps, Button, Popover, Dropdown, Space, Flex, Switch } from 'antd';
-import {
-  ProjectOutlined,
-  CaretDownFilled,
-  DownOutlined,
-  AppstoreOutlined,
-  LoadingOutlined,
-  PieChartOutlined,
-  CloudOutlined,
-  SunOutlined,
-  MoonFilled,
-} from '@ant-design/icons';
+import { ProjectOutlined, CaretDownFilled, DownOutlined, SunOutlined, MoonFilled, OneToOneOutlined } from '@ant-design/icons';
 import { usePageStore } from '@/stores/pageStore';
-import { message } from '@/utils/AntdGlobal';
-import api from '@/api/page';
 import Publish from './PublishPopover';
 import styles from './index.module.less';
 import storage from '@/utils/storage';
@@ -24,22 +12,13 @@ import storage from '@/utils/storage';
  */
 const Header = memo(() => {
   const [isNav, setNav] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [navKey, setNavKey] = useState(['projects']);
   const [pageFrom, setPageFrom] = useState('projects');
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
 
-  const {
-    userInfo,
-    page: { pageId, pageName, remark, ...pageData },
-    mode,
-    theme,
-    setMode,
-    setTheme,
-    updatePageState,
-  } = usePageStore((state) => {
+  const { userInfo, page, mode, theme, setMode, setTheme } = usePageStore((state) => {
     return {
       userInfo: state.userInfo,
       page: state.page,
@@ -47,7 +26,6 @@ const Header = memo(() => {
       theme: state.theme,
       setMode: state.setMode,
       setTheme: state.setTheme,
-      updatePageState: state.updatePageState,
     };
   });
 
@@ -57,49 +35,29 @@ const Header = memo(() => {
     // 点击Logo返回最近操作的列表，对用户友好
     const isProject = /projects\/\d+\/\w+/.test(location.pathname);
     const isPage = /editor\/\d+\/(edit|publishHistory)/.test(location.pathname);
-    const isLib = /lib\/\d+/.test(location.pathname);
-    const isTmpl = /editor\/\d+\/template/.test(location.pathname);
     if (isProject) return navigate('/projects');
-    if (isPage) return navigate('/projects');
-    if (isLib) return navigate('/libs');
-    if (isTmpl) return navigate('/templates');
-    navigate('/projects');
+    if (isPage) return navigate('/pages');
   };
 
   // Tab切换项
   const items: MenuProps['items'] = useMemo(
     () => [
       {
-        label: '我的项目',
+        label: '项目列表',
         key: 'projects',
         icon: <ProjectOutlined style={{ fontSize: 16 }} />,
       },
       {
-        label: '组件库',
-        key: 'libs',
-        icon: <AppstoreOutlined style={{ fontSize: 16 }} />,
-      },
-      {
-        label: '精选模板',
-        key: 'templates',
-        icon: <PieChartOutlined style={{ fontSize: 16 }} />,
-      },
-      // {
-      //   label: '工作流',
-      //   key: 'workflows',
-      //   icon: <ApartmentOutlined style={{ fontSize: 16 }} />,
-      // },
-      {
-        label: '图片云',
-        key: 'cloud',
-        icon: <CloudOutlined style={{ fontSize: 16 }} />,
+        label: '页面列表',
+        key: 'pages',
+        icon: <OneToOneOutlined style={{ fontSize: 16 }} />,
       },
     ],
     [],
   );
 
   useEffect(() => {
-    if (['/projects', '/libs', '/lib', '/templates', '/workflows', '/cloud'].includes(location.pathname)) {
+    if (['/projects', '/pages'].includes(location.pathname)) {
       setNav(true);
       setNavKey([location.pathname.slice(1)]);
     } else {
@@ -108,7 +66,7 @@ const Header = memo(() => {
     setPageFrom(location.pathname.slice(1));
   }, [location]);
 
-  // 获取用户头像
+  // 设置主题
   useEffect(() => {
     const isDark = storage.get('marsview-theme');
     if (isDark) {
@@ -124,42 +82,6 @@ const Header = memo(() => {
     navigate(`/${e.key}`);
   };
 
-  // 操作
-  const handleClick = async (name: string) => {
-    if (name === 'save') {
-      setLoading(true);
-      const pageInfo = JSON.stringify({
-        ...pageData,
-        // 下面字段排除在pageData外
-        stgState: undefined,
-        preState: undefined,
-        prdState: undefined,
-        previewImg: undefined,
-        variableData: {},
-        formData: {},
-        stgPublishId: undefined,
-        prePublishId: undefined,
-        prdPublishId: undefined,
-      });
-      try {
-        await api.updatePageData({
-          id: pageId,
-          name: pageName,
-          remark: remark,
-          pageData: pageInfo,
-        });
-        updatePageState({ env: 'all' });
-        setLoading(false);
-        message.success('保存成功', 1);
-      } catch (error) {
-        setLoading(false);
-      }
-    } else if (name === 'preview') {
-      setMode('preview');
-    } else {
-      message.info('敬请期待');
-    }
-  };
   // 退出预览模式
   const handleExitPreview = () => {
     setMode('edit');
@@ -169,7 +91,7 @@ const Header = memo(() => {
       // 跳转编辑页面时，编辑器已经被销毁，导致page对象为空，此时从浏览器中获取页面ID参数
       navigate(`/editor/${id}/${path}`);
     } else {
-      navigate(`/editor/${pageId}/${path}`);
+      navigate(`/editor/${page.id}/${path}`);
     }
   }
 
@@ -220,33 +142,6 @@ const Header = memo(() => {
         {isNav && (
           <div className={styles.menu}>
             <Menu onClick={handleTab} selectedKeys={navKey} theme={theme} mode="horizontal" items={items} />
-          </div>
-        )}
-
-        {/* 编辑页面-操作按钮 */}
-        {isEditPage && mode === 'edit' && (
-          <div className={styles.iconAction}>
-            {/* 源码 */}
-            <a onClick={() => handleClick('edit')}>
-              <div className={styles.iconBlock}>
-                <img src={`/imgs/${theme === 'dark' ? 'code-dark' : 'code'}.png`} alt="源码" />
-                <span>源码</span>
-              </div>
-            </a>
-            {/* 保存 */}
-            <a onClick={() => handleClick('save')}>
-              <div className={styles.iconBlock}>
-                {loading ? <LoadingOutlined /> : <img src={`/imgs/${theme === 'dark' ? 'save-dark' : 'save'}.png`} alt="保存" />}
-                <span>保存</span>
-              </div>
-            </a>
-            {/* 预览 */}
-            <a onClick={() => handleClick('preview')}>
-              <div className={styles.iconBlock}>
-                <img src={`/imgs/${theme === 'dark' ? 'preview-dark' : 'preview'}.png`} alt="预览" />
-                <span>预览</span>
-              </div>
-            </a>
           </div>
         )}
 
@@ -323,22 +218,13 @@ const Header = memo(() => {
               menu={{
                 items: [
                   {
-                    key: 'profile',
-                    label: '个人中心',
-                  },
-                  {
                     key: 'logout',
                     label: '退出',
                   },
                 ],
                 onClick: (e) => {
-                  if (e.key === 'profile') {
-                    navigate(`/user/profile`);
-                  }
-                  if (e.key === 'logout') {
-                    localStorage.clear();
-                    navigate(`/login?callback=${window.location.href}`);
-                  }
+                  localStorage.clear();
+                  navigate(`/login?callback=${window.location.href}`);
                 },
                 selectable: true,
               }}

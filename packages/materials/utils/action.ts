@@ -288,7 +288,7 @@ async function handleOpenModal({ action, next }: ActionNode<MethodsAction>, data
   const ref = getComponentRef(action.target);
   if (type === 'close') ref.close({ ...data });
   if (type === 'open') await ref.open({ ...data });
-  execAction(next, data);
+  execAction(next?.success || next, data);
 }
 
 /**
@@ -320,7 +320,7 @@ const handleMessage = ({ action, next }: ActionNode<MessageAction>, data: any) =
       duration: action.duration,
     })
     .then(() => {
-      execAction(next, data);
+      execAction(next?.success || next, data);
     });
 };
 
@@ -335,7 +335,7 @@ const handleNotification = ({ action, next }: ActionNode<NotificationAction>, da
     placement: action.placement,
     duration: action.duration,
   });
-  execAction(next, data);
+  execAction(next?.success || next, data);
 };
 
 /**
@@ -344,9 +344,9 @@ const handleNotification = ({ action, next }: ActionNode<NotificationAction>, da
 const handleRequest = async ({ action, next }: ActionNode<ApiConfig>, data: any) => {
   const res = await handleApi(action, data);
   if (res.code === 0) {
-    execAction(next?.success || next, res.data);
+    execAction(next?.success || next, res);
   } else {
-    execAction(next?.fail, res.msg);
+    execAction(next?.fail, res);
   }
 };
 
@@ -399,7 +399,7 @@ const handleVariable = ({ action, next }: ActionNode<VariableAction>, data: any)
     name: action.name,
     value,
   });
-  execAction(next, data);
+  execAction(next?.success || next, data);
 };
 
 /**
@@ -409,7 +409,7 @@ const handleCopy = async ({ action, next }: ActionNode<CopyAction>, data: any) =
   try {
     const copyContent = renderTemplate(action.content, data || {});
     await copyText(copyContent);
-    execAction(next, data);
+    execAction(next?.success || next, data);
   } catch (error) {
     console.error('执行复制行为：', error);
   }
@@ -420,7 +420,7 @@ const handleCopy = async ({ action, next }: ActionNode<CopyAction>, data: any) =
  */
 const handleSetTimeout = async ({ action, next }: ActionNode<{ duration: number }>, data: any) => {
   setTimeout(() => {
-    execAction(next, data);
+    execAction(next?.success || next, data);
   }, action.duration * 1000);
 };
 
@@ -443,7 +443,7 @@ const handleVisible = async ({ action, next }: ActionNode<{ target: string; show
       ref.hide({ ...data });
     }
   }
-  execAction(next, data);
+  execAction(next?.success || next, data);
 };
 
 /**
@@ -470,7 +470,7 @@ const handleDisable = async (
       ref.enable({ ...data });
     }
   }
-  execAction(next, data);
+  execAction(next?.success || next, data);
 };
 
 /**

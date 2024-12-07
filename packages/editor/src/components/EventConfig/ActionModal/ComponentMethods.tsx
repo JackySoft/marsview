@@ -19,13 +19,13 @@ const ComponentMethods = ({ form }: { form: FormInstance }) => {
   useEffect(() => {
     const target = form.getFieldValue('target');
     if (!target) return;
-    const element = state.page.elementsMap[target];
+    const element = state.page.pageData.elementsMap[target];
     if (!element) return;
     setMethods(element.methods || []);
   }, [form?.getFieldValue('target')]);
 
   const handleChange = (value: string) => {
-    const element = state.page.elementsMap[value];
+    const element = state.page.pageData.elementsMap[value];
     if (!element) return;
     setMethods(element.methods || []);
   };
@@ -54,7 +54,7 @@ const ComponentMethods = ({ form }: { form: FormInstance }) => {
           placeholder="请选择目标组件"
           treeDefaultExpandAll
           fieldNames={{ label: 'type', value: 'id', children: 'elements' }}
-          treeData={state.page.elements}
+          treeData={state.page.pageData.elements}
           onChange={handleChange}
         />
       </Form.Item>

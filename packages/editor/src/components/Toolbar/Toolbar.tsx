@@ -8,25 +8,25 @@ const Toolbar = memo(({ hoverTarget, copyElement, pastElement, delElement }: any
   // 页面组件
   const { selectedElement, elements, nodeNav, isUpdateToolbar, setSelectedElement, moveElements } = usePageStore((state) => {
     const currentId = state.selectedElement?.id;
-    const element = currentId ? state.page.elementsMap[currentId] : null;
+    const element = currentId ? state.page.pageData.elementsMap[currentId] : null;
     const nodeNav: { [key: string]: { id: string; type: string; name: string } } = {};
     if (element) {
       // 查找父节点
       if (element.parentId) {
-        const { id, type, name } = state.page.elementsMap[element.parentId];
+        const { id, type, name } = state.page.pageData.elementsMap[element.parentId];
         nodeNav['parent'] = { id, type, name };
       }
       // 当前选中节点
       nodeNav['current'] = { id: element.id, type: element.type, name: element.name };
       // 查找子节点
-      const childElement = Object.values(state.page.elementsMap).find((item) => item.parentId === element.id);
+      const childElement = Object.values(state.page.pageData.elementsMap).find((item) => item.parentId === element.id);
       if (childElement) {
         nodeNav['child'] = { id: childElement.id, type: childElement.type, name: childElement.name };
       }
     }
     return {
       selectedElement: state.selectedElement,
-      elements: state.page.elements,
+      elements: state.page.pageData.elements,
       nodeNav,
       isUpdateToolbar: state.isUpdateToolbar,
       setSelectedElement: state.setSelectedElement,
@@ -60,7 +60,7 @@ const Toolbar = memo(({ hoverTarget, copyElement, pastElement, delElement }: any
         setDirection('rightTop');
       }
       setSelectedStyle(style);
-    }, 10);
+    }, 50);
   }, [selectedElement, elements, isUpdateToolbar]);
 
   /**

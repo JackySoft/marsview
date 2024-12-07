@@ -41,7 +41,11 @@ export default {
       type: 'Title',
       label: '表单配置',
     },
-
+    {
+      type: 'InputNumber',
+      label: '展示行数',
+      name: ['formWrap', 'rows'],
+    },
     {
       type: 'InputNumber',
       label: '最大长度',
@@ -134,6 +138,7 @@ export default {
       formItem: {
         label: '多行输入框',
         name: 'textarea',
+        rows: 3,
       },
       // 组件默认属性值
       formWrap: {

@@ -6,12 +6,14 @@ import { useProjectStore } from '@/stores/projectStore';
 import { getPageId } from '@/utils/util';
 
 export default function BreadList() {
-  const { pageId } = useParams();
+  const { projectId } = useParams();
   const [menuPath, setMenuPath] = useState([] as any[]);
   const { pathname } = useLocation();
   const { pageMap, menuMap } = useProjectStore(useShallow((state) => ({ pageMap: state.pageMap, menuMap: state.menuMap })));
   // 生成面包屑
   useEffect(() => {
+    if (!projectId) return;
+    const pageId = pathname.split(projectId)[1].slice(1);
     const id = getPageId(pageId, pageMap);
     if (!id) return;
     const menuItem = pageMap[Number(id)];

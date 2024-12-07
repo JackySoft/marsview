@@ -14,7 +14,7 @@ export default function Publish() {
   const [loading3, setLoading3] = useState(false);
   const {
     userId,
-    page: { pageId, stgState, preState, prdState, stgPublishId, prePublishId, prdPublishId },
+    page: { id, stgState, preState, prdState, stgPublishId, prePublishId, prdPublishId },
     updatePageState,
   } = usePageStore((state) => ({
     userId: state.userInfo.userId,
@@ -26,10 +26,10 @@ export default function Publish() {
     try {
       const blob = await toBlob(document.querySelector('#page') as HTMLElement);
       if (!blob) return;
-      const file = new File([blob], `${pageId}-${Date.now()}.png`, { type: 'image/png' });
+      const file = new File([blob], `${id}-${Date.now()}.png`, { type: 'image/png' });
       const res = await uploadImg({
         file: file, // File 对象
-        id: userId + '_' + pageId, // 页面ID
+        id: userId + '_' + id, // 页面ID
       });
       return res.url;
     } catch (error) {
@@ -55,7 +55,7 @@ export default function Publish() {
       const previewImg = await createPreviewImg();
       await api.publishPage({
         env,
-        pageId: pageId,
+        id,
         previewImg,
       });
       updatePageState({

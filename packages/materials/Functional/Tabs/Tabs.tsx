@@ -16,7 +16,7 @@ const MTabs = ({ config, elements, onTabClick, onChange }: ComponentType<TabsPro
 
   const { elementsMap } = usePageStore((state) => {
     return {
-      elementsMap: state.page.elementsMap,
+      elementsMap: state.page.pageData.elementsMap,
     };
   });
 

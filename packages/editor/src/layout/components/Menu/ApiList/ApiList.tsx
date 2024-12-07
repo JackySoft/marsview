@@ -10,7 +10,7 @@ export default () => {
   const interceptorRef = useRef<{ showModal: (data?: any) => void }>();
   // 页面组件
   const { apis, removeApi } = usePageStore((state) => ({
-    apis: state.page.apis,
+    apis: state.page.pageData.apis,
     removeApi: state.removeApi,
   }));
 

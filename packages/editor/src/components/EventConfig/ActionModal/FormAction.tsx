@@ -5,7 +5,7 @@ const FormAction = () => {
   // 页面组件
   const { modals } = usePageStore((state) => {
     const modals: { id: string }[] = [];
-    Object.values(state.page.elementsMap).forEach((item) => {
+    Object.values(state.page.pageData.elementsMap).forEach((item) => {
       if (item.type === 'SearchForm' || item.type === 'Form') {
         modals.push({
           id: item.id,

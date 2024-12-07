@@ -6,13 +6,13 @@ import { useMediaQuery } from 'react-responsive';
 import { useAntdTable } from 'ahooks';
 import api from '@/api/project';
 import pageApi from '@/api/page';
-import CreatePage from '@/components/CreatePage';
+import CreatePage, { CreatePageRef } from '@/components/CreatePage';
 import SearchBar from '@/components/Searchbar/SearchBar';
 import PageCard from './components/PageCard';
 import ProjectCard from './components/ProjectCard';
-import CreateProject from '@/components/CreateProject';
+import { PageItem } from '@/api/types';
 import styles from './../index.module.less';
-
+import CreateProject from '@/components/CreateProject';
 /**
  * 页面列表
  */
@@ -21,8 +21,8 @@ function Category() {
   const [form] = Form.useForm();
   const [type, setType] = useState('project');
   const [searchParams] = useSearchParams();
-  const createProjectRef = useRef<{ open: () => void }>();
-  const createPageRef = useRef<{ open: () => void }>();
+  const createPageRef = useRef<CreatePageRef>();
+  const createProjectRef = useRef<{ open: (type: string) => void }>();
   // 判断是否是超大屏
   const isXLarge = useMediaQuery({ query: '(min-width: 1920px)' });
 
@@ -55,11 +55,12 @@ function Category() {
 
   // 新建项目或页面
   const handleCreate = () => {
-    if (type === 'project') {
-      createProjectRef.current?.open();
-    } else {
-      createPageRef.current?.open();
-    }
+    createProjectRef.current?.open(type);
+  };
+
+  // 复制页面
+  const handleCopy = (item: PageItem) => {
+    createPageRef.current?.open('copy', item);
   };
 
   return (
@@ -97,7 +98,7 @@ function Category() {
         <div className={styles.pagesContent}>
           <Spin spinning={loading} size="large" tip="加载中...">
             {tableProps.dataSource.length > 0 ? (
-              <PageCard list={tableProps.dataSource} refresh={search.submit} />
+              <PageCard list={tableProps.dataSource} copy={handleCopy} refresh={search.submit} />
             ) : (
               <Empty style={{ marginTop: 100 }}>
                 <Button type="dashed" icon={<PlusOutlined />} onClick={handleCreate}>
@@ -121,10 +122,9 @@ function Category() {
       ) : null}
 
       {/* 新建项目 */}
-      <CreateProject ref={createProjectRef} update={search.submit} />
-
+      <CreateProject createRef={createProjectRef} update={search.submit} />
       {/* 新建页面 */}
-      <CreatePage title="创建页面" createRef={createPageRef} update={search.submit} />
+      <CreatePage createRef={createPageRef} update={search.submit} />
     </Layout.Content>
   );
 }

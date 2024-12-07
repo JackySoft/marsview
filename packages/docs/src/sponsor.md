@@ -8,9 +8,15 @@ Marsview 是一个开源的可视化搭建平台，采用 MIT 许可的开源项
 
 [爱发电，请给我喝杯咖啡](https://afdian.com/a/marsview)
 
-### 当前赞助者
+<img src="/pay.jpg"  width="300">
+
+### 金牌赞助者（一年）
 
 | 名称            | 头像                                                               |
 | --------------- | ------------------------------------------------------------------ |
 | 钢铁侠          | <img src="http://docs.marsview.com.cn/sponsor/10.png"  width="50"> |
 | 物联网方案-肖工 | <img src="http://docs.marsview.com.cn/sponsor/3.png"  width="50">  |
+
+### 广告位赞助
+
+等你加入！

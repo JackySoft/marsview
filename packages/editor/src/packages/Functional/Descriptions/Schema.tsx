@@ -103,7 +103,7 @@ export default {
     events: [],
     api: {
       sourceType: 'json',
-      sourceField: 'list',
+      sourceField: 'data.list',
       // 数据源
       source: [
         {

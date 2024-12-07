@@ -34,7 +34,7 @@ function Logo() {
       }}
       style={style}
     >
-      <img src={projectInfo.logo || `${import.meta.env.VITE_CDN_URL}/mars-logo.png`} />
+      <img src={projectInfo.logo || '/imgs/mars-logo.png'} />
       {!collapsed && (
         <span className={styles.logoName} style={nameStyle}>
           {projectInfo.name}

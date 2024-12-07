@@ -8,12 +8,12 @@ import { getMenuList, addMenu, updateMenu } from '@/api';
 import api from '@/api/page';
 import { PageItem } from '@/api/pageMember';
 import { arrayToTree } from '@/utils/util';
-import CreatePage from '@/components/CreatePage';
+import CreatePage, { CreatePageRef } from '@/components/CreatePage';
 import CustomIconOptions from '@/components/CustomIconList';
 
 export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
   const [form] = Form.useForm();
-  const createRef = useRef<{ open: (record?: PageItem) => void }>();
+  const createRef = useRef<CreatePageRef>();
   const [action, setAction] = useState<IAction>('create');
   const [visible, setVisible] = useState(false);
   const [menuList, setMenuList] = useState<Menu.MenuItem[]>([]);
@@ -169,7 +169,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
                             该菜单可以解绑、修改、新增绑定页面。暂无页面？
                             <a
                               onClick={() => {
-                                createRef.current?.open();
+                                createRef.current?.open('create', { id: 0, name: '', projectId: Number(projectId) });
                               }}
                             >
                               去创建
@@ -199,7 +199,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
                       label="页面路由"
                       name="path"
                       extra="配置页面路由后，访问时会优先使用页面路由"
-                      rules={[{ pattern: /^\/?[a-zA-Z-_]+$/g, message: '页面路由只支持字母-_ 组合' }]}
+                      rules={[{ pattern: /^\/?[^\d][a-zA-Z-_/]+.*$/g, message: '页面路由不能以数字开头，且不能包含特殊字符' }]}
                     >
                       <Input placeholder="请输入页面路径，例如: /dashboard" />
                     </Form.Item>
@@ -221,7 +221,7 @@ export default function CreateMenu(props: IModalProp<Menu.EditParams>) {
         </Spin>
       </Modal>
       {/* 创建和修改页面 */}
-      <CreatePage title="创建页面" createRef={createRef} update={() => getMyPageList()} />
+      <CreatePage createRef={createRef} update={() => getMyPageList()} />
     </>
   );
 }

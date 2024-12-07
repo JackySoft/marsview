@@ -20,10 +20,10 @@ const EventConfig = memo(() => {
     let values: any = [];
     // 如果未选中，则填充页面事件
     if (!state.selectedElement) {
-      values = state.page.config.events || [];
+      values = state.page.pageData.config.events || [];
     } else {
       // 如果选中，填充组件事件
-      const config = state.page.elementsMap[state.selectedElement.id]?.config || {};
+      const config = state.page.pageData.elementsMap[state.selectedElement.id]?.config || {};
       values = config.events || [];
     }
     form.setFieldsValue({ events: values });
@@ -31,11 +31,11 @@ const EventConfig = memo(() => {
 
   // 定义事件列表
   const items: Array<{ key: string; label: string }> | undefined = state.selectedElement?.id
-    ? state.page.elementsMap[state.selectedElement.id]?.events?.map((item) => ({
+    ? state.page.pageData.elementsMap[state.selectedElement.id]?.events?.map((item) => ({
         key: item.value,
         label: item.name,
       }))
-    : state.page.events.map((item) => ({
+    : state.page.pageData.events.map((item) => ({
         key: item.value,
         label: item.name,
       }));

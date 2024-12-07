@@ -31,7 +31,7 @@ export interface IConfig {
 const MButton = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
   const [visible, setVisible] = useState(true);
   const [data, setData] = useState<any[]>([]);
-  const variableData = usePageStore((state) => state.page.variableData);
+  const variableData = usePageStore((state) => state.page.pageData.variableData);
 
   useEffect(() => {
     getDataList({});

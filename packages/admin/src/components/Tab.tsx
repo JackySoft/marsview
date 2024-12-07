@@ -19,7 +19,7 @@ function Tab() {
     },
   ]);
   const [activeKey, setActiveKey] = useState('');
-  const { pageId } = useParams();
+  const { projectId } = useParams();
   const { pathname } = useLocation();
   const pageMap = useProjectStore(useShallow((state) => state.pageMap));
 
@@ -28,10 +28,8 @@ function Tab() {
   }, [pathname, pageMap]);
   // 创建页签
   const addTabs = () => {
-    if (!pageId) {
-      setActiveKey('welcome');
-      return;
-    }
+    if (!projectId) return;
+    const pageId = pathname.split(projectId)[1].slice(1);
     const id = getPageId(pageId, pageMap);
     const menuItem = pageMap[Number(id)];
     if (!menuItem) return;

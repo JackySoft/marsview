@@ -231,3 +231,37 @@ export async function saveFile(name: string, content: string) {
     return false;
   }
 }
+
+/**
+ *
+ * @param children 组件树
+ * @param nodeId 节点id
+ * @param parentNode 父节点
+ * @returns {
+ * index: number, // 节点在父节点中的索引
+ * parentNode: any, // 父节点
+ * selfNode: any // 当前节点
+ * }
+ */
+export function findNodeIndexAndParent(
+  children: any,
+  nodeId: string,
+  parentNode = null,
+): {
+  index: number;
+  parentNode: any;
+  selfNode: any;
+} | null {
+  for (let i = 0; i < children.length; i++) {
+    if (children[i].id === nodeId) {
+      return { index: i, parentNode, selfNode: children[i] };
+    }
+    if (children[i].children) {
+      const result = findNodeIndexAndParent(children[i].children, nodeId, children[i]);
+      if (result) {
+        return result;
+      }
+    }
+  }
+  return null;
+}

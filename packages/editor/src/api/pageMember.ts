@@ -12,6 +12,7 @@ export interface DelParams {
 }
 export interface PageMember extends AddParams {
   id: number;
+  userId: number;
 }
 
 export interface PageItem {

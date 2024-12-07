@@ -20,7 +20,7 @@ const MBMap = ({ id, type, config, onClick }: ComponentType, ref: any) => {
   const [cityListControl, setCityListControl] = useState<any>(null);
   const [data, setData] = useState<any>(null);
 
-  const variableData = usePageStore((state) => state.page.variableData);
+  const variableData = usePageStore((state) => state.page.pageData.variableData);
 
   window.initMapScript = () => {
     // 确保每个地图都有唯一的ID

@@ -42,6 +42,7 @@ export default {
       label: '主题',
       name: 'theme',
       props: {
+        allowClear: true,
         options: [
           { label: '默认', value: 'default' },
           { label: '暗黑', value: 'dark' },
@@ -60,7 +61,7 @@ export default {
   config: {
     // 组件默认属性值
     props: {
-      autoFit: false, // 图表自适应
+      autoFit: true, // 图表自适应
       appendPadding: 0, // 图表内边距
       barWidthRatio: 0.2,
       color: ['#9d5cff', '#E8EDF3'],
@@ -68,8 +69,8 @@ export default {
     // 组件样式
     style: {
       display: 'inline-block',
-      width: '300px',
-      height: '100px',
+      width: '100%',
+      height: '80px',
     },
     api: {
       sourceType: 'json',

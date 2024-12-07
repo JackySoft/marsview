@@ -67,7 +67,6 @@ export interface ConfigType<T = any> {
   events: EventType[]; //事件配置
   // 接口配置
   api: ApiConfig;
-  source: any; // 数据源
 }
 
 /**
@@ -77,12 +76,7 @@ export interface ApiConfig {
   sourceType: 'json' | 'api' | 'variable' | 'download';
   id: string;
   source: any;
-  sourceField:
-    | string
-    | {
-        type: 'variable' | 'static';
-        value: string;
-      };
+  sourceField: string | { type: 'variable' | 'static'; value: string };
   name?: {
     type: 'variable' | 'static';
     value: string;
@@ -198,7 +192,7 @@ export interface ApiType {
   sourceType?: string; //数据源类型，枚举值
   // 静态数据源映射
   source: any;
-  // 数据源映射，比如：{ code: { list: [] } }，这里sourceField: 'list'
+  // 数据源映射，比如：{ code: { list: [] } }，这里sourceField: 'data.list'
   sourceField: string;
   contentType: string;
   baseApi?: string;

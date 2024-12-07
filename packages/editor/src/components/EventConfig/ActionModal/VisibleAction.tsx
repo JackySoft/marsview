@@ -7,7 +7,7 @@ import styles from './index.module.less';
  * @returns
  */
 const VisibleAction = () => {
-  const elements = usePageStore((state) => state.page.elements);
+  const elements = usePageStore((state) => state.page.pageData.elements);
 
   return (
     <>

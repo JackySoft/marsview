@@ -69,7 +69,7 @@ instance.interceptors.response.use(
       return Promise.reject(res.message);
     } else if (res.code != 0) {
       response.config.showError === false ? null : message.error(res.message);
-      return Promise.reject(res.message);
+      return Promise.reject(res);
     }
     return res;
   },

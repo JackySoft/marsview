@@ -6,6 +6,7 @@ import { getComponent } from '@/packages/index';
 import { usePageStore } from '@/stores/pageStore';
 import { message } from '@/utils/AntdGlobal';
 import { Button } from 'antd';
+import styles from './index.module.less';
 /**
  * 拖拽目标
  * @param props 拖拽对象属性值
@@ -19,7 +20,7 @@ const DragMenuItem = (props: IDragTarget) => {
       addElement: state.addElement,
       addChildElements: state.addChildElements,
       selectedElement: state.selectedElement,
-      elementsMap: state.page.elementsMap,
+      elementsMap: state.page.pageData.elementsMap,
     };
   });
   const [{ isDragging }, drag] = useDrag(
@@ -90,9 +91,10 @@ const DragMenuItem = (props: IDragTarget) => {
   };
 
   return (
-    <Button type="default" style={{ fontSize: 12 }} block ref={drag} onClick={() => handleClick(props)}>
-      {props.name}
-    </Button>
+    <div className={styles.itemContainer} ref={drag} onClick={() => handleClick(props)} style={{ cursor: 'pointer' }}>
+      <div className={styles.iconContainer}>{typeof props.icon === 'string' ? <img src={props.icon} alt={props.name} /> : props.icon}</div>
+      <div className={styles.itemName}>{props.name}</div>
+    </div>
   );
 };
 

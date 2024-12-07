@@ -1,0 +1,38 @@
+.designerBar {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 99;
+  font-size: 12px;
+  padding-right: 20px;
+  color: var(--mars-theme-text-secondary-color);
+  &.hidden {
+    display: none;
+  }
+}
+.shareContent {
+  width: 360px;
+  padding: 10px 10px 0;
+  .shareUser {
+    font-size: 14px;
+    font-weight: 500;
+    margin-block: 10px 5px;
+  }
+  .visitLimit {
+    margin-top: 15px;
+    .label {
+      margin-right: 10px;
+    }
+  }
+  .footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    height: 40px;
+  }
+  .tips {
+    font-size: 12px;
+    color: var(--mars-theme-text-secondary-color);
+  }
+}

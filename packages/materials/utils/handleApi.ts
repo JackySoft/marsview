@@ -10,6 +10,7 @@ import { getEnv, handleArrayVariable, renderFormula, renderTemplate } from './ut
 import { get } from 'lodash-es';
 import qs from 'qs';
 import { isObject } from 'lodash-es';
+import { isPlainObject } from 'lodash-es';
 /**
  * 请求处理，事件行为模块配置的请求也会执行此方法
  * @param api 组件接口配置
@@ -21,12 +22,25 @@ export const handleApi = async (
   sendParams: any = {},
 ) => {
   if (api.sourceType === 'json') {
-    return { code: 0, data: api.source };
+    let renderData = api.source;
+    if (isPlainObject(renderData)) {
+      if (typeof api.sourceField === 'object') {
+        if (api.sourceField.type === 'static') {
+          renderData = api.sourceField.value ? get(renderData, api.sourceField.value) : renderData;
+        } else {
+          renderData = renderFormula(api.sourceField.value, renderData);
+        }
+      } else if (typeof api.sourceField === 'string' && api.sourceField) {
+        renderData = get(renderData, api.sourceField);
+      }
+    }
+
+    return { code: 0, data: renderData };
   } else if (api.sourceType === 'api' || api.actionType === 'request' || api.actionType === 'download') {
     if (!api.id) {
       return { code: 0, data: '' };
     }
-    const apis = usePageStore.getState().page.apis;
+    const apis = usePageStore.getState().page.pageData.apis;
     const { method, stgApi, preApi, prdApi, contentType, replaceData = 'merge', isCors = true, params, result, tips } = apis[api.id] || {};
     // 处理参数
     const config: any = mergeParams(method, replaceData, params, sendParams);
@@ -48,6 +62,8 @@ export const handleApi = async (
       } else {
         if (method === 'GET') {
           response = (await request.get(config.url, config)) || {};
+        } else if (method === 'DELETE') {
+          response = (await request.delete(config.url, config)) || {};
         } else {
           const data = contentType === 'application/x-www-form-urlencoded' ? qs.stringify(config.data) : config.data;
 
@@ -60,8 +76,6 @@ export const handleApi = async (
             response = (await request.put(config.url, data, config)) || {};
           } else if (method === 'PATCH') {
             response = (await request.patch(config.url, data, config)) || {};
-          } else if (method === 'DELETE') {
-            response = (await request.delete(config.url, { ...config, data })) || {};
           } else {
             response = (await request.post(config.url, data, config)) || {};
           }
@@ -70,17 +84,17 @@ export const handleApi = async (
     } catch (error: any) {
       response = {
         status: 200,
-        data: { code: 500, msg: error },
+        data: { code: 500, data: '', msg: error },
       };
     }
-    let res = response.data;
+    let res: { [key: string]: any } | any[] = response.data;
     // 判断是否是数组，如果是数组，则拼接标准结构进行返回，严格意义将，此处必须返回完整结构
-    if (Array.isArray(res)) {
+    if (Array.isArray(res) || typeof res === 'string' || typeof res === 'number' || typeof res === 'boolean') {
       res = { code: 0, data: res, msg: '' };
     }
     // 字段映射
     const code = result.code ? Number(res[result.code] || 0) : 0;
-    const data = result.data ? res[result.data] || res : res;
+    const data = result.data ? res[result.data] : res;
     const msg = result.msg ? res[result.msg] || '' : '';
     if (code === result.codeValue) {
       // 如果开启了系统提示，则优先使用系统提示
@@ -103,14 +117,14 @@ export const handleApi = async (
     let renderData = data;
     if (typeof api.sourceField === 'object') {
       if (api.sourceField.type === 'static') {
-        renderData = api.sourceField.value ? get(data, api.sourceField.value) : data;
+        renderData = api.sourceField.value ? get(res, api.sourceField.value) : data;
       } else {
-        renderData = renderFormula(api.sourceField.value, data);
+        renderData = renderFormula(api.sourceField.value, res);
       }
     } else if (typeof api.sourceField === 'string' && api.sourceField) {
-      renderData = get(data, api.sourceField);
+      renderData = get(res, api.sourceField);
     }
-    return { code: 0, data: renderData, originData: data, msg };
+    return { code: code === result.codeValue ? 0 : code, data: renderData, originData: data, msg };
   } else {
     // 解析动态变量
     if (api.name?.value) {

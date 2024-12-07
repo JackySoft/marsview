@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 function NotFound() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/pages');
+    navigate('/projects');
   };
   return (
     <Result

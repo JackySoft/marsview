@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Col, Flex, Row, Space, Tabs, Tooltip } from 'antd';
+import { Col, Flex, Popover, Row, Space, Tabs, Tooltip } from 'antd';
 import {
   AppstoreOutlined,
   PartitionOutlined,
@@ -102,7 +102,25 @@ const panels = [
     key: 'Member',
     icon: <UsergroupAddOutlined style={{ fontSize: 16 }} />,
     label: '成员',
-    title: '页面成员',
+    title: (
+      <Space>
+        <span>页面成员</span>
+        <Popover
+          style={{ padding: 0 }}
+          content={
+            <>
+              <p>1. 公开页面，所有人均可访问，但无法编辑。</p>
+              <p>2. 只有开发者才可修改页面。</p>
+              <p>3. 私有页面只有添加开发者或体验者才可访问。</p>
+            </>
+          }
+          title="页面权限"
+          placement="right"
+        >
+          <QuestionCircleOutlined />
+        </Popover>
+      </Space>
+    ),
     children: () => {
       return <MemberList />;
     },
