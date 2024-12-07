@@ -29,7 +29,7 @@ const MCascader = ({ type, config, onChange }: ComponentType<IConfig>, ref: any)
   const [data, setData] = useState<Option[]>([]);
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
-  const variableData = usePageStore((state) => state.page.variableData);
+  const variableData = usePageStore((state) => state.page.pageData.variableData);
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;

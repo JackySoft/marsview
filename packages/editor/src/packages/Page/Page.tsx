@@ -17,8 +17,8 @@ const Page: React.FC = () => {
   // 页面组件
   const { config, elements, setSelectedElement } = usePageStore((state) => {
     return {
-      config: state.page.config,
-      elements: state.page.elements,
+      config: state.page.pageData.config,
+      elements: state.page.pageData.elements,
       setSelectedElement: state.setSelectedElement,
     };
   });
@@ -73,9 +73,11 @@ const Page: React.FC = () => {
       }
     });
   }, [config.events]);
+
   return (
     <div
       style={{
+        minHeight: 'calc(100vh - 64px - 40px - 40px)',
         ...config.style,
         // transform: `translate(${position.x}px, ${position.y}px)`,
         // cursor: isDragging ? 'move' : 'default',

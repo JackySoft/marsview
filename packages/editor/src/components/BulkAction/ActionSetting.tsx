@@ -13,7 +13,7 @@ import { createId } from '@/utils/util';
 const ActionSetting = memo(({ form }: { form: FormInstance }) => {
   const { selectedElement, elementsMap, editEvents } = usePageStore((state) => ({
     selectedElement: state.selectedElement,
-    elementsMap: state.page.elementsMap,
+    elementsMap: state.page.pageData.elementsMap,
     editEvents: state.editEvents,
   }));
   const modalRef = useRef<{ open: (index: number) => void }>();

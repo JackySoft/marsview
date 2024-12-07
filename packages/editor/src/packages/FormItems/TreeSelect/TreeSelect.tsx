@@ -28,7 +28,7 @@ const MTreeSelect = ({ id, type, config, onChange }: ComponentType<IConfig>, ref
   const [data, setData] = useState<Array<{ label: string; value: any }>>([]);
   const [visible, setVisible] = useState(true);
   const [disabled, setDisabled] = useState<boolean | undefined>();
-  const variableData = usePageStore(useShallow((state) => state.page.variableData));
+  const variableData = usePageStore(useShallow((state) => state.page.pageData.variableData));
   // 初始化默认值
   useEffect(() => {
     const name: string = config.props.formItem?.name;

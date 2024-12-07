@@ -203,7 +203,6 @@ export default function MenuList() {
       title: '操作',
       key: 'action',
       width: 320,
-      align: 'center',
       fixed: 'right',
       render(_, record) {
         return (

@@ -13,10 +13,10 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
   const [form] = Form.useForm();
   const { variables, pageName, elements, elementsMap } = usePageStore((state) => {
     return {
-      variables: state.page.variables,
-      pageName: state.page.pageName,
-      elements: state.page.elements,
-      elementsMap: state.page.elementsMap,
+      variables: state.page.pageData.variables,
+      pageName: state.page.name,
+      elements: state.page.pageData.elements,
+      elementsMap: state.page.pageData.elementsMap,
     };
   });
 
@@ -63,6 +63,11 @@ const SelectVariableModal = ({ onSelect }: { onSelect: (record: any) => void }, 
               type: 'Store',
               id: 'userId',
               name: 'userId',
+            },
+            {
+              type: 'Store',
+              id: 'nickName',
+              name: 'nickName',
             },
             {
               type: 'Store',

@@ -8,7 +8,7 @@ function Forbidden() {
       title="403"
       subTitle="抱歉，您当前没有权限访问此页面"
       extra={
-        <Button type="primary" onClick={() => navigate('/pages')}>
+        <Button type="primary" onClick={() => navigate('/projects')}>
           返回列表
         </Button>
       }

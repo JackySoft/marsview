@@ -105,8 +105,8 @@ export default {
         type: 'link',
       },
       meta: {
-        title: '零代码搭建平台',
-        description: '全栈自研、零代码搭建、逻辑编排、权限控制',
+        title: '低代码搭建平台',
+        description: '全栈自研、低代码搭建、逻辑编排、权限控制',
       },
     },
     // 组件样式

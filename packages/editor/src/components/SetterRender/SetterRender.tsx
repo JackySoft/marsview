@@ -1,9 +1,8 @@
 import React, { memo } from 'react';
 import { Form, Input, InputNumber, Radio, Select, Switch, Slider, FormInstance, Tooltip, Popover } from 'antd';
 import * as icons from '@ant-design/icons';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined, CaretDownOutlined } from '@ant-design/icons';
 import { SchemaType } from '@/packages/types';
-import { CaretDownOutlined } from '@ant-design/icons/lib';
 import MColorPicker from '../ColorPicker';
 import VariableBindInput from '../VariableBind/VariableBind';
 import InputSelect from '../InputSelect/InputSelect';
@@ -47,11 +46,7 @@ const SetterRender = memo(({ attrs, form }: IAttrs) => {
             <h2 className={styles.title} key={key}>
               <span style={{ marginRight: 10 }}>{item.label}</span>
               {/* 标题增加提示信息 */}
-              {item.tooltip ? (
-                <Tooltip title={item.tooltip}>
-                  <QuestionCircleOutlined />
-                </Tooltip>
-              ) : null}
+              {item.tooltip ? <Tooltip title={item.tooltip}>{<QuestionCircleOutlined />}</Tooltip> : null}
 
               {/* 标题增加跳转链接 */}
               {item.link ? (

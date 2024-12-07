@@ -33,7 +33,7 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
   const [initialValues, setInitialValues] = useState({});
 
   const { formData, setFormData } = usePageStore((state) => ({
-    formData: state.page.formData,
+    formData: state.page.pageData.formData,
     setFormData: state.setFormData,
   }));
 

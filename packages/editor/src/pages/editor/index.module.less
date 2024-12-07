@@ -1,0 +1,39 @@
+// 页面编辑器样式
+.designer {
+  position: relative;
+  overflow: auto;
+  :global {
+    .ant-modal-root {
+      position: absolute;
+      top: 0;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      z-index: 888;
+      min-height: 100%;
+      .ant-modal-mask,
+      .ant-modal-wrap {
+        position: absolute;
+      }
+    }
+  }
+  // 编辑器画布
+  .designer-editor {
+    position: relative;
+    overflow: auto;
+    background-color: var(--mars-theme-bg-color);
+    /* 设置背景图像为重复的径向渐变，每个渐变代表一个点 */
+    background-image: radial-gradient(circle, rgba(185, 185, 185, 0.5) 1px, transparent 1px),
+      radial-gradient(circle, rgba(0, 0, 0, 0.5) 1px, transparent 1px);
+    /* 设置背景大小，确保点之间有足够的间距 */
+    background-size: 20px 20px; /* 根据需要调整间距 */
+    /* 让背景图像在水平和垂直方向上重复 */
+    background-repeat: repeat;
+  }
+  // 当前页面样式
+  .pageWrapper {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
+  }
+}

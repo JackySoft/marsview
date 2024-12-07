@@ -8,7 +8,7 @@ export default () => {
   const variableRef = useRef<{ open: (type: 'add' | 'edit', variable?: PageVariable) => void }>();
   // 页面组件
   const { variables, removeVariable } = usePageStore((state) => ({
-    variables: state.page.variables,
+    variables: state.page.pageData.variables,
     removeVariable: state.removeVariable,
   }));
 

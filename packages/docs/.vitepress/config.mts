@@ -47,6 +47,7 @@ export default defineConfig({
           { text: '介绍', link: '/home' },
           { text: '本地部署', link: '/deploy-dev' },
           { text: '线上部署', link: '/deploy-prd' },
+          { text: '权限', link: '/limit' },
         ],
       },
       {

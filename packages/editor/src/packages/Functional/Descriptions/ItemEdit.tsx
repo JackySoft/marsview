@@ -20,7 +20,7 @@ const ColumnSetting = memo((props: IModalProp) => {
 
   const { selectedElement, elementsMap, editTableProps, editEvents } = usePageStore((state) => ({
     selectedElement: state.selectedElement,
-    elementsMap: state.page.elementsMap,
+    elementsMap: state.page.pageData.elementsMap,
     editTableProps: state.editTableProps,
     editEvents: state.editEvents,
   }));

@@ -24,7 +24,7 @@ instance.interceptors.request.use((config) => {
     timeout = 8,
     timeoutErrorMessage = '请求超时，请稍后重试',
     requestInterceptor,
-  } = usePageStore.getState().page.interceptor || {};
+  } = usePageStore.getState().page.pageData.interceptor || {};
   config.timeout = timeout * 1000;
   config.timeoutErrorMessage = timeoutErrorMessage;
   config.headers = {
@@ -48,7 +48,7 @@ instance.interceptors.request.use((config) => {
 // 响应拦截器
 instance.interceptors.response.use(
   (response) => {
-    const { responseInterceptor } = usePageStore.getState().page.interceptor;
+    const { responseInterceptor } = usePageStore.getState().page.pageData.interceptor;
     // 返回拦截
     let res = response;
     if (responseInterceptor) {

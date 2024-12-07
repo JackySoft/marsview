@@ -5,7 +5,7 @@ const OpenDrawerAction = () => {
   // 页面组件
   const { drawers } = usePageStore((state) => {
     const drawers: { id: string; title: string }[] = [];
-    Object.values(state.page.elementsMap).forEach((item) => {
+    Object.values(state.page.pageData.elementsMap).forEach((item) => {
       if (item.type === 'Drawer') {
         const title = item.config.props.title;
         drawers.push({

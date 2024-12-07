@@ -13,7 +13,7 @@ export type SettingModalProp = {
 
 const SettingModal = ({ update }: SettingModalProp, ref: any) => {
   const { apis, addApi, updateApi } = usePageStore((state) => ({
-    apis: state.page.apis,
+    apis: state.page.pageData.apis,
     addApi: state.addApi,
     updateApi: state.updateApi,
   }));

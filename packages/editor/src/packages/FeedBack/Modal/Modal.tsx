@@ -5,7 +5,6 @@ import { useDrop } from 'react-dnd';
 import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { usePageStore } from '@/stores/pageStore';
-import './index.less';
 
 /**
  *

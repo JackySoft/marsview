@@ -19,7 +19,7 @@ const MForm = ({ id, config, elements, onFinish, onChange }: ComponentType, ref:
   const { formData, setFormData } = usePageStore(
     useShallow((state) => {
       return {
-        formData: state.page.formData,
+        formData: state.page.pageData.formData,
         setFormData: state.setFormData,
       };
     }),

@@ -37,7 +37,7 @@ const SearchForm = ({ id, type, config, elements, onSearch, onChange, onReset }:
   const { addChildElements, updateToolbar, formData, setFormData } = usePageStore((state) => ({
     addChildElements: state.addChildElements,
     updateToolbar: state.updateToolbar,
-    formData: state.page.formData,
+    formData: state.page.pageData.formData,
     setFormData: state.setFormData,
   }));
   // 初始化表单值

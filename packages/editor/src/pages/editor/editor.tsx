@@ -1,7 +1,6 @@
-import React, { MouseEvent, useState, useEffect, memo, useMemo, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { ConfigProvider, theme as AntdTheme, Select, Button } from 'antd';
-import { SettingOutlined } from '@ant-design/icons';
+import React, { MouseEvent, useState, useEffect, memo, useMemo } from 'react';
+import { useBlocker, useNavigate, useParams } from 'react-router-dom';
+import { ConfigProvider, theme as AntdTheme, Modal } from 'antd';
 import { useDrop } from 'react-dnd';
 import { useDebounceFn, useKeyPress } from 'ahooks';
 import { getComponent } from '@/packages/index';
@@ -14,13 +13,11 @@ import { message } from '@/utils/AntdGlobal';
 import { usePageStore } from '@/stores/pageStore';
 import Page from '@/packages/Page/Page';
 import PageConfig from '@/packages/Page/Schema';
-import { PageItem } from '@/api/pageMember';
-
-import CreatePage from '@/components/CreatePage';
-import './index.less';
 import FloatingCollector from '@/components/FloatingCollector';
 import { handleActionFlow } from '@/packages/utils/action';
 import { collectFloatItem } from '@/packages/utils/util';
+import TopBar from './topbar/TopBar';
+import styles from './index.module.less';
 /**
  * 画布
  * 1. 从左侧拖拽组件到画布中
@@ -30,10 +27,9 @@ const Editor = () => {
   // 页面组件
   const {
     mode,
+    isEdit,
     selectedElement,
     theme,
-    pageName,
-    remark,
     elements,
     elementsMap,
     savePageInfo,
@@ -42,17 +38,16 @@ const Editor = () => {
     setSelectedElement,
     removeElements,
     clearPageInfo,
-    updateToolbar,
+    updateEditState,
   } = usePageStore((state) => {
     return {
+      page: state.page,
       mode: state.mode,
+      isEdit: state.isEdit,
       selectedElement: state.selectedElement,
-      theme: state.page.config.props.theme,
-      pageStyle: state.page.config.style,
-      elements: state.page.elements,
-      elementsMap: state.page.elementsMap,
-      pageName: state.page.pageName,
-      remark: state.page.remark,
+      theme: state.page.pageData.config.props.theme,
+      elements: state.page.pageData.elements,
+      elementsMap: state.page.pageData.elementsMap,
       savePageInfo: state.savePageInfo,
       addElement: state.addElement,
       addChildElements: state.addChildElements,
@@ -60,62 +55,80 @@ const Editor = () => {
       removeElements: state.removeElements,
       clearPageInfo: state.clearPageInfo,
       updateToolbar: state.updateToolbar,
+      updatePageState: state.updatePageState,
+      updateEditState: state.updateEditState,
     };
   });
   // 悬浮组件 - 展示悬浮条
   const [hoverTarget, setHoverTarget] = useState<HTMLElement | null>(null);
   const [loaded, setLoaded] = useState(false);
-  const [canvasWidth, setCanvasWidth] = useState('auto');
-  const [projectId, setProjectId] = useState(0);
-  const createRef = useRef<{ open: (record?: PageItem) => void }>();
-  const { id } = useParams();
-
   const [modalList, setModalList] = useState<any[]>([]);
   const [drawerList, setDrawerList] = useState<any[]>([]);
+  const [canvasWidth, setCanvasWidth] = useState('auto');
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  // 监听页面变动，在路由切换的时候提示未修改
+  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    return currentLocation.pathname !== nextLocation.pathname;
+  });
+
+  useEffect(() => {
+    if (blocker.state === 'blocked') {
+      if (isEdit) {
+        Modal.confirm({
+          title: '提示',
+          content: '页面有未保存的内容，离开将失去修改内容',
+          onOk: () => {
+            blocker.proceed();
+          },
+          onCancel: () => {
+            blocker.reset();
+          },
+        });
+      } else {
+        blocker.proceed();
+      }
+    }
+  }, [blocker]);
 
   useEffect(() => {
     if (!id) return;
     setLoaded(false);
     setCanvasWidth(storage.get('canvasWidth') || 'auto');
-    api.getPageDetail(parseInt(id)).then((res) => {
-      let pageData: any = {};
-      try {
-        pageData = JSON.parse(res.pageData || '{}');
-      } catch (error) {
-        console.error(error);
-        console.info('【json数据】', res.pageData);
-        message.error('页面数据格式错误，请检查');
-      }
-      // 对pageData做一次轮询，把页面本身已有的modal和drawer组件放入浮动组件列表
-      pageData.elements?.forEach((item: any) => {
-        if (item.type === 'Modal') {
-          collectFloatItem('Modal', item, item.config, setModalList);
+    api
+      .getPageDetail(parseInt(id))
+      .then((res) => {
+        let pageData: any = {};
+        try {
+          pageData = res.pageData ? JSON.parse(res.pageData) : { config: PageConfig.config };
+        } catch (error) {
+          pageData = { config: PageConfig.config };
+          console.error(error);
+          console.info('【json数据】', res.pageData);
+          message.error('页面数据格式错误，请检查');
         }
+        // 对pageData做一次轮询，把页面本身已有的modal和drawer组件放入浮动组件列表
+        pageData.elements?.forEach((item: any) => {
+          if (item.type === 'Modal') {
+            collectFloatItem('Modal', item, item.config, setModalList);
+          }
 
-        if (item.type === 'Drawer') {
-          collectFloatItem('Drawer', item, item.config, setDrawerList);
-        }
-      });
+          if (item.type === 'Drawer') {
+            collectFloatItem('Drawer', item, item.config, setDrawerList);
+          }
+        });
 
-      savePageInfo({
-        config: PageConfig.config,
-        events: PageConfig.events,
-        ...pageData,
-        pageId: res.id,
-        pageName: res.name,
-        remark: res.remark,
-        previewImg: res.previewImg,
-        stgPublishId: res.stgPublishId,
-        prePublishId: res.prePublishId,
-        prdPublishId: res.prdPublishId,
-        stgState: res.stgState,
-        preState: res.preState,
-        prdState: res.prdState,
-        userId: res.userId,
+        savePageInfo({ ...res, pageData });
+        setTimeout(() => {
+          updateEditState(false);
+        }, 100);
+        setLoaded(true);
+      })
+      .catch((res) => {
+        if (res.code === 403) return navigate('/403');
+        if (res.code === 404) return navigate('/404');
       });
-      setProjectId(res.projectId);
-      setLoaded(true);
-    });
     return () => {
       clearPageInfo();
       setHoverTarget(null);
@@ -225,13 +238,15 @@ const Editor = () => {
     event.stopPropagation();
   };
 
-  const { run } = useDebounceFn(handleOver, { wait: 150 });
+  // 鼠标悬浮防抖监听
+  const { run: handleRunOver } = useDebounceFn(handleOver, { wait: 300 });
 
   // 键盘快捷复制、删除事件
   useKeyPress(['ctrl.c', 'meta.c'], (event: any) => {
     if (['INPUT', 'TEXTAREA'].includes(event.target.tagName)) return;
     copyElement();
   });
+
   /**
    * 组件复制，需要考虑到嵌套组合情况
    * 1. 单个组件复制
@@ -242,6 +257,7 @@ const Editor = () => {
     if (['INPUT', 'TEXTAREA'].includes(event.target.tagName)) return;
     pastElement();
   });
+
   // 快捷删除
   useKeyPress(['delete', 'backspace'], (event: any) => {
     if (['INPUT', 'TEXTAREA'].includes(event.target.tagName) || event.target.contentEditable === 'true') return;
@@ -277,6 +293,7 @@ const Editor = () => {
       deepCopy(current?.elements || [], newId);
     } else {
       const { element: current } = getElement(elements, id);
+      // 复制元素时，需要从新生成组件ID
       const newId = createId(id.split('_')[0]);
       addChildElements({
         ...elementsMap[id],
@@ -315,29 +332,12 @@ const Editor = () => {
     }
   };
 
-  // 修改画布尺寸
-  const handleClickCanvas = (val: string) => {
-    storage.set('canvasWidth', val);
-    setCanvasWidth(val);
-    updateToolbar();
-  };
-
   // 自适应时，需要计算画布宽度
   const editorWidth = useMemo(() => {
     if (canvasWidth !== 'auto') return '';
-    const editorWidth = document.querySelector('.designer')?.getBoundingClientRect()?.width;
+    const editorWidth = document.querySelector('#designer')?.getBoundingClientRect()?.width;
     return `${editorWidth}px`;
   }, [canvasWidth]);
-
-  // 修改页面
-  const handleEditPage = () => {
-    createRef.current?.open({
-      id: Number(id),
-      name: pageName,
-      remark: remark,
-      projectId,
-    });
-  };
 
   // 浮动组件点击事件
   const handleFloateItemClick = (item: any) => {
@@ -357,26 +357,8 @@ const Editor = () => {
   };
 
   return (
-    <div ref={drop} className="designer" onClick={handleClick}>
-      <div className={`designer-bar ${mode === 'preview' ? 'hidden' : ''}`}>
-        <Select
-          variant="borderless"
-          options={[
-            { label: '1920px', value: '1920px' },
-            { label: '1440px', value: '1440px' },
-            { label: '1280px', value: '1280px' },
-            { label: '1024px', value: '1024px' },
-            { label: '960px', value: '960px' },
-            { label: '自适应', value: 'auto' },
-          ]}
-          style={{ width: 100 }}
-          value={canvasWidth}
-          onChange={handleClickCanvas}
-        />
-        <Button type="text" icon={<SettingOutlined />} onClick={handleEditPage}>
-          设置
-        </Button>
-      </div>
+    <div ref={drop} className={styles.designer} onClick={handleClick}>
+      <TopBar updateCanvas={setCanvasWidth} canvasWidth={canvasWidth} />
       <ConfigProvider
         theme={{
           cssVar: true,
@@ -389,16 +371,20 @@ const Editor = () => {
           },
         }}
       >
-        <div className="designer-editor" style={{ height: mode === 'preview' ? 'calc(100vh - 64px)' : 'calc(100vh - 104px)' }}>
+        <div
+          id="designer"
+          className={styles['designer-editor']}
+          style={{ height: mode === 'preview' ? 'calc(100vh - 64px)' : 'calc(100vh - 104px)' }}
+        >
           <div
             id="editor"
-            className="pageWrapper"
+            className={styles.pageWrapper}
             style={
               mode === 'preview'
                 ? { height: 'calc(100vh - 64px)', overflow: 'auto', padding: 0 }
                 : { width: canvasWidth === 'auto' ? editorWidth : canvasWidth }
             }
-            onMouseOver={run}
+            onMouseOver={handleRunOver}
           >
             {/* 根据选中目标的相对位置，设置工具条 */}
             {mode === 'edit' && <Toolbar copyElement={copyElement} pastElement={pastElement} delElement={delElement} hoverTarget={hoverTarget} />}
@@ -406,17 +392,7 @@ const Editor = () => {
           </div>
         </div>
       </ConfigProvider>
-      {/* 修改页面 */}
-      <CreatePage
-        title="修改页面"
-        createRef={createRef}
-        update={(record) => {
-          savePageInfo({
-            pageName: record?.name,
-            remark: record?.remark,
-          });
-        }}
-      />
+
       {/* 弹框收集器 */}
       {mode === 'edit' ? (
         <FloatingCollector

@@ -7,7 +7,7 @@ import VariableBind from '@/components/VariableBind/VariableBind';
  * @returns
  */
 const DisableAction = () => {
-  const elements = usePageStore((state) => state.page.elements);
+  const elements = usePageStore((state) => state.page.pageData.elements);
 
   return (
     <>

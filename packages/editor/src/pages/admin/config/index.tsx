@@ -5,29 +5,33 @@ import { message } from '@/utils/AntdGlobal';
 import { RollbackOutlined, EditOutlined, SaveOutlined } from '@ant-design/icons';
 import UploadImages from '@/components/UploadImages/UploadImages';
 import ColorPicker from '@/components/ColorPicker';
-import { getProjectDetail, updateProject, addProject, delProject } from '@/api';
+import projectApi from '@/api/project';
 import MemberSetting from '@/layout/components/Menu/Member/MemberSetting';
 import api, { PageMember } from '@/api/pageMember';
 import styles from './index.module.less';
+import { usePageStore } from '@/stores/pageStore';
 
 /**
  * 项目配置
  */
 const Config: React.FC = memo(() => {
-  const { id } = useParams();
-  const [form] = Form.useForm();
   const [loading, setLoading] = useState<boolean>(false);
   const [delLoading, setDelLoading] = useState<boolean>(false);
+  const [ownerId, setOwnerId] = useState(0);
   const [open, setOpen] = useState(false);
   const [type, setType] = useState<'detail' | 'edit' | 'create'>('detail');
+  const userId = usePageStore((state) => state.userInfo.userId);
 
+  const { id } = useParams();
+  const [form] = Form.useForm();
   const navigate = useNavigate();
 
   // 项目加载
   useEffect(() => {
     if (!id) return;
-    getProjectDetail(parseInt(id)).then((res) => {
+    projectApi.getProjectDetail(parseInt(id)).then((res) => {
       form.setFieldsValue(res);
+      setOwnerId(res.userId);
     });
   }, []);
 
@@ -37,7 +41,7 @@ const Config: React.FC = memo(() => {
       await form.validateFields();
       const { breadcrumb, tag, footer, ...rest } = form.getFieldsValue();
       setLoading(true);
-      await updateProject({ ...rest, tag: tag ? 1 : 0, footer: footer ? 1 : 0, breadcrumb: breadcrumb ? 1 : 0 });
+      await projectApi.updateProject({ ...rest, tag: tag ? 1 : 0, footer: footer ? 1 : 0, breadcrumb: breadcrumb ? 1 : 0 });
       message.success('更新成功');
       setLoading(false);
       setType('detail');
@@ -54,7 +58,7 @@ const Config: React.FC = memo(() => {
   const handleOk = async (val?: string) => {
     setDelLoading(true);
     try {
-      await delProject({ id: Number(id), type: val });
+      await projectApi.delProject({ id: Number(id), type: val });
       message.success('删除成功');
       navigate('/projects');
     } finally {
@@ -101,7 +105,7 @@ const Config: React.FC = memo(() => {
           <Input placeholder={'项目名称: Mars'} {...props} maxLength={15} showCount />
         </Form.Item>
         <Form.Item label="项目描述" name="remark" rules={[{ required: true, message: '请输入项目描述' }]}>
-          <Input.TextArea autoSize placeholder={'请输入项目描述'} maxLength={20} showCount={type !== 'detail'} {...props} />
+          <Input.TextArea placeholder={'请输入项目描述'} rows={3} maxLength={100} showCount={type !== 'detail'} {...props} />
         </Form.Item>
         <Form.Item label="LOGO" name="logo" rules={[{ required: true, message: '请上传项目Logo' }]}>
           {type === 'detail' ? <ImageFC /> : <UploadImages />}
@@ -168,7 +172,7 @@ const Config: React.FC = memo(() => {
           </Radio.Group>
         </Form.Item>
         <Form.Item label="开发权限" tooltip="项目配置修改权限" extra="只有开发者才能修改当前项目配置。">
-          <Developer />
+          <Developer ownerId={ownerId} />
         </Form.Item>
         <div className={styles.editBtn}>
           {type === 'detail' ? (
@@ -182,7 +186,7 @@ const Config: React.FC = memo(() => {
               >
                 编辑
               </Button>
-              <Button icon={<RollbackOutlined />} onClick={() => history.back()}>
+              <Button icon={<RollbackOutlined />} onClick={() => navigate('/projects')}>
                 返回
               </Button>
             </Space>
@@ -199,7 +203,7 @@ const Config: React.FC = memo(() => {
         </div>
         <h3>危险区域</h3>
         <div className={styles.delBtn}>
-          <Button danger type="primary" onClick={handleDelConfirm} loading={delLoading}>
+          <Button danger type="primary" onClick={handleDelConfirm} loading={delLoading} disabled={ownerId !== userId}>
             删除项目
           </Button>
         </div>
@@ -238,10 +242,12 @@ const ImageFC = ({ value }: any) => {
 };
 
 // 项目设置开发者
-const Developer = () => {
+const Developer = ({ ownerId }: { ownerId: number }) => {
   const projectId = useParams().id as string;
   const memberRef = useRef<{ open: (type: 1 | 2, projectId: number) => void }>();
   const [list, setList] = useState<PageMember[]>([]);
+  const userId = usePageStore((state) => state.userInfo.userId);
+
   // 开发者权限
   useEffect(() => {
     if (projectId == '0') return;
@@ -268,14 +274,16 @@ const Developer = () => {
     <>
       <Space>
         {list.map((item) => (
-          <Tag key={item.id} color="green" closable onClose={() => handleDelete(item.id)}>
+          <Tag key={item.id} color="green" closable={ownerId === userId || item.userId === userId} onClose={() => handleDelete(item.id)}>
             {item.userName}
           </Tag>
         ))}
       </Space>
-      <Button type="link" onClick={handleAdd}>
-        添加
-      </Button>
+      {userId == ownerId && (
+        <Button type="link" onClick={handleAdd}>
+          添加
+        </Button>
+      )}
       <MemberSetting ref={memberRef} update={getMemberList} />
     </>
   );

@@ -9,7 +9,7 @@ function ErrorBoundary() {
   const [logId, setLogId] = useState('');
   const error: any = useRouteError();
   const data = useMemo(() => {
-    return JSON.stringify(usePageStore.getState().page);
+    return JSON.stringify(usePageStore.getState().page.pageData);
   }, []);
   useEffect(() => {
     const backUpId = 'Key' + Date.now();

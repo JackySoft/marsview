@@ -3,6 +3,7 @@ import { produce } from 'immer';
 import { ComponentType, ApiType, PageVariable, EventType, ComItemType } from '@/packages/types';
 import { cloneDeep } from 'lodash-es';
 import { createId, getElement } from '@/utils/util';
+import { merge } from 'lodash-es';
 /**
  * 页面信息存储
  */
@@ -18,52 +19,59 @@ export interface PageState {
   theme: 'light' | 'dark';
   selectedElement: { type: string; id: string } | undefined;
   isUpdateToolbar: boolean; // 更新遮罩
+  isEdit: boolean; // 是否编辑了页面
   page: {
-    pageId: number;
-    pageName: string;
+    id: number;
+    name: string;
     remark: string;
+    projectId: number;
+    isPublic: 1 | 2;
     stgState: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
     preState: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
     prdState: 1 | 2 | 3 | 4; // 1:未保存 2:已保存 3:已发布 4:已回滚
     stgPublishId: number;
     prePublishId: number;
     prdPublishId: number;
-    previewImg: string;
-    userId: string;
-    // 页面配置数据
-    config: {
-      props: any;
-      // 页面综合样式(scopeCss + scopeStyle)
-      style: React.CSSProperties;
-      scopeCss: string;
-      scopeStyle: React.CSSProperties;
-      events: EventType[];
-      api: {
-        sourceType: 'json' | 'api';
-        id: string;
-        source: any;
+    previewImg?: string;
+    userId: number;
+    userName: string;
+    pageData: {
+      // 页面配置数据
+      config: {
+        props: any;
+        // 页面综合样式(scopeCss + scopeStyle)
+        style: React.CSSProperties;
+        scopeCss: string;
+        scopeStyle: React.CSSProperties;
+        events: EventType[];
+        api: {
+          sourceType: 'json' | 'api';
+          id: string;
+          source: any;
+          sourceField: string | { type: 'variable' | 'static'; value: string };
+        };
       };
-    };
-    events: Array<{ name: string; value: string }>;
-    // 页面全局接口
-    apis: { [key: string]: ApiType };
-    elements: ComponentType[];
-    elementsMap: { [key: string]: ComponentType };
-    // 页面变量
-    variables: PageVariable[];
-    variableData: { [key: string]: any };
-    // 表单数据
-    formData: { [key: string]: any };
-    // 全局拦截器
-    interceptor: {
-      headers?: {
-        key: string;
-        value: string;
-      }[];
-      timeout: number;
-      timeoutErrorMessage: string;
-      requestInterceptor?: string;
-      responseInterceptor?: string;
+      events: Array<{ name: string; value: string }>;
+      // 页面全局接口
+      apis: { [key: string]: ApiType };
+      elements: ComponentType[];
+      elementsMap: { [key: string]: ComponentType };
+      // 页面变量
+      variables: PageVariable[];
+      variableData: { [key: string]: any };
+      // 表单数据
+      formData: { [key: string]: any };
+      // 全局拦截器
+      interceptor: {
+        headers?: {
+          key: string;
+          value: string;
+        }[];
+        timeout: number;
+        timeoutErrorMessage: string;
+        requestInterceptor?: string;
+        responseInterceptor?: string;
+      };
     };
   };
 }
@@ -71,6 +79,7 @@ export interface PageAction {
   saveUserInfo: (userInfo: UserInfoStore) => void;
   savePageInfo: (pageInfo: any) => void;
   updatePageState: (payload: any) => void;
+  updateEditState: (isEdit: boolean) => void;
   addApi: (api: ApiType) => void;
   updateApi: (api: ApiType) => void;
   removeApi: (name: string) => void;
@@ -102,50 +111,57 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     avatar: '',
   },
   mode: 'edit',
+  // 是否编辑了页面
+  isEdit: false,
   theme: 'light',
   selectedElement: undefined,
   isUpdateToolbar: false,
   page: {
-    pageId: 0,
-    pageName: '',
+    id: 0,
+    name: '',
     remark: '',
+    projectId: 0,
+    isPublic: 2,
+    userId: 0,
+    userName: '',
+    previewImg: '',
     stgState: 1,
     preState: 1,
     prdState: 1,
     stgPublishId: 0,
     prePublishId: 0,
     prdPublishId: 0,
-    previewImg: '',
-    userId: '',
-    config: {
-      props: {},
-      style: {},
-      scopeCss: '',
-      scopeStyle: {},
-      events: [],
-      api: {
-        sourceType: 'json',
-        id: '',
-        source: {},
-        sourceField: '',
+    pageData: {
+      config: {
+        props: {},
+        style: {},
+        scopeCss: '',
+        scopeStyle: {},
+        events: [],
+        api: {
+          sourceType: 'json',
+          id: '',
+          source: {},
+          sourceField: '',
+        },
       },
-    },
-    events: [],
-    // 页面全局接口
-    apis: {},
-    elements: [],
-    elementsMap: {},
-    // 页面变量定义列表
-    variables: [],
-    // 页面变量数据
-    variableData: {},
-    // 表单数据
-    formData: {},
-    // 全局拦截器
-    interceptor: {
-      headers: [{ key: '', value: '' }],
-      timeout: 8,
-      timeoutErrorMessage: '请求超时，请稍后再试',
+      events: [],
+      // 页面全局接口
+      apis: {},
+      elements: [],
+      elementsMap: {},
+      // 页面变量定义列表
+      variables: [],
+      // 页面变量数据
+      variableData: {},
+      // 表单数据
+      formData: {},
+      // 全局拦截器
+      interceptor: {
+        headers: [{ key: '', value: '' }],
+        timeout: 8,
+        timeoutErrorMessage: '请求超时，请稍后再试',
+      },
     },
   },
   saveUserInfo: (userInfo: UserInfoStore) =>
@@ -158,19 +174,21 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   savePageInfo: (payload: any) =>
     set(
       produce((state) => {
+        state.isEdit = true; // 标记为编辑状态
         if (payload.type === 'props') {
-          state.page.config.props = payload.props;
+          state.page.pageData.config.props = payload.props;
         } else if (payload.type === 'style') {
           // 如果是style，则直接更新
-          state.page.config.scopeCss = payload.scopeCss;
-          state.page.config.scopeStyle = payload.scopeStyle;
-          state.page.config.style = payload.style;
+          state.page.pageData.config.scopeCss = payload.scopeCss;
+          state.page.pageData.config.scopeStyle = payload.scopeStyle;
+          state.page.pageData.config.style = payload.style;
         } else if (payload.type === 'events') {
-          state.page.config.events = payload.events || [];
+          state.page.pageData.config.events = payload.events || [];
         } else if (payload.type === 'api') {
-          state.page.config.api = payload.api;
+          state.page.pageData.config.api = payload.api;
         } else {
-          state.page = Object.assign(state.page, payload);
+          state.isEdit = false; // 标记为编辑状态
+          state.page = merge({}, state.page, payload);
         }
       }),
     ),
@@ -187,24 +205,34 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
       }),
     );
   },
+  updateEditState: (isEdit: boolean) => {
+    set(
+      produce((state) => {
+        state.isEdit = isEdit;
+      }),
+    );
+  },
   addApi: (api) => {
     set(
       produce((state) => {
-        state.page.apis[api.id] = api;
+        state.isEdit = true; // 标记为编辑状态
+        state.page.pageData.apis[api.id] = api;
       }),
     );
   },
   updateApi: (api) => {
     set(
       produce((state) => {
-        Object.assign(state.page.apis[api.id], api);
+        state.isEdit = true; // 标记为编辑状态
+        Object.assign(state.page.pageData.apis[api.id], api);
       }),
     );
   },
   removeApi: (id) => {
     set(
       produce((state) => {
-        delete state.page.apis[id];
+        state.isEdit = true; // 标记为编辑状态
+        delete state.page.pageData.apis[id];
       }),
     );
   },
@@ -216,7 +244,8 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   addElement: (element: ComponentType) => {
     set(
       produce((state) => {
-        state.page.elements.push({
+        state.isEdit = true; // 标记为编辑状态
+        state.page.pageData.elements.push({
           id: element.id,
           parentId: element.parentId,
           type: element.type,
@@ -234,10 +263,10 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           childElement.config.props.formItem.name = createId(element.type, 6);
         }
         // 添加当前组件对象
-        state.page.elementsMap[element.id] = childElement;
+        state.page.pageData.elementsMap[element.id] = childElement;
         // 添加子组件对象
         element.elements?.map((item) => {
-          state.page.elementsMap[item.id] = item;
+          state.page.pageData.elementsMap[item.id] = item;
         });
       }),
     );
@@ -246,6 +275,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   addChildElements(element: ComponentType) {
     set(
       produce((state) => {
+        state.isEdit = true; // 标记为编辑状态
         function deepFind(list: ComItemType[]) {
           for (let i = 0; i < list.length; i++) {
             const item = list[i];
@@ -269,14 +299,15 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
                 remoteConfigUrl: element.remoteConfigUrl,
                 remoteCssUrl: element.remoteCssUrl,
               });
-              if (element.config.props.formItem) {
+              // 默认给表单组件添加name属性
+              if (element.type !== 'FormItem' && element.config.props.formItem) {
                 childElement.config.props.formItem.name = createId(element.type, 6);
               }
               // 添加当前组件对象
-              state.page.elementsMap[element.id] = childElement;
+              state.page.pageData.elementsMap[element.id] = childElement;
               // 添加子组件对象
               element.elements?.map((item) => {
-                state.page.elementsMap[item.id] = item;
+                state.page.pageData.elementsMap[item.id] = item;
               });
               break;
             } else if (item.elements?.length) {
@@ -285,7 +316,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           }
           return list;
         }
-        deepFind(state.page.elements);
+        deepFind(state.page.pageData.elements);
         state.isUpdateToolbar = !state.isUpdateToolbar;
       }),
     );
@@ -294,28 +325,29 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   editElement(payload: any) {
     set(
       produce((state) => {
-        const item = state.page.elementsMap[payload.id];
+        state.isEdit = true; // 标记为编辑状态
+        const item = state.page.pageData.elementsMap[payload.id];
         // 属性修改
         if (payload.type === 'props') {
           item.config.props = payload.props;
           // Tabs标签对象需要同步属性值到Tab组件中
           if (item.type === 'Tabs') {
-            const { element: parentItem } = getElement(state.page.elements, payload.id);
+            const { element: parentItem } = getElement(state.page.pageData.elements, payload.id);
             if (parentItem?.elements.length === payload.props.items.length) {
               parentItem?.elements.map((item, index) => {
-                Object.assign(state.page.elementsMap[item.id].config.props, payload.props.items[index]);
+                Object.assign(state.page.pageData.elementsMap[item.id].config.props, payload.props.items[index]);
               });
             } else {
               parentItem?.elements.map((item, index) => {
                 if (!payload.props.items.find((prop: { id: string }) => prop.id === item.id)) {
                   parentItem?.elements.splice(index, 1);
-                  delete state.page.elementsMap[item.id];
+                  delete state.page.pageData.elementsMap[item.id];
                   // 递归删除相互引用的嵌套父子组件
                   const deepRemove = (id: string) => {
                     // 删除子组件
-                    Object.values(state.page.elementsMap).map((item: any) => {
+                    Object.values(state.page.pageData.elementsMap).map((item: any) => {
                       if (item.parentId == id) {
-                        delete state.page.elementsMap[item.id];
+                        delete state.page.pageData.elementsMap[item.id];
                         deepRemove(item.id);
                       }
                       return item;
@@ -328,7 +360,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           }
           // Tab对象需要同步属性值到Tabs组件中
           if (item.type === 'Tab') {
-            state.page.elementsMap[item.parentId].config.props.items.map((item: { key: string; label: string }) => {
+            state.page.pageData.elementsMap[item.parentId].config.props.items.map((item: { key: string; label: string }) => {
               if (item.key === payload.id) {
                 item.label = payload.props.label;
               }
@@ -348,7 +380,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
           } else {
             // 如果ID存在，更新一下数据源字段即可。
             if (payload.api.id) {
-              state.page.apis[payload.api.id].sourceField = payload.api.sourceField;
+              state.page.pageData.apis[payload.api.id].sourceField = payload.api.sourceField;
             }
           }
         }
@@ -360,7 +392,8 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   editTableProps(payload: any) {
     set(
       produce((state) => {
-        const item = state.page.elementsMap[payload.id];
+        state.isEdit = true; // 标记为编辑状态
+        const item = state.page.pageData.elementsMap[payload.id];
         if (payload.type === 'column') {
           if (!item.config.props.columns) item.config.props.columns = [];
           item.config.props.columns[payload.index] = payload.props;
@@ -382,7 +415,8 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   editEvents(payload: any) {
     set(
       produce((state) => {
-        const item = state.page.elementsMap[payload.id];
+        state.isEdit = true; // 标记为编辑状态
+        const item = state.page.pageData.elementsMap[payload.id];
         item.events = payload.events;
       }),
     );
@@ -391,6 +425,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   moveElements(payload: any) {
     set(
       produce((state) => {
+        state.isEdit = true; // 标记为编辑状态
         const { componentId, direction } = payload;
         function deepFind(list: ComponentType[]) {
           for (let index = 0; index < list.length; index++) {
@@ -407,7 +442,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
             }
           }
         }
-        deepFind(state.page.elements);
+        deepFind(state.page.pageData.elements);
       }),
     );
   },
@@ -415,8 +450,9 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   dragSortElements({ id, list, parentId }: any) {
     set(
       produce((state) => {
-        state.page.elements = list;
-        state.page.elementsMap[id].parentId = parentId;
+        state.isEdit = true; // 标记为编辑状态
+        state.page.pageData.elements = list;
+        state.page.pageData.elementsMap[id].parentId = parentId;
       }),
     );
   },
@@ -429,20 +465,21 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   removeElements(payload: any) {
     set(
       produce((state) => {
+        state.isEdit = true; // 标记为编辑状态
         const id = payload;
         function deepFind(list: ComponentType[]) {
           for (let i = 0; i < list.length; i++) {
             const item = list[i];
             if (item.id == id) {
               list.splice(i, 1);
-              delete state.page.elementsMap[id];
+              delete state.page.pageData.elementsMap[id];
 
               // 递归删除相互引用的嵌套父子组件
               const deepRemove = (id: string) => {
                 // 删除子组件
-                Object.values(state.page.elementsMap).map((item: any) => {
+                Object.values(state.page.pageData.elementsMap).map((item: any) => {
                   if (item.parentId == id) {
-                    delete state.page.elementsMap[item.id];
+                    delete state.page.pageData.elementsMap[item.id];
                     deepRemove(item.id);
                   }
                   return item;
@@ -455,7 +492,7 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
             }
           }
         }
-        deepFind(state.page.elements);
+        deepFind(state.page.pageData.elements);
         state.selectedElement = undefined;
       }),
     );
@@ -464,7 +501,8 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   addVariable(payload: PageVariable) {
     set(
       produce((state) => {
-        state.page.variables.push(payload);
+        state.isEdit = true; // 标记为编辑状态
+        state.page.pageData.variables.push(payload);
       }),
     );
   },
@@ -472,9 +510,11 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   editVariable(payload: PageVariable) {
     set(
       produce((state) => {
-        const index = state.page.variables.findIndex((item: PageVariable) => item.name == payload.name);
+        state.isEdit = true; // 标记为编辑状态
+        const index = state.page.pageData.variables.findIndex((item: PageVariable) => item.name == payload.name);
         if (index > -1) {
-          state.page.variables[index] = payload;
+          state.page.pageData.variableData[payload.name] = payload.defaultValue;
+          state.page.pageData.variables[index] = payload;
         }
       }),
     );
@@ -483,14 +523,15 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   removeVariable(name: string) {
     set(
       produce((state) => {
-        state.page.variables = state.page.variables.filter((item: PageVariable) => item.name !== name);
+        state.isEdit = true; // 标记为编辑状态
+        state.page.pageData.variables = state.page.pageData.variables.filter((item: PageVariable) => item.name !== name);
       }),
     );
   },
   setVariableData({ name, value }: any) {
     set(
       produce((state) => {
-        state.page.variableData[name] = value;
+        state.page.pageData.variableData[name] = value;
       }),
     );
   },
@@ -498,9 +539,9 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     set(
       produce((state) => {
         if (type === 'override') {
-          state.page.formData[name] = value;
+          state.page.pageData.formData[name] = value;
         } else {
-          state.page.formData[name] = { ...state.page.formData[name], ...value };
+          state.page.pageData.formData[name] = { ...state.page.pageData.formData[name], ...value };
         }
       }),
     );
@@ -508,7 +549,8 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
   setInterceptor(payload: any) {
     set(
       produce((state) => {
-        state.page.interceptor = payload;
+        state.isEdit = true; // 标记为编辑状态
+        state.page.pageData.interceptor = payload;
       }),
     );
   },
@@ -525,42 +567,50 @@ export const usePageStore = create<PageState & PageAction>((set) => ({
     set(
       produce((state) => {
         state.page = {
-          pageId: 0,
-          pageName: '',
+          id: 0,
+          name: '',
           remark: '',
+          projectId: 0,
+          userId: 0,
+          userName: '',
+          previewImg: '',
           stgState: 1,
           preState: 1,
           prdState: 1,
-          userId: '',
-          config: {
-            props: {},
-            style: {},
-            scopeCss: '',
-            scopeStyle: {},
-            events: [],
-            api: {
-              sourceType: 'json',
-              id: '',
-              source: {},
-              sourceField: '',
+          stgPublishId: 0,
+          prePublishId: 0,
+          prdPublishId: 0,
+          pageData: {
+            config: {
+              props: {},
+              style: {},
+              scopeCss: '',
+              scopeStyle: {},
+              events: [],
+              api: {
+                sourceType: 'json',
+                id: '',
+                source: {},
+                sourceField: '',
+              },
             },
-          },
-          events: [],
-          // 页面全局接口
-          apis: {},
-          elements: [],
-          elementsMap: {},
-          // 页面变量定义列表
-          variables: [],
-          // 页面变量数据
-          variableData: {},
-          // 表单数据
-          formData: {},
-          // 全局拦截器
-          interceptor: {
-            headers: [{ key: '', value: '' }],
-            timeout: 8,
-            timeoutErrorMessage: '请求超时，请稍后再试',
+            events: [],
+            // 页面全局接口
+            apis: {},
+            elements: [],
+            elementsMap: {},
+            // 页面变量定义列表
+            variables: [],
+            // 页面变量数据
+            variableData: {},
+            // 表单数据
+            formData: {},
+            // 全局拦截器
+            interceptor: {
+              headers: [{ key: '', value: '' }],
+              timeout: 8,
+              timeoutErrorMessage: '请求超时，请稍后再试',
+            },
           },
         };
       }),

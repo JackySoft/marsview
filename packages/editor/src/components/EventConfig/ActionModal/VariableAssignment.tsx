@@ -5,7 +5,7 @@ import VsEditor from '@/components/VsEditor';
 import VariableBind from '@/components/VariableBind/VariableBind';
 import styles from './index.module.less';
 const VariableAssignment = ({ form }: { form: FormInstance }) => {
-  const variables = usePageStore((state) => state.page.variables);
+  const variables = usePageStore((state) => state.page.pageData.variables);
   const [dataType, setDataType] = useState('string');
 
   useEffect(() => {

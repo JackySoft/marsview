@@ -24,33 +24,3 @@ export const getUserInfo = async () => {
 export const searchUser = (keyword: string) => {
   return request.post(`/user/search`, { keyword });
 };
-
-// 密码找回 - 发送邮件
-export const createResetLink = (params: { userEmail: string }) => {
-  return request.post('/user/password/forget', params);
-};
-
-// 密码找回 - 获取用户名
-export const getAccountByToken = (token: string) => {
-  return request.post(`/user/password/getUserByToken?resetToken=${token}`);
-};
-
-// 修改密码
-export const updatePassword = (params: { oldPwd: string; userPwd: string; confirmPwd: string }) => {
-  return request.post('/user/password/update', params);
-};
-
-// 密码找回提交
-export const resetSubmit = (params: { resetToken: string; userPwd: string }) => {
-  return request.post('/user/password/reset', params);
-};
-
-// 获取用户profile
-export const getUserProfile = () => {
-  return request.get('/user/profile');
-};
-
-// 更新用户profile
-export const updateUserProfile = (params: { avatar?: string; nickName?: string }) => {
-  return request.post('/user/update/profile', params);
-};

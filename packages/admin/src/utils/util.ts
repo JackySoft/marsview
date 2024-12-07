@@ -12,10 +12,12 @@ export function isEnv(env?: string) {
  * @param pageMap 菜单映射对象
  * @returns
  */
-export function getPageId(pageId: string | number | undefined, pageMap: Record<number, any>): number {
+export function getPageId(pageId: string | undefined, pageMap: Record<number, any>): number {
   if (!pageId || !pageMap) return 0;
   const id = isNaN(Number(pageId))
-    ? Object.values(pageMap).filter((item) => (item.path.startsWith('/') ? item.path.slice(1) === pageId : item.path === pageId))?.[0]?.pageId
+    ? Object.values(pageMap).filter((item) => {
+        return item.path.startsWith('/') ? item.path.slice(1) === pageId : item.path === pageId;
+      })?.[0]?.pageId
     : pageId;
   return id;
 }

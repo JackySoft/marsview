@@ -1,39 +1,9 @@
 import request from '@/utils/request';
-import { ProjectListParams, ProjectCreateParams, ProjectUpdateParams, UserListParams, UserCreateParams, Menu, Role } from './types';
+import { UserListParams, UserCreateParams, Menu, Role } from './types';
 
 // 图片上传
 export const uploadImg = (params: any) => {
   return request.post('/upload/files', params, { showError: false });
-};
-
-// 获取项目列表
-export const getProjectList = (params: ProjectListParams) => {
-  return request.get('/project/list', params);
-};
-
-// 获取我名下所有项目列表
-export const getAllProjects = () => {
-  return request.get('/project/queryAllProjects');
-};
-
-// 新增项目
-export const addProject = (params: ProjectCreateParams) => {
-  return request.post('/project/create', params);
-};
-
-// 删除项目
-export const delProject = (params: { id: number; type?: string }) => {
-  return request.post('/project/delete', params);
-};
-
-// 获取项目详情
-export const getProjectDetail = (id: number) => {
-  return request.get(`/project/detail/${id}`, {});
-};
-
-// 更新项目
-export const updateProject = (params: ProjectUpdateParams) => {
-  return request.post('/project/update', params);
 };
 
 // 获取菜单列表

@@ -162,7 +162,7 @@ export function renderTemplate(template: string, data: any) {
         return key;
       }
     }
-    return get(data, key);
+    return get(data, key) || '';
   });
 }
 
@@ -170,7 +170,7 @@ export function renderTemplate(template: string, data: any) {
  * 获取页面变量
  */
 export function getPageVariable(name?: string) {
-  const pageStore = usePageStore.getState().page;
+  const pageStore = usePageStore.getState().page.pageData;
   const data: { [key: string]: any } = {};
   pageStore.variables.forEach((item) => {
     data[item.name] = pageStore.variableData[item.name] ?? item.defaultValue;
@@ -211,11 +211,14 @@ export function renderFormula(formula: string, eventParams?: any) {
     const formIds: Array<string> = formula.match(/([A-Za-z]+_\w+)\.[\w\.]*/g) || [];
     const originIds: Array<string> = [...new Set(formIds.map((id) => id.split('.')[0]))];
     const fnParams: Array<string> = ['context', 'eventParams'];
-    const { page: pageStore, userInfo } = usePageStore.getState();
-    const formData = cloneDeep(pageStore.formData || {});
+    const {
+      page: { pageData },
+      userInfo,
+    } = usePageStore.getState();
+    const formData = cloneDeep(pageData.formData || {});
     originIds.forEach((id: string) => {
       // 如果绑定的是表单项，则通过Form实例对象获取对应表单值
-      const formValues = pageStore.formData?.[id] || {};
+      const formValues = pageData.formData?.[id] || {};
       if (!formData?.id) {
         formData[id] = formValues;
       }
@@ -263,7 +266,7 @@ export const getDateItem = (elements: ComponentType[], list: string[]): string[]
  * @param values 表单数据值
  */
 export const dateFormat = (list: Array<ComponentType>, values: any) => {
-  const elementsMap = usePageStore.getState().page.elementsMap;
+  const elementsMap = usePageStore.getState().page.pageData.elementsMap;
   const dates = getDateItem(list, []);
   dates.map((id: string) => {
     const { type, config } = elementsMap[id];
@@ -341,9 +344,9 @@ export const handleArrayVariable = (list: any = [], data: any = {}) => {
           // 解析模板语法
           const val: any = renderTemplate(next.value, data);
           // 数字转换
-          prev[next.key] = isNaN(val) ? val : Number(val);
+          prev[next.key] = isNotEmpty(val) ? (isNaN(val) ? val : Number(val)) : '';
         } else {
-          prev[next.key] = undefined;
+          prev[next.key] = '';
         }
       } else {
         if (next.value.type === 'static') {
@@ -351,14 +354,14 @@ export const handleArrayVariable = (list: any = [], data: any = {}) => {
             // 解析模板语法
             const val: any = renderTemplate(next.value.value, data);
             // 数字转换
-            prev[next.key] = isNaN(val) ? val : Number(val);
+            prev[next.key] = isNotEmpty(val) ? (isNaN(val) ? val : Number(val)) : '';
           } else {
-            prev[next.key] = undefined;
+            prev[next.key] = '';
           }
         } else {
           // 变量不支持模板字符串语法
           const result = renderFormula(next.value.value, data);
-          prev[next.key] = isNotEmpty(result) ? result : undefined;
+          prev[next.key] = isNotEmpty(result) ? result : '';
         }
       }
     }
@@ -428,3 +431,19 @@ export const getEnv = () => {
   }
   return 'prd';
 };
+
+/**
+ * 获取页面ID
+ * @param pageId 页面路径或者页面ID
+ * @param pageMap 菜单映射对象
+ * @returns
+ */
+export function getPageId(pageId: string | undefined, pageMap: Record<number, any>): number {
+  if (!pageId || !pageMap) return 0;
+  const id = isNaN(Number(pageId))
+    ? Object.values(pageMap).filter((item) => {
+        return item.path.startsWith('/') ? item.path.slice(1) === pageId : item.path === pageId;
+      })?.[0]?.pageId
+    : pageId;
+  return id;
+}

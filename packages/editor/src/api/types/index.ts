@@ -6,7 +6,7 @@ export interface PageParams {
   keyword?: string;
   pageNum: number;
   pageSize?: number;
-  projectId: number;
+  projectId?: number;
 }
 
 export interface PageItem {
@@ -24,6 +24,7 @@ export interface PageItem {
   preState: number;
   prdState: number;
   previewImg: string;
+  projectId: number;
 }
 
 export interface PageReqParams {
@@ -31,9 +32,10 @@ export interface PageReqParams {
 }
 
 export interface CreatePageParams {
+  id: number;
   name: string;
-  userName: string;
-  userId: string;
+  remark?: string;
+  projectId: number;
 }
 
 export interface UpdatePageParams {
@@ -43,7 +45,7 @@ export interface UpdatePageParams {
 }
 
 export interface PublishPageParams {
-  pageId: number;
+  id: number;
   env: 'stg' | 'pre' | 'prd'; // 1 stg 2 pre 3 prod;
   previewImg: string;
 }
@@ -178,11 +180,5 @@ export namespace Role {
     projectId: number;
     checked: string;
     halfChecked: string;
-  }
-}
-
-export namespace AIChat {
-  export interface AILibChatProps {
-    message: string;
   }
 }

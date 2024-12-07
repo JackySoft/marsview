@@ -48,7 +48,7 @@ export default function () {
       if (!isEnv(env)) {
         env = 'prd';
       }
-      getPageDetail(env, Number(id))
+      getPageDetail(env, 0, Number(id))
         .then((res: any) => {
           if (!res.id) {
             return navigate('/404');
@@ -63,13 +63,8 @@ export default function () {
           }
           clearPageInfo();
           savePageInfo({
-            pageId: res.id,
-            pageName: res.name,
-            remark: res.remark,
-            stgPublishId: res.stgPublishId,
-            prePublishId: res.prePublishId,
-            prdPublishId: res.prdPublishId,
-            ...pageData,
+            ...res,
+            pageData,
           });
           setPageData(pageData);
           setTheme(pageData.config.props.theme || '#1677ff');

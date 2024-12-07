@@ -151,6 +151,7 @@ export default {
       name: ['legend', 'position'],
       key: 'legendPosition',
       props: {
+        allowClear: true,
         options: [
           { label: 'top', value: 'top' },
           { label: 'top-left', value: 'top-left' },
@@ -231,7 +232,7 @@ export default {
       },
       columnStyle: {
         fillOpacity: 1,
-        radius: [50, 50, 0, 0],
+        radius: [0, 0, 0, 0],
       },
       // 图表交互
       interactions: [

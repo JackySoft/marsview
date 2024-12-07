@@ -46,7 +46,7 @@ const GridForm = ({ id, type, config, elements, onSearch, onChange, onReset }: C
   const { addChildElements, updateToolbar, formData, setFormData } = usePageStore((state) => ({
     addChildElements: state.addChildElements,
     updateToolbar: state.updateToolbar,
-    formData: state.page.formData,
+    formData: state.page.pageData.formData,
     setFormData: state.setFormData,
   }));
 

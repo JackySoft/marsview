@@ -10,7 +10,7 @@ export type SettingModalProp = {
 const InterceptorModal = ({ update }: SettingModalProp, ref: any) => {
   const { interceptor, setInterceptor } = usePageStore((state) => {
     return {
-      interceptor: state.page.interceptor,
+      interceptor: state.page.pageData.interceptor,
       setInterceptor: state.setInterceptor,
     };
   });

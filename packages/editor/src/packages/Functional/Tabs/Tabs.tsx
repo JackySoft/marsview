@@ -16,7 +16,7 @@ const MTabs = ({ id, type, config, elements, onTabClick, onChange }: ComponentTy
 
   const { updateToolbar, elementsMap } = usePageStore((state) => {
     return {
-      elementsMap: state.page.elementsMap,
+      elementsMap: state.page.pageData.elementsMap,
       updateToolbar: state.updateToolbar,
     };
   });

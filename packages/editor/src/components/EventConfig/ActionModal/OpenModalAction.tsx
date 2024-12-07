@@ -5,7 +5,7 @@ const OpenModalAction = () => {
   // 页面组件
   const { modals } = usePageStore((state) => {
     const modals: { id: string; title: string }[] = [];
-    Object.values(state.page.elementsMap).forEach((item) => {
+    Object.values(state.page.pageData.elementsMap).forEach((item) => {
       if (item.type === 'Modal') {
         const title = item.config.props.title;
         modals.push({

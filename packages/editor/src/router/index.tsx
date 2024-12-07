@@ -18,10 +18,6 @@ export const router = [
     element: lazyLoad(React.lazy(() => import('@/pages/login/Login'))),
   },
   {
-    path: '/password-reset',
-    element: lazyLoad(React.lazy(() => import('@/pages/login/Reset'))),
-  },
-  {
     path: '/',
     loader: AuthLoader,
     element: <Root />,
@@ -32,28 +28,12 @@ export const router = [
         element: lazyLoad(React.lazy(() => import('@/pages/home/project/index'))),
       },
       {
-        path: '/project/pages',
+        path: '/pages',
         element: lazyLoad(React.lazy(() => import('@/pages/home/project/Pages'))),
       },
       {
-        path: '/libs',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/LibList'))),
-      },
-      {
-        path: '/templates',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/Template'))),
-      },
-      {
-        path: '/workflows',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/workflow/WorkFlowList'))),
-      },
-      {
-        path: '/workflow/:id',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/workflow/Design'))),
-      },
-      {
-        path: '/lib/:id',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/lib/LibEditor'))),
+        path: '/project/pages',
+        element: lazyLoad(React.lazy(() => import('@/pages/home/project/Pages'))),
       },
       {
         path: '/editor/:id',
@@ -100,26 +80,6 @@ export const router = [
             element: lazyLoad(React.lazy(() => import('@/pages/admin/user/index'))),
           },
         ],
-      },
-      {
-        path: '/cloud',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/cloud/ImgCloud'))),
-      },
-      {
-        path: '/feedback',
-        element: lazyLoad(React.lazy(() => import('@/pages/feedback'))),
-      },
-      {
-        path: '/feedback/:id/detail',
-        element: lazyLoad(React.lazy(() => import('@/pages/feedback/IssueDetail'))),
-      },
-      {
-        path: '/feedback/post',
-        element: lazyLoad(React.lazy(() => import('@/pages/feedback/IssuePost'))),
-      },
-      {
-        path: '/user/profile',
-        element: lazyLoad(React.lazy(() => import('@/pages/user'))),
       },
       {
         path: '*',

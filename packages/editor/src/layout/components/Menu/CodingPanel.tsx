@@ -46,49 +46,23 @@ const CodingPanel = () => {
       message.error('页面数据格式异常，请检查重试');
       return;
     }
-    const { pageName, remark, ...pageData } = value.page;
+    const { name, remark, pageData } = value.page;
     /**
      * 页面ID和用户信息不允许修改
      */
     const params = {
-      id: page.pageId,
-      name: pageName,
+      id: page.id,
+      name,
       remark,
-      pageData: JSON.stringify({
-        ...pageData,
-        pageId: undefined,
-        // 下面字段排除在pageData外
-        stgState: undefined,
-        preState: undefined,
-        prdState: undefined,
-        previewImg: undefined,
-        variableData: {},
-        formData: {},
-        stgPublishId: undefined,
-        prePublishId: undefined,
-        prdPublishId: undefined,
-        userId: undefined, //页面创建者
-      }),
+      pageData: JSON.stringify({ ...pageData, variableData: {}, formData: {} }),
     };
     setLoading(true);
     try {
       await api.updatePageData(params);
       setLoading(false);
       savePageInfo({
-        ...JSON.parse(params.pageData),
-        pageId: page.pageId,
-        pageName,
-        remark,
-        previewImg: page.previewImg,
-        stgPublishId: page.stgPublishId,
-        prePublishId: page.prePublishId,
-        prdPublishId: page.prdPublishId,
-        stgState: page.stgState,
-        preState: page.preState,
-        prdState: page.prdState,
-        userId: page.userId,
-        variableData: page.variableData,
-        formData: page.formData,
+        ...params,
+        pageData: JSON.parse(params.pageData),
       });
       message.success('保存成功');
     } catch (error) {

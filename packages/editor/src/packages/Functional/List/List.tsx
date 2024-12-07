@@ -40,7 +40,7 @@ export interface IConfig {
 const MList = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
   const [data, setData] = useState<Array<any>>([]);
   const [visible, setVisible] = useState(true);
-  const variableData = usePageStore((state) => state.page.variableData);
+  const variableData = usePageStore((state) => state.page.pageData.variableData);
   useEffect(() => {
     getDataList({});
   }, [config.api, config.api?.sourceType == 'variable' ? variableData : '']);

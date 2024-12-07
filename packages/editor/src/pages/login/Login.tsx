@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import type { FormProps } from 'antd';
 import { Button, Flex, Form, Input, InputNumber } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { login, sendEmail, regist, createResetLink } from '@/api/user';
+import { login, sendEmail, regist } from '@/api/user';
 import storage from '@/utils/storage';
 import { usePageStore } from '@/stores/pageStore';
-import { LockOutlined, SafetyOutlined, UserOutlined } from '@ant-design/icons';
+import { SafetyOutlined, UserOutlined } from '@ant-design/icons';
 import style from './index.module.less';
-import { message } from '@/utils/AntdGlobal';
 type FieldType = {
   userName: string;
   code?: number;
@@ -24,13 +23,9 @@ export default function Login() {
   const saveUserInfo = usePageStore((state) => state.saveUserInfo);
 
   // 类型切换
-  const onChange = (val?: string) => {
+  const onChange = (val: string) => {
     setStatus(false);
-    if (val) {
-      setType(val);
-    } else {
-      setType(type == 'login' ? 'regist' : 'login');
-    }
+    setType(val);
     form.setFieldsValue({
       userName: '',
       userPwd: '',
@@ -66,26 +61,19 @@ export default function Login() {
   const onFinish: FormProps<FieldType>['onFinish'] = async (values: FieldType) => {
     setLoading2(true);
     try {
-      if (type === 'reset') {
-        await createResetLink({ userEmail: values.userName });
-        message.success('请查收重置邮件');
-        setStatus(true);
-        setLoading2(false);
-      } else {
-        const res = type === 'login' ? await login<FieldType>(values) : await regist(values);
-        setLoading2(false);
-        if (res.token) {
-          storage.set('token', res.token);
-          saveUserInfo(res);
-          if (location.search) {
-            const params = new URLSearchParams(location.search);
-            setTimeout(() => {
-              const url = new URL(params.get('callback') as string);
-              navigate(url.pathname || '/projects');
-            });
-          } else {
-            navigate('/projects');
-          }
+      const res = type === 'login' ? await login<FieldType>(values) : await regist(values);
+      setLoading2(false);
+      if (res.token) {
+        storage.set('token', res.token);
+        saveUserInfo(res);
+        if (location.search) {
+          const params = new URLSearchParams(location.search);
+          setTimeout(() => {
+            const url = new URL(params.get('callback') as string);
+            navigate(url.pathname || '/projects');
+          });
+        } else {
+          navigate('/projects');
         }
       }
     } catch (error) {
@@ -105,7 +93,7 @@ export default function Login() {
               <span>登录</span>
             </div>
           ) : (
-            <div className={style.title}>{type === 'regist' ? '邮箱注册' : '密码找回'}</div>
+            <div className={style.title}>邮箱注册</div>
           )}
           <Form name="basic" layout="vertical" className={style.form} onFinish={onFinish} size="large" form={form}>
             <Form.Item<FieldType>
@@ -131,21 +119,15 @@ export default function Login() {
               </Form.Item>
             )}
 
-            {type !== 'reset' && (
-              <Form.Item<FieldType> style={{ marginTop: 32 }} name="userPwd" rules={[{ required: true, message: '请输入密码' }]}>
-                <Input.Password prefix={<LockOutlined />} autoComplete="off" allowClear placeholder="请输入密码" />
-              </Form.Item>
-            )}
-
             <Form.Item style={{ marginTop: 40 }}>
               <Button type="primary" block htmlType="submit" loading={loading2} disabled={status}>
-                {type === 'login' ? '登录' : type === 'regist' ? '注册' : '发送重置邮件'}
+                {type === 'login' ? '登录' : '注册'}
               </Button>
             </Form.Item>
             <Form.Item style={{ marginTop: 40 }}>
               <Flex justify="space-between" gap={20}>
-                <a onClick={() => onChange()}>{type === 'login' ? '没有账号？去注册' : '已有账号？去登录'}</a>
-                {type !== 'reset' ? <a onClick={() => onChange('reset')}>忘记密码</a> : <a onClick={() => onChange('regist')}>没有账号？去注册</a>}
+                <a onClick={() => onChange('login')}>{type === 'login' ? '没有账号？去注册' : '已有账号？去登录'}</a>
+                <a onClick={() => onChange('regist')}>没有账号？去注册</a>
               </Flex>
             </Form.Item>
           </Form>

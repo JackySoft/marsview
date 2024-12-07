@@ -62,7 +62,9 @@ const AdminLayout = () => {
     }
     const fetchProjectDetail = async () => {
       if (projectId) {
-        const detail = await getProjectDetail(projectId);
+        const detail = await getProjectDetail(projectId).catch(() => {
+          return navigate('/403?type=project');
+        });
         // 如果项目不存在，跳转到404
         if (!detail.id) {
           return navigate('/404?type=project');

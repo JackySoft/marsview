@@ -27,16 +27,12 @@ export const router = [
         element: lazyLoad(React.lazy(() => import('@/pages/welcome/welcome'))),
       },
       {
-        path: ':pageId',
-        element: lazyLoad(React.lazy(() => import('@/pages/project'))),
-      },
-      {
         path: 'notPublish',
         element: lazyLoad(React.lazy(() => import('@/pages/500'))),
       },
       {
         path: '*',
-        element: lazyLoad(React.lazy(() => import('@/pages/project/notFound'))),
+        element: lazyLoad(React.lazy(() => import('@/pages/project'))),
       },
     ],
   },

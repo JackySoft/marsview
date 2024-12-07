@@ -11,6 +11,18 @@
     flex: 1;
   }
 }
+.pageList,
+.libList {
+  :global {
+    .ant-card {
+      transition: all 0.3s;
+      &:hover {
+        border-color: #7d3fff;
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
 .cardBody {
   cursor: pointer;
 }
@@ -41,7 +53,8 @@
 }
 
 .project,
-.pageList {
+.pageList,
+.libList {
   :global {
     .ant-card-body {
       padding-inline: 12px;
@@ -59,25 +72,10 @@
     margin-top: 30px;
     margin-bottom: 50px;
   }
-  .item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-inline: 10px;
-    border-bottom: 1px solid var(--mars-theme-card-border-color);
-    height: 110px;
-    .itemInfo {
-      .remark {
-        color: #505052;
-      }
-      p {
-        line-height: 30px;
-        color: var(--mars-theme-text-secondary-color);
-      }
-    }
-  }
   .libList {
-    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
   }
 }
 // 模板页面

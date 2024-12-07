@@ -254,7 +254,7 @@ const ActionModal = (props: any, ref: any) => {
       fn.callback({ actionType: action.key, actionName: action.label, ...values });
       setVisible(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   const handleCancel = () => {
