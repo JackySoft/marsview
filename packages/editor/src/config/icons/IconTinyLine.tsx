@@ -4,7 +4,7 @@ const IconTinyLine = (props: any) => {
     <svg width={width} height={height} viewBox="0 0 72 58" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="55.9218354%" y1="100%" x2="55.9218354%" y2="34.8285281%" id="linearGradient-1">
-          <stop stop-color="#FFFFFF" stop-opacity="0" offset="0%"></stop>
+          <stop stop-color="#FFFFFF" stopOpacity="0" offset="0%"></stop>
           <stop stop-color="#E4E7FF" offset="100%"></stop>
         </linearGradient>
       </defs>

@@ -1,4 +1,4 @@
-import { getInstallList, ILibPublish } from '@/api/lib';
+import { getInstallList } from '@/api/lib';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { usePageStore } from '@/stores/pageStore';
 import { Button, Flex, Spin } from 'antd';
@@ -9,7 +9,7 @@ import { createId } from '@/utils/util';
 
 function CustomLib(_: any, ref: any) {
   const [loading, setLoading] = useState(false);
-  const [list, setList] = useState<ILibPublish[]>([]);
+  const [list, setList] = useState<any[]>([]);
   const { selectedElement, addElement, addChildElements } = usePageStore((state) => {
     return {
       addElement: state.addElement,
@@ -48,7 +48,7 @@ function CustomLib(_: any, ref: any) {
     }
   };
 
-  const handleClick = async (item: ILibPublish) => {
+  const handleClick = async (item: any) => {
     // 生成默认配置
     const { config, events, methods = [] }: any = await loadModule(item.configUrl);
     const newId = createId(item.tag);
