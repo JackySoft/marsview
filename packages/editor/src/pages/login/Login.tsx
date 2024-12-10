@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { login, sendEmail, regist } from '@/api/user';
 import storage from '@/utils/storage';
 import { usePageStore } from '@/stores/pageStore';
-import { SafetyOutlined, UserOutlined } from '@ant-design/icons';
+import { SafetyOutlined, UserOutlined, LockOutlined } from '@ant-design/icons';
 import style from './index.module.less';
 type FieldType = {
   userName: string;
@@ -116,6 +116,12 @@ export default function Login() {
                     {count > 0 ? count + 's' : '获取验证码'}
                   </Button>
                 </Flex>
+              </Form.Item>
+            )}
+
+            {type !== 'reset' && (
+              <Form.Item<FieldType> style={{ marginTop: 32 }} name="userPwd" rules={[{ required: true, message: '请输入密码' }]}>
+                <Input.Password prefix={<LockOutlined />} autoComplete="off" allowClear placeholder="请输入密码" />
               </Form.Item>
             )}
 
