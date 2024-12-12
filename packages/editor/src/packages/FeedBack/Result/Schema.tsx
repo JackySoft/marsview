@@ -34,10 +34,10 @@ export default {
       name: ['status'],
       props: {
         options: [
-          { value: 'success', label: 'success' },
-          { value: 'error', label: 'error' },
-          { value: 'info', label: 'info' },
-          { value: 'warning', label: 'warning' },
+          { value: 'success', label: ' 成功型' },
+          { value: 'error', label: '失败型' },
+          { value: 'info', label: '提示型' },
+          { value: 'warning', label: '警告型' },
           { value: '404', label: '404' },
           { value: '403', label: '403' },
           { value: '500', label: '500' },

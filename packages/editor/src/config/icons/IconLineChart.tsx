@@ -4,11 +4,11 @@ const IconLineChart = (props: any) => {
     <svg width={width} height={height} viewBox="0 0 72 58" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="50%" y1="35.4529929%" x2="50%" y2="100%" id="linearGradient-1">
-          <stop stop-color="#EAEDFF" offset="0%"></stop>
-          <stop stop-color="#FFFFFF" offset="100%"></stop>
+          <stop stopColor="#EAEDFF" offset="0%"></stop>
+          <stop stopColor="#FFFFFF" offset="100%"></stop>
         </linearGradient>
       </defs>
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-632.000000, -361.000000)">
           <g id="编组-37" transform="translate(523.000000, 80.000000)">
             <g id="编组-13备份-13" transform="translate(1.000000, 274.000000)">

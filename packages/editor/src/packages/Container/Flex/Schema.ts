@@ -61,7 +61,7 @@ export default {
       label: '元素间隙',
       name: 'gap',
       props: {
-        placeholder: 'eg: 10px',
+        placeholder: 'eg: 10',
       },
     },
   ],
@@ -72,7 +72,7 @@ export default {
       wrap: 'nowrap',
       justify: 'center',
       align: 'center',
-      gap: '10px',
+      gap: 10,
     },
     style: {},
     events: [],

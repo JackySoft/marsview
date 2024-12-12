@@ -4,15 +4,15 @@ const IconIframe = (props: any) => {
     <svg width={width} height={height} viewBox="0 0 72 58" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="89.8596939%" y1="0%" x2="19.387535%" y2="50%" id="linearGradient-1">
-          <stop stop-color="#FAFBFF" offset="0%"></stop>
-          <stop stop-color="#F2F3FF" offset="100%"></stop>
+          <stop stopColor="#FAFBFF" offset="0%"></stop>
+          <stop stopColor="#F2F3FF" offset="100%"></stop>
         </linearGradient>
         <linearGradient x1="32.3304966%" y1="64.2367372%" x2="16.4540317%" y2="2.01454375%" id="linearGradient-2">
-          <stop stop-color="#FFFFFF" offset="0%"></stop>
-          <stop stop-color="#F6F8FF" offset="100%"></stop>
+          <stop stopColor="#FFFFFF" offset="0%"></stop>
+          <stop stopColor="#F6F8FF" offset="100%"></stop>
         </linearGradient>
       </defs>
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-1082.000000, -364.000000)">
           <g id="编组-35备份-5" transform="translate(1074.000000, 357.000000)">
             <g id="编组-9" transform="translate(8.418919, 7.200000)">
@@ -25,7 +25,7 @@ const IconIframe = (props: any) => {
                 d="M23,7 L50,7 C51.1045695,7 52,7.8954305 52,9 L52,23.6898682 L52,23.6898682 L52,39 C52,40.1045695 51.1045695,41 50,41 L23,41 C21.8954305,41 21,40.1045695 21,39 L21,9 C21,7.8954305 21.8954305,7 23,7 Z"
                 id="矩形"
                 stroke="#A5B1FF"
-                stroke-width="0.5"
+                strokeWidth="0.5"
                 fill="url(#linearGradient-2)"
               ></path>
               <g id="编组-38" transform="translate(32.581081, 44.800000)">
@@ -34,9 +34,9 @@ const IconIframe = (props: any) => {
                   id="编组-33"
                   transform="translate(2.666667, 2.666667)"
                   stroke="#FFFFFF"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="0.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="0.5"
                 >
                   <line x1="0" y1="0" x2="2.66666667" y2="2.66666667" id="路径-12"></line>
                   <line

@@ -4,11 +4,11 @@ const IconColumn = (props: any) => {
     <svg width={width} height={height} viewBox="0 0 72 58" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="62.0355314%" y1="133.077504%" x2="16.1281407%" y2="0%" id="linearGradient-1">
-          <stop stop-color="#EAEEFF" offset="0%"></stop>
-          <stop stop-color="#B6C0FF" offset="100%"></stop>
+          <stop stopColor="#EAEEFF" offset="0%"></stop>
+          <stop stopColor="#B6C0FF" offset="100%"></stop>
         </linearGradient>
       </defs>
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-632.000000, -219.000000)" fill="url(#linearGradient-1)">
           <g id="编组-37" transform="translate(523.000000, 80.000000)">
             <g id="编组-13备份-12" transform="translate(1.000000, 132.000000)">

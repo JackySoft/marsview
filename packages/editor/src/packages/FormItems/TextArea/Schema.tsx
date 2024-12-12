@@ -26,6 +26,11 @@ export default {
       name: ['defaultValue'],
     },
     {
+      type: 'Switch',
+      label: '无样式',
+      name: ['formItem', 'noStyle'],
+    },
+    {
       type: 'Input',
       label: 'Extra',
       name: ['formItem', 'extra'],
@@ -40,6 +45,14 @@ export default {
     {
       type: 'Title',
       label: '表单配置',
+    },
+    {
+      type: 'Input',
+      label: '占位提示',
+      name: ['formWrap', 'placeholder'],
+      props: {
+        placeholder: '默认提示',
+      },
     },
     {
       type: 'InputNumber',

@@ -76,11 +76,17 @@ const MTimePickerRange = ({ id, type, config, onChange }: ComponentType<IConfig>
     }
     onChange?.(obj);
   };
+  const {
+    startPlaceholder,
+    endPlaceholder,
+  } = config.props.formWrap;
+  
   return (
     visible && (
       <Form.Item {...config.props.formItem} data-id={id} data-type={type}>
         <TimePicker.RangePicker
           {...config.props.formWrap}
+          placeholder={startPlaceholder && [startPlaceholder, endPlaceholder]}
           disabled={disabled}
           variant={config.props.formWrap.variant || undefined}
           style={config.style}

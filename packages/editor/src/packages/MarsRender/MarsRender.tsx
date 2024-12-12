@@ -8,6 +8,7 @@ import { produce } from 'immer';
 import dayjs from 'dayjs';
 import * as antd from 'antd';
 import * as Plots from '@ant-design/plots';
+import * as icons from '@ant-design/icons';
 import { isNull, loadStyle, renderFormula } from '@/packages/utils/util';
 import { omit } from 'lodash-es';
 import { getComponent } from '@/packages/index';
@@ -50,6 +51,7 @@ export const Material = memo(({ item }: { item: ComItemType }) => {
     window.dayjs = window.dayjs || dayjs;
     window.antd = window.antd || antd;
     window.Plots = window.Plots || Plots;
+    window.icons = window.icons || icons;
   }
 
   useEffect(() => {

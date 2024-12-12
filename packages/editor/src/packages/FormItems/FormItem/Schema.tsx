@@ -26,6 +26,11 @@ export default {
       },
     },
     {
+      type: 'Switch',
+      label: '无样式',
+      name: ['formItem', 'noStyle'],
+    },
+    {
       type: 'Input',
       label: 'Extra',
       name: ['formItem', 'extra'],

@@ -1,10 +1,12 @@
 import { ComponentType, IDragTargetItem } from '@/packages/types';
-import { Modal, Spin } from 'antd';
-import { forwardRef, memo, useEffect, useImperativeHandle, useState } from 'react';
+import { Modal, Spin, Button } from 'antd';
+import React, { forwardRef, memo, useEffect, useImperativeHandle, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
 import { usePageStore } from '@/stores/pageStore';
+import * as icons from '@ant-design/icons';
+import { handleActionFlow } from '@/packages/utils/action';
 
 /**
  *
@@ -16,8 +18,7 @@ const AntdModal = forwardRef(({ id, type, config, elements, onLoad, onOk, onCanc
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(config.props.confirmLoading || false);
   const [loading, setLoading] = useState(false);
-  const { mode, addChildElements, setSelectedElement } = usePageStore((state) => ({
-    mode: state.mode,
+  const { addChildElements, setSelectedElement } = usePageStore((state) => ({
     addChildElements: state.addChildElements,
     setSelectedElement: state.setSelectedElement,
   }));
@@ -118,6 +119,14 @@ const AntdModal = forwardRef(({ id, type, config, elements, onLoad, onOk, onCanc
   } else if (modal) {
     modal.style.display = 'none';
   }
+
+  const handleOperate = (eventName: string) => {
+    const btnEvent = config.events.find((event) => event.eventName === eventName);
+    handleActionFlow(btnEvent?.actions, {});
+  };
+
+  const bulkActionList = config.props.bulkActionList || [];
+  const iconsList: { [key: string]: any } = icons;
   return (
     <>
       <Modal
@@ -125,13 +134,31 @@ const AntdModal = forwardRef(({ id, type, config, elements, onLoad, onOk, onCanc
         data-id={id}
         data-type={type}
         open={visible}
-        footer={config.props.footer ? undefined : null}
         getContainer={false}
         onOk={handleOk}
         maskClosable={false}
         onCancel={handleCancel}
         width={config.props.width || undefined}
         confirmLoading={confirmLoading}
+        footer={
+          bulkActionList.length > 0 ? (
+            <>
+              {bulkActionList.map((item: any, index: number) => {
+                return (
+                  <Button
+                    key={item.eventName}
+                    type={item.type}
+                    danger={item.danger}
+                    icon={item.icon ? React.createElement(iconsList[item.icon]) : null}
+                    onClick={() => handleOperate(item.eventName)}
+                  >
+                    {item.text}
+                  </Button>
+                );
+              })}
+            </>
+          ) : undefined
+        }
         style={{ ...config.style }}
       >
         <div ref={drop}>

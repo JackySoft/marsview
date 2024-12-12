@@ -4,11 +4,11 @@ const IconTinyLine = (props: any) => {
     <svg width={width} height={height} viewBox="0 0 72 58" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="55.9218354%" y1="100%" x2="55.9218354%" y2="34.8285281%" id="linearGradient-1">
-          <stop stop-color="#FFFFFF" stopOpacity="0" offset="0%"></stop>
-          <stop stop-color="#E4E7FF" offset="100%"></stop>
+          <stop stopColor="#FFFFFF" stopOpacity="0" offset="0%"></stop>
+          <stop stopColor="#E4E7FF" offset="100%"></stop>
         </linearGradient>
       </defs>
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-533.000000, -565.000000)">
           <g id="编组-37" transform="translate(523.000000, 80.000000)">
             <g id="编组-13备份-15" transform="translate(1.000000, 478.000000)">

@@ -26,6 +26,11 @@ export default {
       name: ['defaultValue'],
     },
     {
+      type: 'Switch',
+      label: '无样式',
+      name: ['formItem', 'noStyle'],
+    },
+    {
       type: 'Input',
       label: 'Extra',
       name: ['formItem', 'extra'],
@@ -48,18 +53,28 @@ export default {
     },
     {
       type: 'InputNumber',
-      label: '最大长度',
-      name: ['formWrap', 'maxLength'],
+      label: '最大值',
+      name: ['formWrap', 'max'],
     },
     {
       type: 'InputNumber',
-      label: '最小长度',
-      name: ['formWrap', 'minLength'],
+      label: '最小值',
+      name: ['formWrap', 'min'],
     },
     {
       type: 'Switch',
       label: '是否禁用',
       name: ['formWrap', 'disabled'],
+    },
+    {
+      type: 'Input',
+      label: '前缀',
+      name: ['formWrap', 'prefix'],
+    },
+    {
+      type: 'Input',
+      label: '后缀',
+      name: ['formWrap', 'suffix'],
     },
     {
       type: 'Select',
@@ -72,6 +87,38 @@ export default {
           { value: 'borderless', label: '无边框' },
           { value: 'filled', label: '填充' },
         ],
+      },
+    },
+    {
+      type: 'Variable',
+      label: '展示加工',
+      name: ['formWrap', 'formatter'],
+      tooltip: () => (
+        <div>
+          <div>修改展示的内容，如展示百分比。</div>
+          <p>function run(value) {'{'} </p>
+          <p> return `${'{value}'}%`;</p>
+          <p>{'}'}</p>
+        </div>
+      ),
+      props: {
+        placeholder: '输入加工函数',
+      },
+    },
+    {
+      type: 'Variable',
+      label: '值加工',
+      name: ['formWrap', 'parser'],
+      tooltip: () => (
+        <div>
+          <div>修改最终的值，如百分比。</div>
+          <p>function run(value) {'{'} </p>
+          <p> return value?.replace('%', '');</p>
+          <p>{'}'}</p>
+        </div>
+      ),
+      props: {
+        placeholder: '输入加工函数',
       },
     },
     {

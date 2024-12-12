@@ -19,6 +19,7 @@ export const useFormContext = () => {
     console.warn('表单组件必须放在Form组件、SearchForm组件或者GridForm组件内');
     message.warning('表单项必须放在Form组件、SearchForm组件或者GridForm组件内');
     return {
+      form: null,
       initValues() {},
     };
   }

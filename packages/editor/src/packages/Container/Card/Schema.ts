@@ -82,6 +82,11 @@ export default {
     },
     {
       type: 'Input',
+      label: '头像地址',
+      name: 'avatar',
+    },
+    {
+      type: 'Input',
       label: '标题',
       name: ['meta', 'title'],
     },
@@ -116,6 +121,10 @@ export default {
   events: [
     {
       value: 'onClick',
+      name: '点击卡片事件',
+    },
+    {
+      value: 'onClickMore',
       name: '点击更多事件',
     },
   ],

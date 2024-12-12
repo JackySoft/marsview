@@ -8,7 +8,6 @@ import api from '@/api/project';
 import pageApi from '@/api/page';
 import CreatePage, { CreatePageRef } from '@/components/CreatePage';
 import SearchBar from '@/components/Searchbar/SearchBar';
-import PageCard from './components/PageCard';
 import ProjectCard from './components/ProjectCard';
 import { PageItem } from '@/api/types';
 import styles from './../index.module.less';
@@ -47,12 +46,6 @@ function Category() {
     defaultPageSize: isXLarge ? 15 : 12,
   });
 
-  // 列表切换
-  const handleViewChange = (value: string) => {
-    setType(value);
-    search.submit();
-  };
-
   // 新建项目或页面
   const handleCreate = () => {
     createProjectRef.current?.open(type);
@@ -73,7 +66,6 @@ function Category() {
         submit={search.submit}
         refresh={search.submit}
         onCreate={handleCreate}
-        onViewChange={handleViewChange}
       />
 
       {/* 加载项目列表 */}
@@ -86,23 +78,6 @@ function Category() {
               <Empty style={{ marginTop: 100 }}>
                 <Button type="dashed" icon={<PlusOutlined />} onClick={handleCreate}>
                   创建项目
-                </Button>
-              </Empty>
-            )}
-          </Spin>
-        </div>
-      ) : null}
-
-      {/* 加载子页面列表 */}
-      {type === 'page' ? (
-        <div className={styles.pagesContent}>
-          <Spin spinning={loading} size="large" tip="加载中...">
-            {tableProps.dataSource.length > 0 ? (
-              <PageCard list={tableProps.dataSource} copy={handleCopy} refresh={search.submit} />
-            ) : (
-              <Empty style={{ marginTop: 100 }}>
-                <Button type="dashed" icon={<PlusOutlined />} onClick={handleCreate}>
-                  创建页面
                 </Button>
               </Empty>
             )}

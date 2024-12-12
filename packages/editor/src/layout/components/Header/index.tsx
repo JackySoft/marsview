@@ -37,6 +37,7 @@ const Header = memo(() => {
     const isPage = /editor\/\d+\/(edit|publishHistory)/.test(location.pathname);
     if (isProject) return navigate('/projects');
     if (isPage) return navigate('/pages');
+    navigate('/projects');
   };
 
   // Tab切换项

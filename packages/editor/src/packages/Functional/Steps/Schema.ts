@@ -27,6 +27,11 @@ export default {
       },
     },
     {
+      type: 'Switch',
+      label: '点状步骤条',
+      name: ['progressDot'],
+    },
+    {
       type: 'Select',
       label: '标签位置',
       name: ['labelPlacement'],
@@ -65,10 +70,10 @@ export default {
       name: ['status'],
       props: {
         options: [
-          { value: 'wait', label: 'wait' },
-          { value: 'process', label: 'process' },
-          { value: 'finish', label: 'finish' },
-          { value: 'error', label: 'error' },
+          { value: 'wait', label: '等待中' },
+          { value: 'process', label: '处理中' },
+          { value: 'finish', label: '已完成' },
+          { value: 'error', label: '失败' },
         ],
       },
     },
@@ -78,9 +83,9 @@ export default {
       name: ['type'],
       props: {
         options: [
-          { value: 'default', label: 'default' },
-          { value: 'navigation', label: 'navigation' },
-          { value: 'inline', label: 'inline' },
+          { value: 'default', label: '默认' },
+          { value: 'navigation', label: '导航型' },
+          { value: 'inline', label: '嵌入型' },
         ],
       },
     },
@@ -92,6 +97,7 @@ export default {
       direction: 'horizontal',
       labelPlacement: 'horizontal',
       responsive: true,
+      progressDot: false,
     },
     // 组件样式
     style: {},

@@ -2,12 +2,22 @@ import { Form, FormItemProps, InputNumber, InputNumberProps } from 'antd';
 import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import { ComponentType } from '@/packages/types';
 import { useFormContext } from '@/packages/utils/context';
+import { handleFormatter } from '@/packages/utils/util';
 
 /* 泛型只需要定义组件本身用到的属性，当然也可以不定义，默认为any */
 export interface IConfig {
   defaultValue: string;
   formItem: FormItemProps;
-  formWrap: InputNumberProps;
+  formWrap: InputNumberProps & {
+    formatter?: {
+      type: 'variable';
+      value: string;
+    };
+    parser?: {
+      type: 'variable';
+      value: string;
+    };
+  };
 }
 /**
  *
@@ -54,6 +64,9 @@ const MInputNumber = ({ id, type, config, onChange }: ComponentType<IConfig>, re
       [config.props.formItem.name]: val || '',
     });
   };
+  const { formatter, parser } = config.props.formWrap || {};
+  const formatterFn = handleFormatter(formatter?.value);
+  const parserFn = handleFormatter(parser?.value);
   return (
     visible && (
       <Form.Item {...config.props.formItem} data-id={id} data-type={type}>
@@ -62,6 +75,8 @@ const MInputNumber = ({ id, type, config, onChange }: ComponentType<IConfig>, re
           disabled={disabled}
           variant={config.props.formWrap.variant || undefined}
           style={config.style}
+          formatter={formatterFn}
+          parser={parserFn}
           onChange={handleChange}
         />
       </Form.Item>

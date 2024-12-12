@@ -11,6 +11,11 @@ export default {
       key: 'formItem',
     },
     {
+      type: 'Switch',
+      label: '紧凑模式',
+      name: ['compact'],
+    },
+    {
       type: 'Select',
       label: '对齐方式',
       name: 'align',
@@ -56,6 +61,7 @@ export default {
   config: {
     // 组件默认属性值
     props: {
+      compact: false,
       align: 'center',
       direction: 'horizontal',
       size: 'middle',

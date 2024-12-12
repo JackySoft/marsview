@@ -15,7 +15,6 @@ import Page from '@/packages/Page/Page';
 import PageConfig from '@/packages/Page/Schema';
 import FloatingCollector from '@/components/FloatingCollector';
 import { handleActionFlow } from '@/packages/utils/action';
-import { collectFloatItem } from '@/packages/utils/util';
 import TopBar from './topbar/TopBar';
 import styles from './index.module.less';
 /**
@@ -108,16 +107,6 @@ const Editor = () => {
           console.info('【json数据】', res.pageData);
           message.error('页面数据格式错误，请检查');
         }
-        // 对pageData做一次轮询，把页面本身已有的modal和drawer组件放入浮动组件列表
-        pageData.elements?.forEach((item: any) => {
-          if (item.type === 'Modal') {
-            collectFloatItem('Modal', item, item.config, setModalList);
-          }
-
-          if (item.type === 'Drawer') {
-            collectFloatItem('Drawer', item, item.config, setDrawerList);
-          }
-        });
 
         savePageInfo({ ...res, pageData });
         setTimeout(() => {
@@ -158,13 +147,6 @@ const Editor = () => {
       if (monitor.didDrop()) return;
       // 生成默认配置
       const { config, events, methods = [], elements = [] }: any = (await getComponent(item.type + 'Config'))?.default || {};
-      if (item.type === 'Modal') {
-        collectFloatItem('Modal', item, config, setModalList);
-      }
-
-      if (item.type === 'Drawer') {
-        collectFloatItem('Drawer', item, config, setDrawerList);
-      }
 
       if (!checkComponentType(item.type, selectedElement?.id, selectedElement?.type, elementsMap)) {
         message.info('请把表单项放在Form容器内');
@@ -394,15 +376,7 @@ const Editor = () => {
       </ConfigProvider>
 
       {/* 弹框收集器 */}
-      {mode === 'edit' ? (
-        <FloatingCollector
-          modalList={modalList}
-          drawerList={drawerList}
-          clickItem={handleFloateItemClick}
-          closeItem={handleFloateItemClose}
-          deleteItem={handleFloateItemDelete}
-        />
-      ) : null}
+      {mode === 'edit' && <FloatingCollector />}
     </div>
   );
 };

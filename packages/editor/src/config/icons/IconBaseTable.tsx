@@ -4,11 +4,11 @@ const IconBaseTable = (props: any) => {
     <svg width={width} height={height} viewBox="0 0 73 59" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="34.9707181%" y1="62.3438519%" x2="16.1281407%" y2="33.9861687%" id="linearGradient-1">
-          <stop stop-color="#EAEEFF" offset="0%"></stop>
-          <stop stop-color="#CED5FF" offset="100%"></stop>
+          <stop stopColor="#EAEEFF" offset="0%"></stop>
+          <stop stopColor="#CED5FF" offset="100%"></stop>
         </linearGradient>
       </defs>
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-141.000000, -159.000000)">
           <g id="编组-13" transform="translate(34.000000, 153.000000)">
             <g id="编组-17" transform="translate(99.000000, 0.000000)">

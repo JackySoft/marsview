@@ -2,7 +2,7 @@ const IconFlex = (props: any) => {
   const { width = '40px', height = '40px' } = props;
   return (
     <svg width={width} height={height} viewBox="0 0 72 58" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-43.000000, -404.000000)">
           <g id="编组-13备份" transform="translate(34.000000, 397.000000)">
             <g id="编组-17备份" transform="translate(9.000000, 7.000000)">

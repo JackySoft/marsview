@@ -4,21 +4,21 @@ const IconForm = (props: any) => {
     <svg width={width} height={height} viewBox="0 0 72 58" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="100%" y1="41.2618916%" x2="16.1281407%" y2="30.46875%" id="linearGradient-1">
-          <stop stop-color="#DEE3FF" offset="0%"></stop>
-          <stop stop-color="#CED5FF" offset="100%"></stop>
+          <stop stopColor="#DEE3FF" offset="0%"></stop>
+          <stop stopColor="#CED5FF" offset="100%"></stop>
         </linearGradient>
         <linearGradient x1="100%" y1="31.1794929%" x2="-82.6954384%" y2="31.1794929%" id="linearGradient-2">
-          <stop stop-color="#FFFFFF" offset="0%"></stop>
-          <stop stop-color="#FFFFFF" offset="34.2780808%"></stop>
-          <stop stop-color="#F8F8FF" offset="100%"></stop>
-          <stop stop-color="#F8F8FF" offset="100%"></stop>
+          <stop stopColor="#FFFFFF" offset="0%"></stop>
+          <stop stopColor="#FFFFFF" offset="34.2780808%"></stop>
+          <stop stopColor="#F8F8FF" offset="100%"></stop>
+          <stop stopColor="#F8F8FF" offset="100%"></stop>
         </linearGradient>
         <linearGradient x1="100%" y1="44.927538%" x2="16.1281407%" y2="38.6621315%" id="linearGradient-3">
-          <stop stop-color="#DEE3FF" offset="0%"></stop>
-          <stop stop-color="#CED5FF" offset="100%"></stop>
+          <stop stopColor="#DEE3FF" offset="0%"></stop>
+          <stop stopColor="#CED5FF" offset="100%"></stop>
         </linearGradient>
       </defs>
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-42.000000, -506.000000)">
           <g id="编组-13备份-2" transform="translate(34.000000, 499.000000)">
             <g id="编组-16" transform="translate(8.418919, 7.200000)">
@@ -29,7 +29,7 @@ const IconForm = (props: any) => {
                     id="矩形备份-8"
                     fill="url(#linearGradient-1)"
                   ></path>
-                  <g id="编组-6" transform="translate(19.000000, 0.000000)" fill="url(#linearGradient-2)" stroke="#A5B1FF" stroke-width="0.5">
+                  <g id="编组-6" transform="translate(19.000000, 0.000000)" fill="url(#linearGradient-2)" stroke="#A5B1FF" strokeWidth="0.5">
                     <g id="编组-20">
                       <path
                         d="M52,0.25 C52.2071068,0.25 52.3946068,0.333946609 52.5303301,0.469669914 C52.6660534,0.605393219 52.75,0.792893219 52.75,1 L52.75,1 L52.75,9 C52.75,9.20710678 52.6660534,9.39460678 52.5303301,9.53033009 C52.3946068,9.66605339 52.2071068,9.75 52,9.75 L52,9.75 L1,9.75 C0.792893219,9.75 0.605393219,9.66605339 0.469669914,9.53033009 C0.333946609,9.39460678 0.25,9.20710678 0.25,9 L0.25,9 L0.25,1 C0.25,0.792893219 0.333946609,0.605393219 0.469669914,0.469669914 C0.605393219,0.333946609 0.792893219,0.25 1,0.25 L1,0.25 Z"
@@ -54,7 +54,7 @@ const IconForm = (props: any) => {
                       d="M52,0.25 C52.2071068,0.25 52.3946068,0.333946609 52.5303301,0.469669914 C52.6660534,0.605393219 52.75,0.792893219 52.75,1 L52.75,1 L52.75,9 C52.75,9.20710678 52.6660534,9.39460678 52.5303301,9.53033009 C52.3946068,9.66605339 52.2071068,9.75 52,9.75 L52,9.75 L1,9.75 C0.792893219,9.75 0.605393219,9.66605339 0.469669914,9.53033009 C0.333946609,9.39460678 0.25,9.20710678 0.25,9 L0.25,9 L0.25,1 C0.25,0.792893219 0.333946609,0.605393219 0.469669914,0.469669914 C0.605393219,0.333946609 0.792893219,0.25 1,0.25 L1,0.25 Z"
                       id="矩形"
                       stroke="#A5B1FF"
-                      stroke-width="0.5"
+                      strokeWidth="0.5"
                       fill="url(#linearGradient-2)"
                     ></path>
                     <path

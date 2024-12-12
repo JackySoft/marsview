@@ -51,7 +51,15 @@ import IconRignProgress from './icons/IconRingProgress';
 import IconBmap from './icons/IconBMap';
 import IconRibon from './icons/IconRibon';
 import IconCountDown from './icons/IconCountDown';
-
+import IconTag from './icons/IconTag';
+import IconLiquid from './icons/IconLiquid.svg';
+import IconTinyArea from './icons/IconTinyArea.svg';
+import IconWordCloud from './icons/IconWordCloud.svg';
+import IconGauge from './icons/IconGauge.svg';
+import IconTagGroup from './icons/IconTagGroup';
+import IconRadar from './icons/IconRadar.svg';
+import IconGrid from './icons/IconGrid';
+import IconDropdwon from './icons/IconDropdown';
 /**
  * 组件配置列表
  */
@@ -74,8 +82,8 @@ const components = [
     data: [],
   },
   {
-    type: 'Scene',
-    title: '场景组件',
+    type: 'Advanced',
+    title: '高级组件',
     data: [
       {
         icon: <IconSearchForm />,
@@ -91,6 +99,11 @@ const components = [
         icon: <IconBaseTable />,
         name: '基础表格',
         type: 'MarsTable',
+      },
+      {
+        icon: <IconTagGroup />,
+        name: '标签组',
+        type: 'TagGroup',
       },
     ],
   },
@@ -117,6 +130,11 @@ const components = [
         icon: <IconDiv />,
         name: 'Div容器',
         type: 'Div',
+      },
+      {
+        icon: <IconGrid />,
+        name: '网格容器',
+        type: 'Grid',
       },
     ],
   },
@@ -307,6 +325,11 @@ const components = [
         type: 'TinyLine',
       },
       {
+        icon: IconTinyArea,
+        name: '迷你面积图',
+        type: 'TinyArea',
+      },
+      {
         icon: <IconTinyColumn />,
         name: '迷你柱形图',
         type: 'TinyColumn',
@@ -320,6 +343,26 @@ const components = [
         icon: <IconRignProgress />,
         name: '进度环图',
         type: 'RingProgress',
+      },
+      {
+        icon: IconLiquid,
+        name: '水波图',
+        type: 'Liquid',
+      },
+      {
+        icon: IconWordCloud,
+        name: '词云图',
+        type: 'WordCloud',
+      },
+      {
+        icon: IconGauge,
+        name: '仪表盘',
+        type: 'Gauge',
+      },
+      {
+        icon: IconRadar,
+        name: '雷达',
+        type: 'Radar',
       },
     ],
   },
@@ -368,6 +411,11 @@ const components = [
         icon: <IconCarousel />,
         name: '轮播图',
         type: 'Carousel',
+      },
+      {
+        icon: <IconDropdwon />,
+        name: '下拉框',
+        type: 'Dropdown',
       },
     ],
   },
@@ -455,6 +503,11 @@ const components = [
         icon: <IconRibon />,
         name: '缎带',
         type: 'Ribbon',
+      },
+      {
+        icon: <IconTag />,
+        name: '标签',
+        type: 'Tag',
       },
     ],
   },

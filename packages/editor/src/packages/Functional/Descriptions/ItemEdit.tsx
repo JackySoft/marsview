@@ -127,14 +127,29 @@ const ColumnSetting = memo((props: IModalProp) => {
             </Form.Item>
           </Col>
         </Row>
+        {/* 如果是文本类型，可设置字体大小 */}
         <Row>
           <Col span={12}>
-            <Form.Item label="超长省略" name="ellipsis" tooltip="省略后，会自动开启tooltip功能">
+            <Form.Item label="字体大小" name="fontSize" tooltip="只有文本类生效">
+              <InputNumber />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <Form.Item label="文字提示" name="openTooltip" tooltip="只有文本类生效">
               <Switch />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label="可复制" name="copyable" tooltip="开启后，列增加复制功能，只对文本生效">
+            <Form.Item label="提示内容" name="tipContent" tooltip="只有文本类生效">
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <Form.Item label="超长省略" name="ellipsis" tooltip="省略后，会自动开启tooltip功能">
               <Switch />
             </Form.Item>
           </Col>
@@ -146,6 +161,11 @@ const ColumnSetting = memo((props: IModalProp) => {
             </Form.Item>
             <Form.Item name="eventName" hidden>
               <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label="可复制" name="copyable" tooltip="开启后，列增加复制功能，只对文本生效">
+              <Switch />
             </Form.Item>
           </Col>
         </Row>

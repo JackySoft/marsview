@@ -1,77 +1,70 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './index.module.less';
-import { Badge, Button, Popconfirm, Tooltip } from 'antd';
-import { CloseCircleFilled, CloseCircleOutlined, DeleteOutlined, QuestionCircleFilled } from '@ant-design/icons';
-import { CollectorItem } from '@/packages/types';
+import { Badge, Button, Tooltip } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
+import { usePageStore } from '@/stores/pageStore';
+import { getComponentRef } from '@/packages/utils/useComponentRefs';
 
-interface FloatingCollectorProps {
-  modalList: CollectorItem[];
-  drawerList: CollectorItem[];
-  clickItem: (item: CollectorItem) => void;
-  closeItem: (item: CollectorItem) => void;
-  deleteItem: (targetId: string) => void;
-}
-
-const FloatingCollector = (props: FloatingCollectorProps) => {
+type CollectorItem = {
+  id: string;
+  name: string;
+};
+const FloatingCollector = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [modalList, setModalList] = useState<CollectorItem[]>([]);
+  const [drawerList, setDrawerList] = useState<CollectorItem[]>([]);
   const [currentItems, setCurrentItems] = useState<CollectorItem[]>([]);
   const [currentType, setCurrentType] = useState<number>(1);
-  const { modalList, drawerList } = props;
 
+  const { elementsMap, removeElements } = usePageStore((state) => {
+    return {
+      elementsMap: state.page.pageData.elementsMap,
+      removeElements: state.removeElements,
+    };
+  });
+
+  // 过滤弹框和抽屉组件
   useEffect(() => {
-    if (currentType === 1) {
-      setCurrentItems(modalList);
-    }
-    if (currentType === 2) {
-      setCurrentItems(drawerList);
-    }
-    if (modalList.length === 0 && drawerList.length === 0) {
+    setModalList([]);
+    setDrawerList([]);
+    Object.keys(elementsMap)
+      .filter((id) => id.startsWith('Modal') || id.startsWith('Drawer'))
+      ?.forEach((id: string) => {
+        if (id.startsWith('Modal')) {
+          setModalList((prevList) => [...prevList, { id, name: `Modal(${id})` }]);
+        } else {
+          setDrawerList((prevList) => [...prevList, { id, name: `Drawer(${id})` }]);
+        }
+      });
+  }, [elementsMap]);
+
+  // 更新当前显示的列表
+  useEffect(() => {
+    setCurrentItems(currentType === 1 ? modalList : drawerList);
+    setIsExpanded(isExpanded && currentType === 1 ? modalList.length > 0 : drawerList.length > 0);
+  }, [currentType, modalList, drawerList]);
+
+  // 切换类型
+  const handleTypeClick = (type: number) => {
+    setCurrentType(type);
+    setIsExpanded(!isExpanded);
+  };
+
+  // 打开弹框或抽屉
+  const handleItemClick = useCallback((item: CollectorItem, type: string) => {
+    setSelectedItem(item.id);
+    if (type === 'double') {
       setIsExpanded(false);
-    } else if (modalList.length > 0 && drawerList.length === 0) {
-      setCurrentItems(modalList);
-      setCurrentType(1);
-    } else if (modalList.length === 0 && drawerList.length > 0) {
-      setCurrentItems(drawerList);
-      setCurrentType(2);
+      const ref = getComponentRef(item.id);
+      ref.open({});
     }
-  }, [modalList, drawerList]);
-
-  const handleTypeClick = useCallback(
-    (type: number) => {
-      setCurrentType(type);
-      if (isExpanded && currentItems === (type === 1 ? modalList : drawerList)) {
-        // 如果已经展开并且当前是点击的同一种类型，则关闭
-        setIsExpanded(false);
-        setCurrentItems([]);
-      } else {
-        // 否则切换到新类型并展开
-        setIsExpanded(true);
-        setCurrentItems(type === 1 ? modalList : drawerList);
-      }
-    },
-    [isExpanded, modalList, drawerList, currentItems],
-  );
-
-  const handleItemClick = useCallback(
-    (item: CollectorItem, type: string) => {
-      setSelectedItem(item.id);
-      if (type === 'double') {
-        props.clickItem(item);
-        setIsExpanded(false);
-      }
-    },
-    [props],
-  );
-
-  const handleClose = useCallback((item: CollectorItem) => {
-    setSelectedItem(null);
-    props.closeItem(item);
   }, []);
 
+  // 删除弹框或抽屉
   const handleDelete = useCallback((targetId: string) => {
     setSelectedItem(null);
-    props.deleteItem(targetId);
+    removeElements(targetId);
   }, []);
 
   return (
@@ -89,21 +82,13 @@ const FloatingCollector = (props: FloatingCollectorProps) => {
                 >
                   <span className={styles.title}>{item.name}</span>
                   <span className={styles.action}>
-                    <CloseCircleOutlined
+                    <DeleteOutlined
+                      style={{ marginLeft: '5px' }}
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleClose(item);
+                        handleDelete(item.id);
                       }}
                     />
-                    <Popconfirm title="警告" description="将删除此项目及其关联项目" icon={<QuestionCircleFilled style={{ color: 'red' }} />}>
-                      <DeleteOutlined
-                        style={{ marginLeft: '5px' }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete(item.targetId);
-                        }}
-                      />
-                    </Popconfirm>
                   </span>
                 </Button>
               </Tooltip>

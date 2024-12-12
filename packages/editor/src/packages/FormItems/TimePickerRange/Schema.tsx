@@ -31,6 +31,11 @@ export default {
       },
     },
     {
+      type: 'Switch',
+      label: '无样式',
+      name: ['formItem', 'noStyle'],
+    },
+    {
       type: 'Input',
       label: 'Extra',
       name: ['formItem', 'extra'],
@@ -88,8 +93,16 @@ export default {
     },
     {
       type: 'Input',
-      label: '占位提示',
-      name: ['formWrap', 'placeholder'],
+      label: '开始占位提示',
+      name: ['formWrap', 'startPlaceholder'],
+      props: {
+        placeholder: '输入默认提示',
+      },
+    },
+    {
+      type: 'Input',
+      label: '结束占位提示',
+      name: ['formWrap', 'endPlaceholder'],
       props: {
         placeholder: '输入默认提示',
       },

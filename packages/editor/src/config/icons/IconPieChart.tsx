@@ -5,11 +5,11 @@ const IconPieChart = (props: any) => {
       <defs>
         <circle id="path-1" cx="23" cy="23" r="21.16"></circle>
         <linearGradient x1="120.144232%" y1="69.8458447%" x2="3.89927905%" y2="87.7844269%" id="linearGradient-3">
-          <stop stop-color="#D7DDFF" offset="0%"></stop>
-          <stop stop-color="#A5B1FF" offset="100%"></stop>
+          <stop stopColor="#D7DDFF" offset="0%"></stop>
+          <stop stopColor="#A5B1FF" offset="100%"></stop>
         </linearGradient>
       </defs>
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-533.000000, -361.000000)">
           <g id="编组-37" transform="translate(523.000000, 80.000000)">
             <g id="编组-13备份-13" transform="translate(1.000000, 274.000000)">
@@ -24,7 +24,7 @@ const IconPieChart = (props: any) => {
                     mask="url(#mask-2)"
                     points="23 23 23 -9.41911749 54.1293495 11.384466 53.1040069 23"
                   ></polygon>
-                  <circle id="蒙版" stroke="#C5CDFF" stroke-width="0.5" cx="23" cy="23" r="23.25"></circle>
+                  <circle id="蒙版" stroke="#C5CDFF" strokeWidth="0.5" cx="23" cy="23" r="23.25"></circle>
                 </g>
               </g>
             </g>
