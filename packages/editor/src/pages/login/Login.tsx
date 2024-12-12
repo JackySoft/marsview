@@ -134,7 +134,7 @@ export default function Login() {
             <Form.Item style={{ marginTop: 40 }}>
               <Flex justify="space-between" gap={20}>
                 <a onClick={() => onChange('login')}>{type === 'login' ? '' : '已有账号？去登录'}</a>
-                <a onClick={() => onChange('regist')}>没有账号？去注册</a>
+                <a onClick={() => onChange('regist')}>{type === 'login' ? '没有账号？去注册' : ''}</a>
               </Flex>
             </Form.Item>
           </Form>
