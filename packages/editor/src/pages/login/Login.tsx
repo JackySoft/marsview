@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { login, sendEmail, regist } from '@/api/user';
 import storage from '@/utils/storage';
 import { usePageStore } from '@/stores/pageStore';
-import { SafetyOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, SafetyOutlined, UserOutlined } from '@ant-design/icons';
 import style from './index.module.less';
+
 type FieldType = {
   userName: string;
   code?: number;
@@ -119,6 +120,12 @@ export default function Login() {
               </Form.Item>
             )}
 
+            {type !== 'reset' && (
+              <Form.Item<FieldType> style={{ marginTop: 32 }} name="userPwd" rules={[{ required: true, message: '请输入密码' }]}>
+                <Input.Password prefix={<LockOutlined />} autoComplete="off" allowClear placeholder="请输入密码" />
+              </Form.Item>
+            )}
+
             <Form.Item style={{ marginTop: 40 }}>
               <Button type="primary" block htmlType="submit" loading={loading2} disabled={status}>
                 {type === 'login' ? '登录' : '注册'}
@@ -126,7 +133,7 @@ export default function Login() {
             </Form.Item>
             <Form.Item style={{ marginTop: 40 }}>
               <Flex justify="space-between" gap={20}>
-                <a onClick={() => onChange('login')}>{type === 'login' ? '没有账号？去注册' : '已有账号？去登录'}</a>
+                <a onClick={() => onChange('login')}>{type === 'login' ? '' : '已有账号？去登录'}</a>
                 <a onClick={() => onChange('regist')}>没有账号？去注册</a>
               </Flex>
             </Form.Item>
