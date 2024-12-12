@@ -1,10 +1,8 @@
+import TextSetting from '@/packages/components/TextSetting';
+
 /**
  * 组件配置和属性值
  */
-
-import { FormInstance } from 'antd';
-import TextSetting from './TextSetting';
-
 export default {
   // 组件属性配置JSON
   attrs: [
@@ -52,14 +50,8 @@ export default {
       type: 'function',
       label: '自定义渲染',
       key: 'render',
-      render: (form: FormInstance) => {
-        form.setFieldValue(
-          'script',
-          `function render(value){
-    return value;
-}`,
-        );
-        return <TextSetting key="render" form={form} />;
+      render: () => {
+        return <TextSetting key="render" label="自定义" name="script" />;
       },
     },
     {
@@ -113,6 +105,9 @@ export default {
     props: {
       text: '欢迎使用Marsview低代码系统',
       type: '',
+      script: `function render(value){
+    return value;
+}`,
     },
     style: {},
     events: [],

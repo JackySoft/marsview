@@ -26,15 +26,6 @@ const SearchBar = (props: any) => {
         </Form>
       </div>
       <Space>
-        {pathname === '/projects' && (
-          <Segmented
-            onChange={(value) => props.onViewChange(value)}
-            options={[
-              { value: 'project', icon: <AppstoreOutlined />, label: '项目' },
-              { value: 'page', icon: <BarsOutlined />, label: '页面' },
-            ]}
-          />
-        )}
         {pathname === '/project/pages' && (
           <Tooltip title="返回">
             <Button icon={<ArrowLeftOutlined />} shape="circle" onClick={() => navigate('/projects')}></Button>

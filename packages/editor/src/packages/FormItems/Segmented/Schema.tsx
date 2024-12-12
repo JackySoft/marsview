@@ -27,6 +27,11 @@ export default {
       name: ['defaultValue'],
     },
     {
+      type: 'Switch',
+      label: '无样式',
+      name: ['formItem', 'noStyle'],
+    },
+    {
       type: 'Input',
       label: 'Tooltip',
       name: ['formItem', 'tooltip'],

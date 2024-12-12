@@ -26,6 +26,11 @@ export default {
       name: ['defaultValue'],
     },
     {
+      type: 'Switch',
+      label: '无样式',
+      name: ['formItem', 'noStyle'],
+    },
+    {
       type: 'Select',
       label: '按钮类型',
       name: ['formWrap', 'optionType'],

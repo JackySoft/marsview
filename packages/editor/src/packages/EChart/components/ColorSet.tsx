@@ -2,10 +2,10 @@ import MColorPicker from '@/components/ColorPicker';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Form, Space } from 'antd';
 import { memo } from 'react';
-export default memo(() => {
+export default memo(({ name }: { name?: string | string[] }) => {
   return (
     <Form.Item label="颜色">
-      <Form.List name={['color']}>
+      <Form.List name={name || 'color'}>
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }) => (

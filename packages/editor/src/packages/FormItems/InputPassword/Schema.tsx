@@ -36,6 +36,11 @@ export default {
       },
     },
     {
+      type: 'Switch',
+      label: '无样式',
+      name: ['formItem', 'noStyle'],
+    },
+    {
       type: 'Input',
       label: 'Extra',
       name: ['formItem', 'extra'],
@@ -154,7 +159,7 @@ export default {
   config: {
     props: {
       formItem: {
-        label: '输入框',
+        label: '密码框',
         name: 'input',
       },
       // 组件默认属性值

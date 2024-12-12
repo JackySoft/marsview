@@ -1,5 +1,5 @@
 import { ComponentType, IDragTargetItem } from '@/packages/types';
-import { Button, Card } from 'antd';
+import { Button, Card, Avatar } from 'antd';
 import { useDrop } from 'react-dnd';
 import { getComponent } from '@/packages/index';
 import MarsRender from '@/packages/MarsRender/MarsRender';
@@ -12,7 +12,7 @@ import { omit } from 'lodash-es';
  * @param style 组件样式
  * @returns
  */
-const MCard = ({ id, type, config, elements, onClick }: ComponentType, ref: any) => {
+const MCard = ({ id, type, config, elements, onClick, onClickMore }: ComponentType, ref: any) => {
   const addChildElements = usePageStore((state) => state.addChildElements);
   const [visible, setVisible] = useState(true);
   // 拖拽接收
@@ -51,11 +51,8 @@ const MCard = ({ id, type, config, elements, onClick }: ComponentType, ref: any)
     };
   });
 
-  // 点击更多事件
-  const handleClick = () => {
-    onClick?.();
-  };
   const meta = useMemo(() => config.props.meta, [config.props.meta]);
+  const avatar = useMemo(() => config.props.avatar || undefined, [config.props.avatar]);
   return (
     visible && (
       <Card
@@ -66,14 +63,21 @@ const MCard = ({ id, type, config, elements, onClick }: ComponentType, ref: any)
         cover={config.props.cover ? <img src={config.props.cover} /> : null}
         extra={
           config.props.extra?.text ? (
-            <Button {...config.props.extra} onClick={handleClick}>
+            <Button
+              {...config.props.extra}
+              onClick={(event) => {
+                event.stopPropagation();
+                onClickMore?.();
+              }}
+            >
               {config.props.extra?.text}
             </Button>
           ) : null
         }
+        onClick={() => onClick?.()}
         ref={drop}
       >
-        {meta.title || meta.description ? <Card.Meta {...meta} /> : null}
+        {meta.title || meta.description ? <Card.Meta {...meta} avatar={avatar && <Avatar src={avatar} />} /> : null}
         {elements?.length ? (
           <MarsRender elements={elements || []} />
         ) : (

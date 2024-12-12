@@ -2,8 +2,7 @@
  * 组件配置和属性值
  */
 
-import { FormInstance } from 'antd';
-import TextSetting from './TextSetting';
+import TextSetting from '@/packages/components/TextSetting';
 
 export default {
   // 组件属性配置JSON
@@ -35,21 +34,15 @@ export default {
     },
     {
       type: 'Icons',
-      label: '前缀',
+      label: '后缀',
       name: ['suffix'],
     },
     {
       type: 'function',
       label: '自定义渲染',
       key: 'render',
-      render: (form: FormInstance) => {
-        form.setFieldValue(
-          'script',
-          `function render(value){
-    return value;
-}`,
-        );
-        return <TextSetting key="render" form={form} />;
+      render: () => {
+        return <TextSetting key="render" label="自定义" name="script" />;
       },
     },
   ],
@@ -59,6 +52,9 @@ export default {
       title: 'Countdown',
       value: Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30,
       format: 'HH:mm:ss',
+      script: `function render(value){
+    return value;
+}`,
     },
     style: {},
     events: [],

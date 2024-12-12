@@ -512,6 +512,7 @@ const handleRunScripts = async ({ action, next }: ActionNode<{ scripts: string }
       execAction(next?.fail, data);
     }
   } else {
-    execAction(next?.success || next, result || data);
+    // result 为undfined/null时才用data兜底
+    execAction(next?.success || next, result ?? data);
   }
 };

@@ -28,6 +28,11 @@ export default {
     },
     {
       type: 'Switch',
+      label: '无样式',
+      name: ['formItem', 'noStyle'],
+    },
+    {
+      type: 'Switch',
       label: '禁用',
       name: ['formWrap', 'disabled'],
     },

@@ -17,6 +17,11 @@ export default {
         placeholder: '请输入提交字段',
       },
     },
+    {
+      type: 'Switch',
+      label: '无样式',
+      name: ['formItem', 'noStyle'],
+    },
   ],
   config: {
     props: {

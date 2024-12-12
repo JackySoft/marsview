@@ -319,28 +319,3 @@ export interface SchemaType {
   // 渲染函数
   render?: (props?: any) => React.ReactNode;
 }
-
-// 针对弹窗和抽屉收集的封装
-export interface CollectorEvent {
-  id: string;
-  title: string;
-  type: string;
-  config: {
-    actionName: string;
-    actionType: string;
-    target: string;
-  };
-}
-
-// 针对弹窗和抽屉收集的封装
-export interface CollectorItem {
-  id: string;
-  targetId: string;
-  name: string;
-  type: string;
-  config: any;
-  events: {
-    open: CollectorEvent[];
-    close: CollectorEvent[];
-  };
-}

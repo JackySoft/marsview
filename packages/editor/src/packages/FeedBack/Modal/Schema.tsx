@@ -1,7 +1,8 @@
+import { FormInstance } from 'antd';
+import ActionSetting from '@/components/BulkAction/ActionSetting';
 /**
  * 组件配置和属性值
  */
-
 export default {
   // 组件属性配置JSON
   attrs: [
@@ -25,11 +26,7 @@ export default {
       label: '显示关闭',
       name: 'closable',
     },
-    {
-      type: 'Switch',
-      label: 'Footer',
-      name: 'footer',
-    },
+
     {
       type: 'Input',
       label: '确认文本',
@@ -46,9 +43,20 @@ export default {
       name: 'destroyOnClose',
     },
     {
+      type: 'Title',
+      label: '底部按钮配置',
+      key: 'FooterAction',
+    },
+    {
       type: 'Switch',
-      label: '确认Loading',
-      name: 'confirmLoading',
+      label: '显示页脚',
+      name: 'footer',
+    },
+    {
+      type: 'function',
+      render(form: FormInstance) {
+        return <ActionSetting key="ActionSetting" form={form} />;
+      },
     },
   ],
   config: {

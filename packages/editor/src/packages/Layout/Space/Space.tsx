@@ -56,15 +56,30 @@ const MSpace = ({ id, type, config, elements }: ComponentType, ref: any) => {
   });
   return (
     visible && (
-      <Space style={config.style} {...config.props} data-id={id} data-type={type} ref={drop}>
-        {elements?.length ? (
-          elements?.map((child) => <Material key={child.id} item={child} />)
+      // 是否开启紧凑模式
+      <>
+        {config.props.compact ? (
+          <Space.Compact style={config.style} {...config.props} data-id={id} data-type={type} ref={drop}>
+            {elements?.length ? (
+              elements?.map((child) => <Material key={child.id} item={child} />)
+            ) : (
+              <div className="slots" style={{ width: 300, height: 100, lineHeight: '100px' }}>
+                拖拽组件到这里
+              </div>
+            )}
+          </Space.Compact>
         ) : (
-          <div className="slots" style={{ width: 300, height: 100, lineHeight: '100px' }}>
-            拖拽组件到这里
-          </div>
+          <Space style={config.style} {...config.props} data-id={id} data-type={type} ref={drop}>
+            {elements?.length ? (
+              elements?.map((child) => <Material key={child.id} item={child} />)
+            ) : (
+              <div className="slots" style={{ width: 300, height: 100, lineHeight: '100px' }}>
+                拖拽组件到这里
+              </div>
+            )}
+          </Space>
         )}
-      </Space>
+      </>
     )
   );
 };

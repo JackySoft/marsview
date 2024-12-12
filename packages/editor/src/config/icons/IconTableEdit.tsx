@@ -4,11 +4,11 @@ export const IconTableEdit = (props: any) => {
     <svg width={width} height={height} viewBox="0 0 72 58" version="1.1">
       <defs>
         <linearGradient x1="82.6531644%" y1="59.3277502%" x2="8.15855588%" y2="33.9861687%" id="linearGradient-1">
-          <stop stop-color="#EAEEFF" offset="0%"></stop>
-          <stop stop-color="#CED5FF" offset="100%"></stop>
+          <stop stopColor="#EAEEFF" offset="0%"></stop>
+          <stop stopColor="#CED5FF" offset="100%"></stop>
         </linearGradient>
       </defs>
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-43.000000, -262.000000)">
           <g id="编组-12" transform="translate(34.000000, 255.000000)">
             <g id="编组-11" transform="translate(9.000000, 7.000000)">
@@ -23,7 +23,7 @@ export const IconTableEdit = (props: any) => {
                   id="形状结合"
                   fill="url(#linearGradient-1)"
                 ></path>
-                <g id="编组-14" transform="translate(1.384442, 12.619878)" fill="#FFFFFF" stroke="#D5BDFF" stroke-width="0.3">
+                <g id="编组-14" transform="translate(1.384442, 12.619878)" fill="#FFFFFF" stroke="#D5BDFF" strokeWidth="0.3">
                   <path
                     d="M0.5,0 L14.9905576,0 C15.2667,-2.01283612e-15 15.4905576,0.223857625 15.4905576,0.5 L15.4905576,4.75276761 C15.4905576,5.02890999 15.2667,5.25276761 14.9905576,5.25276761 L0.5,5.25276761 C0.223857625,5.25276761 3.38176876e-17,5.02890999 0,4.75276761 L0,0.5 C-3.38176876e-17,0.223857625 0.223857625,5.07265313e-17 0.5,0 Z"
                     id="矩形备份-12"
@@ -37,7 +37,7 @@ export const IconTableEdit = (props: any) => {
                     id="矩形备份-17"
                   ></path>
                 </g>
-                <g id="编组-14备份" transform="translate(1.384442, 25.386109)" fill="#FFFFFF" stroke="#D5BDFF" stroke-width="0.3">
+                <g id="编组-14备份" transform="translate(1.384442, 25.386109)" fill="#FFFFFF" stroke="#D5BDFF" strokeWidth="0.3">
                   <path
                     d="M0.5,0 L14.9905576,0 C15.2667,-5.07265313e-17 15.4905576,0.223857625 15.4905576,0.5 L15.4905576,4.75276761 C15.4905576,5.02890999 15.2667,5.25276761 14.9905576,5.25276761 L0.5,5.25276761 C0.223857625,5.25276761 3.38176876e-17,5.02890999 0,4.75276761 L0,0.5 C-3.38176876e-17,0.223857625 0.223857625,5.07265313e-17 0.5,0 Z"
                     id="矩形备份-12"
@@ -51,7 +51,7 @@ export const IconTableEdit = (props: any) => {
                     id="矩形备份-17"
                   ></path>
                 </g>
-                <g id="编组-14备份-2" transform="translate(1.384442, 38.293962)" fill="#FFFFFF" stroke="#D5BDFF" stroke-width="0.3">
+                <g id="编组-14备份-2" transform="translate(1.384442, 38.293962)" fill="#FFFFFF" stroke="#D5BDFF" strokeWidth="0.3">
                   <path
                     d="M0.5,0 L14.9905576,0 C15.2667,-1.03178132e-15 15.4905576,0.223857625 15.4905576,0.5 L15.4905576,4.75276761 C15.4905576,5.02890999 15.2667,5.25276761 14.9905576,5.25276761 L0.5,5.25276761 C0.223857625,5.25276761 3.38176876e-17,5.02890999 0,4.75276761 L0,0.5 C-3.38176876e-17,0.223857625 0.223857625,5.07265313e-17 0.5,0 Z"
                     id="矩形备份-12"

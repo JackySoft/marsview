@@ -131,7 +131,7 @@ const MForm = ({ id, type, config, elements, onFinish, onChange }: ComponentType
   }, []);
   return (
     visible && (
-      <FormContext.Provider value={{ initValues }}>
+      <FormContext.Provider value={{ form, initValues }}>
         <div ref={drop}>
           <Form
             form={form}

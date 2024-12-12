@@ -4,11 +4,11 @@ const IconDivider = (props: any) => {
     <svg width={width} height={height} viewBox="0 0 72 58" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="100%" y1="46.6701353%" x2="11.5997239%" y2="50%" id="linearGradient-1">
-          <stop stop-color="#F3F5FF" offset="0%"></stop>
-          <stop stop-color="#ECEEFF" offset="100%"></stop>
+          <stop stopColor="#F3F5FF" offset="0%"></stop>
+          <stop stopColor="#ECEEFF" offset="100%"></stop>
         </linearGradient>
       </defs>
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-632.000000, -117.000000)">
           <g id="编组-37" transform="translate(523.000000, 80.000000)">
             <g id="编组-13备份-11" transform="translate(1.000000, 30.000000)">

@@ -132,7 +132,7 @@ export default {
         span: 6,
       },
       wrapperCol: {
-        span: 16,
+        span: 18,
       },
     },
     // 组件样式

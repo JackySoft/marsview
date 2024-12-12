@@ -4,6 +4,7 @@ import { ComponentType } from '@/packages/types';
 import * as icons from '@ant-design/icons';
 import { message } from '@/utils/AntdGlobal';
 import { omit } from 'lodash-es';
+import { handleFormatter } from '@/packages/utils/util';
 
 /**
  *
@@ -18,18 +19,8 @@ const MStatistic = ({ id, type, config }: ComponentType, ref: any) => {
   useEffect(() => {
     const originText = config.props?.value?.toString() || '';
     const script = config.props?.script;
-    let value: string | number = originText;
-
-    if (script) {
-      try {
-        const renderFn = new Function('value', `return (${script})(value);`);
-        value = renderFn(value);
-      } catch (error) {
-        console.error(`脚本解析失败`, error);
-        message.error(JSON.stringify(error));
-      }
-    }
-    setText(value?.toString());
+    const renderText = handleFormatter(script)?.(originText);
+    setText(renderText?.toString() || originText);
   }, [config.props.value, config.props?.script]);
 
   // 对外暴露方法

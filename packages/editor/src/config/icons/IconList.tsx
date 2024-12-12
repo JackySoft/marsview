@@ -4,11 +4,11 @@ const IconList = (props: any) => {
     <svg width={width} height={height} viewBox="0 0 72 58" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="81.7974992%" y1="68.7825182%" x2="20.9825513%" y2="31.2174818%" id="linearGradient-1">
-          <stop stop-color="#EAEEFF" offset="0%"></stop>
-          <stop stop-color="#B6C0FF" offset="100%"></stop>
+          <stop stopColor="#EAEEFF" offset="0%"></stop>
+          <stop stopColor="#B6C0FF" offset="100%"></stop>
         </linearGradient>
       </defs>
-      <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="组件" transform="translate(-798.000000, -222.000000)">
           <g id="编组-16" transform="translate(790.000000, 215.000000)">
             <path

@@ -184,7 +184,7 @@ const GridForm = ({ id, type, config, elements, onSearch, onChange, onReset }: C
 
   return (
     visible && (
-      <FormContext.Provider value={{ initValues }}>
+      <FormContext.Provider value={{ form, initValues }}>
         <Form
           form={form}
           style={config.style}

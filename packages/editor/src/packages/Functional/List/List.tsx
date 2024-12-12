@@ -10,6 +10,7 @@ import { usePageStore } from '@/stores/pageStore';
 /*泛型只需要定义组件本身用到的属性*/
 export interface IConfig {
   bordered: boolean;
+  itemLayout: 'horizontal' | 'vertical';
   size: 'small' | 'default' | 'large';
   split: boolean;
   header: string;
@@ -102,13 +103,30 @@ const MList = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
     const btnEvent = config.events.find((event) => event.eventName === eventName);
     handleActionFlow(btnEvent?.actions, record);
   };
-
   const iconsList: { [key: string]: any } = icons;
+
+  // 渲染头像或图标
+  const renderAvatarOrIcon = (item: any, config: any) => {
+    // 如果存在avatar，优先显示avatar
+    if (config.props.avatar && item[config.props.avatar]) {
+      return <Avatar src={item[config.props.avatar]} />;
+    }
+
+    // 如果没有avatar，显示图标
+    if (config.props.useIcon && config.props.icon && iconsList[item[config.props.icon]]) {
+      return React.createElement(iconsList[item[config.props.icon]]);
+    }
+
+    // 如果都没有，返回null
+    return null;
+  };
+
   return (
     visible && (
       <List
         data-id={id}
         data-type={type}
+        itemLayout={config.props.itemLayout}
         style={config.style}
         bordered={config.props.bordered}
         size={config.props.size}
@@ -136,7 +154,7 @@ const MList = ({ id, type, config }: ComponentType<IConfig>, ref: any) => {
               }
             >
               <List.Item.Meta
-                avatar={config.props.avatar ? <Avatar src={item[config.props.avatar]} /> : null}
+                avatar={renderAvatarOrIcon(item, config)}
                 title={config.props.title?.name ? <span style={{ color: config.props.title.color }}>{item[config.props.title.name]}</span> : null}
                 description={config.props.desc.name ? <span style={{ color: config.props.desc.color }}>{item[config.props.desc.name]}</span> : null}
               />

@@ -33,7 +33,7 @@ export default {
     },
     {
       type: 'Select',
-      label: '水平垂直',
+      label: '水平对齐',
       name: 'justify',
       props: {
         options: [

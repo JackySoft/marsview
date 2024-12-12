@@ -2,7 +2,7 @@ import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { Typography } from 'antd';
 import dayjs from 'dayjs';
 import { ComponentType } from '@/packages/types';
-import { formatNumber } from '@/packages/utils/util';
+import { formatNumber, handleFormatter } from '@/packages/utils/util';
 import { message } from '@/utils/AntdGlobal';
 import { omit } from 'lodash-es';
 
@@ -34,17 +34,8 @@ const MText = ({ id, type, config, onClick }: ComponentType, ref: any) => {
     } else if (format === 'percent') {
       value = formatNumber(originText, 'percent');
     }
-
-    if (script) {
-      try {
-        const renderFn = new Function('value', `return (${script})(value);`);
-        value = renderFn(value);
-      } catch (error) {
-        console.error(`脚本解析失败`, error);
-        message.error(JSON.stringify(error));
-      }
-    }
-    setText(value?.toString());
+    const renderText = handleFormatter(script)?.(value);
+    setText(renderText?.toString() || value);
   }, [config.props.text, config.props?.format, config.props?.script]);
 
   // 对外暴露方法

@@ -12,6 +12,17 @@ export default {
       key: 'basic',
     },
     {
+      type: 'Select',
+      label: '布局',
+      name: 'itemLayout',
+      props: {
+        options: [
+          { label: '横向', value: 'horizontal' },
+          { label: '纵向', value: 'vertical' },
+        ],
+      },
+    },
+    {
       type: 'Input',
       label: '头部标题',
       name: 'header',
@@ -62,6 +73,17 @@ export default {
       type: 'ColorPicker',
       label: '标题颜色',
       name: ['title', 'color'],
+    },
+    {
+      type: 'Switch',
+      label: '使用图标',
+      name: ['useIcon'],
+    },
+    {
+      type: 'Input',
+      label: '图标字段',
+      name: ['icon'],
+      tooltip: '开启图标后，接口可返回Antd的图标名称，用来替换头像',
     },
     {
       type: 'Input',
@@ -120,6 +142,7 @@ export default {
       size: 'default',
       bordered: false,
       split: true,
+      itemLayout: 'horizontal',
       header: '列表标题',
       footer: '列表底部',
       avatar: 'avatar',
@@ -137,6 +160,8 @@ export default {
         type: 'money',
       },
       bulkActionList: [],
+      useIcon: false,
+      icon: 'icon',
     },
     style: {
       padding: '20px',

@@ -42,7 +42,6 @@ export default {
       name: 'showZero',
       tooltip: '为0时是否展示',
     },
-
     {
       type: 'InputNumber',
       label: 'X轴偏移',

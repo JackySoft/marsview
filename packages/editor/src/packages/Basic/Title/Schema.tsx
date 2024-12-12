@@ -1,7 +1,8 @@
+import TextSetting from '@/packages/components/TextSetting';
+
 /**
  * 组件配置和属性值
  */
-
 export default {
   // 组件属性配置JSON
   attrs: [
@@ -11,7 +12,7 @@ export default {
       key: 'basic',
     },
     {
-      type: 'TextArea',
+      type: 'Variable',
       label: '标题内容',
       name: 'text',
     },
@@ -42,6 +43,35 @@ export default {
           { value: 'danger', label: '错误提示' },
         ],
       },
+    },
+    {
+      type: 'Select',
+      label: '文本格式',
+      name: 'format',
+      props: {
+        options: [
+          { value: '', label: '默认' },
+          { value: 'YYYY-MM-DD HH:mm:ss', label: '年-月-日 时:分:秒' },
+          { value: 'YYYY-MM-DD', label: '年-月-日' },
+          { value: 'HH:mm:ss', label: '时:分:秒' },
+          { value: 'money', label: '金额千分位' },
+          { value: 'number', label: '数字千分位' },
+          { value: 'percent', label: '百分比' },
+        ],
+      },
+    },
+    {
+      type: 'function',
+      label: '自定义渲染',
+      key: 'render',
+      render: () => {
+        return <TextSetting key="render" label="自定义" name="script" />;
+      },
+    },
+    {
+      type: 'Title',
+      label: '格式配置',
+      key: 'format_config',
     },
     {
       type: 'Switch',
@@ -90,6 +120,9 @@ export default {
       text: '欢迎使用Marsview低代码系统',
       type: '',
       level: 1,
+      script: `function render(value){
+    return value;
+}`,
     },
     style: {
       margin: 0,

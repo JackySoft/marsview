@@ -4,7 +4,7 @@
 
 import dayjs from 'dayjs';
 import { usePageStore } from '@/stores/pageStore';
-import { CollectorItem, ComponentType } from '../types';
+import { ComponentType } from '../types';
 import { get } from 'lodash-es';
 import { cloneDeep } from 'lodash-es';
 import copy from 'copy-to-clipboard';
@@ -418,49 +418,16 @@ export const getEnv = () => {
 };
 
 /**
- * 针对弹窗和抽屉组件的收集
+ * 处理 formatter 函数
  */
-export const collectFloatItem = (
-  type: 'Modal' | 'Drawer',
-  item: { id: string; name: string },
-  config: any,
-  setList: React.Dispatch<React.SetStateAction<CollectorItem[]>>,
-) => {
-  setList((prev: CollectorItem[]) => {
-    const index = prev.length + 1;
-    const newItem: CollectorItem = {
-      id: createId(type),
-      targetId: item.id,
-      name: `${item.name}(${type.toLowerCase()}_${index})`,
-      type,
-      config,
-      events: {
-        open: [
-          {
-            id: createId(`${type}_event`),
-            title: `${type === 'Modal' ? '弹框' : '抽屉'}选定点击事件`,
-            type: 'normal',
-            config: {
-              actionName: `打开${type === 'Modal' ? '弹框' : '抽屉'}`,
-              actionType: `open${type}`,
-              target: item.id,
-            },
-          },
-        ],
-        close: [
-          {
-            id: createId(`${type}_event`),
-            title: `${type === 'Modal' ? '弹框' : '抽屉'}关闭点击事件`,
-            type: 'normal',
-            config: {
-              actionName: `关闭${type === 'Modal' ? '弹框' : '抽屉'}`,
-              actionType: `close${type}`,
-              target: item.id,
-            },
-          },
-        ],
-      },
-    };
-    return prev.concat(newItem);
-  });
+export const handleFormatter = (formatter: any) => {
+  if (!formatter) return undefined;
+  return (val: any) => {
+    try {
+      return new Function('value', `return (${formatter})(value);`)(val);
+    } catch (error) {
+      console.error('formatter 函数解析失败：', error);
+      return val;
+    }
+  };
 };
