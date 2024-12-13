@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.2.0](https://github.com/JackySoft/marsview/compare/v8.1.0...v8.2.0) (2024-12-13)
+
+
+### Features
+
+* 增加事件流 ([7752de7](https://github.com/JackySoft/marsview/commit/7752de76537536e8ad679f7d474adad72744599d))
+* **editor:** 对登录页的一点小小优化 ([0e92563](https://github.com/JackySoft/marsview/commit/0e925639b44b17e4eabc4ec1896cf980bdb9664a))
+* **editor:** 优化登录页面的账号提示文案 ([fb22860](https://github.com/JackySoft/marsview/commit/fb22860116ff2b30f486308236f4012ec95624ee))
+
 ## 8.1.0 (2024-12-12)
 
 
