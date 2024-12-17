@@ -68,6 +68,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-error-boundary": "^4.0.13",
+    "react-json-view": "^1.21.3",
     "react-quill": "^2.0.0",
     "react-responsive": "^10.0.0",
     "react-router-dom": "^6.21.2",
@@ -145,5 +146,11 @@
       }
     ],
     "scopes": []
+  },
+  "overrides": {
+    "react-json-view": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }
