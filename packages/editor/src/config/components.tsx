@@ -42,6 +42,7 @@ import IconFormTextArea from './icons/IconFormTextArea';
 import IconDescriptions from './icons/IconDescriptions';
 import IconButton from './icons/IconButton';
 import IconRate from './icons/IconRate';
+import IconJson from './icons/IconJson';
 import IconGridForm from './icons/IconGridForm';
 import IconColorPicker from './icons/IconColorPicker';
 import IconSearchForm from './icons/IconSearcFrom';
@@ -292,6 +293,11 @@ const components = [
         icon: <IconRate />,
         name: '评分',
         type: 'Rate',
+      },
+      {
+        icon: <IconJson />,
+        name: 'Json',
+        type: 'Json',
       },
     ],
   },
