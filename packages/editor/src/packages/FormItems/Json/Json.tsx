@@ -62,7 +62,7 @@ const MJson = ({ id, type, config, onAdd, onEdit, onDelete }: ComponentType<ICon
     const name: string = config.props.formItem?.name;
     const value = config.props.defaultValue;
     // JsonView 只支持对象，所以不是对象格式需要转成对象格式。
-    const jsonValue = ['string', 'number', 'boolean'].includes(value) ? value : {};
+    const jsonValue = ['string', 'number', 'boolean'].includes(typeof value) ? { value } : value;
     initValues(type, name, jsonValue);
   }, [config.props.defaultValue]);
 
