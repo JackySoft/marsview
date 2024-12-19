@@ -116,7 +116,7 @@ const MJson = ({ id, type, config, onAdd, onEdit, onDelete }: ComponentType<ICon
             {...config.props.formWrap}
             name={false}
             style={{
-              zIndex: 9999, // 避免默认添加属性时被其他组件遮挡
+              zIndex: 9, // 避免默认添加属性时被其他组件遮挡
               ...config.style,
             }}
             onEdit={!disabled ? handleEdit : false}
