@@ -30,8 +30,6 @@ English | [中文](./README.zh-CN.md)
 
 Marsview is a low code visualization platform for middle and backend development. Developers can create projects, pages, and components on the platform, supporting event interaction, interface calling, data linkage, and logical orchestration. Developers can also quickly integrate them into their own business systems through the microApp front-end framework.
 
-> > > > > > > 4ac0c61 (feat: 添加中英文 readme)
-
 ## Online use 🛸
 
 - 🌍 [Marsview](https://www.marsview.com.cn/)
@@ -56,6 +54,7 @@ Marsview is a low code visualization platform for middle and backend development
 - **environment:** The platform supports three environments, STG, PRE, and PRD. The page can only be accessed on the user side after being published to the corresponding environment.
 - **rollback：** After the platform is released, the page supports one click rollback.
 - **Micro front-end integration:** If you are a traditional Vue project and want to use this platform, you can first build a page on the platform and publish it to the PRD environment, and finally integrate it through microservices.
+- The backend provides Node versions, with MySQL as the database.
 
 ## Local development 👨‍💻
 
@@ -65,20 +64,32 @@ Marsview is a low code visualization platform for middle and backend development
 git clone https://github.com/JackySoft/marsview.git
 ```
 
-### 快速开始
+Project Description
+
+| directory          | description                                 |
+| ------------------ | ------------------------------------------- |
+| packges            | Front end project, including 4 sub projects |
+| packges/admin      | Project Access Terminal                     |
+| packges/editor     | Editor end                                  |
+| packages/materials | Component materials, for admin use only     |
+| packages/docs      | Low code usage documentation                |
+
+### Deploy Documentation
+
+[Documentation](https://docs.marsview.com.cn/home.html)
+
+### Quick start
 
 Running requires a node environment, it is recommended to have a version of 'node: 18' or higher. Use `pnpm` as a dependency management tool. If it is not installed, please execute the installation command `npm install - g pnpm` first.
 
+1. Start the front-end
+
 ```bash
-# 进入根目录
-cd marsview
 
 # Install dependencies (if the installation dependency time is too long, please configure the image source first)
 pnpm i
 # Launch Editor
 pnpm start:editor
-# 启动用户端（用户端是当你页面搭建完成后，给用户提供独立访问的系统）
-pnpm start:admin
 ```
 
 > Note: By default, online interfaces are used. If private deployment is required, please refer to the private deployment documentation.
@@ -113,14 +124,6 @@ git merge upstream/main
 
 ## Activities 🆕
 
-- 2024-08-30: MarsView 发布在[阮一峰周刊](https://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html)
-- 2024-08-27: MarsAI v1.0 上线，在自定义编写中实现辅助生成代码
-- 2024-08-17: 项目[在线文档](http://docs.marsview.cc/)发布
-- 2024-08-13: 开源文章登上掘金论坛热榜第一
-- 2024-08-10: 项目开源
-  - 公告项目开源，发布开源文章：[我的低代码平台 Marsview 终于开源了](https://juejin.cn/post/7401009128204894244)
-- 2024-07-16: 项目首次在掘金论坛预告
-  - # 发布预告文章：[我花了 8 个月，做了一款高颜值零代码平台 Mars](https://juejin.cn/post/7392071348480835595)
 - 2024-10-30: Marsview open-source backend service.
 - 2024-09-27: Online email registration service.
 - 2024-08-30: MarsView Published in [Ruan Yifeng Weekly](https://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html)
