@@ -23,7 +23,7 @@
       &.parent,
       &.child {
         position: absolute;
-        background-color: @primary-color;
+        background-color: var(--mars-primary-color);
         opacity: 0;
       }
 
@@ -61,17 +61,17 @@
     }
   }
   &.hover {
-    border: 1px dashed @primary-color;
+    border: 1px dashed var(--mars-primary-color);
   }
   &.selected {
-    border: 1px solid @primary-color;
+    border: 1px solid var(--mars-primary-color);
     background-color: rgb(156 105 244 / 10%);
     .tool-bar {
       position: absolute;
       right: -1px;
       top: -25px;
       display: inline-flex;
-      background-color: @primary-color;
+      background-color: var(--mars-primary-color);
       color: #fff;
       pointer-events: auto;
       min-width: 144px;

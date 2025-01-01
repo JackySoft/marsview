@@ -1,7 +1,6 @@
-import { Input, Modal, Form, Button } from 'antd';
+import { Input, Modal, Form, Button, Image } from 'antd';
 import { useImperativeHandle, useState, forwardRef, memo } from 'react';
 import api from '@/api/project';
-import UploadImages from './UploadImages/UploadImages';
 import { message } from '@/utils/AntdGlobal';
 import TextArea from 'antd/es/input/TextArea';
 
@@ -58,7 +57,7 @@ const CreateProject = (props: { createRef: any; update?: () => void }, ref: any)
           <TextArea autoSize={{ minRows: 4, maxRows: 6 }} placeholder="请输入描述" maxLength={100} showCount />
         </Form.Item>
         <Form.Item label="图标" name="logo" rules={[{ required: true, message: '请上传项目Logo' }]}>
-          <UploadImages />
+          <Image width={100} src="https://marsview.cdn.bcebos.com/mars-logo.png" />
         </Form.Item>
         <Form.Item>
           <Button block type="primary" onClick={handleOk} loading={loading}>

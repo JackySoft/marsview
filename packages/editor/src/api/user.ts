@@ -11,7 +11,7 @@ export const sendEmail = async (params: { email: string }) => {
 };
 
 // 邮箱注册
-export const regist = async (params: { userName: string; code?: number; userPwd: string }) => {
+export const regist = async (params: any) => {
   return request.post('/user/regist', params);
 };
 

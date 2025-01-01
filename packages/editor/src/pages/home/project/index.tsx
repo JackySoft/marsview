@@ -9,7 +9,6 @@ import pageApi from '@/api/page';
 import CreatePage, { CreatePageRef } from '@/components/CreatePage';
 import SearchBar from '@/components/Searchbar/SearchBar';
 import ProjectCard from './components/ProjectCard';
-import { PageItem } from '@/api/types';
 import styles from './../index.module.less';
 import CreateProject from '@/components/CreateProject';
 /**
@@ -49,11 +48,6 @@ function Category() {
   // 新建项目或页面
   const handleCreate = () => {
     createProjectRef.current?.open(type);
-  };
-
-  // 复制页面
-  const handleCopy = (item: PageItem) => {
-    createPageRef.current?.open('copy', item);
   };
 
   return (

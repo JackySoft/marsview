@@ -3,7 +3,6 @@ import { Button, Space, Tooltip } from 'antd';
 import { CheckOutlined, ClockCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import { toBlob } from 'html-to-image';
 import { usePageStore } from '@/stores/pageStore';
-import { uploadImg } from '@/api';
 import api from '@/api/page';
 import { message } from '@/utils/AntdGlobal';
 import styles from './index.module.less';
@@ -21,22 +20,7 @@ export default function Publish() {
     page: state.page,
     updatePageState: state.updatePageState,
   }));
-  // 将当前页面生成图片，并上传到服务器
-  const createPreviewImg = async () => {
-    try {
-      const blob = await toBlob(document.querySelector('#page') as HTMLElement);
-      if (!blob) return;
-      const file = new File([blob], `${id}-${Date.now()}.png`, { type: 'image/png' });
-      const res = await uploadImg({
-        file: file, // File 对象
-        id: userId + '_' + id, // 页面ID
-      });
-      return res.url;
-    } catch (error) {
-      console.error('封面图上传失败', error);
-      return '';
-    }
-  };
+
   // 发布到指定环境
   async function publishToEnv(env: 'stg' | 'pre' | 'prd') {
     if (env === 'stg') {
@@ -52,11 +36,10 @@ export default function Publish() {
       setLoading3(true);
     }
     try {
-      const previewImg = await createPreviewImg();
       await api.publishPage({
         env,
         id,
-        previewImg,
+        previewImg: '',
       });
       updatePageState({
         env: env === 'stg' ? 'stgState' : env === 'pre' ? 'preState' : 'prdState',

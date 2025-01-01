@@ -16,7 +16,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'http://mars-api.marsview.cc',
+        target: 'http://localhost:5000',
         changeOrigin: true,
       },
     },
@@ -24,14 +24,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-    },
-  },
-  css: {
-    preprocessorOptions: {
-      less: {
-        javascriptEnabled: true,
-        additionalData: '@import "@/App.less";',
-      },
     },
   },
   plugins: [

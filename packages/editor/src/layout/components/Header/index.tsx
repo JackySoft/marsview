@@ -96,41 +96,7 @@ const Header = memo(() => {
     }
   }
 
-  const pathItems: MenuProps['items'] = [
-    {
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => {
-            e.preventDefault();
-            goToPath('edit');
-          }}
-        >
-          编辑器
-        </a>
-      ),
-      key: 'edit',
-    },
-    {
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => {
-            e.preventDefault();
-            goToPath('publishHistory');
-          }}
-        >
-          发布记录
-        </a>
-      ),
-      key: 'publishHistory',
-    },
-  ];
-
   const isEditPage = pageFrom === `editor/${id}/edit` || pageFrom === `editor/${id}/template`;
-  const isPublishPage = pageFrom === `editor/${id}/publishHistory`;
 
   return (
     <>
@@ -195,17 +161,7 @@ const Header = memo(() => {
               </>
             )}
           </Space>
-          {/* 编辑和发布 */}
-          {(isEditPage || isPublishPage) && mode === 'edit' && (
-            <Dropdown menu={{ items: pathItems, selectable: true, defaultSelectedKeys: [...pageFrom.split('/').slice(-1)] }}>
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  {isEditPage ? '编辑' : '发布记录'}
-                  <DownOutlined />
-                </Space>
-              </a>
-            </Dropdown>
-          )}
+
           {/* 预览模式 */}
           {mode === 'preview' && (
             <Button type="primary" onClick={handleExitPreview}>

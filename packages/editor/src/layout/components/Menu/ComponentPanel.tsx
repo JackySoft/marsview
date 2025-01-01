@@ -4,7 +4,6 @@ import { SearchOutlined, UpOutlined } from '@ant-design/icons';
 import { useDebounceFn } from 'ahooks';
 import DragMenuItem from './DragMenuItem';
 import components, { SysComItem } from '@/config/components';
-import CustomLib from './CustomLib';
 /**
  * 组件
  */
@@ -94,7 +93,7 @@ const ComponentPanel = () => {
       {
         key: 'custom',
         label: '自定义组件',
-        children: <CustomLib ref={customRef} />,
+        children: <></>,
       },
     ],
     [list, activeKeys],

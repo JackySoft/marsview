@@ -21,7 +21,6 @@ import IconFormSwitch from './icons/IconFormSwitch';
 import IconFormTimepicker from './icons/IconFormTimePicker';
 import IconImage from './icons/IconImage';
 import IconIframe from './icons/IconIFrame';
-import IconFileUpload from './icons/IconFileUpload';
 import IconList from './icons/IconList';
 import IconFormStatic from './icons/IconFormStatic';
 import IconFormItem from './icons/IconFormItem';
@@ -33,8 +32,6 @@ import IconBarChart from './icons/IconBarChart';
 import IconTinyColumn from './icons/IconTinyColumn';
 import IconProgress from './icons/IconProgress';
 import IconTinyLine from './icons/IconTinyLine';
-import IconFormEditTable from './icons/IconFormEditTable';
-import IconFormPassValidate from './icons/IconFormPassValidate';
 import IconText from './icons/IconText';
 import IconTime from './icons/IconFormTime';
 import IconFormList from './icons/IconFormList';
@@ -43,23 +40,13 @@ import IconDescriptions from './icons/IconDescriptions';
 import IconButton from './icons/IconButton';
 import IconRate from './icons/IconRate';
 import IconJson from './icons/IconJson';
-import IconGridForm from './icons/IconGridForm';
 import IconColorPicker from './icons/IconColorPicker';
 import IconSearchForm from './icons/IconSearcFrom';
 import IconRichText from './icons/IconRichText';
 import IconCarousel from './icons/IconCarousel';
 import IconRignProgress from './icons/IconRingProgress';
-import IconBmap from './icons/IconBMap';
-import IconRibon from './icons/IconRibon';
 import IconCountDown from './icons/IconCountDown';
 import IconTag from './icons/IconTag';
-import IconLiquid from './icons/IconLiquid.svg';
-import IconTinyArea from './icons/IconTinyArea.svg';
-import IconWordCloud from './icons/IconWordCloud.svg';
-import IconGauge from './icons/IconGauge.svg';
-import IconTagGroup from './icons/IconTagGroup';
-import IconRadar from './icons/IconRadar.svg';
-import IconGrid from './icons/IconGrid';
 import IconDropdwon from './icons/IconDropdown';
 /**
  * 组件配置列表
@@ -92,19 +79,9 @@ const components = [
         type: 'SearchForm',
       },
       {
-        icon: <IconGridForm />,
-        name: '网格表单',
-        type: 'GridForm',
-      },
-      {
         icon: <IconBaseTable />,
         name: '基础表格',
         type: 'MarsTable',
-      },
-      {
-        icon: <IconTagGroup />,
-        name: '标签组',
-        type: 'TagGroup',
       },
     ],
   },
@@ -131,11 +108,6 @@ const components = [
         icon: <IconDiv />,
         name: 'Div容器',
         type: 'Div',
-      },
-      {
-        icon: <IconGrid />,
-        name: '网格容器',
-        type: 'Grid',
       },
     ],
   },
@@ -183,11 +155,6 @@ const components = [
         icon: <IconFormInputPassword />,
         name: '密码框',
         type: 'InputPassword',
-      },
-      {
-        icon: <IconFormPassValidate />,
-        name: '短码验证',
-        type: 'InputOTP',
       },
       {
         icon: <IconFormSelect />,
@@ -255,19 +222,9 @@ const components = [
         type: 'TreeSelect',
       },
       {
-        icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*93ymR4RD4S0AAAAAAAAAAAAADrJ8AQ/original',
-        name: '上传',
-        type: 'Upload',
-      },
-      {
         icon: <IconFormList />,
         name: '动态列表',
         type: 'FormList',
-      },
-      {
-        icon: <IconFormEditTable />,
-        name: '编辑表格',
-        type: 'EditTable',
       },
       {
         icon: <IconRichText />,
@@ -331,11 +288,6 @@ const components = [
         type: 'TinyLine',
       },
       {
-        icon: IconTinyArea,
-        name: '迷你面积图',
-        type: 'TinyArea',
-      },
-      {
         icon: <IconTinyColumn />,
         name: '迷你柱形图',
         type: 'TinyColumn',
@@ -350,26 +302,6 @@ const components = [
         name: '进度环图',
         type: 'RingProgress',
       },
-      {
-        icon: IconLiquid,
-        name: '水波图',
-        type: 'Liquid',
-      },
-      {
-        icon: IconWordCloud,
-        name: '词云图',
-        type: 'WordCloud',
-      },
-      {
-        icon: IconGauge,
-        name: '仪表盘',
-        type: 'Gauge',
-      },
-      {
-        icon: IconRadar,
-        name: '雷达',
-        type: 'Radar',
-      },
     ],
   },
   {
@@ -380,11 +312,6 @@ const components = [
         icon: <IconButton />,
         name: '按钮',
         type: 'Button',
-      },
-      {
-        icon: <IconFileUpload />,
-        name: '文件上传',
-        type: 'FileUpload',
       },
       {
         icon: <IconList />,
@@ -420,7 +347,7 @@ const components = [
       },
       {
         icon: <IconDropdwon />,
-        name: '下拉框',
+        name: '下拉菜单',
         type: 'Dropdown',
       },
     ],
@@ -501,16 +428,6 @@ const components = [
         type: 'QRCode',
       },
       {
-        icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*e0qITYqF394AAAAAAAAAAAAADrJ8AQ/original',
-        name: '徽标',
-        type: 'Badge',
-      },
-      {
-        icon: <IconRibon />,
-        name: '缎带',
-        type: 'Ribbon',
-      },
-      {
         icon: <IconTag />,
         name: '标签',
         type: 'Tag',
@@ -521,11 +438,6 @@ const components = [
     type: 'Other',
     title: '其它',
     data: [
-      {
-        icon: <IconBmap />,
-        name: 'BMap',
-        type: 'BMap',
-      },
       {
         icon: <IconIframe />,
         name: 'IFrame',

@@ -3,11 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Input, Button, Space, Image, Radio, Switch, Tag, Modal } from 'antd';
 import { message } from '@/utils/AntdGlobal';
 import { RollbackOutlined, EditOutlined, SaveOutlined } from '@ant-design/icons';
-import UploadImages from '@/components/UploadImages/UploadImages';
 import ColorPicker from '@/components/ColorPicker';
 import projectApi from '@/api/project';
 import MemberSetting from '@/layout/components/Menu/Member/MemberSetting';
-import api, { PageMember } from '@/api/pageMember';
+import api from '@/api/pageMember';
 import styles from './index.module.less';
 import { usePageStore } from '@/stores/pageStore';
 
@@ -108,7 +107,7 @@ const Config: React.FC = memo(() => {
           <Input.TextArea placeholder={'请输入项目描述'} rows={3} maxLength={100} showCount={type !== 'detail'} {...props} />
         </Form.Item>
         <Form.Item label="LOGO" name="logo" rules={[{ required: true, message: '请上传项目Logo' }]}>
-          {type === 'detail' ? <ImageFC /> : <UploadImages />}
+          <ImageFC />
         </Form.Item>
         <h3>系统配置</h3>
         <Form.Item label="系统布局" name="layout">
@@ -245,7 +244,7 @@ const ImageFC = ({ value }: any) => {
 const Developer = ({ ownerId }: { ownerId: number }) => {
   const projectId = useParams().id as string;
   const memberRef = useRef<{ open: (type: 1 | 2, projectId: number) => void }>();
-  const [list, setList] = useState<PageMember[]>([]);
+  const [list, setList] = useState<any[]>([]);
   const userId = usePageStore((state) => state.userInfo.userId);
 
   // 开发者权限

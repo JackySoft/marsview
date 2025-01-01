@@ -1,30 +1,29 @@
 import request from '@/utils/request';
-import { ProjectCreateParams, ProjectUpdateParams, PageParams } from './types';
 export default {
   checkAuth(params: { id: number }) {
-    return request.post('/project/checkAuth', params);
+    return request.post('/projects/checkAuth', params);
   },
-  getCategoryList(params: PageParams) {
-    return request.get('/project/category', params);
+  getCategoryList(params: any) {
+    return request.get('/projects/list', params);
   },
 
   // 新增项目
-  addProject(params: ProjectCreateParams) {
-    return request.post('/project/create', params);
+  addProject(params: any) {
+    return request.post('/projects/create', params);
   },
 
   // 删除项目
   delProject(params: { id: number; type?: string }) {
-    return request.post('/project/delete', params);
+    return request.post('/projects/delete', params);
   },
 
   // 获取项目详情
   getProjectDetail(id: number) {
-    return request.get(`/project/detail/${id}`, {});
+    return request.get(`/projects/detail/${id}`, {});
   },
 
   // 更新项目
-  updateProject(params: ProjectUpdateParams) {
-    return request.post('/project/update', params);
+  updateProject(params: any) {
+    return request.post('/projects/update', params);
   },
 };

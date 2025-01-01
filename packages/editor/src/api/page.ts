@@ -1,52 +1,51 @@
 import request from '@/utils/request';
-import { PageParams, PageReqParams, CreatePageParams, PublishPageParams, PublishListParams } from './types';
 export default {
   // 获取页面列表
-  getPageList(params: PageParams) {
-    return request.get('/page/list', params);
+  getPageList(params: any) {
+    return request.get('/pages/list', params);
   },
 
   // 获取页面模板列表
-  getPageTemplateList(params: Omit<PageParams, 'type'>) {
-    return request.get('/page/getPageTemplateList', params);
+  getPageTemplateList(params: any) {
+    return request.get('/pages/getPageTemplateList', params);
   },
   // 获取页面详情
   getPageDetail(id: number) {
-    return request.get(`/page/detail/${id}`);
+    return request.get(`/pages/detail/${id}`);
   },
 
   // 复制页面数据
-  copyPageData(params: PageReqParams) {
-    return request.post('/page/copy', params);
+  copyPageData(params: any) {
+    return request.post('/pages/copy', params);
   },
 
   // 删除页面数据
   delPageData(params: { id: number }) {
-    return request.post('/page/delete', params);
+    return request.post('/pages/delete', params);
   },
 
   // 创建页面数据
-  createPageData(params: CreatePageParams) {
-    return request.post('/page/create', params);
+  createPageData(params: any) {
+    return request.post('/pages/create', params);
   },
 
   // 保存页面数据
   updatePageData(params: any) {
-    return request.post('/page/update', params);
+    return request.post('/pages/update', params);
   },
 
   // 发布
-  publishPage(params: PublishPageParams) {
-    return request.post('/publish/create', params);
+  publishPage(params: any) {
+    return request.post('/page/publish/create', params);
   },
 
   // 发布记录
-  publishList(params: PublishListParams) {
-    return request.post('/publish/list', params);
+  publishList(params: any) {
+    return request.post('/page/publish/list', params);
   },
 
   // 页面回滚
-  rollbackPage(params: { pageId: number; env: string; lastPublishId: number }) {
-    return request.post('/page/rollback', params);
+  rollbackPage(params: any) {
+    return request.post('/pages/rollback', params);
   },
 };

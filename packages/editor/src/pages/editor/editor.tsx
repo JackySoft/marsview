@@ -61,8 +61,6 @@ const Editor = () => {
   // 悬浮组件 - 展示悬浮条
   const [hoverTarget, setHoverTarget] = useState<HTMLElement | null>(null);
   const [loaded, setLoaded] = useState(false);
-  const [modalList, setModalList] = useState<any[]>([]);
-  const [drawerList, setDrawerList] = useState<any[]>([]);
   const [canvasWidth, setCanvasWidth] = useState('auto');
   const { id } = useParams();
   const navigate = useNavigate();
@@ -308,9 +306,6 @@ const Editor = () => {
   const delElement = () => {
     if (selectedElement) {
       removeElements(selectedElement.id);
-      if (selectedElement.type === 'Modal' || selectedElement.type === 'Drawer') {
-        handleFloateItemDelete(selectedElement.id);
-      }
     }
   };
 
@@ -320,23 +315,6 @@ const Editor = () => {
     const editorWidth = document.querySelector('#designer')?.getBoundingClientRect()?.width;
     return `${editorWidth}px`;
   }, [canvasWidth]);
-
-  // 浮动组件点击事件
-  const handleFloateItemClick = (item: any) => {
-    handleActionFlow(item.events?.open, null);
-  };
-
-  // 浮动组件关闭事件
-  const handleFloateItemClose = (item: any) => {
-    handleActionFlow(item.events?.close, null);
-  };
-
-  // 浮动组件删除事件, 删除浮动组件, 同时删除页面中的组件
-  const handleFloateItemDelete = (targetId: string) => {
-    setModalList((prev) => prev.filter((item) => item.targetId !== targetId));
-    setDrawerList((prev) => prev.filter((item) => item.targetId !== targetId));
-    removeElements(targetId);
-  };
 
   return (
     <div ref={drop} className={styles.designer} onClick={handleClick}>

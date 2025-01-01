@@ -16,9 +16,7 @@ import VisibleAction from './VisibleAction';
 import DisableAction from './DisableAction';
 import ComponentMethods from './ComponentMethods';
 import VariableAssignment from './VariableAssignment';
-// 飞书
-import SendMessageAction from './SendMessageAction';
-import CreateNodeAction from './CreateNodeAction';
+
 // 其他
 import CopyAction from './CopyAction';
 import SetTimeoutAction from './SetTimeoutAction';
@@ -177,26 +175,6 @@ const ActionModal = (props: any, ref: any) => {
           key: 'variable',
           render: () => {
             return <VariableAssignment form={form} />;
-          },
-        },
-      ],
-    },
-    {
-      label: '飞书',
-      key: 'feishu',
-      children: [
-        {
-          label: '发送消息',
-          key: 'sendMessage',
-          render: () => {
-            return <SendMessageAction />;
-          },
-        },
-        {
-          label: '创建知识库副本',
-          key: 'createNode',
-          render: () => {
-            return <CreateNodeAction />;
           },
         },
       ],

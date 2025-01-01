@@ -56,10 +56,6 @@ export const router = [
         ],
       },
       {
-        path: '/editor/:id/publishHistory',
-        element: lazyLoad(React.lazy(() => import('@/pages/publishHistory'))),
-      },
-      {
         path: '/project/:id',
         element: lazyLoad(React.lazy(() => import('@/pages/admin/admin'))),
         children: [
