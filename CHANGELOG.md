@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.2.2](https://github.com/JackySoft/marsview/compare/v8.2.1...v8.2.2) (2025-01-01)
+
+
+### Features
+
+* 1. 优化接口 2. 修复画布问题 3. 删除上传能力 ([938ddca](https://github.com/JackySoft/marsview/commit/938ddcaf5b9ce363e0d2ef17c3ca994859c3e953))
+* **Json:** 调整Json组件的默认层级 ([1e4698b](https://github.com/JackySoft/marsview/commit/1e4698ba3583485db0cd272a9fa8be4aaf7b88dd))
+
+
+### Others
+
+* 修改文档 ([11ae22c](https://github.com/JackySoft/marsview/commit/11ae22c98ef95a64ad406dce0248e5ea1d9b6d13))
+
 ### 8.2.1 (2024-12-19)
 
 
