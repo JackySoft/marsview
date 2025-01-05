@@ -16,7 +16,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'http://mars-api.marsview.cc',
+        target: 'http://mars-api.marsview.com.cn',
         changeOrigin: true,
       },
     },
