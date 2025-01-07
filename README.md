@@ -124,7 +124,6 @@ git merge upstream/main
 
 ## Activities 🆕
 
-- 2024-10-30: Marsview open-source backend service.
 - 2024-09-27: Online email registration service.
 - 2024-08-30: MarsView Published in [Ruan Yifeng Weekly](https://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html)
 - 2024-08-27: MarsAI v1.0 is launched, and auxiliary code generation is implemented in custom writing.
