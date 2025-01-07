@@ -40,7 +40,7 @@ const SettingForm = function () {
               },
             ]}
           >
-            <Input prefix="STG：" placeholder="http://mars-api.marsview.cc/api/user" />
+            <Input prefix="STG：" placeholder="http://mars-api.marsview.com.cn/api/user" />
           </Form.Item>
           <Form.Item
             label="PRE地址"
@@ -52,7 +52,7 @@ const SettingForm = function () {
               },
             ]}
           >
-            <Input prefix="PRE：" placeholder="http://mars-api.marsview.cc/api/user" />
+            <Input prefix="PRE：" placeholder="http://mars-api.marsview.com.cn/api/user" />
           </Form.Item>
           <Form.Item
             label="PRD地址"
@@ -64,7 +64,7 @@ const SettingForm = function () {
               },
             ]}
           >
-            <Input prefix="PRD：" placeholder="http://mars-api.marsview.cc/api/user" />
+            <Input prefix="PRD：" placeholder="http://mars-api.marsview.com.cn/api/user" />
           </Form.Item>
         </Space>
       </Form.Item>

@@ -24,7 +24,7 @@ const InterceptorModal = ({ update }: SettingModalProp, ref: any) => {
     timeoutErrorMessage: '请求超时，请稍后重试',
     requestInterceptor: `/**
  * config: 请求完整配置，请严格按照以下格式使用和返回
- * config.url: 请求地址,eg: config.url = 'https://xxx.marsview.cc/api/xxx'
+ * config.url: 请求地址,eg: config.url = 'https://xxx.marsview.com.cn/api/xxx'
  * config.params: Get请求对应参数,eg: config.params = {name:'xxx'}
  * config.data: Post请求对应数据,eg: config.data = {name:'xxx'}
  * config.timeout: 超时时间（秒）,eg: config.timeout = 5
