@@ -8,11 +8,10 @@ import CreateRole from './CreateRole';
 import SetPermission from './SetPermission';
 import { getRoleList, delRoleById } from '@/api';
 import { IAction } from '@/pages/types';
-import { Role } from '@/api/types';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import BaseTable from '../components/BaseTable';
 export default function RoleList() {
-  const [list, setList] = useState<Role.RoleItem[]>([]);
+  const [list, setList] = useState<any[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [current, setCurrent] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,10 +19,10 @@ export default function RoleList() {
   const { id: projectId } = useParams();
 
   const roleRef = useRef<{
-    open: (type: IAction, data?: Role.RoleItem) => void;
+    open: (type: IAction, data?: any) => void;
   }>();
   const permissionRef = useRef<{
-    open: (data?: Role.RoleItem) => void;
+    open: (data?: any) => void;
   }>();
   useEffect(() => {
     getList();
@@ -57,7 +56,7 @@ export default function RoleList() {
   };
 
   // 编辑角色
-  const handleEdit = (data: Role.RoleItem) => {
+  const handleEdit = (data: any) => {
     roleRef.current?.open('edit', data);
   };
 
@@ -76,11 +75,11 @@ export default function RoleList() {
   };
 
   // 设置权限
-  const handleSetPermission = (record: Role.RoleItem) => {
+  const handleSetPermission = (record: any) => {
     permissionRef.current?.open(record);
   };
 
-  const columns: ColumnsType<Role.RoleItem> = [
+  const columns: ColumnsType<any> = [
     {
       title: '角色名称',
       dataIndex: 'name',

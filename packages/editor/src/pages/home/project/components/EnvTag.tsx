@@ -1,11 +1,10 @@
 import { memo } from 'react';
 import { Tag, Tooltip } from 'antd';
 import { CheckCircleOutlined, ExclamationCircleOutlined, ClockCircleOutlined } from '@ant-design/icons';
-import { PageItem } from '@/api/types';
 import { useLocation } from 'react-router-dom';
 
 // 页面状态标签
-const EnvTag = ({ item }: { item: PageItem }) => {
+const EnvTag = ({ item }: { item: any }) => {
   const { pathname } = useLocation();
   // 新页面
   if (item.stgState === 1 && item.preState === 1 && item.prdState === 1) {

@@ -1,4 +1,3 @@
-import { Menu } from '@/api/types';
 import components from '@/config/components';
 import { ComponentType, ComItemType } from '@/packages/types';
 import dayjs from 'dayjs';
@@ -119,10 +118,10 @@ export const formatDate = (date?: Date | string, rule?: string) => {
 };
 
 // 递归生成菜单
-export function arrayToTree(array: Menu.MenuItem[], parentId = null) {
+export function arrayToTree(array: any[], parentId = null) {
   if (!Array.isArray(array)) return [];
   // 创建一个映射，将id映射到节点对象
-  const map: { [key: number]: Menu.MenuItem & { children?: Menu.MenuItem[] } } = {};
+  const map: { [key: number]: any & { children?: any[] } } = {};
   array.forEach((item) => {
     map[item.id] = { ...item };
   });
@@ -134,7 +133,7 @@ export function arrayToTree(array: Menu.MenuItem[], parentId = null) {
       if (!parentItem.children) parentItem.children = [];
       parentItem.children?.push(map[item.id]);
       // 按照sortNum进行降序排序
-      parentItem.children = parentItem.children.sort((a, b) => a.sortNum - b.sortNum);
+      parentItem.children = parentItem.children.sort((a: any, b: any) => a.sortNum - b.sortNum);
     }
   });
   return Object.values(map)

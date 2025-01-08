@@ -6,17 +6,16 @@ import dayjs from 'dayjs';
 import { message, Modal } from '@/utils/AntdGlobal';
 import api from '@/api/page';
 import EnvTag from './EnvTag';
-import { PageItem } from '@/api/types';
 import styles from './../../index.module.less';
 
 // 页面列表项
-const PageCard = ({ list, copy, refresh }: { list: PageItem[]; copy: (item: PageItem) => void; refresh: () => void }) => {
+const PageCard = ({ list, copy, refresh }: { list: any[]; copy: (item: any) => void; refresh: () => void }) => {
   const [showPreview, setShowPreview] = useState(false);
   const [previewUrl, setPreviewUrl] = useState('');
   const navigate = useNavigate();
 
   // 页面操作
-  const handleAction = async (type: string, params: PageItem) => {
+  const handleAction = async (type: string, params: any) => {
     if (type === 'preview') {
       if (!params.previewImg) {
         return message.warning('该页面未生成预览图');
@@ -58,7 +57,7 @@ const PageCard = ({ list, copy, refresh }: { list: PageItem[]; copy: (item: Page
           gap: 20,
         }}
       >
-        {list.map((item: PageItem, index: number) => {
+        {list.map((item: any, index: number) => {
           return (
             <Card
               key={item.id || item.userName + index}

@@ -4,10 +4,9 @@ import { Modal, Form, Input, Select, Radio, Spin } from 'antd';
 import { useDebounceFn } from 'ahooks';
 import { message } from '@/utils/AntdGlobal';
 import { IAction, IModalProp } from '@/pages/types';
-import { UserItem } from '@/api/types';
 import { addUser, updateUser, getRoleListAll } from '@/api';
 import { searchUser } from '@/api/user';
-export default function CreateMenu(props: IModalProp<UserItem>) {
+export default function CreateMenu(props: IModalProp<any>) {
   const [form] = Form.useForm();
   const [action, setAction] = useState<IAction>('create');
   const [systemRole, setSystemRole] = useState<number>(1);
@@ -24,7 +23,7 @@ export default function CreateMenu(props: IModalProp<UserItem>) {
   }));
 
   // 打开弹框函数
-  const open = async (type: IAction, data?: UserItem) => {
+  const open = async (type: IAction, data?: any) => {
     setAction(type);
     setVisible(true);
     setSystemRole(data?.systemRole || 1);

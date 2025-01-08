@@ -8,7 +8,6 @@ import api from '@/api/page';
 import CreatePage, { CreatePageRef } from '@/components/CreatePage';
 import SearchBar from '@/components/Searchbar/SearchBar';
 import PageCard from './components/PageCard';
-import { PageItem } from '@/api/types';
 import styles from './../index.module.less';
 
 /**
@@ -50,7 +49,7 @@ export default function Index() {
   };
 
   // 复制页面
-  const handleCopy = (item: PageItem) => {
+  const handleCopy = (item: any) => {
     createPageRef.current?.open('copy', item);
   };
 

@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { Typography, Avatar, Dropdown } from 'antd';
 import { UserOutlined, GlobalOutlined, MoreOutlined, SettingOutlined, DeploymentUnitOutlined, FolderOpenOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Project } from '@/api/types';
 import styles from './../page.module.less';
 const { Paragraph } = Typography;
 
@@ -10,7 +9,7 @@ const { Paragraph } = Typography;
  * 页面列表
  */
 
-export default function Category({ list }: { list: Project.ProjectItem[] }) {
+export default function Category({ list }: { list: any[] }) {
   const navigate = useNavigate();
   // 单击打开项目配置
   const handleOpenProject = (id: number) => {

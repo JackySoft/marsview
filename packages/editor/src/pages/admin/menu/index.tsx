@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Form, Input, Button, Table, Select, Badge } from 'antd';
-import { Menu } from '@/api/types';
 import { IAction } from '@/pages/types';
 import { ColumnsType } from 'antd/es/table';
 import { Modal, message } from '@/utils/AntdGlobal';
@@ -18,12 +17,12 @@ import BaseTable from '../components/BaseTable';
  */
 export default function MenuList() {
   const [form] = Form.useForm();
-  const [data, setData] = useState<Menu.MenuItem[]>([]);
+  const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const projectId = useParams().id as string;
 
   const menuRef = useRef<{
-    open: (type: IAction, data: Menu.EditParams | { parentId?: number; sortNum?: number }, list?: Menu.MenuItem[]) => void;
+    open: (type: IAction, data: any | { parentId?: number; sortNum?: number }, list?: any[]) => void;
   }>();
 
   useEffect(() => {
@@ -58,7 +57,7 @@ export default function MenuList() {
   };
 
   // 复制菜单
-  const handleCopy = async (record: Menu.MenuItem) => {
+  const handleCopy = async (record: any) => {
     setLoading(true);
     await copyMenu({
       id: record.id,
@@ -68,17 +67,17 @@ export default function MenuList() {
   };
 
   // 创建子菜单
-  const handleSubCreate = (record: Menu.MenuItem) => {
+  const handleSubCreate = (record: any) => {
     menuRef.current?.open('create', { parentId: record.id, sortNum: (record.children?.length || 0) + 1 });
   };
 
   // 编辑菜单
-  const handleEdit = (record: Menu.MenuItem) => {
+  const handleEdit = (record: any) => {
     menuRef.current?.open('edit', record, data);
   };
 
   // 删除菜单
-  const handleDelete = (record: Menu.MenuItem) => {
+  const handleDelete = (record: any) => {
     let text = '';
     if (record.type == 1) text = '菜单';
     if (record.type == 2) text = '按钮';
@@ -100,7 +99,7 @@ export default function MenuList() {
     getMenus();
   };
 
-  const columns: ColumnsType<Menu.MenuItem> = [
+  const columns: ColumnsType<any> = [
     {
       title: '菜单名称',
       dataIndex: 'name',

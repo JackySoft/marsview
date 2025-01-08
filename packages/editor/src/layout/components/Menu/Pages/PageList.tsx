@@ -1,7 +1,6 @@
 import { Button, Flex, List, Spin, Tag } from 'antd';
 import { PlusOutlined, SyncOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { memo, useEffect, useRef, useState } from 'react';
-import { PageItem } from '@/api/pageMember';
 import api from '@/api/page';
 import { useNavigate } from 'react-router-dom';
 import { Modal, message } from '@/utils/AntdGlobal';
@@ -14,7 +13,7 @@ import CreatePage, { CreatePageRef } from '@/components/CreatePage';
 export default memo(() => {
   const createRef = useRef<CreatePageRef>();
   const [loading, setLoading] = useState(true);
-  const [list, setList] = useState<PageItem[]>([]);
+  const [list, setList] = useState<any[]>([]);
   const { pageId, projectId } = usePageStore((state) => ({
     pageId: state.page.id,
     projectId: state.page.projectId,
@@ -55,7 +54,7 @@ export default memo(() => {
   };
 
   // 新增页面
-  const handleAdd = (item?: PageItem) => {
+  const handleAdd = (item?: any) => {
     if (item) {
       createRef.current?.open('edit', item);
     } else {

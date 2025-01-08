@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Form, Input, Button, Table, Space, Tooltip } from 'antd';
-import { UserItem } from '@/api/types';
 import { IAction } from '@/pages/types';
 import { ColumnsType } from 'antd/es/table';
 import { Modal, message } from '@/utils/AntdGlobal';
@@ -16,7 +15,7 @@ import BaseTable from '../components/BaseTable';
  * @returns
  */
 export default function MenuList() {
-  const [list, setList] = useState<UserItem[]>([]);
+  const [list, setList] = useState<any[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [current, setCurrent] = useState<number>(1);
   const [roleList, setRoleList] = useState<Array<{ id: number; name: string }>>([]);
@@ -25,7 +24,7 @@ export default function MenuList() {
   const projectId = useParams().id as string;
 
   const userRef = useRef<{
-    open: (type: IAction, data?: UserItem) => void;
+    open: (type: IAction, data?: any) => void;
   }>();
 
   useEffect(() => {
@@ -69,12 +68,12 @@ export default function MenuList() {
   };
 
   // 编辑用户
-  const handleEdit = (record: UserItem) => {
+  const handleEdit = (record: any) => {
     userRef.current?.open('edit', record);
   };
 
   // 删除用户
-  const handleDelete = (record: UserItem) => {
+  const handleDelete = (record: any) => {
     Modal.confirm({
       title: '确认',
       content: `确认删除 ${record.userName} 吗？`,
@@ -89,7 +88,7 @@ export default function MenuList() {
     });
   };
 
-  const columns: ColumnsType<UserItem> = [
+  const columns: ColumnsType<any> = [
     {
       title: '用户名称',
       dataIndex: 'userName',

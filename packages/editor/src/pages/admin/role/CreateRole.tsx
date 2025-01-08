@@ -1,11 +1,10 @@
 import { useImperativeHandle, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Modal, Form, Input } from 'antd';
-import { Role } from '@/api/types';
 import { IAction, IModalProp } from '@/pages/types';
 import { message } from '@/utils/AntdGlobal';
 import { createRole, updateRole } from '@/api';
-export default function CreateRole(props: IModalProp<Role.RoleItem>) {
+export default function CreateRole(props: IModalProp<any>) {
   const [visible, setVisible] = useState(false);
   const [action, setAction] = useState<IAction>('create');
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -17,7 +16,7 @@ export default function CreateRole(props: IModalProp<Role.RoleItem>) {
       open,
     };
   });
-  const open = (type: IAction, data?: Role.RoleItem) => {
+  const open = (type: IAction, data?: any) => {
     setAction(type);
     setVisible(true);
     setConfirmLoading(false);

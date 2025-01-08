@@ -1,4 +1,3 @@
-import { Menu, Role } from '@/api/types';
 import { IModalPropData } from '@/pages/types';
 import { Modal, Form, Tree } from 'antd';
 import { useEffect, useImperativeHandle, useState } from 'react';
@@ -7,12 +6,12 @@ import { useParams } from 'react-router-dom';
 import { getMenuList, updateRoleLimits } from '@/api';
 import { arrayToTree } from '@/utils/util';
 
-export default function SetPermission(props: IModalPropData<Role.RoleItem>) {
+export default function SetPermission(props: IModalPropData<any>) {
   const [visible, setVisible] = useState(false);
-  const [menuList, setMenuList] = useState<Menu.MenuItem[]>([]);
+  const [menuList, setMenuList] = useState<any[]>([]);
   const [checkedKeys, setCheckedKeys] = useState<number[]>([]);
-  const [roleInfo, setRoleInfo] = useState<Role.RoleItem>();
-  const [permission, setPermission] = useState<Role.Permission>();
+  const [roleInfo, setRoleInfo] = useState<any>();
+  const [permission, setPermission] = useState<any>();
   const projectId = useParams().id as string;
 
   useEffect(() => {
@@ -35,7 +34,7 @@ export default function SetPermission(props: IModalPropData<Role.RoleItem>) {
     };
   });
 
-  const open = (data: Role.RoleItem) => {
+  const open = (data: any) => {
     setVisible(true);
     setRoleInfo(data);
     setPermission({
@@ -52,7 +51,7 @@ export default function SetPermission(props: IModalPropData<Role.RoleItem>) {
     setCheckedKeys(checkedKeysValue);
     const checkedKeys: number[] = [];
     const parentKeys: number[] = [];
-    item.checkedNodes.map((node: Menu.MenuItem) => {
+    item.checkedNodes.map((node: any) => {
       // 只保留按钮ID，当做选中的ID，父节点一律作为半全选节点，目的是防止后来新增的按钮也被选中
       if (node.type === 2 || (node.type === 1 && !node.children)) {
         checkedKeys.push(node.id);

@@ -2,7 +2,6 @@ import { Input, Modal, Form, Select, Space, Flex, Button } from 'antd';
 import { useImperativeHandle, useState, MutableRefObject } from 'react';
 import projectApi from '@/api/project';
 import api from '@/api/page';
-import { CreatePageParams, Project } from '@/api/types';
 import { useSearchParams } from 'react-router-dom';
 import TextArea from 'antd/es/input/TextArea';
 import { usePageStore } from '@/stores/pageStore';
@@ -10,12 +9,12 @@ import { usePageStore } from '@/stores/pageStore';
  * 创建页面
  */
 export interface CreatePageRef {
-  open: (action: 'create' | 'edit' | 'copy', record?: CreatePageParams) => void;
+  open: (action: 'create' | 'edit' | 'copy', record?: any) => void;
 }
 export interface IModalProp {
-  createRef: MutableRefObject<{ open: (action: 'create' | 'edit' | 'copy', record?: CreatePageParams) => void } | undefined>;
+  createRef: MutableRefObject<{ open: (action: 'create' | 'edit' | 'copy', record?: any) => void } | undefined>;
   update?: (status?: string) => void;
-  copy?: (record: CreatePageParams) => void;
+  copy?: (record: any) => void;
 }
 
 const CreatePage = (props: IModalProp) => {
@@ -24,18 +23,18 @@ const CreatePage = (props: IModalProp) => {
   const [type, setType] = useState<'create' | 'edit' | 'copy'>('create');
   const [recordId, setRecordId] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [projectList, setProjectList] = useState<Project.ProjectItem[]>([]);
+  const [projectList, setProjectList] = useState<any[]>([]);
   const [searchParams] = useSearchParams();
   const savePageInfo = usePageStore((state) => state.savePageInfo);
   // 暴露方法
   useImperativeHandle(props.createRef, () => ({
-    async open(action: 'create' | 'edit' | 'copy', record?: CreatePageParams) {
+    async open(action: 'create' | 'edit' | 'copy', record?: any) {
       const { list = [] } = await projectApi.getCategoryList({
         pageNum: 1,
         pageSize: 100,
       });
       setProjectList(
-        list.map((item: Project.ProjectItem) => {
+        list.map((item: any) => {
           return {
             name: item.name,
             id: item.id,

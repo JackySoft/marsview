@@ -4,10 +4,10 @@ import { Button, Flex, List, Spin } from 'antd';
 import { PlusOutlined, SyncOutlined, UserOutlined } from '@ant-design/icons';
 import MemberSetting from './MemberSetting';
 import { message } from '@/utils/AntdGlobal';
-import api, { PageMember } from '@/api/pageMember';
+import api from '@/api/pageMember';
 export default () => {
   const [loading, setLoading] = useState(false);
-  const [list, setList] = useState<PageMember[]>([]);
+  const [list, setList] = useState<any[]>([]);
   const memberRef = useRef<{ open: (type: 2) => void }>();
   const { id: pageId } = useParams();
   useEffect(() => {

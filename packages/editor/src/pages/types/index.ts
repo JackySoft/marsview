@@ -1,4 +1,3 @@
-import { Project } from '@/api/types';
 import { MutableRefObject } from 'react';
 export type IAction = 'create' | 'edit' | 'delete';
 
@@ -13,7 +12,7 @@ export interface IModalPropData<T = any> {
 }
 
 export interface ProjectCardItemProps {
-  item: Project.ProjectItem;
+  item: any;
   type: number;
   getList: () => void;
 }
