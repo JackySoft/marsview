@@ -15,7 +15,7 @@ dayjs.locale('zh-cn');
 import './App.less';
 import storage from './utils/storage';
 import { usePageStore } from './stores/pageStore';
-
+import '@/api/Mock.ts';
 function App() {
   const isDark = storage.get('marsview-theme');
   const marsTheme = usePageStore((state) => state.theme);

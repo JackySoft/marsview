@@ -8,6 +8,7 @@ declare module '*.svg' {
 }
 declare module 'css';
 declare module 'lodash-es';
+declare module 'mockjs';
 interface Window {
   [key: string]: any;
 }

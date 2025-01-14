@@ -13,12 +13,6 @@ export default defineConfig({
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
-    proxy: {
-      '/api': {
-        target: 'http://mars-api.marsview.com.cn',
-        changeOrigin: true,
-      },
-    },
   },
   resolve: {
     alias: {

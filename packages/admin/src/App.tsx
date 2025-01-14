@@ -4,7 +4,7 @@ import router from './router';
 import AntdGlobal from '@marsview/materials/utils/AntdGlobal';
 import './App.less';
 import './index.less';
-
+import '@/api/Mock';
 function App() {
   return (
     <AntdApp>

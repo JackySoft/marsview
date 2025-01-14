@@ -75,7 +75,7 @@ const PageCard = ({ list, copy, refresh }: { list: any[]; copy: (item: any) => v
                   <GlobalOutlined
                     style={{ fontSize: 16 }}
                     onClick={() => {
-                      window.open(`${import.meta.env.VITE_ADMIN_URL}/page/${item.id}?env=stg`, '_blank');
+                      message.warning('请移步官网查看');
                     }}
                   />
                 </Tooltip>,

@@ -13,20 +13,11 @@ export default defineConfig({
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
-    proxy: {
-      '/api': {
-        target: 'http://mars-api.marsview.com.cn',
-        changeOrigin: true,
-      },
-    },
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
-  plugins: [
-    react() as PluginOption,
-    svgr({ svgrOptions: { icon: true } }),
-  ],
+  plugins: [react() as PluginOption, svgr({ svgrOptions: { icon: true } })],
 });

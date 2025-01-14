@@ -62,7 +62,7 @@ export default function Welcome() {
           <h1 className={style.title}>Marsview 低代码搭建</h1>
           <p className={style.desc}>让搭建更简单，让开发更高效</p>
           <div className={style.count}>
-            服务 <CountUp end={800} duration={3} />+ 项目，
+            服务 <CountUp end={3000} duration={3} />+ 项目，
             <CountUp end={7000} duration={3} />+ 页面
           </div>
           <div className={style.btnGroup}>
