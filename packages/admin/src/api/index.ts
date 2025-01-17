@@ -13,7 +13,7 @@ export const getUserInfo = async () => {
 
 // 获取页面详情
 export const getPageDetail = (env: string, projectId: number, id: number) => {
-  return request.get(`/admin/page/detail/${env}/${id}?projectId=${projectId}`);
+  return request.get(`/admin/page/detail/${env}/${id}`);
 };
 
 // 获取项目列表

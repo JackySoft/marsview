@@ -88,7 +88,7 @@ const Config: React.FC = memo(() => {
           breadcrumb: true,
           tag: true,
           footer: false,
-          logo: `${import.meta.env.VITE_CDN_URL}/mars-logo.png`,
+          logo: '/imgs/mars-logo.png',
         }}
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 12 }}

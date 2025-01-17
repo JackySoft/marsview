@@ -158,10 +158,10 @@ export default {
       waitForAnimate: true,
       imageUrls: [
         {
-          url: 'https://imgcloud.cdn.bcebos.com/82286cf4f02d43345e3537100.gif',
+          url: '/imgs/carousel-1.jpg',
         },
         {
-          url: 'https://imgcloud.cdn.bcebos.com/d1b2fc06fb27a33c6796afc15.gif',
+          url: '/imgs/carousel-2.jpg',
         },
       ],
     },

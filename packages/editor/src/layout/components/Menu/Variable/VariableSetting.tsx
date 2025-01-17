@@ -24,7 +24,7 @@ const VariableSetting = (_: any, ref: any) => {
   // 初始化monaco，默认为jsdelivery分发，由于网络原因改为本地cdn
   loader.config({
     paths: {
-      vs: `${import.meta.env.VITE_CDN_URL}/static/monaco-editor/vs`,
+      vs: '/static/monaco-editor/vs',
     },
   });
 

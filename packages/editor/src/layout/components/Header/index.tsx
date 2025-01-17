@@ -121,7 +121,7 @@ const Header = memo(() => {
                   placement="bottom"
                   content={
                     <>
-                      <img width={150} src={`https://imgcloud.cdn.bcebos.com/f35323e9a2625a85909cb6f02.png`} />
+                      <img width={150} src={`/imgs/wechat.jpg`} />
                       <p style={{ textAlign: 'center' }}>请备注：marsview</p>
                     </>
                   }

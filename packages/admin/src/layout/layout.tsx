@@ -54,9 +54,9 @@ const AdminLayout = () => {
     storage.set(`${projectId}-env`, env);
     // 设置环境标识
     if (env === 'stg') {
-      setEnvTag('https://imgcloud.cdn.bcebos.com/349626543730cd39bd152e1c6.svg');
+      setEnvTag('/imgs/env-stg.svg');
     } else if (env === 'pre') {
-      setEnvTag('https://imgcloud.cdn.bcebos.com/349626543730cd39bd152e1c7.svg');
+      setEnvTag('/imgs/env-pre.svg');
     } else {
       setEnvTag('');
     }
