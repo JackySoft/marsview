@@ -32,19 +32,19 @@ Marsview is a low code visualization platform for middle and backend development
 
 ## contrast
 
-| introduce               | Open source version         | professional version                                                      |
-| ----------------------- | --------------------------- | ------------------------------------------------------------------------- |
-| source code             | front end                   | Complete source code for front-end, back-end, and database                |
-| component               | 50+                         | 80+                                                                       |
-| technical support       | Only for technical exchange | One on one professional support                                           |
-| configurability         | weak                        | strong                                                                    |
-| Repair capability       | weak                        | Timely fix issues                                                         |
-| Domain customization    | Not Supported               | Support personalized domain naming 制                                     |
-| 自定义组件能力          | Not Supported               | Support custom component opening 发                                       |
-| Image Cloud             | Not Supported               | Support image cloud services (Alibaba Cloud, Baidu Cloud, Minio services) |
-| Technical documentation | Not Supported               | Provide documents or videos                                               |
-| Digital large screen    | Not Supported               | The upcoming launch of digital large screen visualization                 |
-| Workflow                | Not Supported               | Future online workflow visualization                                      |
+| introduce                   | Open source version         | professional version                                                      |
+| --------------------------- | --------------------------- | ------------------------------------------------------------------------- |
+| source code                 | front end                   | Complete source code for front-end, back-end, and database                |
+| component                   | 50+                         | 80+                                                                       |
+| technical support           | Only for technical exchange | One on one professional support                                           |
+| configurability             | weak                        | strong                                                                    |
+| Repair capability           | weak                        | Timely fix issues                                                         |
+| Domain customization        | Not Supported               | Support personalized domain naming                                        |
+| Custom component capability | Not Supported               | Support custom component opening                                          |
+| Image Cloud                 | Not Supported               | Support image cloud services (Alibaba Cloud, Baidu Cloud, Minio services) |
+| Technical documentation     | Not Supported               | Provide documents or videos                                               |
+| Digital large screen        | Not Supported               | The upcoming launch of digital large screen visualization                 |
+| Workflow                    | Not Supported               | Future online workflow visualization                                      |
 
 ## Online use 🛸
 
