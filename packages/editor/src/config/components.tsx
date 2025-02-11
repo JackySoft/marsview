@@ -202,11 +202,6 @@ const components = [
         type: 'TimePickerRange',
       },
       {
-        icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*XJR2TbS1aaQAAAAAAAAAAAAADrJ8AQ/original',
-        name: '分段选择器',
-        type: 'Segmented',
-      },
-      {
         icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*ngTnQZNOcK0AAAAAAAAAAAAADrJ8AQ/original',
         name: '级联选择',
         type: 'Cascader',
@@ -215,21 +210,6 @@ const components = [
         icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*_4heQaUrFn4AAAAAAAAAAAAADrJ8AQ/original',
         name: '滑动条',
         type: 'Slider',
-      },
-      {
-        icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*1zcHQLltaJcAAAAAAAAAAAAADrJ8AQ/original',
-        name: '树形选择',
-        type: 'TreeSelect',
-      },
-      {
-        icon: <IconFormList />,
-        name: '动态列表',
-        type: 'FormList',
-      },
-      {
-        icon: <IconRichText />,
-        name: '富文本',
-        type: 'RichText',
       },
       {
         icon: <IconFormStatic />,
@@ -282,26 +262,6 @@ const components = [
         name: '条形图',
         type: 'BarChart',
       },
-      {
-        icon: <IconTinyLine />,
-        name: '迷你折线图',
-        type: 'TinyLine',
-      },
-      {
-        icon: <IconTinyColumn />,
-        name: '迷你柱形图',
-        type: 'TinyColumn',
-      },
-      {
-        icon: <IconProgress />,
-        name: '进度条',
-        type: 'Progress',
-      },
-      {
-        icon: <IconRignProgress />,
-        name: '进度环图',
-        type: 'RingProgress',
-      },
     ],
   },
   {
@@ -323,12 +283,6 @@ const components = [
         name: '描述列表',
         type: 'Descriptions',
       },
-
-      {
-        icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*677sTqCpE3wAAAAAAAAAAAAADrJ8AQ/original',
-        name: '步骤条',
-        type: 'Steps',
-      },
       {
         icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*72NDQqXkyOEAAAAAAAAAAAAADrJ8AQ/original',
         name: '标签页',
@@ -339,16 +293,6 @@ const components = [
         name: '子标签页',
         type: 'Tab',
         hidden: true,
-      },
-      {
-        icon: <IconCarousel />,
-        name: '轮播图',
-        type: 'Carousel',
-      },
-      {
-        icon: <IconDropdwon />,
-        name: '下拉菜单',
-        type: 'Dropdown',
       },
     ],
   },
@@ -408,11 +352,6 @@ const components = [
         type: 'Statistic',
       },
       {
-        icon: <IconCountDown />,
-        name: '倒计时',
-        type: 'CountDown',
-      },
-      {
         icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*PdAYS7anRpoAAAAAAAAAAAAADrJ8AQ/original',
         name: '图标',
         type: 'Icon',
@@ -421,11 +360,6 @@ const components = [
         icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JJBSS5lBG4IAAAAAAAAAAAAADrJ8AQ/original',
         name: '头像',
         type: 'Avatar',
-      },
-      {
-        icon: 'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*cJopQrf0ncwAAAAAAAAAAAAADrJ8AQ/original',
-        name: '二维码',
-        type: 'QRCode',
       },
       {
         icon: <IconTag />,

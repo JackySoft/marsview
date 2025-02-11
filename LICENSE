@@ -1,21 +1,40 @@
-MIT License
+Marsview 非商业开源许可证
+版本 1.0
 
-Copyright (c) [2024] JackySoft
+版权所有 (c) 2024 Marsview
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此免费授予任何获得本软件及相关文档文件（以下简称“软件”）副本的人，允许在以下条件下使用、复制、修改、合并、发布、分发、再许可和/或出售本软件的副本：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. **非商业用途**：
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+   - 本软件仅限用于非商业用途。禁止将本软件用于任何商业目的，包括但不限于销售、租赁、许可、广告、盈利性服务或产品。
+
+2. **学习与修改**：
+
+   - 允许个人或组织出于学习目的使用、复制和修改本软件。
+
+3. **分发**：
+
+   - 允许在遵守本许可证的前提下，分发本软件的副本或修改后的版本。分发时必须包含本许可证的完整文本，并明确注明原始版权归属。
+
+4. **专利授权**：
+
+   - 如果本软件包含专利权，特此授予用户非独占的、全球范围内的、免版税的专利许可，仅限于非商业用途。
+
+5. **免责声明**：
+
+   - 本软件按“原样”提供，不提供任何形式的明示或暗示的担保，包括但不限于对适销性、特定用途适用性和非侵权性的担保。作者或版权持有人不对因使用本软件而产生的任何直接、间接、特殊、偶然或 consequential 损害负责。
+
+6. **商业授权**：
+
+   - 如果您希望将本软件用于商业用途，请联系作者获取商业授权。商业授权条款将另行协商。
+
+7. **终止条款**：
+   - 如果您违反本许可证的任何条款，您的使用权利将自动终止。
+
+联系方式：
+
+- 邮箱：sunnyboysoft@163.com
+- 官网：https://www.marsview.com.cn
+
+Apache License Version 2.0

@@ -30,6 +30,22 @@ English | [中文](./README.zh-CN.md)
 
 Marsview is a low code visualization platform for middle and backend development. Developers can create projects, pages, and components on the platform, supporting event interaction, interface calling, data linkage, and logical orchestration. Developers can also quickly integrate them into their own business systems through the microApp front-end framework.
 
+## contrast
+
+| introduce               | Open source version         | professional version                                                      |
+| ----------------------- | --------------------------- | ------------------------------------------------------------------------- |
+| source code             | front end                   | Complete source code for front-end, back-end, and database                |
+| component               | 50+                         | 80+                                                                       |
+| technical support       | Only for technical exchange | One on one professional support                                           |
+| configurability         | weak                        | strong                                                                    |
+| Repair capability       | weak                        | Timely fix issues                                                         |
+| Domain customization    | Not Supported               | Support personalized domain naming 制                                     |
+| 自定义组件能力          | Not Supported               | Support custom component opening 发                                       |
+| Image Cloud             | Not Supported               | Support image cloud services (Alibaba Cloud, Baidu Cloud, Minio services) |
+| Technical documentation | Not Supported               | Provide documents or videos                                               |
+| Digital large screen    | Not Supported               | The upcoming launch of digital large screen visualization                 |
+| Workflow                | Not Supported               | Future online workflow visualization                                      |
+
 ## Online use 🛸
 
 - 🌍 [Marsview](https://www.marsview.com.cn/)
