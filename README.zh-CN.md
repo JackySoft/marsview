@@ -191,7 +191,3 @@ git merge upstream/main
 <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=JackySoft/marsview&type=Date" />
 </picture>
 </a>
-
-## 许可证 📄
-
-此项目根据 MIT 许可证授权 - 有关详细信息，请参阅 [LICENSE](https://github.com/JackySoft/marsview/blob/main/LICENSE) 文件。
