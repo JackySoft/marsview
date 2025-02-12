@@ -192,7 +192,3 @@ If you find this project helpful to you, please consider [GitHub](https://github
 <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=JackySoft/marsview&type=Date" />
 </picture>
 </a>
-
-## licence 📄
-
-This project is authorized under the MIT License - for more information, please refer to [LICENSE](https://github.com/JackySoft/marsview/blob/main/LICENSE) the document.
