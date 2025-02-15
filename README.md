@@ -93,7 +93,6 @@ git clone https://github.com/JackySoft/marsview.git
 | packges/admin      | 项目访问端                 |
 | packges/editor     | 编辑器端                   |
 | packages/materials | 组件物料 ，仅供 admin 使用 |
-| packages/docs      | 低代码使用文档             |
 
 ### 快速开始
 

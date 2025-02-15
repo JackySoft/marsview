@@ -92,7 +92,6 @@ Project Description
 | packges/admin      | Project Access Terminal                     |
 | packges/editor     | Editor end                                  |
 | packages/materials | Component materials, for admin use only     |
-| packages/docs      | Low code usage documentation                |
 
 ### Deploy Documentation
 
