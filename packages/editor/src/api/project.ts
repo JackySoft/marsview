@@ -1,29 +1,52 @@
-import request from '@/utils/request';
 export default {
-  checkAuth(params: { id: number }) {
-    return request.post('/projects/checkAuth', params);
-  },
-  getCategoryList(params: any) {
-    return request.get('/projects/list', params);
+  async getCategoryList(params: any) {
+    return {
+      total: 1,
+      list: [
+        {
+          id: 100001,
+          name: 'Marsview',
+          remark: '后台管理系统',
+          userId: 100000,
+          userName: 'Marsview',
+          logo: '/imgs/mars-logo.png',
+          updatedAt: Date.now(),
+        },
+      ],
+    };
   },
 
   // 新增项目
-  addProject(params: any) {
-    return request.post('/projects/create', params);
+  async addProject(params: any) {
+    return '';
   },
 
   // 删除项目
-  delProject(params: { id: number; type?: string }) {
-    return request.post('/projects/delete', params);
+  async delProject(params: any) {
+    return '';
   },
 
   // 获取项目详情
-  getProjectDetail(id: number) {
-    return request.get(`/projects/detail/${id}`, {});
+  async getProjectDetail(params: any) {
+    return {
+      id: 100000,
+      name: 'Marsview',
+      remark: '后台管理系统',
+      logo: '/imgs/mars-logo.png',
+      userId: 100000,
+      layout: 1,
+      menuMode: 'vertical',
+      menuThemeColor: 'dark',
+      breadcrumb: 1,
+      tag: 1,
+      footer: 0,
+      isPublic: 2,
+      userName: 'admin',
+    };
   },
 
   // 更新项目
-  updateProject(params: any) {
-    return request.post('/projects/update', params);
+  async updateProject(params: any) {
+    return '';
   },
 };

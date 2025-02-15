@@ -6,10 +6,6 @@ import storage from '@/utils/storage';
  */
 export default async function AuthLoader() {
   try {
-    if (!storage.get('token')) {
-      window.location.replace(`/login?callback=${window.location.href}`);
-      return '';
-    }
     const userInfo: any = await getUserInfo();
     return userInfo;
   } catch (error) {

@@ -10,7 +10,6 @@ import style from './index.module.less';
 
 type FieldType = {
   userName: string;
-  code?: number;
   userPwd: string;
 };
 export default function Login() {
@@ -23,7 +22,7 @@ export default function Login() {
   const onFinish: FormProps<FieldType>['onFinish'] = async (values: FieldType) => {
     setLoading(true);
     try {
-      const res = await login<FieldType>(values);
+      const res = await login(values);
       setLoading(false);
       if (res.token) {
         storage.set('token', res.token);

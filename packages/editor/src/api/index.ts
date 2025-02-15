@@ -1,76 +1,110 @@
-import request from '@/utils/request';
-
 // 获取菜单列表
-export const getMenuList = (params: any) => {
-  return request.post('/project/menu/list', params);
+export const getMenuList = async (params: any) => {
+  return {
+    list: [
+      {
+        id: 1,
+        projectId: 100000,
+        name: '用户管理',
+        type: 1,
+        icon: 'UngroupOutlined',
+        status: 1,
+        userId: 100000,
+        userName: 'Marsview',
+        updatedAt: new Date().toLocaleString(),
+        createdAt: new Date().toLocaleString(),
+      },
+      {
+        id: 2,
+        projectId: 100000,
+        name: '数据看板',
+        type: 1,
+        icon: 'DashboardOutlined',
+        path: '/dashboard',
+        pageId: 100000,
+        sortNum: 1,
+        status: 1,
+        userId: 100000,
+        userName: 'Marsview',
+        updatedAt: new Date().toLocaleString(),
+        createdAt: new Date().toLocaleString(),
+      },
+    ],
+  };
 };
 
 // 新增菜单
-export const addMenu = (params: any) => {
-  return request.post('/project/menu/create', params);
+export const addMenu = async (params: any) => {
+  return '';
 };
 
 // 删除菜单
-export const delMenu = (params: { id: number }) => {
-  return request.post('/project/menu/delete', params);
+export const delMenu = async (params: any) => {
+  return '';
 };
 
 // 更新菜单
-export const updateMenu = (params: any) => {
-  return request.post('/project/menu/update', params);
+export const updateMenu = async (params: any) => {
+  return '';
 };
 
 // 复制菜单
-export const copyMenu = (params: { id: number }) => {
-  return request.post('/project/menu/copy', params);
+export const copyMenu = async (params: any) => {
+  return '';
 };
 
 // 获取项目配置的用户列表
-export const getUserList = (params: any) => {
-  return request.get('/project/user/list', params);
+export const getUserList = async (params: any) => {
+  return {
+    total: 0,
+    list: [],
+  };
 };
 
 // 新增项目用户
-export const addUser = (params: any) => {
-  return request.post('/project/user/create', params);
+export const addUser = async (params: any) => {
+  return '';
 };
 
 // 删除项目用户
-export const delUser = (params: { id: number }) => {
-  return request.post('/project/user/delete', params);
+export const delUser = async (params: any) => {
+  return '';
 };
 
 // 更新项目用户
-export const updateUser = (params: { id: number; systemRole: number; roleId: number }) => {
-  return request.post('/project/user/update', params);
+export const updateUser = async (params: any) => {
+  return '';
 };
 
 // 获取角色列表
 export const getRoleList = (params: any) => {
-  return request.get('/project/role/list', params);
+  return {
+    total: 0,
+    list: [],
+  };
 };
 
 // 获取所有角色
-export const getRoleListAll = (projectId: number) => {
-  return request.get('/project/role/listAll', { projectId });
+export const getRoleListAll = (params: any) => {
+  return [];
 };
 
 // 新增角色
 export const createRole = (params: any) => {
-  return request.post('/project/role/create', params);
+  return '';
 };
 
 // 删除角色
 export const delRoleById = (params: any) => {
-  return request.post('/project/role/delete', params);
+  return '';
 };
 
 // 更新角色
 export const updateRoleLimits = (params: any) => {
-  return request.post('/project/role/updateLimits', params);
+  return '';
 };
 
 // 更新角色权限
 export const updateRole = (params: any) => {
-  return request.post('/project/role/update', params);
+  return '';
 };

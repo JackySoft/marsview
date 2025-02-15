@@ -1,7 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import router from '@/router';
 import { message } from './AntdGlobal';
-import storage from './storage';
 
 declare module 'axios' {
   interface AxiosRequestConfig {
@@ -30,18 +28,9 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     config.baseURL = import.meta.env.VITE_BASE_API;
-    const token = storage.get('token');
-    if (token) {
-      config.headers = {
-        Authorization: `Bearer ${token}`,
-      };
-    }
-    if (config.url === '/upload/files') {
-      config.headers = {
-        ...config.headers,
-        'Content-Type': 'multipart/form-data',
-      };
-    }
+    config.headers = {
+      Authorization: `Bearer 123`,
+    };
     return config;
   },
   (error: AxiosError) => {
@@ -61,11 +50,6 @@ instance.interceptors.response.use(
       return res.data;
     }
     if (res.code === 10018) {
-      message.error('登录已过期，请重新登录');
-      setTimeout(() => {
-        window.location.replace(`/login?callback=${window.location.href}`);
-        return null;
-      }, 1500);
       return Promise.reject(res.message);
     } else if (res.code != 0) {
       response.config.showError === false ? null : message.error(res.message);
@@ -74,11 +58,6 @@ instance.interceptors.response.use(
     return res;
   },
   (error) => {
-    if (error.response && error.response.status === 403) {
-      router.navigate('/403');
-    } else {
-      message.error(error.message || ErrorMsg);
-    }
     return Promise.reject(error.message);
   },
 );

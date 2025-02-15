@@ -1,16 +1,24 @@
-import request from '@/utils/request';
-
 /**
  * 页面和项目成员接口定义
  */
 export default {
-  getMemberList(params: { pageId: number }) {
-    return request.post('/pages/role/list', params);
+  async getMemberList(params: any) {
+    return {
+      list: [
+        {
+          id: 1,
+          pageId: 100000,
+          role: 1,
+          userId: 100000,
+          userName: 'demo@qq.com',
+        },
+      ],
+    };
   },
-  addPageMember(params: any) {
-    return request.post('/pages/role/add', params);
+  async addPageMember(params: any) {
+    return '';
   },
-  deletePageMember(params: any) {
-    return request.post('/pages/role/delete', params);
+  async deletePageMember(params: any) {
+    return '';
   },
 };
