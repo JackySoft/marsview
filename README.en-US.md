@@ -46,7 +46,7 @@ Marsview is a low code visualization platform for middle and backend development
 | Domain customization        | Not Supported               | Support personalized domain naming                                        |
 | Custom component capability | Not Supported               | Support custom component opening                                          |
 | Image Cloud                 | Not Supported               | Support image cloud services (Alibaba Cloud, Baidu Cloud, Minio services) |
-| Technical documentation     | Not Supported               | Provide documents or videos                                               |
+| Technical documentation     | Supported                   | Provide documents or videos                                               |
 | Digital large screen        | Not Supported               | The upcoming launch of digital large screen visualization                 |
 | Workflow                    | Not Supported               | Future online workflow visualization                                      |
 
