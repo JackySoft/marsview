@@ -13,6 +13,7 @@ import com.xintr.lowcode.mapper.sys.UsersMapper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -40,6 +41,9 @@ public class UserController extends BasicController {
 
   @Resource
   private RedisTemplate redisTemplate;
+
+  @Value("${spring.mail.username}")
+  private String from;
 
   /**
    * 用户注册
@@ -82,7 +86,7 @@ public class UserController extends BasicController {
     //放入缓存，保存3分钟
     redisTemplate.opsForValue()
       .set("lowcode.register.code" + dto.getEmail(), Integer.toString(code), 60 * 3, TimeUnit.SECONDS);
-    message.setFrom("19371745202@163.com");
+    message.setFrom(from);
     message.setTo(dto.getEmail());
     message.setSubject("lowcode账号注册");
     message.setText("您当前的验证码为：" + code + "，3分钟内有效。感谢您成为lowcode一员。");
