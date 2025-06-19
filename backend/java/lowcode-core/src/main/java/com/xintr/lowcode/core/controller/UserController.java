@@ -54,11 +54,8 @@ public class UserController extends BasicController {
       Users users = Users.builder()
         .user_name(dto.getUserName())
         .user_pwd(dto.getUserPwd())
-        .team_id(1)
-        .created_at(new Date())
-        .updated_at(new Date())
         .build();
-      int result = usersMapper.insertUseGeneratedKeys(users);
+      int result = usersMapper.register(users);
       if (result > 0) {
         SessionUtils.setUser(request, users);
         HtmlUtil.writerJson(response, getResponse(Map.of("userId", users.getId(), "userName", users.getUser_name(),

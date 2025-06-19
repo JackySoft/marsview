@@ -28,4 +28,11 @@
             </if>
         </where>
     </select>
+
+    <insert id="register" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.xintr.lowcode.api.domain.Users">
+      INSERT INTO `users`
+        (`user_name`, `user_pwd`)
+      VALUES
+        (#{user_name}, #{user_pwd})
+    </insert>
 </mapper>

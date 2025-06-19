@@ -13,7 +13,12 @@ import java.util.List;
  */
 public interface UsersMapper extends BasicMapper<Users> {
 
-    /**
+  /**
+   * 注册用户
+   */
+  int register(Users users);
+
+  /**
      * 查询用户列表
      *
      * @param users
