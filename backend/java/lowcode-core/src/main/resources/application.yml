@@ -2,6 +2,8 @@
 spring:
   application:
     name: lowcode-core
+  profiles:
+    active: local
   #邮箱配置
   mail:
     host:

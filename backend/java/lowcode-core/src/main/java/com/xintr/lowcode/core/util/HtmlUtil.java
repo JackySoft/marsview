@@ -22,20 +22,17 @@ public class HtmlUtil {
 
     public static void writerString(HttpServletResponse response, Object object) {
         response.setContentType("application/json");
-        response.setHeader("Access-Control-Allow-Origin", "*");
         writer(response, object == null ? "" : object.toString());
     }
 
     public static void writerString(HttpServletResponse response, Object object, String contentType) {
         response.setContentType(contentType);
-        response.setHeader("Access-Control-Allow-Origin", "*");
         writer(response, object == null ? "" : object.toString());
     }
 
     public static void writerJson(HttpServletResponse response, Object object) {
         try {
             response.setContentType("application/json");
-            response.setHeader("Access-Control-Allow-Origin", "*");
             writer(response, toJSONString(object));
         } catch (JSONException var3) {
             var3.printStackTrace();

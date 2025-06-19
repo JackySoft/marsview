@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="logPath" value="logs/lowcode-core"></property>
+    <property name="logPath" value="/Users/shawfix/Downloads/logs/marsview" />
     <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%logger{50}] - %msg%n"/>
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
